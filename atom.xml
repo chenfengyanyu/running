@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Jartto&#39;s blog</title>
+  <subtitle>王嘉涛的个人博客</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://jartto.wang/"/>
+  <updated>2016-06-20T03:03:03.000Z</updated>
+  <id>http://jartto.wang/</id>
+  
+  <author>
+    <name>Jartto</name>
+    <email>jartto@qq.com</email>
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>如何创建用github＋hexo搭建个人博客</title>
+    <link href="http://jartto.wang/2016/06/20/%E5%A6%82%E4%BD%95%E5%88%9B%E5%BB%BA%E7%94%A8github%EF%BC%8Bhexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/"/>
+    <id>http://jartto.wang/2016/06/20/如何创建用github＋hexo搭建个人博客/</id>
+    <published>2016-06-20T09:19:22.000Z</published>
+    <updated>2016-06-20T03:03:03.000Z</updated>
+    
+    <content type="html">&lt;p&gt;Any URL (like &lt;a href=&quot;http://www.github.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.github.com/&lt;/a&gt;) will be automatically converted into a clickable link.&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;fancyAlert&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;arg&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt;(arg) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    $.facebox(&amp;#123;div:&lt;span class=&quot;string&quot;&gt;&#39;#foo&#39;&lt;/span&gt;&amp;#125;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Any URL (like &lt;a href=&quot;http://www.github.com/&quot;&gt;http://www.github.com/&lt;/a&gt;) will be automatically converted into a clickable link.&lt;br&gt;
+    
+    </summary>
+    
+      <category term="读书笔记" scheme="http://jartto.wang/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="javascript" scheme="http://jartto.wang/tags/javascript/"/>
+    
+      <category term="test" scheme="http://jartto.wang/tags/test/"/>
+    
+      <category term="demo" scheme="http://jartto.wang/tags/demo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>js之浅拷贝和深拷贝</title>
+    <link href="http://jartto.wang/2016/06/19/js%E4%B9%8B%E6%B5%85%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B7%B1%E6%8B%B7%E8%B4%9D/"/>
+    <id>http://jartto.wang/2016/06/19/js之浅拷贝和深拷贝/</id>
+    <published>2016-06-19T15:01:00.000Z</published>
+    <updated>2016-06-20T03:02:06.000Z</updated>
+    
+    <content type="html">&lt;p&gt;说点题外话，前两天拜读了某位前端大神的博客，内容是js设计模式。文中充满了各种比较风趣幽默的栗子，细细读起来又觉得很到位。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;br&gt;让读者摆脱枯燥乏味的技术恐惧感，这也是写博客的另一种境界啊。&lt;br&gt;稍稍模仿一下，会不会点击量就暴增了呢？嘿嘿……&lt;/p&gt;
+&lt;p&gt;扯得有些远了，往回拉一拉，这就是承上启下段落了。&lt;/p&gt;
+&lt;p&gt;继上一篇js基础概念总结后，陆续又发现了好多疏漏的知识点。那就花些时间搞搞基础吧，简称搞基。多么高大上的称呼啊，简直无法直视了。闹归闹，总结笔记还是不能停。&lt;br&gt;下面直接进入正题，我们来看看js中的浅拷贝和深拷贝：&lt;/p&gt;
+&lt;h4 id=&quot;1-什么是浅拷贝？&quot;&gt;&lt;a href=&quot;#1-什么是浅拷贝？&quot; class=&quot;headerlink&quot; title=&quot;1.什么是浅拷贝？&quot;&gt;&lt;/a&gt;1.什么是浅拷贝？&lt;/h4&gt;&lt;p&gt;js中的赋值都为引用传递，这也就是说，在把一个对象赋值给一个变量（对象）,那么这个变量（对象）所指向的仍就是原来对象的地址，引用就是浅拷贝。&lt;/p&gt;
+&lt;p&gt;看概念我们可能不太容易理解，下面拿一个简单的栗子来说说吧：&lt;br&gt;示例：&lt;br&gt;&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; obj1=&amp;#123;name:&lt;span class=&quot;string&quot;&gt;&#39;jartto&#39;&lt;/span&gt;&amp;#125;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; obj2=&amp;#123;&amp;#125;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//复制obj1&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;obj2=obj1;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.log(obj2.name);&lt;span class=&quot;comment&quot;&gt;//jartto&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//更改obj2.name&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;obj2.name=&lt;span class=&quot;string&quot;&gt;&#39;somebody&#39;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.log(obj2.name);&lt;span class=&quot;comment&quot;&gt;//somebody&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.log(obj1.name);&lt;span class=&quot;comment&quot;&gt;//somebody&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;例子中可以看出，obj2更改了，obj1也被更改了。这说明name仍然存在公共的引用对象，我们的拷贝并不彻底，冒然的使用很有可能带来大的灾难。这时候深拷贝就该上场了，我们接着往下走。&lt;/p&gt;
+&lt;h4 id=&quot;2-什么是深拷贝？&quot;&gt;&lt;a href=&quot;#2-什么是深拷贝？&quot; class=&quot;headerlink&quot; title=&quot;2.什么是深拷贝？&quot;&gt;&lt;/a&gt;2.什么是深拷贝？&lt;/h4&gt;&lt;p&gt;深拷贝就是不仅复制对象的基本类,同时也复制原对象中的对象。就是说完全是新对象产生的，新对象所指向的不是原来对象的地址。&lt;/p&gt;
+&lt;p&gt;同上面的队形，我们还拿栗子来说事：&lt;br&gt;示例：&lt;br&gt;&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; arr1=[&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; arr2=arr1.concat();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//输出arr2&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.log(arr2)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//更改arr2的值&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;arr2[&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;]=&lt;span class=&quot;number&quot;&gt;5&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.log(arr1);&lt;span class=&quot;comment&quot;&gt;//[1,2,3]&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.log(arr2);&lt;span class=&quot;comment&quot;&gt;//[5,2,3]&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;arr2的值变化了，但是arr1的值并未受到影响。这也就告诉我们concat进行了一个深拷贝，arr2已经指向了新的引用地址。js中还有好多类似的例子，这里我就不一一说明啦，感兴趣你可以试试哦。&lt;/p&gt;
+&lt;p&gt;概念也说了，栗子也举了，到这里我想表达的也就over了。从网上看到有人这样解释深拷贝和浅拷贝，虽然说得是其他后台语言，但是感觉有种醍醐灌顶的认知。大伙不妨静下心来细细品味（大哥对不住啊，引用地址搞丢了，见谅啊！）：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;“在有指针的情况下，浅拷贝只是增加了一个指针指向已经存在的内存，而深拷贝就是增加一个指针并且申请一个新的内存，使这个增加的指针指向这个新的内存，采用深拷贝的情况下，释放内存的时候就不会出现在浅拷贝时重复释放同一内存的错误！”&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;参考文章：&lt;br&gt;&lt;a href=&quot;http://m.blog.csdn.net/blog/u012181244/41156763&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://m.blog.csdn.net/blog/u012181244/41156763&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://www.cnblogs.com/yichengbo/archive/2014/07/10/3835882.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.cnblogs.com/yichengbo/archive/2014/07/10/3835882.html&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;说点题外话，前两天拜读了某位前端大神的博客，内容是js设计模式。文中充满了各种比较风趣幽默的栗子，细细读起来又觉得很到位。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="技术博文" scheme="http://jartto.wang/categories/%E6%8A%80%E6%9C%AF%E5%8D%9A%E6%96%87/"/>
+    
+    
+      <category term="github" scheme="http://jartto.wang/tags/github/"/>
+    
+      <category term="hexo" scheme="http://jartto.wang/tags/hexo/"/>
+    
+  </entry>
+  
+</feed>
