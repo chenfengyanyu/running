@@ -247,5 +247,37 @@ npm uninstall -g electron
 
 更多问题，请移步[ Electron 常见问题](https://www.w3cschool.cn/electronmanual/electronmanual-electron-faq.html)
 
-#### 十八、写在最后
+#### 十八、Electron could not be found. No hard resets for you!
+如下方案可以[解决](https://github.com/yan-foto/electron-reload/issues/16)：
+```js
+require('electron-reload')(__dirname, {
+  electron: require('${__dirname}/../../node_modules/electron'),
+});
+```
+
+#### 十九、使用 electron-prebuilt-compile 替换 electron
+{% alert info %}
+Install electron-prebuilt-compile instead of the electron
+{% endalert %}
+```bash
+npm install electron-prebuilt-compile --save-dev
+```
+会报出这样的异常：`Path must be a string. Received undefined at assertPath`
+
+#### 二十、打包异常
+当我们配置好安装 `electron-packager` 并配置好 `package.json` 启动 `npm run package` 的时候，可能会碰到这样的错误：
+{% alert danger %}
+Using electron-prebuilt-compile with Electron Packager requires specifying an exact Electron version
+{% endalert %}
+还有这样的错误：
+{% alert danger %}
+Unable to determine Electron version. Please specify an Electron version
+{% endalert %}
+这时候一定要安装 `electron`
+```bash 
+npm install --save-dev electron
+```
+出现问题的原因可能是 `electron-prebuilt-compile` 与 `electron` 冲突造成的，我这里就是因为冲突，所以我卸载了 `electron` 包。
+
+#### 二十一、写在最后
 陆续写了两篇 `Electron` 文章后，我们需要更实际的去完成一个项目，这样才能融汇贯通。嗯，下一篇文章即将出炉：[初探 Electron - 实践篇](#)

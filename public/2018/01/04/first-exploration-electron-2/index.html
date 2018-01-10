@@ -26,7 +26,7 @@
 <meta property="og:site_name" content="Jartto&#39;s blog">
 <meta property="og:description" content="由于初探 Electron - 理论篇中基础概念太多，导致篇幅过长，影响阅读效果。所以我决定将 Electron 余下部分在本文继续探讨。">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2018-01-05T03:13:51.000Z">
+<meta property="og:updated_time" content="2018-01-09T09:49:53.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="初探 Electron - 升华篇">
 <meta name="twitter:description" content="由于初探 Electron - 理论篇中基础概念太多，导致篇幅过长，影响阅读效果。所以我决定将 Electron 余下部分在本文继续探讨。">
@@ -264,7 +264,7 @@
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
             <p>由于<a href="http://jartto.wang/2018/01/03/first-exploration-electron/">初探 Electron - 理论篇</a>中基础概念太多，导致篇幅过长，影响阅读效果。所以我决定将 Electron 余下部分在本文继续探讨。<br><a id="more"></a></p>
-<h4 id="一、如何引入-jQuery？"><a href="#一、如何引入-jQuery？" class="headerlink" title="一、如何引入 jQuery？"></a>一、如何引入 jQuery？</h4><p>在 <code>Electron</code> 中，如果引入 <code>jQuery</code> 的话，可能会有这样的错误：<code>jQuery is not defined</code>，我们需要这样处理：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;script&gt;<span class="built_in">window</span>.$ = <span class="built_in">window</span>.jQuery = <span class="built_in">require</span>(<span class="string">'jquery'</span>);<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></div></pre></td></tr></table></figure></p>
+<h4 id="一、如何引入-jQuery？"><a href="#一、如何引入-jQuery？" class="headerlink" title="一、如何引入 jQuery？"></a>一、如何引入 jQuery？</h4><p>在 <code>Electron</code> 中，如果引入 <code>jQuery</code> 的话，可能会有这样的错误：<code>jQuery is not defined</code>，我们需要这样处理：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;script&gt;<span class="built_in">window</span>.$ = <span class="built_in">window</span>.jQuery = <span class="built_in">require</span>(<span class="string">'jquery'</span>);&lt;/script&gt;</div></pre></td></tr></table></figure></p>
 <p>如果报出 <code>Cannot find module &#39;jquery&#39;</code> 这样的错，请检查你的 jQuery 是否安装：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install jquery --save</div></pre></td></tr></table></figure></p>
 <p>可以参考如下两篇文章：</p>
 <ul>
@@ -334,7 +334,8 @@
 <p>假如输出的路径类似于 <code>node_modules/electron/index.js</code>，那么你需要移除或者重命名 <code>npm</code> 上的 <code>electron</code> 模块。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">npm uninstall electron</div><div class="line">npm uninstall -g electron</div></pre></td></tr></table></figure></p>
 <p>如果你依然遇到了这个问题，你可能需要检查一下拼写或者是否在错误的进程中调用了这个模块。比如，<code>require(&#39;electron&#39;).app</code> 只能在主进程中使用, 然而 <code>require(&#39;electron&#39;).webFrame</code> 只能在渲染进程中使用。</p>
 <p>更多问题，请移步<a href="https://www.w3cschool.cn/electronmanual/electronmanual-electron-faq.html" target="_blank" rel="external"> Electron 常见问题</a></p>
-<h4 id="十八、写在最后"><a href="#十八、写在最后" class="headerlink" title="十八、写在最后"></a>十八、写在最后</h4><p>陆续写了两篇 <code>Electron</code> 文章后，我们需要更实际的去完成一个项目，这样才能融汇贯通。嗯，下一篇文章即将出炉：<a href="#">初探 Electron - 实践篇</a></p>
+<h4 id="十八、Electron-could-not-be-found-No-hard-resets-for-you"><a href="#十八、Electron-could-not-be-found-No-hard-resets-for-you" class="headerlink" title="十八、Electron could not be found. No hard resets for you!"></a>十八、Electron could not be found. No hard resets for you!</h4><p>如下方案可以<a href="https://github.com/yan-foto/electron-reload/issues/16" target="_blank" rel="external">解决</a>：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">require</span>(<span class="string">'electron-reload'</span>)(__dirname, &#123;</div><div class="line">  electron: <span class="built_in">require</span>(<span class="string">'$&#123;__dirname&#125;/../../node_modules/electron'</span>),</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<h4 id="十九、写在最后"><a href="#十九、写在最后" class="headerlink" title="十九、写在最后"></a>十九、写在最后</h4><p>陆续写了两篇 <code>Electron</code> 文章后，我们需要更实际的去完成一个项目，这样才能融汇贯通。嗯，下一篇文章即将出炉：<a href="#">初探 Electron - 实践篇</a></p>
 
             
         </div>
