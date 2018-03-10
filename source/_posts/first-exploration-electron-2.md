@@ -5,7 +5,7 @@ thumbnailImage: http://7xvi3w.com1.z0.glb.clouddn.com/electron3.png
 thumbnailImagePosition: left
 tags: 
 - electron
-comments: fasle
+comments: false
 metaAlignment: center
 categories: 技术博文
 ---
@@ -280,4 +280,4 @@ npm install --save-dev electron
 出现问题的原因可能是 `electron-prebuilt-compile` 与 `electron` 冲突造成的，我这里就是因为冲突，所以我卸载了 `electron` 包。
 
 #### 二十一、写在最后
-陆续写了两篇 `Electron` 文章后，我们需要更实际的去完成一个项目，这样才能融汇贯通。嗯，下一篇文章即将出炉：[初探 Electron - 实践篇](#)
+陆续写了两篇 `Electron` 文章后，我们需要更实际的去完成一个项目，这样才能融汇贯通。嗯，下一篇文章即将出炉：[初探 Electron - 实践篇1](http://jartto.wang/2018/01/14/first-exploration-electron-3/)

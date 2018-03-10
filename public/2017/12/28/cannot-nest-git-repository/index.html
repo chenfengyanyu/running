@@ -27,7 +27,7 @@
 <meta property="og:description" content="用了很久 Git ，今天却被 Git 嵌套问题卡住了。本文将围绕“如何解决 Git 仓库嵌套”问题展开讨论，并提供解决方案。">
 <meta property="og:locale" content="zh-cn">
 <meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/gitnest1.png">
-<meta property="og:updated_time" content="2017-12-28T05:24:27.000Z">
+<meta property="og:updated_time" content="2018-02-07T05:37:50.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何解决 Git 仓库嵌套问题">
 <meta name="twitter:description" content="用了很久 Git ，今天却被 Git 嵌套问题卡住了。本文将围绕“如何解决 Git 仓库嵌套”问题展开讨论，并提供解决方案。">
@@ -285,7 +285,7 @@
 <p>首先，进入子仓库，也就是被嵌套的 <code>Git</code> 仓库，删除 <code>.git</code> 目录：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rm -rf .git</div></pre></td></tr></table></figure></p>
 <div class="alert info"><p>可以这么理解，一个项目不应该有俩 <code>Git</code> 地址，所以断开子仓库的原有联系，也就是删除 <code>.git</code> 目录。</p>
 </div>
-<p>然后，返回项目根目录，执行 <code>add</code> 操作：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git add fmap-demo</div></pre></td></tr></table></figure></p>
+<p>然后，将你添加的项目拖出当前项目文件，进行提交。之后，再将项目拖回来，返回项目根目录，执行 <code>add</code> 操作：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git add fmap-demo</div></pre></td></tr></table></figure></p>
 <div class="alert success"><p>这里必须要选择子项目进行 <code>add</code>，此时 <code>add .</code> 和 <code>add *</code> 都无效。</p>
 </div>
 <p>之后正常 <code>commit</code> 和 <code>push</code>，就可以了。</p>

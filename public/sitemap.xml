@@ -2,16 +2,107 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://jartto.wang/2018/01/04/first-exploration-electron-2/</loc>
+    <loc>http://jartto.wang/2017/06/09/use-es6/</loc>
     
-    <lastmod>2018-01-09T09:49:53.000Z</lastmod>
+    <lastmod>2018-03-10T15:43:36.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://jartto.wang/2017/03/10/audition-of-f2e/</loc>
+    
+    <lastmod>2018-03-10T12:24:25.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://jartto.wang/2018/02/01/analysis-of-angularjs/</loc>
+    
+    <lastmod>2018-03-09T09:45:18.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://jartto.wang/2018/03/06/tips-of-mini-programs/</loc>
+    
+    <lastmod>2018-03-07T07:04:15.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://jartto.wang/2018/03/06/outline-of-css/</loc>
+    
+    <lastmod>2018-03-06T10:51:31.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://jartto.wang/2018/02/08/count-pit-of-mini-programs/</loc>
+    
+    <lastmod>2018-02-27T08:14:00.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://jartto.wang/2018/02/09/optimise-for-web-request/</loc>
+    
+    <lastmod>2018-02-09T10:42:21.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://jartto.wang/2018/01/25/quick-start-mini-programs/</loc>
+    
+    <lastmod>2018-02-08T07:01:04.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://jartto.wang/2017/12/28/cannot-nest-git-repository/</loc>
+    
+    <lastmod>2018-02-07T05:37:50.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://jartto.wang/2018/01/14/first-exploration-electron-3/</loc>
+    
+    <lastmod>2018-01-24T07:10:45.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://jartto.wang/2018/01/21/first-exploration-electron-4/</loc>
+    
+    <lastmod>2018-01-24T06:49:37.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://jartto.wang/2018/01/03/first-exploration-electron/</loc>
     
-    <lastmod>2018-01-05T02:53:28.000Z</lastmod>
+    <lastmod>2018-01-23T14:35:32.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://jartto.wang/2018/01/04/first-exploration-electron-2/</loc>
+    
+    <lastmod>2018-01-23T14:35:00.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://jartto.wang/2018/01/16/shallow-to-discuss-block-chain/</loc>
+    
+    <lastmod>2018-01-21T00:59:46.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://jartto.wang/2018/01/19/play-image-stream/</loc>
+    
+    <lastmod>2018-01-20T16:05:48.000Z</lastmod>
     
   </url>
   
@@ -26,13 +117,6 @@
     <loc>http://jartto.wang/2017/05/03/guide-of-howler/</loc>
     
     <lastmod>2017-12-28T09:21:14.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://jartto.wang/2017/12/28/cannot-nest-git-repository/</loc>
-    
-    <lastmod>2017-12-28T05:24:27.000Z</lastmod>
     
   </url>
   

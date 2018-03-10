@@ -791,7 +791,7 @@ Electron
 #### 二十八、写在最后
 由于篇幅实在是太长了，所以我打算把开发中遇到的问题留在后续文章中说明。这里先剧透一下，后续应该还会有两篇总结性的文章，标题已经想好了，我会在[ github ](https://github.com/chenfengyanyu/source)持续更新。先留个传送门吧！
 - [初探 Electron - 升华篇](http://jartto.wang/2018/01/04/first-exploration-electron-2/)
-- [初探 Electron - 实践篇](#)
+- [初探 Electron - 实践篇1](http://jartto.wang/2018/01/14/first-exploration-electron-3/)
 
 
 
