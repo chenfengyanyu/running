@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     <meta name="baidu-site-verification" content="bJPvLdWAu8" />
     <meta name="generator" content="Jartto&#39;s blog">
-    <title>前端反思录（三）－谈谈个人规划 - Jartto&#39;s blog</title>
+    <title>Python 笔记 - 简单语法1 - Jartto&#39;s blog</title>
     <meta name="author" content="Jartto">
     
         <meta name="keywords" content="Jartto,web 前端开发,博客,">
@@ -18,18 +18,18 @@
     
         <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
     
-    <meta name="description" content="「技术能力」和「软实力」在前两篇中都做了详细的说明，但还不够。你要知道：方向错了，任何努力都是白费。是的，何不找寻自己的灯塔，时刻校准自己的位置呢？">
-<meta name="keywords" content="f2e">
+    <meta name="description" content="随着人工智能，数据分析的势头，Python 被应用到更广泛的场景中。作为世界上增长最快的编程语言，重要性不言而喻。所以，还有什么理由不去学习呢？">
+<meta name="keywords" content="python">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="前端反思录（三）－谈谈个人规划">
-<meta property="og:url" content="http://jartto.wang/2018/04/29/audition-of-f2e-3/index.html">
+<meta property="og:title" content="Python 笔记 - 简单语法1">
+<meta property="og:url" content="http://jartto.wang/2018/05/19/learn-python-1/index.html">
 <meta property="og:site_name" content="Jartto&#39;s blog">
-<meta property="og:description" content="「技术能力」和「软实力」在前两篇中都做了详细的说明，但还不够。你要知道：方向错了，任何努力都是白费。是的，何不找寻自己的灯塔，时刻校准自己的位置呢？">
+<meta property="og:description" content="随着人工智能，数据分析的势头，Python 被应用到更广泛的场景中。作为世界上增长最快的编程语言，重要性不言而喻。所以，还有什么理由不去学习呢？">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2018-05-17T15:22:05.000Z">
+<meta property="og:updated_time" content="2018-05-22T01:32:28.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="前端反思录（三）－谈谈个人规划">
-<meta name="twitter:description" content="「技术能力」和「软实力」在前两篇中都做了详细的说明，但还不够。你要知道：方向错了，任何努力都是白费。是的，何不找寻自己的灯塔，时刻校准自己的位置呢？">
+<meta name="twitter:title" content="Python 笔记 - 简单语法1">
+<meta name="twitter:description" content="随着人工智能，数据分析的势头，Python 被应用到更广泛的场景中。作为世界上增长最快的编程语言，重要性不言而喻。所以，还有什么理由不去学习呢？">
     
     
         
@@ -38,8 +38,8 @@
         <meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/layout_header.png"/>
     
     
-        <meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/f2e2.png"/>
-        <meta class="swiftype" name="image" data-type="enum" content="http://7xvi3w.com1.z0.glb.clouddn.com/f2e2.png" />
+        <meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/python1.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="http://7xvi3w.com1.z0.glb.clouddn.com/python1.png" />
     
     
     
@@ -235,19 +235,19 @@
         <div class="post-header main-content-wrap text-center">
     
         <h1 class="post-title" itemprop="headline">
-            前端反思录（三）－谈谈个人规划
+            Python 笔记 - 简单语法1
         </h1>
     
     <div class="post-meta">
-    <time itemprop="datePublished" datetime="2018-04-29T21:49:01+08:00">
+    <time itemprop="datePublished" datetime="2018-05-19T08:37:59+08:00">
 	  
-		    2018/4月/29 21:49:01
+		    2018/5月/19 08:37:59
     	
     </time>
     
         <span>发布在 </span>
         
-    <a class="category-link" href="/categories/前端分享/">前端分享</a>
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
 
 
     
@@ -263,34 +263,37 @@
     
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
-            <p>「技术能力」和「软实力」在<a href="http://jartto.wang/2018/03/29/audition-of-f2e/">前两篇</a>中都做了详细的说明，但还不够。你要知道：方向错了，任何努力都是白费。是的，何不找寻自己的灯塔，时刻校准自己的位置呢？<br><a id="more"></a><br>这节我们将从「个人规划」方面切入，如何为自己制定目标呢？当然，我也在探索中，只是多了一些思考。我希望的是，当你看完整个系列文章，能够真正认识自己，从而掌控自我。</p>
-<h4 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h4><p>先从面试过程的直接感受来说吧，头一次和 10 年级的前端开发交流的时候，内心还是颇有敬畏。但是随着越来越多的碰撞，让我有些惊讶，也不断去思考：5 年后的我也是这个样子吗？</p>
-<p>1.抱着一本 <code>JS</code> 高程三就走遍天下。<br>是的，你对 <code>JS</code> 基础了如指掌，同时也对其他技术一无所知。</p>
-<p>2.我偏向管理，技术略懂一些。<br>技术人员都有傲气，管理技术人员，不能服众如何坐稳？</p>
-<p>3.你问的我都知道，只是说不出来。<br>你是面试官，你会信吗？</p>
-<p>4.写业务都用不上，我很有思想。<br>额，有没有思想我没看出来，反正我给你 Fail。</p>
-<p>以上种种的情况，对我来说都犹如警钟一般。一但碰到年长的前端来面试，我都会不由自主的问：你有个人规划吗？</p>
-<div class="alert success"><p>人变老了的感觉不是说我不想学习新东西，而是老东西我还消化不完。</p>
+            <p>随着人工智能，数据分析的势头，Python 被应用到更广泛的场景中。作为世界上增长最快的编程语言，重要性不言而喻。所以，还有什么理由不去学习呢？<br><a id="more"></a></p>
+<h4 id="一、开场白"><a href="#一、开场白" class="headerlink" title="一、开场白"></a>一、开场白</h4><p><code>Python</code> 是一门简单易学且功能强大的编程语言。它拥有高效的高级数据结构，并且能够用简单而又高效的方式进行面向对象编程。<code>Python</code> 优雅的语法和动态类型，再结合它的解释性，使其在大多数平台的许多领域中成为编写脚本或开发应用程序的理想语言。</p>
+<div class="alert success"><p>简单来说，python 的用途很广，可以用来干很多有趣的事情，这就是兴趣所在。</p>
 </div>
-<h4 id="二、面试与被面试"><a href="#二、面试与被面试" class="headerlink" title="二、面试与被面试"></a>二、面试与被面试</h4><p>被面试的时候，就常被问到个人规划的问题，当我成为面试官的时候，我也希望知道一个人对自己的计划有没有清晰的认识。道理其实很简单，短短的 30-45 分钟，面试官如何给你下定论，如何知道你是否有可塑性，如何知道你的思考能力，以及如何确定你的潜力？</p>
-<p>这里不是有意强调面试的技巧，而是想侧面映证个人规划的重要性。当你长期在一个岗位，做着千篇一律的事情的时候，一定要想着打破这样的方式。如何做呢，请参考<a href="http://jartto.wang/2018/04/29/audition-of-f2e-2/">前端反思录（二）－不要让软实力成为短板</a>。</p>
-<h4 id="三、技术上的：「顽固派」与「维新派」"><a href="#三、技术上的：「顽固派」与「维新派」" class="headerlink" title="三、技术上的：「顽固派」与「维新派」"></a>三、技术上的：「顽固派」与「维新派」</h4><p>也正是有了上面两种角色的转换，让我看待问题的方式发生了变化。过程中大概碰到了两类人群，一类是技术「顽固派」，另一类则是技术「维新派」。</p>
-<p>所谓「顽固派」就是：一套 <code>JS</code> 原型链就可以吃天下，只要你基础好，学习什么框架都很容易－某公司代表。<br>而「维新派」呢，恰恰相反，新的技术将取代老的技术，不懂原型链，照样可以混的风生水起。</p>
-<p>挺有意思，一部分人总是强调基础的重要性，但却让自己丧失了对新技术的渴望。在新技术上的投入，「顽固派」明显不如「维新派」，所以这部分「顽固派」注定会被时间淘汰。反观「维新派」，如果不懂点原理，懂点底层知识，新框架的层出不穷，何时才能学完？</p>
-<p>所以，为何不两者取其中，雨露均沾呢？</p>
-<h4 id="四、个人规划"><a href="#四、个人规划" class="headerlink" title="四、个人规划"></a>四、个人规划</h4><p>灯塔作用上文已经提过了，个人规划的作用大概如此。先树立一个目标，然后朝着这个点去发力，直到击穿为止。一个切实有效的方法就是：分短期目标和长期目标。</p>
-<p>1.选定自己要规划的时间点 3-5 年足以，制定短期目标；<br>2.确定 5 年后的高度；<br>3.递推 10 年后的情况；<br>4.反观目前状态以及距离目标的相差程度；<br>5.细化到每一月、每一周、甚至每一天；<br>6.坚持；</p>
-<p>这里推荐一本书：《Google 整理术》，感兴趣的童鞋可以看看。</p>
-<h4 id="五、要时刻反思，校准方向"><a href="#五、要时刻反思，校准方向" class="headerlink" title="五、要时刻反思，校准方向"></a>五、要时刻反思，校准方向</h4><p>可以肯定的是，任何人都不希望自己的努力白费。但是如果你努力错了方向，或者站在了错误的位置，也许白费的概率会大大增加。所以，当你明白你所做的事情没有任何意义的时候，请坚决放弃。</p>
-<p>恰巧我经历了这样一个过程，在本该做决定的时候，迫于各种压力，做了错误的决定。所以，我的一个最重要的两年时间被我浪费了。还好，明白的比较早，在五年的时候，调整了方向。</p>
-<div class="alert success"><p>任何的犹豫和退让都是自欺欺人，饮鸩止渴。</p>
+<h4 id="二、关于-Python"><a href="#二、关于-Python" class="headerlink" title="二、关于 Python"></a>二、关于 Python</h4><p>摘录了几条关于 <code>python</code> 的特性，大致如下，大家现有个整体的认识：</p>
+<ul>
+<li>Python 是一门解释型语言，因为无需编译和链接。</li>
+<li>Python 更易于使用，无论在 Windows、Mac OS X 或 Unix 操作系统上它都会帮助你更快地完成任务。</li>
+<li>完整的编程语言，内置支持高级的数据结构类型</li>
+<li>Python 允许你将程序分割为不同的模块，以便在其他的 Python 程序中重用。</li>
+<li>Python 让程序编写的紧凑和可读。</li>
+<li>Python 是可扩展的。</li>
+<li>…</li>
+</ul>
+<h4 id="三、相关文档"><a href="#三、相关文档" class="headerlink" title="三、相关文档"></a>三、相关文档</h4><ul>
+<li><a href="https://www.python.org" target="_blank" rel="external">官网地址</a></li>
+<li><a href="http://www.runoob.com/manual/pythontutorial/docs/html/" target="_blank" rel="external">Python 入门指南</a></li>
+</ul>
+<div class="alert info"><p>这里先列出前期需要了解到的 Python 文档，后续我会逐步引入更多。</p>
 </div>
-<h4 id="六、这不是鸡汤"><a href="#六、这不是鸡汤" class="headerlink" title="六、这不是鸡汤"></a>六、这不是鸡汤</h4><p>我并不擅长去写鸡汤文，但有的时候，总是想说几句。做技术其实一方面是个人真实爱好；而另一方面则是谋生手段。而如何能体面的活着，这是一个值得思考的问题。在我看来，不外乎如此：</p>
-<div class="alert success"><p>保持旺盛的好奇心、取得正当的财富、赢得他人的尊重、做最具体、最实在的事情。勤奋的去做，而不空谈大道理。</p>
+<h4 id="四、快速开始"><a href="#四、快速开始" class="headerlink" title="四、快速开始"></a>四、快速开始</h4><p>1.安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install python</div></pre></td></tr></table></figure></p>
+<div class="alert info"><p>默认会安装 python3 ，如果需要安装 2.7 版本，请使用 brew install python@2</p>
 </div>
-<p>所以，不要被别人的光环所覆盖，做自己想做的事，努力去做。</p>
-<h4 id="七、总结"><a href="#七、总结" class="headerlink" title="七、总结"></a>七、总结</h4><p>五年算是自己的一个坎，现在迈过来了，以后的路还有很长。下一个五年，我会变成什么样子？</p>
-<p>思考是难受的，<br>就像在雨中漫步。<br>当风正升起，<br>雨似乎越下越大。               </p>
+<p>2.Hello world<br>命令行输入 <code>python</code>，默认会直接打开 <code>python</code> 的执行环境。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">python</div><div class="line">print &apos;jartto: hello world!&apos;</div></pre></td></tr></table></figure></p>
+<h4 id="五、简单运算符"><a href="#五、简单运算符" class="headerlink" title="五、简单运算符"></a>五、简单运算符</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; 5*2</div><div class="line">&gt;&gt;&gt; round(_,2) #保留两位小数</div><div class="line">&gt;&gt;&gt; s = &apos;First line.\nSecond line.&apos;</div><div class="line">&gt;&gt;&gt; print s</div></pre></td></tr></table></figure>
+<div class="alert info"><p>保存之前的值使用下划线，只读属性，不能赋值。</p>
+</div>
+<p>如果你前面带有 \ 的字符被当作特殊字符，你可以使用 原始字符串，方法是在第一个引号前面加上一个 r:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; print &apos;C:\some\name&apos;  # here \n means newline!</div><div class="line">C:\some</div><div class="line">ame</div><div class="line">&gt;&gt;&gt; print r&apos;C:\some\name&apos;  # note the r before the quote</div><div class="line">C:\some\name</div></pre></td></tr></table></figure></p>
+<p>处理多行，使用“”“<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; print &quot;&quot;&quot;a</div><div class="line">... b</div><div class="line">... c</div><div class="line">... d&quot;&quot;&quot;</div><div class="line">a</div><div class="line">b</div><div class="line">c</div><div class="line">d</div></pre></td></tr></table></figure></p>
+<h4 id="六、字符串操作"><a href="#六、字符串操作" class="headerlink" title="六、字符串操作"></a>六、字符串操作</h4><p>1.字符串连接<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; 3*&apos;num&apos;+1</div><div class="line">Traceback (most recent call last):</div><div class="line">  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;</div><div class="line">TypeError: cannot concatenate &apos;str&apos; and &apos;int&apos; objects</div><div class="line">&gt;&gt;&gt; 3 * &apos;num&apos; + 1</div><div class="line">Traceback (most recent call last):</div><div class="line">  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;</div><div class="line">TypeError: cannot concatenate &apos;str&apos; and &apos;int&apos; objects</div><div class="line">&gt;&gt;&gt; 3 * &apos;un&apos; + &apos;ium&apos;</div><div class="line">&apos;unununium&apos;</div><div class="line">&gt;&gt;&gt; 3 * &apos;num&apos; + &apos;1&apos;</div><div class="line">&apos;numnumnum1&apos;</div><div class="line">&gt;&gt;&gt;</div></pre></td></tr></table></figure></p>
+<p>2.相邻的两个字符串文本自动连接在一起<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; &apos;Jartto &apos; &apos;blog&apos;</div><div class="line">&apos;jartto blog&apos;</div></pre></td></tr></table></figure></p>
 
             
         </div>
@@ -304,7 +307,7 @@
             <div class="post-footer-tags">
                 <span class="text-color-light text-small">标签</span><br/>
                 
-    <a class="tag tag--primary tag--small t-link" href="/tags/f2e/">f2e</a>
+    <a class="tag tag--primary tag--small t-link" href="/tags/python/">python</a>
 
             </div>
         
@@ -313,7 +316,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/05/13/about-ckeditor/"  data-tooltip="强大的富文本编辑器 CKEditor">
+                    <a class="post-action-btn btn btn--disabled">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -321,7 +324,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/04/29/audition-of-f2e-2/" data-tooltip="前端反思录（二）－不要让软实力成为短板">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/05/13/api-and-sdk/" data-tooltip="API 和 SDK">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
                     <i class="fa fa-angle-right"></i>
@@ -336,17 +339,17 @@
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/04/29/audition-of-f2e-3/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/05/19/learn-python-1/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/04/29/audition-of-f2e-3/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/05/19/learn-python-1/">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/04/29/audition-of-f2e-3/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/05/19/learn-python-1/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
@@ -391,7 +394,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/05/13/about-ckeditor/"  data-tooltip="强大的富文本编辑器 CKEditor">
+                    <a class="post-action-btn btn btn--disabled">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -399,7 +402,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/04/29/audition-of-f2e-2/" data-tooltip="前端反思录（二）－不要让软实力成为短板">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/05/13/api-and-sdk/" data-tooltip="API 和 SDK">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
                     <i class="fa fa-angle-right"></i>
@@ -414,17 +417,17 @@
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/04/29/audition-of-f2e-3/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/05/19/learn-python-1/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/04/29/audition-of-f2e-3/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/05/19/learn-python-1/">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/04/29/audition-of-f2e-3/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/05/19/learn-python-1/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
@@ -444,17 +447,17 @@
                 <div id="share-options-bar" class="share-options-bar" data-behavior="3">
     <ul class="share-options">
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/04/29/audition-of-f2e-3/">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/05/19/learn-python-1/">
                 <i class="fa fa-google-plus"></i><span class="">分享到 Google+</span>
             </a>
         </li>
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/04/29/audition-of-f2e-3/">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/05/19/learn-python-1/">
                 <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
             </a>
         </li>
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/04/29/audition-of-f2e-3/">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/05/19/learn-python-1/">
                 <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
             </a>
         </li>

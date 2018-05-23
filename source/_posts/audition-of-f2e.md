@@ -23,7 +23,7 @@ categories: 前端分享
 {% endalert %}
 
 原谅我开篇的啰嗦，本系列文章我将从三个层次来说明：
-1. [技术就是核心竞争力](#)；
+1. [技术就是核心竞争力](http://jartto.wang/2018/03/29/audition-of-f2e/)；
 2. [不要让软实力成为短板](http://jartto.wang/2018/04/29/audition-of-f2e-2/)；
 3. [谈谈个人规划](http://jartto.wang/2018/04/29/audition-of-f2e-3/)；
 
@@ -106,11 +106,17 @@ categories: 前端分享
 - 垃圾回收
 - 堆和栈
 - 继承
+- [我所理解的 call 和 apply](http://jartto.wang/2016/06/28/appreciation-of-the-call-and-apply/)
 - [掌握 JS 模板引擎](http://jartto.wang/2016/09/15/grasp-a-js-template-engine/)
 - [js之强大的正则表达式](http://jartto.wang/2016/07/03/js-regular-expression/)
 - [掌握 JS Stack Trace](http://jartto.wang/2017/12/09/grasp-js-stack-trace/)
 - [ES6](http://es6.ruanyifeng.com)
+  - Promise
+  - [XHR or Fetch API ?](http://jartto.wang/2017/01/17/xhr-or-fetch-api/)
 - [TypeScript](https://www.tslang.cn)
+- [何谓 JS 挖矿](http://jartto.wang/2017/11/08/js-dig-ore/)
+- [JS 之强大的正则表达式](http://jartto.wang/2016/07/03/js-regular-expression/)
+- [30S JS](https://github.com/Chalarangelo/30-seconds-of-code)
 
 #### 十、模块化编程
 - [CMD](https://github.com/seajs/seajs/issues/242)
@@ -298,6 +304,7 @@ categories: 前端分享
 - Grunt
 - Gulp
 - Webpack
+  - [Webpack 4](https://juejin.im/post/5af8fa806fb9a07ac162876d)
 - [Parcel](http://jartto.wang/2017/12/11/chattered-about-parcel/)
 
 #### 二十七、版本管理 Git

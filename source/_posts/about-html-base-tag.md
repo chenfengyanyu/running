@@ -18,7 +18,7 @@ categories: 技术博文
 当然，这也不算什么大问题，全局搜索路径，整体替换就ok了。可是我并不想这么做，有没有一种更简洁的办法达到这个目的呢？
 
 #### 二、方案：nginx控制静态资源访问路径
-首先，我想到了去nginx中配置静态资源的访问路径，对路径进行重新拼接或者重定向，如下：
+首先，我想到了去 nginx 中配置静态资源的访问路径，对路径进行重新拼接或者重定向，如下：
 ```sh
 rewrite /assets /zh/assets redirect;
 ```
@@ -66,7 +66,7 @@ base还提供了另一个参数：
 </html>
 ```
 {% alert info %}
-请注意，Jartto's blog链接会在新窗口中打开，即使链接中没有 target='_blank' 属性。
+请注意，Jartto's blog 链接会在新窗口中打开，即使链接中没有 target='_blank' 属性。
 {% endalert %}
 这是因为 base 元素的 target 属性已经被设置为 '_blank' 了。
 
