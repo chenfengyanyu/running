@@ -27,6 +27,10 @@ categories: 前端分享
 2. [不要让软实力成为短板](http://jartto.wang/2018/04/29/audition-of-f2e-2/)；
 3. [谈谈个人规划](http://jartto.wang/2018/04/29/audition-of-f2e-3/)；
 
+{% alert warning %}
+注意：为了更好的维护，我在 Github 增加了[F2E-Awesome](https://github.com/f2e-awesome/knowledge)，本篇文章就不再同步更新啦！
+{% endalert %}
+
 #### 一、不要小瞧 HTML5
 - Audio 和 Video
 - Web storage

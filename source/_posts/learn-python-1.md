@@ -108,3 +108,47 @@ TypeError: cannot concatenate 'str' and 'int' objects
 >>> 'Jartto ' 'blog'
 'jartto blog'
 ```
+
+3.字符串也可以被截取(检索)。类似于 C ，字符串的第一个字符索引为 0：
+```
+>>> word = 'Jartto's blog'
+>>> word[0]  # character in position 0 'J'
+>>> word[5]  # character in position 5 'o'
+```
+
+{% alert info %}
+Python 没有单独的字符类型；一个字符就是一个简单的长度为1的字符串。
+{% endalert %}
+
+4.索引也可以是负数，这将导致从右边开始计算。例如:
+```
+>>> word[-1]  # last character 'g'
+>>> word[-2]  # second-last character 'o'
+>>> word[-6]  # 's'
+```
+
+5.除了索引，还支持切片。索引用于获得单个字符，切片让你获得一个子字符串:
+```
+>>> word[0:2]  # characters from position 0 (included) to 2 (excluded) 'Ja'
+>>> word[2:5]  # characters from position 2 (included) to 5 (excluded) 'rtt'
+```
+{% alert warnning %}
+注意，包含起始的字符，不包含末尾的字符。这使得 s[:i] + s[i:] 永远等于 s:
+{% endalert %}
+
+```
+>>> word[:2] + word[2:]
+'Jartto's blog'
+>>> word[:4] + word[4:]
+'Jartto's blog'
+```
+
+6.切片的索引有非常有用的默认值；省略的第一个索引默认为零，省略的第二个索引默认为切片的字符串的大小。
+```
+>>> word[:6]  # character from the beginning to position 6 (excluded)
+'Ja'
+>>> word[9:]  # characters from position 9 (included) to the end
+'blog'
+>>> word[-2:] # characters from the second-last (included) to the end
+'og'
+```
