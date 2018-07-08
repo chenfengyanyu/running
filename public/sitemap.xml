@@ -2,6 +2,41 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://jartto.wang/2018/07/08/git-commit/</loc>
+    
+    <lastmod>2018-07-08T13:36:26.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://jartto.wang/2018/06/29/talk-about-license/</loc>
+    
+    <lastmod>2018-07-08T13:19:15.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://jartto.wang/2018/06/24/learn-python-3/</loc>
+    
+    <lastmod>2018-06-27T01:22:44.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://jartto.wang/2018/06/12/learn-python-2/</loc>
+    
+    <lastmod>2018-06-24T13:27:25.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://jartto.wang/2018/05/19/learn-python-1/</loc>
+    
+    <lastmod>2018-06-21T00:57:05.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://jartto.wang/2018/06/08/nextjs-3/</loc>
     
     <lastmod>2018-06-08T01:27:58.000Z</lastmod>
@@ -40,13 +75,6 @@
     <loc>http://jartto.wang/2018/05/24/taste-of-umi/</loc>
     
     <lastmod>2018-06-01T13:10:33.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://jartto.wang/2018/05/19/learn-python-1/</loc>
-    
-    <lastmod>2018-05-23T01:26:41.000Z</lastmod>
     
   </url>
   

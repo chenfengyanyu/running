@@ -1,5 +1,5 @@
 ---
-title: Python 笔记 - 简单语法1
+title: Python 笔记1 - 简单语法
 date: 2018-05-19 08:37:59
 thumbnailImage: http://7xvi3w.com1.z0.glb.clouddn.com/python1.png
 thumbnailImagePosition: left
