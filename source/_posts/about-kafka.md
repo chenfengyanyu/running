@@ -9,7 +9,7 @@ comments: false
 metaAlignment: center
 categories: 技术博文
 ---
-经常听后端童鞋提到 `Kafka` 这个词，加上业务慢慢有了交集，对 `Kafka` 的好奇越来越强烈。索性花点时间，一探究竟，顺便扩展一下技能树。
+经常听后端童鞋提到 `Kafka` ，加上业务慢慢有了交集，对 `Kafka` 的好奇越来越强烈。索性花点时间，一探究竟，顺便扩展一下技能树。
 
 <!-- more -->
 #### 一、Kafka 是什么？
@@ -176,19 +176,20 @@ cd kafka_2.11-2.0.0
 ```
 
 3.启动服务
-`kafka` 使用了 `zooKeeper`，所以我们需要先启动 `zooKeeper` 服务。
-
+`kafka` 使用了 `zooKeeper`，所以我们需要先启动 `zooKeeper` 服务。执行：
+```bash
+bin/zookeeper-server-start.sh config/zookeeper.properties
+```
+然后，再启动 `kafka` 服务：
+```bash
+bin/kafka-server-start.sh config/server.properties
+```
+控制台应该会输出：
+```bash
+...
+[2018-10-27 14:41:16,579] INFO [KafkaServer id=0] started (kafka.server.KafkaServer)
+```
 ...
 
-#### 八、API 文档
-学习新东西，一定要先去[官网](http://kafka.apache.org)转一圈。下面是比较重要的一些点：
-- API
-- 配置
-- 常用操作
-- 安全
-- 流
+突然发现要运行一个简单的 `Demo` 还需要做很多事情，鉴于文章内容过长。我将会在下一篇文章：[快速上手 Kafka](http://jartto.wang/2018/10/28/start-kafka/)中详细说明，还请各位移步。
 
-`API` 文档还是有很多重点内容的，这部分等回头看完了，整理整理，再行补充吧。
-
-#### 九、总结
-由于文章篇幅原因，很多细节都没有说到。本文只起到入门的作用，感兴趣的话，不妨深入学习一下。对于前端同学来说，这些就够了，因为如果你不常用，很可能很快就忘记了🙈。
