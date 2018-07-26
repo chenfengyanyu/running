@@ -1,7 +1,7 @@
 ---
 title: CSS 实用概要
 date: 2018-03-06 10:59:15
-thumbnailImage: http://7xvi3w.com1.z0.glb.clouddn.com/outline0.png
+thumbnailImage: https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/outline0.png
 thumbnailImagePosition: left
 tags: 
 - css

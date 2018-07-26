@@ -1,7 +1,7 @@
 ---
 title: 完美渲染之数学公式
 date: 2018-07-08 22:59:45
-thumbnailImage: http://7xvi3w.com1.z0.glb.clouddn.com/math0.png
+thumbnailImage: https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/math0.png
 thumbnailImagePosition: left
 tags: 
 - mathjax

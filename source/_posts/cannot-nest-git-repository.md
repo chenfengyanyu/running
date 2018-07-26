@@ -1,7 +1,7 @@
 ---
 title: 如何解决 Git 仓库嵌套问题
 date: 2017-12-28 10:51:52
-thumbnailImage: http://7xvi3w.com1.z0.glb.clouddn.com/gitnest0.png
+thumbnailImage: https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/gitnest0.png
 thumbnailImagePosition: left
 tags: 
 - git

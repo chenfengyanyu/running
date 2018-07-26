@@ -1,7 +1,7 @@
 ---
 title: 强大的富文本编辑器 CKEditor
 date: 2018-05-13 22:56:40
-thumbnailImage: http://7xvi3w.com1.z0.glb.clouddn.com/ckeditor.png
+thumbnailImage: https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/ckeditor.png
 thumbnailImagePosition: left
 tags: 
 - 富文本

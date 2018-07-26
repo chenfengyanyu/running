@@ -1,7 +1,7 @@
 ---
 title: Next.js 使用指南2－路由与加载
 date: 2018-06-01 22:13:01
-thumbnailImage: http://7xvi3w.com1.z0.glb.clouddn.com/nextjs.png
+thumbnailImage: https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/nextjs.png
 thumbnailImagePosition: left
 tags: 
 - nextjs

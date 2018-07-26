@@ -1,7 +1,7 @@
 ---
 title: 你可能会忽略的 Git 提交规范
 date: 2018-07-08 20:22:15
-thumbnailImage: http://7xvi3w.com1.z0.glb.clouddn.com/gitcommit0.png
+thumbnailImage: https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/gitcommit0.png
 thumbnailImagePosition: left
 tags: 
 - git

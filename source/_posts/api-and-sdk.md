@@ -1,7 +1,7 @@
 ---
 title: API 和 SDK
 date: 2018-05-13 22:57:23
-thumbnailImage: http://7xvi3w.com1.z0.glb.clouddn.com/sdk.png
+thumbnailImage: https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/sdk.png
 thumbnailImagePosition: left
 tags: 
 - api

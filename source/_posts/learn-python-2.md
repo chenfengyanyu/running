@@ -1,7 +1,7 @@
 ---
 title: Python 笔记2 - 常用操作
 date: 2018-06-12 08:43:39
-thumbnailImage: http://7xvi3w.com1.z0.glb.clouddn.com/python1.png
+thumbnailImage: https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/python1.png
 thumbnailImagePosition: left
 tags: 
 - python

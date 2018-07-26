@@ -1,7 +1,7 @@
 ---
 title: 剖析 Angularjs 语法
 date: 2018-02-01 22:54:56
-thumbnailImage: http://7xvi3w.com1.z0.glb.clouddn.com/angular0.png
+thumbnailImage: https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/angular0.png
 thumbnailImagePosition: left
 tags: 
 - angularjs

@@ -1,7 +1,7 @@
 ---
 title: 掌握 HTTP2.0
 date: 2018-03-30 07:39:01
-thumbnailImage: http://7xvi3w.com1.z0.glb.clouddn.com/http2.png
+thumbnailImage: https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/http2.png
 thumbnailImagePosition: left
 tags: 
 - http2

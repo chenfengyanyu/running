@@ -1,7 +1,7 @@
 ---
 title: 前端反思录（二）－不要让软实力成为短板
 date: 2018-04-29 21:35:09
-thumbnailImage: http://7xvi3w.com1.z0.glb.clouddn.com/f2e1.png
+thumbnailImage: https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/f2e1.png
 thumbnailImagePosition: left
 tags: 
 - f2e

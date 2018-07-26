@@ -1,7 +1,7 @@
 ---
 title: 前端反思录（三）－谈谈个人规划
 date: 2018-04-29 21:49:01
-thumbnailImage: http://7xvi3w.com1.z0.glb.clouddn.com/f2e2.png
+thumbnailImage: https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/f2e2.png
 thumbnailImagePosition: left
 tags: 
 - f2e

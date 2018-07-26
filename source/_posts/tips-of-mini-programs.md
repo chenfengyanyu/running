@@ -1,7 +1,7 @@
 ---
 title: 小程序开发 Tips
 date: 2018-03-06 18:59:12
-thumbnailImage: http://7xvi3w.com1.z0.glb.clouddn.com/wxtips0.png
+thumbnailImage: https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/wxtips0.png
 thumbnailImagePosition: left
 tags: 
 - mini-programs

@@ -1,7 +1,7 @@
 ---
 title: 初探 Electron - 理论篇
 date: 2018-01-03 22:17:24
-thumbnailImage: http://7xvi3w.com1.z0.glb.clouddn.com/electron0.png
+thumbnailImage: https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/electron0.png
 thumbnailImagePosition: left
 tags: 
 - electron

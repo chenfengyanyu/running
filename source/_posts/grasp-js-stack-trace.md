@@ -1,7 +1,7 @@
 ---
 title: 掌握 JS Stack Trace
 date: 2017-12-09 21:44:13
-thumbnailImage: http://7xvi3w.com1.z0.glb.clouddn.com/jstrace0.png
+thumbnailImage: https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/jstrace.png
 thumbnailImagePosition: left
 tags: 
 - js

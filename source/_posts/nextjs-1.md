@@ -1,7 +1,7 @@
 ---
 title: Next.js 使用指南1－基本规则
 date: 2018-05-27 06:12:45
-thumbnailImage: http://7xvi3w.com1.z0.glb.clouddn.com/nextjs.png
+thumbnailImage: https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/nextjs.png
 thumbnailImagePosition: left
 tags: 
 - nextjs

@@ -1,7 +1,7 @@
 ---
 title: 聊聊 Parcel
 date: 2017-12-11 9:53:23
-thumbnailImage: http://7xvi3w.com1.z0.glb.clouddn.com/parcel2.png
+thumbnailImage: https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/parcel2.png
 thumbnailImagePosition: left
 tags: 
 - parcel

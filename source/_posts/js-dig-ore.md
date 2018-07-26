@@ -1,7 +1,7 @@
 ---
 title: 何谓 JS 挖矿
 date: 2017-11-08 12:03:45
-thumbnailImage: http://7xvi3w.com1.z0.glb.clouddn.com/dig0.png
+thumbnailImage: https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/dig0.png
 thumbnailImagePosition: left
 tags: 
 - js

@@ -1,7 +1,7 @@
 ---
 title: 简话开源协议
 date: 2018-06-29 09:25:20
-thumbnailImage: http://7xvi3w.com1.z0.glb.clouddn.com/license.png
+thumbnailImage: https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/license.png
 thumbnailImagePosition: left
 tags: 
 - 开源协议

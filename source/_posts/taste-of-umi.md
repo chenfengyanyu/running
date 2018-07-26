@@ -1,7 +1,7 @@
 ---
 title: UmiJs 尝鲜
 date: 2018-05-24 09:00:23
-thumbnailImage: http://7xvi3w.com1.z0.glb.clouddn.com/umijs.png
+thumbnailImage: https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/umijs.png
 thumbnailImagePosition: left
 tags: 
 - umi

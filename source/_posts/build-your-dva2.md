@@ -1,7 +1,7 @@
 ---
 title: 构建你的 Dva2
 date: 2018-05-24 08:58:47
-thumbnailImage: http://7xvi3w.com1.z0.glb.clouddn.com/dva2.png
+thumbnailImage: https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/dva2.png
 thumbnailImagePosition: left
 tags: 
 - dva2

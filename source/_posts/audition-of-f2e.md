@@ -1,7 +1,7 @@
 ---
 title: 前端反思录（一）－技术就是核心竞争力
 date: 2018-03-29 22:03:46
-thumbnailImage: http://7xvi3w.com1.z0.glb.clouddn.com/f2e.png
+thumbnailImage: https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/f2e.png
 thumbnailImagePosition: left
 tags: 
 - f2e

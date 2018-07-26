@@ -1,7 +1,7 @@
 ---
 title: 细数小程序的坑
 date: 2018-02-08 14:31:33
-thumbnailImage: http://7xvi3w.com1.z0.glb.clouddn.com/wx2.png
+thumbnailImage: https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/wx2.png
 thumbnailImagePosition: left
 tags: 
 - 微信
