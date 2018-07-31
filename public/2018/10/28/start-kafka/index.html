@@ -26,10 +26,12 @@
 <meta property="og:site_name" content="Jartto&#39;s blog">
 <meta property="og:description" content="上一篇我们对 Kafka 做了很多概念性的解释，试图去理解它的内部机制。但这还远远不够，所以，这里我们来起手一个 Demo，加强理解。">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2018-10-28T14:27:21.000Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/kafka4.png">
+<meta property="og:updated_time" content="2018-10-29T01:29:57.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="快速上手 Kafka">
 <meta name="twitter:description" content="上一篇我们对 Kafka 做了很多概念性的解释，试图去理解它的内部机制。但这还远远不够，所以，这里我们来起手一个 Demo，加强理解。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/kafka4.png">
     
     
         
@@ -38,8 +40,8 @@
         <meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/layout_header.png"/>
     
     
-        <meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/kafka.png"/>
-        <meta class="swiftype" name="image" data-type="enum" content="http://7xvi3w.com1.z0.glb.clouddn.com/kafka.png" />
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/kafka3.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/kafka3.png" />
     
     
     
@@ -282,7 +284,7 @@
 <p>启动后，就进入了生产者模式，也就是可以我们可以发送消息了，输入：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; Hello, jartto!</div><div class="line">&gt; Let’s go!</div></pre></td></tr></table></figure></p>
 <h4 id="六、接收消息"><a href="#六、接收消息" class="headerlink" title="六、接收消息"></a>六、接收消息</h4><p><code>kafka</code> 还有一个命令行使用者，它会将消息转储到标准输出，这就是我们的 <code>consumer</code>。我们执行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test --from-beginning</div></pre></td></tr></table></figure></p>
 <p>启动后，就会输出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Hello, jartto!</div><div class="line">Let&apos;s go!</div></pre></td></tr></table></figure></p>
-<p>这样，我们就接收到了消息。这时候，在 <code>producer</code> 窗口，我们输入的消息，都会在 <code>consumer</code> 显示。下面这张图可以清楚的看到我们的所有服务，主要包含 <code>ZooKeeper</code>，<code>Topic</code>，<code>Producer</code>，<code>Consumer</code>：<br><img src="" alt=""></p>
+<p>这样，我们就接收到了消息。这时候，在 <code>producer</code> 窗口，我们输入的消息，都会在 <code>consumer</code> 显示。下面这张图可以清楚的看到我们的所有服务，主要包含 <code>ZooKeeper</code>，<code>Topic</code>，<code>Producer</code>，<code>Consumer</code>：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/kafka4.png" alt="kafka console"></p>
 <h4 id="七、设置多代理集群"><a href="#七、设置多代理集群" class="headerlink" title="七、设置多代理集群"></a>七、设置多代理集群</h4><p>上面我们演示了单一的 <code>borker</code>，这并没有什么意思。我们来尝试一下 <code>multi-broker</code> 集群，让我们把集群扩展到三个节点，这才是真正的使用场景。</p>
 <p>首先，我们来修改一下配置文件，拷贝出两份副本：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; cp config/server.properties config/server-1.properties</div><div class="line">&gt; cp config/server.properties config/server-2.properties</div></pre></td></tr></table></figure></p>
 <p>然后稍微做一些调整，我们要在增加两个「篮子」了，我们需要为每个「篮子」编号，指定他们的监听端口，以及日志输出位置。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"># config/server-1.properties</div><div class="line">broker.id=1</div><div class="line">listeners=PLAINTEXT://:9093</div><div class="line">log.dirs=/tmp/kafka-logs-1</div><div class="line"></div><div class="line"># config/server-2.properties</div><div class="line">broker.id=2</div><div class="line">listeners=PLAINTEXT://:9094</div><div class="line">log.dirs=/tmp/kafka-logs-2</div></pre></td></tr></table></figure></p>
@@ -347,7 +349,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--disabled">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/10/30/html5-notification/"  data-tooltip="HTML5 之消息通知（Web Notification）">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -425,7 +427,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--disabled">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/10/30/html5-notification/"  data-tooltip="HTML5 之消息通知（Web Notification）">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>

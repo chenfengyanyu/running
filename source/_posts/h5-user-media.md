@@ -1,7 +1,7 @@
 ---
 title: HTML5 之摄像头调用（User Media API）
 date: 2017-11-28 20:27:37
-thumbnailImage: http://7xvi3w.com1.z0.glb.clouddn.com/h5.png
+thumbnailImage: https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/h5.png
 thumbnailImagePosition: left
 tags: 
 - HTML5

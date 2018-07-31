@@ -1,7 +1,7 @@
 ---
 title: HTML5 之全屏（Full Screen API）
 date: 2017-06-25 07:46:52
-thumbnailImage: http://7xvi3w.com1.z0.glb.clouddn.com/h5.png
+thumbnailImage: https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/h5.png
 thumbnailImagePosition: left
 tags: 
 - HTML5

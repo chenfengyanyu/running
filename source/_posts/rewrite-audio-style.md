@@ -1,7 +1,7 @@
 ---
 title: 重写 Audio 样式
 date: 2018-04-25 08:26:16
-thumbnailImage: http://7xvi3w.com1.z0.glb.clouddn.com/audio.png
+thumbnailImage: https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/audio0.png
 thumbnailImagePosition: left
 tags: 
 - html5

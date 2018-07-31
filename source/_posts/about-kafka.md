@@ -1,7 +1,7 @@
 ---
 title: 了解 Kafka
 date: 2018-10-12 05:21:52
-thumbnailImage: http://7xvi3w.com1.z0.glb.clouddn.com/kafka.png
+thumbnailImage: https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/kafka.png
 thumbnailImagePosition: left
 tags: 
 - kafka

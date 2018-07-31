@@ -1,7 +1,7 @@
 ---
 title: 快速上手 Kafka
 date: 2018-10-28 21:50:48
-thumbnailImage: http://7xvi3w.com1.z0.glb.clouddn.com/kafka.png
+thumbnailImage: https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/kafka3.png
 thumbnailImagePosition: left
 tags: 
 - kafka
@@ -87,7 +87,7 @@ Hello, jartto!
 Let's go!
 ```
 这样，我们就接收到了消息。这时候，在 `producer` 窗口，我们输入的消息，都会在 `consumer` 显示。下面这张图可以清楚的看到我们的所有服务，主要包含 `ZooKeeper`，`Topic`，`Producer`，`Consumer`：
-![]()
+![kafka console](https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/kafka4.png)
 
 #### 七、设置多代理集群
 上面我们演示了单一的 `borker`，这并没有什么意思。我们来尝试一下 `multi-broker` 集群，让我们把集群扩展到三个节点，这才是真正的使用场景。

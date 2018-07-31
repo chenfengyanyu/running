@@ -1,7 +1,7 @@
 ---
 title: HTML5 拖放实现
 date: 2017-10-23 23:47:24
-thumbnailImage: http://7xvi3w.com1.z0.glb.clouddn.com/dragdrop.png
+thumbnailImage: https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/h5.png
 thumbnailImagePosition: left
 tags: 
 - HTML5
