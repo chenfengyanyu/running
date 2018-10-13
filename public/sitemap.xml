@@ -2,9 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://jartto.wang/2018/10/13/nodejs-pdf/</loc>
+    
+    <lastmod>2018-10-13T13:17:30.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://jartto.wang/2018/10/12/about-kafka/</loc>
+    
+    <lastmod>2018-10-11T22:13:05.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://jartto.wang/2018/07/08/perfect-math/</loc>
+    
+    <lastmod>2018-10-11T21:14:49.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://jartto.wang/2018/07/08/git-commit/</loc>
     
-    <lastmod>2018-07-08T13:36:26.000Z</lastmod>
+    <lastmod>2018-07-08T14:57:10.000Z</lastmod>
     
   </url>
   

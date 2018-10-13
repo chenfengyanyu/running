@@ -1,0 +1,506 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>了解 Kafka - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="http://7xvi3w.com1.z0.glb.clouddn.com/layout_header.png">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="经常听后端童鞋提到 Kafka 这个词，加上业务慢慢有了交集，对 Kafka 的好奇越来越强烈。索性花点时间，一探究竟，顺便扩展一下技能树。">
+<meta name="keywords" content="kafka">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="了解 Kafka">
+<meta property="og:url" content="http://jartto.wang/2018/10/12/about-kafka/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="经常听后端童鞋提到 Kafka 这个词，加上业务慢慢有了交集，对 Kafka 的好奇越来越强烈。索性花点时间，一探究竟，顺便扩展一下技能树。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2018-10-11T22:13:05.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="了解 Kafka">
+<meta name="twitter:description" content="经常听后端童鞋提到 Kafka 这个词，加上业务慢慢有了交集，对 Kafka 的好奇越来越强烈。索性花点时间，一探究竟，顺便扩展一下技能树。">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/layout_header.png"/>
+    
+    
+        <meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/kafka.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="http://7xvi3w.com1.z0.glb.clouddn.com/kafka.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a  class="header-right-picture st-search-show-outputs"
+                href="#about">
+        
+        
+            <img class="header-picture" src="http://7xvi3w.com1.z0.glb.clouddn.com/layout_header.png"/>
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="http://7xvi3w.com1.z0.glb.clouddn.com/layout_header.png"/>
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/ "
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/all-categories"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/all-tags"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/all-archives"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="#about"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/atom.xml"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/sitemap.xml"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            了解 Kafka
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2018-10-12T05:21:52+08:00">
+	  
+		    2018/10月/12 05:21:52
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>经常听后端童鞋提到 <code>Kafka</code> 这个词，加上业务慢慢有了交集，对 <code>Kafka</code> 的好奇越来越强烈。索性花点时间，一探究竟，顺便扩展一下技能树。</p>
+<a id="more"></a>
+<h4 id="一、Kafka-是什么？"><a href="#一、Kafka-是什么？" class="headerlink" title="一、Kafka 是什么？"></a>一、Kafka 是什么？</h4><p><code>Kafka</code> 是分布式发布-订阅消息系统。它最初由 <code>LinkedIn</code> 公司开发，之后成为 <code>Apache</code> 项目的一部分。<code>Kafka</code> 是一个分布式的，可划分的，冗余备份的持久性的日志服务。</p>
+<div class="alert info"><p>它主要用于处理活跃的流式数据。</p>
+</div>
+<h4 id="二、简单理解"><a href="#二、简单理解" class="headerlink" title="二、简单理解"></a>二、简单理解</h4><p>举个<a href="http://orchome.com/kafka/index" target="_blank" rel="external">例子</a>，生产者消费者，生产者生产鸡蛋，消费者消费鸡蛋，生产者生产一个鸡蛋，消费者就消费一个鸡蛋，假设消费者消费鸡蛋的时候噎住了（系统宕机了），生产者还在生产鸡蛋，那新生产的鸡蛋就丢失了。再比如生产者很强劲（大交易量的情况），生产者 1 秒钟生产 100 个鸡蛋，消费者 1 秒钟只能吃 50 个鸡蛋，那要不了一会，消费者就吃不消了（消息堵塞，最终导致系统超时），消费者拒绝再吃了，「鸡蛋」又丢失了，这个时候我们放个篮子在它们中间，生产出来的鸡蛋都放到篮子里，消费者去篮子里拿鸡蛋，这样鸡蛋就不会丢失了，都在篮子里，而这个篮子就是<code>kafka</code>。</p>
+<p>鸡蛋其实就是「数据流」，系统之间的交互都是通过「数据流」来传输的，也称为报文，也叫「消息」。<br>消息队列满了，其实就是篮子满了，「鸡蛋」放不下了，那赶紧多放几个篮子，其实就是 <code>kafka</code> 的扩容。</p>
+<div class="alert success"><p>综上所述，kafka 的概念就很好理解了，它就是那个「篮子」。</p>
+</div>
+<h4 id="三、使用场景"><a href="#三、使用场景" class="headerlink" title="三、使用场景"></a>三、使用场景</h4><p>1.消息系统<br>对于一些常规的消息系统，<code>kafka</code> 是个不错的选择。</p>
+<p>2.检测网站活性<br><code>kafka</code> 可以作为「网站活性跟踪」的最佳工具。可以将网页/用户操作等信息发送到 <code>kafka</code> 中。并实时监控，或者离线统计分析等。</p>
+<p>3.日志系统<br><code>kafka</code> 的特性决定它非常适合作为「日志收集中心」;</p>
+<h4 id="四、重要概念"><a href="#四、重要概念" class="headerlink" title="四、重要概念"></a>四、重要概念</h4><ul>
+<li>Producers</li>
+<li>Consumers</li>
+<li>zookeeper</li>
+<li>topic</li>
+<li>broker</li>
+</ul>
+<h4 id="五、设计原理"><a href="#五、设计原理" class="headerlink" title="五、设计原理"></a>五、设计原理</h4><h4 id="六、简单应用"><a href="#六、简单应用" class="headerlink" title="六、简单应用"></a>六、简单应用</h4>
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br/>文章首发于 <a href="http://jartto.wang"> Jartto's blog </a>，
+          转载文章请务必以超链接形式标明文章出处，作者信息及本版权声明（<a href="http://jartto.wang"> http://jartto.wang </a>)。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br/>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/kafka/">kafka</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/10/13/nodejs-pdf/"  data-tooltip="nodejs pdf">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/07/08/perfect-math/" data-tooltip="完美渲染之数学公式">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/10/12/about-kafka/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/10/12/about-kafka/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/10/12/about-kafka/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="http://7xvi3w.com1.z0.glb.clouddn.com/layout_0100110.jpg" width="100%" alt="请 Jartto 喝杯茶，亦或是给他一个简单的项目需求"/></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2018 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/10/13/nodejs-pdf/"  data-tooltip="nodejs pdf">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/07/08/perfect-math/" data-tooltip="完美渲染之数学公式">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/10/12/about-kafka/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/10/12/about-kafka/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/10/12/about-kafka/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/10/12/about-kafka/">
+                <i class="fa fa-google-plus"></i><span class="">分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/10/12/about-kafka/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/10/12/about-kafka/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="http://7xvi3w.com1.z0.glb.clouddn.com/layout_header.png"/>
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，</br>而是梦想从未上路!</br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>jartto@qq.com</p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br/>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('http://7xvi3w.com1.z0.glb.clouddn.com/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>
