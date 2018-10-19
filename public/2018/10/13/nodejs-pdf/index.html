@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     <meta name="baidu-site-verification" content="bJPvLdWAu8" />
     <meta name="generator" content="Jartto&#39;s blog">
-    <title>nodejs pdf - Jartto&#39;s blog</title>
+    <title>使用 Nodejs 生成网页 PDF - Jartto&#39;s blog</title>
     <meta name="author" content="Jartto">
     
         <meta name="keywords" content="Jartto,web 前端开发,博客,">
@@ -18,18 +18,18 @@
     
         <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
     
-    <meta name="description" content="最遗憾的不是把梦想丢在路上，而是梦想从未上路">
-<meta name="keywords" content="Jartto,web 前端开发,博客">
+    <meta name="description" content="众所周知，Nodejs 可以用来做很多有意义的事情，偶尔来写一款小工具或是一个小插件也别有一番风味。这不，我们来用 Nodejs 写一款工具，将网页保存成 PDF。">
+<meta name="keywords" content="nodejs,pdf">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="nodejs pdf">
+<meta property="og:title" content="使用 Nodejs 生成网页 PDF">
 <meta property="og:url" content="http://jartto.wang/2018/10/13/nodejs-pdf/index.html">
 <meta property="og:site_name" content="Jartto&#39;s blog">
-<meta property="og:description" content="最遗憾的不是把梦想丢在路上，而是梦想从未上路">
+<meta property="og:description" content="众所周知，Nodejs 可以用来做很多有意义的事情，偶尔来写一款小工具或是一个小插件也别有一番风味。这不，我们来用 Nodejs 写一款工具，将网页保存成 PDF。">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2018-10-13T13:17:30.000Z">
+<meta property="og:updated_time" content="2018-10-19T01:11:01.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="nodejs pdf">
-<meta name="twitter:description" content="最遗憾的不是把梦想丢在路上，而是梦想从未上路">
+<meta name="twitter:title" content="使用 Nodejs 生成网页 PDF">
+<meta name="twitter:description" content="众所周知，Nodejs 可以用来做很多有意义的事情，偶尔来写一款小工具或是一个小插件也别有一番风味。这不，我们来用 Nodejs 写一款工具，将网页保存成 PDF。">
     
     
         
@@ -37,6 +37,9 @@
     
         <meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/layout_header.png"/>
     
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/pdf.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/pdf.png" />
     
     
     
@@ -229,10 +232,10 @@
 <article class="post" itemscope itemType="http://schema.org/BlogPosting">
     
     
-        <div class="post-header main-content-wrap text-left">
+        <div class="post-header main-content-wrap text-center">
     
         <h1 class="post-title" itemprop="headline">
-            nodejs pdf
+            使用 Nodejs 生成网页 PDF
         </h1>
     
     <div class="post-meta">
@@ -241,6 +244,12 @@
 		    2018/10月/13 21:17:30
     	
     </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
     
     <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
 </div>
@@ -254,7 +263,15 @@
     
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
-            
+            <p>众所周知，Nodejs 可以用来做很多有意义的事情，偶尔来写一款小工具或是一个小插件也别有一番风味。这不，我们来用 Nodejs 写一款工具，将网页保存成 PDF。<br><a id="more"></a></p>
+<h4 id="一、使用-Phantomjs"><a href="#一、使用-Phantomjs" class="headerlink" title="一、使用 Phantomjs"></a>一、使用 Phantomjs</h4><p>1.简单使用<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> phantom = <span class="built_in">require</span>(<span class="string">'phantom'</span>);</div><div class="line">(<span class="keyword">async</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">const</span> instance = <span class="keyword">await</span> phantom.create();</div><div class="line">  <span class="keyword">const</span> page = <span class="keyword">await</span> instance.createPage();</div><div class="line">  <span class="keyword">await</span> page.on(<span class="string">'onResourceRequested'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">requestData</span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.info(<span class="string">'Requesting'</span>, requestData.url);</div><div class="line">  &#125;);</div><div class="line"></div><div class="line">  <span class="keyword">const</span> status = <span class="keyword">await</span> page.open(<span class="string">'http://jartto.wang'</span>);</div><div class="line"></div><div class="line">  <span class="keyword">await</span> page.render(<span class="string">'jarttoTest.pdf'</span>);</div><div class="line"></div><div class="line">  <span class="keyword">await</span> instance.exit();</div><div class="line">&#125;)();</div></pre></td></tr></table></figure></p>
+<p>上面是一个完整的示例，我们来看看最核心的部分，不妨放大一下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">page.open(address, <span class="function"><span class="keyword">function</span> (<span class="params">status</span>) </span>&#123;</div><div class="line">  <span class="keyword">if</span> (status !== <span class="string">'success'</span>) &#123;</div><div class="line">      <span class="comment">// --- Error opening the webpage ---</span></div><div class="line">      <span class="built_in">console</span>.log(<span class="string">'Unable to load the address!'</span>);</div><div class="line">  &#125; <span class="keyword">else</span> &#123;</div><div class="line">      <span class="comment">// --- Keep Looping Until Render Completes ---</span></div><div class="line">      <span class="built_in">window</span>.setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">          page.render(output);</div><div class="line">          phantom.exit();</div><div class="line">      &#125;, <span class="number">200</span>);</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>嗯，结合起来，就完美了。下面就是最佳实践：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> page = <span class="built_in">require</span>(<span class="string">'webpage'</span>).create();</div><div class="line">page.open(<span class="string">'http://jartto.wang'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">status</span>) </span>&#123;</div><div class="line">  setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">      <span class="keyword">if</span> ( status === <span class="string">'success'</span> ) &#123;</div><div class="line">        page.render(<span class="string">'test.png'</span>);</div><div class="line">        phantom.exit(); </div><div class="line">      &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'Page failed to load.'</span>); </div><div class="line">      &#125;</div><div class="line">  &#125;, <span class="number">200</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<div class="alert info"><p>至于为什么使用 setTimeout，后问会细说这个问题。</p>
+</div>
+<p>这里需要额外补充一点，如果需要检测 <code>UA</code>，那么你需要这么使用：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> page = <span class="built_in">require</span>(<span class="string">'webpage'</span>).create();</div><div class="line">page.userAgent = <span class="string">'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36'</span>;</div><div class="line"></div><div class="line">page.open(<span class="string">'https://securelearning.in'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  page.render(<span class="string">'image.png'</span>);</div><div class="line">  phantom.exit();</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>这里就不再细说了，更多细节可以查看 <a href="https://github.com/chenfengyanyu/my-web-accumulation/tree/master/phantomjs-demo" target="_blank" rel="external">Demo</a>。</p>
+<h4 id="二、使用-Puppeteer"><a href="#二、使用-Puppeteer" class="headerlink" title="二、使用 Puppeteer"></a>二、使用 Puppeteer</h4>
             
         </div>
     </div>
@@ -263,6 +280,13 @@
           版权声明：<br/>文章首发于 <a href="http://jartto.wang"> Jartto's blog </a>，
           转载文章请务必以超链接形式标明文章出处，作者信息及本版权声明（<a href="http://jartto.wang"> http://jartto.wang </a>)。
         </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br/>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/nodejs/">nodejs</a> <a class="tag tag--primary tag--small t-link" href="/tags/pdf/">pdf</a>
+
+            </div>
         
         <div class="post-actions-wrap">
     <nav>
@@ -307,12 +331,6 @@
             </a>
         </li>
         
-            <li class="post-action">
-                <a class="post-action-btn btn btn--default" href="#disqus_thread">
-                    <i class="fa fa-comment-o"></i>
-                </a>
-            </li>
-        
         <li class="post-action">
             
                 <a class="post-action-btn btn btn--default" href="#">
@@ -325,12 +343,6 @@
 
 
         <div><img style="border-radius:3px;" src="http://7xvi3w.com1.z0.glb.clouddn.com/layout_0100110.jpg" width="100%" alt="请 Jartto 喝杯茶，亦或是给他一个简单的项目需求"/></div>
-        
-            
-                <div id="disqus_thread">
-    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-            
         
     </div>
 </article>
@@ -396,12 +408,6 @@
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
-        
-            <li class="post-action">
-                <a class="post-action-btn btn btn--default" href="#disqus_thread">
-                    <i class="fa fa-comment-o"></i>
-                </a>
-            </li>
         
         <li class="post-action">
             
@@ -483,25 +489,6 @@
     <!--SCRIPTS-->
 <script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
 <!--SCRIPTS END-->
-
-    
-        <script>
-             var disqus_config = function () {
-                 this.page.url = 'http://jartto.wang/2018/10/13/nodejs-pdf/';
-                 
-                    this.page.identifier = '2018/10/13/nodejs-pdf/';
-                                  
-             };
-            (function() {
-                var d = document, s = d.createElement('script');
-                var disqus_shortname = 'jartto';
-                s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-
-                s.setAttribute('data-timestamp', +new Date());
-                (d.head || d.body).appendChild(s);
-            })();
-        </script>
-    
 
 
 
