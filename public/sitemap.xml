@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://jartto.wang/2018/10/23/puppeteerjs/</loc>
+    
+    <lastmod>2018-10-27T01:26:16.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://jartto.wang/2018/10/12/about-kafka/</loc>
     
     <lastmod>2018-10-27T01:10:44.000Z</lastmod>
@@ -12,13 +19,6 @@
     <loc>http://jartto.wang/2018/10/13/nodejs-pdf/</loc>
     
     <lastmod>2018-10-27T00:30:31.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://jartto.wang/2018/10/23/puppeteerjs/</loc>
-    
-    <lastmod>2018-10-24T08:43:36.000Z</lastmod>
     
   </url>
   
