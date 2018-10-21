@@ -147,8 +147,8 @@ const puppeteer = require('puppeteer');
 (async () => {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
-  await page.goto('https://news.ycombinator.com', {waitUntil: 'networkidle2'});
-  await page.pdf({path: 'hn.pdf', format: 'A4'});
+  await page.goto('https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#pdf', {waitUntil: 'networkidle2'});
+  await page.pdf({path: 'jartto.pdf', format: 'A4'});
 
   await browser.close();
 })();
@@ -169,8 +169,76 @@ const COOKS =[
 
 await page.setCookie(...COOKS);
 ```
+模拟设备 iphonex 来生成截图：
+```js
+const devices = require('puppeteer/DeviceDescriptors');
+const puppeteer = require('puppeteer');
 
-如果觉得例子还不够，这里有个[在线演示](https://try-puppeteer.appspot.com/)，可以试一试。
+(async () => {
+  //创建浏览器示例对象
+  const browser = await puppeteer.launch({
+    executablePath: 'chromium/Chromium.app/Contents/MacOS/Chromium',
+    headless: true
+  });
+  // 通过浏览器实例 Browser 对象创建页面 Page 对象 
+  const page = await browser.newPage();
+  await page.emulate(devices['iPhone X']);
+  await page.goto('http://jartto.wang');
+
+  await page.screenshot({path: 'temp/iphonex.png'});
+ 
+  await browser.close();
+})().catch(error => console.log('error: ', error.message));
+```
+{% alert info %}
+如果是本地的 chromium ，记得配置 executablePath: 'chromium/Chromium.app/Contents/MacOS/Chromium'。
+{% endalert %}
+
+更有趣的事情是，我们可以搜索一些关键字来生成快照，譬如：
+```js
+const devices = require('puppeteer/DeviceDescriptors')
+const puppeteer = require('puppeteer');
+
+(async () => {
+  const browser = await puppeteer.launch({
+    executablePath: 'chromium/Chromium.app/Contents/MacOS/Chromium',
+    headless: true
+  });
+  const page = await browser.newPage();
+  await page.emulate(devices['iPhone X']);
+  await page.goto('https://www.baidu.com/');
+
+  // 输入框 id，搜索关键字 jartto
+  await page.type('#index-kw', 'jartto');
+  // 模拟点击提交按钮
+  await page.click('#index-bn');
+  // 跳转等待时间
+  await page.waitForNavigation({ timeout: 3000 });
+
+  await page.screenshot({path: 'temp/search.png'});
+  await browser.close();
+})().catch(error => console.log('error: ', error.message));
+```
+
+执行上面的代码，将会打开百度搜索引擎，同时搜索关键字 `jartto`，跳转完成后进行截屏，保存成图片。核心代码：
+```js
+// 输入框 id，搜索关键字 jartto
+await page.type('#index-kw', 'jartto');
+// 模拟点击提交按钮
+await page.click('#index-bn');
+// 跳转等待时间
+await page.waitForNavigation({ timeout: 3000 });
+```
+
+{% alert warning %}
+一定要找准对应元素的 id，我们可以使用 chrome 开发者工具切换手机模式查看元素。
+{% endalert %}
+
+实际效果一览，左图为 [blog](http://jartto.wang) 快照，右图为搜索跳转快照：
+{% image fancybox left  group:travel https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/puppeteer-test/temp/iphonex.png 320px %}
+{% image fancybox right clear group:travel https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/puppeteer-test/temp/search.png 320px %}
+
+如果觉得例子还不够，这里有个[在线演示](https://try-puppeteer.appspot.com/)，以及我自己写的 [Demo](https://github.com/chenfengyanyu/my-web-accumulation/tree/master/puppeteer-test)。
 
 
 5.相关资源
@@ -189,6 +257,8 @@ await page.setCookie(...COOKS);
 - 第三阶段
   - [中文文档](https://www.bookstack.cn/read/puppeteer-api-zh_CN/class-Page.md)
   - [Puppeteer API ](https://github.com/GoogleChrome/puppeteer/blob/v1.9.0/docs/api.md#environment-variables)
+
+循序渐进的开始你的学习旅程吧。
 
 #### 三、总结
 文章提供了两种方式，在线抓取 `URL` 生成 `PDF`，当然插件的功能并不简单如此，你还可以做更多有趣的事情。嗯，慢慢摸索、积累，相信我，总有一天你会用上的。
