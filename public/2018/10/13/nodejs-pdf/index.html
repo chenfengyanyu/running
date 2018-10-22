@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     <meta name="baidu-site-verification" content="bJPvLdWAu8" />
     <meta name="generator" content="Jartto&#39;s blog">
-    <title>使用 Nodejs 生成网页 PDF - Jartto&#39;s blog</title>
+    <title>抓取网页生成 PDF - Jartto&#39;s blog</title>
     <meta name="author" content="Jartto">
     
         <meta name="keywords" content="Jartto,web 前端开发,博客,">
@@ -18,18 +18,18 @@
     
         <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
     
-    <meta name="description" content="众所周知，Nodejs 可以用来做很多有意义的事情，偶尔来写一款小工具或是一个小插件也别有一番风味。这不，我们来用 Nodejs 写一款工具，将网页保存成 PDF。">
-<meta name="keywords" content="nodejs,pdf">
+    <meta name="description" content="看到自己喜欢的在线文档，是不是总想保存下来慢慢学习。可是苦于没有现成的工具，这里我来介绍两个 JS 类库，只需要简单封装一下，从此想抓哪里抓哪里。">
+<meta name="keywords" content="nodejs,pdf,phantomjs,puppeteer">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="使用 Nodejs 生成网页 PDF">
+<meta property="og:title" content="抓取网页生成 PDF">
 <meta property="og:url" content="http://jartto.wang/2018/10/13/nodejs-pdf/index.html">
 <meta property="og:site_name" content="Jartto&#39;s blog">
-<meta property="og:description" content="众所周知，Nodejs 可以用来做很多有意义的事情，偶尔来写一款小工具或是一个小插件也别有一番风味。这不，我们来用 Nodejs 写一款工具，将网页保存成 PDF。">
+<meta property="og:description" content="看到自己喜欢的在线文档，是不是总想保存下来慢慢学习。可是苦于没有现成的工具，这里我来介绍两个 JS 类库，只需要简单封装一下，从此想抓哪里抓哪里。">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2018-10-19T01:11:01.000Z">
+<meta property="og:updated_time" content="2018-10-24T12:42:32.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="使用 Nodejs 生成网页 PDF">
-<meta name="twitter:description" content="众所周知，Nodejs 可以用来做很多有意义的事情，偶尔来写一款小工具或是一个小插件也别有一番风味。这不，我们来用 Nodejs 写一款工具，将网页保存成 PDF。">
+<meta name="twitter:title" content="抓取网页生成 PDF">
+<meta name="twitter:description" content="看到自己喜欢的在线文档，是不是总想保存下来慢慢学习。可是苦于没有现成的工具，这里我来介绍两个 JS 类库，只需要简单封装一下，从此想抓哪里抓哪里。">
     
     
         
@@ -235,7 +235,7 @@
         <div class="post-header main-content-wrap text-center">
     
         <h1 class="post-title" itemprop="headline">
-            使用 Nodejs 生成网页 PDF
+            抓取网页生成 PDF
         </h1>
     
     <div class="post-meta">
@@ -263,15 +263,64 @@
     
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
-            <p>众所周知，Nodejs 可以用来做很多有意义的事情，偶尔来写一款小工具或是一个小插件也别有一番风味。这不，我们来用 Nodejs 写一款工具，将网页保存成 PDF。<br><a id="more"></a></p>
+            <p>看到自己喜欢的在线文档，是不是总想保存下来慢慢学习。可是苦于没有现成的工具，这里我来介绍两个 JS 类库，只需要简单封装一下，从此想抓哪里抓哪里。<br><a id="more"></a></p>
 <h4 id="一、使用-Phantomjs"><a href="#一、使用-Phantomjs" class="headerlink" title="一、使用 Phantomjs"></a>一、使用 Phantomjs</h4><p>1.简单使用<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> phantom = <span class="built_in">require</span>(<span class="string">'phantom'</span>);</div><div class="line">(<span class="keyword">async</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">const</span> instance = <span class="keyword">await</span> phantom.create();</div><div class="line">  <span class="keyword">const</span> page = <span class="keyword">await</span> instance.createPage();</div><div class="line">  <span class="keyword">await</span> page.on(<span class="string">'onResourceRequested'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">requestData</span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.info(<span class="string">'Requesting'</span>, requestData.url);</div><div class="line">  &#125;);</div><div class="line"></div><div class="line">  <span class="keyword">const</span> status = <span class="keyword">await</span> page.open(<span class="string">'http://jartto.wang'</span>);</div><div class="line"></div><div class="line">  <span class="keyword">await</span> page.render(<span class="string">'jarttoTest.pdf'</span>);</div><div class="line"></div><div class="line">  <span class="keyword">await</span> instance.exit();</div><div class="line">&#125;)();</div></pre></td></tr></table></figure></p>
 <p>上面是一个完整的示例，我们来看看最核心的部分，不妨放大一下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">page.open(address, <span class="function"><span class="keyword">function</span> (<span class="params">status</span>) </span>&#123;</div><div class="line">  <span class="keyword">if</span> (status !== <span class="string">'success'</span>) &#123;</div><div class="line">      <span class="comment">// --- Error opening the webpage ---</span></div><div class="line">      <span class="built_in">console</span>.log(<span class="string">'Unable to load the address!'</span>);</div><div class="line">  &#125; <span class="keyword">else</span> &#123;</div><div class="line">      <span class="comment">// --- Keep Looping Until Render Completes ---</span></div><div class="line">      <span class="built_in">window</span>.setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">          page.render(output);</div><div class="line">          phantom.exit();</div><div class="line">      &#125;, <span class="number">200</span>);</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
 <p>嗯，结合起来，就完美了。下面就是最佳实践：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> page = <span class="built_in">require</span>(<span class="string">'webpage'</span>).create();</div><div class="line">page.open(<span class="string">'http://jartto.wang'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">status</span>) </span>&#123;</div><div class="line">  setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">      <span class="keyword">if</span> ( status === <span class="string">'success'</span> ) &#123;</div><div class="line">        page.render(<span class="string">'test.png'</span>);</div><div class="line">        phantom.exit(); </div><div class="line">      &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'Page failed to load.'</span>); </div><div class="line">      &#125;</div><div class="line">  &#125;, <span class="number">200</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
-<div class="alert info"><p>至于为什么使用 setTimeout，后问会细说这个问题。</p>
+<div class="alert info"><p>因为 open 操作会有响应时间，所以需要使用 setTimeout 来确保流程。</p>
 </div>
 <p>这里需要额外补充一点，如果需要检测 <code>UA</code>，那么你需要这么使用：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> page = <span class="built_in">require</span>(<span class="string">'webpage'</span>).create();</div><div class="line">page.userAgent = <span class="string">'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36'</span>;</div><div class="line"></div><div class="line">page.open(<span class="string">'https://securelearning.in'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  page.render(<span class="string">'image.png'</span>);</div><div class="line">  phantom.exit();</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
 <p>这里就不再细说了，更多细节可以查看 <a href="https://github.com/chenfengyanyu/my-web-accumulation/tree/master/phantomjs-demo" target="_blank" rel="external">Demo</a>。</p>
-<h4 id="二、使用-Puppeteer"><a href="#二、使用-Puppeteer" class="headerlink" title="二、使用 Puppeteer"></a>二、使用 Puppeteer</h4>
+<h4 id="二、使用-Puppeteer"><a href="#二、使用-Puppeteer" class="headerlink" title="二、使用 Puppeteer"></a>二、使用 Puppeteer</h4><div class="alert info"><p>既然 Phantomjs 这么好用，为啥还要了解 Puppeteer ？</p>
+</div>
+<p>提到这个问题，我们不得不来说一下 <a href="https://github.com/GoogleChrome/puppeteer" target="_blank" rel="external"><code>Puppeteer</code></a> 强大的官方背景：Puppeteer（木偶） 英[ˌpʌpɪˈtɪə(r)]，美[ˌpʌpɪˈtɪr]，是 <code>Google Chrome</code> 团队官方的无界面 <code>（Headless）Chrome</code> 工具。所以不管从以后的发展还是完整性方面，<code>Puppeteer</code> 都是我们的首选。</p>
+<p>那么，<code>Puppeteer</code> 能用来干啥，有哪些功能：</p>
+<ul>
+<li>生成页面的截图和 <code>PDF</code></li>
+<li>爬取网站内容</li>
+<li>模拟登陆、自动提交表单，<code>UI</code> 测试，键盘输入等</li>
+<li>使用最新的 <code>JavaScript</code> 和浏览器功能，直接在最新版本的 <code>Chrome</code> 中运行测试。</li>
+<li>捕获网站的时间线跟踪，以帮助诊断性能问题</li>
+<li>测试 <code>Chrome</code> 扩展程序</li>
+</ul>
+<div class="alert success"><p>说了这么多，让我们快速开始，迅速的体验一把。</p>
+</div>
+<p>1.安装<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm i puppeteer</div></pre></td></tr></table></figure></p>
+<p>2.注意事项<br><div class="alert warning"><p>安装并不会那么顺利，因为要依赖 Chromium ，所以你可能会遇到这样的异常。</p>
+</div><br>Note: When you install Puppeteer, it downloads a recent version of Chromium (~170MB Mac, ~282MB Linux, ~280MB Win) that is guaranteed to work with the API. To skip the download, see Environment variables.</p>
+<p>正确姿势：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">set</span> PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=1</div><div class="line">npm i puppeteer</div><div class="line"></div><div class="line"><span class="comment"># 或者忽略依赖脚本安装 jartto's demo</span></div><div class="line">npm i --save puppeteer --ignore-scripts</div></pre></td></tr></table></figure></p>
+<p>如果不能翻墙下载，那么就手动去官网下载 <a href="https://download-chromium.appspot.com/" target="_blank" rel="external"><code>Chromium</code></a> 吧。当然，坑远不止这些，感兴趣的童鞋可以戳这里 <a href="http://jartto.wang/2018/10/23/puppeteerjs/">Puppeteer 异常处理</a>。</p>
+<p>3.下载核心包<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm i puppeteer-core</div></pre></td></tr></table></figure></p>
+<p>从 1.7 版本开始发布 <code>puppeteer-core</code> ，他默认不会下载 <code>Chromium</code> 。<code>puppeteer-core</code> 使用已安装的浏览器 或远程浏览器。具体可以查看官网文档 <a href="https://github.com/GoogleChrome/puppeteer/blob/v1.9.0/docs/api.md#puppeteer-vs-puppeteer-core" target="_blank" rel="external"><code>puppeteer vs puppeteer-core</code></a>.</p>
+<p>4.示例<br>生成网站快照：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> puppeteer = <span class="built_in">require</span>(<span class="string">'puppeteer'</span>);</div><div class="line"></div><div class="line">(<span class="keyword">async</span> () =&gt; &#123;</div><div class="line">  <span class="keyword">const</span> browser = <span class="keyword">await</span> puppeteer.launch();</div><div class="line">  <span class="keyword">const</span> page = <span class="keyword">await</span> browser.newPage();</div><div class="line">  <span class="keyword">await</span> page.goto(<span class="string">'http://jartto.wang'</span>);</div><div class="line">  <span class="keyword">await</span> page.screenshot(&#123;<span class="attr">path</span>: <span class="string">'blog.png'</span>&#125;);</div><div class="line"></div><div class="line">  <span class="keyword">await</span> browser.close();</div><div class="line">&#125;)();</div></pre></td></tr></table></figure></p>
+<p>通过网站地址，生成 <code>pdf</code>：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> puppeteer = <span class="built_in">require</span>(<span class="string">'puppeteer'</span>);</div><div class="line"></div><div class="line">(<span class="keyword">async</span> () =&gt; &#123;</div><div class="line">  <span class="keyword">const</span> browser = <span class="keyword">await</span> puppeteer.launch();</div><div class="line">  <span class="keyword">const</span> page = <span class="keyword">await</span> browser.newPage();</div><div class="line">  <span class="keyword">await</span> page.goto(<span class="string">'https://news.ycombinator.com'</span>, &#123;<span class="attr">waitUntil</span>: <span class="string">'networkidle2'</span>&#125;);</div><div class="line">  <span class="keyword">await</span> page.pdf(&#123;<span class="attr">path</span>: <span class="string">'hn.pdf'</span>, <span class="attr">format</span>: <span class="string">'A4'</span>&#125;);</div><div class="line"></div><div class="line">  <span class="keyword">await</span> browser.close();</div><div class="line">&#125;)();</div></pre></td></tr></table></figure></p>
+<p>设置视口：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">await</span> page.setViewport(&#123;<span class="attr">width</span>: <span class="number">1024</span>, <span class="attr">height</span>: <span class="number">880</span>&#125;);</div></pre></td></tr></table></figure></p>
+<p>设置 <code>cookie</code>：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> COOKS =[</div><div class="line">  &#123;</div><div class="line">  <span class="string">'domain'</span>: <span class="string">'jartto.wang'</span>,</div><div class="line">  <span class="string">'name'</span>: <span class="string">'user'</span>,</div><div class="line">  <span class="string">'value'</span>: <span class="string">'jartto'</span>,</div><div class="line">  &#125;</div><div class="line">]</div><div class="line"></div><div class="line"><span class="keyword">await</span> page.setCookie(...COOKS);</div></pre></td></tr></table></figure></p>
+<p>如果觉得例子还不够，这里有个<a href="https://try-puppeteer.appspot.com/" target="_blank" rel="external">在线演示</a>，可以试一试。</p>
+<p>5.相关资源<br><div class="alert success"><p>学习资源总是很多，由浅入深的学习将会事半功倍，下面我稍微整理一下。</p>
+</div></p>
+<ul>
+<li>第一阶段<ul>
+<li><a href="https://try-puppeteer.appspot.com/" target="_blank" rel="external">在线 DEMO</a></li>
+<li><a href="https://juejin.im/post/5a8151a05188257a7349c6db" target="_blank" rel="external">了解 Puppeteer</a></li>
+<li><a href="https://www.jianshu.com/p/56babda610f9" target="_blank" rel="external">Puppeteer入门及实践</a></li>
+<li><a href="https://blog.csdn.net/u010142437/article/details/79126564?utm_source=blogxgwz0" target="_blank" rel="external">Chromium 下载跳坑 </a></li>
+<li><a href="http://jartto.wang/2018/10/13/nodejs-pdf/">通过 Puppeteer 生成 PDF 文件</a></li>
+</ul>
+</li>
+<li>第二阶段<ul>
+<li><a href="https://github.com/zhentaoo/puppeteer-deep" target="_blank" rel="external">深入 Puppeteer</a></li>
+<li><a href="http://jartto.wang/2018/10/23/puppeteerjs/">Puppeteer 异常处理</a></li>
+</ul>
+</li>
+<li>第三阶段<ul>
+<li><a href="https://www.bookstack.cn/read/puppeteer-api-zh_CN/class-Page.md" target="_blank" rel="external">中文文档</a></li>
+<li><a href="https://github.com/GoogleChrome/puppeteer/blob/v1.9.0/docs/api.md#environment-variables" target="_blank" rel="external">Puppeteer API </a></li>
+</ul>
+</li>
+</ul>
+<h4 id="三、总结"><a href="#三、总结" class="headerlink" title="三、总结"></a>三、总结</h4><p>文章提供了两种方式，在线抓取 <code>URL</code> 生成 <code>PDF</code>，当然插件的功能并不简单如此，你还可以做更多有趣的事情。嗯，慢慢摸索、积累，相信我，总有一天你会用上的。</p>
+
             
         </div>
     </div>
@@ -284,7 +333,7 @@
             <div class="post-footer-tags">
                 <span class="text-color-light text-small">标签</span><br/>
                 
-    <a class="tag tag--primary tag--small t-link" href="/tags/nodejs/">nodejs</a> <a class="tag tag--primary tag--small t-link" href="/tags/pdf/">pdf</a>
+    <a class="tag tag--primary tag--small t-link" href="/tags/nodejs/">nodejs</a> <a class="tag tag--primary tag--small t-link" href="/tags/pdf/">pdf</a> <a class="tag tag--primary tag--small t-link" href="/tags/phantomjs/">phantomjs</a> <a class="tag tag--primary tag--small t-link" href="/tags/puppeteer/">puppeteer</a>
 
             </div>
         
@@ -293,7 +342,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--disabled">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/10/23/puppeteerjs/"  data-tooltip="Puppeteer 异常处理">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -371,7 +420,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--disabled">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/10/23/puppeteerjs/"  data-tooltip="Puppeteer 异常处理">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>

@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     <meta name="baidu-site-verification" content="bJPvLdWAu8" />
     <meta name="generator" content="Jartto&#39;s blog">
-    <title>了解 Kafka - Jartto&#39;s blog</title>
+    <title>Puppeteer 异常处理 - Jartto&#39;s blog</title>
     <meta name="author" content="Jartto">
     
         <meta name="keywords" content="Jartto,web 前端开发,博客,">
@@ -18,21 +18,18 @@
     
         <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
     
-    <meta name="description" content="经常听后端童鞋提到 Kafka 这个词，加上业务慢慢有了交集，对 Kafka 的好奇越来越强烈。索性花点时间，一探究竟，顺便扩展一下技能树。">
-<meta name="keywords" content="kafka">
+    <meta name="description" content="从一个生成 PDF 的需求中接触到了 Puppeteer ，随着使用场景的深入，异常问题也越发难以处理。索性纪录一下摸索过程，供新手参考学习。">
+<meta name="keywords" content="nodejs,puppeteer">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="了解 Kafka">
-<meta property="og:url" content="http://jartto.wang/2018/10/12/about-kafka/index.html">
+<meta property="og:title" content="Puppeteer 异常处理">
+<meta property="og:url" content="http://jartto.wang/2018/10/23/puppeteerjs/index.html">
 <meta property="og:site_name" content="Jartto&#39;s blog">
-<meta property="og:description" content="经常听后端童鞋提到 Kafka 这个词，加上业务慢慢有了交集，对 Kafka 的好奇越来越强烈。索性花点时间，一探究竟，顺便扩展一下技能树。">
+<meta property="og:description" content="从一个生成 PDF 的需求中接触到了 Puppeteer ，随着使用场景的深入，异常问题也越发难以处理。索性纪录一下摸索过程，供新手参考学习。">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/kafka1.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/kafka2.png">
-<meta property="og:updated_time" content="2018-10-24T12:52:01.000Z">
+<meta property="og:updated_time" content="2018-10-24T08:43:36.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="了解 Kafka">
-<meta name="twitter:description" content="经常听后端童鞋提到 Kafka 这个词，加上业务慢慢有了交集，对 Kafka 的好奇越来越强烈。索性花点时间，一探究竟，顺便扩展一下技能树。">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/kafka1.png">
+<meta name="twitter:title" content="Puppeteer 异常处理">
+<meta name="twitter:description" content="从一个生成 PDF 的需求中接触到了 Puppeteer ，随着使用场景的深入，异常问题也越发难以处理。索性纪录一下摸索过程，供新手参考学习。">
     
     
         
@@ -41,8 +38,8 @@
         <meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/layout_header.png"/>
     
     
-        <meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/kafka.png"/>
-        <meta class="swiftype" name="image" data-type="enum" content="http://7xvi3w.com1.z0.glb.clouddn.com/kafka.png" />
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/puppeteer.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/puppeteer.png" />
     
     
     
@@ -238,13 +235,13 @@
         <div class="post-header main-content-wrap text-center">
     
         <h1 class="post-title" itemprop="headline">
-            了解 Kafka
+            Puppeteer 异常处理
         </h1>
     
     <div class="post-meta">
-    <time itemprop="datePublished" datetime="2018-10-12T05:21:52+08:00">
+    <time itemprop="datePublished" datetime="2018-10-23T09:10:52+08:00">
 	  
-		    2018/10月/12 05:21:52
+		    2018/10月/23 09:10:52
     	
     </time>
     
@@ -266,63 +263,16 @@
     
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
-            <p>经常听后端童鞋提到 <code>Kafka</code> 这个词，加上业务慢慢有了交集，对 <code>Kafka</code> 的好奇越来越强烈。索性花点时间，一探究竟，顺便扩展一下技能树。</p>
-<a id="more"></a>
-<h4 id="一、Kafka-是什么？"><a href="#一、Kafka-是什么？" class="headerlink" title="一、Kafka 是什么？"></a>一、Kafka 是什么？</h4><p><code>Kafka</code> 是分布式发布-订阅消息系统。它最初由 <code>LinkedIn</code> 公司开发，之后成为 <code>Apache</code> 项目的一部分。<code>Kafka</code> 是一个分布式的，可划分的，冗余备份的持久性的日志服务。</p>
-<div class="alert info"><p>Kafka 是用于构建实时数据管道和流应用程序。具有横向扩展，容错，wicked fast（变态快）等优点。</p>
-</div>
-<h4 id="二、简单理解"><a href="#二、简单理解" class="headerlink" title="二、简单理解"></a>二、简单理解</h4><p>直接去解释概念可能比较枯燥，不如先委婉的理解一下。</p>
-<p>举个<a href="http://orchome.com/kafka/index" target="_blank" rel="external">例子</a>，生产者消费者，生产者生产鸡蛋，消费者消费鸡蛋，生产者生产一个鸡蛋，消费者就消费一个鸡蛋，假设消费者消费鸡蛋的时候噎住了（系统宕机了），生产者还在生产鸡蛋，那新生产的鸡蛋就丢失了。</p>
-<p>或者另一种情况：生产者很强劲（大交易量的情况），生产者 1 秒钟生产 100 个鸡蛋，消费者 1 秒钟只能吃 50 个鸡蛋，那要不了一会，消费者就吃不消了（消息堵塞，最终导致系统超时），消费者拒绝再吃了，「鸡蛋」又丢失了。</p>
-<p>这个时候我们放个篮子在它们中间，生产出来的鸡蛋都放到篮子里，消费者去篮子里拿鸡蛋，这样鸡蛋就不会丢失了，都在篮子里，而这个篮子就是<code>Kafka</code>。</p>
-<p>鸡蛋其实就是「数据流」，系统之间的交互都是通过「数据流」来传输的，也称为报文，也叫「消息」。消息队列满了，其实就是篮子满了，「鸡蛋」放不下了，那赶紧多放几个篮子，其实就是 <code>Kafka</code> 的扩容。</p>
-<div class="alert success"><p>综上所述，Kafka 的概念就很好理解了，它就是那个「篮子」。</p>
-</div>
-<h4 id="三、使用场景"><a href="#三、使用场景" class="headerlink" title="三、使用场景"></a>三、使用场景</h4><p>通过简单形象的比喻，相信很多童鞋都大概了解 <code>Kafka</code> 是怎么一回事了。</p>
-<div class="alert warning"><p>那么我们要不要放「篮子」，以及什么情况我们需要去放这个「篮子」？</p>
-</div>
-<p>1.消息系统<br>对于一些常规的消息系统，<code>Kafka</code> 是个不错的选择。</p>
-<p>2.检测网站活性<br><code>Kafka</code> 可以作为「网站活性跟踪」的最佳工具。可以将网页/用户操作等信息发送到 <code>Kafka</code> 中。并实时监控，或者离线统计分析等。</p>
-<p>3.日志系统<br><code>Kafka</code> 的特性决定它非常适合作为「日志收集中心」;</p>
-<div class="alert success"><p>kafka是一个分布式消息队列。一般在架构设计中起到解耦、削峰、异步处理的作用。</p>
-</div>
-<h4 id="四、重要概念"><a href="#四、重要概念" class="headerlink" title="四、重要概念"></a>四、重要概念</h4><ul>
-<li>Producers：生产者，就是它来生产「鸡蛋」的。</li>
-<li>Consumers：消费者，生出的「鸡蛋」它来消费。</li>
-<li>topic：你把它理解为标签，生产者每生产出来一个鸡蛋就贴上一个标签（topic），消费者可不是谁生产的「鸡蛋」都吃的，这样不同的生产者生产出来的「鸡蛋」，消费者就可以选择性的吃了。</li>
-<li>broker：就是篮子喽。</li>
-</ul>
-<div class="alert info"><p>除了上面几个概念，还有一个也非常重要，那就是 <code>zookeeper</code>。</p>
-</div>
-<p>1) <code>Producer</code> 端使用 <code>zookeeper</code> 用来发现 <code>broker</code> 列表，以及和 <code>Topic</code> 下每个 <code>partition leader</code> 建立 <code>socket</code> 连接并发送消息。<br>2) <code>Broker</code> 端使用 <code>zookeeper</code> 用来注册 <code>broker</code> 信息，已经监测 <code>partition leader</code> 存活性。<br>3) <code>Consumer</code> 端使用 <code>zookeeper</code> 用来注册 <code>consumer</code> 信息,其中包括 <code>consumer</code> 消费的 <code>partition</code> 列表等，同时也用来发现 <code>broker</code> 列表，并和 <code>partition leader</code> 建立 <code>socket</code> 连接，并获取消息。</p>
-<h4 id="五、Kafka-数据流"><a href="#五、Kafka-数据流" class="headerlink" title="五、Kafka 数据流"></a>五、Kafka 数据流</h4><p>看完「鸡蛋」，「篮子」，我们逐渐清晰了，可这他娘的 <code>zookeeper</code> 又出来搅合了，是不是有点懵比了？不要着急，看看下面这张图，也许你就了然于胸了。</p>
-<p><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/kafka1.png" alt="kafka data flow"></p>
-<p><code>Kafka</code> 的总体<a href="https://www.jianshu.com/p/d3e963ff8b70" target="_blank" rel="external">数据流</a>是这样的：<code>Producer</code> 往 <code>Broker</code> 里面的指定 <code>Topic</code> 中写消息，<code>Consumers</code> 从 <code>Brokers</code> 里面拉去指定 <code>Topic</code> 的消息，然后进行业务处理。</p>
-<p>图中有两个 <code>topic</code>，<code>topic 0</code> 有两个 <code>partition</code>，<code>topic 1</code> 有一个 <code>partition</code> ，三副本备份。可以看到<code>consumer gourp 1</code> 中的 <code>consumer 2</code> 没有分到 <code>partition</code> 处理，这是有可能出现的。</p>
-<p>那么，<code>Kafka</code> 又是如何<a href="https://www.jianshu.com/p/d3e963ff8b70" target="_blank" rel="external">生产数据</a>的？</p>
-<p><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/kafka2.png" alt="Producer"></p>
-<p>如上图所示：</p>
-<ul>
-<li>首先创建一条记录，记录中一定要指定对应的 <code>topic</code> 和 <code>value</code> ，<code>key</code> 和 <code>partition</code> 可选。 </li>
-<li>先序列化，然后按照 <code>topic</code> 和 <code>partition</code> ，放进对应的发送队列中。</li>
-<li><code>kafka produce</code> 都是批量请求，会积攒一批，然后一起发送，不是调 <code>send()</code> 就进行立刻进行网络发包。</li>
-</ul>
-<p>如果 <code>partition</code> 没填，那么情况会是这样的：<br>1.填写了 <code>key</code>：按照 <code>key</code> 进行哈希，相同 <code>key</code> 去一个 <code>partition</code>。（如果扩展了 <code>partition</code> 的数量那么就不能保证了）</p>
-<p>2.没填 <code>key</code>：<code>round-robin</code> 来选 <code>partition</code>。</p>
-<div class="alert info"><p>这些要发往同一个 <code>partition</code> 的请求按照配置，攒一波，然后由一个单独的线程一次性发过去。</p>
-</div>
-<h4 id="六、设计原理"><a href="#六、设计原理" class="headerlink" title="六、设计原理"></a>六、设计原理</h4><p><code>Kafka</code> 的设计初衷是希望作为一个统一的信息收集平台，能够实时的收集反馈信息，并需要能够支撑较大的数据量，且具备良好的容错能力。</p>
-<p>1.持久性<br>2.性能<br>3.生产者<br>4.消费者<br>5.消息传送机制<br>6.复制备份<br>7.日志<br>8.分配</p>
-<p>更多细节，请移步<a href="http://www.aboutyun.com/thread-9341-1-1.html" target="_blank" rel="external">Kafka 入门</a>。</p>
-<h4 id="七、API-文档"><a href="#七、API-文档" class="headerlink" title="七、API 文档"></a>七、API 文档</h4><p>学习新东西，一定要先去<a href="http://kafka.apache.org" target="_blank" rel="external">官网</a>转一圈。</p>
-<ul>
-<li>API</li>
-<li>配置</li>
-<li>常用操作</li>
-<li>安全</li>
-<li>流</li>
-</ul>
-<h4 id="八、总结"><a href="#八、总结" class="headerlink" title="八、总结"></a>八、总结</h4><p>由于文章篇幅原因，很多细节都没有说到。本文只起到推荐入门的作用，感兴趣的话，不妨深入学习一下。对于前端同学来说，这些就够了，因为如果你不常用，很可能很快就忘记了🙈。</p>
+            <p>从一个生成 PDF 的需求中接触到了 Puppeteer ，随着使用场景的深入，异常问题也越发难以处理。索性纪录一下摸索过程，供新手参考学习。<br><a id="more"></a></p>
+<h4 id="一、Chromium-revision-is-not-downloaded"><a href="#一、Chromium-revision-is-not-downloaded" class="headerlink" title="一、Chromium revision is not downloaded"></a>一、Chromium revision is not downloaded</h4><p>UnhandledPromiseRejectionWarning: Unhandled promise rejection (rejection id: 1): Error: Chromium revision is not downloaded. Run “npm install” or “yarn install”</p>
+<p>遇到这个问题，说明你并没有成功下载 <code>Chromium</code></p>
+<h4 id="二、Unhandled-promise-rejection"><a href="#二、Unhandled-promise-rejection" class="headerlink" title="二、Unhandled promise rejection"></a>二、Unhandled promise rejection</h4><p>需要使用 <code>catch</code> 处理异常</p>
+<h4 id="三、spawn-EACCES"><a href="#三、spawn-EACCES" class="headerlink" title="三、spawn EACCES"></a>三、spawn EACCES</h4><p>没有权限，需要执行：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo chmod -R a+rwx chromium/Chromium.app</div></pre></td></tr></table></figure></p>
+<h4 id="四、PrintToPDF-is-not-implemented"><a href="#四、PrintToPDF-is-not-implemented" class="headerlink" title="四、PrintToPDF is not implemented"></a>四、PrintToPDF is not implemented</h4><p><a href="https://github.com/GoogleChrome/puppeteer/issues/576" target="_blank" rel="external">https://github.com/GoogleChrome/puppeteer/issues/576</a></p>
+<h4 id="五、生成-PDF-乱码问题"><a href="#五、生成-PDF-乱码问题" class="headerlink" title="五、生成 PDF 乱码问题"></a>五、生成 PDF 乱码问题</h4><p>小技巧：如果你发现无头打印异常，可以将设置改掉 <code>headless: false</code>,，通过调试工具打开。</p>
+<h4 id="六、在-Docker中使用"><a href="#六、在-Docker中使用" class="headerlink" title="六、在 Docker中使用"></a>六、在 Docker中使用</h4><p><a href="https://www.meiwen.com.cn/subject/xkwsbftx.html" target="_blank" rel="external">https://www.meiwen.com.cn/subject/xkwsbftx.html</a></p>
+<h4 id="七、更改默认视口"><a href="#七、更改默认视口" class="headerlink" title="七、更改默认视口"></a>七、更改默认视口</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">await</span> page.setViewport(&#123;<span class="attr">width</span>: <span class="number">1024</span>, <span class="attr">height</span>: <span class="number">880</span>&#125;);</div></pre></td></tr></table></figure>
+<h4 id="八、设置-cookie："><a href="#八、设置-cookie：" class="headerlink" title="八、设置 cookie："></a>八、设置 <code>cookie</code>：</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> COOKS =[</div><div class="line">  &#123;</div><div class="line">  <span class="string">'domain'</span>: <span class="string">'jartto.wang'</span>,</div><div class="line">  <span class="string">'name'</span>: <span class="string">'user'</span>,</div><div class="line">  <span class="string">'value'</span>: <span class="string">'jartto'</span>,</div><div class="line">  &#125;</div><div class="line">]</div><div class="line"></div><div class="line"><span class="keyword">await</span> page.setCookie(...COOKS);</div></pre></td></tr></table></figure>
 
             
         </div>
@@ -336,7 +286,7 @@
             <div class="post-footer-tags">
                 <span class="text-color-light text-small">标签</span><br/>
                 
-    <a class="tag tag--primary tag--small t-link" href="/tags/kafka/">kafka</a>
+    <a class="tag tag--primary tag--small t-link" href="/tags/nodejs/">nodejs</a> <a class="tag tag--primary tag--small t-link" href="/tags/puppeteer/">puppeteer</a>
 
             </div>
         
@@ -345,7 +295,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/10/13/nodejs-pdf/"  data-tooltip="抓取网页生成 PDF">
+                    <a class="post-action-btn btn btn--disabled">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -353,7 +303,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/07/08/perfect-math/" data-tooltip="完美渲染之数学公式">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/10/13/nodejs-pdf/" data-tooltip="抓取网页生成 PDF">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
                     <i class="fa fa-angle-right"></i>
@@ -368,17 +318,17 @@
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/10/12/about-kafka/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/10/23/puppeteerjs/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/10/12/about-kafka/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/10/23/puppeteerjs/">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/10/12/about-kafka/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/10/23/puppeteerjs/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
@@ -423,7 +373,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/10/13/nodejs-pdf/"  data-tooltip="抓取网页生成 PDF">
+                    <a class="post-action-btn btn btn--disabled">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -431,7 +381,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/07/08/perfect-math/" data-tooltip="完美渲染之数学公式">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/10/13/nodejs-pdf/" data-tooltip="抓取网页生成 PDF">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
                     <i class="fa fa-angle-right"></i>
@@ -446,17 +396,17 @@
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/10/12/about-kafka/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/10/23/puppeteerjs/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/10/12/about-kafka/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/10/23/puppeteerjs/">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/10/12/about-kafka/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/10/23/puppeteerjs/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
@@ -476,17 +426,17 @@
                 <div id="share-options-bar" class="share-options-bar" data-behavior="3">
     <ul class="share-options">
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/10/12/about-kafka/">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/10/23/puppeteerjs/">
                 <i class="fa fa-google-plus"></i><span class="">分享到 Google+</span>
             </a>
         </li>
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/10/12/about-kafka/">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/10/23/puppeteerjs/">
                 <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
             </a>
         </li>
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/10/12/about-kafka/">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/10/23/puppeteerjs/">
                 <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
             </a>
         </li>
