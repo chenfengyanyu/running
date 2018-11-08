@@ -1,5 +1,5 @@
 ---
-title: HTML5 之音频合成（SpeechSynthesis）
+title: HTML5 之音频合成（Speech Synthesis）
 date: 2018-10-31 20:53:09
 thumbnailImage: https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/h5-speed.png
 thumbnailImagePosition: left

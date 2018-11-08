@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     <meta name="baidu-site-verification" content="bJPvLdWAu8" />
     <meta name="generator" content="Jartto&#39;s blog">
-    <title>HTML5 之音频合成（SpeechSynthesis） - Jartto&#39;s blog</title>
+    <title>HTML5 之音频合成（Speech Synthesis） - Jartto&#39;s blog</title>
     <meta name="author" content="Jartto">
     
         <meta name="keywords" content="Jartto,web 前端开发,博客,">
@@ -21,7 +21,7 @@
     <meta name="description" content="H5 让我们的 Web 交互更加生动有趣，但浏览器的多样性以及挥之不去的兼容问题，却阻碍了技术发展。这并不是我们拒绝的理由，恰恰相反，它应该成为动力。">
 <meta name="keywords" content="html5,SpeechSynthesis">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="HTML5 之音频合成（SpeechSynthesis）">
+<meta property="og:title" content="HTML5 之音频合成（Speech Synthesis）">
 <meta property="og:url" content="http://jartto.wang/2018/10/31/h5-SpeechSynthesis/index.html">
 <meta property="og:site_name" content="Jartto&#39;s blog">
 <meta property="og:description" content="H5 让我们的 Web 交互更加生动有趣，但浏览器的多样性以及挥之不去的兼容问题，却阻碍了技术发展。这并不是我们拒绝的理由，恰恰相反，它应该成为动力。">
@@ -29,9 +29,9 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/h5/speech1.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/h5/console.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/h5/speech2.png">
-<meta property="og:updated_time" content="2018-11-01T15:39:29.000Z">
+<meta property="og:updated_time" content="2018-11-06T00:40:47.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="HTML5 之音频合成（SpeechSynthesis）">
+<meta name="twitter:title" content="HTML5 之音频合成（Speech Synthesis）">
 <meta name="twitter:description" content="H5 让我们的 Web 交互更加生动有趣，但浏览器的多样性以及挥之不去的兼容问题，却阻碍了技术发展。这并不是我们拒绝的理由，恰恰相反，它应该成为动力。">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/h5/speech1.png">
     
@@ -239,7 +239,7 @@
         <div class="post-header main-content-wrap text-center">
     
         <h1 class="post-title" itemprop="headline">
-            HTML5 之音频合成（SpeechSynthesis）
+            HTML5 之音频合成（Speech Synthesis）
         </h1>
     
     <div class="post-meta">
@@ -276,7 +276,7 @@
 <li>闹钟，提醒，小秘书</li>
 <li>残疾人支持<br>…</li>
 </ul>
-<p>这些都是随处可见的例子，但真正燃起我激情的是这个<a href="https://codepen.io/ispal/pen/LxjgEj" target="_blank" rel="external">场景</a>，简直酷炫到爆：<br><img src="" alt="GIF"></p>
+<p>这些都是随处可见的例子，但真正燃起我激情的是这个<a href="https://codepen.io/ispal/pen/LxjgEj" target="_blank" rel="external">场景</a>，简直酷炫到爆。原来动画和语音结合起来才是最佳的用户体验。</p>
 <h4 id="二、技术核心"><a href="#二、技术核心" class="headerlink" title="二、技术核心"></a>二、技术核心</h4><p>看完上面的动画，按捺不住内心的好奇，随手就翻起了源码。Oh～原来如此，把你揪出来：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> sayhello = <span class="keyword">new</span> <span class="built_in">window</span>.SpeechSynthesisUtterance(<span class="string">'你好，欢迎来到 Jartto 的博客！'</span>);</div><div class="line"><span class="built_in">window</span>.speechSynthesis.speak(sayhello);</div></pre></td></tr></table></figure></p>
 <div class="alert info"><p>事情的真相就是简单如此，短短两行，就实现了语音播报。</p>
 </div>
@@ -337,7 +337,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/11/01/mobile-debug/"  data-tooltip="H5 移动端调试全攻略">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/11/01/mobile-debug/"  data-tooltip="H5 移动调试全攻略">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -415,7 +415,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/11/01/mobile-debug/"  data-tooltip="H5 移动端调试全攻略">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/11/01/mobile-debug/"  data-tooltip="H5 移动调试全攻略">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>

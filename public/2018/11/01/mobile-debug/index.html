@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     <meta name="baidu-site-verification" content="bJPvLdWAu8" />
     <meta name="generator" content="Jartto&#39;s blog">
-    <title>H5 移动端调试全攻略 - Jartto&#39;s blog</title>
+    <title>H5 移动调试全攻略 - Jartto&#39;s blog</title>
     <meta name="author" content="Jartto">
     
         <meta name="keywords" content="Jartto,web 前端开发,博客,">
@@ -21,15 +21,23 @@
     <meta name="description" content="随着移动设备的高速发展，H5 开发也成为了 F2E 不可或缺的能力。而移动开发的重中之重就是掌握调试技巧，定 Bug于无形。">
 <meta name="keywords" content="html5,mobile,debug">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="H5 移动端调试全攻略">
+<meta property="og:title" content="H5 移动调试全攻略">
 <meta property="og:url" content="http://jartto.wang/2018/11/01/mobile-debug/index.html">
 <meta property="og:site_name" content="Jartto&#39;s blog">
 <meta property="og:description" content="随着移动设备的高速发展，H5 开发也成为了 F2E 不可或缺的能力。而移动开发的重中之重就是掌握调试技巧，定 Bug于无形。">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2018-11-02T01:04:28.000Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/mobile-debug/safari1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/mobile-debug/ios1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/mobile-debug/ios2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/mobile-debug/ip1.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/mobile-debug/ip2.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/mobile-debug/map1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/mobile-debug/map2.png">
+<meta property="og:updated_time" content="2018-11-08T01:29:51.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="H5 移动端调试全攻略">
+<meta name="twitter:title" content="H5 移动调试全攻略">
 <meta name="twitter:description" content="随着移动设备的高速发展，H5 开发也成为了 F2E 不可或缺的能力。而移动开发的重中之重就是掌握调试技巧，定 Bug于无形。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/mobile-debug/safari1.png">
     
     
         
@@ -235,7 +243,7 @@
         <div class="post-header main-content-wrap text-center">
     
         <h1 class="post-title" itemprop="headline">
-            H5 移动端调试全攻略
+            H5 移动调试全攻略
         </h1>
     
     <div class="post-meta">
@@ -264,30 +272,56 @@
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
             <p>随着移动设备的高速发展，<code>H5</code> 开发也成为了 <code>F2E</code> 不可或缺的能力。而移动开发的重中之重就是掌握调试技巧，定 <code>Bug</code>于无形。<br><a id="more"></a></p>
-<h4 id="一、概要"><a href="#一、概要" class="headerlink" title="一、概要"></a>一、概要</h4><p>因为移动端操作系统分为 <code>iOS</code> 和 <code>Android</code> 两派，所以本文的调试技巧也会按照不同的系统来区分。</p>
-<h4 id="二、iOS-设备"><a href="#二、iOS-设备" class="headerlink" title="二、iOS 设备"></a>二、iOS 设备</h4><ul>
-<li>Safari</li>
-<li>iOS 模拟器</li>
-</ul>
-<h4 id="三、通用方案"><a href="#三、通用方案" class="headerlink" title="三、通用方案"></a>三、通用方案</h4><ul>
-<li>spy-debugger</li>
-<li>Charles</li>
-<li>Fiddler</li>
-<li>Chrome Remote Devices</li>
-</ul>
-<h4 id="四、HTTPS-安装证书"><a href="#四、HTTPS-安装证书" class="headerlink" title="四、HTTPS 安装证书"></a>四、HTTPS 安装证书</h4><p><code>Https</code> 无法抓包，需要安装额外的信任证书，按照下面操作：</p>
-<h4 id="五、真机模拟"><a href="#五、真机模拟" class="headerlink" title="五、真机模拟"></a>五、真机模拟</h4><ul>
-<li>localhost 转 ip，扫描二维码手机显示</li>
-</ul>
-<h4 id="六、调试工具"><a href="#六、调试工具" class="headerlink" title="六、调试工具"></a>六、调试工具</h4><p>这里推荐一款调试工具：<a href="#">vConsole</a>，一个轻量、可拓展、针对手机网页的前端开发者调试面板。</p>
-<h4 id="七、场景分析"><a href="#七、场景分析" class="headerlink" title="七、场景分析"></a>七、场景分析</h4><div class="alert warning"><p>既然移动端调试有这么多种方案，那在实际操作中，我该如何取舍？</p>
+<h4 id="一、概要"><a href="#一、概要" class="headerlink" title="一、概要"></a>一、概要</h4><p>因为移动端操作系统分为 <code>iOS</code> 和 <code>Android</code> 两派，所以本文的调试技巧也会按照不同的系统来区分。寻找最合适高效的方式，才能让你事半功倍。</p>
+<div class="alert success"><p>文章会列举目前适合移动端调试的多种方案，快来选择你的最佳实践吧！</p>
 </div>
-<h4 id="八、白屏处理"><a href="#八、白屏处理" class="headerlink" title="八、白屏处理"></a>八、白屏处理</h4><ul>
+<h4 id="二、iOS-设备"><a href="#二、iOS-设备" class="headerlink" title="二、iOS 设备"></a>二、iOS 设备</h4><div class="alert info"><p>Safari：iphone 调试利器，查错改样式首选，需要我们做如下设置：</p>
+</div>
+<ul>
+<li>浏览器设置：Safari - 偏好设置 - 高级 - 勾选「在菜单栏中显示开发」菜单</li>
+<li>iphone 设置：设置 - Safari - 高级 - 打开 Web 检查器</li>
+</ul>
+<p>大功告成，这时候通过手机的 <code>Safari</code> 来打开 <code>H5</code> 页面，我们通过浏览器开发选项可以看到：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/mobile-debug/safari1.png" alt="safari1"></p>
+<div class="alert info"><p>iOS 模拟器：不需要真机，适合调试 <code>Webview</code> 和 <code>H5</code> 有频繁交互的功能页面。</p>
+</div>
+<p>首先下载 <code>Xcode</code> ，运行项目，选择模拟器 <code>iphonex</code>，编译后就会打开模拟器，如下：</p>
+<div class="figure left" style="width:320px;"><a class="fancybox" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/mobile-debug/ios1.png" title="" data-fancybox-group="travel" target="_blank" rel="external"><img class="fig-img" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/mobile-debug/ios1.png" style="width:320px;" alt=""></a></div>
+<div class="figure right" style="width:320px;"><a class="fancybox" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/mobile-debug/ios2.png" title="" data-fancybox-group="travel" target="_blank" rel="external"><img class="fig-img" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/mobile-debug/ios2.png" style="width:320px;" alt=""></a></div><div style="clear:both;"></div>
+<p>可以看到 <code>H5</code> 已经在「壳子」中运行起来了，下来就可以尝试调用 <code>Webview</code> 的方法，和「壳子」交互了。更多的调试技巧可以参考文章：<a href="http://imweb.io/topic/5bcd417305c8cb261b76a1f9" target="_blank" rel="external">iOS 模拟器调试</a>。</p>
+<div class="alert success"><p>具体的调试功能还是依赖浏览器的开发选项，与上无异，就不赘述了。</p>
+</div>
+<h4 id="三、抓包"><a href="#三、抓包" class="headerlink" title="三、抓包"></a>三、抓包</h4><div class="alert info"><p><a href="https://www.charlesproxy.com/download/" target="_blank" rel="external">Charles</a>： Mac OS 系统首选的抓包工具，适合查看、控制网络请求，分析数据情况。</p>
+</div>
+<p><code>Charles</code> 抓包首先需要配置手机代理，<code>Wifi</code> - 配置代理（IP 地址） - 手动，如下图：</p>
+<div class="figure left" style="width:320px;"><a class="fancybox" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/mobile-debug/ip1.jpeg" title="" data-fancybox-group="travel" target="_blank" rel="external"><img class="fig-img" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/mobile-debug/ip1.jpeg" style="width:320px;" alt=""></a></div>
+<div class="figure right" style="width:320px;"><a class="fancybox" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/mobile-debug/ip2.jpeg" title="" data-fancybox-group="travel" target="_blank" rel="external"><img class="fig-img" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/mobile-debug/ip2.jpeg" style="width:320px;" alt=""></a></div><div style="clear:both;"></div>
+<p>配置好手机代理，这时候打开 <code>Charles</code> ，就会收到确认提醒，选择允许。接下来就可以捕获手机的请求了，但是这些都是常规操作，我们来点高级的。</p>
+<div class="alert success"><p>有意思的是：我们可以用本地文件来替换线上文件，方便调试，远程定位线上问题。</p>
+</div>
+<p>选择 <code>Structure</code>，找到需要替换的文件，右键菜单 - <code>Map Local</code>，如下图：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/mobile-debug/map1.png" alt="map1"></p>
+<p>这时候就会打开一个弹窗，填写具体的配置：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/mobile-debug/map2.png" alt="map2"></p>
+<p>OK，大功告成，快去改动本地文件吧，从此再也不怕线上调试了。</p>
+<div class="alert warning"><p>与之相应的是 Windows 平台的 Fiddler，功能大致相似，这里就不细说了。</p>
+</div>
+<h4 id="四、综合方案"><a href="#四、综合方案" class="headerlink" title="四、综合方案"></a>四、综合方案</h4><ul>
+<li>spy-debugger</li>
+<li>whistle</li>
+</ul>
+<h4 id="五、HTTPS-安装证书"><a href="#五、HTTPS-安装证书" class="headerlink" title="五、HTTPS 安装证书"></a>五、HTTPS 安装证书</h4><p><code>Https</code> 无法抓包，需要安装额外的信任证书，按照下面操作：</p>
+<h4 id="六、真机模拟"><a href="#六、真机模拟" class="headerlink" title="六、真机模拟"></a>六、真机模拟</h4><ul>
+<li>Chrome Remote Devices</li>
+<li><code>localhost</code> 转 <code>ip</code>，扫描二维码手机显示。</li>
+</ul>
+<h4 id="七、调试工具"><a href="#七、调试工具" class="headerlink" title="七、调试工具"></a>七、调试工具</h4><p>这里推荐一款调试工具：<a href="#">vConsole</a>，一个轻量、可拓展、针对手机网页的前端开发者调试面板。</p>
+<h4 id="八、场景分析"><a href="#八、场景分析" class="headerlink" title="八、场景分析"></a>八、场景分析</h4><div class="alert warning"><p>既然移动端调试有这么多种方案，那在实际操作中，我该如何取舍？</p>
+</div>
+<h4 id="九、白屏处理"><a href="#九、白屏处理" class="headerlink" title="九、白屏处理"></a>九、白屏处理</h4><ul>
 <li>方案分析 ☆</li>
 <li>代码注释法 ☆</li>
 <li>类库异常，兼容问题 ☆</li>
 <li>try catch ☆☆</li>
 <li>Debug 包 ☆☆☆</li>
+<li>ES6 语法兼容</li>
 </ul>
 
             
@@ -319,7 +353,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/10/31/h5-SpeechSynthesis/" data-tooltip="HTML5 之音频合成（SpeechSynthesis）">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/10/31/h5-SpeechSynthesis/" data-tooltip="HTML5 之音频合成（Speech Synthesis）">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
                     <i class="fa fa-angle-right"></i>
@@ -397,7 +431,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/10/31/h5-SpeechSynthesis/" data-tooltip="HTML5 之音频合成（SpeechSynthesis）">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/10/31/h5-SpeechSynthesis/" data-tooltip="HTML5 之音频合成（Speech Synthesis）">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
                     <i class="fa fa-angle-right"></i>
