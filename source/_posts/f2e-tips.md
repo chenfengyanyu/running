@@ -1,7 +1,7 @@
 ---
 title: CSS 实用 Tips
 date: 2017-11-12 21:19:26
-thumbnailImage: http://7xvi3w.com1.z0.glb.clouddn.com/tips0.png
+thumbnailImage: https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/css-tips.png
 thumbnailImagePosition: left
 tags: 
 - web

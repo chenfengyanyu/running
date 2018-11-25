@@ -1,7 +1,7 @@
 ---
 title: jQuery 插件 range.slider
 date: 2017-11-01 23:25:53
-thumbnailImage: http://7xvi3w.com1.z0.glb.clouddn.com/cha0.png
+thumbnailImage: https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/jquery-slider.png
 thumbnailImagePosition: left
 tags: 
 - jquery
