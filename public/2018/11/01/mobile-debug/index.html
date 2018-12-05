@@ -10,7 +10,7 @@
     <title>H5 移动调试全攻略 - Jartto&#39;s blog</title>
     <meta name="author" content="Jartto">
     
-        <meta name="keywords" content="Jartto,web 前端开发,博客,">
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
     
     
         <link rel="icon" href="http://7xvi3w.com1.z0.glb.clouddn.com/layout_header.png">
@@ -41,7 +41,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/mobile-debug/https2.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/mobile-debug/vconsole1.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/mobile-debug/vconsole2.png">
-<meta property="og:updated_time" content="2018-11-12T02:06:35.000Z">
+<meta property="og:updated_time" content="2018-11-30T15:03:52.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="H5 移动调试全攻略">
 <meta name="twitter:description" content="随着移动设备的高速发展，H5 开发也成为了 F2E 不可或缺的能力。而移动开发的重中之重就是掌握调试技巧，定 Bug于无形。">
@@ -382,7 +382,7 @@
 <p>1.方案分析 ☆<br>一般上线后出现问题，我们最容易想到的就是：是否是新代码引起的问题。所以有效解决手段就是「控制变量法」。</p>
 <p>2.代码注释法 ☆<br>莫名奇妙的白屏，适合页面无异常日志，同时无请求发送，问题集中在单一页面的情况。这种问题比较直观，肯定是某一页面出现了代码异常或是无效的 <code>return</code>，导致页面渲染终止，但并不属于异常。这时候，「代码注释法」将是你的最佳选择，逐行去注释可以代码，直到定位问题。</p>
 <p>3.类库异常，兼容问题 ☆<br>这种场景也会经常遇到，我们需要用可以调试页面异常的方式，如 <code>Safari</code>，<code>Spy-Debugger</code>，<code>Whistle</code>，<code>vConsole</code> 查看异常日志，从而迅速定位类库位置，从而找寻替换或是兼容方案。</p>
-<p>4.try catch ☆☆<br>如果你的项目没有<a href="http://jartto.wang/">异常监控</a>，那么在可疑的代码片段中去 <code>Try Catch</code> 吧。</p>
+<p>4.try catch ☆☆<br>如果你的项目没有<a href="http://jartto.wang/2018/11/20/js-exception-handling/">异常监控</a>，那么在可疑的代码片段中去 <code>Try Catch</code> 吧。</p>
 <p>5.Debug 包 ☆☆☆<br>在你的项目中装上 <a href="http://jartto.wang/2018/11/01/mobile-debug/"><code>vConsole</code></a>，并配合客户端 <code>debug</code> 插件，<code>360</code> 度无死角监控异常，这才是最有效的方式。</p>
 <p>6.ES6 语法兼容 ☆<br>一般我们都会通过 <code>Babel</code> 来编译 <code>ES6</code> ，但是额外的第三方类库如果有不兼容的语法，低版本的移动设备就会异常。所以，先用<a href="http://jartto.wang/2018/11/01/mobile-debug/">上文</a>讲述的调试方法，确定异常，然后去增加 <a href="https://polyfill.io/v2/docs/examples" target="_blank" rel="external"><code>polyfill</code></a> 来兼容吧。</p>
 

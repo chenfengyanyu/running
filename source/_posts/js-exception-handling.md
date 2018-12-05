@@ -13,7 +13,7 @@ categories: 异常处理
 ---
 前端一直是距离用户最近的一层，随着产品的日益完善，我们会更加注重用户体验，而前端异常却如鲠在喉，甚是烦人。
 <!-- more -->
-#### 一、为什么要处理异常
+#### 一、为什么要处理异常？
 {% alert success %}
 异常是不可控的，会影响最终的呈现结果，但是我们有充分的理由去做这样的事情。
 {% endalert %}
@@ -25,7 +25,22 @@ categories: 异常处理
 
 对于 `JS` 而言，我们面对的仅仅只是异常，异常的出现不会直接导致 `JS` 引擎崩溃，最多只会使当前执行的任务终止。
 
-#### 二、Try-Catch 的误区
+#### 二、需要处理哪些异常？
+对于前端来说，我们可做的异常捕获还真不少。总结一下，大概如下：
+- `JS` 语法错误、代码异常
+- `AJAX` 请求异常
+- 静态资源加载异常
+- `Promise` 异常
+- `Iframe` 异常
+- 跨域 Script error 
+- 崩溃和卡顿
+
+{% alert info %}
+[下面](http://jartto.wang/2018/11/20/js-exception-handling/)我会针对每种具体情况来说明如何处理这些异常。
+{% endalert %}
+
+
+#### 三、Try-Catch 的误区
 `try-catch` 只能捕获到同步的运行时错误，对语法和异步错误却无能为力，捕获不到。
 1.同步运行时错误：
 ```js
@@ -76,7 +91,7 @@ Uncaught TypeError: Cannot read property 'map' of undefined
 ```
 并没有捕获到异常，这是需要我们特别注意的地方。
 
-#### 三、window.onerror 不是万能的
+#### 四、window.onerror 不是万能的
 当 `JS` 运行时错误发生时，`window` 会触发一个 `ErrorEvent` 接口的 `error` 事件，并执行 `window.onerror()`。
 ```js
 /**
@@ -180,7 +195,7 @@ Uncaught ReferenceError: Jartto is not defined
 {% endalert %}
 
 
-#### 四、window.addEventListener
+#### 五、window.addEventListener
 当一项资源（如图片或脚本）加载失败，加载资源的元素会触发一个 `Event` 接口的 `error` 事件，并执行该元素上的`onerror()` 处理函数。这些 `error` 事件不会向上冒泡到 `window` ，不过（至少在 `Firefox` 中）能被单一的`window.addEventListener` 捕获。
 ```html
 <scritp>
@@ -199,7 +214,7 @@ window.addEventListener('error', (error) => {
 - 不同浏览器下返回的 `error` 对象可能不同，需要注意兼容处理。
 - 需要注意避免 `addEventListener` 重复监听。
 
-#### 五、Promise Catch
+#### 六、Promise Catch
 {% alert info %}
 在 `promise` 中使用 `catch` 可以非常方便的捕获到异步 `error` ，这个很简单。
 {% endalert %}
@@ -248,7 +263,7 @@ new Promise((resolve, reject) => {
 event.preventDefault();
 ```
 
-#### 六、VUE errorHandler
+#### 七、VUE errorHandler
 ```js
 Vue.config.errorHandler = (err, vm, info) => {
   console.error('通过vue errorHandler捕获的错误');
@@ -258,32 +273,103 @@ Vue.config.errorHandler = (err, vm, info) => {
 }
 ```
 
-#### 七、React 异常捕获
+#### 八、React 异常捕获
 `React 16` 提供了一个内置函数 `componentDidCatch`，使用它可以非常简单的获取到 `react` 下的错误信息
 ```js
 componentDidCatch(error, info) {
     console.log(error, info);
 }
 ```
+除此之外，我们可以了解一下：[`error boundary`](https://blog.csdn.net/a986597353/article/details/78469979)
+`UI` 的某部分引起的 `JS` 错误不应该破坏整个程序，为了帮 `React` 的使用者解决这个问题，`React 16` 介绍了一种关于错误边界（`error boundary`)的新观念。
 
-#### 八、iframe 异常
-```html
-window.onerror = function(message, source, lineno, colno, error) {
-    console.log('捕获到异常：',{message, source, lineno, colno, error});
+
+{% alert warning %}
+需要注意的是： error boundaries 并不会捕捉下面这些错误。
+{% endalert %}
+1.事件处理器
+2.异步代码
+3.服务端的渲染代码
+4.在 `error boundaries` 区域内的错误
+
+我们来举一个小例子，在下面这个 `componentDIdCatch(error,info)` 里的类会变成一个 `error boundary`：
+```jsx
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
+ 
+  componentDidCatch(error, info) {
+    // Display fallback UI
+    this.setState({ hasError: true });
+    // You can also log the error to an error reporting service
+    logErrorToMyService(error, info);
+  }
+ 
+  render() {
+    if (this.state.hasError) {
+      // You can render any custom fallback UI
+      return <h1>Something went wrong.</h1>;
+    }
+    return this.props.children;
+  }
 }
+```
+然后我们像使用普通组件那样使用它：
+```
+<ErrorBoundary>
+  <MyWidget />
+</ErrorBoundary>
+```
+
+`componentDidCatch()` 方法像 `JS` 的 `catch{}` 模块一样工作，但是对于组件，只有 `class` 类型的组件(`class component` )可以成为一个 `error boundaries` 。
+
+实际上，大多数情况下我们可以在整个程序中定义一个 `error boundary` 组件，之后就可以一直使用它了！
+
+
+#### 九、iframe 异常
+对于 `iframe` 的异常捕获，我们还得借力 `window.onerror`：
+```js
+window.onerror = function(message, source, lineno, colno, error) {
+  console.log('捕获到异常：',{message, source, lineno, colno, error});
+}
+```
+一个简单的例子可能如下：
+```html
+
 <iframe src="./iframe.html" frameborder="0"></iframe>
 <script>
-  window.frames[0].onerror = function (msg, url, row, col, error) {
-    console.log('我知道 iframe 的错误了，也知道错误信息');
-    console.log({
-      msg,  url,  row, col, error
-    })
+  window.frames[0].onerror = function (message, source, lineno, colno, error) {
+    console.log('捕获到 iframe 异常：',{message, source, lineno, colno, error});
     return true;
   };
 </script>
 ```
 
-#### 九、崩溃和卡顿
+#### 十、Script error
+一般情况，如果出现 `Script error` 这样的错误，基本上可以确定是出现了跨域问题。这时候，是不会有其他太多辅助信息的，但是解决思路无非如下：
+
+{% alert info %}
+跨源资源共享机制( `CORS` )：我们为 `script` 标签添加 `crossOrigin` 属性。
+{% endalert %}
+
+```html
+<script src="http://jartto.wang/main.js" crossorigin></script>
+```
+或者动态去添加 `js` 脚本：
+```js
+const script = document.createElement('script');
+script.crossOrigin = 'anonymous';
+script.src = url;
+document.body.appendChild(script);
+```
+
+{% alert warning %}
+特别注意，服务器端需要设置：Access-Control-Allow-Origin
+{% endalert %}
+
+#### 十一、崩溃和卡顿
 卡顿也就是网页暂时响应比较慢， `JS` 可能无法及时执行。但崩溃就不一样了，网页都崩溃了，`JS` 都不运行了，还有什么办法可以监控网页的崩溃，并将网页崩溃上报呢？
 
 {% alert info %}
@@ -319,7 +405,7 @@ window.addEventListener('load', function () {
 - 网页可以通过 `navigator.serviceWorker.controller.postMessage API` 向掌管自己的 `SW` 发送消息。
 
 
-#### 十、错误上报
+#### 十二、错误上报
 1.通过 `Ajax` 发送数据
 因为 `Ajax` 请求本身也有可能会发生异常，而且有可能会引发跨域问题，一般情况下更推荐使用动态创建 `img` 标签的形式进行上报。
 
@@ -331,7 +417,7 @@ function report(error) {
 }
 ```
 
-收集异常信息量太多，怎么办？实际中，我们不得不考虑这样一种情况：如果你的网站访问量很大，那么一个必然的错误发送的信息就有很多条，这时候，我们需要设置采集率，从而减缓服务器的压力：
+收集异常信息量太多，怎么办？实际中，我们不得不考虑这样一种情况：如果你的网站访问量很大，那么一个必然的错误发送的信息就有很多条，这时候，我们需要设置采集率，从而[减缓服务器的压力](https://github.com/happylindz/blog/issues/5)：
 ```js
 Reporter.send = function(data) {
   // 只采集 30%
@@ -345,23 +431,23 @@ Reporter.send = function(data) {
 采集率应该通过实际情况来设定，随机数，或者某些用户特征都是不错的选择。
 {% endalert %}
 
-#### 十一、总结
-通过上文，我们来总结一下，一般前端要捕获的异常和反馈大致如下：
-- `JS` 错误
-- `AJAX` 请求异常
-- 静态资源加载异常
-- `Promise` 异常
-- `Iframe` 异常
-- 崩溃和卡顿
-
+#### 十三、总结
 {% alert warning %}
 回到我们开头提出的那个问题，如何优雅的处理异常呢？
 {% endalert %}
 
-其实很简单，正如[上文](http://jartto.wang/2018/11/20/js-exception-handling/)说说：采用组合方案，分类型的去捕获异常，这样基本 80%－90% 的问题都化于无形。
+1.可疑区域增加 `Try-Catch`
+2.全局监控 `JS` 异常 `window.onerror`
+3.全局监控静态资源异常 `window.addEventListener`
+4.捕获没有 `Catch` 的 `Promise` 异常：`unhandledrejection`
+5.`VUE errorHandler` 和 `React componentDidCatch`
+6.监控网页崩溃：`window` 对象的 `load` 和 `beforeunload`
+7.跨域 `crossOrigin` 解决
 
+其实很简单，正如[上文](http://jartto.wang/2018/11/20/js-exception-handling/)所说：采用组合方案，分类型的去捕获异常，这样基本 80%-90% 的问题都化于无形。
 
-#### 十二、参考
+#### 十四、参考
 [Logging Information on Browser Crashes](http://jasonjl.me/blog/2015/06/21/taking-action-on-browser-crashes/)
 [前端代码异常监控实战](https://github.com/happylindz/blog/issues/5)
+[Error Boundaries](https://blog.csdn.net/a986597353/article/details/78469979)
 [前端监控知识点](https://github.com/RicardoCao-Biker/Front-End-Monitoring/blob/master/BasicKnowledge.md)

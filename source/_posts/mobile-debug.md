@@ -261,7 +261,7 @@ var vConsole = new VConsole();
 这种场景也会经常遇到，我们需要用可以调试页面异常的方式，如 `Safari`，`Spy-Debugger`，`Whistle`，`vConsole` 查看异常日志，从而迅速定位类库位置，从而找寻替换或是兼容方案。
 
 4.try catch ☆☆
-如果你的项目没有[异常监控](http://jartto.wang/)，那么在可疑的代码片段中去 `Try Catch` 吧。
+如果你的项目没有[异常监控](http://jartto.wang/2018/11/20/js-exception-handling/)，那么在可疑的代码片段中去 `Try Catch` 吧。
 
 5.Debug 包 ☆☆☆
 在你的项目中装上 [`vConsole`](http://jartto.wang/2018/11/01/mobile-debug/)，并配合客户端 `debug` 插件，`360` 度无死角监控异常，这才是最有效的方式。

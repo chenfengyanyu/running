@@ -4,7 +4,7 @@
 
 # Site
 title: Jartto's blog
-subtitle: 王嘉涛的个人博客
+subtitle: Jartto 个人博客
 description: 最遗憾的不是把梦想丢在路上，而是梦想从未上路
 author: Jartto
 language: zh-cn
@@ -12,7 +12,7 @@ email: jartto@qq.com
 timezone:
 keywords:
 - Jartto
-- web 前端开发
+- Web 前端开发
 - 博客
 
 # URL
@@ -67,7 +67,7 @@ time_format: HH:mm:ss
 
 # Pagination
 ## Set per_page to 0 to disable pagination
-per_page: 20
+per_page: 30
 pagination_dir: page
 
 # Extensions
@@ -87,7 +87,7 @@ Plugins:
 feed:
     type: atom
     path: atom.xml
-    limit: 20
+    limit: 30
 
 #sitemap
 sitemap:
