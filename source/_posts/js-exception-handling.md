@@ -369,6 +369,49 @@ document.body.appendChild(script);
 特别注意，服务器端需要设置：Access-Control-Allow-Origin
 {% endalert %}
 
+此外，我们也可以试试这个-[解决 Script Error 的另类思路](https://juejin.im/post/5c00a405f265da610e7fd024)：
+```
+const originAddEventListener = EventTarget.prototype.addEventListener;
+EventTarget.prototype.addEventListener = function (type, listener, options) {
+  const wrappedListener = function (...args) {
+    try {
+      return listener.apply(this, args);
+    }
+    catch (err) {
+      throw err;
+    }
+  }
+  return originAddEventListener.call(this, type, wrappedListener, options);
+}
+```
+简单解释一下：
+- 改写了 `EventTarget` 的 `addEventListener` 方法；
+- 对传入的 `listener` 进行包装，返回包装过的 `listener`，对其执行进行 `try-catch`；
+- 浏览器不会对 `try-catch` 起来的异常进行跨域拦截，所以 `catch` 到的时候，是有堆栈信息的；
+- 重新 `throw` 出来异常的时候，执行的是同域代码，所以 `window.onerror` 捕获的时候不会丢失堆栈信息；
+
+利用包装 `addEventListener`，我们还可以达到「扩展堆栈」的效果：
+```
+(() => {
+   const originAddEventListener = EventTarget.prototype.addEventListener;
+   EventTarget.prototype.addEventListener = function (type, listener, options) {
++    // 捕获添加事件时的堆栈
++    const addStack = new Error(`Event (${type})`).stack;
+     const wrappedListener = function (...args) {
+       try {
+         return listener.apply(this, args);
+       }
+       catch (err) {
++        // 异常发生时，扩展堆栈
++        err.stack += '\n' + addStack;
+         throw err;
+       }
+     }
+     return originAddEventListener.call(this, type, wrappedListener, options);
+   }
+ })();
+```
+
 #### 十一、崩溃和卡顿
 卡顿也就是网页暂时响应比较慢， `JS` 可能无法及时执行。但崩溃就不一样了，网页都崩溃了，`JS` 都不运行了，还有什么办法可以监控网页的崩溃，并将网页崩溃上报呢？
 
@@ -451,3 +494,4 @@ Reporter.send = function(data) {
 [前端代码异常监控实战](https://github.com/happylindz/blog/issues/5)
 [Error Boundaries](https://blog.csdn.net/a986597353/article/details/78469979)
 [前端监控知识点](https://github.com/RicardoCao-Biker/Front-End-Monitoring/blob/master/BasicKnowledge.md)
+[Capture and report JavaScript errors with window.onerror](https://blog.sentry.io/2016/01/04/client-javascript-reporting-window-onerror)

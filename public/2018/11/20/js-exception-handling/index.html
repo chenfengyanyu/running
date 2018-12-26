@@ -13,7 +13,7 @@
         <meta name="keywords" content="Jartto,Web 前端开发,博客,">
     
     
-        <link rel="icon" href="http://7xvi3w.com1.z0.glb.clouddn.com/layout_header.png">
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
     
     
         <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
@@ -29,7 +29,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/js-exception/error1.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/js-exception/error2.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/js-exception/promise.png">
-<meta property="og:updated_time" content="2018-12-01T02:53:37.000Z">
+<meta property="og:updated_time" content="2018-12-05T01:20:53.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何优雅处理前端异常？">
 <meta name="twitter:description" content="前端一直是距离用户最近的一层，随着产品的日益完善，我们会更加注重用户体验，而前端异常却如鲠在喉，甚是烦人。">
@@ -39,7 +39,7 @@
         
     
     
-        <meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/layout_header.png"/>
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
     
     
         <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/js-exception/except.png"/>
@@ -88,7 +88,7 @@
                 href="#about">
         
         
-            <img class="header-picture" src="http://7xvi3w.com1.z0.glb.clouddn.com/layout_header.png"/>
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
         
         </a>
     
@@ -105,7 +105,7 @@
     
         <div class="sidebar-profile">
             <a href="/#about">
-                    <img class="sidebar-profile-picture" src="http://7xvi3w.com1.z0.glb.clouddn.com/layout_header.png"/>
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
             </a>
             <span class="sidebar-profile-name">Jartto</span>
         </div>
@@ -282,7 +282,7 @@
 <li>跨域 Script error </li>
 <li>崩溃和卡顿</li>
 </ul>
-<div class="alert info"><p><a href="http://localhost:4000/2018/11/20/js-exception-handling/" target="_blank" rel="external">下面</a>我会针对每种具体情况来说明如何处理这些异常。</p>
+<div class="alert info"><p><a href="http://jartto.wang/2018/11/20/js-exception-handling/">下面</a>我会针对每种具体情况来说明如何处理这些异常。</p>
 </div>
 <h4 id="三、Try-Catch-的误区"><a href="#三、Try-Catch-的误区" class="headerlink" title="三、Try-Catch 的误区"></a>三、Try-Catch 的误区</h4><p><code>try-catch</code> 只能捕获到同步的运行时错误，对语法和异步错误却无能为力，捕获不到。<br>1.同步运行时错误：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">  <span class="keyword">let</span> name = <span class="string">'jartto'</span>;</div><div class="line">  <span class="built_in">console</span>.log(nam);</div><div class="line">&#125; <span class="keyword">catch</span>(e) &#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'捕获到异常：'</span>,e);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>输出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">捕获到异常： ReferenceError: nam is not defined</div><div class="line">    at &lt;anonymous&gt;:3:15</div></pre></td></tr></table></figure></p>
@@ -349,6 +349,15 @@
 <p>或者动态去添加 <code>js</code> 脚本：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> script = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>);</div><div class="line">script.crossOrigin = <span class="string">'anonymous'</span>;</div><div class="line">script.src = url;</div><div class="line"><span class="built_in">document</span>.body.appendChild(script);</div></pre></td></tr></table></figure></p>
 <div class="alert warning"><p>特别注意，服务器端需要设置：Access-Control-Allow-Origin</p>
 </div>
+<p>此外，我们也可以试试这个-<a href="https://juejin.im/post/5c00a405f265da610e7fd024" target="_blank" rel="external">解决 Script Error 的另类思路</a>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">const originAddEventListener = EventTarget.prototype.addEventListener;</div><div class="line">EventTarget.prototype.addEventListener = function (type, listener, options) &#123;</div><div class="line">  const wrappedListener = function (...args) &#123;</div><div class="line">    try &#123;</div><div class="line">      return listener.apply(this, args);</div><div class="line">    &#125;</div><div class="line">    catch (err) &#123;</div><div class="line">      throw err;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  return originAddEventListener.call(this, type, wrappedListener, options);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>简单解释一下：</p>
+<ul>
+<li>改写了 <code>EventTarget</code> 的 <code>addEventListener</code> 方法；</li>
+<li>对传入的 <code>listener</code> 进行包装，返回包装过的 <code>listener</code>，对其执行进行 <code>try-catch</code>；</li>
+<li>浏览器不会对 <code>try-catch</code> 起来的异常进行跨域拦截，所以 <code>catch</code> 到的时候，是有堆栈信息的；</li>
+<li>重新 <code>throw</code> 出来异常的时候，执行的是同域代码，所以 <code>window.onerror</code> 捕获的时候不会丢失堆栈信息；</li>
+</ul>
+<p>利用包装 <code>addEventListener</code>，我们还可以达到「扩展堆栈」的效果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">(() =&gt; &#123;</div><div class="line">   const originAddEventListener = EventTarget.prototype.addEventListener;</div><div class="line">   EventTarget.prototype.addEventListener = function (type, listener, options) &#123;</div><div class="line">+    // 捕获添加事件时的堆栈</div><div class="line">+    const addStack = new Error(`Event ($&#123;type&#125;)`).stack;</div><div class="line">     const wrappedListener = function (...args) &#123;</div><div class="line">       try &#123;</div><div class="line">         return listener.apply(this, args);</div><div class="line">       &#125;</div><div class="line">       catch (err) &#123;</div><div class="line">+        // 异常发生时，扩展堆栈</div><div class="line">+        err.stack += &apos;\n&apos; + addStack;</div><div class="line">         throw err;</div><div class="line">       &#125;</div><div class="line">     &#125;</div><div class="line">     return originAddEventListener.call(this, type, wrappedListener, options);</div><div class="line">   &#125;</div><div class="line"> &#125;)();</div></pre></td></tr></table></figure></p>
 <h4 id="十一、崩溃和卡顿"><a href="#十一、崩溃和卡顿" class="headerlink" title="十一、崩溃和卡顿"></a>十一、崩溃和卡顿</h4><p>卡顿也就是网页暂时响应比较慢， <code>JS</code> 可能无法及时执行。但崩溃就不一样了，网页都崩溃了，<code>JS</code> 都不运行了，还有什么办法可以监控网页的崩溃，并将网页崩溃上报呢？</p>
 <div class="alert info"><p>崩溃和卡顿也是不可忽视的，也许会导致你的用户流失。</p>
 </div>
@@ -368,7 +377,7 @@
 </div>
 <p>1.可疑区域增加 <code>Try-Catch</code><br>2.全局监控 <code>JS</code> 异常 <code>window.onerror</code><br>3.全局监控静态资源异常 <code>window.addEventListener</code><br>4.捕获没有 <code>Catch</code> 的 <code>Promise</code> 异常：<code>unhandledrejection</code><br>5.<code>VUE errorHandler</code> 和 <code>React componentDidCatch</code><br>6.监控网页崩溃：<code>window</code> 对象的 <code>load</code> 和 <code>beforeunload</code><br>7.跨域 <code>crossOrigin</code> 解决</p>
 <p>其实很简单，正如<a href="http://jartto.wang/2018/11/20/js-exception-handling/">上文</a>所说：采用组合方案，分类型的去捕获异常，这样基本 80%-90% 的问题都化于无形。</p>
-<h4 id="十四、参考"><a href="#十四、参考" class="headerlink" title="十四、参考"></a>十四、参考</h4><p><a href="http://jasonjl.me/blog/2015/06/21/taking-action-on-browser-crashes/" target="_blank" rel="external">Logging Information on Browser Crashes</a><br><a href="https://github.com/happylindz/blog/issues/5" target="_blank" rel="external">前端代码异常监控实战</a><br><a href="https://blog.csdn.net/a986597353/article/details/78469979" target="_blank" rel="external">Error Boundaries</a><br><a href="https://github.com/RicardoCao-Biker/Front-End-Monitoring/blob/master/BasicKnowledge.md" target="_blank" rel="external">前端监控知识点</a></p>
+<h4 id="十四、参考"><a href="#十四、参考" class="headerlink" title="十四、参考"></a>十四、参考</h4><p><a href="http://jasonjl.me/blog/2015/06/21/taking-action-on-browser-crashes/" target="_blank" rel="external">Logging Information on Browser Crashes</a><br><a href="https://github.com/happylindz/blog/issues/5" target="_blank" rel="external">前端代码异常监控实战</a><br><a href="https://blog.csdn.net/a986597353/article/details/78469979" target="_blank" rel="external">Error Boundaries</a><br><a href="https://github.com/RicardoCao-Biker/Front-End-Monitoring/blob/master/BasicKnowledge.md" target="_blank" rel="external">前端监控知识点</a><br><a href="https://blog.sentry.io/2016/01/04/client-javascript-reporting-window-onerror" target="_blank" rel="external">Capture and report JavaScript errors with window.onerror</a></p>
 
             
         </div>
@@ -440,7 +449,7 @@
 </div>
 
 
-        <div><img style="border-radius:3px;" src="http://7xvi3w.com1.z0.glb.clouddn.com/layout_0100110.jpg" width="100%" alt="请 Jartto 喝杯茶，亦或是给他一个简单的项目需求"/></div>
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/qrcode.png" width="100%" alt="请 Jartto 喝杯茶，亦或是给他一个简单的项目需求"/></div>
         
     </div>
 </article>
@@ -554,7 +563,7 @@
             <i class="fa fa-remove"></i>
         </div>
         
-            <img id="about-card-picture" src="http://7xvi3w.com1.z0.glb.clouddn.com/layout_header.png"/>
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
         
             <h4 id="about-card-name">Jartto</h4>
         
@@ -582,7 +591,7 @@
 </div>
 
         
-<div id="cover" style="background-image:url('http://7xvi3w.com1.z0.glb.clouddn.com/layout_cover.jpg');"></div>
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
     </body>
     <!--SCRIPTS-->
 <script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>

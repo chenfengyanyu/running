@@ -2,9 +2,51 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://jartto.wang/2018/12/16/manage/</loc>
+    
+    <lastmod>2018-12-25T01:36:37.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://jartto.wang/2018/12/09/bitmap/</loc>
+    
+    <lastmod>2018-12-15T09:45:15.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://jartto.wang/2018/12/11/git-rebase/</loc>
+    
+    <lastmod>2018-12-15T09:30:38.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://jartto.wang/2018/12/02/indexeddb/</loc>
     
-    <lastmod>2018-12-02T14:08:45.000Z</lastmod>
+    <lastmod>2018-12-09T12:32:45.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://jartto.wang/2018/11/30/about-devops/</loc>
+    
+    <lastmod>2018-12-09T09:22:58.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://jartto.wang/2018/12/05/git-flow/</loc>
+    
+    <lastmod>2018-12-06T01:05:54.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://jartto.wang/2018/11/20/js-exception-handling/</loc>
+    
+    <lastmod>2018-12-05T01:20:53.000Z</lastmod>
     
   </url>
   
@@ -19,20 +61,6 @@
     <loc>http://jartto.wang/2018/11/22/algorithm1/</loc>
     
     <lastmod>2018-12-01T15:41:37.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://jartto.wang/2018/11/20/js-exception-handling/</loc>
-    
-    <lastmod>2018-12-01T02:53:37.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://jartto.wang/2018/11/30/about-devops/</loc>
-    
-    <lastmod>2018-12-01T02:19:22.000Z</lastmod>
     
   </url>
   
