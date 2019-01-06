@@ -30,7 +30,7 @@ categories: 技术博文
 
 提到 `HTTP2` 的新特性，有三个特性肯定是亮点：
 1.多路复用：多路复用允许同时通过单一的 `HTTP2` 连接发起多重的请求-响应消息先来看一张[流程对比图](https://www.zhihu.com/question/34074946)。
-![http2](http://7xvi3w.com1.z0.glb.clouddn.com/http2.jpg)
+![diff](https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/http2/diff.png)
 因此 `HTTP2` 可以很容易的去实现多流并行而不用依赖建立多个 `TCP` 连接，`HTTP2` 把 `HTTP` 协议通信的基本单位缩小为一个一个的帧，这些帧对应着逻辑流中的消息。并行地在同一个 `TCP` 连接上。
 
 {% alert success %}
@@ -75,7 +75,6 @@ HTTP1.1 并不支持 HTTP 首部压缩，为此 SPDY 和 HTTP/2 应运而生， 
 
 #### 四、HTTP2 加载效果演示
 有个在线的 [DMEO](https://http2.akamai.com/demo) 可以直观的感受一下 `HTTP2` 的实际效果。
-![DEMO](http://7xvi3w.com1.z0.glb.clouddn.com/http2-1.png)
 
 {% alert success %}
 可以看出 `HTTP1.1` 和 `HTTP2` 在比较接近的服务器延迟条件下，`HTTP2` 的加载速度明显要优于 `HTTP1`。

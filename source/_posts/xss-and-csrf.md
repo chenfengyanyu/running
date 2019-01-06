@@ -1,7 +1,7 @@
 ---
 title: Web 安全之 XSS 和 CSRF
 date: 2017-12-15 06:35:38
-thumbnailImage: http://7xvi3w.com1.z0.glb.clouddn.com/xss0.png
+thumbnailImage: https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/xss0.png
 thumbnailImagePosition: left
 tags: 
 - xss

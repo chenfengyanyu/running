@@ -1,7 +1,7 @@
 ---
 title: 玩转图片流
 date: 2018-01-19 23:22:22
-thumbnailImage: http://7xvi3w.com1.z0.glb.clouddn.com/blob0.png
+thumbnailImage: https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo/cool0.png
 thumbnailImagePosition: left
 tags: 
 - image

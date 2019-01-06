@@ -1,7 +1,7 @@
 ---
 title: 如何配置 Git 对应多个 Repository
 date: 2017-12-19 15:46:27
-thumbnailImage: http://7xvi3w.com1.z0.glb.clouddn.com/github0.png
+thumbnailImage: https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo/git0.png
 thumbnailImagePosition: left
 tags: 
 - git

@@ -1,7 +1,7 @@
 ---
 title: CSS 三大特性
 date: 2017-02-08 07:37:26
-thumbnailImage: http://7xvi3w.com1.z0.glb.clouddn.com/css1.png
+thumbnailImage: https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/css/logo.png
 thumbnailImagePosition: left
 tags: 
 - css
@@ -14,7 +14,7 @@ categories: 技术博文
 <!-- more -->
 #### 一、CSS 优先级
 CSS 的组成单元是样式规则，也就是我们常说的 CSS Rule ，正如我们下面看到的这张图：
-![css rule](http://7xvi3w.com1.z0.glb.clouddn.com/parse3.png-blog)
+![css rule](https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/css/rule.png)
 
 众所周知，CSS 有一个核心特性：当多条样式规则中的同一个属性作用到了同一个元素，这些样式之间就会发生覆盖。
 {% alert info %}

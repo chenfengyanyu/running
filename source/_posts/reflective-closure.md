@@ -1,7 +1,7 @@
 ---
 title: 反思闭包
 date: 2017-12-18 22:33:23
-thumbnailImage: http://7xvi3w.com1.z0.glb.clouddn.com/closure0.png
+thumbnailImage: https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo/closure0.png
 thumbnailImagePosition: left
 tags:
 - js

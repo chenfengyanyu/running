@@ -26,13 +26,12 @@
 <meta property="og:site_name" content="Jartto&#39;s blog">
 <meta property="og:description" content="提到 HTTP2.0 ，第一印象就是：这与 HTTP1.0 的区别是什么，有怎样的改进？大的版本变化必然会有更强力的特性，那不妨拿来了解一下。">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/http2.jpg">
-<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/http2-1.png">
-<meta property="og:updated_time" content="2018-10-31T15:03:01.000Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/http2/diff.png">
+<meta property="og:updated_time" content="2018-12-30T15:11:33.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="掌握 HTTP2.0">
 <meta name="twitter:description" content="提到 HTTP2.0 ，第一印象就是：这与 HTTP1.0 的区别是什么，有怎样的改进？大的版本变化必然会有更强力的特性，那不妨拿来了解一下。">
-<meta name="twitter:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/http2.jpg">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/http2/diff.png">
     
     
         
@@ -276,7 +275,7 @@
 <p>更多细节请<a href="https://blog.csdn.net/linsongbin1/article/details/54980801" target="_blank" rel="external">参考</a>，还有之前的一篇文章 <a href="http://jartto.wang/2016/08/04/Rudimentary-http-protocol/">HTTP 协议入门</a>。</p>
 <h4 id="二、HTTP2-新特性"><a href="#二、HTTP2-新特性" class="headerlink" title="二、HTTP2 新特性"></a>二、HTTP2 新特性</h4><div class="alert warning"><p>众所周知 ，在 <code>HTTP1.1</code> 协议中 「浏览器客户端在同一时间，针对同一域名下的请求有一定数量限制。超过限制数目的请求会被阻塞」，也就是我们常说的 <code>Pending</code> 状态。</p>
 </div>
-<p>提到 <code>HTTP2</code> 的新特性，有三个特性肯定是亮点：<br>1.多路复用：多路复用允许同时通过单一的 <code>HTTP2</code> 连接发起多重的请求-响应消息先来看一张<a href="https://www.zhihu.com/question/34074946" target="_blank" rel="external">流程对比图</a>。<br><img src="http://7xvi3w.com1.z0.glb.clouddn.com/http2.jpg" alt="http2"><br>因此 <code>HTTP2</code> 可以很容易的去实现多流并行而不用依赖建立多个 <code>TCP</code> 连接，<code>HTTP2</code> 把 <code>HTTP</code> 协议通信的基本单位缩小为一个一个的帧，这些帧对应着逻辑流中的消息。并行地在同一个 <code>TCP</code> 连接上。</p>
+<p>提到 <code>HTTP2</code> 的新特性，有三个特性肯定是亮点：<br>1.多路复用：多路复用允许同时通过单一的 <code>HTTP2</code> 连接发起多重的请求-响应消息先来看一张<a href="https://www.zhihu.com/question/34074946" target="_blank" rel="external">流程对比图</a>。<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/http2/diff.png" alt="diff"><br>因此 <code>HTTP2</code> 可以很容易的去实现多流并行而不用依赖建立多个 <code>TCP</code> 连接，<code>HTTP2</code> 把 <code>HTTP</code> 协议通信的基本单位缩小为一个一个的帧，这些帧对应着逻辑流中的消息。并行地在同一个 <code>TCP</code> 连接上。</p>
 <div class="alert success"><p>这样来说的话，多路复用也为前端性能优化提供了更高效的方式。</p>
 </div>
 <p>2.首部数据压缩<br><code>HTTP1.1</code> 不支持 <code>header</code> 数据的压缩，<code>HTTP2.0</code> 使用 <code>HPACK</code> 算法对 <code>header</code> 的数据进行压缩，这样数据体积小了，在网络上传输就会更快。</p>
@@ -295,7 +294,7 @@
 <p>在实际的应用中，由于 <code>HTTP2</code> 多路复用的优势，前端应用团队无须采取把多个文件合并成一个，生成雪碧图之类的方法减少网络请求。除此之外，<code>HTTP2</code> 对于前端开发的影响并不大。</p>
 <div class="alert info"><p>对于网络状况较差的环境，<code>HTTP2</code> 的性能也高于 <code>HTTP1</code>。</p>
 </div>
-<h4 id="四、HTTP2-加载效果演示"><a href="#四、HTTP2-加载效果演示" class="headerlink" title="四、HTTP2 加载效果演示"></a>四、HTTP2 加载效果演示</h4><p>有个在线的 <a href="https://http2.akamai.com/demo" target="_blank" rel="external">DMEO</a> 可以直观的感受一下 <code>HTTP2</code> 的实际效果。<br><img src="http://7xvi3w.com1.z0.glb.clouddn.com/http2-1.png" alt="DEMO"></p>
+<h4 id="四、HTTP2-加载效果演示"><a href="#四、HTTP2-加载效果演示" class="headerlink" title="四、HTTP2 加载效果演示"></a>四、HTTP2 加载效果演示</h4><p>有个在线的 <a href="https://http2.akamai.com/demo" target="_blank" rel="external">DMEO</a> 可以直观的感受一下 <code>HTTP2</code> 的实际效果。</p>
 <div class="alert success"><p>可以看出 <code>HTTP1.1</code> 和 <code>HTTP2</code> 在比较接近的服务器延迟条件下，<code>HTTP2</code> 的加载速度明显要优于 <code>HTTP1</code>。</p>
 </div>
 <h4 id="五、扩展：HTTP-POST-请求为什么会有一个-OPTION-？"><a href="#五、扩展：HTTP-POST-请求为什么会有一个-OPTION-？" class="headerlink" title="五、扩展：HTTP POST 请求为什么会有一个 OPTION ？"></a>五、扩展：HTTP POST 请求为什么会有一个 OPTION ？</h4><p>正如上面问题所说，当你打开 <code>Chrome</code> 开发工具或者其他抓包工具的时候，会发现一条 <code>POST</code> 请求输出两次，第一次状态显示 <code>OPTION</code>。</p>
@@ -447,7 +446,7 @@
                 <footer id="footer" class="main-content-wrap">
   <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
   <span class="copyrights">
-    Copyrights &copy; 2018 Jartto. All Rights Reserved.
+    Copyrights &copy; 2019 Jartto. All Rights Reserved.
   </span>
   <br>
   <span id="busuanzi_container_site_uv">

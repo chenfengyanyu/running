@@ -1,7 +1,7 @@
 ---
 title: Web 优化之 Request
 date: 2018-02-09 10:37:00
-thumbnailImage: http://7xvi3w.com1.z0.glb.clouddn.com/web0.png
+thumbnailImage: https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/async0.png
 thumbnailImagePosition: left
 tags: 
 - web

@@ -1,7 +1,7 @@
 ---
 title: 初探 Electron - 升华篇
 date: 2018-01-04 21:33:14
-thumbnailImage: http://7xvi3w.com1.z0.glb.clouddn.com/electron3.png
+thumbnailImage: https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/electron0.png
 thumbnailImagePosition: left
 tags: 
 - electron

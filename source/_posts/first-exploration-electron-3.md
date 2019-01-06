@@ -1,7 +1,7 @@
 ---
 title: 初探 Electron - 实践篇1
 date: 2018-01-14 22:53:49
-thumbnailImage: http://7xvi3w.com1.z0.glb.clouddn.com/electron5.png
+thumbnailImage: https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/electron0.png
 thumbnailImagePosition: left
 tags: 
 - electron

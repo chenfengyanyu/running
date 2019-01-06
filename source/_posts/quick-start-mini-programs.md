@@ -1,7 +1,7 @@
 ---
 title: 快速上手小程序
 date: 2018-01-25 22:53:33
-thumbnailImage: http://7xvi3w.com1.z0.glb.clouddn.com/wx0.png
+thumbnailImage: https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo/wxmini.png
 thumbnailImagePosition: left
 tags: 
 - wx

@@ -2,6 +2,111 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://jartto.wang/2018/12/31/f2e-2018/</loc>
+    
+    <lastmod>2019-01-01T08:50:14.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://jartto.wang/2018/01/16/shallow-to-discuss-block-chain/</loc>
+    
+    <lastmod>2018-12-30T15:52:17.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://jartto.wang/2018/01/25/quick-start-mini-programs/</loc>
+    
+    <lastmod>2018-12-30T15:50:06.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://jartto.wang/2018/01/19/play-image-stream/</loc>
+    
+    <lastmod>2018-12-30T15:49:17.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://jartto.wang/2017/12/18/reflective-closure/</loc>
+    
+    <lastmod>2018-12-30T15:48:33.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://jartto.wang/2017/12/19/one-git-for-more-repository/</loc>
+    
+    <lastmod>2018-12-30T15:48:12.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://jartto.wang/2018/01/21/first-exploration-electron-4/</loc>
+    
+    <lastmod>2018-12-30T15:40:00.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://jartto.wang/2018/01/14/first-exploration-electron-3/</loc>
+    
+    <lastmod>2018-12-30T15:39:52.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://jartto.wang/2018/01/04/first-exploration-electron-2/</loc>
+    
+    <lastmod>2018-12-30T15:39:11.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://jartto.wang/2018/02/09/optimise-for-web-request/</loc>
+    
+    <lastmod>2018-12-30T15:37:31.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://jartto.wang/2017/12/15/xss-and-csrf/</loc>
+    
+    <lastmod>2018-12-30T15:25:55.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://jartto.wang/2017/12/03/exploration-the-encryption/</loc>
+    
+    <lastmod>2018-12-30T15:21:12.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://jartto.wang/2017/12/01/git-common-operate/</loc>
+    
+    <lastmod>2018-12-30T15:19:12.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://jartto.wang/2018/03/30/grasp-http2-0/</loc>
+    
+    <lastmod>2018-12-30T15:11:33.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://jartto.wang/2018/12/26/web-worker/</loc>
+    
+    <lastmod>2018-12-30T09:51:21.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://jartto.wang/2018/12/16/manage/</loc>
     
     <lastmod>2018-12-25T01:36:37.000Z</lastmod>
@@ -138,13 +243,6 @@
     <loc>http://jartto.wang/2018/03/06/outline-of-css/</loc>
     
     <lastmod>2018-10-31T15:03:19.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://jartto.wang/2018/03/30/grasp-http2-0/</loc>
-    
-    <lastmod>2018-10-31T15:03:01.000Z</lastmod>
     
   </url>
   
@@ -387,13 +485,6 @@
   </url>
   
   <url>
-    <loc>http://jartto.wang/2018/01/25/quick-start-mini-programs/</loc>
-    
-    <lastmod>2018-03-27T03:28:35.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://jartto.wang/2017/06/09/use-es6/</loc>
     
     <lastmod>2018-03-26T08:55:25.000Z</lastmod>
@@ -404,48 +495,6 @@
     <loc>http://jartto.wang/2016/07/15/grasp-sorting-algorithm/</loc>
     
     <lastmod>2018-03-11T08:17:24.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://jartto.wang/2018/02/09/optimise-for-web-request/</loc>
-    
-    <lastmod>2018-02-09T10:42:21.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://jartto.wang/2018/01/14/first-exploration-electron-3/</loc>
-    
-    <lastmod>2018-01-24T07:10:45.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://jartto.wang/2018/01/21/first-exploration-electron-4/</loc>
-    
-    <lastmod>2018-01-24T06:49:37.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://jartto.wang/2018/01/04/first-exploration-electron-2/</loc>
-    
-    <lastmod>2018-01-23T14:35:00.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://jartto.wang/2018/01/16/shallow-to-discuss-block-chain/</loc>
-    
-    <lastmod>2018-01-21T00:59:46.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://jartto.wang/2018/01/19/play-image-stream/</loc>
-    
-    <lastmod>2018-01-20T16:05:48.000Z</lastmod>
     
   </url>
   
@@ -464,37 +513,9 @@
   </url>
   
   <url>
-    <loc>http://jartto.wang/2017/12/19/one-git-for-more-repository/</loc>
-    
-    <lastmod>2017-12-22T03:59:39.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://jartto.wang/2017/12/18/reflective-closure/</loc>
-    
-    <lastmod>2017-12-21T14:55:04.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://jartto.wang/2017/12/15/xss-and-csrf/</loc>
-    
-    <lastmod>2017-12-19T07:13:39.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://jartto.wang/2017/10/06/js-async-and-await/</loc>
     
     <lastmod>2017-12-12T04:05:32.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://jartto.wang/2017/12/03/exploration-the-encryption/</loc>
-    
-    <lastmod>2017-12-11T03:04:38.000Z</lastmod>
     
   </url>
   
@@ -509,13 +530,6 @@
     <loc>http://jartto.wang/2017/05/18/use-google-map-in-react/</loc>
     
     <lastmod>2017-12-06T07:49:20.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://jartto.wang/2017/12/01/git-common-operate/</loc>
-    
-    <lastmod>2017-12-05T03:04:42.000Z</lastmod>
     
   </url>
   

@@ -1,7 +1,7 @@
 ---
 title: 初探加密算法
 date: 2017-12-03 18:53:33
-thumbnailImage: http://7xvi3w.com1.z0.glb.clouddn.com/encrtption0.png
+thumbnailImage: https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/pwd.png
 thumbnailImagePosition: left
 tags: 
 - encrypt

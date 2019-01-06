@@ -1,7 +1,7 @@
 ---
 title: 浅谈区块链
 date: 2018-01-16 23:32:19
-thumbnailImage: http://7xvi3w.com1.z0.glb.clouddn.com/blockc0.png
+thumbnailImage: https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo/chain.png
 thumbnailImagePosition: left
 tags: 
 - 区块链

@@ -1,7 +1,7 @@
 ---
 title: Git 常规操作
 date: 2017-12-01 20:32:22
-thumbnailImage: http://7xvi3w.com1.z0.glb.clouddn.com/git0.png
+thumbnailImage: https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/github0.png
 thumbnailImagePosition: left
 tags: 
 - git
