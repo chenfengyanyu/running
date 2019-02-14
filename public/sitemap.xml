@@ -2,6 +2,41 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://jartto.wang/2019/01/17/js-typeof/</loc>
+    
+    <lastmod>2019-02-14T00:51:19.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://jartto.wang/2017/12/18/reflective-closure/</loc>
+    
+    <lastmod>2019-01-13T12:50:05.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://jartto.wang/2019/01/06/map-case/</loc>
+    
+    <lastmod>2019-01-09T00:54:57.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://jartto.wang/2019/01/06/f2e-interview/</loc>
+    
+    <lastmod>2019-01-06T14:07:19.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://jartto.wang/2017/02/08/css-features/</loc>
+    
+    <lastmod>2019-01-06T04:00:01.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://jartto.wang/2018/12/31/f2e-2018/</loc>
     
     <lastmod>2019-01-01T08:50:14.000Z</lastmod>
@@ -26,13 +61,6 @@
     <loc>http://jartto.wang/2018/01/19/play-image-stream/</loc>
     
     <lastmod>2018-12-30T15:49:17.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://jartto.wang/2017/12/18/reflective-closure/</loc>
-    
-    <lastmod>2018-12-30T15:48:33.000Z</lastmod>
     
   </url>
   
@@ -544,13 +572,6 @@
     <loc>http://jartto.wang/2017/04/15/nginx-exception-handling/</loc>
     
     <lastmod>2017-11-30T00:02:26.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://jartto.wang/2017/02/08/css-features/</loc>
-    
-    <lastmod>2017-11-29T07:56:39.000Z</lastmod>
     
   </url>
   

@@ -26,13 +26,13 @@
 <meta property="og:site_name" content="Jartto&#39;s blog">
 <meta property="og:description" content="最近看了许多 CSS 相关的文章，也深刻认识到自身的不足。本文属于查漏补缺，巩固基础知识。">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/parse3.png-blog">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/css/rule.png">
 <meta property="og:image" content="http://acgtofe.com/assets/used-images/posts/201304/specificity_calculate_example.png">
-<meta property="og:updated_time" content="2017-11-29T07:56:39.000Z">
+<meta property="og:updated_time" content="2019-01-06T04:00:01.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CSS 三大特性">
 <meta name="twitter:description" content="最近看了许多 CSS 相关的文章，也深刻认识到自身的不足。本文属于查漏补缺，巩固基础知识。">
-<meta name="twitter:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/parse3.png-blog">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/css/rule.png">
     
     
         
@@ -41,8 +41,8 @@
         <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
     
     
-        <meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/css1.png"/>
-        <meta class="swiftype" name="image" data-type="enum" content="http://7xvi3w.com1.z0.glb.clouddn.com/css1.png" />
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/css/logo.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/css/logo.png" />
     
     
     
@@ -267,7 +267,7 @@
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
             <p>最近看了许多 CSS 相关的文章，也深刻认识到自身的不足。本文属于查漏补缺，巩固基础知识。<br><a id="more"></a></p>
-<h4 id="一、CSS-优先级"><a href="#一、CSS-优先级" class="headerlink" title="一、CSS 优先级"></a>一、CSS 优先级</h4><p>CSS 的组成单元是样式规则，也就是我们常说的 CSS Rule ，正如我们下面看到的这张图：<br><img src="http://7xvi3w.com1.z0.glb.clouddn.com/parse3.png-blog" alt="css rule"></p>
+<h4 id="一、CSS-优先级"><a href="#一、CSS-优先级" class="headerlink" title="一、CSS 优先级"></a>一、CSS 优先级</h4><p>CSS 的组成单元是样式规则，也就是我们常说的 CSS Rule ，正如我们下面看到的这张图：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/css/rule.png" alt="css rule"></p>
 <p>众所周知，CSS 有一个核心特性：当多条样式规则中的同一个属性作用到了同一个元素，这些样式之间就会发生覆盖。<br><div class="alert info"><p>优先级高的 CSS 样式，将覆盖优先级低的 CSS 样式，成为最终网页元素的实际样式。</p>
 </div></p>
 <p>所以，为了保证页面有序并且正确的渲染，我们需要了解 CSS 优先级规则。大致的规则如下：<br><div class="alert success"><p>!important &gt; 行内样式 &gt; ID 选择器 &gt; 类选择器 &gt; 标签 &gt; 通配符 &gt; 继承 &gt; 浏览器默认属性</p>

@@ -9,7 +9,7 @@ tags:
 - 面试
 comments: false
 metaAlignment: center
-categories: 技术博文
+categories: 面试笔试
 ---
 最近一年陆陆续续都在面试各种不同程度的 Web 前端开发，总觉得现在前端氛围太过于浮躁，急于求成的人比比皆是。
 <!-- more -->

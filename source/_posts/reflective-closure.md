@@ -24,9 +24,9 @@ categories: 技术博文
 ```js
 const sum = () => {
   let count = 666;
-return () => {
-return count++;
-}
+  return () => {
+    return count++;
+  }
 }
 let getCount= sum();
 console.log(getCount()); // 667
@@ -54,12 +54,12 @@ console.log(getCount()); // 669
 ```js
 let name = 'Window';
 let obj = {
-name: 'Jartto',
-getName: function(){
-return function(){
-return this.name;
-}
-}
+  name: 'Jartto',
+  getName: function(){
+    return function(){
+      return this.name;
+    }
+  }
 }
 console.log(obj.getName()()); // Window
 ```
@@ -69,13 +69,13 @@ console.log(obj.getName()()); // Window
 ```js
 let name = 'Window';
 let obj = {
-name: 'Jartto',
-getName: function(){
-let that = this;
-return function(){
-return that.name;
-}
-}
+  name: 'Jartto',
+  getName: function(){
+    let that = this;
+    return function(){
+      return that.name;
+    }
+  }
 }
 console.log(obj.getName()()); // Jartto
 ```
@@ -83,22 +83,22 @@ console.log(obj.getName()()); // Jartto
 4.在 `IE9` 之前，如果闭包的作用域链中保存着一个 `HTML` 元素，那么意味着该元素无法被销毁。
 ```js
 function closure(){
-var element = document.getElementById(ID);
-element.onclick = function(){
-console.log(element.id);
-}
+  var element = document.getElementById(ID);
+  element.onclick = function(){
+    console.log(element.id);
+  }
 }
 ```
 这里 `DOM` 对象 `element` 引用闭包函数，闭包函数作用域引用 `DOM` 对象，循环引用导致内存泄露。我们修改一下如上代码：
 ```js
 function closure(){
-var element = document.getElementById(ID);
-var id = element.id;
-element.onclick = function(){
-console.log(id);
-}
+  var element = document.getElementById(ID);
+  var id = element.id;
+  element.onclick = function(){
+    console.log(id);
+  }
 
-element = null;
+  element = null;
 }
 ```
 先把 `element.id` 用局部变量 `id` 保存起来，并且在闭包中引用该变量消除了循环引用。但是，这样还不能消除内存泄露，闭包会引用包含函数的活动变量，而其中会有 `element`。即使闭包闭包不直接引用 `element`，包含函数的活动对象仍然会保存一个引用，因此有必要把 `element` 设为 `null`。
@@ -106,13 +106,13 @@ element = null;
 5.闭包只能获取到外部函数中任何变量的最后一个值。
 ```js
 function Outer() {
-var arr = new Array();
-for (var i = 0; i < 5; ++i) {
-arr[i] = function() {
-return i;
-};
-}
-return arr;
+  var arr = new Array();
+  for (var i = 0; i < 5; ++i) {
+    arr[i] = function() {
+      return i;
+    };
+  }
+  return arr;
 }
 
 var arr = Outer();
@@ -125,16 +125,16 @@ console.log(arr[4]()); // 输出5
 我们可以通过定义立即执行函数来解决这个问题，如下：
 ```js
 function Outer() {
-var arr = new Array();
-for (var i = 0; i < 5; ++i) {
-arr[i] = function(num) {
-// inner
-return function() {
-return num;
-}
-}(i);
-}
-return arr;
+  var arr = new Array();
+  for (var i = 0; i < 5; ++i) {
+    arr[i] = function(num) {
+      // inner
+      return function() {
+        return num;
+      }
+    }(i);
+  }
+  return arr;
 }
 
 var arr = Outer();
@@ -148,16 +148,16 @@ console.log(arr[4]()); // 输出4
 除了每次使用变量都是用 `var` 关键字外，我们在实际情况下经常遇到这样一种情况，即有的函数只需要执行一次，其内部变量无需维护，可以尝试如下方式：
 ```js
 var datamodel = {
-table : [],
-tree : {}
+  table : [],
+  tree : {}
 };
 (function(dm){
-for(var i = 0; i < dm.table.rows; i++){
-var row = dm.table.rows[i];
-for(var j = 0; j < row.cells; i++){
-drawCell(i, j);
-}
-}
+  for(var i = 0; i < dm.table.rows; i++){
+    var row = dm.table.rows[i];
+    for(var j = 0; j < row.cells; i++){
+      drawCell(i, j);
+    }
+  }
 //build dm.tree
 })(datamodel);
 ```
@@ -172,25 +172,25 @@ drawCell(i, j);
 {% endalert %}
 ```js
 var CachedSearchBox = (function(){
-var cache = {}, count = [];
-return {
-attachSearchBox : function(dsid){
-if(dsid in cache){//如果结果在缓存中
-return cache[dsid];//直接返回缓存中的对象
-}
-var fsb = new uikit.webctrl.SearchBox(dsid);//新建
-cache[dsid] = fsb;//更新缓存
-if(count.length > 100){//保正缓存的大小<=100
-delete cache[count.shift()];
-}
-return fsb;
-},
-clearSearchBox : function(dsid){
-if(dsid in cache){
-cache[dsid].clearSelection();
-}
-}
-};
+  var cache = {}, count = [];
+  return {
+    attachSearchBox : function(dsid){
+      if(dsid in cache){//如果结果在缓存中
+        return cache[dsid];//直接返回缓存中的对象
+      }
+      var fsb = new uikit.webctrl.SearchBox(dsid);//新建
+      cache[dsid] = fsb;//更新缓存
+      if(count.length > 100){//保正缓存的大小<=100
+        delete cache[count.shift()];
+      }
+      return fsb;
+    },
+    clearSearchBox : function(dsid){
+      if(dsid in cache){
+        cache[dsid].clearSelection();
+      }
+    }
+  };
 })();
 CachedSearchBox.attachSearchBox("input1");
 ```
@@ -199,16 +199,16 @@ CachedSearchBox.attachSearchBox("input1");
 8.实现封装
 ```js
 var person = function(){
-//变量作用域为函数内部，外部无法访问
-var name = 'default';
-return {
-getName : function(){
-return name;
-},
-setName : function(newName){
-name = newName;
-}
-}
+  //变量作用域为函数内部，外部无法访问
+  var name = 'default';
+  return {
+    getName : function(){
+      return name;
+    },
+    setName : function(newName){
+      name = newName;
+    }
+  }
 }();
 console.log(person.name); // 直接访问，结果为undefined
 console.log(person.getName()); // default
@@ -220,15 +220,15 @@ console.log(person.getName()); // jartto
 我们要实现不同的对象(类的实例)拥有独立的成员及状态，互不干涉。虽然 `JS` 中没有类这样的机制，但是通过使用闭包，就可以模拟出这样的机制。
 ```js
 function Person(){
-var name = 'default';
-return {
-getName : function(){
-return name;
-},
-setName : function(newName){
-name = newName;
-}
-}
+  var name = 'default';
+  return {
+    getName : function(){
+      return name;
+    },
+    setName : function(newName){
+      name = newName;
+    }
+  }
 };
 var p1 = Person();
 console.log(p1.getName()); // default
