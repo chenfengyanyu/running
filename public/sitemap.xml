@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://jartto.wang/2019/02/16/web-optimization/</loc>
+    
+    <lastmod>2019-02-20T13:58:33.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://jartto.wang/2019/02/14/web-cache/</loc>
+    
+    <lastmod>2019-02-16T14:08:35.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://jartto.wang/2019/01/17/js-typeof/</loc>
     
     <lastmod>2019-02-14T00:51:19.000Z</lastmod>

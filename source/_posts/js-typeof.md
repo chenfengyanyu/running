@@ -98,7 +98,7 @@ instanceof (A,B) = {
 从上述过程可以看出，当 `A` 的 `__proto__` 指向 `B` 的 `prototype` 时，就认为 `A` 就是 `B` 的实例，我们来看几个例子：
 ```js
 [] instanceof Array; //true
-{} instanceof Object;//true
+({}) instanceof Object;//true
 new Date() instanceof Date;//true
 ```
 `JS` 中万物皆对象的思想：

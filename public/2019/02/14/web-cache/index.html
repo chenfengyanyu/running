@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     <meta name="baidu-site-verification" content="bJPvLdWAu8" />
     <meta name="generator" content="Jartto&#39;s blog">
-    <title>在 React 中接入高德地图（AMap） - Jartto&#39;s blog</title>
+    <title>聊一聊浏览器缓存机制 - Jartto&#39;s blog</title>
     <meta name="author" content="Jartto">
     
         <meta name="keywords" content="Jartto,Web 前端开发,博客,">
@@ -18,18 +18,20 @@
     
         <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
     
-    <meta name="description" content="项目需要，用 React 接了一版高德地图，由于 AMap 没有很好的 React 支持，所以走了不少弯路。既然从坑里一步步走出来，当然得留下些什么。">
-<meta name="keywords" content="amap,高德地图,react">
+    <meta name="description" content="相信很多前端童鞋对于浏览器缓存都不太陌生，但是如果没有系统的归纳总结，可能三言两句很难说明白。如何才能完美的回答，这是一个值得思考的问题。">
+<meta name="keywords" content="http,web,cache">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="在 React 中接入高德地图（AMap）">
-<meta property="og:url" content="http://jartto.wang/2017/02/19/use-AMap-in-React/index.html">
+<meta property="og:title" content="聊一聊浏览器缓存机制">
+<meta property="og:url" content="http://jartto.wang/2019/02/14/web-cache/index.html">
 <meta property="og:site_name" content="Jartto&#39;s blog">
-<meta property="og:description" content="项目需要，用 React 接了一版高德地图，由于 AMap 没有很好的 React 支持，所以走了不少弯路。既然从坑里一步步走出来，当然得留下些什么。">
+<meta property="og:description" content="相信很多前端童鞋对于浏览器缓存都不太陌生，但是如果没有系统的归纳总结，可能三言两句很难说明白。如何才能完美的回答，这是一个值得思考的问题。">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2017-08-28T16:11:19.000Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/cache/process.png">
+<meta property="og:updated_time" content="2019-02-16T14:08:35.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="在 React 中接入高德地图（AMap）">
-<meta name="twitter:description" content="项目需要，用 React 接了一版高德地图，由于 AMap 没有很好的 React 支持，所以走了不少弯路。既然从坑里一步步走出来，当然得留下些什么。">
+<meta name="twitter:title" content="聊一聊浏览器缓存机制">
+<meta name="twitter:description" content="相信很多前端童鞋对于浏览器缓存都不太陌生，但是如果没有系统的归纳总结，可能三言两句很难说明白。如何才能完美的回答，这是一个值得思考的问题。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/cache/process.png">
     
     
         
@@ -38,8 +40,8 @@
         <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
     
     
-        <meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/amap.png"/>
-        <meta class="swiftype" name="image" data-type="enum" content="http://7xvi3w.com1.z0.glb.clouddn.com/amap.png" />
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/cache/logo.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/cache/logo.png" />
     
     
     
@@ -235,19 +237,19 @@
         <div class="post-header main-content-wrap text-center">
     
         <h1 class="post-title" itemprop="headline">
-            在 React 中接入高德地图（AMap）
+            聊一聊浏览器缓存机制
         </h1>
     
     <div class="post-meta">
-    <time itemprop="datePublished" datetime="2017-02-19T23:01:52+08:00">
+    <time itemprop="datePublished" datetime="2019-02-14T08:54:13+08:00">
 	  
-		    2017/2月/19 23:01:52
+		    2019/2月/14 08:54:13
     	
     </time>
     
         <span>发布在 </span>
         
-    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+    <a class="category-link" href="/categories/面试笔试/">面试笔试</a>
 
 
     
@@ -263,18 +265,37 @@
     
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
-            <p>项目需要，用 React 接了一版高德地图，由于 AMap 没有很好的 React 支持，所以走了不少弯路。既然从坑里一步步走出来，当然得留下些什么。<br><a id="more"></a><br>我计划从功能方面来入手，知道要干什么，怎么实现以及如何避免一些问题。</p>
-<h4 id="一、了解AMap"><a href="#一、了解AMap" class="headerlink" title="一、了解AMap"></a>一、了解AMap</h4><h4 id="二、功能一览"><a href="#二、功能一览" class="headerlink" title="二、功能一览"></a>二、功能一览</h4><h4 id="三、如何初始化"><a href="#三、如何初始化" class="headerlink" title="三、如何初始化"></a>三、如何初始化</h4><h4 id="四、创建点标记"><a href="#四、创建点标记" class="headerlink" title="四、创建点标记"></a>四、创建点标记</h4><ul>
-<li>点标记</li>
-<li>添加聚合</li>
-<li>自定义聚合图标</li>
-</ul>
-<h4 id="五、信息窗体"><a href="#五、信息窗体" class="headerlink" title="五、信息窗体"></a>五、信息窗体</h4><ul>
-<li>默认信息窗</li>
-<li>自定义信息窗</li>
-</ul>
-<h4 id="六、右键菜单"><a href="#六、右键菜单" class="headerlink" title="六、右键菜单"></a>六、右键菜单</h4><h4 id="七、自定义功能－打点"><a href="#七、自定义功能－打点" class="headerlink" title="七、自定义功能－打点"></a>七、自定义功能－打点</h4><h4 id="八、总结"><a href="#八、总结" class="headerlink" title="八、总结"></a>八、总结</h4><!-- 当然，AMap 提供的功能远不止这些，这里我就不一一罗列了。 -->
-<h4 id="九、参考资料"><a href="#九、参考资料" class="headerlink" title="九、参考资料"></a>九、参考资料</h4><p>1.<a href="http://lbs.amap.com/api/javascript-api/reference/map" target="_blank" rel="external">AMap 开发指南</a><br>2.<a href="http://lbs.amap.com/api/javascript-api/example/marker/marker-content" target="_blank" rel="external">AMap Demo</a><br>3.<a href="https://github.com/hhhyaaon/amap_demo" target="_blank" rel="external">Github</a></p>
+            <p>相信很多前端童鞋对于浏览器缓存都不太陌生，但是如果没有系统的归纳总结，可能三言两句很难说明白。如何才能完美的回答，这是一个值得思考的问题。<br><a id="more"></a></p>
+<div class="alert success"><p>当然，我们不能为了应对面试才去掌握，而应该当作技能储备起来，做到活学活用。</p>
+</div>
+<h4 id="一、为什么要缓存"><a href="#一、为什么要缓存" class="headerlink" title="一、为什么要缓存"></a>一、为什么要缓存</h4><p>1.缓存可以减少用户等待时间，提升用户体验；<br>2.减少网络带宽消耗<br>对于网站运营者和用户，带宽都代表着成本，过多的带宽消耗，都需要支付额外的费用。如果可以使用缓存，只会产生极小的网络流量，这将有效的降低运营成本。</p>
+<p>3.降低服务器压力<br>给网络资源设定有效期之后，用户可以重复使用本地的缓存，减少对源服务器的请求，降低服务器的压力。此外，搜索引擎的爬虫机器人也能根据过期机制降低爬取的频率，也能有效降低服务器的压力。</p>
+<div class="alert warning"><p>需要注意：缓存使用不当，会有「脏数据」，导致用户数据异常。</p>
+</div>
+<h4 id="二、常见缓存类型"><a href="#二、常见缓存类型" class="headerlink" title="二、常见缓存类型"></a>二、常见缓存类型</h4><div class="alert info"><p>浏览器缓存分为强缓存和协商缓存。</p>
+</div>
+<p>强缓存<br>1.<code>Expires</code>：<code>GMT</code> 格式的时间字符串，代表缓存资源的过期时间<br><code>Expires</code> 也是需要在服务端配置（具体配置也根据服务器而定），<code>Expires</code> 添加的是该资源过期的日期。浏览器会根据该过期日期与客户端时间对比，如果过期时间还没到，则会去缓存中读取该资源，如果已经到期了，则浏览器判断为该资源已经不新鲜要重新从服务端获取。</p>
+<p>通过这种方式，可以实现直接从浏览器缓存中读取，而不需要去服务端判断是否已经缓存，避免了这次 <code>HTTP</code> 请求。值得注意的是 <code>Expires</code> 时间可能存在 <code>客户端时间跟服务端时间不一致</code> 的问题。</p>
+<div class="alert info"><p>建议 Expires 结合 Cache-Control 一起使用，大型网站中一起使用的情况比较多见。</p>
+</div>
+<p>2.<code>Cache-Control</code>: <code>max-age</code> 强缓存利用其 <code>max-age</code> 值来判断缓存资源的最大生命周期，它的值单位为秒。<br><code>Cache-Control</code> 属性值是在 <code>server</code> 端配置的，不同的服务器有不同的配置，<code>web</code> 服务器 <code>apache</code>、<code>nginx</code>、<code>IIS</code> ,应用服务器 <code>tomcat</code> 等配置都不尽相同；</p>
+<p>协商缓存<br>1.<code>Last-Modified</code>：值为资源最后更新时间，随服务器 <code>Response</code> 返回</p>
+<p>2.<code>If-Modified-Since</code>：通过比较两个时间来判断资源在两次请求期间是否有过修改，如果没有修改，则命中协商缓存。</p>
+<p>3.<code>ETag</code>：表示资源内容的唯一标识，随服务器 <code>Response</code> 返回。<br><code>Web</code> 服务器响应请求时，告诉浏览器当前资源在服务器的唯一标识</p>
+<div class="alert danger"><p>注：HTTP 中并没有指定如何生成 ETag，哈希是比较理想的选择。</p>
+</div>
+<p>4.<code>If-None-Match</code><br>服务器通过比较请求头部的 <code>If-None-Match</code> 与当前资源的 <code>ETag</code> 是否一致来判断资源是否在两次请求之间有过修改，如果没有修改，则命中协商缓存。</p>
+<h4 id="三、缓存流程解析"><a href="#三、缓存流程解析" class="headerlink" title="三、缓存流程解析"></a>三、缓存流程解析</h4><p>看完上面的概念，我们来看看缓存流程是怎样的？先来看看下面这张图：</p>
+<p><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/cache/process.png" alt="process"></p>
+<p>如上图所示：<br>1.浏览器会先检测强缓存类型（<code>Cache-Control</code> 或者 <code>Expires</code>）是否有效；<br>2.如果命中了强缓存，则直接从本地获取缓存资源；<br>3.当强缓存没有命中时，客户端会发送请求到服务器，服务器通过另一些 <code>Request Header</code> 验证这个资源是否命中协商缓存，称为 <code>HTTP</code> 再验证，如果命中，服务器将请求返回，但不返回资源，而是告诉客户端直接从缓存中获取，客户端收到返回后就会从缓存中获取资源；<br>4.强缓存不会发送请求到服务器，但协商缓存会发送服务器请求；<br>5.当协商缓存也没命中时，服务器就会将资源发送回客户端。</p>
+<p>需要注意：<br>1.强缓存和协商缓存共同之处在于，如果命中缓存，服务器都不会返回资源；<br>2.当 <code>F5</code> 刷新网页时，跳过强缓存，但是会检查协商缓存；<br>3.当 <code>Ctrl + F5</code> 强制刷新页面时，直接从服务器加载，跳过强缓存和协商缓存；</p>
+<h4 id="四、不会缓存的情况"><a href="#四、不会缓存的情况" class="headerlink" title="四、不会缓存的情况"></a>四、不会缓存的情况</h4><p>当然并不是所有请求都能被缓存，无法被浏览器缓存的请求如下：<br>1.<code>HTTP</code> 信息头中包含 <code>Cache-Control:no-cache</code> ，<code>pragma:no-cache（HTTP1.0）</code>，或<code>Cache-Control: max-age=0</code> 等告诉浏览器不用缓存的请求；<br>2.需要根据 <code>Cookie</code>，认证信息等决定输入内容的动态请求是不能被缓存的；<br>3.经过 <code>HTTPS</code> 安全加密的请求；<br>4.<code>POST</code> 请求无法被缓存；<br>5.<code>HTTP</code> 响应头中不包含 <code>Last-Modified/Etag</code>，也不包含 <code>Cache-Control/Expires</code> 的请求无法被缓存；</p>
+<h4 id="五、小故事大道理"><a href="#五、小故事大道理" class="headerlink" title="五、小故事大道理"></a>五、小故事大道理</h4><p>上文对整个概念做了阐述，还是不够形象，我们来通过几个小故事生动理解一下：</p>
+<p>故事一：<code>Last-Modified</code><br>浏览器：<code>Hi</code>，我需要 <code>jartto.min.js</code> 这个文件，如果是在 <code>Last-Modified: Fri Feb 15 2019 19:57:31 GMT</code> 之后修改过的，请发给我。<br>服务器：（检查文件的修改时间）<br>服务器：<code>Oh</code>，这个文件在那个时间之后没有被修改过，你已经有最新的版本了。<br>浏览器：太好了，那我就显示给用户了。</p>
+<p>故事二：<code>ETag</code><br>浏览器：<code>Hi</code>，我需要 <code>jartto.css</code> 这个文件，有没有不匹配 <code>3c61f-1c1-2aecb436</code> 这个串的<br>服务器：（检查 <code>ETag</code>…）<br>服务器：<code>Hey</code>，我这里的版本也是 <code>3c61f-1c1-2aecb436</code>，你已经是最新的版本了<br>浏览器：好，那就可以使用本地缓存了</p>
+<div class="alert success"><p>看完这两个小故事，是否对协商缓存有了更清晰的认识了。</p>
+</div>
+<p>参考：<br><a href="https://www.cnblogs.com/slly/p/6732749.html" target="_blank" rel="external">浏览器缓存机制详解</a><br><a href="https://www.cnblogs.com/etoah/p/5579622.html" target="_blank" rel="external">web性能优化:详说浏览器缓存</a><br><a href="https://blog.csdn.net/bluedandelion/article/details/80895021" target="_blank" rel="external">前端性能优化之缓存利用</a></p>
 
             
         </div>
@@ -288,7 +309,7 @@
             <div class="post-footer-tags">
                 <span class="text-color-light text-small">标签</span><br/>
                 
-    <a class="tag tag--primary tag--small t-link" href="/tags/amap/">amap</a> <a class="tag tag--primary tag--small t-link" href="/tags/react/">react</a> <a class="tag tag--primary tag--small t-link" href="/tags/高德地图/">高德地图</a>
+    <a class="tag tag--primary tag--small t-link" href="/tags/cache/">cache</a> <a class="tag tag--primary tag--small t-link" href="/tags/http/">http</a> <a class="tag tag--primary tag--small t-link" href="/tags/web/">web</a>
 
             </div>
         
@@ -297,7 +318,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/03/06/beautiful-ui-kit/"  data-tooltip="好看的管理后台 UI kit">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/02/16/web-optimization/"  data-tooltip="网站优化实战">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -305,7 +326,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/02/19/grasp-react-component/" data-tooltip="掌握 React 组件 Component">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/01/17/js-typeof/" data-tooltip="JS 基础｜搞懂 typeof 和 instanceof">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
                     <i class="fa fa-angle-right"></i>
@@ -320,26 +341,20 @@
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2017/02/19/use-AMap-in-React/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2019/02/14/web-cache/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2017/02/19/use-AMap-in-React/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2019/02/14/web-cache/">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2017/02/19/use-AMap-in-React/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2019/02/14/web-cache/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
-        
-            <li class="post-action">
-                <a class="post-action-btn btn btn--default" href="#disqus_thread">
-                    <i class="fa fa-comment-o"></i>
-                </a>
-            </li>
         
         <li class="post-action">
             
@@ -353,12 +368,6 @@
 
 
         <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/qrcode.png" width="100%" alt="请 Jartto 喝杯茶，亦或是给他一个简单的项目需求"/></div>
-        
-            
-                <div id="disqus_thread">
-    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-            
         
     </div>
 </article>
@@ -387,7 +396,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/03/06/beautiful-ui-kit/"  data-tooltip="好看的管理后台 UI kit">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/02/16/web-optimization/"  data-tooltip="网站优化实战">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -395,7 +404,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/02/19/grasp-react-component/" data-tooltip="掌握 React 组件 Component">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/01/17/js-typeof/" data-tooltip="JS 基础｜搞懂 typeof 和 instanceof">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
                     <i class="fa fa-angle-right"></i>
@@ -410,26 +419,20 @@
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2017/02/19/use-AMap-in-React/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2019/02/14/web-cache/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2017/02/19/use-AMap-in-React/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2019/02/14/web-cache/">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2017/02/19/use-AMap-in-React/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2019/02/14/web-cache/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
-        
-            <li class="post-action">
-                <a class="post-action-btn btn btn--default" href="#disqus_thread">
-                    <i class="fa fa-comment-o"></i>
-                </a>
-            </li>
         
         <li class="post-action">
             
@@ -446,17 +449,17 @@
                 <div id="share-options-bar" class="share-options-bar" data-behavior="3">
     <ul class="share-options">
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2017/02/19/use-AMap-in-React/">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2019/02/14/web-cache/">
                 <i class="fa fa-google-plus"></i><span class="">分享到 Google+</span>
             </a>
         </li>
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2017/02/19/use-AMap-in-React/">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2019/02/14/web-cache/">
                 <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
             </a>
         </li>
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2017/02/19/use-AMap-in-React/">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2019/02/14/web-cache/">
                 <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
             </a>
         </li>
@@ -511,25 +514,6 @@
     <!--SCRIPTS-->
 <script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
 <!--SCRIPTS END-->
-
-    
-        <script>
-             var disqus_config = function () {
-                 this.page.url = 'http://jartto.wang/2017/02/19/use-AMap-in-React/';
-                 
-                    this.page.identifier = '2017/02/19/use-AMap-in-React/';
-                                  
-             };
-            (function() {
-                var d = document, s = d.createElement('script');
-                var disqus_shortname = 'jartto';
-                s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-
-                s.setAttribute('data-timestamp', +new Date());
-                (d.head || d.body).appendChild(s);
-            })();
-        </script>
-    
 
 
 
