@@ -1,5 +1,5 @@
 ---
-title: 算法图解笔记1-二分查找和大O表示法
+title: 算法图解1 - 二分查找和大O表示法
 date: 2018-11-22 08:53:28
 thumbnailImage: https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/algorithm/logo.png
 thumbnailImagePosition: left
@@ -150,5 +150,11 @@ binarySearch([1, 3, 5, 7, 9], 3);
 #### 六、文末彩蛋：原来小蜜蜂一直在解决旅行商问题！
 进行研究的奈杰尔·雷恩博士说，蜜蜂每天都要在蜂巢和花朵间飞来飞去，为了采蜜而在不同花朵间飞行是一件很耗精力的事情，因此实际上蜜蜂每天都在解决「旅行商问题」。尽管蜜蜂的大脑只有草籽那么大，也没有电脑的帮助，但它已经进化出了一套很好的解决方案，如果能理解蜜蜂怎样做到这一点，对人类的生产、生活将有很大帮助。
 
-
-
+#### 七、学习目录
+- [算法图解1 - 二分查找和大O表示法](http://jartto.wang/2018/11/22/algorithm1/)
+- [算法图解2 - 数组和链表](http://jartto.wang/2018/11/25/algorithm2/)
+- [算法图解3 - 递归，快排](http://jartto.wang/2018/11/26/algorithm3/)
+- [算法图解4 - 散列表](http://jartto.wang/2018/11/27/algorithm4/)
+- [算法图解5 - 图和广度优先搜索](http://jartto.wang/2018/11/28/algorithm5/)
+- [算法图解6 - 狄克斯特拉算法与贪婪算法](http://jartto.wang/2018/11/29/algorithm6/)
+- [算法图解7 - 动态规划](http://jartto.wang/2018/11/29/algorithm7/)

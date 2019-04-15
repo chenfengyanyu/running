@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     <meta name="baidu-site-verification" content="bJPvLdWAu8" />
     <meta name="generator" content="Jartto&#39;s blog">
-    <title>算法图解笔记2-数组和链表 - Jartto&#39;s blog</title>
+    <title>算法图解2 - 数组和链表 - Jartto&#39;s blog</title>
     <meta name="author" content="Jartto">
     
         <meta name="keywords" content="Jartto,Web 前端开发,博客,">
@@ -21,7 +21,7 @@
     <meta name="description" content="我们继续上文的脚步，深入了解一下数组和链表。掌握它们之间的区别和联系，以及各自的使用场景，为后续的算法学习打好基础。">
 <meta name="keywords" content="algorithm">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="算法图解笔记2-数组和链表">
+<meta property="og:title" content="算法图解2 - 数组和链表">
 <meta property="og:url" content="http://jartto.wang/2018/11/25/algorithm2/index.html">
 <meta property="og:site_name" content="Jartto&#39;s blog">
 <meta property="og:description" content="我们继续上文的脚步，深入了解一下数组和链表。掌握它们之间的区别和联系，以及各自的使用场景，为后续的算法学习打好基础。">
@@ -29,9 +29,9 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/algorithm/array1.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/algorithm/array2.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/algorithm/array3.png">
-<meta property="og:updated_time" content="2018-12-02T14:01:33.000Z">
+<meta property="og:updated_time" content="2019-04-07T13:54:49.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="算法图解笔记2-数组和链表">
+<meta name="twitter:title" content="算法图解2 - 数组和链表">
 <meta name="twitter:description" content="我们继续上文的脚步，深入了解一下数组和链表。掌握它们之间的区别和联系，以及各自的使用场景，为后续的算法学习打好基础。">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/algorithm/array1.png">
     
@@ -239,7 +239,7 @@
         <div class="post-header main-content-wrap text-center">
     
         <h1 class="post-title" itemprop="headline">
-            算法图解笔记2-数组和链表
+            算法图解2 - 数组和链表
         </h1>
     
     <div class="post-meta">
@@ -314,6 +314,15 @@
 </div>
 <h4 id="六、选择排序"><a href="#六、选择排序" class="headerlink" title="六、选择排序"></a>六、选择排序</h4><p>有了上面的基础，我们来学习一下：选择排序。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * @msg: 选择排序</span></div><div class="line"><span class="comment"> * @param &#123;Array&#125; arr</span></div><div class="line"><span class="comment"> * @return: Array</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="keyword">const</span> selectionSort = <span class="function">(<span class="params">arr</span>) =&gt;</span> &#123;</div><div class="line">  <span class="keyword">let</span> newArr = [];</div><div class="line">  <span class="keyword">let</span> len = arr.length;</div><div class="line"></div><div class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</div><div class="line">    <span class="keyword">let</span> smallest = arr[<span class="number">0</span>];</div><div class="line">    <span class="keyword">let</span> smallest_index = <span class="number">0</span>;</div><div class="line"></div><div class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> j = <span class="number">1</span>; j &lt; len - <span class="number">1</span>; j++) &#123;</div><div class="line">      <span class="keyword">if</span> (arr[j] &lt; smallest) &#123;</div><div class="line">        smallest = arr[j];</div><div class="line">        smallest_index = j;</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    newArr.push(arr.splice(smallest_index,<span class="number">1</span>)[<span class="number">0</span>]);</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> newArr;</div><div class="line">&#125;</div><div class="line"></div><div class="line">selectionSort([<span class="number">5</span>, <span class="number">3</span>, <span class="number">6</span>, <span class="number">2</span>, <span class="number">10</span>]);</div></pre></td></tr></table></figure></p>
 <p>书中用 <code>Python</code> 实现，这里我们采用了 <code>JS</code> 实现，先实现为主，后续进行算法优化。</p>
+<h4 id="七、学习目录"><a href="#七、学习目录" class="headerlink" title="七、学习目录"></a>七、学习目录</h4><ul>
+<li><a href="http://jartto.wang/2018/11/22/algorithm1/">算法图解1 - 二分查找和大O表示法</a></li>
+<li><a href="http://jartto.wang/2018/11/25/algorithm2/">算法图解2 - 数组和链表</a></li>
+<li><a href="http://jartto.wang/2018/11/26/algorithm3/">算法图解3 - 递归，快排</a></li>
+<li><a href="http://jartto.wang/2018/11/27/algorithm4/">算法图解4 - 散列表</a></li>
+<li><a href="http://jartto.wang/2018/11/28/algorithm5/">算法图解5 - 图和广度优先搜索</a></li>
+<li><a href="http://jartto.wang/2018/11/29/algorithm6/">算法图解6 - 狄克斯特拉算法与贪婪算法</a></li>
+<li><a href="http://jartto.wang/2018/11/29/algorithm7/">算法图解7 - 动态规划</a></li>
+</ul>
 
             
         </div>
@@ -336,7 +345,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/11/30/about-devops/"  data-tooltip="DevOps 简介">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/11/26/algorithm3/"  data-tooltip="算法图解3 - 递归，快排">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -344,7 +353,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/11/22/algorithm1/" data-tooltip="算法图解笔记1-二分查找和大O表示法">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/11/22/algorithm1/" data-tooltip="算法图解1 - 二分查找和大O表示法">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
                     <i class="fa fa-angle-right"></i>
@@ -414,7 +423,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/11/30/about-devops/"  data-tooltip="DevOps 简介">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/11/26/algorithm3/"  data-tooltip="算法图解3 - 递归，快排">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -422,7 +431,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/11/22/algorithm1/" data-tooltip="算法图解笔记1-二分查找和大O表示法">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/11/22/algorithm1/" data-tooltip="算法图解1 - 二分查找和大O表示法">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
                     <i class="fa fa-angle-right"></i>

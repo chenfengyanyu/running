@@ -1,5 +1,5 @@
 ---
-title: 算法图解笔记2-数组和链表
+title: 算法图解2 - 数组和链表
 date: 2018-11-25 23:38:56
 thumbnailImage: https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/algorithm/logo.png
 thumbnailImagePosition: left
@@ -131,3 +131,12 @@ selectionSort([5, 3, 6, 2, 10]);
 ```
 
 书中用 `Python` 实现，这里我们采用了 `JS` 实现，先实现为主，后续进行算法优化。
+
+#### 七、学习目录
+- [算法图解1 - 二分查找和大O表示法](http://jartto.wang/2018/11/22/algorithm1/)
+- [算法图解2 - 数组和链表](http://jartto.wang/2018/11/25/algorithm2/)
+- [算法图解3 - 递归，快排](http://jartto.wang/2018/11/26/algorithm3/)
+- [算法图解4 - 散列表](http://jartto.wang/2018/11/27/algorithm4/)
+- [算法图解5 - 图和广度优先搜索](http://jartto.wang/2018/11/28/algorithm5/)
+- [算法图解6 - 狄克斯特拉算法与贪婪算法](http://jartto.wang/2018/11/29/algorithm6/)
+- [算法图解7 - 动态规划](http://jartto.wang/2018/11/29/algorithm7/)
