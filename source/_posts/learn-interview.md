@@ -1,5 +1,5 @@
 ---
-title: 如何成为一位合格的技术面试官？
+title: 如何成为合格的技术面试官？
 date: 2019-04-07 21:12:42
 thumbnailImage: https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/interview/interview.png
 thumbnailImagePosition: left
