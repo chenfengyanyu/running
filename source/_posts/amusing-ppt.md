@@ -1,11 +1,12 @@
 ---
-title: 有趣的在线 PPT
+title: 酷炫的 HTML5 网页 PPT
 date: 2019-04-15 20:07:39
 thumbnailImage: https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/ppt/logo.png
 thumbnailImagePosition: left
 tags: 
 - ppt
 - impress
+- html5
 comments: false
 metaAlignment: center
 categories: 技术博文
