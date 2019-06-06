@@ -80,11 +80,10 @@
     </h1>
     
         
-            <a  class="header-right-picture st-search-show-outputs"
-                href="#about">
+            <a class="header-right-picture st-search-show-outputs" href="#about">
         
         
-            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
         
         </a>
     
@@ -101,7 +100,7 @@
     
         <div class="sidebar-profile">
             <a href="/#about">
-                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
             </a>
             <span class="sidebar-profile-name">Jartto</span>
         </div>
@@ -111,10 +110,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/ "
-                        
-                    >
+                    <a class="sidebar-button-link " href="/ ">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-home"></i>
                     <span class="sidebar-button-desc">首页</span>
@@ -123,10 +119,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/all-categories"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/all-categories">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
                     <span class="sidebar-button-desc">分类</span>
@@ -135,10 +128,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/all-tags"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/all-tags">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
                     <span class="sidebar-button-desc">标签</span>
@@ -147,10 +137,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/all-archives"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/all-archives">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
                     <span class="sidebar-button-desc">归档</span>
@@ -159,10 +146,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="#about"
-                        
-                    >
+                    <a class="sidebar-button-link " href="#about">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-question"></i>
                     <span class="sidebar-button-desc">关于</span>
@@ -175,7 +159,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
                     <span class="sidebar-button-desc">Email</span>
@@ -184,7 +168,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-github"></i>
                     <span class="sidebar-button-desc">GitHub</span>
@@ -197,10 +181,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/atom.xml"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/atom.xml">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
                     <span class="sidebar-button-desc">RSS</span>
@@ -209,10 +190,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/sitemap.xml"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/sitemap.xml">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
                     <span class="sidebar-button-desc">Sitemap</span>
@@ -229,7 +207,7 @@
                         hasCoverMetaIn
                         ">
                 
-<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
     
     
         <div class="post-header main-content-wrap text-center">
@@ -269,12 +247,12 @@
 <p>所有的服务都符合依赖注入的原则。它们用一个唯一的名字将自己注册进AngularJS的依赖注入系统（injector），并且声明需要提供给工场函数的依赖。它们的依赖在测试中可以是虚拟的，这使得它们能很好地被测试。</p>
 </blockquote>
 <p>①注册服务：要注册服务，你首先要有一个包含该服务的模块。然后你就能通过模块的api或者使用模块配置函数中的$provide服务来注册你的服务了。下面的伪代码显示了这两种方法。</p>
-<p>方式一：使用angular.Module api:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> myModule = angular.module(<span class="string">'myModule'</span> , []);</div><div class="line">myModule.factory(<span class="string">'serviceId'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> shinyNewServiceInstance;</div><div class="line">    <span class="comment">//factory function body that constructs shinyNewServiceInstance</span></div><div class="line">    <span class="keyword">return</span> shinyNewServiceInstance;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
-<p>方式二：使用$provide服务:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">angular.module(<span class="string">'myModule'</span>, [], <span class="function"><span class="keyword">function</span> (<span class="params">$provide</span>) </span>&#123;</div><div class="line">    $provide.factory( <span class="string">'serviceId'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">var</span> shinyNewServiceInstance;</div><div class="line">        <span class="comment">//factory function body that constructs shinyNewServiceInstance</span></div><div class="line">        <span class="keyword">return</span> shinyNewServiceInstance;</div><div class="line">    &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>方式一：使用angular.Module api:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myModule = angular.module(<span class="string">'myModule'</span> , []);</span><br><span class="line">myModule.factory(<span class="string">'serviceId'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> shinyNewServiceInstance;</span><br><span class="line">    <span class="comment">//factory function body that constructs shinyNewServiceInstance</span></span><br><span class="line">    <span class="keyword">return</span> shinyNewServiceInstance;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>方式二：使用$provide服务:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">angular.module(<span class="string">'myModule'</span>, [], <span class="function"><span class="keyword">function</span> (<span class="params">$provide</span>) </span>&#123;</span><br><span class="line">    $provide.factory( <span class="string">'serviceId'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> shinyNewServiceInstance;</span><br><span class="line">        <span class="comment">//factory function body that constructs shinyNewServiceInstance</span></span><br><span class="line">        <span class="keyword">return</span> shinyNewServiceInstance;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
 <p>②设置依赖：服务不仅可以被依赖，还可以有自己的依赖。依赖可以在工场函数的参数中指定。参阅AngularJS的依赖注入系统，和使用依赖的数组表示法和$inject属性来让依赖表示精简化。</p>
-<p>下面是一个很简单的服务的例子。这个服务依赖于$window服务（会被当成参数传递给工场函数），并且只是个函数。这个服务的任务是存储所有的通知；在第三个通知以后，服务会用window的alert来输出所有的通知。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">angular.module(<span class="string">'myModule'</span>, [], <span class="function"><span class="keyword">function</span> (<span class="params">$provide</span>) </span>&#123;</div><div class="line">    $provide.factory( <span class="string">'notify'</span>, [<span class="string">'$window'</span> , <span class="function"><span class="keyword">function</span> (<span class="params">win</span>) </span>&#123;</div><div class="line">        <span class="keyword">var</span> msgs = [];</div><div class="line">        <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">msg</span>) </span>&#123;</div><div class="line">            msgs.push(msg);</div><div class="line">            <span class="keyword">if</span> (msgs.length == <span class="number">3</span>) &#123;</div><div class="line">                win.alert(msgs.join( <span class="string">"\n"</span>));</div><div class="line">                msgs = [];</div><div class="line">            &#125;</div><div class="line">        &#125;;</div><div class="line">    &#125;]);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>下面是一个很简单的服务的例子。这个服务依赖于$window服务（会被当成参数传递给工场函数），并且只是个函数。这个服务的任务是存储所有的通知；在第三个通知以后，服务会用window的alert来输出所有的通知。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">angular.module(<span class="string">'myModule'</span>, [], <span class="function"><span class="keyword">function</span> (<span class="params">$provide</span>) </span>&#123;</span><br><span class="line">    $provide.factory( <span class="string">'notify'</span>, [<span class="string">'$window'</span> , <span class="function"><span class="keyword">function</span> (<span class="params">win</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> msgs = [];</span><br><span class="line">        <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">msg</span>) </span>&#123;</span><br><span class="line">            msgs.push(msg);</span><br><span class="line">            <span class="keyword">if</span> (msgs.length == <span class="number">3</span>) &#123;</span><br><span class="line">                win.alert(msgs.join( <span class="string">"\n"</span>));</span><br><span class="line">                msgs = [];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;]);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
 <p>③实例化angularjs服务：所有服务都是延迟实例化的。这意味着所有的服务只有在需要时，或者被依赖时才会实例化。换句话说，AngularJS不会实例化服务，除非被要请求了或者被应用直接或间接依赖了。</p>
-<p>④将服务注入到控制器：将服务用作控制器的依赖和将服务用作其他服务的依赖很类似。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">angular.module(<span class="string">'MyServiceModule'</span>, [])</div><div class="line">.factory(<span class="string">'theService'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;<span class="comment">//创建theService服务</span></div><div class="line">   <span class="keyword">return</span>&#123;</div><div class="line">          test:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">               <span class="keyword">var</span> arr=[<span class="string">"wang"</span>,<span class="string">"jia"</span>,<span class="string">"tao"</span>];</div><div class="line">               <span class="keyword">return</span> arr;</div><div class="line">          &#125;</div><div class="line">&#125;);</div><div class="line"><span class="comment">//方式一：隐式注入</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">myController</span>(<span class="params">scope,theService</span>) </span>&#123;</div><div class="line">   theService.test();<span class="comment">//输出"wang","jia","tao"</span></div><div class="line">&#125;</div><div class="line"><span class="comment">// 方式二：显式注入</span></div><div class="line">myController.$inject = [<span class="string">'$scope'</span>, <span class="string">'theService'</span>];</div></pre></td></tr></table></figure></p>
+<p>④将服务注入到控制器：将服务用作控制器的依赖和将服务用作其他服务的依赖很类似。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">angular.module(<span class="string">'MyServiceModule'</span>, [])</span><br><span class="line">.factory(<span class="string">'theService'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;<span class="comment">//创建theService服务</span></span><br><span class="line">   <span class="keyword">return</span>&#123;</span><br><span class="line">          test:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">               <span class="keyword">var</span> arr=[<span class="string">"wang"</span>,<span class="string">"jia"</span>,<span class="string">"tao"</span>];</span><br><span class="line">               <span class="keyword">return</span> arr;</span><br><span class="line">          &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//方式一：隐式注入</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myController</span>(<span class="params">scope,theService</span>) </span>&#123;</span><br><span class="line">   theService.test();<span class="comment">//输出"wang","jia","tao"</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 方式二：显式注入</span></span><br><span class="line">myController.$inject = [<span class="string">'$scope'</span>, <span class="string">'theService'</span>];</span><br></pre></td></tr></table></figure></p>
 <div class="alert info"><p>注意：如你要压缩你的代码，你的变量名会被重命名，你就只能显示地指定依赖了。</p>
 </div>
 <p>补充：要注意的是所有AngularJS服务都是单例的。这意味着在每一个注入器中都只有一个需要的服务的实例。因为AngularJS极度讨厌全局的东西，所以是可以创建多个注入器的，并且每个住一起有自己的服务实例。但这种情况很少，除非在测试中，这样的特性才极度重要。</p>
@@ -282,19 +260,19 @@
 <blockquote>
 <p>AngularJS通过“构造器注入”来注入依赖（通过工场函数来传递依赖）。以为Javascript是动态类型语言，AngularJS无法通过静态类型来识别服务，所以你必须使用$inject属性来显式地指定依赖。</p>
 </blockquote>
-<p>参考链接：<br>《Angularjs 开发指南》<br><a href="http://www.angularjs.cn/A00L" target="_blank" rel="external">angularjs中文社区</a><br><a href="http://www.ngnice.com/docs/guide/services" target="_blank" rel="external">angularjs services API</a></p>
+<p>参考链接：<br>《Angularjs 开发指南》<br><a href="http://www.angularjs.cn/A00L" target="_blank" rel="noopener">angularjs中文社区</a><br><a href="http://www.ngnice.com/docs/guide/services" target="_blank" rel="noopener">angularjs services API</a></p>
 
             
         </div>
     </div>
     <div id="post-footer" class="post-footer main-content-wrap"> 
         <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
-          版权声明：<br/>文章首发于 <a href="http://jartto.wang"> Jartto's blog </a>，
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's blog </a>，
           转载文章请务必以超链接形式标明文章出处，作者信息及本版权声明（<a href="http://jartto.wang"> http://jartto.wang </a>)。
         </div>
         
             <div class="post-footer-tags">
-                <span class="text-color-light text-small">标签</span><br/>
+                <span class="text-color-light text-small">标签</span><br>
                 
     <a class="tag tag--primary tag--small t-link" href="/tags/angularjs/">angularjs</a>
 
@@ -305,7 +283,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2014/05/11/angularjs-part-14/"  data-tooltip="Angularjs学习笔记13~路由 Route">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2014/05/11/angularjs-part-14/" data-tooltip="Angularjs学习笔记13~路由 Route">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -323,7 +301,7 @@
     </nav>
     <ul class="post-actions post-action-share">
         <li class="post-action hide-lg hide-md hide-sm">
-            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
                 <i class="fa fa-share-alt"></i>
             </a>
         </li>
@@ -360,7 +338,7 @@
 </div>
 
 
-        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/qrcode.png" width="100%" alt="请 Jartto 喝杯茶，亦或是给他一个简单的项目需求"/></div>
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/qrcode.png" width="100%" alt="请 Jartto 喝杯茶，亦或是给他一个简单的项目需求"></div>
         
             
                 <div id="disqus_thread">
@@ -395,7 +373,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2014/05/11/angularjs-part-14/"  data-tooltip="Angularjs学习笔记13~路由 Route">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2014/05/11/angularjs-part-14/" data-tooltip="Angularjs学习笔记13~路由 Route">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -413,7 +391,7 @@
     </nav>
     <ul class="post-actions post-action-share">
         <li class="post-action hide-lg hide-md hide-sm">
-            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
                 <i class="fa fa-share-alt"></i>
             </a>
         </li>
@@ -455,7 +433,7 @@
     <ul class="share-options">
         <li class="share-option">
             <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2014/05/08/angularjs-part-13/">
-                <i class="fa fa-google-plus"></i><span class="">分享到 Google+</span>
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
             </a>
         </li>
         <li class="share-option">
@@ -486,27 +464,27 @@
             <i class="fa fa-remove"></i>
         </div>
         
-            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
         
             <h4 id="about-card-name">Jartto</h4>
         
             <h5 id="about-card-bio"><blockquote>
-<p>最遗憾的不是把梦想丢在路上，</br>而是梦想从未上路!</br>Just do IT</p>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
 </blockquote>
 </h5>
         
         
             <h5 id="about-card-job">
                 <i class="fa fa-briefcase"></i>
-                <br/>
-                <p>jartto@qq.com</p>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
 
             </h5>
         
         
             <h5 id="about-card-location">
                 <i class="fa fa-map-marker"></i>
-                <br/>
+                <br>
                 北京－朝阳
             </h5>
         

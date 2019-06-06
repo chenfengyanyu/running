@@ -80,11 +80,10 @@
     </h1>
     
         
-            <a  class="header-right-picture st-search-show-outputs"
-                href="#about">
+            <a class="header-right-picture st-search-show-outputs" href="#about">
         
         
-            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
         
         </a>
     
@@ -101,7 +100,7 @@
     
         <div class="sidebar-profile">
             <a href="/#about">
-                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
             </a>
             <span class="sidebar-profile-name">Jartto</span>
         </div>
@@ -111,10 +110,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/ "
-                        
-                    >
+                    <a class="sidebar-button-link " href="/ ">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-home"></i>
                     <span class="sidebar-button-desc">首页</span>
@@ -123,10 +119,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/all-categories"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/all-categories">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
                     <span class="sidebar-button-desc">分类</span>
@@ -135,10 +128,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/all-tags"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/all-tags">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
                     <span class="sidebar-button-desc">标签</span>
@@ -147,10 +137,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/all-archives"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/all-archives">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
                     <span class="sidebar-button-desc">归档</span>
@@ -159,10 +146,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="#about"
-                        
-                    >
+                    <a class="sidebar-button-link " href="#about">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-question"></i>
                     <span class="sidebar-button-desc">关于</span>
@@ -175,7 +159,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
                     <span class="sidebar-button-desc">Email</span>
@@ -184,7 +168,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-github"></i>
                     <span class="sidebar-button-desc">GitHub</span>
@@ -197,10 +181,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/atom.xml"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/atom.xml">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
                     <span class="sidebar-button-desc">RSS</span>
@@ -209,10 +190,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/sitemap.xml"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/sitemap.xml">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
                     <span class="sidebar-button-desc">Sitemap</span>
@@ -229,7 +207,7 @@
                         hasCoverMetaIn
                         ">
                 
-<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
     
     
         <div class="post-header main-content-wrap text-center">
@@ -270,19 +248,19 @@
 <p>缺点：<br>①安全性低，每次都需要传递用户名和密码，用户名和密码很大程度上存在被监听盗取的可能；<br>②同时应用本地还需要保存用户名和密码，在应用本身的安全性来说，也存在很大问题；<br>③开放平台服务商出于自身安全性的考虑（第三方可以得到该服务商用户的账号密码，对于服务商来说是一种安全隐患），未来也会限制此认证方式（Twitter就计划在6月份停止Basic Auth的支持）<br>④用户如果更改了用户名和密码，还需要重新进行密码校验的过程。</p>
 <h4 id="二、OAuth"><a href="#二、OAuth" class="headerlink" title="二、OAuth"></a>二、OAuth</h4><p>OAuth为用户资源的授权提供了一个安全、开放的标准，它分为几个交互过程：<br>1）应用用APP KEY和APP SECRET换取OAuth_token；<br>2）应用将用户引导到服务商的页面对该OAuth_token进行授权（可能需要输入用户名和密码）；<br>3）服务商的页面跳转回应用，应用再根据参数去服务商获得Access Token；<br>4）使用这个Access Token就可以访问API了。</p>
 <p>OAuth的优点：<br>①安全性高，用户的账户和密码只需要提供一次，而且是在服务商的页面上提供，防止了Basic Auth反复传输密码带来的安全隐患；<br>②Access Token访问权限仅限于应用，被窃取不会影响用户在该服务商的其他服务；<br>③Access Token即使被监听丢失了随时可以撤销，不像密码丢失可能就被别人篡改了；<br>④用户修改了密码也不会影响该应用的正常使用。</p>
-<p>参考文章：<br><a href="http://baike.baidu.com/link?url=Ru1yPv68202-u1y8EmdkrV38N57dEXWaqFNuT_MeyGwnRAXlxsPPCYH93UzqkKa4QNxCgm38UYgr9I1t_vwlca" target="_blank" rel="external">http://baike.baidu.com/link?url=Ru1yPv68202-u1y8EmdkrV38N57dEXWaqFNuT_MeyGwnRAXlxsPPCYH93UzqkKa4QNxCgm38UYgr9I1t_vwlca</a></p>
+<p>参考文章：<br><a href="http://baike.baidu.com/link?url=Ru1yPv68202-u1y8EmdkrV38N57dEXWaqFNuT_MeyGwnRAXlxsPPCYH93UzqkKa4QNxCgm38UYgr9I1t_vwlca" target="_blank" rel="noopener">http://baike.baidu.com/link?url=Ru1yPv68202-u1y8EmdkrV38N57dEXWaqFNuT_MeyGwnRAXlxsPPCYH93UzqkKa4QNxCgm38UYgr9I1t_vwlca</a></p>
 
             
         </div>
     </div>
     <div id="post-footer" class="post-footer main-content-wrap"> 
         <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
-          版权声明：<br/>文章首发于 <a href="http://jartto.wang"> Jartto's blog </a>，
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's blog </a>，
           转载文章请务必以超链接形式标明文章出处，作者信息及本版权声明（<a href="http://jartto.wang"> http://jartto.wang </a>)。
         </div>
         
             <div class="post-footer-tags">
-                <span class="text-color-light text-small">标签</span><br/>
+                <span class="text-color-light text-small">标签</span><br>
                 
     <a class="tag tag--primary tag--small t-link" href="/tags/auth/">auth</a>
 
@@ -293,7 +271,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/07/29/trap-set-by-wx/"  data-tooltip="微信支付大坑">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/07/29/trap-set-by-wx/" data-tooltip="微信支付大坑">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -311,7 +289,7 @@
     </nav>
     <ul class="post-actions post-action-share">
         <li class="post-action hide-lg hide-md hide-sm">
-            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
                 <i class="fa fa-share-alt"></i>
             </a>
         </li>
@@ -348,7 +326,7 @@
 </div>
 
 
-        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/qrcode.png" width="100%" alt="请 Jartto 喝杯茶，亦或是给他一个简单的项目需求"/></div>
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/qrcode.png" width="100%" alt="请 Jartto 喝杯茶，亦或是给他一个简单的项目需求"></div>
         
             
                 <div id="disqus_thread">
@@ -383,7 +361,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/07/29/trap-set-by-wx/"  data-tooltip="微信支付大坑">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/07/29/trap-set-by-wx/" data-tooltip="微信支付大坑">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -401,7 +379,7 @@
     </nav>
     <ul class="post-actions post-action-share">
         <li class="post-action hide-lg hide-md hide-sm">
-            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
                 <i class="fa fa-share-alt"></i>
             </a>
         </li>
@@ -443,7 +421,7 @@
     <ul class="share-options">
         <li class="share-option">
             <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2016/07/27/chattered-about-auth/">
-                <i class="fa fa-google-plus"></i><span class="">分享到 Google+</span>
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
             </a>
         </li>
         <li class="share-option">
@@ -474,27 +452,27 @@
             <i class="fa fa-remove"></i>
         </div>
         
-            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
         
             <h4 id="about-card-name">Jartto</h4>
         
             <h5 id="about-card-bio"><blockquote>
-<p>最遗憾的不是把梦想丢在路上，</br>而是梦想从未上路!</br>Just do IT</p>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
 </blockquote>
 </h5>
         
         
             <h5 id="about-card-job">
                 <i class="fa fa-briefcase"></i>
-                <br/>
-                <p>jartto@qq.com</p>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
 
             </h5>
         
         
             <h5 id="about-card-location">
                 <i class="fa fa-map-marker"></i>
-                <br/>
+                <br>
                 北京－朝阳
             </h5>
         

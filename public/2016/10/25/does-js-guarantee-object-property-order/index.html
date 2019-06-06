@@ -80,11 +80,10 @@
     </h1>
     
         
-            <a  class="header-right-picture st-search-show-outputs"
-                href="#about">
+            <a class="header-right-picture st-search-show-outputs" href="#about">
         
         
-            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
         
         </a>
     
@@ -101,7 +100,7 @@
     
         <div class="sidebar-profile">
             <a href="/#about">
-                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
             </a>
             <span class="sidebar-profile-name">Jartto</span>
         </div>
@@ -111,10 +110,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/ "
-                        
-                    >
+                    <a class="sidebar-button-link " href="/ ">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-home"></i>
                     <span class="sidebar-button-desc">首页</span>
@@ -123,10 +119,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/all-categories"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/all-categories">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
                     <span class="sidebar-button-desc">分类</span>
@@ -135,10 +128,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/all-tags"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/all-tags">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
                     <span class="sidebar-button-desc">标签</span>
@@ -147,10 +137,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/all-archives"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/all-archives">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
                     <span class="sidebar-button-desc">归档</span>
@@ -159,10 +146,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="#about"
-                        
-                    >
+                    <a class="sidebar-button-link " href="#about">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-question"></i>
                     <span class="sidebar-button-desc">关于</span>
@@ -175,7 +159,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
                     <span class="sidebar-button-desc">Email</span>
@@ -184,7 +168,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-github"></i>
                     <span class="sidebar-button-desc">GitHub</span>
@@ -197,10 +181,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/atom.xml"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/atom.xml">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
                     <span class="sidebar-button-desc">RSS</span>
@@ -209,10 +190,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/sitemap.xml"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/sitemap.xml">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
                     <span class="sidebar-button-desc">Sitemap</span>
@@ -229,7 +207,7 @@
                         hasCoverMetaIn
                         ">
                 
-<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
     
     
         <div class="post-header main-content-wrap text-center">
@@ -264,19 +242,19 @@
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
             <p>碰到了一个很有意思的问题，js中对象属性的输出是有序的吗？如果有的话，那又遵循怎样的规则呢？<br><a id="more"></a><br>这里我们来做一个简单的探讨，工作之余来一点趣味性的问题。虽不能醍醐灌顶，但可以巩固所学知识，也是极好的～🙈</p>
-<h4 id="一、奇怪现象"><a href="#一、奇怪现象" class="headerlink" title="一、奇怪现象"></a>一、奇怪现象</h4><p>我们来看这样一个对象，来输出他的属性名称，也就是key值：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> data = &#123;<span class="string">'1'</span>:<span class="string">'aaa'</span>,<span class="string">'2'</span>:<span class="string">'bbb'</span>,<span class="string">'3'</span>:<span class="string">'ccc'</span>,<span class="string">'测试'</span>:<span class="string">'000'</span>&#125;;</div><div class="line"><span class="built_in">Object</span>.keys(data) ;</div></pre></td></tr></table></figure></p>
-<p>控制台输出：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[<span class="string">"1"</span>, <span class="string">"2"</span>, <span class="string">"3"</span>, <span class="string">"测试"</span>]</div></pre></td></tr></table></figure></p>
-<p>嗯，没啥问题。那调整一下最后一项的位置，再来试试：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> data = &#123;<span class="string">'测试'</span>:<span class="string">'000'</span>,<span class="string">'1'</span>:<span class="string">'aaa'</span>,<span class="string">'2'</span>:<span class="string">'bbb'</span>,<span class="string">'3'</span>:<span class="string">'ccc'</span>&#125;;</div><div class="line"><span class="built_in">Object</span>.keys(data);</div></pre></td></tr></table></figure></p>
-<p>控制台输出：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[<span class="string">"1"</span>, <span class="string">"2"</span>, <span class="string">"3"</span>, <span class="string">"测试"</span>]</div></pre></td></tr></table></figure></p>
-<p>奇怪，输出的顺序被调整了，这是为什么呢？我们继续，换一下属性名称，再试一次：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> data = &#123;<span class="string">'a'</span>:<span class="string">'000'</span>,<span class="string">'1'</span>:<span class="string">'aaa'</span>,<span class="string">'2'</span>:<span class="string">'bbb'</span>,<span class="string">'3'</span>:<span class="string">'ccc'</span>&#125;;</div><div class="line"><span class="built_in">Object</span>.keys(data);</div></pre></td></tr></table></figure></p>
-<p>控制台输出：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[<span class="string">"1"</span>, <span class="string">"2"</span>, <span class="string">"3"</span>, <span class="string">"a"</span>]</div></pre></td></tr></table></figure></p>
+<h4 id="一、奇怪现象"><a href="#一、奇怪现象" class="headerlink" title="一、奇怪现象"></a>一、奇怪现象</h4><p>我们来看这样一个对象，来输出他的属性名称，也就是key值：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> data = &#123;<span class="string">'1'</span>:<span class="string">'aaa'</span>,<span class="string">'2'</span>:<span class="string">'bbb'</span>,<span class="string">'3'</span>:<span class="string">'ccc'</span>,<span class="string">'测试'</span>:<span class="string">'000'</span>&#125;;</span><br><span class="line"><span class="built_in">Object</span>.keys(data) ;</span><br></pre></td></tr></table></figure></p>
+<p>控制台输出：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">"1"</span>, <span class="string">"2"</span>, <span class="string">"3"</span>, <span class="string">"测试"</span>]</span><br></pre></td></tr></table></figure></p>
+<p>嗯，没啥问题。那调整一下最后一项的位置，再来试试：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> data = &#123;<span class="string">'测试'</span>:<span class="string">'000'</span>,<span class="string">'1'</span>:<span class="string">'aaa'</span>,<span class="string">'2'</span>:<span class="string">'bbb'</span>,<span class="string">'3'</span>:<span class="string">'ccc'</span>&#125;;</span><br><span class="line"><span class="built_in">Object</span>.keys(data);</span><br></pre></td></tr></table></figure></p>
+<p>控制台输出：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">"1"</span>, <span class="string">"2"</span>, <span class="string">"3"</span>, <span class="string">"测试"</span>]</span><br></pre></td></tr></table></figure></p>
+<p>奇怪，输出的顺序被调整了，这是为什么呢？我们继续，换一下属性名称，再试一次：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> data = &#123;<span class="string">'a'</span>:<span class="string">'000'</span>,<span class="string">'1'</span>:<span class="string">'aaa'</span>,<span class="string">'2'</span>:<span class="string">'bbb'</span>,<span class="string">'3'</span>:<span class="string">'ccc'</span>&#125;;</span><br><span class="line"><span class="built_in">Object</span>.keys(data);</span><br></pre></td></tr></table></figure></p>
+<p>控制台输出：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">"1"</span>, <span class="string">"2"</span>, <span class="string">"3"</span>, <span class="string">"a"</span>]</span><br></pre></td></tr></table></figure></p>
 <p>依结果来看，貌似有点小规律，我们不妨猜一下。</p>
-<h4 id="二、大胆猜测"><a href="#二、大胆猜测" class="headerlink" title="二、大胆猜测"></a>二、大胆猜测</h4><p>我们来看结果：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[<span class="string">"1"</span>, <span class="string">"2"</span>, <span class="string">"3"</span>, <span class="string">"测试"</span>]</div><div class="line">[<span class="string">"1"</span>, <span class="string">"2"</span>, <span class="string">"3"</span>, <span class="string">"a"</span>]</div></pre></td></tr></table></figure></p>
-<p>会不会是按照ASC码的大小顺序来输出的呢？<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="string">'1'</span>&lt;<span class="string">'2'</span>&lt;<span class="string">'3'</span>&lt;<span class="string">'测试'</span></div><div class="line"><span class="string">'1'</span>&lt;<span class="string">'2'</span>&lt;<span class="string">'3'</span>&lt;<span class="string">'a'</span></div></pre></td></tr></table></figure></p>
-<p>好像漏掉了一种情况（字母和汉字的属性名称同时存在），我们试一下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> data = &#123;<span class="string">'a'</span>:<span class="string">'000'</span>,<span class="string">'3'</span>:<span class="string">'ccc'</span>,<span class="string">'1'</span>:<span class="string">'aaa'</span>,<span class="string">'测试'</span>:<span class="string">'bbb'</span>,&#125;;</div><div class="line"><span class="built_in">Object</span>.keys(data);</div></pre></td></tr></table></figure></p>
-<p>控制台输出：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[<span class="string">"1"</span>, <span class="string">"3"</span>, <span class="string">"a"</span>, <span class="string">"测试"</span>]</div></pre></td></tr></table></figure></p>
-<p>调整属性’a’和’测试’的顺序呢？<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> data = &#123;<span class="string">'测试'</span>:<span class="string">'bbb'</span>,<span class="string">'3'</span>:<span class="string">'ccc'</span>,<span class="string">'a'</span>:<span class="string">'000'</span>,<span class="string">'1'</span>:<span class="string">'aaa'</span>&#125;;</div><div class="line"><span class="built_in">Object</span>.keys(data);</div></pre></td></tr></table></figure></p>
-<p>控制台输出：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[<span class="string">"1"</span>, <span class="string">"3"</span>, <span class="string">"测试"</span>, <span class="string">"a"</span>]</div></pre></td></tr></table></figure></p>
+<h4 id="二、大胆猜测"><a href="#二、大胆猜测" class="headerlink" title="二、大胆猜测"></a>二、大胆猜测</h4><p>我们来看结果：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">"1"</span>, <span class="string">"2"</span>, <span class="string">"3"</span>, <span class="string">"测试"</span>]</span><br><span class="line">[<span class="string">"1"</span>, <span class="string">"2"</span>, <span class="string">"3"</span>, <span class="string">"a"</span>]</span><br></pre></td></tr></table></figure></p>
+<p>会不会是按照ASC码的大小顺序来输出的呢？<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'1'</span>&lt;<span class="string">'2'</span>&lt;<span class="string">'3'</span>&lt;<span class="string">'测试'</span></span><br><span class="line"><span class="string">'1'</span>&lt;<span class="string">'2'</span>&lt;<span class="string">'3'</span>&lt;<span class="string">'a'</span></span><br></pre></td></tr></table></figure></p>
+<p>好像漏掉了一种情况（字母和汉字的属性名称同时存在），我们试一下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> data = &#123;<span class="string">'a'</span>:<span class="string">'000'</span>,<span class="string">'3'</span>:<span class="string">'ccc'</span>,<span class="string">'1'</span>:<span class="string">'aaa'</span>,<span class="string">'测试'</span>:<span class="string">'bbb'</span>,&#125;;</span><br><span class="line"><span class="built_in">Object</span>.keys(data);</span><br></pre></td></tr></table></figure></p>
+<p>控制台输出：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">"1"</span>, <span class="string">"3"</span>, <span class="string">"a"</span>, <span class="string">"测试"</span>]</span><br></pre></td></tr></table></figure></p>
+<p>调整属性’a’和’测试’的顺序呢？<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> data = &#123;<span class="string">'测试'</span>:<span class="string">'bbb'</span>,<span class="string">'3'</span>:<span class="string">'ccc'</span>,<span class="string">'a'</span>:<span class="string">'000'</span>,<span class="string">'1'</span>:<span class="string">'aaa'</span>&#125;;</span><br><span class="line"><span class="built_in">Object</span>.keys(data);</span><br></pre></td></tr></table></figure></p>
+<p>控制台输出：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">"1"</span>, <span class="string">"3"</span>, <span class="string">"测试"</span>, <span class="string">"a"</span>]</span><br></pre></td></tr></table></figure></p>
 <p>好了，到此为止，我们可以得出结论了。<br><div class="alert danger"><p>结论：对象的遍历输出并不是按照属性的ASC码升序排序的。</p>
 </div></p>
 <h4 id="三、初见端倪"><a href="#三、初见端倪" class="headerlink" title="三、初见端倪"></a>三、初见端倪</h4><p>查阅了一些文档后，得出了以下有效结论：<br>1.An object is a member of the type Object. It is an unordered collection of properties each of which contains a primitive value, object, or function. A function stored in a property of an object is called a method.</p>
@@ -286,21 +264,21 @@
 <p>这和我们上面例子中的数据结果是吻合的，嗯，这就是我想要的结果！</p>
 <h4 id="五、结案总结"><a href="#五、结案总结" class="headerlink" title="五、结案总结"></a>五、结案总结</h4><div class="alert info"><p>如果想顺序遍历一组数据，请使用数组并使用 for 语句遍历。 </p>
 </div>
-<p>for-in语句无法保证遍历顺序，应尽量避免编写依赖对象属性顺序的代码。如果想按照定义的次序遍历对象属性，请参考<a href="http://w3help.org/zh-cn/causes/SJ9011" target="_blank" rel="external">这里</a>针对各浏览器编写特殊代码。</p>
+<p>for-in语句无法保证遍历顺序，应尽量避免编写依赖对象属性顺序的代码。如果想按照定义的次序遍历对象属性，请参考<a href="http://w3help.org/zh-cn/causes/SJ9011" target="_blank" rel="noopener">这里</a>针对各浏览器编写特殊代码。</p>
 <p>由于对象的输出是无序的，但是数组却是有序的，所以为了保证顺序，搞成数组再输出。嗯，就是这样！</p>
-<h4 id="六、参考文档"><a href="#六、参考文档" class="headerlink" title="六、参考文档"></a>六、参考文档</h4><p>1.ASCII参照表<br><a href="http://baike.baidu.com/link?url=biyz3JjFtGX7OAA48C" target="_blank" rel="external">http://baike.baidu.com/link?url=biyz3JjFtGX7OAA48C</a><br>2.js对象输出顺序<br><a href="http://stackoverflow.com/questions/5525795/does-javascript-guarantee-object-property-order" target="_blank" rel="external">http://stackoverflow.com/questions/5525795/does-javascript-guarantee-object-property-order</a><br>3.遍历出的属性顺序与对象定义时不同<br><a href="http://w3help.org/zh-cn/causes/SJ9011" target="_blank" rel="external">http://w3help.org/zh-cn/causes/SJ9011</a><br>4.控制js中的对象顺序输出<br><a href="https://segmentfault.com/q/1010000000765467" target="_blank" rel="external">https://segmentfault.com/q/1010000000765467</a></p>
+<h4 id="六、参考文档"><a href="#六、参考文档" class="headerlink" title="六、参考文档"></a>六、参考文档</h4><p>1.ASCII参照表<br><a href="http://baike.baidu.com/link?url=biyz3JjFtGX7OAA48C" target="_blank" rel="noopener">http://baike.baidu.com/link?url=biyz3JjFtGX7OAA48C</a><br>2.js对象输出顺序<br><a href="http://stackoverflow.com/questions/5525795/does-javascript-guarantee-object-property-order" target="_blank" rel="noopener">http://stackoverflow.com/questions/5525795/does-javascript-guarantee-object-property-order</a><br>3.遍历出的属性顺序与对象定义时不同<br><a href="http://w3help.org/zh-cn/causes/SJ9011" target="_blank" rel="noopener">http://w3help.org/zh-cn/causes/SJ9011</a><br>4.控制js中的对象顺序输出<br><a href="https://segmentfault.com/q/1010000000765467" target="_blank" rel="noopener">https://segmentfault.com/q/1010000000765467</a></p>
 
             
         </div>
     </div>
     <div id="post-footer" class="post-footer main-content-wrap"> 
         <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
-          版权声明：<br/>文章首发于 <a href="http://jartto.wang"> Jartto's blog </a>，
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's blog </a>，
           转载文章请务必以超链接形式标明文章出处，作者信息及本版权声明（<a href="http://jartto.wang"> http://jartto.wang </a>)。
         </div>
         
             <div class="post-footer-tags">
-                <span class="text-color-light text-small">标签</span><br/>
+                <span class="text-color-light text-small">标签</span><br>
                 
     <a class="tag tag--primary tag--small t-link" href="/tags/js/">js</a> <a class="tag tag--primary tag--small t-link" href="/tags/object/">object</a>
 
@@ -311,7 +289,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/11/02/linux-common-command/"  data-tooltip="linux 实用命令">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/11/02/linux-common-command/" data-tooltip="linux 实用命令">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -329,7 +307,7 @@
     </nav>
     <ul class="post-actions post-action-share">
         <li class="post-action hide-lg hide-md hide-sm">
-            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
                 <i class="fa fa-share-alt"></i>
             </a>
         </li>
@@ -366,7 +344,7 @@
 </div>
 
 
-        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/qrcode.png" width="100%" alt="请 Jartto 喝杯茶，亦或是给他一个简单的项目需求"/></div>
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/qrcode.png" width="100%" alt="请 Jartto 喝杯茶，亦或是给他一个简单的项目需求"></div>
         
             
                 <div id="disqus_thread">
@@ -401,7 +379,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/11/02/linux-common-command/"  data-tooltip="linux 实用命令">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/11/02/linux-common-command/" data-tooltip="linux 实用命令">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -419,7 +397,7 @@
     </nav>
     <ul class="post-actions post-action-share">
         <li class="post-action hide-lg hide-md hide-sm">
-            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
                 <i class="fa fa-share-alt"></i>
             </a>
         </li>
@@ -461,7 +439,7 @@
     <ul class="share-options">
         <li class="share-option">
             <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2016/10/25/does-js-guarantee-object-property-order/">
-                <i class="fa fa-google-plus"></i><span class="">分享到 Google+</span>
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
             </a>
         </li>
         <li class="share-option">
@@ -492,27 +470,27 @@
             <i class="fa fa-remove"></i>
         </div>
         
-            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
         
             <h4 id="about-card-name">Jartto</h4>
         
             <h5 id="about-card-bio"><blockquote>
-<p>最遗憾的不是把梦想丢在路上，</br>而是梦想从未上路!</br>Just do IT</p>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
 </blockquote>
 </h5>
         
         
             <h5 id="about-card-job">
                 <i class="fa fa-briefcase"></i>
-                <br/>
-                <p>jartto@qq.com</p>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
 
             </h5>
         
         
             <h5 id="about-card-location">
                 <i class="fa fa-map-marker"></i>
-                <br/>
+                <br>
                 北京－朝阳
             </h5>
         

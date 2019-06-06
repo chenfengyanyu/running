@@ -80,11 +80,10 @@
     </h1>
     
         
-            <a  class="header-right-picture st-search-show-outputs"
-                href="#about">
+            <a class="header-right-picture st-search-show-outputs" href="#about">
         
         
-            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
         
         </a>
     
@@ -101,7 +100,7 @@
     
         <div class="sidebar-profile">
             <a href="/#about">
-                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
             </a>
             <span class="sidebar-profile-name">Jartto</span>
         </div>
@@ -111,10 +110,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/ "
-                        
-                    >
+                    <a class="sidebar-button-link " href="/ ">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-home"></i>
                     <span class="sidebar-button-desc">首页</span>
@@ -123,10 +119,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/all-categories"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/all-categories">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
                     <span class="sidebar-button-desc">分类</span>
@@ -135,10 +128,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/all-tags"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/all-tags">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
                     <span class="sidebar-button-desc">标签</span>
@@ -147,10 +137,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/all-archives"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/all-archives">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
                     <span class="sidebar-button-desc">归档</span>
@@ -159,10 +146,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="#about"
-                        
-                    >
+                    <a class="sidebar-button-link " href="#about">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-question"></i>
                     <span class="sidebar-button-desc">关于</span>
@@ -175,7 +159,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
                     <span class="sidebar-button-desc">Email</span>
@@ -184,7 +168,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-github"></i>
                     <span class="sidebar-button-desc">GitHub</span>
@@ -197,10 +181,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/atom.xml"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/atom.xml">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
                     <span class="sidebar-button-desc">RSS</span>
@@ -209,10 +190,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/sitemap.xml"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/sitemap.xml">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
                     <span class="sidebar-button-desc">Sitemap</span>
@@ -229,7 +207,7 @@
                         hasCoverMetaIn
                         ">
                 
-<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
     
     
         <div class="post-header main-content-wrap text-center">
@@ -264,32 +242,32 @@
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
             <p>这两天在尝试用antd+webpack+react来构建项目，我想了解antd构建的项目中webpack配置有何不同？全局的类库（如jquery）如何配置？以及如何避免类库文件打包等问题。<br><a id="more"></a><br>当然，都属于webpack中的基础知识，但是套上了atool-build这样一个壳子，又有点小懵。还好不是很难，尝试后，很快搞定了，顺手也总结一下吧！</p>
-<h4 id="一、安装ant-init"><a href="#一、安装ant-init" class="headerlink" title="一、安装ant-init"></a>一、安装ant-init</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install antd-init -g</div></pre></td></tr></table></figure>
-<h4 id="二、创建目录"><a href="#二、创建目录" class="headerlink" title="二、创建目录"></a>二、创建目录</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mkdir antd-demo &amp;&amp; <span class="built_in">cd</span> antd-demo</div></pre></td></tr></table></figure>
-<h4 id="三、初始化项目"><a href="#三、初始化项目" class="headerlink" title="三、初始化项目"></a>三、初始化项目</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">antd-init</div></pre></td></tr></table></figure>
+<h4 id="一、安装ant-init"><a href="#一、安装ant-init" class="headerlink" title="一、安装ant-init"></a>一、安装ant-init</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install antd-init -g</span><br></pre></td></tr></table></figure>
+<h4 id="二、创建目录"><a href="#二、创建目录" class="headerlink" title="二、创建目录"></a>二、创建目录</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir antd-demo &amp;&amp; <span class="built_in">cd</span> antd-demo</span><br></pre></td></tr></table></figure>
+<h4 id="三、初始化项目"><a href="#三、初始化项目" class="headerlink" title="三、初始化项目"></a>三、初始化项目</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">antd-init</span><br></pre></td></tr></table></figure>
 <p>之后提示：<br>antd-init@2 仅适用于学习和体验 antd，如果你要开发项目，推荐使用 dva-cli 进行项目初始化。dva 是一个基于 react 和 redux 的轻量应用框架，概念来自 elm，支持 side effects、热替换、动态加载等，已在生产环境广泛应用。</p>
 <div class="alert info"><p>这里先引出dva，后续文章我会以实际项目继续深入探讨。</p>
 </div>
-<h4 id="四、使用组件"><a href="#四、使用组件" class="headerlink" title="四、使用组件"></a>四、使用组件</h4><p>替换index.js<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</div><div class="line"><span class="keyword">import</span> ReactDOM <span class="keyword">from</span> <span class="string">'react-dom'</span>;</div><div class="line"><span class="keyword">import</span> &#123; DatePicker, message &#125; <span class="keyword">from</span> <span class="string">'antd'</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</div><div class="line">  <span class="keyword">constructor</span>(props) &#123;</div><div class="line">    <span class="keyword">super</span>(props);</div><div class="line">    <span class="keyword">this</span>.state = &#123;</div><div class="line">      date: <span class="string">''</span>,</div><div class="line">    &#125;;</div><div class="line">  &#125;</div><div class="line">  handleChange(date) &#123;</div><div class="line">    message.info(<span class="string">'您选择的日期是: '</span> + date.toString());</div><div class="line">    <span class="keyword">this</span>.setState(&#123; date &#125;);</div><div class="line">  &#125;</div><div class="line">  render() &#123;</div><div class="line">    <span class="keyword">return</span> (</div><div class="line">      &lt;div style=&#123;&#123; <span class="attr">width</span>: <span class="number">400</span>, <span class="attr">margin</span>: <span class="string">'100px auto'</span> &#125;&#125;&gt;</div><div class="line">        &lt;DatePicker onChange=&#123;value =&gt; <span class="keyword">this</span>.handleChange(value)&#125; /&gt;</div><div class="line">        &lt;div style=&#123;&#123; <span class="attr">marginTop</span>: <span class="number">20</span> &#125;&#125;&gt;当前日期：&#123;<span class="keyword">this</span>.state.date.toString()&#125;&lt;<span class="regexp">/div&gt;</span></div><div class="line"><span class="regexp">      &lt;/</span>div&gt;</div><div class="line">    );</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">ReactDOM.render(<span class="xml"><span class="tag">&lt;<span class="name">App</span> /&gt;</span>, document.getElementById('root'));</span></div></pre></td></tr></table></figure></p>
-<h4 id="五、开发调试"><a href="#五、开发调试" class="headerlink" title="五、开发调试"></a>五、开发调试</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm start</div></pre></td></tr></table></figure>
-<p>访问：<a href="http://127.0.0.1:8000" target="_blank" rel="external">http://127.0.0.1:8000</a></p>
-<h4 id="六、构建和部署"><a href="#六、构建和部署" class="headerlink" title="六、构建和部署"></a>六、构建和部署</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm run build</div></pre></td></tr></table></figure>
+<h4 id="四、使用组件"><a href="#四、使用组件" class="headerlink" title="四、使用组件"></a>四、使用组件</h4><p>替换index.js<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> ReactDOM <span class="keyword">from</span> <span class="string">'react-dom'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; DatePicker, message &#125; <span class="keyword">from</span> <span class="string">'antd'</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(props) &#123;</span><br><span class="line">    <span class="keyword">super</span>(props);</span><br><span class="line">    <span class="keyword">this</span>.state = &#123;</span><br><span class="line">      date: <span class="string">''</span>,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">  handleChange(date) &#123;</span><br><span class="line">    message.info(<span class="string">'您选择的日期是: '</span> + date.toString());</span><br><span class="line">    <span class="keyword">this</span>.setState(&#123; date &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;div style=&#123;&#123; <span class="attr">width</span>: <span class="number">400</span>, <span class="attr">margin</span>: <span class="string">'100px auto'</span> &#125;&#125;&gt;</span><br><span class="line">        &lt;DatePicker onChange=&#123;value =&gt; <span class="keyword">this</span>.handleChange(value)&#125; /&gt;</span><br><span class="line">        &lt;div style=&#123;&#123; <span class="attr">marginTop</span>: <span class="number">20</span> &#125;&#125;&gt;当前日期：&#123;<span class="keyword">this</span>.state.date.toString()&#125;&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">      &lt;/</span>div&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ReactDOM.render(<span class="xml"><span class="tag">&lt;<span class="name">App</span> /&gt;</span>, document.getElementById('root'));</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="五、开发调试"><a href="#五、开发调试" class="headerlink" title="五、开发调试"></a>五、开发调试</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm start</span><br></pre></td></tr></table></figure>
+<p>访问：<a href="http://127.0.0.1:8000" target="_blank" rel="noopener">http://127.0.0.1:8000</a></p>
+<h4 id="六、构建和部署"><a href="#六、构建和部署" class="headerlink" title="六、构建和部署"></a>六、构建和部署</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run build</span><br></pre></td></tr></table></figure>
 <p>入口文件会构建到dist目录中，可以自由部署到不同环境中进行引用。</p>
-<h4 id="七、关于webpack配置"><a href="#七、关于webpack配置" class="headerlink" title="七、关于webpack配置"></a>七、关于webpack配置</h4><p>webpack.congfig.js文件：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>);</div><div class="line"><span class="keyword">var</span> webpack = <span class="built_in">require</span>(<span class="string">'webpack'</span>);</div><div class="line"></div><div class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span>(<span class="params">webpackConfig</span>) </span>&#123;</div><div class="line">    webpackConfig.module.loaders.push(&#123; <span class="attr">test</span>: <span class="regexp">/\.html$/</span>, <span class="attr">loader</span>: <span class="string">'file?name=[name].[ext]'</span> &#125;);</div><div class="line">    webpackConfig.babel.plugins.push(<span class="string">'transform-runtime'</span>);</div><div class="line">    webpackConfig.babel.plugins.push([<span class="string">'import'</span>, &#123;</div><div class="line">        libraryName: <span class="string">'antd'</span>,</div><div class="line">        style: <span class="string">'css'</span>,</div><div class="line">    &#125;]);</div><div class="line">    <span class="comment">// 避免jquery被打包</span></div><div class="line">    webpackConfig.externals = &#123;</div><div class="line">        jquery: <span class="string">'jQuery'</span>,</div><div class="line">    &#125;;</div><div class="line">    <span class="comment">// 设置全局jquery变量</span></div><div class="line">    webpackConfig.plugins.push(</div><div class="line">      <span class="keyword">new</span> webpack.ProvidePlugin(&#123;</div><div class="line">        $: <span class="string">'jQuery'</span></div><div class="line">    &#125;));</div><div class="line">    <span class="keyword">return</span> webpackConfig;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<h4 id="八、总结"><a href="#八、总结" class="headerlink" title="八、总结"></a>八、总结</h4><p>本文简单的尝试了一个antd小例子，只作为入门介绍，代码放在这里<a href="https://github.com/chenfengyanyu/my-antd-demo" target="_blank" rel="external">demo</a>，至于为什么用它，大概是对ant design和react的喜爱吧。</p>
-<h4 id="九、相关文档"><a href="#九、相关文档" class="headerlink" title="九、相关文档"></a>九、相关文档</h4><p>1.<a href="https://ant.design/docs/react/introduce-cn" target="_blank" rel="external">ant design</a><br>2.<a href="http://ant-tool.github.io/setup.html" target="_blank" rel="external">atool-build 简介</a><br>3.<a href="http://webpack.github.io/docs/configuration.html#entry" target="_blank" rel="external">webpack</a></p>
+<h4 id="七、关于webpack配置"><a href="#七、关于webpack配置" class="headerlink" title="七、关于webpack配置"></a>七、关于webpack配置</h4><p>webpack.congfig.js文件：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>);</span><br><span class="line"><span class="keyword">var</span> webpack = <span class="built_in">require</span>(<span class="string">'webpack'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span>(<span class="params">webpackConfig</span>) </span>&#123;</span><br><span class="line">    webpackConfig.module.loaders.push(&#123; <span class="attr">test</span>: <span class="regexp">/\.html$/</span>, <span class="attr">loader</span>: <span class="string">'file?name=[name].[ext]'</span> &#125;);</span><br><span class="line">    webpackConfig.babel.plugins.push(<span class="string">'transform-runtime'</span>);</span><br><span class="line">    webpackConfig.babel.plugins.push([<span class="string">'import'</span>, &#123;</span><br><span class="line">        libraryName: <span class="string">'antd'</span>,</span><br><span class="line">        style: <span class="string">'css'</span>,</span><br><span class="line">    &#125;]);</span><br><span class="line">    <span class="comment">// 避免jquery被打包</span></span><br><span class="line">    webpackConfig.externals = &#123;</span><br><span class="line">        jquery: <span class="string">'jQuery'</span>,</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="comment">// 设置全局jquery变量</span></span><br><span class="line">    webpackConfig.plugins.push(</span><br><span class="line">      <span class="keyword">new</span> webpack.ProvidePlugin(&#123;</span><br><span class="line">        $: <span class="string">'jQuery'</span></span><br><span class="line">    &#125;));</span><br><span class="line">    <span class="keyword">return</span> webpackConfig;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<h4 id="八、总结"><a href="#八、总结" class="headerlink" title="八、总结"></a>八、总结</h4><p>本文简单的尝试了一个antd小例子，只作为入门介绍，代码放在这里<a href="https://github.com/chenfengyanyu/my-antd-demo" target="_blank" rel="noopener">demo</a>，至于为什么用它，大概是对ant design和react的喜爱吧。</p>
+<h4 id="九、相关文档"><a href="#九、相关文档" class="headerlink" title="九、相关文档"></a>九、相关文档</h4><p>1.<a href="https://ant.design/docs/react/introduce-cn" target="_blank" rel="noopener">ant design</a><br>2.<a href="http://ant-tool.github.io/setup.html" target="_blank" rel="noopener">atool-build 简介</a><br>3.<a href="http://webpack.github.io/docs/configuration.html#entry" target="_blank" rel="noopener">webpack</a></p>
 
             
         </div>
     </div>
     <div id="post-footer" class="post-footer main-content-wrap"> 
         <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
-          版权声明：<br/>文章首发于 <a href="http://jartto.wang"> Jartto's blog </a>，
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's blog </a>，
           转载文章请务必以超链接形式标明文章出处，作者信息及本版权声明（<a href="http://jartto.wang"> http://jartto.wang </a>)。
         </div>
         
             <div class="post-footer-tags">
-                <span class="text-color-light text-small">标签</span><br/>
+                <span class="text-color-light text-small">标签</span><br>
                 
     <a class="tag tag--primary tag--small t-link" href="/tags/antd/">antd</a> <a class="tag tag--primary tag--small t-link" href="/tags/react/">react</a> <a class="tag tag--primary tag--small t-link" href="/tags/webpack/">webpack</a>
 
@@ -300,7 +278,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/01/05/detail-of-mockjs/"  data-tooltip="细说 Mockjs">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/01/05/detail-of-mockjs/" data-tooltip="细说 Mockjs">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -318,7 +296,7 @@
     </nav>
     <ul class="post-actions post-action-share">
         <li class="post-action hide-lg hide-md hide-sm">
-            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
                 <i class="fa fa-share-alt"></i>
             </a>
         </li>
@@ -355,7 +333,7 @@
 </div>
 
 
-        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/qrcode.png" width="100%" alt="请 Jartto 喝杯茶，亦或是给他一个简单的项目需求"/></div>
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/qrcode.png" width="100%" alt="请 Jartto 喝杯茶，亦或是给他一个简单的项目需求"></div>
         
             
                 <div id="disqus_thread">
@@ -390,7 +368,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/01/05/detail-of-mockjs/"  data-tooltip="细说 Mockjs">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/01/05/detail-of-mockjs/" data-tooltip="细说 Mockjs">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -408,7 +386,7 @@
     </nav>
     <ul class="post-actions post-action-share">
         <li class="post-action hide-lg hide-md hide-sm">
-            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
                 <i class="fa fa-share-alt"></i>
             </a>
         </li>
@@ -450,7 +428,7 @@
     <ul class="share-options">
         <li class="share-option">
             <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2016/12/14/together-to-learn-ant-design-of-react/">
-                <i class="fa fa-google-plus"></i><span class="">分享到 Google+</span>
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
             </a>
         </li>
         <li class="share-option">
@@ -481,27 +459,27 @@
             <i class="fa fa-remove"></i>
         </div>
         
-            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
         
             <h4 id="about-card-name">Jartto</h4>
         
             <h5 id="about-card-bio"><blockquote>
-<p>最遗憾的不是把梦想丢在路上，</br>而是梦想从未上路!</br>Just do IT</p>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
 </blockquote>
 </h5>
         
         
             <h5 id="about-card-job">
                 <i class="fa fa-briefcase"></i>
-                <br/>
-                <p>jartto@qq.com</p>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
 
             </h5>
         
         
             <h5 id="about-card-location">
                 <i class="fa fa-map-marker"></i>
-                <br/>
+                <br>
                 北京－朝阳
             </h5>
         

@@ -85,11 +85,10 @@
     </h1>
     
         
-            <a  class="header-right-picture st-search-show-outputs"
-                href="#about">
+            <a class="header-right-picture st-search-show-outputs" href="#about">
         
         
-            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
         
         </a>
     
@@ -106,7 +105,7 @@
     
         <div class="sidebar-profile">
             <a href="/#about">
-                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
             </a>
             <span class="sidebar-profile-name">Jartto</span>
         </div>
@@ -116,10 +115,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/ "
-                        
-                    >
+                    <a class="sidebar-button-link " href="/ ">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-home"></i>
                     <span class="sidebar-button-desc">首页</span>
@@ -128,10 +124,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/all-categories"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/all-categories">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
                     <span class="sidebar-button-desc">分类</span>
@@ -140,10 +133,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/all-tags"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/all-tags">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
                     <span class="sidebar-button-desc">标签</span>
@@ -152,10 +142,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/all-archives"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/all-archives">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
                     <span class="sidebar-button-desc">归档</span>
@@ -164,10 +151,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="#about"
-                        
-                    >
+                    <a class="sidebar-button-link " href="#about">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-question"></i>
                     <span class="sidebar-button-desc">关于</span>
@@ -180,7 +164,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
                     <span class="sidebar-button-desc">Email</span>
@@ -189,7 +173,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-github"></i>
                     <span class="sidebar-button-desc">GitHub</span>
@@ -202,10 +186,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/atom.xml"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/atom.xml">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
                     <span class="sidebar-button-desc">RSS</span>
@@ -214,10 +195,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/sitemap.xml"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/sitemap.xml">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
                     <span class="sidebar-button-desc">Sitemap</span>
@@ -234,7 +212,7 @@
                         hasCoverMetaIn
                         ">
                 
-<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
     
     
         <div class="post-header main-content-wrap text-center">
@@ -277,18 +255,18 @@
 </div><br>大体思路如下：<br>1.首先，要拿到文章中的关键词，需要使用爬虫；<br>2.为了不那么枯燥，我决定采用图片蒙版来做背景；<br>3.统计关键词出现的频率，进行分词；<br>4.过滤掉干扰词汇；<br>5.生成图片；</p>
 <div class="alert info"><p>热词集合的图片就是我最终的目标。</p>
 </div>
-<h4 id="三、使用爬虫"><a href="#三、使用爬虫" class="headerlink" title="三、使用爬虫"></a>三、使用爬虫</h4><p>1.没什么好选择的，直接使用 <code>Python</code> 插件 <code>BeautifulSoup</code>，我们先拿到 <code>Dom</code> 元素：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># -*- coding: utf-8 -*- </span></div><div class="line"><span class="keyword">from</span> os <span class="keyword">import</span> path</div><div class="line"><span class="keyword">import</span> sys</div><div class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</div><div class="line"></div><div class="line">html_doc = <span class="string">"""</span></div><div class="line"><span class="string">&lt;body id="activity-detail"&gt;   </span></div><div class="line"><span class="string">&lt;div id="js_article" class="rich_media"&gt;</span></div><div class="line"><span class="string">    &lt;div id="js_top_ad_area" class="top_banner"&gt;&lt;/div&gt;</span></div><div class="line"><span class="string">    &lt;div class="rich_media_inner"&gt;</span></div><div class="line"><span class="string">      ...</span></div><div class="line"><span class="string">    &lt;/div&gt;</span></div><div class="line"><span class="string">&lt;/div&gt;</span></div><div class="line"><span class="string">&lt;/body&gt;</span></div><div class="line"><span class="string">"""</span></div><div class="line"></div><div class="line">soup = BeautifulSoup(html_doc)</div><div class="line"><span class="comment"># 可以抓到 a 标签内容</span></div><div class="line"><span class="comment"># print(soup.find_all('a'))</span></div><div class="line"><span class="comment"># 也直接抓取所有文本</span></div><div class="line">print(soup.get_text())</div><div class="line"></div><div class="line"><span class="comment"># 打开文件，逐行写入</span></div><div class="line"><span class="keyword">with</span> open(<span class="string">'&#123;&#125;/result/word.txt'</span>.format(sys.path[<span class="number">0</span>]),<span class="string">'w'</span>) <span class="keyword">as</span> f:</div><div class="line">  f.writelines(soup.get_text());</div></pre></td></tr></table></figure></p>
+<h4 id="三、使用爬虫"><a href="#三、使用爬虫" class="headerlink" title="三、使用爬虫"></a>三、使用爬虫</h4><p>1.没什么好选择的，直接使用 <code>Python</code> 插件 <code>BeautifulSoup</code>，我们先拿到 <code>Dom</code> 元素：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*- </span></span><br><span class="line"><span class="keyword">from</span> os <span class="keyword">import</span> path</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line"></span><br><span class="line">html_doc = <span class="string">"""</span></span><br><span class="line"><span class="string">&lt;body id="activity-detail"&gt;   </span></span><br><span class="line"><span class="string">&lt;div id="js_article" class="rich_media"&gt;</span></span><br><span class="line"><span class="string">    &lt;div id="js_top_ad_area" class="top_banner"&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="string">    &lt;div class="rich_media_inner"&gt;</span></span><br><span class="line"><span class="string">      ...</span></span><br><span class="line"><span class="string">    &lt;/div&gt;</span></span><br><span class="line"><span class="string">&lt;/div&gt;</span></span><br><span class="line"><span class="string">&lt;/body&gt;</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line">soup = BeautifulSoup(html_doc)</span><br><span class="line"><span class="comment"># 可以抓到 a 标签内容</span></span><br><span class="line"><span class="comment"># print(soup.find_all('a'))</span></span><br><span class="line"><span class="comment"># 也直接抓取所有文本</span></span><br><span class="line">print(soup.get_text())</span><br><span class="line"></span><br><span class="line"><span class="comment"># 打开文件，逐行写入</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'&#123;&#125;/result/word.txt'</span>.format(sys.path[<span class="number">0</span>]),<span class="string">'w'</span>) <span class="keyword">as</span> f:</span><br><span class="line">  f.writelines(soup.get_text());</span><br></pre></td></tr></table></figure></p>
 <p>为了确定内容是否都抓到了，我们先进行打印：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/2018f2e/word.png" alt="word"><br>看到这些，基本上我们需要的内容已经就绪了，继续下一步。</p>
 <h4 id="四、生成图片"><a href="#四、生成图片" class="headerlink" title="四、生成图片"></a>四、生成图片</h4><p>1.使用 <code>Photoshop</code>，制作一个 <code>F2E</code> 字样的蒙版文件，如下图：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/2018f2e/mask.png" alt="mask"></p>
-<p>2.使用 <code>Python</code> 插件 <code>jieba</code> 进行分词：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">jieba_processing_txt</span><span class="params">(text)</span>:</span></div><div class="line">    <span class="keyword">for</span> word <span class="keyword">in</span> userdict_list:</div><div class="line">        jieba.add_word(word)</div><div class="line"></div><div class="line">    mywordlist = []</div><div class="line">    seg_list = jieba.cut(text, cut_all=<span class="keyword">False</span>)</div><div class="line">    liststr = <span class="string">'/ '</span>.join(seg_list)</div><div class="line"></div><div class="line">    <span class="keyword">with</span> io.open(stopwords_path, encoding=<span class="string">'utf-8'</span>) <span class="keyword">as</span> f_stop:</div><div class="line">        f_stop_text = f_stop.read()</div><div class="line">        f_stop_seg_list = f_stop_text.splitlines()</div><div class="line"></div><div class="line">    <span class="keyword">for</span> myword <span class="keyword">in</span> liststr.split(<span class="string">'/'</span>):</div><div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> (myword.strip() <span class="keyword">in</span> f_stop_seg_list) <span class="keyword">and</span> len(myword.strip()) &gt; <span class="number">1</span>:</div><div class="line">            mywordlist.append(myword)</div><div class="line">    <span class="keyword">print</span> (mywordlist)</div><div class="line">    <span class="keyword">return</span> <span class="string">' '</span>.join(mywordlist)</div></pre></td></tr></table></figure></p>
+<p>2.使用 <code>Python</code> 插件 <code>jieba</code> 进行分词：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">jieba_processing_txt</span><span class="params">(text)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> word <span class="keyword">in</span> userdict_list:</span><br><span class="line">        jieba.add_word(word)</span><br><span class="line"></span><br><span class="line">    mywordlist = []</span><br><span class="line">    seg_list = jieba.cut(text, cut_all=<span class="literal">False</span>)</span><br><span class="line">    liststr = <span class="string">'/ '</span>.join(seg_list)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">with</span> io.open(stopwords_path, encoding=<span class="string">'utf-8'</span>) <span class="keyword">as</span> f_stop:</span><br><span class="line">        f_stop_text = f_stop.read()</span><br><span class="line">        f_stop_seg_list = f_stop_text.splitlines()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> myword <span class="keyword">in</span> liststr.split(<span class="string">'/'</span>):</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> (myword.strip() <span class="keyword">in</span> f_stop_seg_list) <span class="keyword">and</span> len(myword.strip()) &gt; <span class="number">1</span>:</span><br><span class="line">            mywordlist.append(myword)</span><br><span class="line">    <span class="keyword">print</span> (mywordlist)</span><br><span class="line">    <span class="keyword">return</span> <span class="string">' '</span>.join(mywordlist)</span><br></pre></td></tr></table></figure></p>
 <p>分词后，我们打印 <code>mywordlist</code>：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/2018f2e/array.png" alt="array"></p>
 <div class="alert success"><p>整齐的数组，没有半点瑕疵。确定过眼神，是我要的数组。</p>
 </div>
-<p>3.使用 <code>woldcloud</code> 来生成词云图片：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">wc = WordCloud(font_path=font_path, background_color=<span class="string">"white"</span>, max_words=<span class="number">2000</span>          mask=back_coloring,max_font_size=<span class="number">60</span>, random_state=<span class="number">42</span>, width=<span class="number">1000</span>, height=<span class="number">860</span>, margin=<span class="number">2</span>,)</div><div class="line"></div><div class="line">wc.generate(jieba_processing_txt(mytext))</div><div class="line">wc.to_file(path.join(d, imgname1))</div></pre></td></tr></table></figure></p>
-<p>4.为了去除干扰，我们还需要过滤掉无用的关键词，如：发布，整理，功能，介绍，已经，使用，可以，电脑等等<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">userdict_list = [<span class="string">'我们'</span>, <span class="string">'什么'</span>, <span class="string">'发布'</span>, <span class="string">'整理'</span>, <span class="string">'功能'</span>, </div><div class="line"><span class="string">'介绍'</span>,<span class="string">'已经'</span>,<span class="string">'使用'</span>,<span class="string">'可以'</span>,<span class="string">'电脑'</span>,<span class="string">'尽快'</span>,<span class="string">'收藏'</span>,<span class="string">'最后'</span>,<span class="string">'公众'</span>,<span class="string">'支持'</span>,<span class="string">'微信'</span>,<span class="string">'需要'</span>,<span class="string">'这些'</span>]</div></pre></td></tr></table></figure></p>
+<p>3.使用 <code>woldcloud</code> 来生成词云图片：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wc = WordCloud(font_path=font_path, background_color=<span class="string">"white"</span>, max_words=<span class="number">2000</span>          mask=back_coloring,max_font_size=<span class="number">60</span>, random_state=<span class="number">42</span>, width=<span class="number">1000</span>, height=<span class="number">860</span>, margin=<span class="number">2</span>,)</span><br><span class="line"></span><br><span class="line">wc.generate(jieba_processing_txt(mytext))</span><br><span class="line">wc.to_file(path.join(d, imgname1))</span><br></pre></td></tr></table></figure></p>
+<p>4.为了去除干扰，我们还需要过滤掉无用的关键词，如：发布，整理，功能，介绍，已经，使用，可以，电脑等等<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">userdict_list = [<span class="string">'我们'</span>, <span class="string">'什么'</span>, <span class="string">'发布'</span>, <span class="string">'整理'</span>, <span class="string">'功能'</span>, </span><br><span class="line"><span class="string">'介绍'</span>,<span class="string">'已经'</span>,<span class="string">'使用'</span>,<span class="string">'可以'</span>,<span class="string">'电脑'</span>,<span class="string">'尽快'</span>,<span class="string">'收藏'</span>,<span class="string">'最后'</span>,<span class="string">'公众'</span>,<span class="string">'支持'</span>,<span class="string">'微信'</span>,<span class="string">'需要'</span>,<span class="string">'这些'</span>]</span><br></pre></td></tr></table></figure></p>
 <div class="alert danger"><p>这里不得不吐槽一下，乱起八糟的广告真的很多，感觉自己在抓 2018 年的广告热词。</p>
 </div>
-<p>到这里就结束了，感兴趣的童鞋可以看看 <a href="https://github.com/chenfengyanyu/my-web-accumulation/tree/master/python-dom" target="_blank" rel="external">Demo</a></p>
+<p>到这里就结束了，感兴趣的童鞋可以看看 <a href="https://github.com/chenfengyanyu/my-web-accumulation/tree/master/python-dom" target="_blank" rel="noopener">Demo</a></p>
 <h4 id="五、打包带走"><a href="#五、打包带走" class="headerlink" title="五、打包带走"></a>五、打包带走</h4><p>嗯，运行程序，我们最终得到了一张图片：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/2018f2e/tags.jpg" alt="tag"><br>大体一看，2018 年，前端还是那些老样子，不过我们可以了解到一些特点：<br>1.<code>JavaScript</code> 的文章还是很多；<br>2.<code>React</code> 和 <code>Vue</code> 仍然是主流；<br>3.<code>Flutter</code> 出现的晚，但是上升趋势不容小觑；<br>4.<code>Nodejs</code>，<code>Electron</code> 还是很受前端欢迎；<br>5.<code>TypeScript</code> 和 <code>GraphQL</code> 仍然有不少的讨论；<br>6.优化、构建、开源、线路图仍然是前端的关注点；<br>7.全栈仍是前端的追逐目标；<br>…</p>
 <p>任务完成，收工。这里还是得特别感谢前端之巅小编辛苦的整理。这些前端精选资源，我真的打包带走了。</p>
 
@@ -297,12 +275,12 @@
     </div>
     <div id="post-footer" class="post-footer main-content-wrap"> 
         <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
-          版权声明：<br/>文章首发于 <a href="http://jartto.wang"> Jartto's blog </a>，
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's blog </a>，
           转载文章请务必以超链接形式标明文章出处，作者信息及本版权声明（<a href="http://jartto.wang"> http://jartto.wang </a>)。
         </div>
         
             <div class="post-footer-tags">
-                <span class="text-color-light text-small">标签</span><br/>
+                <span class="text-color-light text-small">标签</span><br>
                 
     <a class="tag tag--primary tag--small t-link" href="/tags/F2E/">F2E</a> <a class="tag tag--primary tag--small t-link" href="/tags/python/">python</a> <a class="tag tag--primary tag--small t-link" href="/tags/前端/">前端</a>
 
@@ -313,7 +291,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/01/06/f2e-interview/"  data-tooltip="前端面试官的套路，你懂吗？">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/01/06/f2e-interview/" data-tooltip="前端面试官的套路，你懂吗？">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -331,7 +309,7 @@
     </nav>
     <ul class="post-actions post-action-share">
         <li class="post-action hide-lg hide-md hide-sm">
-            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
                 <i class="fa fa-share-alt"></i>
             </a>
         </li>
@@ -362,7 +340,7 @@
 </div>
 
 
-        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/qrcode.png" width="100%" alt="请 Jartto 喝杯茶，亦或是给他一个简单的项目需求"/></div>
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/qrcode.png" width="100%" alt="请 Jartto 喝杯茶，亦或是给他一个简单的项目需求"></div>
         
     </div>
 </article>
@@ -391,7 +369,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/01/06/f2e-interview/"  data-tooltip="前端面试官的套路，你懂吗？">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/01/06/f2e-interview/" data-tooltip="前端面试官的套路，你懂吗？">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -409,7 +387,7 @@
     </nav>
     <ul class="post-actions post-action-share">
         <li class="post-action hide-lg hide-md hide-sm">
-            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
                 <i class="fa fa-share-alt"></i>
             </a>
         </li>
@@ -445,7 +423,7 @@
     <ul class="share-options">
         <li class="share-option">
             <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/12/31/f2e-2018/">
-                <i class="fa fa-google-plus"></i><span class="">分享到 Google+</span>
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
             </a>
         </li>
         <li class="share-option">
@@ -476,27 +454,27 @@
             <i class="fa fa-remove"></i>
         </div>
         
-            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
         
             <h4 id="about-card-name">Jartto</h4>
         
             <h5 id="about-card-bio"><blockquote>
-<p>最遗憾的不是把梦想丢在路上，</br>而是梦想从未上路!</br>Just do IT</p>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
 </blockquote>
 </h5>
         
         
             <h5 id="about-card-job">
                 <i class="fa fa-briefcase"></i>
-                <br/>
-                <p>jartto@qq.com</p>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
 
             </h5>
         
         
             <h5 id="about-card-location">
                 <i class="fa fa-map-marker"></i>
-                <br/>
+                <br>
                 北京－朝阳
             </h5>
         

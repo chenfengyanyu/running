@@ -82,11 +82,10 @@
     </h1>
     
         
-            <a  class="header-right-picture st-search-show-outputs"
-                href="#about">
+            <a class="header-right-picture st-search-show-outputs" href="#about">
         
         
-            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
         
         </a>
     
@@ -103,7 +102,7 @@
     
         <div class="sidebar-profile">
             <a href="/#about">
-                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
             </a>
             <span class="sidebar-profile-name">Jartto</span>
         </div>
@@ -113,10 +112,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/ "
-                        
-                    >
+                    <a class="sidebar-button-link " href="/ ">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-home"></i>
                     <span class="sidebar-button-desc">首页</span>
@@ -125,10 +121,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/all-categories"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/all-categories">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
                     <span class="sidebar-button-desc">分类</span>
@@ -137,10 +130,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/all-tags"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/all-tags">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
                     <span class="sidebar-button-desc">标签</span>
@@ -149,10 +139,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/all-archives"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/all-archives">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
                     <span class="sidebar-button-desc">归档</span>
@@ -161,10 +148,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="#about"
-                        
-                    >
+                    <a class="sidebar-button-link " href="#about">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-question"></i>
                     <span class="sidebar-button-desc">关于</span>
@@ -177,7 +161,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
                     <span class="sidebar-button-desc">Email</span>
@@ -186,7 +170,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-github"></i>
                     <span class="sidebar-button-desc">GitHub</span>
@@ -199,10 +183,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/atom.xml"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/atom.xml">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
                     <span class="sidebar-button-desc">RSS</span>
@@ -211,10 +192,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/sitemap.xml"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/sitemap.xml">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
                     <span class="sidebar-button-desc">Sitemap</span>
@@ -231,7 +209,7 @@
                         hasCoverMetaIn
                         ">
                 
-<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
     
     
         <div class="post-header main-content-wrap text-center">
@@ -275,17 +253,17 @@
 </ul>
 <div class="alert info"><p>不看场景的解决方案就是耍流氓。</p>
 </div>
-<h4 id="二、场景一：在代码中引入其他-Git-仓库"><a href="#二、场景一：在代码中引入其他-Git-仓库" class="headerlink" title="二、场景一：在代码中引入其他 Git 仓库"></a>二、场景一：在代码中引入其他 <code>Git</code> 仓库</h4><p>这种情况，需要使用 <code>submodule</code>，过程如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">git submodule add https://github.com/chenfengyanyu/fmap-demo.git</div><div class="line"></div><div class="line"><span class="comment"># 或者使用 clone</span></div><div class="line">git <span class="built_in">clone</span> --recursive https://github.com/chenfengyanyu/fmap-demo.git</div></pre></td></tr></table></figure></p>
-<p>这个操作类似于 <code>Clone</code> ，但是会在父仓库下面新建 <code>.gitmodules</code> 文件，我们看一下内容：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vi .gitmodules</div></pre></td></tr></table></figure></p>
-<p>大致如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[submodule <span class="string">"fmap-demo"</span>]</div><div class="line">        path = fmap-demo</div><div class="line">        url = https://github.com/chenfengyanyu/fmap-demo.git</div></pre></td></tr></table></figure></p>
+<h4 id="二、场景一：在代码中引入其他-Git-仓库"><a href="#二、场景一：在代码中引入其他-Git-仓库" class="headerlink" title="二、场景一：在代码中引入其他 Git 仓库"></a>二、场景一：在代码中引入其他 <code>Git</code> 仓库</h4><p>这种情况，需要使用 <code>submodule</code>，过程如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git submodule add https://github.com/chenfengyanyu/fmap-demo.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># 或者使用 clone</span></span><br><span class="line">git <span class="built_in">clone</span> --recursive https://github.com/chenfengyanyu/fmap-demo.git</span><br></pre></td></tr></table></figure></p>
+<p>这个操作类似于 <code>Clone</code> ，但是会在父仓库下面新建 <code>.gitmodules</code> 文件，我们看一下内容：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi .gitmodules</span><br></pre></td></tr></table></figure></p>
+<p>大致如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[submodule <span class="string">"fmap-demo"</span>]</span><br><span class="line">        path = fmap-demo</span><br><span class="line">        url = https://github.com/chenfengyanyu/fmap-demo.git</span><br></pre></td></tr></table></figure></p>
 <p>然后做正常提交就可以了。<br><div class="alert info"><p>需要注意的是，这样的操作只能提交一个引用，类似：<code>fmap-demo @ 90758cf</code>，打开的话，会跳到项目源地址。</p>
 </div></p>
 <h4 id="三、场景二：Clone-别人的-Demo-并做修改"><a href="#三、场景二：Clone-别人的-Demo-并做修改" class="headerlink" title="三、场景二：Clone 别人的 Demo 并做修改"></a>三、场景二：<code>Clone</code> 别人的 <code>Demo</code> 并做修改</h4><p>那么有时候，我们可能会 <code>Clone</code> 到一段代码来作为项目的脚手架，这时候嵌套的话，肯定不希望改子仓库的时候，父仓库毫无感知。那么这种情况如何处理呢？</p>
 <p><img src="http://7xvi3w.com1.z0.glb.clouddn.com/gitnest1.png" alt="github"></p>
-<p>首先，进入子仓库，也就是被嵌套的 <code>Git</code> 仓库，删除 <code>.git</code> 目录：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rm -rf .git</div></pre></td></tr></table></figure></p>
+<p>首先，进入子仓库，也就是被嵌套的 <code>Git</code> 仓库，删除 <code>.git</code> 目录：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm -rf .git</span><br></pre></td></tr></table></figure></p>
 <div class="alert info"><p>可以这么理解，一个项目不应该有俩 <code>Git</code> 地址，所以断开子仓库的原有联系，也就是删除 <code>.git</code> 目录。</p>
 </div>
-<p>然后，将你添加的项目拖出当前项目文件，进行提交。之后，再将项目拖回来，返回项目根目录，执行 <code>add</code> 操作：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git add fmap-demo</div></pre></td></tr></table></figure></p>
+<p>然后，将你添加的项目拖出当前项目文件，进行提交。之后，再将项目拖回来，返回项目根目录，执行 <code>add</code> 操作：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add fmap-demo</span><br></pre></td></tr></table></figure></p>
 <div class="alert success"><p>这里必须要选择子项目进行 <code>add</code>，此时 <code>add .</code> 和 <code>add *</code> 都无效。</p>
 </div>
 <p>之后正常 <code>commit</code> 和 <code>push</code>，就可以了。</p>
@@ -295,12 +273,12 @@
     </div>
     <div id="post-footer" class="post-footer main-content-wrap"> 
         <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
-          版权声明：<br/>文章首发于 <a href="http://jartto.wang"> Jartto's blog </a>，
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's blog </a>，
           转载文章请务必以超链接形式标明文章出处，作者信息及本版权声明（<a href="http://jartto.wang"> http://jartto.wang </a>)。
         </div>
         
             <div class="post-footer-tags">
-                <span class="text-color-light text-small">标签</span><br/>
+                <span class="text-color-light text-small">标签</span><br>
                 
     <a class="tag tag--primary tag--small t-link" href="/tags/git/">git</a> <a class="tag tag--primary tag--small t-link" href="/tags/nest/">nest</a>
 
@@ -311,7 +289,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/01/03/first-exploration-electron/"  data-tooltip="初探 Electron - 理论篇">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/01/03/first-exploration-electron/" data-tooltip="初探 Electron - 理论篇">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -329,7 +307,7 @@
     </nav>
     <ul class="post-actions post-action-share">
         <li class="post-action hide-lg hide-md hide-sm">
-            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
                 <i class="fa fa-share-alt"></i>
             </a>
         </li>
@@ -366,7 +344,7 @@
 </div>
 
 
-        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/qrcode.png" width="100%" alt="请 Jartto 喝杯茶，亦或是给他一个简单的项目需求"/></div>
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/qrcode.png" width="100%" alt="请 Jartto 喝杯茶，亦或是给他一个简单的项目需求"></div>
         
             
                 <div id="disqus_thread">
@@ -401,7 +379,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/01/03/first-exploration-electron/"  data-tooltip="初探 Electron - 理论篇">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/01/03/first-exploration-electron/" data-tooltip="初探 Electron - 理论篇">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -419,7 +397,7 @@
     </nav>
     <ul class="post-actions post-action-share">
         <li class="post-action hide-lg hide-md hide-sm">
-            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
                 <i class="fa fa-share-alt"></i>
             </a>
         </li>
@@ -461,7 +439,7 @@
     <ul class="share-options">
         <li class="share-option">
             <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2017/12/28/cannot-nest-git-repository/">
-                <i class="fa fa-google-plus"></i><span class="">分享到 Google+</span>
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
             </a>
         </li>
         <li class="share-option">
@@ -492,27 +470,27 @@
             <i class="fa fa-remove"></i>
         </div>
         
-            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
         
             <h4 id="about-card-name">Jartto</h4>
         
             <h5 id="about-card-bio"><blockquote>
-<p>最遗憾的不是把梦想丢在路上，</br>而是梦想从未上路!</br>Just do IT</p>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
 </blockquote>
 </h5>
         
         
             <h5 id="about-card-job">
                 <i class="fa fa-briefcase"></i>
-                <br/>
-                <p>jartto@qq.com</p>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
 
             </h5>
         
         
             <h5 id="about-card-location">
                 <i class="fa fa-map-marker"></i>
-                <br/>
+                <br>
                 北京－朝阳
             </h5>
         

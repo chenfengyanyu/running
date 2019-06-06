@@ -84,11 +84,10 @@
     </h1>
     
         
-            <a  class="header-right-picture st-search-show-outputs"
-                href="#about">
+            <a class="header-right-picture st-search-show-outputs" href="#about">
         
         
-            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
         
         </a>
     
@@ -105,7 +104,7 @@
     
         <div class="sidebar-profile">
             <a href="/#about">
-                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
             </a>
             <span class="sidebar-profile-name">Jartto</span>
         </div>
@@ -115,10 +114,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/ "
-                        
-                    >
+                    <a class="sidebar-button-link " href="/ ">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-home"></i>
                     <span class="sidebar-button-desc">首页</span>
@@ -127,10 +123,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/all-categories"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/all-categories">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
                     <span class="sidebar-button-desc">分类</span>
@@ -139,10 +132,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/all-tags"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/all-tags">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
                     <span class="sidebar-button-desc">标签</span>
@@ -151,10 +141,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/all-archives"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/all-archives">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
                     <span class="sidebar-button-desc">归档</span>
@@ -163,10 +150,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="#about"
-                        
-                    >
+                    <a class="sidebar-button-link " href="#about">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-question"></i>
                     <span class="sidebar-button-desc">关于</span>
@@ -179,7 +163,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
                     <span class="sidebar-button-desc">Email</span>
@@ -188,7 +172,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-github"></i>
                     <span class="sidebar-button-desc">GitHub</span>
@@ -201,10 +185,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/atom.xml"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/atom.xml">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
                     <span class="sidebar-button-desc">RSS</span>
@@ -213,10 +194,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/sitemap.xml"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/sitemap.xml">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
                     <span class="sidebar-button-desc">Sitemap</span>
@@ -233,7 +211,7 @@
                         hasCoverMetaIn
                         ">
                 
-<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
     
     
         <div class="post-header main-content-wrap text-center">
@@ -290,10 +268,12 @@
 </ul>
 <h4 id="三、状态值与状态码"><a href="#三、状态值与状态码" class="headerlink" title="三、状态值与状态码"></a>三、状态值与状态码</h4><blockquote>
 <p>AJAX状态值是指，运行AJAX所经历过的几种状态，无论访问是否成功都将响应的步骤，可以理解成为AJAX运行步骤。如：正在发送，正在响应等，由AJAX对象与服务器交互时所得；使用“ajax.readyState”获得。（由数字1~4单位数字组成）          </p>
+</blockquote>
+<blockquote>
 <p>AJAX状态码是指，无论AJAX访问是否成功，由HTTP协议根据所提交的信息，服务器所返回的HTTP头信息代码，该信息使用“ajax.status”所获得；（由数字1XX,2XX三位数字组成，详细查看RFC）</p>
 </blockquote>
 <p>这就是我们在使用AJAX时为什么采用下面的方式判断所获得的信息是否正确的原因。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(ajax.readyState == <span class="number">4</span> &amp;&amp; ajax.status == <span class="number">200</span>) &#123; </div><div class="line">	putData(ajax.responseText);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(ajax.readyState == <span class="number">4</span> &amp;&amp; ajax.status == <span class="number">200</span>) &#123; </span><br><span class="line">	putData(ajax.responseText);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="四、status"><a href="#四、status" class="headerlink" title="四、status"></a>四、status</h4><p>status体现的是服务器对请求的反馈</p>
 <ul>
 <li>1**：请求收到，继续处理</li>
@@ -350,25 +330,25 @@
 <p>0 - (未初始化)还没有调用send()方法<br>1 - (载入)已调用send()方法，正在发送请求<br>2 - (载入完成)send()方法执行完成，<br>3 - (交互)正在解析响应内容<br>4 - (完成)响应内容解析完成，可以在客户端调用了</p>
 <p>对于上面的状态，其中“0”状态是在定义后自动具有的状态值，而对于成功访问的状态（得到信息）我们大多数采用“4”进行判断。</p>
 <h4 id="六、XMLHttpRequest对象的常用方法和属性："><a href="#六、XMLHttpRequest对象的常用方法和属性：" class="headerlink" title="六、XMLHttpRequest对象的常用方法和属性："></a>六、XMLHttpRequest对象的常用方法和属性：</h4><p>①open(“method”,”URL”)建立对服务器的调用。第一个参数是HTTP请求，方式是GET、POST等。第二个参数是请求页面的URL。<br>②send( )方法，发送具体请求；<br>③abort( )方法，停止当前请求；<br>④readyState属性，包含五个状态，0为请求未初始化，1为正在加载，2为已加载，3为交互中，4为完成；<br>⑤responseText属性，此为服务器的响应，表示为一个串。<br>⑥responseXML属性，此为服务器的响应，表示为XML。<br>⑦status属性，服务器的HTTP状态码，200对应的是OK，400错误是页面为找到等等。</p>
-<h4 id="七、一个AJAX的简单实例"><a href="#七、一个AJAX的简单实例" class="headerlink" title="七、一个AJAX的简单实例"></a>七、一个AJAX的简单实例</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> xmlhttp;</div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">loadXMLDoc</span>(<span class="params">url, cfunc</span>)</span>&#123;</div><div class="line">          <span class="keyword">if</span>(<span class="built_in">window</span>.XMLHttpRequest)&#123;</div><div class="line">            xmlhttp = <span class="keyword">new</span> XMLHttpRequest();<span class="comment">//非IE内核浏览器</span></div><div class="line">          &#125;</div><div class="line">          <span class="keyword">else</span>&#123;</div><div class="line">          xmlhttp = <span class="keyword">new</span> ActiveXObject(<span class="string">"Mircrosoft.XMLHTTP"</span>);<span class="comment">//IE内核浏览器</span></div><div class="line">          &#125;</div><div class="line">          xmlhttp.onreadystatechange = cfunc;</div><div class="line">          xmlhttp.open(<span class="string">"GET"</span>,url,<span class="literal">true</span>);</div><div class="line">          xmlhttp.send();</div><div class="line">     &#125;</div><div class="line">     <span class="function"><span class="keyword">function</span> <span class="title">myFunction</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        loadXMLDoc(<span class="string">"/ajax/test1.txt"</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;                         <span class="comment">//这里使用callback函数</span></div><div class="line">            <span class="keyword">if</span>(xmlhttp.readystate ==<span class="number">4</span> &amp;&amp;xmlhttp.status==<span class="number">200</span>)&#123;</div><div class="line">             <span class="built_in">document</span>.getELementById(<span class="string">"mydiv"</span>).innerHTML = xmlhttp.responseText;</div><div class="line">             &#125;</div><div class="line">             &#125;);</div><div class="line">        &#125;</div></pre></td></tr></table></figure>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"mydiv"</span>&gt;</span>ljkjlkjlkj<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">onclick</span>=<span class="string">"muFunction()"</span>&gt;</span>通过AJAX改变内容<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div></pre></td></tr></table></figure>
+<h4 id="七、一个AJAX的简单实例"><a href="#七、一个AJAX的简单实例" class="headerlink" title="七、一个AJAX的简单实例"></a>七、一个AJAX的简单实例</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> xmlhttp;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">loadXMLDoc</span>(<span class="params">url, cfunc</span>)</span>&#123;</span><br><span class="line">          <span class="keyword">if</span>(<span class="built_in">window</span>.XMLHttpRequest)&#123;</span><br><span class="line">            xmlhttp = <span class="keyword">new</span> XMLHttpRequest();<span class="comment">//非IE内核浏览器</span></span><br><span class="line">          &#125;</span><br><span class="line">          <span class="keyword">else</span>&#123;</span><br><span class="line">          xmlhttp = <span class="keyword">new</span> ActiveXObject(<span class="string">"Mircrosoft.XMLHTTP"</span>);<span class="comment">//IE内核浏览器</span></span><br><span class="line">          &#125;</span><br><span class="line">          xmlhttp.onreadystatechange = cfunc;</span><br><span class="line">          xmlhttp.open(<span class="string">"GET"</span>,url,<span class="literal">true</span>);</span><br><span class="line">          xmlhttp.send();</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="function"><span class="keyword">function</span> <span class="title">myFunction</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        loadXMLDoc(<span class="string">"/ajax/test1.txt"</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;                         <span class="comment">//这里使用callback函数</span></span><br><span class="line">            <span class="keyword">if</span>(xmlhttp.readystate ==<span class="number">4</span> &amp;&amp;xmlhttp.status==<span class="number">200</span>)&#123;</span><br><span class="line">             <span class="built_in">document</span>.getELementById(<span class="string">"mydiv"</span>).innerHTML = xmlhttp.responseText;</span><br><span class="line">             &#125;</span><br><span class="line">             &#125;);</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"mydiv"</span>&gt;</span>ljkjlkjlkj<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">onclick</span>=<span class="string">"muFunction()"</span>&gt;</span>通过AJAX改变内容<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <h4 id="八、AJAX的优点和缺点"><a href="#八、AJAX的优点和缺点" class="headerlink" title="八、AJAX的优点和缺点"></a>八、AJAX的优点和缺点</h4><ul>
 <li>AJAX的优点：<br>①实现局部动态刷新；<br>②异步加载，提高客户端浏览器响应速度；<br>③利用客户端闲置的资源来缓解服务器端的压力；<br>④不需要使用任何插件，使用方便；<br>⑤网页操作反应速度快，动态效果十足，用户体验好。</li>
 <li>AJAX的缺点：<br>①破坏了浏览器的后退按钮，使之无法运行；<br>解决方案，通过js调用history.go(-1)实现后退功能。自行处理，为用户提供误操作返回入口。<br>②对搜索引擎不友好；<br>换句话说，AJXA实现异步加载，也就意味着有一部分内容通过请求后才从服务器接收过来。而搜索引擎则是通过页面抓取进行搜索的，服务器上的东西根本访问不到。<br>③AJAX的脚本语言是嵌入在HTML页面中的，通过查看源代码或者firebug等工具可直接查看，不利于项目代码的保密；<br>④不支持跨域请求；<br>解决方案,JSONP(JSON with Padding,即填充式JSON)。</li>
 </ul>
-<p>参考：<br><a href="http://blog.csdn.net/chenmoquan/article/details/38560649" target="_blank" rel="external">http://blog.csdn.net/chenmoquan/article/details/38560649</a><br><a href="http://www.itxueyuan.org/view/6454.html" target="_blank" rel="external">http://www.itxueyuan.org/view/6454.html</a><br><a href="http://www.jb51.net/article/16966.htm" target="_blank" rel="external">http://www.jb51.net/article/16966.htm</a><br><a href="http://blog.csdn.net/libertea/article/details/11059425" target="_blank" rel="external">http://blog.csdn.net/libertea/article/details/11059425</a></p>
+<p>参考：<br><a href="http://blog.csdn.net/chenmoquan/article/details/38560649" target="_blank" rel="noopener">http://blog.csdn.net/chenmoquan/article/details/38560649</a><br><a href="http://www.itxueyuan.org/view/6454.html" target="_blank" rel="noopener">http://www.itxueyuan.org/view/6454.html</a><br><a href="http://www.jb51.net/article/16966.htm" target="_blank" rel="noopener">http://www.jb51.net/article/16966.htm</a><br><a href="http://blog.csdn.net/libertea/article/details/11059425" target="_blank" rel="noopener">http://blog.csdn.net/libertea/article/details/11059425</a></p>
 
             
         </div>
     </div>
     <div id="post-footer" class="post-footer main-content-wrap"> 
         <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
-          版权声明：<br/>文章首发于 <a href="http://jartto.wang"> Jartto's blog </a>，
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's blog </a>，
           转载文章请务必以超链接形式标明文章出处，作者信息及本版权声明（<a href="http://jartto.wang"> http://jartto.wang </a>)。
         </div>
         
             <div class="post-footer-tags">
-                <span class="text-color-light text-small">标签</span><br/>
+                <span class="text-color-light text-small">标签</span><br>
                 
     <a class="tag tag--primary tag--small t-link" href="/tags/ajax/">ajax</a>
 
@@ -379,7 +359,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/09/07/git-part-1/"  data-tooltip="git实践系列一：初探">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/09/07/git-part-1/" data-tooltip="git实践系列一：初探">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -397,7 +377,7 @@
     </nav>
     <ul class="post-actions post-action-share">
         <li class="post-action hide-lg hide-md hide-sm">
-            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
                 <i class="fa fa-share-alt"></i>
             </a>
         </li>
@@ -434,7 +414,7 @@
 </div>
 
 
-        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/qrcode.png" width="100%" alt="请 Jartto 喝杯茶，亦或是给他一个简单的项目需求"/></div>
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/qrcode.png" width="100%" alt="请 Jartto 喝杯茶，亦或是给他一个简单的项目需求"></div>
         
             
                 <div id="disqus_thread">
@@ -469,7 +449,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/09/07/git-part-1/"  data-tooltip="git实践系列一：初探">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/09/07/git-part-1/" data-tooltip="git实践系列一：初探">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -487,7 +467,7 @@
     </nav>
     <ul class="post-actions post-action-share">
         <li class="post-action hide-lg hide-md hide-sm">
-            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
                 <i class="fa fa-share-alt"></i>
             </a>
         </li>
@@ -529,7 +509,7 @@
     <ul class="share-options">
         <li class="share-option">
             <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2015/09/01/chattered-about-ajax/">
-                <i class="fa fa-google-plus"></i><span class="">分享到 Google+</span>
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
             </a>
         </li>
         <li class="share-option">
@@ -560,27 +540,27 @@
             <i class="fa fa-remove"></i>
         </div>
         
-            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
         
             <h4 id="about-card-name">Jartto</h4>
         
             <h5 id="about-card-bio"><blockquote>
-<p>最遗憾的不是把梦想丢在路上，</br>而是梦想从未上路!</br>Just do IT</p>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
 </blockquote>
 </h5>
         
         
             <h5 id="about-card-job">
                 <i class="fa fa-briefcase"></i>
-                <br/>
-                <p>jartto@qq.com</p>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
 
             </h5>
         
         
             <h5 id="about-card-location">
                 <i class="fa fa-map-marker"></i>
-                <br/>
+                <br>
                 北京－朝阳
             </h5>
         

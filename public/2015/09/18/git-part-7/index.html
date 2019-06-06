@@ -80,11 +80,10 @@
     </h1>
     
         
-            <a  class="header-right-picture st-search-show-outputs"
-                href="#about">
+            <a class="header-right-picture st-search-show-outputs" href="#about">
         
         
-            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
         
         </a>
     
@@ -101,7 +100,7 @@
     
         <div class="sidebar-profile">
             <a href="/#about">
-                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
             </a>
             <span class="sidebar-profile-name">Jartto</span>
         </div>
@@ -111,10 +110,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/ "
-                        
-                    >
+                    <a class="sidebar-button-link " href="/ ">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-home"></i>
                     <span class="sidebar-button-desc">首页</span>
@@ -123,10 +119,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/all-categories"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/all-categories">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
                     <span class="sidebar-button-desc">分类</span>
@@ -135,10 +128,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/all-tags"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/all-tags">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
                     <span class="sidebar-button-desc">标签</span>
@@ -147,10 +137,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/all-archives"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/all-archives">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
                     <span class="sidebar-button-desc">归档</span>
@@ -159,10 +146,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="#about"
-                        
-                    >
+                    <a class="sidebar-button-link " href="#about">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-question"></i>
                     <span class="sidebar-button-desc">关于</span>
@@ -175,7 +159,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
                     <span class="sidebar-button-desc">Email</span>
@@ -184,7 +168,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-github"></i>
                     <span class="sidebar-button-desc">GitHub</span>
@@ -197,10 +181,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/atom.xml"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/atom.xml">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
                     <span class="sidebar-button-desc">RSS</span>
@@ -209,10 +190,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/sitemap.xml"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/sitemap.xml">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
                     <span class="sidebar-button-desc">Sitemap</span>
@@ -229,7 +207,7 @@
                         hasCoverMetaIn
                         ">
                 
-<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
     
     
         <div class="post-header main-content-wrap text-center">
@@ -264,19 +242,19 @@
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
             <p>本节主要来说说checkout和reset，为啥把把它俩放一起呢？哈哈，不用猜啦，只是随心情而已～，如果非要找点联系，那么我认为是松花江和松花蛋的之间的关系。<br><a id="more"></a></p>
-<h4 id="一、git-checkout"><a href="#一、git-checkout" class="headerlink" title="一、git checkout"></a>一、git checkout</h4><p>也就是我们所说的迁出，主要有三个作用：<br>第一个就是切换分支。例如你从远程仓库clone下来所有的源代码，你git branch一下会看到你通常是在master，如果你想切换到某一个分支上呢？<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git checkout &lt;branchname&gt;</div></pre></td></tr></table></figure></p>
-<p>第二个就是放弃对某个文件的修改。例如你想放弃对某个文件Hello.cpp的修改。<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git checkout -- &lt;Hello.cpp&gt;</div></pre></td></tr></table></figure></p>
-<p>第三个就是新建一个分支<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git checkout &lt;-b&gt; &lt;branchname&gt;，</div></pre></td></tr></table></figure></p>
+<h4 id="一、git-checkout"><a href="#一、git-checkout" class="headerlink" title="一、git checkout"></a>一、git checkout</h4><p>也就是我们所说的迁出，主要有三个作用：<br>第一个就是切换分支。例如你从远程仓库clone下来所有的源代码，你git branch一下会看到你通常是在master，如果你想切换到某一个分支上呢？<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout &lt;branchname&gt;</span><br></pre></td></tr></table></figure></p>
+<p>第二个就是放弃对某个文件的修改。例如你想放弃对某个文件Hello.cpp的修改。<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -- &lt;Hello.cpp&gt;</span><br></pre></td></tr></table></figure></p>
+<p>第三个就是新建一个分支<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout &lt;-b&gt; &lt;branchname&gt;，</span><br></pre></td></tr></table></figure></p>
 <p>不加-b的话只新建不切换到新的分支上，加-b新建并切换到该分支上</p>
 <h4 id="二、git-reset"><a href="#二、git-reset" class="headerlink" title="二、git reset"></a>二、git reset</h4><p>主要是取消上一次的操作，具体用法有很多，说两个：</p>
-<p>第一个取消merge，如下代码会退回到merge前的代码<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git reset --hard ORIG_HEAD</div></pre></td></tr></table></figure></p>
-<p>第二个就是取消commit，取消上num次的commit<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git reset HEAD~&lt;num&gt; &lt;-soft/-hard&gt;</div></pre></td></tr></table></figure></p>
-<p>第三个是将文件从stage（追踪的库）中移除<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git reset HEAD &lt;filename&gt;</div></pre></td></tr></table></figure></p>
+<p>第一个取消merge，如下代码会退回到merge前的代码<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard ORIG_HEAD</span><br></pre></td></tr></table></figure></p>
+<p>第二个就是取消commit，取消上num次的commit<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset HEAD~&lt;num&gt; &lt;-soft/-hard&gt;</span><br></pre></td></tr></table></figure></p>
+<p>第三个是将文件从stage（追踪的库）中移除<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset HEAD &lt;filename&gt;</span><br></pre></td></tr></table></figure></p>
 <p>关于reset，我觉得这个很有必要好好了解一下，毕竟这里可以找到无尽的后悔药，你就不需要承担自己失误的后果了。这里有两篇笔记：</p>
 <ul>
-<li><p>git reset学习笔记<br><a href="http://www.cnblogs.com/craftor/archive/2012/11/04/2754140.html" target="_blank" rel="external">http://www.cnblogs.com/craftor/archive/2012/11/04/2754140.html</a></p>
+<li><p>git reset学习笔记<br><a href="http://www.cnblogs.com/craftor/archive/2012/11/04/2754140.html" target="_blank" rel="noopener">http://www.cnblogs.com/craftor/archive/2012/11/04/2754140.html</a></p>
 </li>
-<li><p>git回滚操作 （推荐）<br><a href="http://blog.163.com/zhulp0372@yeah/blog/static/11589447920124894240873/" target="_blank" rel="external">http://blog.163.com/zhulp0372@yeah/blog/static/11589447920124894240873/</a></p>
+<li><p>git回滚操作 （推荐）<br><a href="http://blog.163.com/zhulp0372@yeah/blog/static/11589447920124894240873/" target="_blank" rel="noopener">http://blog.163.com/zhulp0372@yeah/blog/static/11589447920124894240873/</a></p>
 </li>
 </ul>
 
@@ -285,12 +263,12 @@
     </div>
     <div id="post-footer" class="post-footer main-content-wrap"> 
         <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
-          版权声明：<br/>文章首发于 <a href="http://jartto.wang"> Jartto's blog </a>，
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's blog </a>，
           转载文章请务必以超链接形式标明文章出处，作者信息及本版权声明（<a href="http://jartto.wang"> http://jartto.wang </a>)。
         </div>
         
             <div class="post-footer-tags">
-                <span class="text-color-light text-small">标签</span><br/>
+                <span class="text-color-light text-small">标签</span><br>
                 
     <a class="tag tag--primary tag--small t-link" href="/tags/git/">git</a>
 
@@ -301,7 +279,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/09/21/git-part-8/"  data-tooltip="git实践系列八：合并与冲突">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/09/21/git-part-8/" data-tooltip="git实践系列八：合并与冲突">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -319,7 +297,7 @@
     </nav>
     <ul class="post-actions post-action-share">
         <li class="post-action hide-lg hide-md hide-sm">
-            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
                 <i class="fa fa-share-alt"></i>
             </a>
         </li>
@@ -356,7 +334,7 @@
 </div>
 
 
-        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/qrcode.png" width="100%" alt="请 Jartto 喝杯茶，亦或是给他一个简单的项目需求"/></div>
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/qrcode.png" width="100%" alt="请 Jartto 喝杯茶，亦或是给他一个简单的项目需求"></div>
         
             
                 <div id="disqus_thread">
@@ -391,7 +369,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/09/21/git-part-8/"  data-tooltip="git实践系列八：合并与冲突">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/09/21/git-part-8/" data-tooltip="git实践系列八：合并与冲突">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -409,7 +387,7 @@
     </nav>
     <ul class="post-actions post-action-share">
         <li class="post-action hide-lg hide-md hide-sm">
-            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
                 <i class="fa fa-share-alt"></i>
             </a>
         </li>
@@ -451,7 +429,7 @@
     <ul class="share-options">
         <li class="share-option">
             <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2015/09/18/git-part-7/">
-                <i class="fa fa-google-plus"></i><span class="">分享到 Google+</span>
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
             </a>
         </li>
         <li class="share-option">
@@ -482,27 +460,27 @@
             <i class="fa fa-remove"></i>
         </div>
         
-            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
         
             <h4 id="about-card-name">Jartto</h4>
         
             <h5 id="about-card-bio"><blockquote>
-<p>最遗憾的不是把梦想丢在路上，</br>而是梦想从未上路!</br>Just do IT</p>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
 </blockquote>
 </h5>
         
         
             <h5 id="about-card-job">
                 <i class="fa fa-briefcase"></i>
-                <br/>
-                <p>jartto@qq.com</p>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
 
             </h5>
         
         
             <h5 id="about-card-location">
                 <i class="fa fa-map-marker"></i>
-                <br/>
+                <br>
                 北京－朝阳
             </h5>
         

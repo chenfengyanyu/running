@@ -80,11 +80,10 @@
     </h1>
     
         
-            <a  class="header-right-picture st-search-show-outputs"
-                href="#about">
+            <a class="header-right-picture st-search-show-outputs" href="#about">
         
         
-            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
         
         </a>
     
@@ -101,7 +100,7 @@
     
         <div class="sidebar-profile">
             <a href="/#about">
-                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
             </a>
             <span class="sidebar-profile-name">Jartto</span>
         </div>
@@ -111,10 +110,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/ "
-                        
-                    >
+                    <a class="sidebar-button-link " href="/ ">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-home"></i>
                     <span class="sidebar-button-desc">首页</span>
@@ -123,10 +119,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/all-categories"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/all-categories">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
                     <span class="sidebar-button-desc">分类</span>
@@ -135,10 +128,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/all-tags"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/all-tags">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
                     <span class="sidebar-button-desc">标签</span>
@@ -147,10 +137,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/all-archives"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/all-archives">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
                     <span class="sidebar-button-desc">归档</span>
@@ -159,10 +146,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="#about"
-                        
-                    >
+                    <a class="sidebar-button-link " href="#about">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-question"></i>
                     <span class="sidebar-button-desc">关于</span>
@@ -175,7 +159,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
                     <span class="sidebar-button-desc">Email</span>
@@ -184,7 +168,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-github"></i>
                     <span class="sidebar-button-desc">GitHub</span>
@@ -197,10 +181,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/atom.xml"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/atom.xml">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
                     <span class="sidebar-button-desc">RSS</span>
@@ -209,10 +190,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/sitemap.xml"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/sitemap.xml">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
                     <span class="sidebar-button-desc">Sitemap</span>
@@ -229,7 +207,7 @@
                         hasCoverMetaIn
                         ">
                 
-<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
     
     
         <div class="post-header main-content-wrap text-center">
@@ -266,10 +244,10 @@
             <p>听到散列表，第一时间想到 <code>Python</code> 中的 <code>Dict</code>，可是我们是前端。那么散列表在 JS 中是如何描述的呢？这节，我们来一探究竟。<br><a id="more"></a></p>
 <h4 id="一、散列表"><a href="#一、散列表" class="headerlink" title="一、散列表"></a>一、散列表</h4><div class="alert info"><p>使用散列函数和数组创建了一种被称为散列表 hash table 的数据结构。</p>
 </div>
-<p><code>Python</code> 提供的散列表实现为字典 ，你可使用函数 <code>dict</code> 来创建散列表。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">book = dict()</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>book[<span class="string">"jartto"</span>] = <span class="number">0.67</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>book[<span class="string">"milk"</span>] = <span class="number">1.49</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>book[<span class="string">"avocado"</span>] = <span class="number">1.49</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">print</span> book</div><div class="line"></div><div class="line">&#123;<span class="string">'avocado'</span>: <span class="number">1.49</span>, <span class="string">'jartto'</span>: <span class="number">0.67</span>, <span class="string">'milk'</span>: <span class="number">1.49</span>&#125;</div></pre></td></tr></table></figure></p>
+<p><code>Python</code> 提供的散列表实现为字典 ，你可使用函数 <code>dict</code> 来创建散列表。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">book = dict()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>book[<span class="string">"jartto"</span>] = <span class="number">0.67</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>book[<span class="string">"milk"</span>] = <span class="number">1.49</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>book[<span class="string">"avocado"</span>] = <span class="number">1.49</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">print</span> book</span><br><span class="line"></span><br><span class="line">&#123;<span class="string">'avocado'</span>: <span class="number">1.49</span>, <span class="string">'jartto'</span>: <span class="number">0.67</span>, <span class="string">'milk'</span>: <span class="number">1.49</span>&#125;</span><br></pre></td></tr></table></figure></p>
 <p>散列表由键和值组成。在前面的散列表 <code>book</code> 中，键为商品名，值为商品价格。散列表将键映射到值。</p>
 <p>那么 JS 中如何实现呢？<br><div class="alert success"><p>其实 Map 对应的就是散列表，一种 Hash Map 结构。</p>
-</div><br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> book = <span class="keyword">new</span> <span class="built_in">Map</span>();</div><div class="line">book.set(<span class="string">'jartto'</span>, <span class="number">0.67</span>);</div><div class="line">book.set(<span class="string">'milk'</span>, <span class="number">1.49</span>);</div><div class="line">book.set(<span class="string">'avocado'</span>, <span class="number">1.49</span>);</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(book); <span class="comment">// &#123;"jartto" =&gt; 0.67, "milk" =&gt; 1.49, "avocado" =&gt; 1.49&#125;</span></div><div class="line"></div><div class="line">book.get(<span class="string">'jartto'</span>); <span class="comment">// 0.67</span></div></pre></td></tr></table></figure></p>
+</div><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> book = <span class="keyword">new</span> <span class="built_in">Map</span>();</span><br><span class="line">book.set(<span class="string">'jartto'</span>, <span class="number">0.67</span>);</span><br><span class="line">book.set(<span class="string">'milk'</span>, <span class="number">1.49</span>);</span><br><span class="line">book.set(<span class="string">'avocado'</span>, <span class="number">1.49</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(book); <span class="comment">// &#123;"jartto" =&gt; 0.67, "milk" =&gt; 1.49, "avocado" =&gt; 1.49&#125;</span></span><br><span class="line"></span><br><span class="line">book.get(<span class="string">'jartto'</span>); <span class="comment">// 0.67</span></span><br></pre></td></tr></table></figure></p>
 <h4 id="二、散列表特性"><a href="#二、散列表特性" class="headerlink" title="二、散列表特性"></a>二、散列表特性</h4><p>1.散列函数总是将同样的输入映射到相同的索引。<br>2.散列函数将不同的输入映射到不同的索引。<br>3.散列函数知道数组有多大，只返回有效的索引。如果数组包含 5 个元素，散列函数就不会返回无效索引 100。</p>
 <div class="alert warning"><p>注意：对于同样的输入，散列表必须返回同样的输出。</p>
 </div>
@@ -277,7 +255,7 @@
 <h4 id="四、防止重复"><a href="#四、防止重复" class="headerlink" title="四、防止重复"></a>四、防止重复</h4><p>假设我们要做一个投票统计，每个人只允许投票一次，为此，首先创建一个散列表，用于记录已投票的人。有人来投票时，检查他是否在散列表中。</p>
 <div class="alert danger"><p>书中均为 Python 实现，这里我们都转为 JS 实现。</p>
 </div>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> voted = <span class="keyword">new</span> <span class="built_in">Map</span>();</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkVoter</span>(<span class="params">name</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span>(voted.has(name)) &#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'kick them out!'</span>);</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        voted.set(name, <span class="literal">true</span>);</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'let them vote!'</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">checkVoter(<span class="string">'jartto'</span>) <span class="comment">// let them vote!</span></div><div class="line">checkVoter(<span class="string">'jartto'</span>) <span class="comment">// kick them out!</span></div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> voted = <span class="keyword">new</span> <span class="built_in">Map</span>();</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkVoter</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(voted.has(name)) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'kick them out!'</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        voted.set(name, <span class="literal">true</span>);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'let them vote!'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">checkVoter(<span class="string">'jartto'</span>) <span class="comment">// let them vote!</span></span><br><span class="line">checkVoter(<span class="string">'jartto'</span>) <span class="comment">// kick them out!</span></span><br></pre></td></tr></table></figure>
 <h4 id="五、总结"><a href="#五、总结" class="headerlink" title="五、总结"></a>五、总结</h4><p>这里总结一下，散列表适合用于：<br>1.模拟映射关系；<br>2.防止重复；<br>3.缓存/记住数据，以免服务器再通过处理来生成它们。</p>
 <p>注意：<br>1.散列函数很重要。前面的散列函数将所有的键都映射到一个位置，而最理想的情况是，散列函数将键均匀地映射到散列表的不同位置。<br>2.如果散列表存储的链表很长，散列表的速度将急剧下降。然而，如果使用的散列函数很好 ，这些链表就不会很长！</p>
 <h4 id="六、补充：性能"><a href="#六、补充：性能" class="headerlink" title="六、补充：性能"></a>六、补充：性能</h4><p>散列表的性能：<br>1.查找：平均 O(1)，最糟 O(n)<br>2.插入：平均 O(1)，最糟 O(n)<br>3.删除：平均 O(1)，最糟 O(n)</p>
@@ -307,12 +285,12 @@
     </div>
     <div id="post-footer" class="post-footer main-content-wrap"> 
         <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
-          版权声明：<br/>文章首发于 <a href="http://jartto.wang"> Jartto's blog </a>，
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's blog </a>，
           转载文章请务必以超链接形式标明文章出处，作者信息及本版权声明（<a href="http://jartto.wang"> http://jartto.wang </a>)。
         </div>
         
             <div class="post-footer-tags">
-                <span class="text-color-light text-small">标签</span><br/>
+                <span class="text-color-light text-small">标签</span><br>
                 
     <a class="tag tag--primary tag--small t-link" href="/tags/algorithm/">algorithm</a>
 
@@ -323,7 +301,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/11/28/algorithm5/"  data-tooltip="算法图解5 - 图和广度优先搜索">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/11/28/algorithm5/" data-tooltip="算法图解5 - 图和广度优先搜索">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -341,7 +319,7 @@
     </nav>
     <ul class="post-actions post-action-share">
         <li class="post-action hide-lg hide-md hide-sm">
-            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
                 <i class="fa fa-share-alt"></i>
             </a>
         </li>
@@ -372,7 +350,7 @@
 </div>
 
 
-        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/qrcode.png" width="100%" alt="请 Jartto 喝杯茶，亦或是给他一个简单的项目需求"/></div>
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/qrcode.png" width="100%" alt="请 Jartto 喝杯茶，亦或是给他一个简单的项目需求"></div>
         
     </div>
 </article>
@@ -401,7 +379,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/11/28/algorithm5/"  data-tooltip="算法图解5 - 图和广度优先搜索">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/11/28/algorithm5/" data-tooltip="算法图解5 - 图和广度优先搜索">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -419,7 +397,7 @@
     </nav>
     <ul class="post-actions post-action-share">
         <li class="post-action hide-lg hide-md hide-sm">
-            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
                 <i class="fa fa-share-alt"></i>
             </a>
         </li>
@@ -455,7 +433,7 @@
     <ul class="share-options">
         <li class="share-option">
             <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/11/27/algorithm4/">
-                <i class="fa fa-google-plus"></i><span class="">分享到 Google+</span>
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
             </a>
         </li>
         <li class="share-option">
@@ -486,27 +464,27 @@
             <i class="fa fa-remove"></i>
         </div>
         
-            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
         
             <h4 id="about-card-name">Jartto</h4>
         
             <h5 id="about-card-bio"><blockquote>
-<p>最遗憾的不是把梦想丢在路上，</br>而是梦想从未上路!</br>Just do IT</p>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
 </blockquote>
 </h5>
         
         
             <h5 id="about-card-job">
                 <i class="fa fa-briefcase"></i>
-                <br/>
-                <p>jartto@qq.com</p>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
 
             </h5>
         
         
             <h5 id="about-card-location">
                 <i class="fa fa-map-marker"></i>
-                <br/>
+                <br>
                 北京－朝阳
             </h5>
         

@@ -83,11 +83,10 @@
     </h1>
     
         
-            <a  class="header-right-picture st-search-show-outputs"
-                href="#about">
+            <a class="header-right-picture st-search-show-outputs" href="#about">
         
         
-            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
         
         </a>
     
@@ -104,7 +103,7 @@
     
         <div class="sidebar-profile">
             <a href="/#about">
-                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
             </a>
             <span class="sidebar-profile-name">Jartto</span>
         </div>
@@ -114,10 +113,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/ "
-                        
-                    >
+                    <a class="sidebar-button-link " href="/ ">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-home"></i>
                     <span class="sidebar-button-desc">首页</span>
@@ -126,10 +122,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/all-categories"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/all-categories">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
                     <span class="sidebar-button-desc">分类</span>
@@ -138,10 +131,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/all-tags"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/all-tags">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
                     <span class="sidebar-button-desc">标签</span>
@@ -150,10 +140,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/all-archives"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/all-archives">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
                     <span class="sidebar-button-desc">归档</span>
@@ -162,10 +149,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="#about"
-                        
-                    >
+                    <a class="sidebar-button-link " href="#about">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-question"></i>
                     <span class="sidebar-button-desc">关于</span>
@@ -178,7 +162,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
                     <span class="sidebar-button-desc">Email</span>
@@ -187,7 +171,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-github"></i>
                     <span class="sidebar-button-desc">GitHub</span>
@@ -200,10 +184,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/atom.xml"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/atom.xml">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
                     <span class="sidebar-button-desc">RSS</span>
@@ -212,10 +193,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/sitemap.xml"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/sitemap.xml">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
                     <span class="sidebar-button-desc">Sitemap</span>
@@ -232,7 +210,7 @@
                         hasCoverMetaIn
                         ">
                 
-<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
     
     
         <div class="post-header main-content-wrap text-center">
@@ -279,43 +257,43 @@
 <div class="alert success"><p>一旦在 Worker 进行计算，它对于用户来说是无缝地且不会影响到用户体验。</p>
 </div>
 <h4 id="三、兼容性"><a href="#三、兼容性" class="headerlink" title="三、兼容性"></a>三、兼容性</h4><p><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/webworker/hack.png" alt="hack"></p>
-<h4 id="四、基本概念"><a href="#四、基本概念" class="headerlink" title="四、基本概念"></a>四、基本概念</h4><p>1.首先记得去判断是否支持<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (<span class="built_in">window</span>.Worker) &#123;</div><div class="line">  ...</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>2.创建一个新的 <code>worker</code> 很简单<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> myWorker = <span class="keyword">new</span> Worker(<span class="string">'worker.js'</span>);</div></pre></td></tr></table></figure></p>
+<h4 id="四、基本概念"><a href="#四、基本概念" class="headerlink" title="四、基本概念"></a>四、基本概念</h4><p>1.首先记得去判断是否支持<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="built_in">window</span>.Worker) &#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>2.创建一个新的 <code>worker</code> 很简单<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> myWorker = <span class="keyword">new</span> Worker(<span class="string">'worker.js'</span>);</span><br></pre></td></tr></table></figure></p>
 <div class="alert success"><p>postMessage() 方法和 onmessage 事件处理函数是 Workers 的黑魔法。</p>
 </div>
-<p>3.<code>postMessage</code> 用来发送消息，而 <code>onmessage</code> 用来监听消息<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> worker = <span class="keyword">new</span> Worker(<span class="string">'src/worker.js'</span>);</div><div class="line"></div><div class="line">worker.onmessage = <span class="function"><span class="params">e</span> =&gt;</span> &#123;</div><div class="line">  <span class="built_in">console</span>.log(e.data);</div><div class="line">&#125;;</div><div class="line"></div><div class="line">worker.postMessage(<span class="string">'你好吗!'</span>);</div></pre></td></tr></table></figure></p>
+<p>3.<code>postMessage</code> 用来发送消息，而 <code>onmessage</code> 用来监听消息<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> worker = <span class="keyword">new</span> Worker(<span class="string">'src/worker.js'</span>);</span><br><span class="line"></span><br><span class="line">worker.onmessage = <span class="function"><span class="params">e</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(e.data);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">worker.postMessage(<span class="string">'你好吗!'</span>);</span><br></pre></td></tr></table></figure></p>
 <p>在主线程中使用时，<code>onmessage</code> 和 <code>postMessage()</code> 必须挂在 <code>worker</code> 对象上，而在 <code>worker</code> 中使用时不用这样做。原因是，在 <code>worker</code> 内部，<code>worker</code> 是有效的全局作用域。</p>
-<p>4.异常处理：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">worker.onerror = <span class="function"><span class="keyword">function</span>(<span class="params">error</span>) </span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(error.message);</div><div class="line">  <span class="keyword">throw</span> error;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<p>5.终止 <code>worker</code><br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">worker.terminate();</div></pre></td></tr></table></figure></p>
+<p>4.异常处理：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">worker.onerror = <span class="function"><span class="keyword">function</span>(<span class="params">error</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(error.message);</span><br><span class="line">  <span class="keyword">throw</span> error;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>5.终止 <code>worker</code><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">worker.terminate();</span><br></pre></td></tr></table></figure></p>
 <div class="alert danger"><p><code>worker</code> 线程会被立即杀死，不会有任何机会让它完成自己的操作或清理工作。</p>
 </div>
-<p>6.在 <code>worker</code> 线程中，<code>workers</code> 也可以调用自己的 <code>close</code>  方法进行关闭：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">close();</div></pre></td></tr></table></figure></p>
-<h4 id="五、快速开始"><a href="#五、快速开始" class="headerlink" title="五、快速开始"></a>五、快速开始</h4><p>为了快速掌握，我们来做一个小例子：项目结构如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">├── index.html</div><div class="line">└── src</div><div class="line">    ├── main.js</div><div class="line">    └── worker.js</div></pre></td></tr></table></figure></p>
-<p>Html<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Web Work Demo<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span> Hello Jartto! <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"src/main.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>main.js<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> worker = <span class="keyword">new</span> Worker(<span class="string">'src/worker.js'</span>);</div><div class="line"></div><div class="line">worker.onmessage = <span class="function"><span class="params">e</span> =&gt;</span> &#123;</div><div class="line">  <span class="keyword">const</span> message = e.data;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">`[From Worker]: <span class="subst">$&#123;message&#125;</span>`</span>);</div><div class="line">  <span class="built_in">document</span>.getElementById(<span class="string">'app'</span>).innerHTML = message;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">worker.postMessage(<span class="string">'写的真好!'</span>);</div></pre></td></tr></table></figure></p>
-<p>Work.js<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">onmessage = <span class="function"><span class="params">e</span> =&gt;</span> &#123;</div><div class="line">  <span class="keyword">const</span> message = e.data;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">`[From Main]: <span class="subst">$&#123;message&#125;</span>`</span>);</div><div class="line">  <span class="keyword">if</span>(message.indexOf(<span class="string">'好'</span>) &gt; <span class="number">-1</span>) &#123;</div><div class="line">    postMessage(<span class="string">'谢谢支持'</span>);</div><div class="line">  &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>6.在 <code>worker</code> 线程中，<code>workers</code> 也可以调用自己的 <code>close</code>  方法进行关闭：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">close();</span><br></pre></td></tr></table></figure></p>
+<h4 id="五、快速开始"><a href="#五、快速开始" class="headerlink" title="五、快速开始"></a>五、快速开始</h4><p>为了快速掌握，我们来做一个小例子：项目结构如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">├── index.html</span><br><span class="line">└── src</span><br><span class="line">    ├── main.js</span><br><span class="line">    └── worker.js</span><br></pre></td></tr></table></figure></p>
+<p>Html<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Web Work Demo<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span> Hello Jartto! <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"src/main.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>main.js<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> worker = <span class="keyword">new</span> Worker(<span class="string">'src/worker.js'</span>);</span><br><span class="line"></span><br><span class="line">worker.onmessage = <span class="function"><span class="params">e</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> message = e.data;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`[From Worker]: <span class="subst">$&#123;message&#125;</span>`</span>);</span><br><span class="line">  <span class="built_in">document</span>.getElementById(<span class="string">'app'</span>).innerHTML = message;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">worker.postMessage(<span class="string">'写的真好!'</span>);</span><br></pre></td></tr></table></figure></p>
+<p>Work.js<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">onmessage = <span class="function"><span class="params">e</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> message = e.data;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`[From Main]: <span class="subst">$&#123;message&#125;</span>`</span>);</span><br><span class="line">  <span class="keyword">if</span>(message.indexOf(<span class="string">'好'</span>) &gt; <span class="number">-1</span>) &#123;</span><br><span class="line">    postMessage(<span class="string">'谢谢支持'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
 <p>代码很简单，主线程发送：「写的真好！」<br>web worker 收到消息，发现内容中含有「好」字，回传给主线程：「谢谢支持」</p>
 <h4 id="六、局限性"><a href="#六、局限性" class="headerlink" title="六、局限性"></a>六、局限性</h4><p>1.在 <code>worker</code> 内，不能直接操作 <code>DOM</code> 节点，也不能使用 <code>window</code> 对象的默认方法和属性。然而我们可以使用大量<code>window</code> 对象之下的东西，包括 <code>WebSockets</code>，<code>IndexedDB</code> 以及 <code>FireFox OS</code> 专用的 <code>Data Store API</code> 等数据存储机制。</p>
-<p>这里举个例子，我们修改 <code>main.js</code>：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> worker = <span class="keyword">new</span> Worker(<span class="string">'src/worker.js'</span>);</div><div class="line"></div><div class="line">worker.onmessage = <span class="function"><span class="params">e</span> =&gt;</span> &#123;</div><div class="line">  <span class="keyword">const</span> message = e.data;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">`[From Worker]: <span class="subst">$&#123;message&#125;</span>`</span>);</div><div class="line">  <span class="built_in">document</span>.getElementById(<span class="string">'app'</span>).innerHTML = message;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">+ worker.onerror = <span class="function"><span class="keyword">function</span>(<span class="params">error</span>) </span>&#123;</div><div class="line">+   <span class="built_in">console</span>.log(error);</div><div class="line">+   worker.terminate();</div><div class="line">+ &#125;;</div><div class="line"></div><div class="line">worker.postMessage(<span class="string">'写的真好!'</span>);</div></pre></td></tr></table></figure></p>
-<p>再来修改 <code>work.js</code><br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">+ alert(<span class="string">'jartto'</span>);</div><div class="line">onmessage = <span class="function"><span class="params">e</span> =&gt;</span> &#123;</div><div class="line">  <span class="keyword">const</span> message = e.data;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">`[From Main]: <span class="subst">$&#123;message&#125;</span>`</span>);</div><div class="line">  <span class="keyword">if</span>(message.indexOf(<span class="string">'好'</span>) &gt; <span class="number">-1</span>) &#123;</div><div class="line">    postMessage(<span class="string">'谢谢支持'</span>);</div><div class="line">  &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>这里举个例子，我们修改 <code>main.js</code>：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> worker = <span class="keyword">new</span> Worker(<span class="string">'src/worker.js'</span>);</span><br><span class="line"></span><br><span class="line">worker.onmessage = <span class="function"><span class="params">e</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> message = e.data;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`[From Worker]: <span class="subst">$&#123;message&#125;</span>`</span>);</span><br><span class="line">  <span class="built_in">document</span>.getElementById(<span class="string">'app'</span>).innerHTML = message;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">+ worker.onerror = <span class="function"><span class="keyword">function</span>(<span class="params">error</span>) </span>&#123;</span><br><span class="line">+   <span class="built_in">console</span>.log(error);</span><br><span class="line">+   worker.terminate();</span><br><span class="line">+ &#125;;</span><br><span class="line"></span><br><span class="line">worker.postMessage(<span class="string">'写的真好!'</span>);</span><br></pre></td></tr></table></figure></p>
+<p>再来修改 <code>work.js</code><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">+ alert(<span class="string">'jartto'</span>);</span><br><span class="line">onmessage = <span class="function"><span class="params">e</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> message = e.data;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`[From Main]: <span class="subst">$&#123;message&#125;</span>`</span>);</span><br><span class="line">  <span class="keyword">if</span>(message.indexOf(<span class="string">'好'</span>) &gt; <span class="number">-1</span>) &#123;</span><br><span class="line">    postMessage(<span class="string">'谢谢支持'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
 <p>这时候运行就会报出：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/webworker/error.png" alt="error"></p>
 <p>这是因为：<code>worker.js</code> 执行的上下文，与主页面 <code>HTML</code> 执行时的上下文并不相同，最顶层的对象并不是 <code>Window</code>，<code>woker.js</code> 执行的全局上下文，而是 <code>WorkerGlobalScope</code>，<a href="#">下文</a>我们具体说明。</p>
 <p>2.<code>workers</code> 和主线程间的数据传递通过这样的消息机制进行：双方都使用 <code>postMessage()</code> 方法发送各自的消息，使用<code>onmessage</code> 事件处理函数来响应消息（消息被包含在 <code>Message</code> 事件的 <code>data</code> 属性中）。<br><div class="alert info"><p>这个过程中数据并不是被共享而是被复制。</p>
 </div></p>
 <p>3.同源限制<br>分配给 <code>Worker</code> 线程运行的脚本文件，必须与主线程的脚本文件同源。</p>
 <p>4.文件限制<br><code>Worker</code> 线程无法读取本地文件，即不能打开本机的文件系统<code>（file://）</code>，它所加载的脚本，必须来自服务器。</p>
-<p>5.不允许本地文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Uncaught SecurityError: Failed to create a worker: </div><div class="line">script at &apos;(path)/worker.js&apos; </div><div class="line">cannot be accessed from origin &apos;null&apos;.</div></pre></td></tr></table></figure></p>
+<p>5.不允许本地文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Uncaught SecurityError: Failed to create a worker: </span><br><span class="line">script at &apos;(path)/worker.js&apos; </span><br><span class="line">cannot be accessed from origin &apos;null&apos;.</span><br></pre></td></tr></table></figure></p>
 <div class="alert danger"><p>Chrome doesn’t let you load web workers when running scripts from a local file.</p>
 </div>
 <p>那如何解决呢？我们可以启动一个本地服务器，建议使用 <code>http-server</code>，简单易用。</p>
 <p>6.内容安全策略<br>有别于创建它的 <code>document</code> 对象，<code>worker</code> 有它自己的执行上下文。因此普遍来说，<code>worker</code> 并不受限于创建它的<code>document</code>（或者父级 <code>worker</code> ）的内容安全策略。</p>
-<p>我们来举个例子，假设一个 <code>document</code> 有如下头部声明：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Content-Security-Policy: script-src &apos;self&apos;</div></pre></td></tr></table></figure></p>
+<p>我们来举个例子，假设一个 <code>document</code> 有如下头部声明：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Content-Security-Policy: script-src &apos;self&apos;</span><br></pre></td></tr></table></figure></p>
 <p>这个声明有一部分作用在于，禁止它内部包含的脚本代码使用 <code>eval()</code> 方法。然而，如果脚本代码创建了一个 <code>worker</code>，在 <code>worker</code> 上下文中执行的代码却是可以使用 <code>eval()</code> 的。</p>
 <div class="alert info"><p>为了给 worker 指定 CSP，必须为发送 worker 代码的请求本身加上一个 CSP。</p>
 </div>
 <p>关于 <a href="http://jartto.wang/2018/11/12/outline-of-CSP/">CSP（Content security policy 内容安全策略）</a>，可以看我之前的这篇文章。</p>
 <p>有一个例外情况，即 <code>worker</code> 脚本的源如果是一个全局性的唯一的标识符（例如，它的 <code>URL</code> 指定了数据模式或者 <code>blob</code>），<code>worker</code>则会继承创建它的 <code>document</code> 或者 <code>worker</code> 的 <code>CSP</code>。</p>
-<h4 id="七、扩展：WorkerGlobalScope"><a href="#七、扩展：WorkerGlobalScope" class="headerlink" title="七、扩展：WorkerGlobalScope"></a>七、扩展：WorkerGlobalScope</h4><p>关于 ，我们可以在 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/WorkerGlobalScope" target="_blank" rel="external"><code>MDN</code></a> 上面找到文档：<br>1.<code>self</code>：<br>我们可以使用 <code>WorkerGlobalScope</code> 的 <code>self</code> 属性来获取这个对象本身的引用。</p>
+<h4 id="七、扩展：WorkerGlobalScope"><a href="#七、扩展：WorkerGlobalScope" class="headerlink" title="七、扩展：WorkerGlobalScope"></a>七、扩展：WorkerGlobalScope</h4><p>关于 ，我们可以在 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/WorkerGlobalScope" target="_blank" rel="noopener"><code>MDN</code></a> 上面找到文档：<br>1.<code>self</code>：<br>我们可以使用 <code>WorkerGlobalScope</code> 的 <code>self</code> 属性来获取这个对象本身的引用。</p>
 <p>2.<code>location</code>：<br><code>location</code> 属性返回当线程被创建出来的时候与之关联的 <code>WorkerLocation</code> 对象，它表示用于初始化这个工作线程的脚步资源的绝对 <code>URL</code>，即使页面被多次重定向后，这个 <code>URL</code> 资源位置也不会改变。</p>
 <p>3.<code>close</code>：<br>关闭当前线程，与 <code>terminate</code> 作用类似。</p>
 <p>4.<code>caches</code>：<br>当前上下文得 <code>CacheStorage</code>，确保离线可用，同时可以自定义请求的响应。</p>
@@ -337,20 +315,20 @@
 <li><code>Filename</code>：发生错误的脚本文件名；</li>
 <li><code>Lineno</code>：发生错误时所在脚本文件的行号；</li>
 </ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">worker.onerror = <span class="function"><span class="keyword">function</span>(<span class="params">error</span>) </span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(error.message);</div><div class="line">  <span class="keyword">throw</span> error;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<h4 id="九、参考文章"><a href="#九、参考文章" class="headerlink" title="九、参考文章"></a>九、参考文章</h4><p><a href="http://www.ruanyifeng.com/blog/2014/10/event-loop.html" target="_blank" rel="external">JavaScript 运行机制详解：再谈Event Loop</a><br><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Web_Workers_API/Using_web_workers" target="_blank" rel="external">MDN</a><br><a href="http://jixianqianduan.com/frontend-javascript/2014/06/05/webworker-serviceworker.html" target="_blank" rel="external">从webWorker到serviceWorker</a><br><a href="https://www.cnblogs.com/giggle/p/5350288.html" target="_blank" rel="external">浅谈webWorker</a></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">worker.onerror = <span class="function"><span class="keyword">function</span>(<span class="params">error</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(error.message);</span><br><span class="line">  <span class="keyword">throw</span> error;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="九、参考文章"><a href="#九、参考文章" class="headerlink" title="九、参考文章"></a>九、参考文章</h4><p><a href="http://www.ruanyifeng.com/blog/2014/10/event-loop.html" target="_blank" rel="noopener">JavaScript 运行机制详解：再谈Event Loop</a><br><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Web_Workers_API/Using_web_workers" target="_blank" rel="noopener">MDN</a><br><a href="http://jixianqianduan.com/frontend-javascript/2014/06/05/webworker-serviceworker.html" target="_blank" rel="noopener">从webWorker到serviceWorker</a><br><a href="https://www.cnblogs.com/giggle/p/5350288.html" target="_blank" rel="noopener">浅谈webWorker</a></p>
 
             
         </div>
     </div>
     <div id="post-footer" class="post-footer main-content-wrap"> 
         <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
-          版权声明：<br/>文章首发于 <a href="http://jartto.wang"> Jartto's blog </a>，
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's blog </a>，
           转载文章请务必以超链接形式标明文章出处，作者信息及本版权声明（<a href="http://jartto.wang"> http://jartto.wang </a>)。
         </div>
         
             <div class="post-footer-tags">
-                <span class="text-color-light text-small">标签</span><br/>
+                <span class="text-color-light text-small">标签</span><br>
                 
     <a class="tag tag--primary tag--small t-link" href="/tags/HTML5/">HTML5</a> <a class="tag tag--primary tag--small t-link" href="/tags/web/">web</a> <a class="tag tag--primary tag--small t-link" href="/tags/worker/">worker</a>
 
@@ -361,7 +339,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/12/31/f2e-2018/"  data-tooltip="用 Python 爬取 2018 前端热点">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/12/31/f2e-2018/" data-tooltip="用 Python 爬取 2018 前端热点">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -379,7 +357,7 @@
     </nav>
     <ul class="post-actions post-action-share">
         <li class="post-action hide-lg hide-md hide-sm">
-            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
                 <i class="fa fa-share-alt"></i>
             </a>
         </li>
@@ -410,7 +388,7 @@
 </div>
 
 
-        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/qrcode.png" width="100%" alt="请 Jartto 喝杯茶，亦或是给他一个简单的项目需求"/></div>
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/qrcode.png" width="100%" alt="请 Jartto 喝杯茶，亦或是给他一个简单的项目需求"></div>
         
     </div>
 </article>
@@ -439,7 +417,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/12/31/f2e-2018/"  data-tooltip="用 Python 爬取 2018 前端热点">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/12/31/f2e-2018/" data-tooltip="用 Python 爬取 2018 前端热点">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -457,7 +435,7 @@
     </nav>
     <ul class="post-actions post-action-share">
         <li class="post-action hide-lg hide-md hide-sm">
-            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
                 <i class="fa fa-share-alt"></i>
             </a>
         </li>
@@ -493,7 +471,7 @@
     <ul class="share-options">
         <li class="share-option">
             <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/12/26/web-worker/">
-                <i class="fa fa-google-plus"></i><span class="">分享到 Google+</span>
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
             </a>
         </li>
         <li class="share-option">
@@ -524,27 +502,27 @@
             <i class="fa fa-remove"></i>
         </div>
         
-            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
         
             <h4 id="about-card-name">Jartto</h4>
         
             <h5 id="about-card-bio"><blockquote>
-<p>最遗憾的不是把梦想丢在路上，</br>而是梦想从未上路!</br>Just do IT</p>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
 </blockquote>
 </h5>
         
         
             <h5 id="about-card-job">
                 <i class="fa fa-briefcase"></i>
-                <br/>
-                <p>jartto@qq.com</p>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
 
             </h5>
         
         
             <h5 id="about-card-location">
                 <i class="fa fa-map-marker"></i>
-                <br/>
+                <br>
                 北京－朝阳
             </h5>
         

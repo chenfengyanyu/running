@@ -19,7 +19,7 @@
         <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
     
     <meta name="description" content="从一个生成 PDF 的需求中接触到了 Puppeteer ，随着使用场景的深入，异常问题也越发难以处理。索性纪录一下摸索过程，供新手参考学习。">
-<meta name="keywords" content="nodejs,puppeteer">
+<meta name="keywords" content="puppeteer,nodejs">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="Puppeteer 异常处理">
 <meta property="og:url" content="http://jartto.wang/2018/10/23/puppeteerjs/index.html">
@@ -80,11 +80,10 @@
     </h1>
     
         
-            <a  class="header-right-picture st-search-show-outputs"
-                href="#about">
+            <a class="header-right-picture st-search-show-outputs" href="#about">
         
         
-            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
         
         </a>
     
@@ -101,7 +100,7 @@
     
         <div class="sidebar-profile">
             <a href="/#about">
-                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
             </a>
             <span class="sidebar-profile-name">Jartto</span>
         </div>
@@ -111,10 +110,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/ "
-                        
-                    >
+                    <a class="sidebar-button-link " href="/ ">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-home"></i>
                     <span class="sidebar-button-desc">首页</span>
@@ -123,10 +119,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/all-categories"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/all-categories">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
                     <span class="sidebar-button-desc">分类</span>
@@ -135,10 +128,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/all-tags"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/all-tags">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
                     <span class="sidebar-button-desc">标签</span>
@@ -147,10 +137,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/all-archives"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/all-archives">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
                     <span class="sidebar-button-desc">归档</span>
@@ -159,10 +146,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="#about"
-                        
-                    >
+                    <a class="sidebar-button-link " href="#about">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-question"></i>
                     <span class="sidebar-button-desc">关于</span>
@@ -175,7 +159,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
                     <span class="sidebar-button-desc">Email</span>
@@ -184,7 +168,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-github"></i>
                     <span class="sidebar-button-desc">GitHub</span>
@@ -197,10 +181,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/atom.xml"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/atom.xml">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
                     <span class="sidebar-button-desc">RSS</span>
@@ -209,10 +190,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/sitemap.xml"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/sitemap.xml">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
                     <span class="sidebar-button-desc">Sitemap</span>
@@ -229,7 +207,7 @@
                         hasCoverMetaIn
                         ">
                 
-<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
     
     
         <div class="post-header main-content-wrap text-center">
@@ -264,33 +242,33 @@
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
             <p>从一个生成 PDF 的需求中接触到了 Puppeteer ，随着使用场景的深入，异常问题也越发难以处理。索性纪录一下摸索过程，供新手参考学习。<br><a id="more"></a></p>
-<h4 id="一、Chromium-revision-is-not-downloaded"><a href="#一、Chromium-revision-is-not-downloaded" class="headerlink" title="一、Chromium revision is not downloaded"></a>一、Chromium revision is not downloaded</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">UnhandledPromiseRejectionWarning: Unhandled promise rejection (rejection id: 1): Error: Chromium revision is not downloaded. Run "npm install" or "yarn install”</div></pre></td></tr></table></figure>
-<p>遇到这个问题，说明你并没有成功下载 <code>Chromium</code>，<a href="https://download-chromium.appspot.com/" target="_blank" rel="external">手动下载</a>（需要翻墙）可以解决你的问题。</p>
-<h4 id="二、Unhandled-promise-rejection"><a href="#二、Unhandled-promise-rejection" class="headerlink" title="二、Unhandled promise rejection"></a>二、Unhandled promise rejection</h4><p>需要使用 <code>catch</code> 处理异常，所以你需要这么处理：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> puppeteer = <span class="built_in">require</span>(<span class="string">'puppeteer'</span>);</div><div class="line"></div><div class="line">(<span class="keyword">async</span> () =&gt; &#123;</div><div class="line">  <span class="keyword">const</span> browser = <span class="keyword">await</span> puppeteer.launch(&#123;</div><div class="line">    executablePath: <span class="string">'chromium/Chromium.app/Contents/MacOS/Chromium'</span>,</div><div class="line">    headless: <span class="literal">true</span></div><div class="line">  &#125;);</div><div class="line">  <span class="keyword">const</span> page = <span class="keyword">await</span> browser.newPage();</div><div class="line">  <span class="keyword">await</span> page.goto(<span class="string">'http://jartto.wang'</span>);</div><div class="line">  <span class="keyword">await</span> page.screenshot(&#123;<span class="attr">path</span>: <span class="string">'temp/blog.png'</span>&#125;);</div><div class="line">  <span class="keyword">await</span> browser.close();</div><div class="line">&#125;)().catch(<span class="function"><span class="params">error</span> =&gt;</span> <span class="built_in">console</span>.log(<span class="string">'error: '</span>, error.message));</div></pre></td></tr></table></figure></p>
+<h4 id="一、Chromium-revision-is-not-downloaded"><a href="#一、Chromium-revision-is-not-downloaded" class="headerlink" title="一、Chromium revision is not downloaded"></a>一、Chromium revision is not downloaded</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UnhandledPromiseRejectionWarning: Unhandled promise rejection (rejection id: 1): Error: Chromium revision is not downloaded. Run "npm install" or "yarn install”</span><br></pre></td></tr></table></figure>
+<p>遇到这个问题，说明你并没有成功下载 <code>Chromium</code>，<a href="https://download-chromium.appspot.com/" target="_blank" rel="noopener">手动下载</a>（需要翻墙）可以解决你的问题。</p>
+<h4 id="二、Unhandled-promise-rejection"><a href="#二、Unhandled-promise-rejection" class="headerlink" title="二、Unhandled promise rejection"></a>二、Unhandled promise rejection</h4><p>需要使用 <code>catch</code> 处理异常，所以你需要这么处理：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> puppeteer = <span class="built_in">require</span>(<span class="string">'puppeteer'</span>);</span><br><span class="line"></span><br><span class="line">(<span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> browser = <span class="keyword">await</span> puppeteer.launch(&#123;</span><br><span class="line">    executablePath: <span class="string">'chromium/Chromium.app/Contents/MacOS/Chromium'</span>,</span><br><span class="line">    headless: <span class="literal">true</span></span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">const</span> page = <span class="keyword">await</span> browser.newPage();</span><br><span class="line">  <span class="keyword">await</span> page.goto(<span class="string">'http://jartto.wang'</span>);</span><br><span class="line">  <span class="keyword">await</span> page.screenshot(&#123;<span class="attr">path</span>: <span class="string">'temp/blog.png'</span>&#125;);</span><br><span class="line">  <span class="keyword">await</span> browser.close();</span><br><span class="line">&#125;)().catch(<span class="function"><span class="params">error</span> =&gt;</span> <span class="built_in">console</span>.log(<span class="string">'error: '</span>, error.message));</span><br></pre></td></tr></table></figure></p>
 <p>重点关注最后一行即可。</p>
-<h4 id="三、spawn-EACCES"><a href="#三、spawn-EACCES" class="headerlink" title="三、spawn EACCES"></a>三、spawn EACCES</h4><p>没有权限，需要执行：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo chmod -R a+rwx chromium/Chromium.app</div></pre></td></tr></table></figure></p>
-<p>之后请设置正确的引用路径：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">executablePath: <span class="string">'chromium/Chromium.app/Contents/MacOS/Chromium'</span>,</div></pre></td></tr></table></figure></p>
-<h4 id="四、PrintToPDF-is-not-implemented"><a href="#四、PrintToPDF-is-not-implemented" class="headerlink" title="四、PrintToPDF is not implemented"></a>四、PrintToPDF is not implemented</h4><p>出现这个问题，是因为 <code>headless: false</code>：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> browser = <span class="keyword">await</span> puppeteer.launch(&#123;</div><div class="line">  headless: <span class="literal">false</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<h4 id="三、spawn-EACCES"><a href="#三、spawn-EACCES" class="headerlink" title="三、spawn EACCES"></a>三、spawn EACCES</h4><p>没有权限，需要执行：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chmod -R a+rwx chromium/Chromium.app</span><br></pre></td></tr></table></figure></p>
+<p>之后请设置正确的引用路径：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">executablePath: <span class="string">'chromium/Chromium.app/Contents/MacOS/Chromium'</span>,</span><br></pre></td></tr></table></figure></p>
+<h4 id="四、PrintToPDF-is-not-implemented"><a href="#四、PrintToPDF-is-not-implemented" class="headerlink" title="四、PrintToPDF is not implemented"></a>四、PrintToPDF is not implemented</h4><p>出现这个问题，是因为 <code>headless: false</code>：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> browser = <span class="keyword">await</span> puppeteer.launch(&#123;</span><br><span class="line">  headless: <span class="literal">false</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
 <p>官方文档中是这么说的：<br><div class="alert info"><p>NOTE Generating a pdf is currently only supported in Chrome headless.</p>
 </div></p>
 <h4 id="五、生成-PDF-乱码问题"><a href="#五、生成-PDF-乱码问题" class="headerlink" title="五、生成 PDF 乱码问题"></a>五、生成 PDF 乱码问题</h4><p>小技巧：如果你发现无头打印异常，可以将设置改掉 <code>headless: false</code>，通过调试工具打开。</p>
 <h4 id="六、在-Docker-中使用"><a href="#六、在-Docker-中使用" class="headerlink" title="六、在 Docker 中使用"></a>六、在 Docker 中使用</h4><p>在 <code>Docker</code> 中使用 <code>Puppeteer</code> 稍显复杂，因为其 <code>node</code> 库中自带的 <code>Chromium</code> 缺少一些依赖。这些依赖在桌面环境中一般都已自带，但是在 <code>Docker</code> 的 <code>node</code> 源镜像例如 <code>node-alpine</code> 或者 <code>node-slim</code> 是缺失的。所以，在 <code>Docker</code> 中使用 <code>Puppeteer</code> 需要首先安装这些缺失的依赖。</p>
-<p>具体细节，请移步<a href="https://www.meiwen.com.cn/subject/xkwsbftx.html" target="_blank" rel="external">在 Docker 中使用</a>。</p>
-<h4 id="七、更改默认视口"><a href="#七、更改默认视口" class="headerlink" title="七、更改默认视口"></a>七、更改默认视口</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">await</span> page.setViewport(&#123;<span class="attr">width</span>: <span class="number">1024</span>, <span class="attr">height</span>: <span class="number">880</span>&#125;);</div></pre></td></tr></table></figure>
-<h4 id="八、设置-cookie"><a href="#八、设置-cookie" class="headerlink" title="八、设置 cookie"></a>八、设置 <code>cookie</code></h4><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> COOKS =[</div><div class="line">  &#123;</div><div class="line">  <span class="string">'domain'</span>: <span class="string">'jartto.wang'</span>,</div><div class="line">  <span class="string">'name'</span>: <span class="string">'user'</span>,</div><div class="line">  <span class="string">'value'</span>: <span class="string">'jartto'</span>,</div><div class="line">  &#125;</div><div class="line">]</div><div class="line"></div><div class="line"><span class="keyword">await</span> page.setCookie(...COOKS);</div></pre></td></tr></table></figure>
-<h4 id="九、模拟点击"><a href="#九、模拟点击" class="headerlink" title="九、模拟点击"></a>九、模拟点击</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 输入框 id，搜索关键字 jartto</span></div><div class="line"><span class="keyword">await</span> page.type(<span class="string">'#index-kw'</span>, <span class="string">'jartto'</span>);</div><div class="line"><span class="comment">// 模拟点击提交按钮</span></div><div class="line"><span class="keyword">await</span> page.click(<span class="string">'#index-bn'</span>);</div><div class="line"><span class="comment">// 跳转等待时间</span></div><div class="line"><span class="keyword">await</span> page.waitForNavigation(&#123; <span class="attr">timeout</span>: <span class="number">3000</span> &#125;);</div></pre></td></tr></table></figure>
+<p>具体细节，请移步<a href="https://www.meiwen.com.cn/subject/xkwsbftx.html" target="_blank" rel="noopener">在 Docker 中使用</a>。</p>
+<h4 id="七、更改默认视口"><a href="#七、更改默认视口" class="headerlink" title="七、更改默认视口"></a>七、更改默认视口</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">await</span> page.setViewport(&#123;<span class="attr">width</span>: <span class="number">1024</span>, <span class="attr">height</span>: <span class="number">880</span>&#125;);</span><br></pre></td></tr></table></figure>
+<h4 id="八、设置-cookie"><a href="#八、设置-cookie" class="headerlink" title="八、设置 cookie"></a>八、设置 <code>cookie</code></h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> COOKS =[</span><br><span class="line">  &#123;</span><br><span class="line">  <span class="string">'domain'</span>: <span class="string">'jartto.wang'</span>,</span><br><span class="line">  <span class="string">'name'</span>: <span class="string">'user'</span>,</span><br><span class="line">  <span class="string">'value'</span>: <span class="string">'jartto'</span>,</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="keyword">await</span> page.setCookie(...COOKS);</span><br></pre></td></tr></table></figure>
+<h4 id="九、模拟点击"><a href="#九、模拟点击" class="headerlink" title="九、模拟点击"></a>九、模拟点击</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 输入框 id，搜索关键字 jartto</span></span><br><span class="line"><span class="keyword">await</span> page.type(<span class="string">'#index-kw'</span>, <span class="string">'jartto'</span>);</span><br><span class="line"><span class="comment">// 模拟点击提交按钮</span></span><br><span class="line"><span class="keyword">await</span> page.click(<span class="string">'#index-bn'</span>);</span><br><span class="line"><span class="comment">// 跳转等待时间</span></span><br><span class="line"><span class="keyword">await</span> page.waitForNavigation(&#123; <span class="attr">timeout</span>: <span class="number">3000</span> &#125;);</span><br></pre></td></tr></table></figure>
 
             
         </div>
     </div>
     <div id="post-footer" class="post-footer main-content-wrap"> 
         <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
-          版权声明：<br/>文章首发于 <a href="http://jartto.wang"> Jartto's blog </a>，
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's blog </a>，
           转载文章请务必以超链接形式标明文章出处，作者信息及本版权声明（<a href="http://jartto.wang"> http://jartto.wang </a>)。
         </div>
         
             <div class="post-footer-tags">
-                <span class="text-color-light text-small">标签</span><br/>
+                <span class="text-color-light text-small">标签</span><br>
                 
     <a class="tag tag--primary tag--small t-link" href="/tags/nodejs/">nodejs</a> <a class="tag tag--primary tag--small t-link" href="/tags/puppeteer/">puppeteer</a>
 
@@ -301,7 +279,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/10/28/start-kafka/"  data-tooltip="快速上手 Kafka">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/10/28/start-kafka/" data-tooltip="快速上手 Kafka">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -319,7 +297,7 @@
     </nav>
     <ul class="post-actions post-action-share">
         <li class="post-action hide-lg hide-md hide-sm">
-            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
                 <i class="fa fa-share-alt"></i>
             </a>
         </li>
@@ -350,7 +328,7 @@
 </div>
 
 
-        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/qrcode.png" width="100%" alt="请 Jartto 喝杯茶，亦或是给他一个简单的项目需求"/></div>
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/qrcode.png" width="100%" alt="请 Jartto 喝杯茶，亦或是给他一个简单的项目需求"></div>
         
     </div>
 </article>
@@ -379,7 +357,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/10/28/start-kafka/"  data-tooltip="快速上手 Kafka">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/10/28/start-kafka/" data-tooltip="快速上手 Kafka">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -397,7 +375,7 @@
     </nav>
     <ul class="post-actions post-action-share">
         <li class="post-action hide-lg hide-md hide-sm">
-            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
                 <i class="fa fa-share-alt"></i>
             </a>
         </li>
@@ -433,7 +411,7 @@
     <ul class="share-options">
         <li class="share-option">
             <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/10/23/puppeteerjs/">
-                <i class="fa fa-google-plus"></i><span class="">分享到 Google+</span>
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
             </a>
         </li>
         <li class="share-option">
@@ -464,27 +442,27 @@
             <i class="fa fa-remove"></i>
         </div>
         
-            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
         
             <h4 id="about-card-name">Jartto</h4>
         
             <h5 id="about-card-bio"><blockquote>
-<p>最遗憾的不是把梦想丢在路上，</br>而是梦想从未上路!</br>Just do IT</p>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
 </blockquote>
 </h5>
         
         
             <h5 id="about-card-job">
                 <i class="fa fa-briefcase"></i>
-                <br/>
-                <p>jartto@qq.com</p>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
 
             </h5>
         
         
             <h5 id="about-card-location">
                 <i class="fa fa-map-marker"></i>
-                <br/>
+                <br>
                 北京－朝阳
             </h5>
         

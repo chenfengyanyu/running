@@ -83,11 +83,10 @@
     </h1>
     
         
-            <a  class="header-right-picture st-search-show-outputs"
-                href="#about">
+            <a class="header-right-picture st-search-show-outputs" href="#about">
         
         
-            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
         
         </a>
     
@@ -104,7 +103,7 @@
     
         <div class="sidebar-profile">
             <a href="/#about">
-                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
             </a>
             <span class="sidebar-profile-name">Jartto</span>
         </div>
@@ -114,10 +113,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/ "
-                        
-                    >
+                    <a class="sidebar-button-link " href="/ ">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-home"></i>
                     <span class="sidebar-button-desc">首页</span>
@@ -126,10 +122,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/all-categories"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/all-categories">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
                     <span class="sidebar-button-desc">分类</span>
@@ -138,10 +131,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/all-tags"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/all-tags">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
                     <span class="sidebar-button-desc">标签</span>
@@ -150,10 +140,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/all-archives"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/all-archives">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
                     <span class="sidebar-button-desc">归档</span>
@@ -162,10 +149,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="#about"
-                        
-                    >
+                    <a class="sidebar-button-link " href="#about">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-question"></i>
                     <span class="sidebar-button-desc">关于</span>
@@ -178,7 +162,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
                     <span class="sidebar-button-desc">Email</span>
@@ -187,7 +171,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-github"></i>
                     <span class="sidebar-button-desc">GitHub</span>
@@ -200,10 +184,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/atom.xml"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/atom.xml">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
                     <span class="sidebar-button-desc">RSS</span>
@@ -212,10 +193,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/sitemap.xml"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/sitemap.xml">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
                     <span class="sidebar-button-desc">Sitemap</span>
@@ -232,7 +210,7 @@
                         hasCoverMetaIn
                         ">
                 
-<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
     
     
         <div class="post-header main-content-wrap text-center">
@@ -268,22 +246,22 @@
         <div class="main-content-wrap">
             <p>最近越来越懒了，说好的每天抽一点时间来总结笔记，可是却完全没有执行，后续还有好多笔记，想想都觉得头疼。之前已经把目录整理好了，回头发现，目录是全了，可是之前学习的笔记太过于零散，无法形成一套完整的笔记。<br><a id="more"></a><br>所以，边写博客边总结吧，也算是对之前的学习来一次大回顾。哎，看书虽易，理解不易，且学且总结吧！不瞎扯了，下面直接进入正题。</p>
 <p>这节笔记主要是来总结angularjs中过滤器（filter）是如何使用的。其实，之前的笔记中已经有filter的使用示例，但是并没有作为重点。这里我又把问题抛出来，给个痛快的解决（参考了不少资料，应该是很全面了，至少我自己这么觉得O(∩_∩)O）。</p>
-<h4 id="一、过滤器"><a href="#一、过滤器" class="headerlink" title="一、过滤器"></a>一、过滤器</h4><p>AngularJS过滤器用来格式化输出数据。过滤器不但能格式化数据，还能修改DOM。过滤器可用在任何api或者ng.$rootScoe.Scope的执行过程中，不过一般用来格式化绑定在模板中的表达式。<br>这是一种最常见的模式，也是最简单的，直接用管道符连接起来就行。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123;&#123; expression | filter &#125;&#125;</div></pre></td></tr></table></figure></p>
-<p>过滤器一般在处理过程中将数据转变成新的格式。它能使用链式风格，还能接受附加参数。我们可以这样使用链式风格：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123;&#123; expression | filter1 | filter2 &#125;&#125;</div></pre></td></tr></table></figure></p>
-<p>当然也可以使用“:”来传递额外的参数给过滤器，比如，将数字123格式化成带有2位小数的形式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">123 | number:2</div></pre></td></tr></table></figure></p>
+<h4 id="一、过滤器"><a href="#一、过滤器" class="headerlink" title="一、过滤器"></a>一、过滤器</h4><p>AngularJS过滤器用来格式化输出数据。过滤器不但能格式化数据，还能修改DOM。过滤器可用在任何api或者ng.$rootScoe.Scope的执行过程中，不过一般用来格式化绑定在模板中的表达式。<br>这是一种最常见的模式，也是最简单的，直接用管道符连接起来就行。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123; expression | filter &#125;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>过滤器一般在处理过程中将数据转变成新的格式。它能使用链式风格，还能接受附加参数。我们可以这样使用链式风格：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123; expression | filter1 | filter2 &#125;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>当然也可以使用“:”来传递额外的参数给过滤器，比如，将数字123格式化成带有2位小数的形式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">123 | number:2</span><br></pre></td></tr></table></figure></p>
 <h4 id="二、过滤器的两种形式"><a href="#二、过滤器的两种形式" class="headerlink" title="二、过滤器的两种形式"></a>二、过滤器的两种形式</h4><p>上面大概描述了过滤器的几种常见格式，可是如何去使用过滤器来格式化我们自己的数据呢？这里，我姑且先把过滤器分为两类吧。</p>
-<p>第一种，内置过滤器：<br>也就是Angularjs内置的过滤器，例如currency、date、number、uppercase等。如你所想，内置过滤器用起来也相当简单，下面给出几个简单的实例，代码如下：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-app</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> &gt;</span> 12.9 用过滤器currency结果为： &#123;&#123;12.9|currency &#125;&#125; <span class="tag">&lt;/<span class="name">div</span> &gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> &gt;</span> 1396606957717 用过滤器date结果为： &#123;&#123;1396606957717|date:"yyyy-MM-dd hh:mm:ss"&#125;&#125; <span class="tag">&lt;/ <span class="attr">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> &gt;</span> 12.9 用过滤器number结果为： &#123;&#123;12.9| number:0 &#125;&#125; <span class="tag">&lt;/<span class="name">div</span> &gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> &gt;</span> &#123;name="wang"&#125; 用过滤器json结果为： &#123;&#123;&#123;name:"wang"&#125;| json&#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span>wang 用过滤器uppercase结果为：&#123;&#123;"wang"| uppercase&#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span>WANG 用过滤器lowercase结果为：&#123;&#123;"WANG"| lowercase&#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>第一种，内置过滤器：<br>也就是Angularjs内置的过滤器，例如currency、date、number、uppercase等。如你所想，内置过滤器用起来也相当简单，下面给出几个简单的实例，代码如下：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-app</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> &gt;</span> 12.9 用过滤器currency结果为： &#123;&#123;12.9|currency &#125;&#125; <span class="tag">&lt;/<span class="name">div</span> &gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> &gt;</span> 1396606957717 用过滤器date结果为： &#123;&#123;1396606957717|date:"yyyy-MM-dd hh:mm:ss"&#125;&#125; <span class="tag">&lt;/ <span class="attr">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> &gt;</span> 12.9 用过滤器number结果为： &#123;&#123;12.9| number:0 &#125;&#125; <span class="tag">&lt;/<span class="name">div</span> &gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> &gt;</span> &#123;name="wang"&#125; 用过滤器json结果为： &#123;&#123;&#123;name:"wang"&#125;| json&#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span>wang 用过滤器uppercase结果为：&#123;&#123;"wang"| uppercase&#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span>WANG 用过滤器lowercase结果为：&#123;&#123;"WANG"| lowercase&#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 <p>效果如下：<br><img src="http://7xvi3w.com1.z0.glb.clouddn.com/blog_CB60244D-79F6-4B3C-A341-D7E2E24B5382.png" alt="angularjs"></p>
-<div class="alert info"><p>演示地址：<a href="http://jsfiddle.net/Au79V/13/" target="_blank" rel="external">http://jsfiddle.net/Au79V/13/</a></p>
+<div class="alert info"><p>演示地址：<a href="http://jsfiddle.net/Au79V/13/" target="_blank" rel="noopener">http://jsfiddle.net/Au79V/13/</a></p>
 </div>
-<p>第二种，自定义过滤器：<br>当然，多数情况下angularjs的内置过滤器就可以满足我们的使用了。但是你需要定制或者一些特别的过滤器，那么也不用担心，我们可以写自己的过滤器。哈哈，规则完全由你定，听起来是不是感觉很过瘾。下面我引用一下开发指南中的自定义过滤器，来说明问题，首先来看看代码：<br>index.html:<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">!</span> <span class="attr">doctype</span> <span class="attr">html</span> &gt;</span></div><div class="line"><span class="tag">&lt; <span class="attr">html</span> <span class="attr">ng-app</span> =<span class="string">"MyReverseModule"</span>&gt;</span></div><div class="line"><span class="tag">&lt; <span class="attr">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span> =<span class="string">"http://code.angularjs.org/angular-1.0.2.min.js"</span>&gt;</span><span class="xml"><span class="tag">&lt;/ <span class="attr">script</span>&gt;</span></span></div><div class="line"><span class="xml">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"script.js"</span>&gt;</span><span class="xml"><span class="tag">&lt;/ <span class="attr">script</span> &gt;</span></span></span></div><div class="line"><span class="xml"><span class="tag">&lt;/ <span class="attr">head</span>&gt;</span></span></div><div class="line"><span class="xml"><span class="tag">&lt; <span class="attr">body</span>&gt;</span></span></div><div class="line"><span class="xml">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-controller</span>=<span class="string">"Ctrl"</span>&gt;</span></span></div><div class="line"><span class="xml">        <span class="tag">&lt; <span class="attr">input</span> <span class="attr">ng-model</span> =<span class="string">"greeting"</span> <span class="attr">type</span> =<span class="string">"greeting"</span>&gt;</span><span class="tag">&lt;<span class="name">br</span> &gt;</span></span></div><div class="line"><span class="xml">        No filter: &#123;&#123;greeting &#125;&#125; <span class="tag">&lt;<span class="name">br</span> &gt;</span></span></div><div class="line"><span class="xml">        Reverse: &#123;&#123;greeting|reverse &#125;&#125; <span class="tag">&lt;<span class="name">br</span> &gt;</span></span></div><div class="line"><span class="javascript">        Reverse + uppercase: &#123;&#123;greeting|reverse:<span class="literal">true</span> &#125;&#125; &lt;br &gt;</span></div><div class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">div</span> &gt;</span></span></div><div class="line"><span class="xml"><span class="tag">&lt;/ <span class="attr">body</span>&gt;</span></span></div><div class="line"><span class="xml"><span class="tag">&lt;/ <span class="attr">html</span>&gt;</span></span></div></pre></td></tr></table></figure></p>
-<p>script.js:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">angular.module( <span class="string">'MyReverseModule'</span>, []).</div><div class="line">    filter( <span class="string">'reverse'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">input, uppercase</span>) </span>&#123;</div><div class="line">            <span class="keyword">var</span> out = <span class="string">""</span> ;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; input.length; i++) &#123;</div><div class="line">                out = input.charAt(i) + out;</div><div class="line">            &#125;</div><div class="line">            <span class="comment">// conditional based on optional argument</span></div><div class="line">            <span class="keyword">if</span> (uppercase) &#123;</div><div class="line">                out = out.toUpperCase();</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span> out;</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Ctrl</span>(<span class="params">$scope</span>) </span>&#123;</div><div class="line">    $scope.greeting = <span class="string">'hello'</span> ;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>第二种，自定义过滤器：<br>当然，多数情况下angularjs的内置过滤器就可以满足我们的使用了。但是你需要定制或者一些特别的过滤器，那么也不用担心，我们可以写自己的过滤器。哈哈，规则完全由你定，听起来是不是感觉很过瘾。下面我引用一下开发指南中的自定义过滤器，来说明问题，首先来看看代码：<br>index.html:<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">!</span> <span class="attr">doctype</span> <span class="attr">html</span> &gt;</span></span><br><span class="line"><span class="tag">&lt; <span class="attr">html</span> <span class="attr">ng-app</span> =<span class="string">"MyReverseModule"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt; <span class="attr">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span> =<span class="string">"http://code.angularjs.org/angular-1.0.2.min.js"</span>&gt;</span><span class="xml"><span class="tag">&lt;/ <span class="attr">script</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"script.js"</span>&gt;</span><span class="xml"><span class="tag">&lt;/ <span class="attr">script</span> &gt;</span></span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/ <span class="attr">head</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt; <span class="attr">body</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-controller</span>=<span class="string">"Ctrl"</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt; <span class="attr">input</span> <span class="attr">ng-model</span> =<span class="string">"greeting"</span> <span class="attr">type</span> =<span class="string">"greeting"</span>&gt;</span><span class="tag">&lt;<span class="name">br</span> &gt;</span></span></span><br><span class="line"><span class="xml">        No filter: &#123;&#123;greeting &#125;&#125; <span class="tag">&lt;<span class="name">br</span> &gt;</span></span></span><br><span class="line"><span class="xml">        Reverse: &#123;&#123;greeting|reverse &#125;&#125; <span class="tag">&lt;<span class="name">br</span> &gt;</span></span></span><br><span class="line"><span class="javascript">        Reverse + uppercase: &#123;&#123;greeting|reverse:<span class="literal">true</span> &#125;&#125; &lt;br &gt;</span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">div</span> &gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/ <span class="attr">body</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/ <span class="attr">html</span>&gt;</span></span></span><br></pre></td></tr></table></figure></p>
+<p>script.js:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">angular.module( <span class="string">'MyReverseModule'</span>, []).</span><br><span class="line">    filter( <span class="string">'reverse'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">input, uppercase</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">var</span> out = <span class="string">""</span> ;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; input.length; i++) &#123;</span><br><span class="line">                out = input.charAt(i) + out;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// conditional based on optional argument</span></span><br><span class="line">            <span class="keyword">if</span> (uppercase) &#123;</span><br><span class="line">                out = out.toUpperCase();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> out;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Ctrl</span>(<span class="params">$scope</span>) </span>&#123;</span><br><span class="line">    $scope.greeting = <span class="string">'hello'</span> ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>效果如下：<br><img src="http://7xvi3w.com1.z0.glb.clouddn.com/blog_5DFA9C34-BCE6-4588-8A0B-D257CD4F8D86.png" alt="angularjs"></p>
-<div class="alert info"><p>演示地址：<a href="http://jsfiddle.net/Au79V/14/" target="_blank" rel="external">http://jsfiddle.net/Au79V/14/</a></p>
+<div class="alert info"><p>演示地址：<a href="http://jsfiddle.net/Au79V/14/" target="_blank" rel="noopener">http://jsfiddle.net/Au79V/14/</a></p>
 </div>
 <p>说明：这里实现了一个将字符串逆向输出的过滤器reverse，要扩展filter，首先我们需要在module中创建它，就像这样</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">angular.module(<span class="string">'moduleName'</span>,[]).filter(<span class="string">'filterName'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;这里是你扩展的方法&#125;);</div></pre></td></tr></table></figure>
-<p>这样我们就定义好自己的filter了，下面我来像这样调用它<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123;&#123;&quot;字符串&quot;|reverse&#125;&#125;。</div></pre></td></tr></table></figure></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">angular.module(<span class="string">'moduleName'</span>,[]).filter(<span class="string">'filterName'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;这里是你扩展的方法&#125;);</span><br></pre></td></tr></table></figure>
+<p>这样我们就定义好自己的filter了，下面我来像这样调用它<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;&quot;字符串&quot;|reverse&#125;&#125;。</span><br></pre></td></tr></table></figure></p>
 <p>通过两步就轻松的扩展了一个自定义过滤器，是不是很简单呢？</p>
 <p>到这里，过滤器的简单用法已经阐述完了。当然，复杂的使用场景这里我就不说了（关键是我也不懂）。网上有很多大牛，晋级的话，他们是最好的老师！</p>
 <p>参考文章：<br>《Angularjs 开发指南》<br>《用Angularjs开发下一代web应用》</p>
@@ -293,12 +271,12 @@
     </div>
     <div id="post-footer" class="post-footer main-content-wrap"> 
         <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
-          版权声明：<br/>文章首发于 <a href="http://jartto.wang"> Jartto's blog </a>，
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's blog </a>，
           转载文章请务必以超链接形式标明文章出处，作者信息及本版权声明（<a href="http://jartto.wang"> http://jartto.wang </a>)。
         </div>
         
             <div class="post-footer-tags">
-                <span class="text-color-light text-small">标签</span><br/>
+                <span class="text-color-light text-small">标签</span><br>
                 
     <a class="tag tag--primary tag--small t-link" href="/tags/angularjs/">angularjs</a>
 
@@ -309,7 +287,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2014/04/20/angularjs-part-6/"  data-tooltip="Angularjs学习笔记05~模板 Template">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2014/04/20/angularjs-part-6/" data-tooltip="Angularjs学习笔记05~模板 Template">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -327,7 +305,7 @@
     </nav>
     <ul class="post-actions post-action-share">
         <li class="post-action hide-lg hide-md hide-sm">
-            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
                 <i class="fa fa-share-alt"></i>
             </a>
         </li>
@@ -364,7 +342,7 @@
 </div>
 
 
-        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/qrcode.png" width="100%" alt="请 Jartto 喝杯茶，亦或是给他一个简单的项目需求"/></div>
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/qrcode.png" width="100%" alt="请 Jartto 喝杯茶，亦或是给他一个简单的项目需求"></div>
         
             
                 <div id="disqus_thread">
@@ -399,7 +377,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2014/04/20/angularjs-part-6/"  data-tooltip="Angularjs学习笔记05~模板 Template">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2014/04/20/angularjs-part-6/" data-tooltip="Angularjs学习笔记05~模板 Template">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -417,7 +395,7 @@
     </nav>
     <ul class="post-actions post-action-share">
         <li class="post-action hide-lg hide-md hide-sm">
-            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
                 <i class="fa fa-share-alt"></i>
             </a>
         </li>
@@ -459,7 +437,7 @@
     <ul class="share-options">
         <li class="share-option">
             <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2014/04/14/angularjs-part-5/">
-                <i class="fa fa-google-plus"></i><span class="">分享到 Google+</span>
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
             </a>
         </li>
         <li class="share-option">
@@ -490,27 +468,27 @@
             <i class="fa fa-remove"></i>
         </div>
         
-            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
         
             <h4 id="about-card-name">Jartto</h4>
         
             <h5 id="about-card-bio"><blockquote>
-<p>最遗憾的不是把梦想丢在路上，</br>而是梦想从未上路!</br>Just do IT</p>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
 </blockquote>
 </h5>
         
         
             <h5 id="about-card-job">
                 <i class="fa fa-briefcase"></i>
-                <br/>
-                <p>jartto@qq.com</p>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
 
             </h5>
         
         
             <h5 id="about-card-location">
                 <i class="fa fa-map-marker"></i>
-                <br/>
+                <br>
                 北京－朝阳
             </h5>
         

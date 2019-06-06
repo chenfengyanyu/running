@@ -84,11 +84,10 @@
     </h1>
     
         
-            <a  class="header-right-picture st-search-show-outputs"
-                href="#about">
+            <a class="header-right-picture st-search-show-outputs" href="#about">
         
         
-            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
         
         </a>
     
@@ -105,7 +104,7 @@
     
         <div class="sidebar-profile">
             <a href="/#about">
-                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
             </a>
             <span class="sidebar-profile-name">Jartto</span>
         </div>
@@ -115,10 +114,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/ "
-                        
-                    >
+                    <a class="sidebar-button-link " href="/ ">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-home"></i>
                     <span class="sidebar-button-desc">首页</span>
@@ -127,10 +123,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/all-categories"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/all-categories">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
                     <span class="sidebar-button-desc">分类</span>
@@ -139,10 +132,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/all-tags"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/all-tags">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
                     <span class="sidebar-button-desc">标签</span>
@@ -151,10 +141,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/all-archives"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/all-archives">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
                     <span class="sidebar-button-desc">归档</span>
@@ -163,10 +150,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="#about"
-                        
-                    >
+                    <a class="sidebar-button-link " href="#about">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-question"></i>
                     <span class="sidebar-button-desc">关于</span>
@@ -179,7 +163,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
                     <span class="sidebar-button-desc">Email</span>
@@ -188,7 +172,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-github"></i>
                     <span class="sidebar-button-desc">GitHub</span>
@@ -201,10 +185,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/atom.xml"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/atom.xml">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
                     <span class="sidebar-button-desc">RSS</span>
@@ -213,10 +194,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/sitemap.xml"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/sitemap.xml">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
                     <span class="sidebar-button-desc">Sitemap</span>
@@ -233,7 +211,7 @@
                         hasCoverMetaIn
                         ">
                 
-<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
     
     
         <div class="post-header main-content-wrap text-center">
@@ -280,7 +258,7 @@
 <p>提到 RenderLayers 不得不说 RenderObjects ：<br>RenderObjects 保持了树结构，一个 RenderObjects 知道如何绘制一个 node 的内容， 他通过向一个绘图上下文（GraphicsContext）发出必要的绘制调用来绘制 nodes。</p>
 <p>每个 GraphicsLayer 都有一个 GraphicsContext，GraphicsContext 会负责输出该层的位图，位图是存储在共享内存中，作为纹理上传到 GPU 中，最后由 GPU 将多个位图进行合成，然后 draw 到屏幕上，此时，我们的页面也就展现到了屏幕上。<br><div class="alert info"><p>GraphicsContext 绘图上下文的责任就是向屏幕进行像素绘制(这个过程是先把像素级的数据写入位图中，然后再显示到显示器)，在chrome里，绘图上下文是包裹了的 Skia（chrome 自己的 2d 图形绘制库）</p>
 </div><br>某些特殊的渲染层会被认为是合成层（Compositing Layers），合成层拥有单独的 GraphicsLayer，而其他不是合成层的渲染层，则和其第一个拥有 GraphicsLayer 父层公用一个。</p>
-<h4 id="三、composite-隐式合成"><a href="#三、composite-隐式合成" class="headerlink" title="三、composite 隐式合成"></a>三、composite 隐式合成</h4><p>对于隐式合成，<a href="https://www.smashingmagazine.com/2016/12/gpu-animation-doing-it-right/" target="_blank" rel="external">CSS GPU Animation</a> 中是这么描述的：<br><div class="alert success"><p>This is called implicit compositing: One or more non-composited elements that should appear above a composited one in the stacking order are promoted to composite layers — i.e. painted to separate images that are then sent to the GPU.</p>
+<h4 id="三、composite-隐式合成"><a href="#三、composite-隐式合成" class="headerlink" title="三、composite 隐式合成"></a>三、composite 隐式合成</h4><p>对于隐式合成，<a href="https://www.smashingmagazine.com/2016/12/gpu-animation-doing-it-right/" target="_blank" rel="noopener">CSS GPU Animation</a> 中是这么描述的：<br><div class="alert success"><p>This is called implicit compositing: One or more non-composited elements that should appear above a composited one in the stacking order are promoted to composite layers — i.e. painted to separate images that are then sent to the GPU.</p>
 </div><br>大概意思就是：一个或多个非合成元素应出现在堆叠顺序上的合成元素之上，被提升到合成层，即被绘制成分离的图像，然后将图像交给 GPU 处理。</p>
 <p>我们先来看下面的图示：</p>
 <iframe src="https://sergeche.github.io/gpu-article-assets/examples/example4.html#.b:anim-translate" height="280" frameborder="no" allowtransparency="true" style="width: 100%;"></iframe>
@@ -298,7 +276,7 @@
 <li>filter;</li>
 <li>有合成层后代同时本身 overflow 不为 visible（如果本身是因为明确的定位因素产生的 SelfPaintingLayer，则需要 z-index 不为 auto）<br>等等…</li>
 </ol>
-<p>这里只举出部分例子，<a href="http://taobaofed.org/blog/2016/04/25/performance-composite/" target="_blank" rel="external">无线性能优化：Composite</a>这篇文章描述的很详细，这里就不赘述了。</p>
+<p>这里只举出部分例子，<a href="http://taobaofed.org/blog/2016/04/25/performance-composite/" target="_blank" rel="noopener">无线性能优化：Composite</a>这篇文章描述的很详细，这里就不赘述了。</p>
 <h4 id="五、层压缩与层爆炸"><a href="#五、层压缩与层爆炸" class="headerlink" title="五、层压缩与层爆炸"></a>五、层压缩与层爆炸</h4><p>1.层压缩：<br>类似我们举出的层隐式合成的例子，可能简单的重叠就会产生大量的合成层，这样会占用很多无辜的 CPU 和 内存资源，严重影响了页面的性能。这一点浏览器也考虑到了，因此就有了层压缩（Layer Squashing）的处理。<br><div class="alert danger"><p>浏览器的自动的层压缩也不是万能的，有很多特定情况下，浏览器是无法进行层压缩的。</p>
 </div><br>如下所示，而这些情况也是我们应该尽量避免的：</p>
 <ul>
@@ -314,13 +292,13 @@
 <li>当渲染层同合成层有不同的具有 filter 的祖先层时，该渲染层无法压缩（squashingFilterAncestorMismatch，同上）</li>
 <li>当覆盖的合成层正在运行动画时，该渲染层无法压缩（squashingLayerIsAnimating），当动画未开始或者运行完毕以后，该渲染层才可以被压缩 </li>
 </ul>
-<p>此处摘录自<a href="http://taobaofed.org/blog/2016/04/25/performance-composite/" target="_blank" rel="external">无线性能优化：Composite</a>，demo 请查看原文。</p>
+<p>此处摘录自<a href="http://taobaofed.org/blog/2016/04/25/performance-composite/" target="_blank" rel="noopener">无线性能优化：Composite</a>，demo 请查看原文。</p>
 <div class="alert info"><p>如果多个渲染层同一个合成层重叠时，这些渲染层会被压缩到一个 GraphicsLayer 中，以防止由于重叠原因导致可能出现的“层爆炸”。</p>
 </div>
 <p>2.层爆炸：<br>通过之前的介绍，我们知道同合成层重叠也会使元素提升为合成层，虽然有浏览器的层压缩机制，但是也有很多无法进行压缩的情况。也就是说除了我们显式的声明的合成层，还可能由于重叠原因不经意间产生一些不在预期的合成层，极端一点可能会产生大量的额外合成层，出现层爆炸的现象。<br><div class="alert success"><p>解决层爆炸的问题，最佳方案是打破 overlap 的条件，也就是说让其他元素不要和合成层元素重叠，譬如巧妙的使用 z-index 属性。</p>
 </div></p>
-<h4 id="六、内存消耗"><a href="#六、内存消耗" class="headerlink" title="六、内存消耗"></a>六、内存消耗</h4><p>上面提到了层合成的过程会产生内存消耗，那么我们如何来评估层消耗的内存，下面举例来说明：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- jartto test --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"a"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"b"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#a</span>, <span class="selector-id">#b</span> &#123;</div><div class="line"> <span class="attribute">will-change</span>: transform;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-id">#a</span> &#123;</div><div class="line"> <span class="attribute">width</span>: <span class="number">100px</span>;</div><div class="line"> <span class="attribute">height</span>: <span class="number">100px</span>;</div><div class="line"> <span class="attribute">background</span>: <span class="built_in">rgb</span>(255, 0, 0);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-id">#b</span> &#123;</div><div class="line"> <span class="attribute">width</span>: <span class="number">10px</span>;</div><div class="line"> <span class="attribute">height</span>: <span class="number">10px</span>;</div><div class="line"> <span class="attribute">background</span>: <span class="built_in">rgb</span>(255, 0, 0);</div><div class="line"> <span class="attribute">transform</span>: <span class="built_in">scale</span>(10);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="六、内存消耗"><a href="#六、内存消耗" class="headerlink" title="六、内存消耗"></a>六、内存消耗</h4><p>上面提到了层合成的过程会产生内存消耗，那么我们如何来评估层消耗的内存，下面举例来说明：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- jartto test --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"a"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"b"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#a</span>, <span class="selector-id">#b</span> &#123;</span><br><span class="line"> <span class="attribute">will-change</span>: transform;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#a</span> &#123;</span><br><span class="line"> <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line"> <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line"> <span class="attribute">background</span>: <span class="built_in">rgb</span>(255, 0, 0);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#b</span> &#123;</span><br><span class="line"> <span class="attribute">width</span>: <span class="number">10px</span>;</span><br><span class="line"> <span class="attribute">height</span>: <span class="number">10px</span>;</span><br><span class="line"> <span class="attribute">background</span>: <span class="built_in">rgb</span>(255, 0, 0);</span><br><span class="line"> <span class="attribute">transform</span>: <span class="built_in">scale</span>(10);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>如上，我们创建了两个容器 #a 和 #b，#a 的物理尺寸是 100×100px（100×100×3 = 30000 字节），而 #b 只有10×10px（10×10×3 = 300 字节）但放大了 10 倍。#b 由于存在 will-change 属性，transform 动画将通过 GPU 来渲染图层。<br><div class="alert info"><p>我们通过图像的高度乘以图像的宽度来获得图像中像素的数量。然后，我们将其乘以3，因为每个像素都用三个字节（RGB）描述。那么不难理解，如果图像包含透明区域，我们要乘以4，因为需要额外的字节来描述透明度：（RGBA）：100×100×4 = 40000 字节。</p>
 </div></p>
 <p>从上面的例子中，我们得出了一个非常有意义的结论，从而帮助我们去做一些简单的优化。例如：如果你想要为一张大图添加动画，你可以先下载缩小版（原版 10% ）然后放大显示。这对用户是无感知的，但是我们却精简了页面加载，从而提升了用户体验。</p>
@@ -347,8 +325,8 @@
 </ul>
 <h4 id="八、硬件加速"><a href="#八、硬件加速" class="headerlink" title="八、硬件加速"></a>八、硬件加速</h4><p>既然整个渲染过程如此耗时，那么大多数人喜欢使用 translateZ(0) 与 will-change 开启硬件加速的行为就很容易理解了。</p>
 <p>转了一圈，又回到了本文的重点：合成层。提升合成层的最好方式是使用 CSS 的 will-change 属性。而 will-change 设置为 opacity、transform、top、left、bottom、right 可以将元素提升为合成层。</p>
-<p>先来看看 will-change 的浏览器支持情况，<a href="http://caniuse.com/#search=will-change" target="_blank" rel="external">点击查看</a><br><img src="http://7xvi3w.com1.z0.glb.clouddn.com/composite-will-change.png" alt="will-change"><br>总体支持情况还不错，所以我们可以像下面这样使用：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#jartto</span> &#123;</div><div class="line">  <span class="attribute">will-change</span>: transform;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>当然，对于个别不支持的浏览器，我们使用 translateZ(0) 来解决，<a href="http://caniuse.com/#search=translate" target="_blank" rel="external">点击查看</a><br><img src="http://7xvi3w.com1.z0.glb.clouddn.com/composite-translate.png" alt="translate"><br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#jartto</span> &#123;</div><div class="line">  <span class="attribute">transform</span>: <span class="built_in">translateZ</span>(0);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>先来看看 will-change 的浏览器支持情况，<a href="http://caniuse.com/#search=will-change" target="_blank" rel="noopener">点击查看</a><br><img src="http://7xvi3w.com1.z0.glb.clouddn.com/composite-will-change.png" alt="will-change"><br>总体支持情况还不错，所以我们可以像下面这样使用：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#jartto</span> &#123;</span><br><span class="line">  <span class="attribute">will-change</span>: transform;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>当然，对于个别不支持的浏览器，我们使用 translateZ(0) 来解决，<a href="http://caniuse.com/#search=translate" target="_blank" rel="noopener">点击查看</a><br><img src="http://7xvi3w.com1.z0.glb.clouddn.com/composite-translate.png" alt="translate"><br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#jartto</span> &#123;</span><br><span class="line">  <span class="attribute">transform</span>: <span class="built_in">translateZ</span>(0);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <div class="alert info"><p>We already know that animation of transform and opacity via CSS transitions or animations automatically creates a compositing layer and works on the GPU.</p>
 </div>
 <p>那么问题来了，硬件加速依赖 GPU ，而 GPU 为什么会比 CPU 快，我们接着来看。</p>
@@ -360,7 +338,7 @@
 <li>准备动画着色器（如果适用）；</li>
 <li>将数据发送到GPU；</li>
 </ul>
-<p>从 <a href="http://www.chromium.org/developers/design-documents/gpu-accelerated-compositing-in-chrome" target="_blank" rel="external">pu-accelerated-compositing-in-chrome</a> 这篇文章可以看出，硬件合成的好处有三种：</p>
+<p>从 <a href="http://www.chromium.org/developers/design-documents/gpu-accelerated-compositing-in-chrome" target="_blank" rel="noopener">pu-accelerated-compositing-in-chrome</a> 这篇文章可以看出，硬件合成的好处有三种：</p>
 <ol>
 <li>GPU 上合成图层可以在涉及大量像素的绘图和合成操作中实现比 CPU（无论是在速度和功耗方面）还要好的效率。硬件专为这些类型的工作负载而设计。</li>
 <li>GPU 上的内容不需要昂贵的回读（例如加速视频 Canvas2D 或 WebGL ）。</li>
@@ -369,7 +347,7 @@
 <div class="alert info"><p>组成缓存元素的图像会更快，而这正是 GPU 的强势之处：它能够很快地用亚像素精度合成图像，这给动画增加了显著的平滑度。</p>
 </div>
 <p>我们可以这么理解，GPU 是一个单独的计算机：每一个现代设备的一个重要部分实际上是一个独立的单元，有自己的处理器和自己的内存和数据处理模型。与其他应用程序或游戏一样，浏览器必须像外部设备那样与 GPU 对话。</p>
-<p>更多 GPU 的介绍，请看这里<a href="http://www.chromium.org/developers/design-documents/gpu-accelerated-compositing-in-chrome" target="_blank" rel="external">传送门</a>，这里就不扯远了。</p>
+<p>更多 GPU 的介绍，请看这里<a href="http://www.chromium.org/developers/design-documents/gpu-accelerated-compositing-in-chrome" target="_blank" rel="noopener">传送门</a>，这里就不扯远了。</p>
 <h4 id="十、补充：CPU-与-GPU-各自的职责"><a href="#十、补充：CPU-与-GPU-各自的职责" class="headerlink" title="十、补充：CPU 与 GPU 各自的职责"></a>十、补充：CPU 与 GPU 各自的职责</h4><p>这里我再补充一点：<br><div class="alert success"><p>我们可以说 CPU 所做的工作都在软件层面，而 GPU 在硬件层面，我们可以用软件（使用 CPU ）做任何事情，但是对于图像处理，通常用硬件会更快，因为GPU使用图像对高度并行浮点运算做了优化。</p>
 </div></p>
 <p>这也是我之前一直困扰的地方，我们一味的强调硬件加速，而忽略了 CPU 本身的作用。大致过程可能如下：</p>
@@ -396,23 +374,23 @@
 </ul>
 <p>如果你已经把一个元素放到一个新的合成层里，那么可以使用 Timeline 来确认这么做是否真的改进了渲染性能。别盲目提升合成层，一定要分析其实际性能表现。</p>
 <p>实际上，在内存资源有限的设备上，合成层带来的性能改善，可能远远赶不上过多合成层开销给页面性能带来的负面影响。同时，由于每个渲染层的纹理都需要上传到 GPU 处理，因此我们还需要考虑 CPU 和 GPU 之间的带宽问题、以及有多大内存供 GPU 处理这些纹理的问题。</p>
-<p>所以，你就会明白，这里我们使用方式二而不使用方式一的原因了：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*jartto：方式一*/</span></div><div class="line">@<span class="keyword">keyframes</span> move &#123;</div><div class="line"> <span class="selector-tag">from</span> &#123; <span class="attribute">left</span>: <span class="number">30px</span>; &#125;</div><div class="line"> <span class="selector-tag">to</span> &#123; <span class="attribute">left</span>: <span class="number">100px</span>; &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*jartto：方式二*/</span></div><div class="line">@<span class="keyword">keyframes</span> move &#123;</div><div class="line"> <span class="selector-tag">from</span> &#123; <span class="attribute">transform</span>: <span class="built_in">translateX</span>(0); &#125;</div><div class="line"> <span class="selector-tag">to</span> &#123; <span class="attribute">transform</span>: <span class="built_in">translateX</span>(70px); &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>所以，你就会明白，这里我们使用方式二而不使用方式一的原因了：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*jartto：方式一*/</span></span><br><span class="line">@<span class="keyword">keyframes</span> move &#123;</span><br><span class="line"> <span class="selector-tag">from</span> &#123; <span class="attribute">left</span>: <span class="number">30px</span>; &#125;</span><br><span class="line"> <span class="selector-tag">to</span> &#123; <span class="attribute">left</span>: <span class="number">100px</span>; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*jartto：方式二*/</span></span><br><span class="line">@<span class="keyword">keyframes</span> move &#123;</span><br><span class="line"> <span class="selector-tag">from</span> &#123; <span class="attribute">transform</span>: <span class="built_in">translateX</span>(0); &#125;</span><br><span class="line"> <span class="selector-tag">to</span> &#123; <span class="attribute">transform</span>: <span class="built_in">translateX</span>(70px); &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="十三、总结"><a href="#十三、总结" class="headerlink" title="十三、总结"></a>十三、总结</h4><p>优化其实是一个过程，我们需要一个点一个点的处理、突破。没有什么是一蹴而就的，更没有所谓的银弹。就像高中物理书中所说的误差：“误差是不可避免的，只能减少”。</p>
 <p>优化也一样，我们只能尽力去做，而不能强求。不断尝试，方是永恒。</p>
-<p>参考：<br><a href="http://taobaofed.org/blog/2016/04/25/performance-composite/" target="_blank" rel="external">无线性能优化：Composite</a><br><a href="https://www.smashingmagazine.com/2016/12/gpu-animation-doing-it-right/" target="_blank" rel="external">CSS GPU Animation</a><br><a href="https://github.com/hello2dj/blog/blob/master/%08web优化之composite.md" target="_blank" rel="external">web优化之composite</a><br><a href="http://blog.csdn.net/xiaozhuxmen/article/details/52014901" target="_blank" rel="external">浏览器渲染</a><br><a href="http://www.chromium.org/developers/design-documents/gpu-accelerated-compositing-in-chrome" target="_blank" rel="external">gpu-accelerated-compositing-in-chrome</a><br><a href="http://blog.csdn.net/smnisbear/article/details/51170932" target="_blank" rel="external">视图渲染、CPU和GPU卡顿原因及其优化方案</a></p>
+<p>参考：<br><a href="http://taobaofed.org/blog/2016/04/25/performance-composite/" target="_blank" rel="noopener">无线性能优化：Composite</a><br><a href="https://www.smashingmagazine.com/2016/12/gpu-animation-doing-it-right/" target="_blank" rel="noopener">CSS GPU Animation</a><br><a href="https://github.com/hello2dj/blog/blob/master/%08web优化之composite.md" target="_blank" rel="noopener">web优化之composite</a><br><a href="http://blog.csdn.net/xiaozhuxmen/article/details/52014901" target="_blank" rel="noopener">浏览器渲染</a><br><a href="http://www.chromium.org/developers/design-documents/gpu-accelerated-compositing-in-chrome" target="_blank" rel="noopener">gpu-accelerated-compositing-in-chrome</a><br><a href="http://blog.csdn.net/smnisbear/article/details/51170932" target="_blank" rel="noopener">视图渲染、CPU和GPU卡顿原因及其优化方案</a></p>
 
             
         </div>
     </div>
     <div id="post-footer" class="post-footer main-content-wrap"> 
         <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
-          版权声明：<br/>文章首发于 <a href="http://jartto.wang"> Jartto's blog </a>，
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's blog </a>，
           转载文章请务必以超链接形式标明文章出处，作者信息及本版权声明（<a href="http://jartto.wang"> http://jartto.wang </a>)。
         </div>
         
             <div class="post-footer-tags">
-                <span class="text-color-light text-small">标签</span><br/>
+                <span class="text-color-light text-small">标签</span><br>
                 
     <a class="tag tag--primary tag--small t-link" href="/tags/composite/">composite</a> <a class="tag tag--primary tag--small t-link" href="/tags/performance/">performance</a>
 
@@ -423,7 +401,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/10/06/js-async-and-await/"  data-tooltip="掌握 Async/Await">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/10/06/js-async-and-await/" data-tooltip="掌握 Async/Await">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -441,7 +419,7 @@
     </nav>
     <ul class="post-actions post-action-share">
         <li class="post-action hide-lg hide-md hide-sm">
-            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
                 <i class="fa fa-share-alt"></i>
             </a>
         </li>
@@ -472,7 +450,7 @@
 </div>
 
 
-        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/qrcode.png" width="100%" alt="请 Jartto 喝杯茶，亦或是给他一个简单的项目需求"/></div>
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/qrcode.png" width="100%" alt="请 Jartto 喝杯茶，亦或是给他一个简单的项目需求"></div>
         
     </div>
 </article>
@@ -501,7 +479,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/10/06/js-async-and-await/"  data-tooltip="掌握 Async/Await">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/10/06/js-async-and-await/" data-tooltip="掌握 Async/Await">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -519,7 +497,7 @@
     </nav>
     <ul class="post-actions post-action-share">
         <li class="post-action hide-lg hide-md hide-sm">
-            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
                 <i class="fa fa-share-alt"></i>
             </a>
         </li>
@@ -555,7 +533,7 @@
     <ul class="share-options">
         <li class="share-option">
             <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2017/09/29/expand-on-performance-composite/">
-                <i class="fa fa-google-plus"></i><span class="">分享到 Google+</span>
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
             </a>
         </li>
         <li class="share-option">
@@ -586,27 +564,27 @@
             <i class="fa fa-remove"></i>
         </div>
         
-            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
         
             <h4 id="about-card-name">Jartto</h4>
         
             <h5 id="about-card-bio"><blockquote>
-<p>最遗憾的不是把梦想丢在路上，</br>而是梦想从未上路!</br>Just do IT</p>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
 </blockquote>
 </h5>
         
         
             <h5 id="about-card-job">
                 <i class="fa fa-briefcase"></i>
-                <br/>
-                <p>jartto@qq.com</p>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
 
             </h5>
         
         
             <h5 id="about-card-location">
                 <i class="fa fa-map-marker"></i>
-                <br/>
+                <br>
                 北京－朝阳
             </h5>
         

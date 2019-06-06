@@ -82,11 +82,10 @@
     </h1>
     
         
-            <a  class="header-right-picture st-search-show-outputs"
-                href="#about">
+            <a class="header-right-picture st-search-show-outputs" href="#about">
         
         
-            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
         
         </a>
     
@@ -103,7 +102,7 @@
     
         <div class="sidebar-profile">
             <a href="/#about">
-                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
             </a>
             <span class="sidebar-profile-name">Jartto</span>
         </div>
@@ -113,10 +112,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/ "
-                        
-                    >
+                    <a class="sidebar-button-link " href="/ ">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-home"></i>
                     <span class="sidebar-button-desc">首页</span>
@@ -125,10 +121,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/all-categories"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/all-categories">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
                     <span class="sidebar-button-desc">分类</span>
@@ -137,10 +130,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/all-tags"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/all-tags">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
                     <span class="sidebar-button-desc">标签</span>
@@ -149,10 +139,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/all-archives"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/all-archives">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
                     <span class="sidebar-button-desc">归档</span>
@@ -161,10 +148,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="#about"
-                        
-                    >
+                    <a class="sidebar-button-link " href="#about">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-question"></i>
                     <span class="sidebar-button-desc">关于</span>
@@ -177,7 +161,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
                     <span class="sidebar-button-desc">Email</span>
@@ -186,7 +170,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-github"></i>
                     <span class="sidebar-button-desc">GitHub</span>
@@ -199,10 +183,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/atom.xml"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/atom.xml">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
                     <span class="sidebar-button-desc">RSS</span>
@@ -211,10 +192,7 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link "
-                         href="/sitemap.xml"
-                        
-                    >
+                    <a class="sidebar-button-link " href="/sitemap.xml">
                 
                     <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
                     <span class="sidebar-button-desc">Sitemap</span>
@@ -231,7 +209,7 @@
                         hasCoverMetaIn
                         ">
                 
-<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
     
     
         <div class="post-header main-content-wrap text-center">
@@ -285,9 +263,9 @@
 </ul>
 <div class="alert info"><p>结论：Angularjs 是框架，React 是类库。</p>
 </div>
-<p>更多细节的比较，可以<a href="https://juejin.im/entry/5a54b747518825734216c3df" target="_blank" rel="external">参考这里</a></p>
-<h4 id="三、双向绑定"><a href="#三、双向绑定" class="headerlink" title="三、双向绑定"></a>三、双向绑定</h4><p><code>Angularjs</code> 是以数据双向绑定出名的一个框架，视图的变更会影响到模型，同理，模型的变更也能影响到视图。为什么会如此神奇，底层的实现原理到底是怎样的呢？下面我们来细节拆分，举例说明吧：<br>首先，先来一个 <code>html</code> 结构：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">button</span> <span class="attr">ng-click</span>=<span class="string">"week = '周几'"</span>&gt;</span>修改日期<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">ng-model</span>=<span class="string">"week"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>如上，我们设置了一个 <code>ng-click</code> 方法，以及一个 <code>ng-model</code> ，涉及到了 <code>week</code> 变量。经过 <code>$compile</code> 编译之后，实际是做了这样的处理：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$scope.watch(<span class="string">'week'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">el</span>)</span>&#123;</div><div class="line">  el.innerHTML = $interpolate(el.innerHTML);</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<p>更多细节的比较，可以<a href="https://juejin.im/entry/5a54b747518825734216c3df" target="_blank" rel="noopener">参考这里</a></p>
+<h4 id="三、双向绑定"><a href="#三、双向绑定" class="headerlink" title="三、双向绑定"></a>三、双向绑定</h4><p><code>Angularjs</code> 是以数据双向绑定出名的一个框架，视图的变更会影响到模型，同理，模型的变更也能影响到视图。为什么会如此神奇，底层的实现原理到底是怎样的呢？下面我们来细节拆分，举例说明吧：<br>首先，先来一个 <code>html</code> 结构：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">button</span> <span class="attr">ng-click</span>=<span class="string">"week = '周几'"</span>&gt;</span>修改日期<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">ng-model</span>=<span class="string">"week"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>如上，我们设置了一个 <code>ng-click</code> 方法，以及一个 <code>ng-model</code> ，涉及到了 <code>week</code> 变量。经过 <code>$compile</code> 编译之后，实际是做了这样的处理：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$scope.watch(<span class="string">'week'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">el</span>)</span>&#123;</span><br><span class="line">  el.innerHTML = $interpolate(el.innerHTML);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
 <h4 id="四、关于-Scope"><a href="#四、关于-Scope" class="headerlink" title="四、关于 Scope"></a>四、关于 Scope</h4><p>作用域是一个指向应用模型的对象。它是表达式的执行环境。作用域有层次结构，这个层次和相应的 <code>DOM</code> 几乎是一样的。作用域能监控表达式和传递事件。</p>
 <div class="alert success"><p>我们可以把作用域和它的属性当做是用来渲染视图的数据。作用域是视图唯一相关联的变化来源。</p>
 </div>
@@ -301,7 +279,7 @@
 <div class="alert info"><p>本身是无意义的，除非把它放到指定 username 属性的作用域中。</p>
 </div>
 <h4 id="五、强大的-eval"><a href="#五、强大的-eval" class="headerlink" title="五、强大的 $eval"></a>五、强大的 $eval</h4><p>在Angular中，有几种方式可以在作用域的上下文上执行代码，最简单的一种就是$eval。它使用一个函数作参数，所做的事情是立即执行这个传入的函数，并且把作用域自身当作参数传递给它，返回的是这个函数的返回值。$eval也可以有第二个参数，它所做的仅仅是把这个参数传递给这个函数。</p>
-<p>$eval的实现很简单：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Scope.prototype.$<span class="built_in">eval</span> = <span class="function"><span class="keyword">function</span>(<span class="params">expr, locals</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> expr(<span class="keyword">this</span>, locals);</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>$eval的实现很简单：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Scope.prototype.$<span class="built_in">eval</span> = <span class="function"><span class="keyword">function</span>(<span class="params">expr, locals</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> expr(<span class="keyword">this</span>, locals);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
 <h4 id="六、依赖注入实现原理"><a href="#六、依赖注入实现原理" class="headerlink" title="六、依赖注入实现原理"></a>六、依赖注入实现原理</h4><p>下来看看依赖注入是如何定义的：<br>依赖注入，也就是 <code>Dependency injection</code>，是一种软件设计模式，用来处理代码的依赖关系。<br>开发指南中提到，用三种方法让函数获得它的需要依赖。</p>
 <ul>
 <li>其一，它的依赖是能被创建的，一般用new操作符就行。</li>
@@ -309,20 +287,20 @@
 <li>其三，依赖能在需要时被导入。</li>
 </ul>
 <p>前两种方式都不是很好，因为它们需要对依赖硬编码，使得修改依赖的时候变得困难。特别是在测试的时候不好办，因为对某个部分进行孤立的测试常常需要模拟它的依赖。第三种方式是最好的，因为它不必在组件中去主动需找和获取依赖，而是由外界将依赖传入。</p>
-<p>①推断依赖：这是最简单的处理依赖的方法，就是假设函数的参数名就是依赖的名字。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">MyController</span>(<span class="params">$scope,greeter</span>)</span>&#123;&#125;</div></pre></td></tr></table></figure></p>
+<p>①推断依赖：这是最简单的处理依赖的方法，就是假设函数的参数名就是依赖的名字。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">MyController</span>(<span class="params">$scope,greeter</span>)</span>&#123;&#125;</span><br></pre></td></tr></table></figure></p>
 <p>给出一个注入器可以通过检查声明来获取函数名，从而知道需要的依赖的函数。在上面的例子中，<code>$scope</code> 和<code>greeter</code> 是需要注入到函数中的依赖。</p>
-<p>②$inject标记：要允许压缩类库重命名函数参数，同时注入器又能正确处理依赖的话，函数需要使用$inject属性。这个属性是一个包含依赖的名称的数组。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> MyController = <span class="function"><span class="keyword">function</span>(<span class="params">renamed$scope, renamedGreeter</span>) </span>&#123;&#125;</div><div class="line">MyController.$inject = [<span class="string">'$scope'</span>, <span class="string">'greeter'</span>];</div></pre></td></tr></table></figure></p>
+<p>②$inject标记：要允许压缩类库重命名函数参数，同时注入器又能正确处理依赖的话，函数需要使用$inject属性。这个属性是一个包含依赖的名称的数组。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> MyController = <span class="function"><span class="keyword">function</span>(<span class="params">renamed$scope, renamedGreeter</span>) </span>&#123;&#125;</span><br><span class="line">MyController.$inject = [<span class="string">'$scope'</span>, <span class="string">'greeter'</span>];</span><br></pre></td></tr></table></figure></p>
 <p>注意 <code>$inject</code> 标记里的值和函数声明的参数是对应的。这种方式适合用于控制器的声明，因为控制器有了明确的声明标记。</p>
-<p>③行内标记<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">someModule.factory(<span class="string">'greeter'</span>, [<span class="string">'$window'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">renamed$window</span>) </span>&#123;...&#125;]);</div></pre></td></tr></table></figure></p>
+<p>③行内标记<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">someModule.factory(<span class="string">'greeter'</span>, [<span class="string">'$window'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">renamed$window</span>) </span>&#123;...&#125;]);</span><br></pre></td></tr></table></figure></p>
 <p>更多的细节，请参考我之前的这篇文章：<a href="http://jartto.wang/2014/04/24/angularjs-part-7/">Angularjs学习笔记06~依赖注入 DI</a></p>
 <h4 id="七、-injector"><a href="#七、-injector" class="headerlink" title="七、$injector"></a>七、$injector</h4><ul>
 <li>是什么：根据名字获取组件的⽅方法。</li>
 <li>地⽅：从缓存⾥里里找，没有的话实例例化一个应⽤，一般只有⼀个 $injector 实例。 </li>
 <li>如何产生: bootstrap 里 createInjector</li>
 </ul>
-<p>结合 $injector 使⽤ module ⾥的数据<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// module.js</span></div><div class="line">angular.module(<span class="string">'App'</span>)</div><div class="line">  ...</div><div class="line">  .constant(<span class="string">'num1'</span>, <span class="number">3</span>)</div><div class="line">  .constant(<span class="string">'num2'</span>, <span class="number">2</span>)</div><div class="line"><span class="comment">// app.js</span></div><div class="line">angular.module(<span class="string">'App'</span>, []).controller(<span class="string">'Controller'</span>, [<span class="string">'$scope'</span>, <span class="string">'week'</span>, <span class="string">'$injector'</span>,    <span class="function"><span class="keyword">function</span>(<span class="params">$scope, week, $injector</span>) </span>&#123;</div><div class="line">￼    <span class="function"><span class="keyword">function</span> <span class="title">sum</span> (<span class="params">num1, num2</span>) </span>&#123;</div><div class="line">      <span class="keyword">return</span> num1 + num2;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">const</span> num1 = $injector.get(<span class="string">'num1'</span>);</div><div class="line">    <span class="keyword">const</span> num2 = $injector.get(<span class="string">'num2'</span>);</div><div class="line">    <span class="built_in">console</span>.log(sum(num1, num2));</div><div class="line">  &#125;</div><div class="line">]);</div></pre></td></tr></table></figure></p>
-<h4 id="八、无处不在的-Provider"><a href="#八、无处不在的-Provider" class="headerlink" title="八、无处不在的 Provider"></a>八、无处不在的 Provider</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> invokeLater = <span class="function"><span class="keyword">function</span>(<span class="params">service, method, arrayMethod, queue</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    queue = queue || invokeQueue;</div><div class="line">    queue[arrayMethod || <span class="string">'push'</span>]([service, method, <span class="built_in">arguments</span>]);</div><div class="line">    <span class="keyword">return</span> moduleInstance;</div><div class="line">  &#125;;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">var</span> moduleInstance = &#123;</div><div class="line">  name: name,</div><div class="line">  requires: requires,</div><div class="line">  constant: invokeLater(<span class="string">'$provide'</span>, <span class="string">'constant'</span>, <span class="string">'unshift'</span>),</div><div class="line">  provider: invokeLater(<span class="string">'$provide'</span>, <span class="string">'provider'</span>),</div><div class="line">  factory: invokeLater(<span class="string">'$provide'</span>, <span class="string">'factory'</span>),</div><div class="line">  value: invokeLater(<span class="string">'$provide'</span>, <span class="string">'value'</span>),</div><div class="line">  service: invokeLater(<span class="string">'$provide'</span>, <span class="string">'service'</span>),</div><div class="line">  decorator: invokeLater(<span class="string">'$provide'</span>, <span class="string">'decorator'</span>),</div><div class="line">  filter: invokeLater(<span class="string">'$filterProvider'</span>, <span class="string">'register'</span>),</div><div class="line">  directive: invokeLater(<span class="string">'$compileProvider'</span>, <span class="string">'directive'</span>),</div><div class="line">  controller: invokeLater(<span class="string">'$controllerProvider'</span>, <span class="string">'register'</span>),</div><div class="line">  component: invokeLater(<span class="string">'$compileProvider'</span>, <span class="string">'component'</span>),</div><div class="line"></div><div class="line">  config: invokeLater(<span class="string">'$injector'</span>, <span class="string">'invoke'</span>, <span class="string">'push'</span>, configBlocks),</div><div class="line">  run: <span class="function"><span class="keyword">function</span>(<span class="params">fn</span>) </span>&#123;</div><div class="line">    moduleInstance._runBlocks.push(fn);</div><div class="line">    <span class="keyword">return</span> moduleInstance;</div><div class="line">  &#125;,</div><div class="line">  _invokeQueue: invokeQueue,</div><div class="line">  _configBlocks: configBlocks,</div><div class="line">  _runBlocks: []</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<h4 id="九、-apply-和-digest"><a href="#九、-apply-和-digest" class="headerlink" title="九、$apply 和 $digest"></a>九、$apply 和 $digest</h4><p>$apply 会使 ng 进入 $digest cycle, 并从 $rootScope 开始遍历(深度优先)检查数据变更。$digest 仅会检查该 scope 和它的子 scope，当你确定当前操作仅影响它们时，用 $digest 可以稍微提升性能。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> $apply = <span class="function"><span class="params">exp</span> =&gt;</span> &#123;</div><div class="line">  $<span class="built_in">eval</span>(exp);</div><div class="line">  $rootScope.$digest();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>结合 $injector 使⽤ module ⾥的数据<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// module.js</span></span><br><span class="line">angular.module(<span class="string">'App'</span>)</span><br><span class="line">  ...</span><br><span class="line">  .constant(<span class="string">'num1'</span>, <span class="number">3</span>)</span><br><span class="line">  .constant(<span class="string">'num2'</span>, <span class="number">2</span>)</span><br><span class="line"><span class="comment">// app.js</span></span><br><span class="line">angular.module(<span class="string">'App'</span>, []).controller(<span class="string">'Controller'</span>, [<span class="string">'$scope'</span>, <span class="string">'week'</span>, <span class="string">'$injector'</span>,    <span class="function"><span class="keyword">function</span>(<span class="params">$scope, week, $injector</span>) </span>&#123;</span><br><span class="line">￼    <span class="function"><span class="keyword">function</span> <span class="title">sum</span> (<span class="params">num1, num2</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> num1 + num2;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">const</span> num1 = $injector.get(<span class="string">'num1'</span>);</span><br><span class="line">    <span class="keyword">const</span> num2 = $injector.get(<span class="string">'num2'</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(sum(num1, num2));</span><br><span class="line">  &#125;</span><br><span class="line">]);</span><br></pre></td></tr></table></figure></p>
+<h4 id="八、无处不在的-Provider"><a href="#八、无处不在的-Provider" class="headerlink" title="八、无处不在的 Provider"></a>八、无处不在的 Provider</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> invokeLater = <span class="function"><span class="keyword">function</span>(<span class="params">service, method, arrayMethod, queue</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    queue = queue || invokeQueue;</span><br><span class="line">    queue[arrayMethod || <span class="string">'push'</span>]([service, method, <span class="built_in">arguments</span>]);</span><br><span class="line">    <span class="keyword">return</span> moduleInstance;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> moduleInstance = &#123;</span><br><span class="line">  name: name,</span><br><span class="line">  requires: requires,</span><br><span class="line">  constant: invokeLater(<span class="string">'$provide'</span>, <span class="string">'constant'</span>, <span class="string">'unshift'</span>),</span><br><span class="line">  provider: invokeLater(<span class="string">'$provide'</span>, <span class="string">'provider'</span>),</span><br><span class="line">  factory: invokeLater(<span class="string">'$provide'</span>, <span class="string">'factory'</span>),</span><br><span class="line">  value: invokeLater(<span class="string">'$provide'</span>, <span class="string">'value'</span>),</span><br><span class="line">  service: invokeLater(<span class="string">'$provide'</span>, <span class="string">'service'</span>),</span><br><span class="line">  decorator: invokeLater(<span class="string">'$provide'</span>, <span class="string">'decorator'</span>),</span><br><span class="line">  filter: invokeLater(<span class="string">'$filterProvider'</span>, <span class="string">'register'</span>),</span><br><span class="line">  directive: invokeLater(<span class="string">'$compileProvider'</span>, <span class="string">'directive'</span>),</span><br><span class="line">  controller: invokeLater(<span class="string">'$controllerProvider'</span>, <span class="string">'register'</span>),</span><br><span class="line">  component: invokeLater(<span class="string">'$compileProvider'</span>, <span class="string">'component'</span>),</span><br><span class="line"></span><br><span class="line">  config: invokeLater(<span class="string">'$injector'</span>, <span class="string">'invoke'</span>, <span class="string">'push'</span>, configBlocks),</span><br><span class="line">  run: <span class="function"><span class="keyword">function</span>(<span class="params">fn</span>) </span>&#123;</span><br><span class="line">    moduleInstance._runBlocks.push(fn);</span><br><span class="line">    <span class="keyword">return</span> moduleInstance;</span><br><span class="line">  &#125;,</span><br><span class="line">  _invokeQueue: invokeQueue,</span><br><span class="line">  _configBlocks: configBlocks,</span><br><span class="line">  _runBlocks: []</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="九、-apply-和-digest"><a href="#九、-apply-和-digest" class="headerlink" title="九、$apply 和 $digest"></a>九、$apply 和 $digest</h4><p>$apply 会使 ng 进入 $digest cycle, 并从 $rootScope 开始遍历(深度优先)检查数据变更。$digest 仅会检查该 scope 和它的子 scope，当你确定当前操作仅影响它们时，用 $digest 可以稍微提升性能。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> $apply = <span class="function"><span class="params">exp</span> =&gt;</span> &#123;</span><br><span class="line">  $<span class="built_in">eval</span>(exp);</span><br><span class="line">  $rootScope.$digest();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>$digest()触发条件：</p>
 <ol>
 <li>DOM事件</li>
@@ -331,22 +309,22 @@
 <li>手动执行执行$digest()或$apply()</li>
 <li>浏览器Location变更事件 ($location)</li>
 </ol>
-<h4 id="十、脏值检测"><a href="#十、脏值检测" class="headerlink" title="十、脏值检测"></a>十、脏值检测</h4><p>我们摘录出脏值检测的核心代码，先来研究一下源代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">function Scope() &#123; </div><div class="line">  this.$$watchers = [];</div><div class="line">&#125;</div><div class="line"></div><div class="line">Scope.prototype.$watch = function (watchFn, listenerFn) &#123; </div><div class="line">  var watcher = &#123;</div><div class="line">    watchFn: watchFn,</div><div class="line">    listenerFn: listenerFn</div><div class="line">  &#125;;</div><div class="line">  this.$$watchers.push(watcher);</div><div class="line">&#125;;</div><div class="line"></div><div class="line">Scope.prototype.$digest = function () &#123;</div><div class="line">  var self = this;</div><div class="line">  var newValue, oldValue; _.forEach(this.$$watchers, function (watcher) &#123;</div><div class="line">    newValue = watcher.watchFn(self);</div><div class="line">    oldValue = watcher.last;</div><div class="line">    if (newValue !== oldValue) &#123;</div><div class="line">      watcher.last = newValue;</div><div class="line">      watcher.listenerFn(newValue, oldValue, self);</div><div class="line">    &#125;</div><div class="line">  &#125;); </div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<h4 id="十、脏值检测"><a href="#十、脏值检测" class="headerlink" title="十、脏值检测"></a>十、脏值检测</h4><p>我们摘录出脏值检测的核心代码，先来研究一下源代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">function Scope() &#123; </span><br><span class="line">  this.$$watchers = [];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Scope.prototype.$watch = function (watchFn, listenerFn) &#123; </span><br><span class="line">  var watcher = &#123;</span><br><span class="line">    watchFn: watchFn,</span><br><span class="line">    listenerFn: listenerFn</span><br><span class="line">  &#125;;</span><br><span class="line">  this.$$watchers.push(watcher);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Scope.prototype.$digest = function () &#123;</span><br><span class="line">  var self = this;</span><br><span class="line">  var newValue, oldValue; _.forEach(this.$$watchers, function (watcher) &#123;</span><br><span class="line">    newValue = watcher.watchFn(self);</span><br><span class="line">    oldValue = watcher.last;</span><br><span class="line">    if (newValue !== oldValue) &#123;</span><br><span class="line">      watcher.last = newValue;</span><br><span class="line">      watcher.listenerFn(newValue, oldValue, self);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;); </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
 <p>脏值检测简单来说就是给每个需要绑定的元素加个 <code>watcher</code>，缓存下 <code>oldValue</code>，然后定时遍历所有的<code>watcher</code>，比较 <code>newValue</code> 和 <code>oldValue</code>，如果变化了做更新操作。</p>
 <h4 id="十一、启动流程"><a href="#十一、启动流程" class="headerlink" title="十一、启动流程"></a>十一、启动流程</h4><p><img src="http://7xvi3w.com1.z0.glb.clouddn.com/angular1.png" alt="启动流程"></p>
-<h4 id="十二、参考资源"><a href="#十二、参考资源" class="headerlink" title="十二、参考资源"></a>十二、参考资源</h4><p><a href="https://github.com/teropa/build-your-own-angularjs" target="_blank" rel="external">build-your-own-angularjs</a></p>
+<h4 id="十二、参考资源"><a href="#十二、参考资源" class="headerlink" title="十二、参考资源"></a>十二、参考资源</h4><p><a href="https://github.com/teropa/build-your-own-angularjs" target="_blank" rel="noopener">build-your-own-angularjs</a></p>
 
             
         </div>
     </div>
     <div id="post-footer" class="post-footer main-content-wrap"> 
         <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
-          版权声明：<br/>文章首发于 <a href="http://jartto.wang"> Jartto's blog </a>，
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's blog </a>，
           转载文章请务必以超链接形式标明文章出处，作者信息及本版权声明（<a href="http://jartto.wang"> http://jartto.wang </a>)。
         </div>
         
             <div class="post-footer-tags">
-                <span class="text-color-light text-small">标签</span><br/>
+                <span class="text-color-light text-small">标签</span><br>
                 
     <a class="tag tag--primary tag--small t-link" href="/tags/angularjs/">angularjs</a>
 
@@ -357,7 +335,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/02/08/count-pit-of-mini-programs/"  data-tooltip="细数小程序的坑">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/02/08/count-pit-of-mini-programs/" data-tooltip="细数小程序的坑">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -375,7 +353,7 @@
     </nav>
     <ul class="post-actions post-action-share">
         <li class="post-action hide-lg hide-md hide-sm">
-            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
                 <i class="fa fa-share-alt"></i>
             </a>
         </li>
@@ -406,7 +384,7 @@
 </div>
 
 
-        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/qrcode.png" width="100%" alt="请 Jartto 喝杯茶，亦或是给他一个简单的项目需求"/></div>
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/qrcode.png" width="100%" alt="请 Jartto 喝杯茶，亦或是给他一个简单的项目需求"></div>
         
     </div>
 </article>
@@ -435,7 +413,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/02/08/count-pit-of-mini-programs/"  data-tooltip="细数小程序的坑">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/02/08/count-pit-of-mini-programs/" data-tooltip="细数小程序的坑">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -453,7 +431,7 @@
     </nav>
     <ul class="post-actions post-action-share">
         <li class="post-action hide-lg hide-md hide-sm">
-            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
                 <i class="fa fa-share-alt"></i>
             </a>
         </li>
@@ -489,7 +467,7 @@
     <ul class="share-options">
         <li class="share-option">
             <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/02/01/analysis-of-angularjs/">
-                <i class="fa fa-google-plus"></i><span class="">分享到 Google+</span>
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
             </a>
         </li>
         <li class="share-option">
@@ -520,27 +498,27 @@
             <i class="fa fa-remove"></i>
         </div>
         
-            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
         
             <h4 id="about-card-name">Jartto</h4>
         
             <h5 id="about-card-bio"><blockquote>
-<p>最遗憾的不是把梦想丢在路上，</br>而是梦想从未上路!</br>Just do IT</p>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
 </blockquote>
 </h5>
         
         
             <h5 id="about-card-job">
                 <i class="fa fa-briefcase"></i>
-                <br/>
-                <p>jartto@qq.com</p>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
 
             </h5>
         
         
             <h5 id="about-card-location">
                 <i class="fa fa-map-marker"></i>
-                <br/>
+                <br>
                 北京－朝阳
             </h5>
         
