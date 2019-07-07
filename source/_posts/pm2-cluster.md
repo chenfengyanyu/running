@@ -11,13 +11,13 @@ comments: false
 metaAlignment: center
 categories: 技术博文
 ---
-PM2 大大简化了 Node 任务操作，除了简单的应用外，我们还可以做一些有趣的事情。本节我们来探讨一下 PM2 的平滑启动以及具体使用方法。
+PM2 大大简化了 Node 任务操作，除了简单的应用外，我们还可以做一些有趣的事情。本节我们来探讨一下 PM2 的平滑启动以及数据监控。
 <!-- more -->
 如果你还不了解 `PM2`，可以先看看[PM2 初体验](http://jartto.wang/2016/06/27/first-experience-of-pm2/)，或者查看[PM2 用法简介](https://www.jianshu.com/p/f640450bd120)。
 
 #### 一、`PM2` 两种启动方式
-1.`cluster_mode`：用 `cluster` 来做负载均衡，我们不需要做任何代码的改动。
-2.`fork_mode`：用 `fork` 模式启动（默认），这可以允许我们通过改变 `exec_interpreter` 参数，启动 `php` 或者 `python` 服务。
+1.`cluster_mode`：用 `cluster` 来做负载均衡，我们不需要做任何代码的改动。       
+2.`fork_mode`：用 `fork` 模式启动（默认），这可以允许我们通过改变 `exec_interpreter` 参数，启动 `php` 或者 `python` 服务。      
 
 
 {% alert success %}
@@ -184,13 +184,16 @@ module.exports = {
 命令很简单，都有注释，这里就不赘述了。
 
 3.是时候启动了
-```
+```bash
 # Setup deployment at remote location
 pm2 deploy production setup
+
 # Update remote version
 pm2 deploy production update
+
 # Revert to -1 deployment
 pm2 deploy production revert 1
+
 # execute a command on remote servers
 pm2 deploy production exec "pm2 reload all"
 ```
@@ -215,23 +218,68 @@ pm2 deploy <configuration_file> <environment> <command>
 ```
 "env": {
     "NODE_ENV": "production",
-    "REMOTE_ADDR": "http://www.example.com/"
+    "REMOTE_ADDR": "http://www.jartto.wang/"
   },
   "env_dev": {
     "NODE_ENV": "development",
-    "REMOTE_ADDR": "http://wdev.example.com/"
+    "REMOTE_ADDR": "http://dev.jartto.wang/"
   },
   "env_test": {
     "NODE_ENV": "test",
-    "REMOTE_ADDR": "http://wtest.example.com/"
+    "REMOTE_ADDR": "http://test.jartto.wang/"
   }
 ```
 
 #### 七、负载均衡
+`PM2` 提供了强大的负载能力，我们可以通过如下命令来开启：
 ```
 pm2 start app.js -i 3 # 开启三个进程
 pm2 start app.js -i max # 根据机器CPU核数，开启对应数目的进程
 ```
+
+#### 八、数据监控
+`PM2` 提供了一个数据监控命令：`pm2 monit`，执行命令后，大概界面如下：
+![monit](https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/pm2/monit.png)
+
+看起来不错，可惜并不实用。大家可能发现了，在实际场景下，我们线上环境会有 `N` 台服务器，你会一台台上去看监控数据吗？
+
+{% alert info %}
+显然，我们碰到了另一种场景，那么如何才能统一监控呢？
+{% endalert %}
+
+不要着急，`PM2` 为我们提供了另外一种方式，通过在 `Server` 端运行命令：`pm2 web`，我们可以在该机器启动一个监听服务：
+![web](https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/pm2/pm2web.png)
+
+之后，你可以通过 `主机 IP:9615` 来获取数据，如下图：
+![api](https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/pm2/api.png)
+
+{% alert info %}
+获取数据可以通过客户端轮询，或者是服务端 Socket 推送，It's up to you!
+{% endalert %}
+
+最后，我们来看看数据格式：
+![data](https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/pm2/data.png)
+
+有了数据，那么可视化岂不是小菜一碟，我们就可以在本地实时监控如下数据：
+1.服务器内存情况；
+2.`CPU` 使用情况；
+3.各个站点服务情况，是否正常运转，是否报错，是否频繁重启等；
+4.服务器平均负载；
+...
+
+
+#### 九、重置状态
+既然通过 `PM2` 来监控数据了，那么我们肯定希望每次的数据是准确的，所以这时候就可以使用：
+```dash
+pm2 reset jartto-test
+```
+来重置服务状态。
+
+#### 十、最终效果
+有了数据，可视化就非常容易了，我们来看一个简单的示例：
+![show](https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/pm2/show.png)
+
+当然，你可以做的更好，快发挥你创造性，做一些有趣的事情吧！
 
 
 

@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     <meta name="baidu-site-verification" content="bJPvLdWAu8" />
     <meta name="generator" content="Jartto&#39;s blog">
-    <title>重写 Audio 样式 - Jartto&#39;s blog</title>
+    <title>HTML5 之跨域通讯（postMessage） - Jartto&#39;s blog</title>
     <meta name="author" content="Jartto">
     
         <meta name="keywords" content="Jartto,Web 前端开发,博客,">
@@ -18,18 +18,20 @@
     
         <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
     
-    <meta name="description" content="众所周知，HTML5 已经可以很好的支持 Audio 和 Vedio 了，我们可以方便的在网页添加多媒体控件。然而，设计师总是与众不同，修改 Audio 默认样式已成常态。">
-<meta name="keywords" content="html5,css,audio,style">
+    <meta name="description" content="很多情况下，我们受到浏览器的安全策略限制。如何能规避此限制，并且能安全的使用跨域通讯，这就不得不介绍一下 postMessage 了。">
+<meta name="keywords" content="HTML5,postMessage">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="重写 Audio 样式">
-<meta property="og:url" content="http://jartto.wang/2018/04/25/rewrite-audio-style/index.html">
+<meta property="og:title" content="HTML5 之跨域通讯（postMessage）">
+<meta property="og:url" content="http://jartto.wang/2019/06/11/post-message/index.html">
 <meta property="og:site_name" content="Jartto&#39;s blog">
-<meta property="og:description" content="众所周知，HTML5 已经可以很好的支持 Audio 和 Vedio 了，我们可以方便的在网页添加多媒体控件。然而，设计师总是与众不同，修改 Audio 默认样式已成常态。">
+<meta property="og:description" content="很多情况下，我们受到浏览器的安全策略限制。如何能规避此限制，并且能安全的使用跨域通讯，这就不得不介绍一下 postMessage 了。">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2018-10-29T01:26:28.000Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/postmsg/use.png">
+<meta property="og:updated_time" content="2019-07-08T13:10:34.955Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="重写 Audio 样式">
-<meta name="twitter:description" content="众所周知，HTML5 已经可以很好的支持 Audio 和 Vedio 了，我们可以方便的在网页添加多媒体控件。然而，设计师总是与众不同，修改 Audio 默认样式已成常态。">
+<meta name="twitter:title" content="HTML5 之跨域通讯（postMessage）">
+<meta name="twitter:description" content="很多情况下，我们受到浏览器的安全策略限制。如何能规避此限制，并且能安全的使用跨域通讯，这就不得不介绍一下 postMessage 了。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/postmsg/use.png">
     
     
         
@@ -38,8 +40,8 @@
         <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
     
     
-        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/audio0.png"/>
-        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/audio0.png" />
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/postmsg/logo.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/postmsg/logo.png" />
     
     
     
@@ -213,13 +215,13 @@
         <div class="post-header main-content-wrap text-center">
     
         <h1 class="post-title" itemprop="headline">
-            重写 Audio 样式
+            HTML5 之跨域通讯（postMessage）
         </h1>
     
     <div class="post-meta">
-    <time itemprop="datePublished" datetime="2018-04-25T08:26:16+08:00">
+    <time itemprop="datePublished" datetime="2019-06-11T16:31:21+08:00">
 	  
-		    2018/4月/25 08:26:16
+		    2019/6月/11 16:31:21
     	
     </time>
     
@@ -241,30 +243,36 @@
     
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
-            <p>众所周知，HTML5 已经可以很好的支持 Audio 和 Vedio 了，我们可以方便的在网页添加多媒体控件。然而，设计师总是与众不同，修改 Audio 默认样式已成常态。<br><a id="more"></a><br>本文将围绕如何通过 <code>CSS</code> 来修改 <code>HTML5</code> 的默认样式，撇开 <code>JS</code> 实现方式。当然，后续还会推出一篇文章：<a href="#">打造与众不同的 Audio 播放器</a>，先占个坑吧！</p>
-<h4 id="一、Audio-结构"><a href="#一、Audio-结构" class="headerlink" title="一、Audio 结构"></a>一、Audio 结构</h4><p>Audio 的用法很简单，插入下面的代码，一个原生音频播放器就完成了：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">audio</span> <span class="attr">controls</span>=<span class="string">"controls"</span> <span class="attr">preload</span>=<span class="string">"auto"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">"jartto.ogg"</span> <span class="attr">type</span>=<span class="string">"audio/ogg"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">"jartto.mp3"</span> <span class="attr">type</span>=<span class="string">"audio/mpeg"</span> /&gt;</span></span><br><span class="line">Your browser does not support the audio element.</span><br><span class="line"><span class="tag">&lt;/<span class="name">audio</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<h4 id="二、属性一览"><a href="#二、属性一览" class="headerlink" title="二、属性一览"></a>二、属性一览</h4><ul>
-<li>autoplay：如果出现该属性，则音频在就绪后马上播放。</li>
-<li>controls：如果出现该属性，则向用户显示控件，比如播放按钮。</li>
-<li>loop：如果出现该属性，则每当音频结束时重新开始播放。</li>
-<li>preload：如果出现该属性，则音频在页面加载时进行加载，并预备播放。如果使用 “autoplay”，则忽略该属性。</li>
-<li>src：要播放的音频的 URL。</li>
-</ul>
-<p>更多详情，请参考文档：<a href="http://www.w3school.com.cn/html5/tag_audio.asp" target="_blank" rel="noopener">HTML5 Audio 标签</a></p>
-<h4 id="三、问题窘境"><a href="#三、问题窘境" class="headerlink" title="三、问题窘境"></a>三、问题窘境</h4><p>当我们打开开发者工具审查 <code>Audio</code> 元素的时候，除了 <code>Audio</code> 标签，什么也看不到。这时候，肯定有人想这么改：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">audio</span> &#123;</span><br><span class="line">  // todo...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>然而，并没有什么卵用。</p>
-<div class="alert warning"><p>那么问题来了，如果只通过修改样式，能不能达到修改音频播放器的外观的功能呢？</p>
+            <p>很多情况下，我们受到浏览器的安全策略限制。如何能规避此限制，并且能安全的使用跨域通讯，这就不得不介绍一下 postMessage 了。<br><a id="more"></a></p>
+<h4 id="一、关于-postMessage"><a href="#一、关于-postMessage" class="headerlink" title="一、关于 postMessage"></a>一、关于 postMessage</h4><div class="alert success"><p>window.postMessage() 方法可以安全地实现跨源通信。</p>
 </div>
-<h4 id="四、最终方案"><a href="#四、最终方案" class="headerlink" title="四、最终方案"></a>四、最终方案</h4><p>答案是肯定的，我们来覆写 Audio 内置的一些全局样式，如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">audio::-webkit-media-controls-panel</span><br><span class="line"></span><br><span class="line">audio::-webkit-media-controls-mute-button</span><br><span class="line"></span><br><span class="line">audio::-webkit-media-controls-play-button</span><br><span class="line"></span><br><span class="line">audio::-webkit-media-controls-timeline-container</span><br><span class="line"></span><br><span class="line">audio::-webkit-media-controls-current-time-display</span><br><span class="line"></span><br><span class="line">audio::-webkit-media-controls-time-remaining-display</span><br><span class="line"></span><br><span class="line">audio::-webkit-media-controls-timeline</span><br><span class="line"></span><br><span class="line">audio::-webkit-media-controls-volume-slider-container</span><br><span class="line"></span><br><span class="line">audio::-webkit-media-controls-volume-slider</span><br><span class="line"></span><br><span class="line">audio::-webkit-media-controls-seek-back-button</span><br><span class="line"></span><br><span class="line">audio::-webkit-media-controls-seek-forward-button</span><br><span class="line"></span><br><span class="line">audio::-webkit-media-controls-fullscreen-button</span><br><span class="line"></span><br><span class="line">audio::-webkit-media-controls-rewind-button</span><br><span class="line"></span><br><span class="line">audio::-webkit-media-controls-return-to-realtime-button</span><br><span class="line"></span><br><span class="line">audio::-webkit-media-controls-toggle-closed-captions-button</span><br></pre></td></tr></table></figure></p>
-<p>嗯，意思很明了，就这么干。看起来并没有什么挑战，这仅仅只是开始！</p>
-<h4 id="五、新的问题"><a href="#五、新的问题" class="headerlink" title="五、新的问题"></a>五、新的问题</h4><p>我们碰到了新的问题，具体如下：</p>
-<ol>
-<li>播放／暂停 按钮不能替换；</li>
-<li>播放进度 slider 和 声音 slider 无法修改样式；</li>
-</ol>
-<p>怎么办，这是个问题，距离设计师与众不同的音频播放器就差一步之遥了！</p>
-<h4 id="六、继续探索"><a href="#六、继续探索" class="headerlink" title="六、继续探索"></a>六、继续探索</h4><p>首先，突破点在于能否找到一个 <code>pause</code> 的样式类，来解决上述问题一。<br>其次，play 和 pause 如何触发图片互换。</p>
-<p>我们知道，通过 <code>audio::-webkit-media-controls-play-button</code> 可以重新定义播放按钮的外观样式。</p>
+<p>通常，对于两个不同页面的脚本，只有当执行它们的页面位于具有相同的协议（通常为 <code>https</code>），端口号（<code>443</code> 为 <code>https</code> 的默认值），以及主机 (两个页面的模数 <code>Document.domain</code> 设置为相同的值) 时，这两个脚本才能相互通信。</p>
+<p><code>window.postMessage()</code> 方法提供了一种受控机制来规避此限制，只要正确的使用，这种方法就很安全。</p>
+<h4 id="二、理解过程"><a href="#二、理解过程" class="headerlink" title="二、理解过程"></a>二、理解过程</h4><p><code>window.postMessage()</code> 方法被调用时，会在所有页面脚本执行完毕之后向目标窗口派发一个  <code>MessageEvent</code> 消息。 该 <code>MessageEvent</code> 消息有四个属性： </p>
+<p>1.<code>message</code> 属性表示该 <code>message</code> 的类型；<br>2.<code>data</code> 属性为 <code>window.postMessage</code> 的第一个参数；<br>3.<code>origin</code> 属性表示调用 <code>window.postMessage()</code> 方法时调用页面的当前状态；<br>4.<code>source</code> 属性记录调用 <code>window.postMessage()</code> 方法的窗口信息。</p>
+<p>关于更多细节，我们可以查看<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Window/postMessage" target="_blank" rel="noopener"> MDN 文档</a>，这里就不赘述了。</p>
+<h4 id="三、兼容性"><a href="#三、兼容性" class="headerlink" title="三、兼容性"></a>三、兼容性</h4><p><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/postmsg/use.png" alt="caniuse"></p>
+<p>通过上面的图片，我们可以看出来，几乎所有的浏览器都支持了 <code>postMessage</code>，所以放心大胆的去使用吧。</p>
+<h4 id="四、用法简介"><a href="#四、用法简介" class="headerlink" title="四、用法简介"></a>四、用法简介</h4><p>基本用例：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">otherWindow.postMessage(message, targetOrigin, [transfer]);</span><br></pre></td></tr></table></figure></p>
+<p>1.<code>otherWindow</code><br>其他窗口的一个引用，比如 <code>iframe</code> 的 <code>contentWindow</code> 属性、执行 <code>window.open</code> 返回的窗口对象、或者是命名过或数值索引的 <code>window.frames</code>。</p>
+<p>2.<code>message</code><br>将要发送到其他 <code>window</code> 的数据。它将会被结构化克隆算法序列化。</p>
+<div class="alert info"><p>这意味着我们可以不受什么限制的将数据对象安全的传送给目标窗口而无需自己序列化。</p>
+</div>
+<p>3.<code>targetOrigin</code><br>通过窗口的 <code>origin</code> 属性来指定哪些窗口能接收到消息事件，其值可以是字符串 「*」（表示无限制）或者一个 <code>URI</code>。</p>
+<p>在发送消息的时候，如果目标窗口的协议、主机地址或端口这三者的任意一项不匹配 <code>targetOrigin</code> 提供的值，那么消息就不会被发送；</p>
+<p>只有三者完全匹配，消息才会被发送。这个机制用来控制消息可以发送到哪些窗口。</p>
+<p>我们举个例子，当用 <code>postMessage</code> 传送密码时，这个参数就显得尤为重要，必须保证它的值与这条包含密码的信息的预期接受者的 <code>origin</code> 属性完全一致，来防止密码被恶意的第三方截获。</p>
+<p>如果你明确的知道消息应该发送到哪个窗口，那么请始终提供一个有确切值的 <code>targetOrigin</code>，而不是 <code>*</code>。</p>
+<div class="alert danger"><p>需要注意：不提供确切的目标将导致数据泄露到恶意站点。</p>
+</div>
+<p>4.<code>transfer</code><br>是一串和 <code>message</code> 同时传递的 <code>Transferable</code> 对象. 这些对象的所有权将被转移给消息的接收方，而发送一方将不再保有所有权。</p>
+<h4 id="五、事件监听"><a href="#五、事件监听" class="headerlink" title="五、事件监听"></a>五、事件监听</h4><p>我们来看下面这段代码：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">"message"</span>, receiveMessage, <span class="literal">false</span>);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">receiveMessage</span>(<span class="params">event</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="comment">// For Chrome, the origin property is in the event.originalEvent</span></span><br><span class="line">  <span class="comment">// object. </span></span><br><span class="line">  <span class="comment">// 这里不准确，chrome没有这个属性</span></span><br><span class="line">  <span class="comment">// var origin = event.origin || event.originalEvent.origin; </span></span><br><span class="line">  <span class="keyword">var</span> origin = event.origin</span><br><span class="line">  <span class="keyword">if</span> (origin !== <span class="string">"http://jartto.wang:8080"</span>)</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>1.<code>data</code><br>从其他 <code>window</code> 中传递过来的对象。</p>
+<p>2.<code>origin</code><br>调用 <code>postMessage</code>  时消息发送方窗口的 <code>origin</code> . 这个字符串由 协议、<code>://</code>、域名、<code>: 端口号</code> 拼接而成。</p>
+<p>例如 <code>https://jartto.wang (隐含端口 443)</code>、<code>http://jartto.net(隐含端口 80)</code>、<code>http://jartto.com:8080</code>。请注意，这个 <code>origin</code> 不能保证是该窗口的当前或未来 <code>origin</code> ，因为<code>postMessage</code> 被调用后可能被导航到不同的位置。</p>
+<p>3.<code>source</code><br>对发送消息的窗口对象的引用， 我们可以使用此来在具有不同 <code>origin</code> 的两个窗口之间建立双向通信。</p>
+<h4 id="六、简单应用"><a href="#六、简单应用" class="headerlink" title="六、简单应用"></a>六、简单应用</h4><p>1.监听 <code>message</code> 事件：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">"message"</span>, receiveMessage, <span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">receiveMessage</span>(<span class="params">event</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'get it !!!'</span>,event);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>2.发送数据<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.postMessage(&#123;</span><br><span class="line">    name: <span class="string">'Jartto'</span>,</span><br><span class="line">    say: <span class="string">'hello~'</span>,</span><br><span class="line">    arr: [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">&#125;, <span class="string">'*'</span>);</span><br></pre></td></tr></table></figure></p>
 
             
         </div>
@@ -278,7 +286,7 @@
             <div class="post-footer-tags">
                 <span class="text-color-light text-small">标签</span><br>
                 
-    <a class="tag tag--primary tag--small t-link" href="/tags/audio/">audio</a> <a class="tag tag--primary tag--small t-link" href="/tags/css/">css</a> <a class="tag tag--primary tag--small t-link" href="/tags/html5/">html5</a> <a class="tag tag--primary tag--small t-link" href="/tags/style/">style</a>
+    <a class="tag tag--primary tag--small t-link" href="/tags/HTML5/">HTML5</a> <a class="tag tag--primary tag--small t-link" href="/tags/postMessage/">postMessage</a>
 
             </div>
         
@@ -287,7 +295,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/04/29/audition-of-f2e-2/" data-tooltip="前端反思录（二）－不要让软实力成为短板">
+                    <a class="post-action-btn btn btn--disabled">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -295,7 +303,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/03/30/grasp-http2-0/" data-tooltip="掌握 HTTP2.0">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/05/24/pm2-cluster/" data-tooltip="进阶 PM2">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
                     <i class="fa fa-angle-right"></i>
@@ -310,17 +318,17 @@
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/04/25/rewrite-audio-style/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2019/06/11/post-message/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/04/25/rewrite-audio-style/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2019/06/11/post-message/">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/04/25/rewrite-audio-style/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2019/06/11/post-message/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
@@ -365,7 +373,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/04/29/audition-of-f2e-2/" data-tooltip="前端反思录（二）－不要让软实力成为短板">
+                    <a class="post-action-btn btn btn--disabled">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -373,7 +381,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/03/30/grasp-http2-0/" data-tooltip="掌握 HTTP2.0">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/05/24/pm2-cluster/" data-tooltip="进阶 PM2">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
                     <i class="fa fa-angle-right"></i>
@@ -388,17 +396,17 @@
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/04/25/rewrite-audio-style/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2019/06/11/post-message/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/04/25/rewrite-audio-style/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2019/06/11/post-message/">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/04/25/rewrite-audio-style/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2019/06/11/post-message/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
@@ -418,17 +426,17 @@
                 <div id="share-options-bar" class="share-options-bar" data-behavior="3">
     <ul class="share-options">
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/04/25/rewrite-audio-style/">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2019/06/11/post-message/">
                 <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
             </a>
         </li>
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/04/25/rewrite-audio-style/">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2019/06/11/post-message/">
                 <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
             </a>
         </li>
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/04/25/rewrite-audio-style/">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2019/06/11/post-message/">
                 <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
             </a>
         </li>
