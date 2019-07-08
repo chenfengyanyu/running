@@ -9,7 +9,7 @@ tags:
 - worker
 comments: false
 metaAlignment: center
-categories: 技术杂谈
+categories: 技术博文
 ---
 提到 HTML5 总是让人津津乐道，太多的特性和有趣的 API 让人耳目一新。但是很多童鞋还停留在语义化的阶段，忽视了 HTML5 的强劲之处。
 <!-- more -->
