@@ -87,12 +87,12 @@ Plugins:
 feed:
     type: atom
     path: atom.xml
-    limit: 10
+    limit: 20
 
 #sitemap
 sitemap:
   path: sitemap.xml
-  
+
 baidusitemap:
   path: baidusitemap.xml
 

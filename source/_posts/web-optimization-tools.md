@@ -11,7 +11,7 @@ comments: false
 metaAlignment: center
 categories: 技术博文
 ---
-“工欲善其事，必先利其器”，在「[网站优化实战](http://jartto.wang/2019/02/16/web-optimization/)」中我们提到了一些优化的相关经验，并没有对优化工具展开讨论，这节就让我们一起上手实践吧！
+工欲善其事，必先利其器。在「[网站优化实战](http://jartto.wang/2019/02/16/web-optimization/)」中我们提到了一些优化的相关经验，并没有对优化工具展开讨论，这节就让我们一起上手实践吧！
 <!-- more -->
 #### 一、概要
 {% alert success %}
