@@ -26,15 +26,15 @@
 <meta property="og:site_name" content="Jartto&#39;s blog">
 <meta property="og:description" content="吃早饭的时候，同事随意问了一句：“你知道 CSS 是怎么解析的吗？”，我一头雾水。对哦，作为前端，每天都在与 CSS 打交道，我竟然忽视了最基本的原理。">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/parse2.png-blog">
-<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/parse1.png-blog">
-<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/parse3.png-blog">
-<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/parse4.png-blog">
-<meta property="og:updated_time" content="2017-11-27T22:06:07.000Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/css-parse/webkit-render.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/css-parse/css-parse.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/css-parse/css-rule.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/css-parse/parse-speed.jpg">
+<meta property="og:updated_time" content="2019-10-08T08:11:25.013Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="探究 CSS 解析原理">
 <meta name="twitter:description" content="吃早饭的时候，同事随意问了一句：“你知道 CSS 是怎么解析的吗？”，我一头雾水。对哦，作为前端，每天都在与 CSS 打交道，我竟然忽视了最基本的原理。">
-<meta name="twitter:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/parse2.png-blog">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/css-parse/webkit-render.png">
     
     
         
@@ -43,8 +43,8 @@
         <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
     
     
-        <meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/parse0.png"/>
-        <meta class="swiftype" name="image" data-type="enum" content="http://7xvi3w.com1.z0.glb.clouddn.com/parse0.png" />
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/css-parse/logo.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/css-parse/logo.png" />
     
     
     
@@ -247,17 +247,17 @@
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
             <p>吃早饭的时候，同事随意问了一句：“你知道 CSS 是怎么解析的吗？”，我一头雾水。对哦，作为前端，每天都在与 CSS 打交道，我竟然忽视了最基本的原理。<br><a id="more"></a></p>
-<h4 id="一、浏览器渲染"><a href="#一、浏览器渲染" class="headerlink" title="一、浏览器渲染"></a>一、浏览器渲染</h4><p>开篇，我们还是不厌其烦的回顾一下浏览器的渲染过程，先上图：<br><img src="http://7xvi3w.com1.z0.glb.clouddn.com/parse2.png-blog" alt="webkit render"><br>正如上图所展示的，我们浏览器渲染过程分为了两条主线：<br>其一，HTML Parser 生成的 DOM 树；<br>其二，CSS Parser 生成的 Style Rules ；</p>
+<h4 id="一、浏览器渲染"><a href="#一、浏览器渲染" class="headerlink" title="一、浏览器渲染"></a>一、浏览器渲染</h4><p>开篇，我们还是不厌其烦的回顾一下浏览器的渲染过程，先上图：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/css-parse/webkit-render.png" alt="webkit render"><br>正如上图所展示的，我们浏览器渲染过程分为了两条主线：<br>其一，HTML Parser 生成的 DOM 树；<br>其二，CSS Parser 生成的 Style Rules ；</p>
 <p>在这之后，DOM 树与 Style Rules 会生成一个新的对象，也就是我们常说的 Render Tree 渲染树，结合 Layout 绘制在屏幕上，从而展现出来。</p>
 <div class="alert success"><p>本文的重点也就集中在第二条分支上，我们来探究一下 CSS 解析原理。</p>
 </div>
 <h4 id="二、Webkit-CSS-解析器"><a href="#二、Webkit-CSS-解析器" class="headerlink" title="二、Webkit CSS 解析器"></a>二、Webkit CSS 解析器</h4><p>浏览器 CSS 模块负责 CSS 脚本解析，并为每个 Element 计算出样式。CSS 模块虽小，但是计算量大，设计不好往往成为浏览器性能的瓶颈。</p>
 <p>CSS 模块在实现上有几个特点：CSS 对象众多(颗粒小而多)，计算频繁(为每个 Element 计算样式)。这些特性决定了 webkit 在实现 CSS 引擎上采取的设计，算法。如何高效的计算样式是浏览器内核的重点也是难点。</p>
-<p>先来看一张图：<br><img src="http://7xvi3w.com1.z0.glb.clouddn.com/parse1.png-blog" alt="webkit css parse"></p>
+<p>先来看一张图：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/css-parse/css-parse.jpg" alt="webkit css parse"></p>
 <div class="alert info"><p>Webkit 使用 Flex 和 Bison 解析生成器从 CSS 语法文件中自动生成解析器。</p>
 </div>
 <p>它们都是将每个 CSS 文件解析为样式表对象，每个对象包含 CSS 规则，CSS 规则对象包含选择器和声明对象，以及其他一些符合 CSS 语法的对象，下图可能会比较明了：</p>
-<p><img src="http://7xvi3w.com1.z0.glb.clouddn.com/parse3.png-blog" alt="css rule"></p>
+<p><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/css-parse/css-rule.jpg" alt="css rule"></p>
 <p>Webkit 使用了自动代码生成工具生成了相应的代码，也就是说<code>词法分析</code>和<code>语法分析</code>这部分代码是自动生成的，而 Webkit 中实现的 CallBack 函数就是在 CSSParser 中。</p>
 <p>CSS 的一些解析功能的入口也在此处，它们会调用 lex , parse 等生成代码。相对的，生成代码中需要的 CallBack 也需要在这里实现。</p>
 <p>举例来说，现在我们来看其中一个回调函数的实现，createStyleRule(),该函数将在一般性的规则需要被建立的时候调用，代码如下：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">CSSRule* CSSParser::createStyleRule(CSSSelector* selector)  </span><br><span class="line">&#123;  </span><br><span class="line">    CSSStyleRule* rule = <span class="number">0</span>;  </span><br><span class="line">    <span class="keyword">if</span> (selector) &#123;  </span><br><span class="line">        rule = <span class="keyword">new</span> CSSStyleRule(styleElement);  </span><br><span class="line">        m_parsedStyleObjects.append(rule);  </span><br><span class="line">        rule-&gt;setSelector(sinkFloatingSelector(selector));  </span><br><span class="line">        rule-&gt;setDeclaration(<span class="keyword">new</span> CSSMutableStyleDeclaration(rule, parsedProperties, numParsedProperties));  </span><br><span class="line">    &#125;  </span><br><span class="line">    clearProperties();  </span><br><span class="line">    <span class="keyword">return</span> rule;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
@@ -311,7 +311,7 @@
 </ul>
 <p>当然，知道了共享 computedStyle 的规则，那么反面我们也就了解了：不会共享 computedStyle 的规则，这里就不展开讨论了。</p>
 <p>深入了解，请参考：<a href="http://blog.csdn.net/scusyq/article/details/7059063" target="_blank" rel="noopener">Webkit CSS 引擎分析 - 高效执行的 CSS 脚本</a></p>
-<h4 id="七、眼见为实"><a href="#七、眼见为实" class="headerlink" title="七、眼见为实"></a>七、眼见为实</h4><p><img src="http://7xvi3w.com1.z0.glb.clouddn.com/parse4.png-blog" alt="parse speed"><br>如上图，我们可以看到不同的 CSS 选择器的组合，解析速度也会受到不同的影响，你还会轻视 CSS 解析原理吗？</p>
+<h4 id="七、眼见为实"><a href="#七、眼见为实" class="headerlink" title="七、眼见为实"></a>七、眼见为实</h4><p><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/css-parse/parse-speed.jpg" alt="parse speed"><br>如上图，我们可以看到不同的 CSS 选择器的组合，解析速度也会受到不同的影响，你还会轻视 CSS 解析原理吗？</p>
 <p>感兴趣的同学可以参考这里：<a href="http://test.veryos.com/selector/slickspeed/index.html" target="_blank" rel="noopener">speed/validity selectors test for frameworks</a></p>
 <h4 id="八、有何收获？"><a href="#八、有何收获？" class="headerlink" title="八、有何收获？"></a>八、有何收获？</h4><p>1.使用 id selector 非常的高效。在使用 id selector 的时候需要注意一点：因为 id 是唯一的，所以不需要既指定 id 又指定 tagName：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">Bad</span></span><br><span class="line"><span class="selector-tag">p</span><span class="selector-id">#id1</span> &#123;<span class="attribute">color</span>:red;&#125;  </span><br><span class="line"></span><br><span class="line"><span class="selector-tag">Good</span>  </span><br><span class="line"><span class="selector-id">#id1</span> &#123;<span class="attribute">color</span>:red;&#125;</span><br></pre></td></tr></table></figure></p>
 <div class="alert danger"><p>当然，你非要这么写也没有什么问题，但这会增加 CSS 编译与解析时间，实在是不值当。</p>

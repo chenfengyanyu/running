@@ -1,7 +1,7 @@
 ---
 title: 探究 CSS 解析原理
 date: 2017-11-13 22:35:10
-thumbnailImage: http://7xvi3w.com1.z0.glb.clouddn.com/parse0.png
+thumbnailImage: https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/css-parse/logo.png
 thumbnailImagePosition: left
 tags: 
 - css
@@ -15,7 +15,7 @@ categories: 技术博文
 <!-- more -->
 #### 一、浏览器渲染
 开篇，我们还是不厌其烦的回顾一下浏览器的渲染过程，先上图：
-![webkit render](http://7xvi3w.com1.z0.glb.clouddn.com/parse2.png-blog)
+![webkit render](https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/css-parse/webkit-render.png)
 正如上图所展示的，我们浏览器渲染过程分为了两条主线：
 其一，HTML Parser 生成的 DOM 树；
 其二，CSS Parser 生成的 Style Rules ；
@@ -32,7 +32,7 @@ categories: 技术博文
 CSS 模块在实现上有几个特点：CSS 对象众多(颗粒小而多)，计算频繁(为每个 Element 计算样式)。这些特性决定了 webkit 在实现 CSS 引擎上采取的设计，算法。如何高效的计算样式是浏览器内核的重点也是难点。
 
 先来看一张图：
-![webkit css parse](http://7xvi3w.com1.z0.glb.clouddn.com/parse1.png-blog)
+![webkit css parse](https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/css-parse/css-parse.jpg)
 
 {% alert info %}
 Webkit 使用 Flex 和 Bison 解析生成器从 CSS 语法文件中自动生成解析器。
@@ -40,7 +40,7 @@ Webkit 使用 Flex 和 Bison 解析生成器从 CSS 语法文件中自动生成�
 
 它们都是将每个 CSS 文件解析为样式表对象，每个对象包含 CSS 规则，CSS 规则对象包含选择器和声明对象，以及其他一些符合 CSS 语法的对象，下图可能会比较明了：
 
-![css rule](http://7xvi3w.com1.z0.glb.clouddn.com/parse3.png-blog)
+![css rule](https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/css-parse/css-rule.jpg)
 
 Webkit 使用了自动代码生成工具生成了相应的代码，也就是说`词法分析`和`语法分析`这部分代码是自动生成的，而 Webkit 中实现的 CallBack 函数就是在 CSSParser 中。
 
@@ -216,7 +216,7 @@ div {
 深入了解，请参考：[Webkit CSS 引擎分析 - 高效执行的 CSS 脚本](http://blog.csdn.net/scusyq/article/details/7059063)
 
 #### 七、眼见为实
-![parse speed](http://7xvi3w.com1.z0.glb.clouddn.com/parse4.png-blog)
+![parse speed](https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/css-parse/parse-speed.jpg)
 如上图，我们可以看到不同的 CSS 选择器的组合，解析速度也会受到不同的影响，你还会轻视 CSS 解析原理吗？
 
 感兴趣的同学可以参考这里：[speed/validity selectors test for frameworks](http://test.veryos.com/selector/slickspeed/index.html)

@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://jartto.wang/2017/11/13/Exploring-the-principle-of-CSS-parsing/</loc>
+    <lastmod>2019-10-08</lastmod>
+  </url>  <url>
     <loc>http://jartto.wang/2019/09/08/web-optimization-tools/</loc>
     <lastmod>2019-09-10</lastmod>
   </url>  <url>
@@ -297,9 +300,6 @@
   </url>  <url>
     <loc>http://jartto.wang/2017/04/15/nginx-exception-handling/</loc>
     <lastmod>2017-11-30</lastmod>
-  </url>  <url>
-    <loc>http://jartto.wang/2017/11/13/Exploring-the-principle-of-CSS-parsing/</loc>
-    <lastmod>2017-11-27</lastmod>
   </url>  <url>
     <loc>http://jartto.wang/2017/10/31/js-anti-aliasing/</loc>
     <lastmod>2017-11-20</lastmod>
