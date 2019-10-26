@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://jartto.wang/2019/10/23/css-theory-and-optimization/</loc>
+    
+    <lastmod>2019-10-26T08:14:52.572Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://jartto.wang/2017/11/13/Exploring-the-principle-of-CSS-parsing/</loc>
     
     <lastmod>2019-10-08T08:11:25.013Z</lastmod>
