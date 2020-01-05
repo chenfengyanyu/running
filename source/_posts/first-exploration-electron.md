@@ -16,9 +16,11 @@ categories: 技术博文
 文章首发于 Jartto's blog ，转载文章请务必以超链接形式标明文章出处。
 {% endalert %}
 
+Electron5.0 有一些变化，具体可以查看[本文](http://jartto.wang/2019/07/13/use-electron-5/)。
+
 #### 一、Electron 是什么？
 `Electron` 是由 `Github` 开发，用 `HTML`，`CSS` 和 `JavaScript` 来构建跨平台桌面应用程序的一个开源库。 `Electron` 通过将 `Chromium` 和 `Node.js` 合并到同一个运行时环境中，并将其打包为 `Mac`，`Windows` 和 `Linux` 系统下的应用来实现这一目的。
-![elctron](http://7xvi3w.com1.z0.glb.clouddn.com/electron2.png-blog)
+![elctron](https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/electron/start.jpeg)
 
 {% alert success %}
 `Chromium` 是 `Google` 为发展 `Chrome` 浏览器而启动的开源项目，`Chromium` 相当于 `Chrome` 的工程版或称实验版（尽管 `Chrome` 自身也有 `β` 版阶段），新功能会率先在 `Chromium` 上实现，待验证后才会应用在`Chrome` 上，故 `Chrome` 的功能会相对落后但较稳定。
@@ -40,7 +42,7 @@ $ npm install && npm start
 #### 三、简单示例
 项目启动后，你会看到一个 `Hello World!` 应用窗口，很简单，就不细说了。我更感兴趣的是 ` Electron API Demos app` ，大家可以去[官网下载](https://electronjs.org)：
 
-![Electron API Demos app](http://7xvi3w.com1.z0.glb.clouddn.com/electron4.png-blog)
+![Electron API Demos app](https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/electron/demo.png)
 
 在 ` Electron API Demos app` 中，我们可以查看官方 API 和 一些 Demo 演示，强烈建议去实际感受一下。只有你知道了它的强大之处，你才会兴奋不已，点燃学习的激情。
 
@@ -142,7 +144,7 @@ myNotification.onclick = () => {
 #### 五、整装代发
 在开始 `Coding` 前，我们需要认识一下桌面应用的基本构成，以及基础模块。这里以 `OS X` 示例：
 
-![base modules](http://7xvi3w.com1.z0.glb.clouddn.com/ps2.png-blog)
+![base modules](https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/electron/desk.png)
 
 上图列出了一个桌面应用应该涵盖的基本特征，当然，还有更多无法视觉感知，但却依然重要的底层模块。下文将一一罗列，并尽量用示例说明。
 
@@ -157,7 +159,7 @@ myNotification.onclick = () => {
 
 `Electron` 中，由 `package.json` 中的 `main.js` 运行出来的进程为主进程(Main Process)。主进程用于创建 `GUI` 界面以便 `web` 页面的展示。`Electron` 由 `Chromium` 负责页面的显示，所以当创建一个页面时，就会对应的创建渲染进程(Renderer Process)。
 
-![Electron Process](http://7xvi3w.com1.z0.glb.clouddn.com/electron6.png)
+![Electron Process](https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/electron/render.png)
 
 主进程通过创建 `BrowserWindow` 对象来创建 `web` 显示页面，`BrowserWindow` 运行在他自己的渲染进程中。当 `BrowserWindow` 被销毁时，对应的渲染进程也会终止。
 

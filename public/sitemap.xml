@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://jartto.wang/2020/01/01/web-ai/</loc>
+    
+    <lastmod>2020-01-05T13:05:05.067Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://jartto.wang/2018/01/03/first-exploration-electron/</loc>
+    
+    <lastmod>2019-12-19T09:27:04.369Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://jartto.wang/2019/10/23/css-theory-and-optimization/</loc>
     
     <lastmod>2019-11-07T08:24:53.762Z</lastmod>
@@ -481,13 +495,6 @@
     <loc>http://jartto.wang/2018/03/06/tips-of-mini-programs/</loc>
     
     <lastmod>2018-10-31T14:57:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://jartto.wang/2018/01/03/first-exploration-electron/</loc>
-    
-    <lastmod>2018-10-31T14:57:01.000Z</lastmod>
     
   </url>
   

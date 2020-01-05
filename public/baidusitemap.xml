@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://jartto.wang/2020/01/01/web-ai/</loc>
+    <lastmod>2020-01-05</lastmod>
+  </url>  <url>
+    <loc>http://jartto.wang/2018/01/03/first-exploration-electron/</loc>
+    <lastmod>2019-12-19</lastmod>
+  </url>  <url>
     <loc>http://jartto.wang/2019/10/23/css-theory-and-optimization/</loc>
     <lastmod>2019-11-07</lastmod>
   </url>  <url>
@@ -206,9 +212,6 @@
     <lastmod>2018-10-31</lastmod>
   </url>  <url>
     <loc>http://jartto.wang/2018/03/06/tips-of-mini-programs/</loc>
-    <lastmod>2018-10-31</lastmod>
-  </url>  <url>
-    <loc>http://jartto.wang/2018/01/03/first-exploration-electron/</loc>
     <lastmod>2018-10-31</lastmod>
   </url>  <url>
     <loc>http://jartto.wang/2018/05/24/build-your-dva2/</loc>
