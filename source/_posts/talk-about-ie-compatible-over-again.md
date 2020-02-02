@@ -58,9 +58,9 @@ js中设置了cookie和url重定向，引导用户去下载chrome浏览器，这
 
 #### 二、检查页面中的伪类和伪元素
 这里还是以ie9示例，下面列出ie9对伪类的支持情况：
-```css
+```
 //ie9不支持的伪类和伪元素
-:default
+:default 
 :valid
 :invalid
 :in-range
@@ -236,7 +236,7 @@ if(!+'\v1' && !'1'[0]){
 
 3.ie9支持的属性background-size怎么也会失效；
 解决方案：如下
-```css
+```
 //这么用
 >.two {
     background-image: url(../image/yunzi/temp04.png);

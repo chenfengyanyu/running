@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://jartto.wang/2020/01/20/system-load/</loc>
+    <lastmod>2020-01-20</lastmod>
+  </url>  <url>
+    <loc>http://jartto.wang/2016/12/06/talk-about-ie-compatible-over-again/</loc>
+    <lastmod>2020-01-20</lastmod>
+  </url>  <url>
     <loc>http://jartto.wang/2020/01/01/web-ai/</loc>
     <lastmod>2020-01-05</lastmod>
   </url>  <url>
@@ -357,9 +363,6 @@
   </url>  <url>
     <loc>http://jartto.wang/2016/12/08/yslow-add-expires-headers/</loc>
     <lastmod>2016-12-09</lastmod>
-  </url>  <url>
-    <loc>http://jartto.wang/2016/12/06/talk-about-ie-compatible-over-again/</loc>
-    <lastmod>2016-12-06</lastmod>
   </url>  <url>
     <loc>http://jartto.wang/2016/09/15/grasp-a-js-template-engine/</loc>
     <lastmod>2016-12-01</lastmod>

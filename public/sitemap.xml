@@ -2,9 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://jartto.wang/2020/01/20/system-load/</loc>
+    
+    <lastmod>2020-01-20T08:43:27.278Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://jartto.wang/2016/12/06/talk-about-ie-compatible-over-again/</loc>
+    
+    <lastmod>2020-01-20T03:39:19.118Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://jartto.wang/2020/01/01/web-ai/</loc>
     
-    <lastmod>2020-01-05T13:05:05.067Z</lastmod>
+    <lastmod>2020-01-05T15:42:42.529Z</lastmod>
     
   </url>
   
@@ -831,13 +845,6 @@
     <loc>http://jartto.wang/2016/12/08/yslow-add-expires-headers/</loc>
     
     <lastmod>2016-12-09T05:28:13.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://jartto.wang/2016/12/06/talk-about-ie-compatible-over-again/</loc>
-    
-    <lastmod>2016-12-06T10:41:02.000Z</lastmod>
     
   </url>
   
