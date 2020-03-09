@@ -4,7 +4,8 @@ date: 2020-03-08 18:32:43
 thumbnailImage: https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/break/logo.png
 thumbnailImagePosition: left
 tags: 
-- dva2
+- 技术视野
+- 规划
 comments: false
 metaAlignment: center
 categories: 技术博文
@@ -128,5 +129,60 @@ categories: 技术博文
 两个数据中心是对等的、不分主从、并可同时部署业务，可极大的提高资源的利用率和系统的工作效率、性能，双活是觉得备用数据中心只做备份太浪费了，所以让主备两个数据中心都同时承担用户的业务，此时，主备两个数据中心互为备份，并且进行实时备份。
 
 一般来说，主数据中心的负载可能会多一些，比如分担 60~70% 的业务，备数据中心只分担 40%~30% 的业务。
+
+#### 四、技术视野 - Technical perspective
+关于技术视野，峰会上提到了几个概念，下面我们来逐一解释。
+![技术视野](https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/break/perspective.png)
+
+1.**`5G` 时代**
+`5G` 时代，核心网采用微服务架构，也是和容器完美搭配——单体式架构 `Monolithic` 变成微服务架构`Microservices`，相当于一个全能型变成N个专能型。
+
+{% alert success %}
+每个专能型，分配给一个隔离的容器，赋予了最大程度的灵活。
+{% endalert %}
+
+![5G](https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/break/5g.png)
+
+`5G` 的特点概括来说：高数据速率、减少延迟、节省能源、降低成本、提高系统容量和大规模设备连接。
+
+
+2.**工程效能**
+很多大厂都专门设立了这个部门，主要职责包括：需求治理、质量分析，量化管理，代码构建、代码搜索，开发测试、自动化、发布、舆情监控等。
+
+![工程效能](https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/break/effective.png)
+
+3.**红蓝军对抗**
+类似于军事领域的红蓝军对抗，网络安全中，红蓝军对抗则是一方扮演黑客「蓝军」，一方扮演防御者「红军」。红蓝军对抗的目的就是用来评估企业安全性，有助于找出企业安全中最脆弱的环节，提升企业安全能力的建设。
+![红蓝军对抗](https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/break/confrontation.png)
+
+4.**数字化转型**
+![数字化转型](https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/break/digital.png)
+
+这里不得不说说什么是「数字领导力」，在我们正在经历的这场数字革命中，透明化、网络化、公开化和分享成为领导力文化的核心。
+
+数字经济时代，数字化领导力是企业战略地使用数字资产达成商业目的的能力。对企业而言，清晰的数字化战略和强有力的数字化领导者将对该目标的实现起到关键作用。
+
+#### 五、技能发展与规划 - Skill development and planning
+
+1.**进化路径**
+![进化路径](https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/break/plan.png)
+
+2.**具备能力**
+![数字化转型](https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/break/ability.png)
+
+3.**提升途径**
+![数字化转型](https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/break/ascent.png)
+
+#### 六、总结
+好了，以上就是我分享的主要内容，感兴趣的童鞋欢迎深入交流。如果你需要 `PPT` ，可以去这里[下载](https://pan.baidu.com/s/1nNha7JtZCOo1GfxuOx_aeg)（提取码: `i6ud`）。
+
+文章最后，打个小广告吧。如果你想搭上在线教育的快车，快速成长，不妨加入我们。一起成长，一起学习，一起挑战更多有趣的事情，「跟谁学-高途课堂」欢迎你，请将简历私我～
+
+
+
+
+
+
+
 
 
