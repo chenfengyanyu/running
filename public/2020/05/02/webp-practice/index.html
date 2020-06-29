@@ -32,7 +32,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/webp/sence.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/webp/nginx.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/webp/server.png">
-<meta property="og:updated_time" content="2020-05-14T00:20:02.918Z">
+<meta property="og:updated_time" content="2020-05-14T05:08:32.632Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="WebP 方案分析与实践">
 <meta name="twitter:description" content="对于网站来说，图片始终扮演着重要角色。图片大小直接影响网站速度、流量、运营成本以及用户体验。因此，减少图片大小成为网站优化最重要的一个环节。">
@@ -303,7 +303,8 @@
 </div>
 <h4 id="六、部署模型"><a href="#六、部署模型" class="headerlink" title="六、部署模型"></a>六、部署模型</h4><p>服务端部署模型需要简单了解一下，这样我们就可以根据不同的实际情况从上述<a href="http://jartto.wang/2020/05/02/webp-practice/">四种方案</a>中进行选择了。<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/webp/server.png" alt="Server"></p>
 <p>注意，如果你需要对 <code>Nginx</code> 进行配置，请不要操作 <code>Load Balancer</code> 层，尽量在应用服务器层操作。</p>
-<h4 id="七、技术揭秘"><a href="#七、技术揭秘" class="headerlink" title="七、技术揭秘"></a>七、技术揭秘</h4><p><strong>1.分块 <code>MacroBlocking</code></strong><br>将图片划分成多个宏块 <code>Macro Blocks</code>，典型的宏块由一个 <code>16×16</code> 的亮度像素 <code>luma pixel</code> 块和两个 <code>8×8</code> 的色度像素 <code>chroma pixel</code> 块组成。<br><div class="alert success"><p>分块越小，预测越准，需要记录的信息也越多。</p>
+<h4 id="七、技术揭秘"><a href="#七、技术揭秘" class="headerlink" title="七、技术揭秘"></a>七、技术揭秘</h4><p>听起来很酷，那么 <code>WebP</code> 究竟使用了什么很魔法，我们来揭秘一下：              </p>
+<p><strong>1.分块 <code>MacroBlocking</code></strong><br>将图片划分成多个宏块 <code>Macro Blocks</code>，典型的宏块由一个 <code>16×16</code> 的亮度像素 <code>luma pixel</code> 块和两个 <code>8×8</code> 的色度像素 <code>chroma pixel</code> 块组成。<br><div class="alert success"><p>分块越小，预测越准，需要记录的信息也越多。</p>
 </div><br>一般来说，细节越丰富的地方，分块越细，即使用 <code>4×4</code> 分块预测。细节相对不丰富的地方使用 <code>16×16</code> 分块。</p>
 <p><strong>2.帧内预测</strong><br><code>WebP</code> 有损压缩使用了帧内预测编码，这一技术也被用于 <code>VP8</code> 视频编码中的关键帧压缩。</p>
 <p><code>VP8</code> 有四种常见的帧内预测模型：</p>
@@ -316,7 +317,7 @@
 <p>使用哪种分块预测模式是动态决定的。<br><div class="alert info"><p>编码器会将所有可能的预测模式都计算出来，然后选出错误程度最小的模式。</p>
 </div></p>
 <p><strong>3.算法编码</strong><br><code>WebP</code> 使用 <code>Arithmetic entropy encoding</code>，该算法相比 <code>JPEG</code> 上使用的 <code>Huffman encoding</code>，在压缩表现上更出色。</p>
-<p>深入研究，请移步：<a href="#">Compression Techniques</a></p>
+<p>深入研究，请移步：<br>1.<a href="https://developers.google.com/speed/webp/docs/compression?hl=zh_cn" target="_blank" rel="noopener">Compression Techniques</a><br>2.<a href="https://www.jianshu.com/p/7fb720ec57cd" target="_blank" rel="noopener">WebP 有损压缩的编码过程</a></p>
 <h4 id="八、4种常见压缩格式"><a href="#八、4种常见压缩格式" class="headerlink" title="八、4种常见压缩格式"></a>八、4种常见压缩格式</h4><ol>
 <li><p><code>Lossy</code><br>有损压缩基于 <code>VP8</code> 关键帧编码。 <code>VP8</code> 是 一种视频压缩格式，是 <code>VP6</code> 和 <code>VP7</code> 格式的后继格式。</p>
 </li>
@@ -356,7 +357,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--disabled">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2020/05/25/blog-to-csdn/" data-tooltip="将博客搬至 CSDN">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -434,7 +435,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--disabled">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2020/05/25/blog-to-csdn/" data-tooltip="将博客搬至 CSDN">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
