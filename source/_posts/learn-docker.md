@@ -26,9 +26,9 @@ categories: 技术博文
 
 ![黑魔法](https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/docker/store3.png)
 
-等我到了海边，就用这个「镜像」，复制一套房子，拎包入住。Build once，Run anywhere!
+等我到了海边，就用这个「镜像」，复制一套房子，拎包入住。
 
-是不是很神奇？对应到我们的项目中来，房子就是项目本身，镜像就是项目的复制，背包就是镜像仓库。如果要动态扩容，从仓库中取出项目镜像，随便复制就可以了。
+是不是很神奇？对应到我们的项目中来，房子就是项目本身，镜像就是项目的复制，背包就是镜像仓库。如果要动态扩容，从仓库中取出项目镜像，随便复制就可以了。Build once，Run anywhere!
 
 {% alert info %}
 不用再关注版本、兼容、部署等问题，彻底解决了「上线即崩，无休止构建」的尴尬。
@@ -100,13 +100,13 @@ categories: 技术博文
 
 3.`Docker` 本身并不是容器，它是创建容器的工具，是应用容器引擎；
 
-2.`Docker` 三大核心概念，分别是：镜像 `Image`，容器 `Container`、仓库 `Repository`；
+4.`Docker` 三大核心概念，分别是：镜像 `Image`，容器 `Container`、仓库 `Repository`；
 
-3.`Docker` 技术使用 `Linux` 内核和内核功能（例如 `Cgroups` 和 `namespaces`）来分隔进程，以便各进程相互独立运行。
+5.`Docker` 技术使用 `Linux` 内核和内核功能（例如 `Cgroups` 和 `namespaces`）来分隔进程，以便各进程相互独立运行。
 
-4.由于 `Namespace` 和 `Cgroups` 功能仅在 `Linux` 上可用，因此容器无法在其他操作系统上运行。那么 `Docker` 如何在 `macOS` 或 `Windows` 上运行？ `Docker` 实际上使用了一个技巧，并在非 `Linux` 操作系统上安装 `Linux` 虚拟机，然后在虚拟机内运行容器。
+6.由于 `Namespace` 和 `Cgroups` 功能仅在 `Linux` 上可用，因此容器无法在其他操作系统上运行。那么 `Docker` 如何在 `macOS` 或 `Windows` 上运行？ `Docker` 实际上使用了一个技巧，并在非 `Linux` 操作系统上安装 `Linux` 虚拟机，然后在虚拟机内运行容器。
 
-5.镜像是一个可执行包，其包含运行应用程序所需的代码、运行时、库、环境变量和配置文件，容器是镜像的**运行时实例**。
+7.镜像是一个可执行包，其包含运行应用程序所需的代码、运行时、库、环境变量和配置文件，容器是镜像的**运行时实例**。
 
 更多关于 `Docker` 的原理，可以查看[ `Docker` 工作原理及容器化简易指南](http://dockone.io/article/8788)，这里不再赘述。
 
@@ -141,12 +141,19 @@ docker -v
 ```
 
 **4.安装桌面端**
+![Docker 桌面端](https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/docker/first.png)
+桌面端操作非常简单，先去[官网下载](https://www.docker.com/products/docker-desktop)。通过 `Docker` 桌面端，我们可以方便的操作：
+1.clone：克隆一个项目
+2.build：打包镜像
+3.run：运行实例
+4.share：共享镜像
 
+好了，准备工作就绪，下面可以大展身手了！
 
 #### 六、快速开始
 安装完 `Docker` 之后，我们先打个实际项目的镜像，边学边用。
 
-**1.先大致了解一下我们将会用到的 `11` 个命令**
+**1.首先需要大致了解一下我们将会用到的 `11` 个命令**
 
 | 命令| 描述 |
 | ----- | :---- |
@@ -163,16 +170,38 @@ docker -v
 | VOLUME | 数据卷，将宿主机的目录映射到容器中的目录 |
 
 2.新建项目
+为了快捷，我们直接使用[`Vue` 脚手架](https://cli.vuejs.org/guide/creating-a-project.html#vue-create)构建项目：
+```
+vue create docker-demo
+```
 
 3.新建 `Dockerfile`
+```
+cd docker-demo && touch Dockerfile
+```
+此时的项目目录如下：
+```
+.
+├── Dockerfile
+├── README.md
+├── babel.config.js
+├── node_modules
+├── package.json
+├── public
+├── src
+└── yarn.lock
+```
+可以看到我们已经在 `docker-demo` 目录下成功创建了 `Dockerfile` 文件。
 
-4.构建镜像
+4.配置
 
-5.运行容器
+5.构建镜像
 
-6.访问项目
+6.运行容器
 
-https://www.cnblogs.com/flaming/p/11438244.html
+7.访问项目
+
+8.发布镜像
 
 
 #### 七、常规操作
@@ -208,60 +237,57 @@ https://www.cnblogs.com/flaming/p/11438244.html
 - `ENTRYPOINT`
     - 也是执行命令，和 `CMD` 一样，只是这个命令不会被命令行覆盖
     - `ENTRYPOINT ["executable", "param1", "param2"]`
-    - 例如：`ENTRYPOINT ["donnet", "myapp.dll"]`
+    - 示例：`ENTRYPOINT ["donnet", "myapp.dll"]`
 
-LABEL：为镜像添加元数据，key-value形式的。
+- `LABEL`：为镜像添加元数据，`key-value` 形式
+    - `LABEL <key>=<value>  <key>=<value> ...` 
+    - 示例：`LABEL version="1.0"  description="这是一个web应用"`
 
-　　LABEL <key>=<value>  <key>=<value>  <key>=<value>  ....
+- `ENV`：设置环境变量，有些容器运行时会需要某些环境变量
+    - `ENV  <key>  <value>` 一次设置一个环境变量
+    - `ENV  <key>=<value>  <key>=<value>  <key>=<value>` 设置多个环境变量
+    - 示例：`ENV  JAVA_HOME  /usr/java1.8/`
 
-　　例如：LABEL version="1.0"  description="这是一个web应用"
+- `EXPOSE`：暴露对外的端口（容器内部程序的端口，虽然会和宿主机的一样，但是其实是两个端口）
+    - `EXPOSE <port>`
+    - 示例：`EXPOSE  80`
+    - 容器运行时，需要用 `-p` 映射外部端口才能访问到容器内的端口
+- `VOLUME`：指定数据持久化的目录，官方语言叫做挂载
+    - `VOLUME  /var/log` 指定容器中需要被挂载的目录，会把这个目录映射到宿主机的一个随机目录上，实现数据的持久化和同步。
+    - `VOLUME  ["/var/log","/var/test".....]` 指定容器中多个需要被挂载的目录，会把这些目录映射到宿主机的多个随机目录上，实现数据的持久化和同步
+    - `VOLUME  /var/data  var/log` 指定容器中的 `var/log` 目录挂载到宿主机上的 `/var/data` 目录，这种形式可以手动指定宿主机上的目录
+- `WORKDIR`：设置工作目录，设置之后 ，`RUN、CMD、COPY、ADD` 的工作目录都会同步变更
+    - `WORKDIR <path>`
+    - 示例：`WORKDIR  /app/test`
+- `USER`：指定运行命令时所使用的用户，为了安全和权限起见，根据要执行的命令选择不同用户
+    - `USER  <user>:[<group>]`
+    - 示例：`USER  test`
+- `ARG`：设置构建镜像是要传递的参数
+    - `ARG  <name>[=<value>]`
+    - `ARG  name=sss`
 
-ENV：设置环境变量，有些容器运行时会需要某些环境变量 比如：JAVA_HOME。
-
-　　ENV  <key>  <value>   一次设置一个环境变量。
-
-　　ENV  <key>=<value>  <key>=<value>  <key>=<value>  ....  设置多个环境变量。
-
-　　例如：ENV  JAVA_HOME  /usr/java1.8/
-
-EXPOSE：暴露对外的端口。
-
-　　EXPOSE <port>
-
-　　例如：EXPOSE  80
-
-　　这里指的是容器内部程序的端口，虽然会和宿主机的一样，但是其实是两个端口，容器运行时，需要用-p  映射外部端口才能访问到容器内的端口。
-
-VOLUME：指定数据持久化的目录，官方语言叫做挂载。
-
-　　VOLUME  /var/log  指定容器中需要被挂载的目录，会把这个目录映射到宿主机的一个随机目录上，实现数据的持久化和同步。
-
-　　VOLUME  ["/var/log","/var/test".....]  指定容器中多个需要被挂载的目录，会把这些目录映射到宿主机的多个随机目录上，实现数据的持久化和同步。
-
-　　VOLUME  /var/data  var/log   指定容器中的var/log目录挂载到宿主机上的/var/data目录，这种形式可以手动指定宿主机上的目录。
-
-WORKDIR：设置工作目录，设置完工作目录之后 ，上边的RUN、CMD、COPY、ADD等的工作目录都变成这个了。
-
-　　WORKDIR <path>
-
-　　例如：WORKDIR  /app/test
-
-USER：指定运行命令时所使用的用户，为了安全和权限起见，有的用户可能权限高，有的用户可能权限低，根据要执行的命令选择不同的用户。
-
-　　USER  <user>:[<group>]
-
-　　例如：USER  test
-
-ARG：设置构建镜像是要传递的参数。
-
-　　ARG  <name>[=<value>]
-
-　　例如：ARG  name=sss
-
+更多操作，请移步[官方使用文档](https://docs.docker.com)。
 
 #### 八、最佳实践
+在掌握 `Docker` 常规操作之后，我们很容易就可以打出自己想要的项目镜像。然而不同的操作打出的镜像也是千差万别。
 
+{% alert warning %}
+究竟是什么原因导致镜像差异，我们不妨继续探索。
+{% endalert %}
+
+以下是在应用 `Docker` 过程中整理的**最佳实践**，请尽量遵循如下准则：
+
+1.`Require` 明确：需要什么镜像
+2.步骤精简：变化较少的 `Step` 优先
+3.版本明确：镜像命名明确
+4.说明文档：整个镜像打包步骤可以重现
+
+推荐如下两篇文章：
+[Intro Guide to Dockerfile Best Practices](https://www.docker.com/blog/intro-guide-to-dockerfile-best-practices/)                       
+[Best practices for writing Dockerfiles](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/)
 
 
 #### 九、总结
-容器化技术必将是云时代不可或缺的技能之一，而 `Docker` 只是沧海一粟。随之而来的还有集群容器管理 `K8s`，复杂 `Service Mesh` 管理 `Istio` 等技术。打开 `Docker` 的大门，不断抽丝剥茧，逐层深入，你将感受到容器化的无穷魅力。
+容器化技术必将是云时代不可或缺的技能之一，而 `Docker` 只是沧海一粟。随之而来的还有集群容器管理 `K8s`、`Service Mesh` 、`Istio` 等技术。打开 `Docker` 的大门，不断抽丝剥茧，逐层深入，你将感受到容器化的无穷魅力。
+
+快打开技能边界，为你的前端赋能吧！
