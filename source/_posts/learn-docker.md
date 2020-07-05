@@ -1,6 +1,6 @@
 ---
 title: Docker 边学边用
-date: 2020-06-20 22:10:13
+date: 2020-07-04 22:10:13
 thumbnailImage: https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/docker/logo.png
 thumbnailImagePosition: left
 tags: 
@@ -174,6 +174,15 @@ docker -v
 ```
 vue create docker-demo
 ```
+尝试启动一下：
+```
+yarn serve
+```
+访问地址：`http://localhost:8080/`。项目就绪，我们接着为项目打包：
+```
+yarn build
+```
+这时候，项目目录下的 `Dist` 就是我们要部署的静态资源了，我们继续下一步。
 
 3.新建 `Dockerfile`
 ```
@@ -185,6 +194,7 @@ cd docker-demo && touch Dockerfile
 ├── Dockerfile
 ├── README.md
 ├── babel.config.js
+├── dist
 ├── node_modules
 ├── package.json
 ├── public
@@ -193,20 +203,113 @@ cd docker-demo && touch Dockerfile
 ```
 可以看到我们已经在 `docker-demo` 目录下成功创建了 `Dockerfile` 文件。
 
-4.配置
+4.准备 `Nginx` 镜像
+运行你的 `Docker` 桌面端，就会默认启动实例，我们在控制台拉取 `Nginx` 镜像：
+```
+docker pull nginx
+```
+控制台会出现如下信息：
+```
+Using default tag: latest
+latest: Pulling from library/nginx
+8559a31e96f4: Pull complete
+8d69e59170f7: Pull complete
+3f9f1ec1d262: Pull complete
+d1f5ff4f210d: Pull complete
+1e22bfa8652e: Pull complete
+Digest: sha256:21f32f6c08406306d822a0e6e8b7dc81f53f336570e852e25fbe1e3e3d0d0133
+Status: Downloaded newer image for nginx:latest
+docker.io/library/nginx:latest
+```
 
-5.构建镜像
+如果你出现这样的异常，请确认 `Docker` 实例是否正常运行。
+```
+Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?
+```
+镜像准备 `OK`，我们在根目录创建 `Nginx` 配置文件：
+```
+touch default.conf
+```
+写入：
+```
+server {
+    listen       80;
+    server_name  localhost;
 
-6.运行容器
+    #charset koi8-r;
+    access_log  /var/log/nginx/host.access.log  main;
+    error_log  /var/log/nginx/error.log  error;
 
-7.访问项目
+    location / {
+        root   /usr/share/nginx/html;
+        index  index.html index.htm;
+    }
 
-8.发布镜像
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+        root   /usr/share/nginx/html;
+    }
+} 
+```
+
+5.配置镜像
+打开 `Dockerfile` ，写入如下内容：
+```
+FROM nginx
+COPY dist/ /usr/share/nginx/html/
+COPY default.conf /etc/nginx/conf.d/default.conf
+```
+我们逐行解释一下代码：
+- `FROM nginx` 指定该镜像是基于 `nginx:latest` 镜像而构建的；
+- `COPY dist/ /usr/share/nginx/html/` 命令的意思是将项目根目录下 `dist` 文件夹中的所有文件复制到镜像中 `/usr/share/nginx/html/` 目录下；
+- `COPY default.conf /etc/nginx/conf.d/default.conf` 将 `default.conf` 复制到 `etc/nginx/conf.d/default.conf`，用本地的 `default.conf` 配置来替换 `Nginx` 镜像里的默认配置。
+
+6.构建镜像
+`Docker` 通过 `build` 命令来构建镜像：
+```
+docker build -t jartto-docker-demo .
+```
+按照惯例，我们解释一下上述代码：
+- `-t` 参数给镜像命名 `jartto-docker-demo`
+- `.` 是基于当前目录的 `Dockerfile` 来构建镜像
+
+执行成功后，将会输出：
+```
+Sending build context to Docker daemon  115.4MB
+Step 1/3 : FROM nginx
+ ---> 2622e6cca7eb
+Step 2/3 : COPY dist/ /usr/share/nginx/html/
+ ---> Using cache
+ ---> 82b31f98dce6
+Step 3/3 : COPY default.conf /etc/nginx/conf.d/default.conf
+ ---> 7df6efaf9592
+Successfully built 7df6efaf9592
+Successfully tagged jartto-docker-demo:latest
+```
+镜像制作成功！我们来查看一下容器：
+```
+docker image ls | grep jartto-docker-demo
+```
+可以看到，我们打出了一个 `133MB` 的项目镜像：
+```
+jartto-docker-demo latest 7df6efaf9592 About a minute ago 133MB
+```
+{% alert warning %}
+镜像也有好坏之分，后续我们将介绍如何优化，这里可以先暂时忽略。
+{% endalert %}
+
+7.运行容器
+```
+docker run -d -p 8080:80 --name docker-vue jartto-docker-demo
+```
+
+8.访问项目
+
+9.发布镜像
 
 
 #### 七、常规操作
 到这里，恭喜你已经完成了 `Docker` 的入门项目！如果还想继续深入，不妨接着往下看看。
-
 
 **1.参数使用**
 - `FROM`
