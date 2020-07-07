@@ -169,7 +169,7 @@ docker -v
 | ENTRYPOINT | 与 CMD 功能相同，但需 docker run 不会覆盖，如果需要覆盖可增加参数 -entrypoint 来覆盖 |
 | VOLUME | 数据卷，将宿主机的目录映射到容器中的目录 |
 
-2.新建项目
+2.**新建项目**
 为了快捷，我们直接使用[`Vue` 脚手架](https://cli.vuejs.org/guide/creating-a-project.html#vue-create)构建项目：
 ```
 vue create docker-demo
@@ -184,7 +184,9 @@ yarn build
 ```
 这时候，项目目录下的 `Dist` 就是我们要部署的静态资源了，我们继续下一步。
 
-3.新建 `Dockerfile`
+**需要注意**：前端项目一般分两类，一类直接 `Nginx` 静态部署，一类需要启动 `Node` 服务。本节我们只考虑第一种。关于 `Node` 服务，[下文](#)我会详细说明。
+
+3.**新建 `Dockerfile`**
 ```
 cd docker-demo && touch Dockerfile
 ```
@@ -203,7 +205,7 @@ cd docker-demo && touch Dockerfile
 ```
 可以看到我们已经在 `docker-demo` 目录下成功创建了 `Dockerfile` 文件。
 
-4.准备 `Nginx` 镜像
+4.**准备 `Nginx` 镜像**
 运行你的 `Docker` 桌面端，就会默认启动实例，我们在控制台拉取 `Nginx` 镜像：
 ```
 docker pull nginx
@@ -252,7 +254,7 @@ server {
 } 
 ```
 
-5.配置镜像
+5.**配置镜像**
 打开 `Dockerfile` ，写入如下内容：
 ```
 FROM nginx
@@ -264,7 +266,7 @@ COPY default.conf /etc/nginx/conf.d/default.conf
 - `COPY dist/ /usr/share/nginx/html/` 命令的意思是将项目根目录下 `dist` 文件夹中的所有文件复制到镜像中 `/usr/share/nginx/html/` 目录下；
 - `COPY default.conf /etc/nginx/conf.d/default.conf` 将 `default.conf` 复制到 `etc/nginx/conf.d/default.conf`，用本地的 `default.conf` 配置来替换 `Nginx` 镜像里的默认配置。
 
-6.构建镜像
+6.**构建镜像**
 `Docker` 通过 `build` 命令来构建镜像：
 ```
 docker build -t jartto-docker-demo .
@@ -298,15 +300,48 @@ jartto-docker-demo latest 7df6efaf9592 About a minute ago 133MB
 镜像也有好坏之分，后续我们将介绍如何优化，这里可以先暂时忽略。
 {% endalert %}
 
-7.运行容器
+7.**运行容器**
 ```
-docker run -d -p 8080:80 --name docker-vue jartto-docker-demo
+docker run -d -p 3000:80 --name docker-vue jartto-docker-demo
+```
+这里解释一下参数：
+- `-d` 设置容器在后台运行
+- `-p` 表示端口映射，把本机的 `3000` 端口映射到 `container` 的 `80` 端口（这样外网就能通过本机的 `3000` 端口访问了
+- `--name` 设置容器名 `docker-vue`
+- `jartto-docker-demo` 是我们上面构建的镜像名字
+
+补充一点：
+在控制台，我们可以通过 `docker ps` 查看刚运行的 `Container` 的 `ID`：
+```
+docker ps -a
+```
+控制台会输出：
+```
+CONTAINER ID IMAGE              COMMAND                  CREATED       STATUS PORTS  NAMES
+ab1375befb0b jartto-docker-demo "/docker-entrypoint.…"   8 minutes ago Up 7 minutes  0.0.0.0:3000->80/tcp  docker-vue
 ```
 
-8.访问项目
+如果你使用桌面端，那么打开 `Docker Dashboard` 就可以看到容器列表了，如下图：
+![Docker 桌面端](https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/docker/desk.png)
 
-9.发布镜像
+8.**访问项目**
+因为我们映射了本机 `3000` 端口，所以执行：
+```
+curl -v -i localhost:3000
+```
+或者打开浏览器，访问：`localhost:3000`
 
+9.**发布镜像**
+{% alert info %}
+如果你想为社区贡献力量，那么需要将镜像发布，方便其他开发者使用。
+{% endalert %}
+
+发布镜像需要如下步骤：
+- 登陆 `[dockerhub](https://hub.docker.com)`，注册账号；
+- 命令行执行 `docker login`，之后输入我们的账号密码，进行登录；
+- 推送镜像之前，需要打一个 `Tag`，执行 `docker tag <image> <username>/<repository>:<tag>`
+
+全流程结束，以后我们要使用，再也不需要「搬石头、砍木头、画图纸、盖房子」了，拎包入住。**这也是 `docker` 独特魅力所在。**
 
 #### 七、常规操作
 到这里，恭喜你已经完成了 `Docker` 的入门项目！如果还想继续深入，不妨接着往下看看。
@@ -391,6 +426,6 @@ docker run -d -p 8080:80 --name docker-vue jartto-docker-demo
 
 
 #### 九、总结
-容器化技术必将是云时代不可或缺的技能之一，而 `Docker` 只是沧海一粟。随之而来的还有集群容器管理 `K8s`、`Service Mesh` 、`Istio` 等技术。打开 `Docker` 的大门，不断抽丝剥茧，逐层深入，你将感受到容器化的无穷魅力。
+容器化技术必将是云时代不可或缺的技能之一，而 `Docker` 只是沧海一粟。随之而来的还有集群容器管理 `K8s`、`Service Mesh` 、`Istio` 等技术。打开 `Docker` 的大门，不断**抽丝剥茧，逐层深入**，你将感受到容器化的无穷魅力。
 
-快打开技能边界，为你的前端赋能吧！
+赶快打开技能边界，为你的前端技术赋能吧！
