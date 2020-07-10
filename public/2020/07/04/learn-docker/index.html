@@ -32,7 +32,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/docker/docker.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/docker/first.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/docker/desk.png">
-<meta property="og:updated_time" content="2020-07-05T23:49:25.305Z">
+<meta property="og:updated_time" content="2020-07-09T23:18:19.888Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Docker 边学边用">
 <meta name="twitter:description" content="富 Web 时代，应用变得越来越强大，与此同时也越来越复杂。集群部署、隔离环境、灰度发布以及动态扩容缺一不可，而容器化则成为中间的必要桥梁。">
@@ -249,6 +249,7 @@
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
             <p>富 <code>Web</code> 时代，应用变得越来越强大，与此同时也越来越复杂。集群部署、隔离环境、灰度发布以及动态扩容缺一不可，而容器化则成为中间的必要桥梁。<br><a id="more"></a><br>本节我们就来探索一下 <code>Docker</code> 的神秘世界，从零到一掌握 <code>Docker</code> 的基本原理与实践操作。别再守着前端那一亩三分地，是时候该开疆扩土了。</p>
+<p>我们将会围绕下面几点展开：<br>1.讲个故事<br>2.虚拟机与容器<br>3.认识 <code>Docker</code><br>4.核心概念<br>5.安装 <code>Docker</code><br>6.快速开始<br>7.常规操作<br>8.最佳实践</p>
 <h4 id="一、讲个故事"><a href="#一、讲个故事" class="headerlink" title="一、讲个故事"></a>一、讲个故事</h4><p>为了更好的理解 <code>Docker</code> 是什么，我们先来讲个<a href="https://my.oschina.net/jamesview/blog/2994112" target="_blank" rel="noopener">故事</a>：</p>
 <p>我需要盖一个房子，于是我搬石头、砍木头、画图纸、盖房子。一顿操作，终于把这个房子盖好了。<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/docker/store1.png" alt="盖房子"></p>
 <p>结果，住了一段时间，心血来潮想搬到海边去。这时候按以往的办法，我只能去海边，再次搬石头、砍木头、画图纸、盖房子。<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/docker/store2.png" alt="重复盖房"></p>
@@ -321,9 +322,10 @@
 </tr>
 </tbody>
 </table>
+<p>与虚拟机相比，容器更轻量且速度更快，因为它利用了 <code>Linux</code> 底层操作系统在隔离的环境中运行。虚拟机的 <code>Hypervisor</code> 创建了一个非常牢固的边界，以防止应用程序突破它，而容器的边界不那么强大。</p>
+<p>物理机部署不能充分利用资源，造成资源浪费。虚拟机方式部署，虚拟机本身会占用大量资源，导致资源浪费，另外虚拟机性能也很差。而容器化部署比较灵活，且轻量级，性能较好。</p>
 <div class="alert info"><p>虚拟机属于虚拟化技术，而 Docker 这样的容器技术，属于轻量级的虚拟化。</p>
 </div>
-<p>与虚拟机相比，容器更轻量且速度更快，因为它利用了 <code>Linux</code> 底层操作系统在隔离的环境中运行。虚拟机的 <code>Hypervisor</code> 创建了一个非常牢固的边界，以防止应用程序突破它，而容器的边界不那么强大。</p>
 <h4 id="三、认识-Docker"><a href="#三、认识-Docker" class="headerlink" title="三、认识 Docker"></a>三、认识 Docker</h4><p><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/docker/docker.png" alt="Docker"><br><strong>1.概念</strong><br><code>Docker</code> 是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任何流行的 <code>Linux</code> 机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口。</p>
 <p><code>Docker</code> 技术的<strong>三大核心概念</strong>，分别是：镜像 <code>Image</code>、容器 <code>Container</code>、仓库 <code>Repository</code>。</p>
 <p><strong>2.<code>Docker</code> 轻量级的原因？</strong><br>相信你也会有这样的疑惑：为什么 <code>Docker</code> 启动快？如何做到和宿主机共享内核？</p>
@@ -575,7 +577,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2020/07/06/start-k8s/" data-tooltip="Kubernetes">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2020/07/10/start-k8s/" data-tooltip="一文了解 Kubernetes 基础概念">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -653,7 +655,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2020/07/06/start-k8s/" data-tooltip="Kubernetes">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2020/07/10/start-k8s/" data-tooltip="一文了解 Kubernetes 基础概念">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
