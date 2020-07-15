@@ -1,6 +1,6 @@
 ---
-title: 一文了解 Kubernetes 基础概念
-date: 2020-07-10 06:12:04
+title: 一文了解 Kubernetes
+date: 2020-07-15 06:12:04
 thumbnailImage: https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/k8s/logo.png
 thumbnailImagePosition: left
 tags: 
@@ -12,9 +12,9 @@ categories: 技术博文
 ---
 [上一节](http://jartto.wang/2020/07/04/learn-docker/)我们着重讲解了 `Docker`，其实遗留了一个大问题。`Docker` 虽好用，但面对强大的集群，成千上万的容器，突然感觉不香了。
 <!-- more -->
-这时候就需要我们的主角 `Kubernetes` 上场了，这节我们先来了解一下 `K8s` 的基本概念，后面会有一篇实践介绍，由浅入深，步步为营。
+这时候就需要我们的主角 `Kubernetes` 上场了，先来了解一下 `K8s` 的基本概念，后面再介绍实践，由浅入深步步为营。
 
-我将会围绕如下几个点来展开：
+**关于 `K8s` 的基本概念我们将会围绕如下七点展开：**
 1.`Docker` 的管理痛点
 2.什么是 `K8s`？
 3.云架构 & 云原生
@@ -26,7 +26,7 @@ categories: 技术博文
 
 
 #### 一、Docker 的管理痛点
-如果想要将 `Docker` 应用于庞大的业务实现，是存在困难的**编排**、**管理**和**调度**问题。于是，人们迫切需要一套管理系统，对 `Docker` 及容器进行更高级更灵活的管理。
+如果想要将 `Docker` 应用于庞大的业务实现，是存在困难的**编排**、**管理**和**调度**问题。于是，我们迫切需要一套管理系统，对 `Docker` 及容器进行更高级更灵活的管理。
 
 `Kubernetes` 应运而生！`Kubernetes`，名词源于希腊语，意为「舵手」或「飞行员」。`Google` 在 `2014` 年开源了 `Kubernetes` 项目，建立在 `Google` 在大规模运行生产工作负载方面拥有十几年的经验的基础上，结合了社区中最好的想法和实践。
 
@@ -37,7 +37,7 @@ K8s 是 Kubernetes 的缩写，用 8 替代了 「ubernete」，下文我们将�
 
 #### 二、什么是 K8s ？
 ![K8s 介绍](https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/k8s/intro.png)
-`K8s` 是一个可移植的、可扩展的开源平台，用于管理容器化的工作负载和服务，可促进声明式配置和自动化。`K8s` 拥有一个庞大且快速增长的生态系统。`K8s` 的服务、支持和工具广泛可用。
+`K8s` 是一个可移植的、可扩展的开源平台，用于**管理容器化的工作负载和服务，可促进声明式配置和自动化**。`K8s` 拥有一个庞大且快速增长的生态系统。`K8s` 的服务、支持和工具广泛可用。
 
 通过 `K8s` 我们可以：
 1.快速部署应用
@@ -55,6 +55,7 @@ K8s 是 Kubernetes 的缩写，用 8 替代了 「ubernete」，下文我们将�
 云就是使用容器构建的一套服务集群网络，云由很多的大量容器构成。`K8s` 就是用来管理云中的容器。
 
 2.常见几类云架构
+- `On-Premises` (本地部署)
 - `iaas`（基础设施即服务）
     - 用户：租用（购买|分配权限）云主机，用户不需要考虑网络，`DNS`，硬件环境方面的问题。
     - 运营商：提供网络，存储，`DNS`，这样服务就叫做基础设施服务
@@ -66,7 +67,9 @@ K8s 是 Kubernetes 的缩写，用 8 替代了 「ubernete」，下文我们将�
 - `serverless`
     - 无服务，不需要服务器。站在用户的角度考虑问题，用户只需要使用云服务器即可，在云服务器所在的基础环境，软件环境都不需要用户关心。
 
-![常见云架构图示](#)
+![常见云架构图示](https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/k8s/iaas.png)
+
+如果觉得不好理解，推荐阅读这篇文章：[如何通俗解释 IaaS、PaaS、SaaS 的区别](https://www.zhihu.com/question/21641778/answer/62523535)
 
 {% alert info %}
 可以预见：未来服务开发都是 Serverless，企业都构建了自己的私有云环境，或者是使用公有云环境。
@@ -83,26 +86,26 @@ K8s 是 Kubernetes 的缩写，用 8 替代了 「ubernete」，下文我们将�
 
 #### 四、K8s 架构原理
 1.`K8s` 架构
-概括来说 `K8s` 架构就是一个 `master` 对应一群 `node` 节点。
+概括来说 `K8s` 架构就是一个 `Master` 对应一群 `Node` 节点。
 
-![K8s 架构图示](#)
+![K8s 架构图示](https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/k8s/k8s.png)
 
-2.`Master` 节点
-- api server，k8s 网关，所有的指令请求都必须要经过 api server
-- scheduler 调度器，使用调度算法，把请求资源调度到某一个node节点
-- controller 控制器，维护k8s资源对象
-- etcd 存储资源对象
+下面我们来逐一介绍 `K8s` 架构图中的 `Master` 和 `Node`。
 
-![K8s Master 节点](#)
+2.`Master` 节点结构如下：
+- `apiserver` 即 `K8s` 网关，所有的指令请求都必须要经过 `apiserver`；
+- `scheduler` 调度器，使用调度算法，把请求资源调度到某一个 `node` 节点；
+- `controller` 控制器，维护 `K8s` 资源对象；
+- `etcd` 存储资源对象；
 
 3.`Node`节点
-    - docker 运行容器的基础环境，容器引擎
-    - kubelet 在每一个 node 节点都存在一份，在node节点上的资源操作指令由kubelet 来执行
-    - kube-proxy 代理服务，负载均衡
-    - fluentd 日志收集服务
-    - pod 是 k8s 管理的基本单元（最小单元），pod 内部是容器，k8s 不直接管理容器，而是管理pod
+- `kubelet` 在每一个 `node` 节点都存在一份，在 `node` 节点上的资源操作指令由 `kubelet` 来执行；
+- `kube-proxy` 代理服务，处理服务间负载均衡；
+- `pod` 是 `k8s` 管理的基本单元（最小单元），`pod` 内部是容器，`k8s` 不直接管理容器，而是管理`pod`；
+- `docker` 运行容器的基础环境，容器引擎；
+- `fluentd` 日志收集服务；
 
-![K8s Node 节点](#)
+在介绍完 `K8s` 架构后，我们又引入了很多技术名词。不要着急，先有**整体概念，再各个击破**。请耐心[阅读下文](http://jartto.wang/2020/07/15/start-k8s/)，相信你一定会有不一样的收获。
 
 #### 五、K8s 核心组件
 1.`K8s` 组件
