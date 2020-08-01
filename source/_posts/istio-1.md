@@ -165,6 +165,8 @@ Istio lets you connect, secure, control, and observe services.
 - 故障注入
 - 丰富的度量指标
 
+`Envoy` 分为主线程、工作线程、文件刷新线程，其中主线程就是负责工作线程和文件刷新线程的管理和调度。而工作线程主要负责监听、过滤和转发，工作线程里面会包含一个监听器，如果收到一个请求之后会通过过滤链来进行数据过滤。前面两个都是非阻塞的，唯一一个阻塞的是这种 `IO` 操作的，会不断地把内存里面一些缓存进行落盘。
+
 总结来说，我们可以围绕如下 5 方面：
 
 **1.服务的动态注册和发现**
@@ -206,10 +208,21 @@ Istio lets you connect, secure, control, and observe services.
 #### 七、方案畅想
 说白了，`Istio` 的核心原理：是**网络代理**，拦截下所有想拦截的流量，然后尽情的使用吧。
 
-**1.方案一**
-根据 header 内容分发流量
-istio 可以基于内容分发流量，在这里我们让普通用户全部访问 v1 版，而特殊用户（jason）访问 v2 版。
-使用如下配置，并提交给 k8s。
+**1.方案一**（官网示例）
+模仿在线书店的一个分类，显示一本书的信息。 页面上会显示一本书的描述，书籍的细节（`ISBN`、页数等），以及关于这本书的一些评论。
+
+Bookinfo 应用分为四个单独的微服务：
+
+productpage. 这个微服务会调用 details 和 reviews 两个微服务，用来生成页面。
+details. 这个微服务中包含了书籍的信息。
+reviews. 这个微服务中包含了书籍相关的评论。它还会调用 ratings 微服务。
+ratings. 这个微服务中包含了由书籍评价组成的评级信息。
+reviews 微服务有 3 个版本：
+
+v1 版本不会调用 ratings 服务。
+v2 版本会调用 ratings 服务，并使用 1 到 5 个黑色星形图标来显示评分信息。
+v3 版本会调用 ratings 服务，并使用 1 到 5 个红色星形图标来显示评分信息。
+下图展示了这个应用的端到端架构。
 
 
 **2.方案二**
@@ -223,3 +236,4 @@ istio 可以基于内容分发流量，在这里我们让普通用户全部访�
 [2.什么是 `Envoy`](https://www.jianshu.com/p/a6f7f46683e1?utm_campaign=maleskine&utm_content=note&utm_medium=seo_notes&utm_source=recommendation)
 [3.微服务之 `Service Mesh`](https://www.jianshu.com/p/27a742e349f7)
 [4.什么是 `Service Mesh`](https://zhuanlan.zhihu.com/p/61901608)
+[5.从架构到组件，深挖istio如何连接、管理和保护微服务2.0？](https://www.kubernetes.org.cn/3575.html)
