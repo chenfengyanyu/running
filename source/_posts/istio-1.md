@@ -14,10 +14,32 @@ categories: 技术博文
 很多企业都会面临从单体应用向微服务架构的转型，也会衍生出更多的分布式场景需求。随着规模和复杂度的不断增长，如何才能更好的理解、高效的管理**服务网格**呢？
 
 <!-- more -->
-#### 一、什么是服务网格？
-服务网格（`Service Mesh`）用来描述组成这些应用程序的微服务网络以及它们之间的交互。它是一个用于保证服务间安全、快速、可靠通信的网络代理组件，是随着微服务和云原生应用兴起而诞生的基础设施层。它通常以轻量级网络代理的方式同应用部署在一起。比如 `Sidecar` 方式，如下图所示：
 
-![Service Mesh](#)
+本节篇幅较长，我们主要围绕以下几点来展开：
+1.什么是服务网格？
+2.初识 `Istio`
+3.核心特性
+4.流程架构
+5.核心模块
+6.`Envoy` 进阶
+7.方案畅想
+
+
+
+#### 一、什么是服务网格？
+服务网格（`Service Mesh`）用来描述组成这些应用程序的微服务网络以及它们之间的交互。它是一个用于保证服务间安全、快速、可靠通信的网络代理组件，是随着**微服务和云原生应用**兴起而诞生的基础设施层。
+
+它通常以轻量级网络代理的方式同应用部署在一起。比如 `Sidecar` 方式，如下图所示：
+
+![Service Mesh](https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/istio/service-mesh.png)
+
+我们对上图做个解释：
+`Service Mesh` 设计一般划分为两个模块，**控制面**和**数据面**。对于应用来说，所有流量都会经过数据面进行转发。顺利转发的前提：**数据面需要知道转发的目标地址**，目标地址本身是由一些业务逻辑来决定的(例如服务发现)。
+
+所以自然而然地，我们可以推断**控制面**需要负责管理数据面能正常运行所需要的一些配置：
+- 需要知道某次请求转发去哪里：服务发现配置；
+- 外部流量进入需要判断是否已经达到服务流量上限：限流配置；
+- 依赖服务返回错误时，需要能够执行相应的熔断逻辑：熔断配置；
 
 `Serivce Mesh` 可以看作是一个位于 `TCP/IP` 之上的网络模型，抽象了服务间可靠通信的机制。但与 `TCP` 不同，它是面向应用的，为应用提供了统一的可视化和控制。
 
@@ -49,7 +71,7 @@ Istio lets you connect, secure, control, and observe services.
 连接、安全、控制和观测服务。
 {% endalert %}
 
-![初识 Istio](#)
+![初识 Istio](https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/istio/ingress-istio.png)
 
 
 简单来说，`Istio` 针对现有的服务网格，提供一种简单的方式将连接、安全、控制和观测的模块，与应用程序或服务隔离开来，从而开发人员可以将更多的精力放在核心的业务逻辑上，以下是 `Istio` 的核心功能：
@@ -224,34 +246,54 @@ Istio lets you connect, secure, control, and observe services.
 )
 
 #### 七、方案畅想
-说白了，`Istio` 的核心原理：是**网络代理**，拦截下所有想拦截的流量，然后尽情的使用吧。
+{% alert success %}
+应用上面的原理，我们可以有很多具体的方案应用于日常开发。
+{% endalert %}
 
-**1.方案一**（官网示例）
+
+**1.方案一**：应用 `Istio` 改造微服务
 模仿在线书店的一个分类，显示一本书的信息。 页面上会显示一本书的描述，书籍的细节（`ISBN`、页数等），以及关于这本书的一些评论。
 
-Bookinfo 应用分为四个单独的微服务：
+**应用的端到端架构：**`Bookinfo` 应用中的几个微服务是由不同的语言编写的。 这些服务对 `Istio` 并无依赖，但是构成了一个有代表性的服务网格的例子：它由多个服务、多个语言构成，并且 `reviews` 服务具有多个版本。
 
-productpage. 这个微服务会调用 details 和 reviews 两个微服务，用来生成页面。
-details. 这个微服务中包含了书籍的信息。
-reviews. 这个微服务中包含了书籍相关的评论。它还会调用 ratings 微服务。
-ratings. 这个微服务中包含了由书籍评价组成的评级信息。
-reviews 微服务有 3 个版本：
+![Bookinfo 架构图](https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/istio/before.svg)
 
-v1 版本不会调用 ratings 服务。
-v2 版本会调用 ratings 服务，并使用 1 到 5 个黑色星形图标来显示评分信息。
-v3 版本会调用 ratings 服务，并使用 1 到 5 个红色星形图标来显示评分信息。
-下图展示了这个应用的端到端架构。
+**用 `Istio` 改造后架构如下：**要在 `Istio` 中运行这一应用，无需对应用自身做出任何改变。我们只需要把 `Envoy Sidecar` 注入到每个服务之中。最终的部署结果将如下图所示：
+
+![Istio 改造后架构图](https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/istio/after.svg)
+
+所有的微服务都和 `Envoy Sidecar` 集成在一起，被集成服务所有的**出入流量**都被 `Sidecar` 所劫持，这样就为外部控制准备了所需的 `Hook`，然后就可以利用 `Istio` 控制平面为应用提供服务路由、遥测数据收集以及策略实施等功能。
+
+更多细节，请移步 [官网示例](https://istio.io/latest/zh/docs/examples/bookinfo/)。
 
 
-**2.方案二**
+**2.方案二**：用 `Istio` 改造 `CI/CD` 流程
 ![Istio 架构图](https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/istio/practice.png)
 
+对上述流程图简单解释一下：
+- 通过 `Docker` 对代码进行容器化处理；
+- 通过 `Gitlab` 托管代码；
+- `Jenkins` 监听 `Gitlab` 下的代码，触发自动构建，并执行 `Kustomize` 文件；
+- `Kustomize` 通过配置文件，设置了 `Istio` 的配置（染色识别、流量分发），并启动 `K8s` 部署应用；
+- 最终我们通过 `Rancher` 来对多容器进行界面化管理；
+- 打开浏览器进行访问；
+
+看到这里，相信你也了解了，我们实现了一个**前端多容器化部署**的案例。它有什么意义呢？
+- 首先，当然是环境隔离了，研发每人一个容器开发，互不干扰；
+- 其次，我们可以做很多小流量、灰度发布等事情；
+- 自动化部署，一站式的流程体验；
+
+如果你对容器化还不太了解，请先看看前面两篇文章：
+[`Docker` 边学边用](http://jartto.wang/2020/07/04/learn-docker/)
+[一文了解 `Kubernetes`](http://jartto.wang/2020/07/15/start-k8s/)
 
 
+`Istio` 还是有很多可圈可点的地方，相信看到这里你也有了更全面的认识。如果你想深入了解，不妨仔细研究官方示例，在实际项目中不断打磨。
 
 #### 八、参考资料
 [1.`Istio` 官网](https://istio.io/latest/zh/docs/concepts/what-is-istio/)
 [2.什么是 `Envoy`](https://www.jianshu.com/p/a6f7f46683e1?utm_campaign=maleskine&utm_content=note&utm_medium=seo_notes&utm_source=recommendation)
 [3.微服务之 `Service Mesh`](https://www.jianshu.com/p/27a742e349f7)
 [4.什么是 `Service Mesh`](https://zhuanlan.zhihu.com/p/61901608)
-[5.从架构到组件，深挖istio如何连接、管理和保护微服务2.0？](https://www.kubernetes.org.cn/3575.html)
+[5.`Istio` 如何连接、管理和保护微服务 2.0？](https://www.kubernetes.org.cn/3575.html)
+[6.在 `MOSN` 中玩转 `dubbo-go`](https://blog.csdn.net/joke59/article/details/106725749)
