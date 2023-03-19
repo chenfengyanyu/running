@@ -1,0 +1,529 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>Angularjs学习笔记07~表单验证 - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="前面的6篇笔记大概介绍了一下angularjs的一些基础，确实挺无味。这一节就来一些干货，我们来看看angularjs是如何处理表单验证的。当你亲自尝试过之后，你定会深深的喜欢上angularjs处理数据的这种方式，so cool~">
+<meta name="keywords" content="angularjs">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Angularjs学习笔记07~表单验证">
+<meta property="og:url" content="http://jartto.wang/2014/04/25/angularjs-part-8/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="前面的6篇笔记大概介绍了一下angularjs的一些基础，确实挺无味。这一节就来一些干货，我们来看看angularjs是如何处理表单验证的。当你亲自尝试过之后，你定会深深的喜欢上angularjs处理数据的这种方式，so cool~">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/blog_angular_show.gif">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/blog_angualr_validate.gif">
+<meta property="og:updated_time" content="2016-06-24T04:51:41.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Angularjs学习笔记07~表单验证">
+<meta name="twitter:description" content="前面的6篇笔记大概介绍了一下angularjs的一些基础，确实挺无味。这一节就来一些干货，我们来看看angularjs是如何处理表单验证的。当你亲自尝试过之后，你定会深深的喜欢上angularjs处理数据的这种方式，so cool~">
+<meta name="twitter:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/blog_angular_show.gif">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/blog_155IK010-0.jpg"/>
+        <meta class="swiftype" name="image" data-type="enum" content="http://7xvi3w.com1.z0.glb.clouddn.com/blog_155IK010-0.jpg" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            Angularjs学习笔记07~表单验证
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2014-04-25T12:15:40+08:00">
+	  
+		    2014/4月/25 12:15:40
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>前面的6篇笔记大概介绍了一下angularjs的一些基础，确实挺无味。这一节就来一些干货，我们来看看angularjs是如何处理表单验证的。当你亲自尝试过之后，你定会深深的喜欢上angularjs处理数据的这种方式，so cool~<br><a id="more"></a><br>那么，让咱们现在就开始吧！</p>
+<h4 id="一、表现形式"><a href="#一、表现形式" class="headerlink" title="一、表现形式"></a>一、表现形式</h4><p>①隐藏\显示错误提示消息；<br><img src="http://7xvi3w.com1.z0.glb.clouddn.com/blog_angular_show.gif" alt="angularjs"><br>②高亮输入框<br><img src="http://7xvi3w.com1.z0.glb.clouddn.com/blog_angualr_validate.gif" alt="angularjs"></p>
+<p>③自定义验证<br>当然，如果以上两种表格验证方式还不能满足需要的话，那么也不用担心。我们可以通过编写指令来随心所欲的控制表单验证方式，这里就不细说了。后续在指令章节，我会通过具体事例来展现。</p>
+<p>上面展现了三种方式，当然只要你善于创造，肯定不会局限于上述表现形式。就像网络流行语所说：you can you up！</p>
+<h4 id="二、验证示例"><a href="#二、验证示例" class="headerlink" title="二、验证示例"></a>二、验证示例</h4><p>上面展示了angularjs中两种验证方式，看起来不错吧，下面我通过简单代码一个个来具体说明。这里需要注意两个问题：</p>
+<p>其一，需要引入以下文件（我用了angular-ui）<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">"bootstrap.css"</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">type</span>=<span class="string">"text/css"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">'text/javascript'</span> <span class="attr">src</span>=<span class="string">'angular.js'</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">'text/javascript'</span> <span class="attr">src</span>=<span class="string">'ui-bootstrap-tpls-0.10.0.js'</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">'text/javascript'</span> <span class="attr">src</span>=<span class="string">'main.js'</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>其二，main.js是我自建文件，代码如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myApp=angular.module(<span class="string">'myModule'</span>, [<span class="string">'ui.bootstrap'</span>]);</span><br><span class="line">myApp.controller(<span class="string">'myCtrl'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">$scope</span>)</span>&#123;</span><br><span class="line">     $scope.reset=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; <span class="comment">//表单重置</span></span><br><span class="line">          $scope.user=&#123;<span class="attr">account</span>:<span class="string">''</span>,<span class="attr">email</span>:<span class="string">''</span>&#125;;</span><br><span class="line">     &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>这里我们向module中注入了ui.bootstrap，这样就可以用angular-ui去做一些事情了。好了，到这里，我们前期的准备就做好了。</p>
+<p>①隐藏\显示错误提示消息；<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span>  <span class="attr">id</span>=<span class="string">"css_form"</span><span class="attr">class</span>=<span class="string">"form-horizontal"</span> <span class="attr">novalidate</span> <span class="attr">name</span>=<span class="string">"myform"</span> <span class="attr">role</span>=<span class="string">"form"</span> &gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"form-group"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"inputAccount"</span> <span class="attr">class</span>=<span class="string">"col-sm-2 control-label"</span>&gt;</span>账号：<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-md-2"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"number"</span>  <span class="attr">ng-model</span>=<span class="string">"user.account"</span> <span class="attr">min</span>=<span class="string">"3"</span> <span class="attr">max</span>=<span class="string">"6"</span>  <span class="attr">name</span>=<span class="string">"myAccount"</span> <span class="attr">required</span>   <span class="attr">class</span>=<span class="string">"form-control"</span>  <span class="attr">id</span>=<span class="string">"inputAccount"</span> <span class="attr">placeholder</span>=<span class="string">"请输入3-6的整数"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"input-required"</span>&gt;</span>*<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">     /*输入框*/</span><br><span class="line">     <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"alert alert-danger well-sm"</span> <span class="attr">ng-show</span>=<span class="string">"myform.myAccount.$error.required"</span>&gt;</span>不能为空！<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"alert alert-danger well-sm"</span> <span class="attr">ng-show</span>=<span class="string">"myform.myAccount.$error.min || myform.myAccount.$error.max"</span>&gt;</span></span><br><span class="line">     输入值必须在3-6之间!<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p>注意：就像上述代码所展示的，我需要预判断用户可能输入的错误类型，然后置于div中，通过ng-show的true/false来显示/隐藏。</p>
+</div>
+<p>这里出现了一个$error属性，你需要记住的就是$error对象包含了某个特定表单所有的验证信息以及表单是否合法。如果某个验证失败，则这个属性返回true,相反如果验证通过,则这个属性返回false。</p>
+<p>②高亮输入框具体实现代码：<br>首先，我们来设置输入框高亮显示的样式，代码如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="selector-tag">style</span>&gt;</span><br><span class="line">      <span class="selector-id">#css_form</span> <span class="selector-tag">input</span><span class="selector-class">.ng-invalid</span><span class="selector-class">.ng-dirty</span> &#123;</span><br><span class="line">           <span class="attribute">background-color</span>: <span class="number">#FFC0CB</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="selector-id">#css_form</span> <span class="selector-tag">input</span><span class="selector-class">.ng-valid</span><span class="selector-class">.ng-dirty</span> &#123;</span><br><span class="line">           <span class="attribute">background-color</span>: <span class="number">#78FA89</span>;</span><br><span class="line">      &#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure></p>
+<p>接下来，我们需要搞出一个表单，包含两个输入框和两个按钮（为了代码简洁，我只保留一个输入框），具体代码如下：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span>  <span class="attr">id</span>=<span class="string">"css_form"</span><span class="attr">class</span>=<span class="string">"form-horizontal"</span> <span class="attr">novalidate</span> <span class="attr">name</span>=<span class="string">"myform"</span> <span class="attr">role</span>=<span class="string">"form"</span> &gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"form-group"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"inputAccount"</span> <span class="attr">class</span>=<span class="string">"col-sm-2 control-label"</span>&gt;</span>账号：<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-md-2"</span>&gt;</span></span><br><span class="line">/*输入框*/</span><br><span class="line">      <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span>  <span class="attr">ng-model</span>=<span class="string">"user.account"</span> <span class="attr">ng-pattern</span>=<span class="string">"/^[0-9]&#123;6&#125;$/"</span>  <span class="attr">name</span>=<span class="string">"myAccount"</span> <span class="attr">required</span>   <span class="attr">class</span>=<span class="string">"form-control"</span>  <span class="attr">id</span>=<span class="string">"inputAccount"</span></span></span><br><span class="line"><span class="tag"><span class="attr">placeholder</span>=<span class="string">"请输入6位的数字账号"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"input-required"</span>&gt;</span>*<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">/*按钮组*/</span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"form-group"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-sm-offset-2 col-sm-10"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">button</span>  <span class="attr">class</span>=<span class="string">"btn btn-default"</span>  <span class="attr">ng-disabled</span>=<span class="string">"!myform.$valid"</span>&gt;</span>提交<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">"btn btn-default"</span> <span class="attr">ng-click</span>=<span class="string">"reset()"</span>&gt;</span>重置<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>注意：<br>从上面代码可以看出，我在form中加了id=”css_form”和name=”myform”这两个属性，同时在提交按钮中添加了ng-disabled=”!myform.$valid”。这就够了，剩下的angular全部为我们搞定了。当然，前提是你的body中也这么写<body ng-app="myModule" ng-controller="myCtrl">，之前的笔记有说明过，这样用来确定angular的操作范围，这里就不赘述了。</body></p>
+<p>你可能会疑问，valid、dirty和invalid这又是什么？不过没关心，下面我会具体阐述。</p>
+<h4 id="三、参数说明"><a href="#三、参数说明" class="headerlink" title="三、参数说明"></a>三、参数说明</h4><p>①valid、invalid、pristine和dirty<br>valid标记表单元素有效；<br>invalid标记表单元素无效；<br>pristine表示表单元素是纯净的，用户未操作过；<br>dirty表示表单元素是已被用户操作过；</p>
+<p>②更改css属性<br>.ng-pristine {}<br>.ng-dirty {}<br>.ng-valid {}<br>.ng-invalid {}</p>
+<p>正如上面示例二所示，我可以预先定义表单验证的表现方式。当然，这些类名是不能更改的，我们只能去覆盖父类属性。</p>
+<h4 id="四、注意事项"><a href="#四、注意事项" class="headerlink" title="四、注意事项"></a>四、注意事项</h4><p>①novalidate<br>标准浏览器如火狐，谷歌等对HTML5有很好的支持。众所周知，HTML5中input的type属性已经具备了验证功能。如果你要自己定义验证方式，那么请加上novalidate属性，以此避开浏览器自行验证。</p>
+<p>②type类型<br>HTML5的type属性可以包含text、email、number等，但是angular又内部重写了这些属性，所以放心大胆的去用吧，angular完全可以满足你所有的验证。</p>
+<p>③type=”number”还是ng-pattern=”/^[0-9]{6}$/“<br>你可以使用type=”number”来限制输入框只能输入数字，当然你也可以用ng-pattern来验证用户输入，从而过滤掉非数字输入。这完全取决于你的爱好，没有硬性规定，只是选择多一些罢了。</p>
+<p>参考文章：</p>
+<p>AngularJS官方API：<a href="https://docs.angularjs.org/" target="_blank" rel="noopener">https://docs.angularjs.org/</a></p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/angularjs/">angularjs</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2014/04/28/angularjs-part-9/" data-tooltip="Angularjs学习笔记08~指令 Directive（一）初探">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2014/04/24/angularjs-part-7/" data-tooltip="Angularjs学习笔记06~依赖注入 DI">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2014/04/25/angularjs-part-8/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2014/04/25/angularjs-part-8/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2014/04/25/angularjs-part-8/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+            
+                <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2014/04/28/angularjs-part-9/" data-tooltip="Angularjs学习笔记08~指令 Directive（一）初探">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2014/04/24/angularjs-part-7/" data-tooltip="Angularjs学习笔记06~依赖注入 DI">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2014/04/25/angularjs-part-8/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2014/04/25/angularjs-part-8/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2014/04/25/angularjs-part-8/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2014/04/25/angularjs-part-8/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2014/04/25/angularjs-part-8/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2014/04/25/angularjs-part-8/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+    
+        <script>
+             var disqus_config = function () {
+                 this.page.url = 'http://jartto.wang/2014/04/25/angularjs-part-8/';
+                 
+                    this.page.identifier = '2014/04/25/angularjs-part-8/';
+                                  
+             };
+            (function() {
+                var d = document, s = d.createElement('script');
+                var disqus_shortname = 'jartto';
+                s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+
+
+
+</html>

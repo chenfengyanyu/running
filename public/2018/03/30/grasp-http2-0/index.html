@@ -1,0 +1,567 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>掌握 HTTP2.0 - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="提到 HTTP2.0 ，第一印象就是：这与 HTTP1.0 的区别是什么，有怎样的改进？大的版本变化必然会有更强力的特性，那不妨拿来了解一下。">
+<meta name="keywords" content="http2">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="掌握 HTTP2.0">
+<meta property="og:url" content="http://jartto.wang/2018/03/30/grasp-http2-0/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="提到 HTTP2.0 ，第一印象就是：这与 HTTP1.0 的区别是什么，有怎样的改进？大的版本变化必然会有更强力的特性，那不妨拿来了解一下。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/http2/diff.png">
+<meta property="og:updated_time" content="2018-12-30T15:11:33.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="掌握 HTTP2.0">
+<meta name="twitter:description" content="提到 HTTP2.0 ，第一印象就是：这与 HTTP1.0 的区别是什么，有怎样的改进？大的版本变化必然会有更强力的特性，那不妨拿来了解一下。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/http2/diff.png">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/http2.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/http2.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            掌握 HTTP2.0
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2018-03-30T07:39:01+08:00">
+	  
+		    2018/3月/30 07:39:01
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>提到 HTTP2.0 ，第一印象就是：这与 HTTP1.0 的区别是什么，有怎样的改进？大的版本变化必然会有更强力的特性，那不妨拿来了解一下。<br><a id="more"></a></p>
+<h4 id="一、先了解-HTTP1-0-和-HTTP1-1"><a href="#一、先了解-HTTP1-0-和-HTTP1-1" class="headerlink" title="一、先了解 HTTP1.0 和 HTTP1.1"></a>一、先了解 HTTP1.0 和 HTTP1.1</h4><p>我们先撇开 <code>HTTP2</code> 和 <code>HTTP1</code> 的区别，来说说 <code>HTTP1.0</code> 和 <code>HTTP1.1</code> 的区别，因为它俩本身就存在一些大的区别：</p>
+<ul>
+<li>长连接<br><code>HTTP 1.0</code> 需要使用 <code>keep-alive</code> 参数来告知服务器端要建立一个长连接，而 <code>HTTP1.1</code> 默认支持长连接。</li>
+<li>节约带宽<br><code>HTTP 1.1</code> 支持只发送 <code>header</code> 信息(不带任何 <code>body</code> 信息)，如果服务器认为客户端有权限请求服务器，则返回 100，否则返回 401。客户端如果接受到 100，才开始把请求 <code>body</code> 发送到服务器。</li>
+<li>HOST 域<br>现在可以 <code>web server</code> 例如 <code>tomat</code>，设置虚拟站点是非常常见的，也即是说，<code>web server</code> 上的多个虚拟站点可以共享同一个 <code>ip</code> 和端口。<code>HTTP1.0</code> 是没有 <code>host</code> 域的，<code>HTTP1.1</code> 才支持这个参数。</li>
+</ul>
+<p>更多细节请<a href="https://blog.csdn.net/linsongbin1/article/details/54980801" target="_blank" rel="noopener">参考</a>，还有之前的一篇文章 <a href="http://jartto.wang/2016/08/04/Rudimentary-http-protocol/">HTTP 协议入门</a>。</p>
+<h4 id="二、HTTP2-新特性"><a href="#二、HTTP2-新特性" class="headerlink" title="二、HTTP2 新特性"></a>二、HTTP2 新特性</h4><div class="alert warning"><p>众所周知 ，在 <code>HTTP1.1</code> 协议中 「浏览器客户端在同一时间，针对同一域名下的请求有一定数量限制。超过限制数目的请求会被阻塞」，也就是我们常说的 <code>Pending</code> 状态。</p>
+</div>
+<p>提到 <code>HTTP2</code> 的新特性，有三个特性肯定是亮点：<br>1.多路复用：多路复用允许同时通过单一的 <code>HTTP2</code> 连接发起多重的请求-响应消息先来看一张<a href="https://www.zhihu.com/question/34074946" target="_blank" rel="noopener">流程对比图</a>。<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/http2/diff.png" alt="diff"><br>因此 <code>HTTP2</code> 可以很容易的去实现多流并行而不用依赖建立多个 <code>TCP</code> 连接，<code>HTTP2</code> 把 <code>HTTP</code> 协议通信的基本单位缩小为一个一个的帧，这些帧对应着逻辑流中的消息。并行地在同一个 <code>TCP</code> 连接上。</p>
+<div class="alert success"><p>这样来说的话，多路复用也为前端性能优化提供了更高效的方式。</p>
+</div>
+<p>2.首部数据压缩<br><code>HTTP1.1</code> 不支持 <code>header</code> 数据的压缩，<code>HTTP2.0</code> 使用 <code>HPACK</code> 算法对 <code>header</code> 的数据进行压缩，这样数据体积小了，在网络上传输就会更快。</p>
+<div class="alert info"><p>HTTP1.1 并不支持 HTTP 首部压缩，为此 SPDY 和 HTTP/2 应运而生， SPDY 使用的是通用的 DEFLATE  算法，而 HTTP2 则使用了专门为首部压缩而设计的。</p>
+</div>
+<p>3.服务器推送<br>当我们对支持 <code>HTTP2.0</code> 的 <code>web server</code> 请求数据的时候，服务器会顺便把一些客户端需要的资源一起推送到客户端，免得客户端再次创建连接发送请求到服务器端获取。这种方式非常合适加载静态资源。</p>
+<p>引用 <a href="https://www.zhihu.com/question/34074946" target="_blank" rel="noopener">HTTP/2.0 相比 1.0 有哪些重大改进</a> 中的描述：<br>服务端推送是一种在客户端请求之前发送数据的机制。在 <code>HTTP/2</code> 中，服务器可以对客户端的一个请求发送多个响应。<code>Server Push</code> 让 <code>HTTP1.x</code> 时代使用内嵌资源的优化手段变得没有意义；</p>
+<p>如果一个请求是由你的主页发起的，服务器很可能会响应主页内容、logo 以及样式表，因为它知道客户端会用到这些东西。这相当于在一个 HTML 文档内集合了所有的资源。</p>
+<p>不过与之相比，服务器推送还有一个很大的优势：可以缓存！也让在遵循同源的情况下，不同页面之间可以共享缓存资源成为可能。</p>
+<div class="alert info"><p>至于 HPACK 算法是什么鬼，这里就不扩展了，感兴趣的童鞋可以走这里<a href="https://www.jianshu.com/p/f44b930cfcac" target="_blank" rel="noopener">HPACK 完全解析</a></p>
+</div>
+<h4 id="三、关于-HTTP2-性能"><a href="#三、关于-HTTP2-性能" class="headerlink" title="三、关于 HTTP2 性能"></a>三、关于 HTTP2 性能</h4><p>说的天花乱坠，HTTP2 不但能多路复用，而且还可以压缩头部数据，以及做一些服务器端推送。那么，HTTP2 真正的性能到底如何呢？我们来看看<a href="https://segmentfault.com/a/1190000007219256" target="_blank" rel="noopener">深入研究：HTTP2 的真正性能到底如何？</a></p>
+<div class="alert success"><p>文章做了一些验证试验，这里就不赘述了，我们来看一下试验结果，有一个感性认识。</p>
+</div>
+<p>通过上述一系列的实验，我们可以知道 HTTP2 的性能优势集中体现在“多路复用”和“服务端推送”上。对于请求数目较少（约小于30个）的情况下，<code>HTTP1</code> 和 <code>HTTP2</code> 的性能差异不大，在请求数目较多且延迟大于 30ms 的情况下，才能体现 <code>HTTP2</code> 的性能优势。对于网络状况较差的环境，<code>HTTP2</code> 的性能也高于 <code>HTTP1</code>。与此同时，如果把静态资源都通过服务端推送的方式来处理，加载速度会得到更加巨大的提升。</p>
+<p>在实际的应用中，由于 <code>HTTP2</code> 多路复用的优势，前端应用团队无须采取把多个文件合并成一个，生成雪碧图之类的方法减少网络请求。除此之外，<code>HTTP2</code> 对于前端开发的影响并不大。</p>
+<div class="alert info"><p>对于网络状况较差的环境，<code>HTTP2</code> 的性能也高于 <code>HTTP1</code>。</p>
+</div>
+<h4 id="四、HTTP2-加载效果演示"><a href="#四、HTTP2-加载效果演示" class="headerlink" title="四、HTTP2 加载效果演示"></a>四、HTTP2 加载效果演示</h4><p>有个在线的 <a href="https://http2.akamai.com/demo" target="_blank" rel="noopener">DMEO</a> 可以直观的感受一下 <code>HTTP2</code> 的实际效果。</p>
+<div class="alert success"><p>可以看出 <code>HTTP1.1</code> 和 <code>HTTP2</code> 在比较接近的服务器延迟条件下，<code>HTTP2</code> 的加载速度明显要优于 <code>HTTP1</code>。</p>
+</div>
+<h4 id="五、扩展：HTTP-POST-请求为什么会有一个-OPTION-？"><a href="#五、扩展：HTTP-POST-请求为什么会有一个-OPTION-？" class="headerlink" title="五、扩展：HTTP POST 请求为什么会有一个 OPTION ？"></a>五、扩展：HTTP POST 请求为什么会有一个 OPTION ？</h4><p>正如上面问题所说，当你打开 <code>Chrome</code> 开发工具或者其他抓包工具的时候，会发现一条 <code>POST</code> 请求输出两次，第一次状态显示 <code>OPTION</code>。</p>
+<p><a href="https://blog.csdn.net/leikezhu1981/article/details/7402272" target="_blank" rel="noopener">文档官方</a>是这么定义的：</p>
+<ul>
+<li><code>OPTIONS</code> 方法是用于请求获得由 <code>Request-URI</code> 标识的资源在请求/响应的通信过程中可以使用的功能选项。</li>
+<li>该请求方法的响应不能缓存。</li>
+<li>如果这个 <code>OPTIONS</code> 请求包含一个正文（有 <code>Content-Length</code> 或 <code>Transfer-Encoding</code> 存在），则必须有<code>Content-Type</code> 来指定媒体类型。虽然规范里没有定义这种正文的用法，但是 <code>HTTP</code> 将来的扩展可能会用它来查询服务器上更详细的信息。不支持该扩展的服务器可以忽略该请求正文。</li>
+<li>如果该 <code>URI</code> 是一个星号（“<em>”），<code>OPTIONS</code> 请求将试图应用于服务器，而不是某个指定资源。由于服务器的通信选项通常依赖于资源，所以此“</em>”请求只能作为“ping”或者“no-op”方法；或者用来测试服务器的性能。例如，用来测试 <code>HTTP/1.1</code> 代理。</li>
+<li>如果该 <code>URI</code> 不是星号，则只能用来获取该资源通信中可用的选项。</li>
+<li>得到的 <code>200</code> 响应应该包含一个头域，指明服务器实现的和适用于该资源的可选特征（如：<code>Allow</code>），可能还包括该规范尚未定义的扩展。如果有响应正文，则应包含关于通信选项的信息。本规范没有定义该正文格式，但可能在 <code>HTTP</code> 将来的扩展中定义。可以利用内容协商来选择合适的响应格式。如果没有响应正文，响应必须包含 <code>Content-Length</code>，并且值为“0”。</li>
+<li>请求头的 <code>Max-Forwards</code> 用来请求特定代理。当代理收到一个允许 <code>URI</code> 转发的 <code>OPTIONS</code> 请求，则检查<code>Max-Forwards</code>。如果 <code>Max-Forwards</code> 值为0，则不能转发该消息；相反，代理会将自己的通信选项去响应。如果<code>Max-Forwards</code> 是正整数，代理转发请求的时候会将该值减1。如果请求中没有 <code>Max-Forwards</code>，转发的请求也不会有。</li>
+</ul>
+<div class="alert success"><p>通过这个方法，客户端可以在采取具体资源请求之前，决定对该资源采取何种必要措施，或者了解服务器的性能。</p>
+</div>
+<p>根据上面描述，我们可以列举出 OPTION 的主要功能：<br>其一：获取服务器支持的 <code>HTTP</code> 请求方法；<br>其二：用来检查服务器的性能。</p>
+<div class="alert info"><p>值得注意的是：其实 HTTP 请求还分为两类：普通请求和简单请求。</p>
+</div>
+<p>那么到这里，大家已经了然于胸了吧！<code>OPTIONS</code> 请求旨在发送一种“探测”请求以确定针对某个目标地址的请求必须具有怎样的约束（比如应该采用怎样的HTTP方法以及自定义的请求报头），然后根据其约束发送真正的请求。比如针对“跨域资源”的预检（Preflight）请求采用的 <code>HTTP</code> 方法就是 <code>OPTIONS</code>。</p>
+<p>好了，就说到这里，了解更多请移步<a href="https://www.w3.org/TR/cors/#cross-origin-request-with-preflight-0" target="_blank" rel="noopener"> W3C </a>官方文档。</p>
+<h4 id="六、扩展：如何理解-HTTP-中「三次握手」和「四次挥手」-？"><a href="#六、扩展：如何理解-HTTP-中「三次握手」和「四次挥手」-？" class="headerlink" title="六、扩展：如何理解 HTTP 中「三次握手」和「四次挥手」 ？"></a>六、扩展：如何理解 HTTP 中「三次握手」和「四次挥手」 ？</h4><div class="alert success"><p>众所周知，<code>HTTP</code> 底层协议使用了 <code>TCP/IP</code> 协议，当我们想要了解细节的时候，这个问题始终绕不开。</p>
+</div>
+<p>我们先简单回顾一下 <code>HTTP</code> 的<a href="http://jartto.wang/2016/08/04/Rudimentary-http-protocol/">请求过程</a>：<br>①建立 <code>TCP</code> 连接；<br>②<code>Web</code> 浏览器向 <code>Web</code> 服务器发送请求命令；<br>③<code>Web</code> 浏览器发送请求头信息；<br>④<code>Web</code> 服务器应答；<br>⑤<code>Web</code> 服务器发送应答头信息；<br>⑥<code>Web</code> 服务器向浏览器发送数据；<br>⑦<code>Web</code> 服务器关闭 <code>TCP</code> 连接；</p>
+<p>中间的 ②–⑥ 过程都很明确，那 <code>TCP</code> 是如何建立连接的呢？<br>TCP(Transmission Control Protocol)　传输控制协议，是主机对主机层的传输控制协议，提供可靠的连接服务，采用三次握手确认建立一个连接:</p>
+<ul>
+<li>第一次握手：建立连接时，客户端 <code>A</code> 发送 <code>SYN</code> 包 <code>（SYN=j）</code> 到服务器 <code>B</code>，并进入 <code>SYN_SEND</code> 状态，等待服务器 <code>B</code> 确认。</li>
+<li>第二次握手：服务器 <code>B</code> 收到 <code>SYN</code> 包，必须确认客户 <code>A</code> 的 <code>SYN（ACK=j+1）</code>，同时自己也发送一个 <code>SYN</code> 包 <code>（SYN=k）</code>，即 <code>SYN+ACK</code> 包，此时服务器 <code>B</code> 进入 <code>SYN_RECV</code> 状态。</li>
+<li>第三次握手：客户端 <code>A</code> 收到服务器 <code>B</code> 的 <code>SYN＋ACK</code> 包，向服务器 <code>B</code> 发送确认包 <code>ACK（ACK=k+1）</code>，此包发送完毕，客户端 <code>A</code> 和服务器 <code>B</code> 进入 <code>ESTABLISHED</code> 状态，完成三次握手。</li>
+</ul>
+<div class="alert info"><p>完成三次握手，客户端与服务器开始传送数据，中间过程请参考<a href="http://jartto.wang/2016/08/04/Rudimentary-http-protocol/">请求过程</a>：</p>
+</div>
+<p>那么「四次挥手」又是怎么回事？<br>由于 <code>TCP</code> 连接是全双工的，因此每个方向都必须单独进行关闭。这个原则是当一方完成它的数据发送任务后就能发送一个 <code>FIN</code> 来终止这个方向的连接。收到一个 <code>FIN</code> 只意味着这一方向上没有数据流动，一个 <code>TCP</code> 连接在收到一个 <code>FIN</code> 后仍能发送数据。首先进行关闭的一方将执行主动关闭，而另一方执行被动关闭。</p>
+<p><code>TCP</code> 的连接的拆除需要发送四个包，因此称为「四次挥手」(four-way handshake)。客户端或服务器均可主动发起挥手动作，在 <code>socket</code> 编程中，任何一方执行 <code>close()</code> 操作即可产生挥手操作。</p>
+<ul>
+<li>客户端 <code>A</code> 发送一个 <code>FIN</code>，用来关闭客户 <code>A</code> 到服务器 <code>B</code> 的数据传送。 </li>
+<li>服务器 <code>B</code> 收到这个 <code>FIN</code> ，它发回一个 <code>ACK</code> ，确认序号为收到的序号加 1。和 <code>SYN</code> 一样，一个 <code>FIN</code> 将占用一个序号。 </li>
+<li>服务器 <code>B</code> 关闭与客户端 <code>A</code> 的连接，发送一个 <code>FIN</code> 给客户端 <code>A</code> 。 </li>
+<li>客户端 <code>A</code> 发回 <code>ACK</code> 报文确认，并将确认序号设置为收到序号加 1。 </li>
+</ul>
+<div class="alert success"><p>当然，整个过程并没有这么简单，这里就不继续深入了。</p>
+</div>
+<p>补充说明：TCP 标志位,有 6 种标示:</p>
+<ul>
+<li>SYN(synchronous建立联机)</li>
+<li>ACK(acknowledgement 确认)</li>
+<li>PSH(push传送)</li>
+<li>FIN(finish结束)</li>
+<li>RST(reset重置)</li>
+<li>URG(urgent紧急)</li>
+<li>Sequence number(顺序号码)</li>
+<li>Acknowledge number(确认号码)</li>
+</ul>
+<p>详细过程，请参考：</p>
+<ul>
+<li><a href="http://blog.163.com/wangzhenbo85@126/blog/static/1013632822013423502833/?suggestedreading&amp;wumii" target="_blank" rel="noopener">Http 协议三次握手过程</a>。</li>
+<li><a href="https://www.cnblogs.com/Jessy/p/3535612.html" target="_blank" rel="noopener">TCP 的三次握手(建立连接）和四次挥手(关闭连接）</a></li>
+</ul>
+<h4 id="七、扩展阅读"><a href="#七、扩展阅读" class="headerlink" title="七、扩展阅读"></a>七、扩展阅读</h4><ul>
+<li><a href="https://www.nginx.com/blog/7-tips-for-faster-http2-performance/" target="_blank" rel="noopener">7 Tips for Faster HTTP/2 Performance</a></li>
+<li><a href="https://legacy.gitbook.com/book/ye11ow/http2-explained/details" target="_blank" rel="noopener">HTTP2 讲解</a></li>
+<li><a href="http://blog.httpwatch.com/2015/01/16/a-simple-performance-comparison-of-https-spdy-and-http2/" target="_blank" rel="noopener">A Simple Performance Comparison of HTTPS, SPDY and HTTP/2</a></li>
+<li><a href="http://httpwg.org/specs/rfc7541.html" target="_blank" rel="noopener">HPACK: Header Compression for HTTP/2</a></li>
+<li><a href="https://www.nginx.com/wp-content/uploads/2015/09/NGINX_HTTP2_White_Paper_v4.pdf" target="_blank" rel="noopener">HTTP/2 for Web Application Developers</a></li>
+<li><a href="https://cascadingmedia.com/insites/2015/03/http-2.html" target="_blank" rel="noopener">HTTP/2 for a Faster Web</a></li>
+<li><a href="http://www.oreilly.com/webops-perf/free/files/HTTP2-high-perf-browser-networking.pdf" target="_blank" rel="noopener">O’Reilly HTTP2-high-perf-browser-networking</a></li>
+<li><a href="http://www.unclekevin.org/?cat=15" target="_blank" rel="noopener">HTTP/2 的系列文章</a></li>
+<li><a href="#">一分钟预览 HTTP2 特性和抓包分析</a></li>
+<li><a href="#">HTTP,HTTP2.0,SPDY,HTTPS你应该知道的一些事</a></li>
+<li><a href="http://io.upyun.com/2015/05/13/http2/" target="_blank" rel="noopener">HTTP/2 新特性浅析</a></li>
+</ul>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/http2/">http2</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/04/25/rewrite-audio-style/" data-tooltip="重写 Audio 样式">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/03/29/audition-of-f2e/" data-tooltip="前端反思录（一）－技术就是核心竞争力">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/03/30/grasp-http2-0/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/03/30/grasp-http2-0/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/03/30/grasp-http2-0/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/04/25/rewrite-audio-style/" data-tooltip="重写 Audio 样式">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/03/29/audition-of-f2e/" data-tooltip="前端反思录（一）－技术就是核心竞争力">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/03/30/grasp-http2-0/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/03/30/grasp-http2-0/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/03/30/grasp-http2-0/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/03/30/grasp-http2-0/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/03/30/grasp-http2-0/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/03/30/grasp-http2-0/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

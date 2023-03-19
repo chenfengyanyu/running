@@ -1,0 +1,508 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>探路 Roadhog - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="为了紧跟 ant design 的步伐，前不久将项目从 dora 切换到了 roadhog。当然，问题也如雨后春笋一般，陆续冒出来，总结一下，也不负折腾。">
+<meta name="keywords" content="roadhog,antd">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="探路 Roadhog">
+<meta property="og:url" content="http://jartto.wang/2017/04/25/gating-roadhog/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="为了紧跟 ant design 的步伐，前不久将项目从 dora 切换到了 roadhog。当然，问题也如雨后春笋一般，陆续冒出来，总结一下，也不负折腾。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2017-10-30T23:07:06.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="探路 Roadhog">
+<meta name="twitter:description" content="为了紧跟 ant design 的步伐，前不久将项目从 dora 切换到了 roadhog。当然，问题也如雨后春笋一般，陆续冒出来，总结一下，也不负折腾。">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/roadhog0.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="http://7xvi3w.com1.z0.glb.clouddn.com/roadhog0.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            探路 Roadhog
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2017-04-25T23:13:20+08:00">
+	  
+		    2017/4月/25 23:13:20
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>为了紧跟 ant design 的步伐，前不久将项目从 dora 切换到了 roadhog。当然，问题也如雨后春笋一般，陆续冒出来，总结一下，也不负折腾。<br><a id="more"></a></p>
+<h4 id="一、Roadhog-是什么？"><a href="#一、Roadhog-是什么？" class="headerlink" title="一、Roadhog 是什么？"></a>一、Roadhog 是什么？</h4><p><code>dva</code> 是基于 <code>redux</code>，<code>redux-saga</code>，<code>react-route</code> 的框架，<code>roadhog</code> 是基于 <code>create-react-app</code> 脚手架优化简便的脚手架。<br><div class="alert info"><p>我们可以这样理解：<code>dva</code> 相当于 <code>react + redux</code>，而 <code>roadhog</code> 则是 <code>webpack</code></p>
+</div></p>
+<p>官网是这么描述的：由于 create-react-app 的默认配置不能满足需求，而他又不提供定制的功能，于是基于他实现了一个可配置版。所以如果既要 create-react-app 的优雅体验，又想定制配置，那么可以试试 roadhog 。</p>
+<h4 id="二、如何使用？"><a href="#二、如何使用？" class="headerlink" title="二、如何使用？"></a>二、如何使用？</h4><p>首先，全局安装 <code>roadhog</code><br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i roadhog -g</span><br></pre></td></tr></table></figure></p>
+<p>其次，在项目根目录下创建 .roadhogrc 文件，并添加如下代码（<a href="https://github.com/sorrycc/roadhog" target="_blank" rel="noopener">配置项请参看官网文档</a>）：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"entry"</span>: <span class="string">"src/index.js"</span>,</span><br><span class="line">  <span class="string">"disableCSSModules"</span>: <span class="literal">false</span>,</span><br><span class="line">  <span class="string">"publicPath"</span>: <span class="string">"/"</span>,</span><br><span class="line">  <span class="string">"theme"</span>: &#123;</span><br><span class="line">    <span class="string">"@primary-color"</span>: <span class="string">"#108ee9"</span>,</span><br><span class="line">    <span class="string">"@link-color"</span>: <span class="string">"#1DA57A"</span>,</span><br><span class="line">    <span class="string">"@border-radius-base"</span>: <span class="string">"2px"</span>,</span><br><span class="line">    <span class="string">"@font-size-base"</span>: <span class="string">"16px"</span>,</span><br><span class="line">    <span class="string">"@line-height-base"</span>: <span class="string">"1.2"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"externals"</span>: &#123;</span><br><span class="line">    <span class="string">"XLSX"</span>: <span class="string">"window.XLSX"</span>,</span><br><span class="line">    <span class="string">"jquery"</span>: <span class="string">"jQuery"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"autoprefixer"</span>: <span class="literal">null</span>,</span><br><span class="line">  <span class="string">"extraBabelPlugins"</span>: [</span><br><span class="line">    <span class="string">"transform-runtime"</span>,</span><br><span class="line">    [<span class="string">"import"</span>, &#123; <span class="string">"libraryName"</span>: <span class="string">"antd"</span>, <span class="string">"style"</span>: <span class="string">"css"</span> &#125;]</span><br><span class="line">  ],</span><br><span class="line">  <span class="string">"env"</span>: &#123;</span><br><span class="line">    <span class="string">"development"</span>: &#123;</span><br><span class="line">      <span class="string">"extraBabelPlugins"</span>: [</span><br><span class="line">        <span class="string">"dva-hmr"</span></span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>然后，我们就可以通过启动项目了：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">roadhog server</span><br></pre></td></tr></table></figure></p>
+<p>最后，在需要构建发布的时候，执行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">roadhog build</span><br></pre></td></tr></table></figure></p>
+<p>此外，启动测试，默认会跑 ./test 目录下的所有文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">roadhog test</span><br></pre></td></tr></table></figure></p>
+<h4 id="三、从-atool-build-dora-转换到-roadhog"><a href="#三、从-atool-build-dora-转换到-roadhog" class="headerlink" title="三、从 atool-build + dora 转换到 roadhog"></a>三、从 atool-build + dora 转换到 roadhog</h4><p>此处参考了作者的<a href="https://www.tuicool.com/articles/nEreu2e" target="_blank" rel="noopener">说明文档</a>，大致过程如下：</p>
+<p>1.修改 <code>package.json</code>，删除 <code>atool-build</code> 和 <code>dora</code> 相关依赖，加上 <code>roadhog</code> 依赖。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install roadhog --save-dev</span><br></pre></td></tr></table></figure></p>
+<p>2.修改 <code>scripts</code> 部分，让 <code>start</code> 和 <code>build</code> 走 <code>roadhog</code>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&quot;start&quot;: &quot;roadhog server&quot;</span><br><span class="line">&quot;build&quot;: &quot;roadhog build&quot;</span><br></pre></td></tr></table></figure></p>
+<p>3.新增 .roadhogrc<br>如果是用 <code>dva + antd</code> 的组合，<code>babel</code> 插件部分通常这么配：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&quot;extraBabelPlugins&quot;: [</span><br><span class="line">  &quot;transform-runtime&quot;,</span><br><span class="line">  [&quot;import&quot;, &#123; &quot;libraryName&quot;: &quot;antd&quot;, &quot;style&quot;: &quot;css&quot; &#125;]</span><br><span class="line">],</span><br><span class="line">&quot;env&quot;: &#123;</span><br><span class="line">  &quot;development&quot;: &#123;</span><br><span class="line">    &quot;extraBabelPlugins&quot;: [</span><br><span class="line">      &quot;dva-hmr&quot;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>4.把 <code>webpack.config.js</code> 中的配置迁移到 <code>.roadhogrc</code> 中。<br>5.删除 <code>webpack.config.js</code></p>
+<div class="alert info"><p>最后一定要删除 <code>webpack.config.js</code>，否则可能会出现异常。</p>
+</div>
+<h4 id="四、全局安装-rodehog，启动-roadhog-server-异常处理"><a href="#四、全局安装-rodehog，启动-roadhog-server-异常处理" class="headerlink" title="四、全局安装 rodehog，启动 roadhog server 异常处理"></a>四、全局安装 rodehog，启动 roadhog server 异常处理</h4><p>按照步骤当运行 <code>roadhog server</code> 的时候，报出了如下的错误：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Failed to compile.</span><br><span class="line">Error in ./src/index.js</span><br><span class="line">Module build failed: Error: /Users/fox/Documents/ceb-admin/src/index.js: [babel-plugin-dva-hmr error] You must set the `entries` option.</span><br><span class="line">@ multi index</span><br></pre></td></tr></table></figure></p>
+<p>这时候，需要看一下 babel-plugin-dva-hmr 升级到最新的版本 0.3.2，再次运行 roadhog server<br>系统默认打开 <a href="http://localhost:8000/" target="_blank" rel="noopener">http://localhost:8000/</a></p>
+<p>不错，项目启动起来了。</p>
+<h4 id="五、接着，我们需要打包发布："><a href="#五、接着，我们需要打包发布：" class="headerlink" title="五、接着，我们需要打包发布："></a>五、接着，我们需要打包发布：</h4><p>执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">roadhog build</span><br></pre></td></tr></table></figure></p>
+<p>可以看到生成了。</p>
+<h4 id="六、打包完，启动服务器模拟一下部署环境"><a href="#六、打包完，启动服务器模拟一下部署环境" class="headerlink" title="六、打包完，启动服务器模拟一下部署环境"></a>六、打包完，启动服务器模拟一下部署环境</h4><p>你可以使用 <code>ngnix</code>，或者 <code>http-server</code> 启动：</p>
+<p>ok，访问链接，页面正常打开，没有问题。</p>
+<h4 id="七、其他异常："><a href="#七、其他异常：" class="headerlink" title="七、其他异常："></a>七、其他异常：</h4><p>1.Error in Cannot find module ‘less’<br>初步怀疑并没有添加 <code>less loader</code>，执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install less —save</span><br></pre></td></tr></table></figure></p>
+<p>2.使用 <code>public</code> 目录<br>我们约定 <code>public</code> 目录下的文件会在 <code>server</code> 和 <code>build</code> 时被自动 <code>copy</code> 到输出目录（默认是 ./dist）下。所以可以在这里存放 <code>favicon</code>, <code>iconfont</code>, <code>html</code>, <code>html</code> 里引用的图片等。</p>
+<p>3.图片路径访问不到，奇怪<br>需要放到 <code>public</code> 目录下，且访问不需要带 <code>public</code> 目录</p>
+<p>4.Cannot find module ‘webpack/lib/removeAndDo’<br>出现如上提示，需要局部安装 <code>webpack</code>，执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i webpack --save-dev</span><br></pre></td></tr></table></figure></p>
+<p><a href="https://github.com/webpack/webpack/issues/2131" target="_blank" rel="noopener">详情</a></p>
+<p>5.Chunk.entry was removed. Use hasRuntime()<br>执行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install webpack-extract-text-plugin —save</span><br></pre></td></tr></table></figure></p>
+<p>还有：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install extract-text-webpack-plugin@^2.0.0-beta --save-dev</span><br></pre></td></tr></table></figure></p>
+<p><a href="https://github.com/webpack/webpack/issues/2764" target="_blank" rel="noopener">详情</a></p>
+<h4 id="八、打包慢怎么办"><a href="#八、打包慢怎么办" class="headerlink" title="八、打包慢怎么办"></a>八、打包慢怎么办</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">roadhog build --debug</span><br><span class="line">roadhog build --watch</span><br><span class="line">roadhog build -h</span><br></pre></td></tr></table></figure>
+<p>此外，我们可以分析一下构建后文件大小：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">roadhog build --analyze</span><br></pre></td></tr></table></figure></p>
+<p>当出现如下提示，说明已经成功生成了分析文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Analyze result is generated at dist/stats.html.</span><br></pre></td></tr></table></figure></p>
+<p>让然，我们还可以查看 build 时的编译时间：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">time roadhog build</span><br></pre></td></tr></table></figure></p>
+<p>结果可能如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">roadhog build  79.98s user 3.38s system 99% cpu 1:23.95 total</span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p>这里指包括开发时的编译时间，修改代码重编译时间。</p>
+</div>
+<h4 id="九、参考："><a href="#九、参考：" class="headerlink" title="九、参考："></a>九、参考：</h4><ol>
+<li><a href="https://github.com/sorrycc/roadhog" target="_blank" rel="noopener">roadhog</a></li>
+<li><a href="http://www.tuicool.com/articles/nEreu2e" target="_blank" rel="noopener">从 dora 转到 roadhog</a></li>
+<li><a href="https://github.com/webpack/webpack/issues/2131" target="_blank" rel="noopener">webpack</a></li>
+</ol>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/antd/">antd</a> <a class="tag tag--primary tag--small t-link" href="/tags/roadhog/">roadhog</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/05/03/guide-of-howler/" data-tooltip="Howlerjs 音频播放插件">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/04/15/nginx-exception-handling/" data-tooltip="Nginx 使用与异常处理">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2017/04/25/gating-roadhog/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2017/04/25/gating-roadhog/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2017/04/25/gating-roadhog/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/05/03/guide-of-howler/" data-tooltip="Howlerjs 音频播放插件">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/04/15/nginx-exception-handling/" data-tooltip="Nginx 使用与异常处理">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2017/04/25/gating-roadhog/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2017/04/25/gating-roadhog/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2017/04/25/gating-roadhog/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2017/04/25/gating-roadhog/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2017/04/25/gating-roadhog/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2017/04/25/gating-roadhog/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

@@ -1,0 +1,531 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>打造你的专属 Chrome 插件（一） - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="不得不说 Chrome 给前端带来了无限的可能，Chrome 插件更是如虎添翼，让开发者有了更大的操作权限。这样，我们就可以做很多有趣的事情了。">
+<meta name="keywords" content="chrome,extensions">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="打造你的专属 Chrome 插件（一）">
+<meta property="og:url" content="http://jartto.wang/2018/11/10/chrome-extensions-1/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="不得不说 Chrome 给前端带来了无限的可能，Chrome 插件更是如虎添翼，让开发者有了更大的操作权限。这样，我们就可以做很多有趣的事情了。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/chrome/extnsions.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/chrome/show.png">
+<meta property="og:updated_time" content="2018-11-16T01:00:30.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="打造你的专属 Chrome 插件（一）">
+<meta name="twitter:description" content="不得不说 Chrome 给前端带来了无限的可能，Chrome 插件更是如虎添翼，让开发者有了更大的操作权限。这样，我们就可以做很多有趣的事情了。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/chrome/extnsions.png">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/chrome/logo.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/chrome/logo.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            打造你的专属 Chrome 插件（一）
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2018-11-10T22:18:21+08:00">
+	  
+		    2018/11月/10 22:18:21
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>不得不说 Chrome 给前端带来了无限的可能，Chrome 插件更是如虎添翼，让开发者有了更大的操作权限。这样，我们就可以做很多有趣的事情了。<br><a id="more"></a></p>
+<h4 id="一、写在前面"><a href="#一、写在前面" class="headerlink" title="一、写在前面"></a>一、写在前面</h4><p>对于很多开发者来说，通篇的概念可能会让人感到厌烦。所以，咱们先绕开一些预备知识，进行简单的实践。采用「自顶向下」的学习方式，我们先来看一个具型的东西，稍后再逐步深入概念和内在原理。</p>
+<div class="alert success"><p>本文将会一步步去搭建一个 Chrome 插件开发环境，采用 React 来实现基本功能。</p>
+</div>
+<h4 id="二、简单了解"><a href="#二、简单了解" class="headerlink" title="二、简单了解"></a>二、简单了解</h4><p><code>Chrome</code> 插件是一系列文件的集合，这些文件包括 <code>HTML</code>文件、<code>CSS</code>样式文件、<code>JavaScript</code>脚本文件、图片等静态文件以及 <code>manifest.json</code>。</p>
+<p>说白了就是：<code>Chrome</code> 扩展更像是一个运行于本地的网站，只是它可以利用 <code>Chrome</code> 平台提供的丰富的接口，获得更加全面的信息，进行更加复杂的操作。</p>
+<h4 id="三、创建项目"><a href="#三、创建项目" class="headerlink" title="三、创建项目"></a>三、创建项目</h4><div class="alert info"><p>因为选择了采用 React 来开发，所以我们可以使用脚手架来生成最基本的项目结构。</p>
+</div>
+<p>首先，安装 <code>create-react-app</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo npm install -g create-react-app</span><br></pre></td></tr></table></figure></p>
+<p>然后，初始化项目：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create-react-app chrome-extension</span><br></pre></td></tr></table></figure></p>
+<p>进入 <code>public</code> 目录，修改文件：<code>mainfest.json</code>：<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"manifest_version"</span>: <span class="number">2</span>,</span><br><span class="line">  <span class="attr">"name"</span>: <span class="string">"Jartto's Demo"</span>,</span><br><span class="line">  <span class="attr">"description"</span>: <span class="string">"My first chrome extension."</span>,</span><br><span class="line">  <span class="attr">"version"</span>: <span class="string">"1.0.0"</span>,</span><br><span class="line">  <span class="attr">"icons"</span>: &#123;</span><br><span class="line">    <span class="attr">"16"</span>: <span class="string">"image/icon-16.png"</span>,</span><br><span class="line">    <span class="attr">"128"</span>: <span class="string">"image/icon-128.png"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"browser_action"</span>: &#123;</span><br><span class="line">    <span class="attr">"default_icon"</span>: &#123;</span><br><span class="line">      <span class="attr">"19"</span>: <span class="string">"image/icon-38.png"</span>,</span><br><span class="line">      <span class="attr">"38"</span>: <span class="string">"image/icon-19.png"</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">"default_title"</span>: <span class="string">"Jartto's Demo"</span>,</span><br><span class="line">    <span class="attr">"default_popup"</span>: <span class="string">"index.html"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"permissions"</span>: [</span><br><span class="line">    <span class="string">"alarms"</span>, <span class="string">"tabs"</span>, <span class="string">"notifications"</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">"background"</span>: &#123;</span><br><span class="line">    <span class="attr">"persistent"</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="attr">"scripts"</span>: [</span><br><span class="line">      <span class="string">"background.js"</span></span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"content_security_policy"</span>: <span class="string">"script-src 'self' 'unsafe-eval'; object-src 'self'"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>找到几个 <code>icon</code>，放入 <code>image</code> 目录下。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">icon-128.png</span><br><span class="line">icon-16.png</span><br><span class="line">icon-19.png</span><br><span class="line">icon-38.png</span><br></pre></td></tr></table></figure></p>
+<p>图片就绪，此外我们还需要创建一个脚本 <code>background.js</code>：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="comment">// 这里调用 chrome api tabs 作为尝试</span></span><br><span class="line">  chrome.tabs.onUpdated.addListener(<span class="function"><span class="keyword">function</span>(<span class="params">tabId,changeInfo,tab</span>)</span>&#123;</span><br><span class="line">    <span class="comment">// 用户切换 tab，会弹出警告框</span></span><br><span class="line">    alert(tab.url);</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure></p>
+<p>最终 <code>public</code> 下目录结构大概如此：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public</span><br><span class="line">├── background.js</span><br><span class="line">├── favicon.ico</span><br><span class="line">├── image</span><br><span class="line">│   ├── icon-128.png</span><br><span class="line">│   ├── icon-16.png</span><br><span class="line">│   ├── icon-19.png</span><br><span class="line">│   └── icon-38.png</span><br><span class="line">├── index.html</span><br><span class="line">└── manifest.json</span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p>稍后我会对参数做<a href="#">详细说明</a>，所以这里我们只实现插件的最小闭环。</p>
+</div>
+<h4 id="四、构建"><a href="#四、构建" class="headerlink" title="四、构建"></a>四、构建</h4><p>按照上面的步骤，我们开发了一个极其简单的功能，打个包先：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn build</span><br></pre></td></tr></table></figure></p>
+<div class="alert danger"><p>注意观察 <code>dist</code> 目录下的文件变化。</p>
+</div>
+<h4 id="五、如何运行"><a href="#五、如何运行" class="headerlink" title="五、如何运行"></a>五、如何运行</h4><p><code>Chrome</code> 浏览器打开：<code>chrome://extensions</code>，选择「加载已解压的扩展程序」。看到如下图：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/chrome/extnsions.png" alt="chrome 插件安装"></p>
+<div class="alert warning"><p>需要注意：将插件目录指向我们上文构建出的 <code>dist</code> 目录。</p>
+</div>
+<p>安装完之后，页面和页头工具栏都会出现我们新开发的插件，如下图：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/chrome/show.png" alt="chrome 插件演示"></p>
+<h4 id="六、异常"><a href="#六、异常" class="headerlink" title="六、异常"></a>六、异常</h4><p>奇怪的是，插件导入后，并没有运行，我们看到了如下的警告：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Refused to execute inline script because it violates the following Content Security Policy directive: &quot;script-src &apos;self&apos; blob: filesystem: chrome-extension-resource:&quot;. Either the &apos;unsafe-inline&apos; keyword, a hash (&apos;sha256-GgRxrVOKNdB4LrRsVPDSbzvfdV4UqglmviH9GoBJ5jk=&apos;), or a nonce (&apos;nonce-...&apos;) is required to enable inline execution.</span><br></pre></td></tr></table></figure></p>
+<p>大概意思是违反了 <code>CSP</code> 原则，这里大概提一下，详细请看另一篇文章：<a href="http://jartto.wang/2018/11/12/outline-of-CSP/">CSP 概要</a> </p>
+<p><code>CSP（Content Security Policy）</code>，内容安全策略，<code>CSP</code> 通常是在 <code>Header</code> 或者 <code>HTML</code> 的 <code>Meta</code> 标签中定义的，它声明了一系列可以被当前网页合法引用的资源，如果不在 <code>CSP</code> 声明的合法范围内，浏览器会拒绝引用这些资源，<code>CSP</code> 的主要目的是防止跨站脚本攻击（<code>XSS</code>）。</p>
+<div class="alert info"><p>说白了其实 CSP 是一种安全策略，Chrome 插件不允许如此操作。</p>
+</div>
+<p>默认情况下，内容安全策略将不会加载内联脚本，只能加载本地脚本。所以我们可以放宽默认政策：<br>1.内联脚本<br>看看官方指南，通过在策略中指定源代码的 <code>base64</code> 编码散列，可以将内联脚本列入白名单。但最好的方法是将这个逻辑提取到一个单独的脚本，而不是使用内联脚本。</p>
+<p>2.远程脚本<br>我们可以设置白名单脚本资源<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">manifest.json "content_security_policy":"script-src 'self' https://apis.google.com; object-src 'self'"</span><br></pre></td></tr></table></figure></p>
+<p>当然，下载远程 <code>jartto.js</code> 并将其包含为本地脚本，这才是最好的方式。</p>
+<div class="alert danger"><p>请注意，根据内联脚本的说明，unsafe-inline 不再有效。</p>
+</div>
+<p>到这里其实已经明确了，使用 <code>Create-React-App</code> 创建的项目，在我们构建的时候，默认将 <code>js</code> 打包为内联，所以违反了 <code>CSP</code> 原则，我们修改一下打包命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&quot;scripts&quot;: &#123;</span><br><span class="line">  &quot;start&quot;: &quot;react-scripts start&quot;,</span><br><span class="line">  &quot;build&quot;: &quot;INLINE_RUNTIME_CHUNK=false react-scripts build&quot;,</span><br><span class="line">  &quot;test&quot;: &quot;react-scripts test&quot;,</span><br><span class="line">  &quot;eject&quot;: &quot;react-scripts eject&quot;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></p>
+<div class="alert warning"><p>请注意：我们增加了 INLINE_RUNTIME_CHUNK=false 用来控制打包的 js 文件。</p>
+</div>
+<p>好了，现在再次安装 <code>Chrome</code> 插件就不会有任何问题了。细节问题，可以查看我的 <a href="https://github.com/chenfengyanyu/my-web-accumulation/tree/master/chrome-extension" target="_blank" rel="noopener">Demo</a>。</p>
+<h4 id="七、补充说明"><a href="#七、补充说明" class="headerlink" title="七、补充说明"></a>七、补充说明</h4><p>上面我们完成了一个简单的 <code>Chrome</code> 插件，细心的童鞋可能发现了，文件中创建了 <code>background.js</code>，这是什么意思呢？这里大概提一下：</p>
+<p>1.<code>background</code> 层，<code>chrome</code> 插件底层，控制整个 <code>chrome</code> 插件的大脑，具有最高权限；</p>
+<p>2.<code>content</code> 层，<code>content-script</code> 脚本工作平台，本质上是 <code>chrome</code> 插件脚本注入层，权限最低只能影响页面<code>DOM</code> ，不能跨域操作，但是可以通过 <code>chrome.runtime.sendMessage</code> 与 <code>background</code> 层交互；</p>
+<p>3.<code>popup/option</code> 层，<code>UI</code> 交互层，权限中等，可以直接使用 <code>background</code> 的实例对象，也可以通过消息与 <code>content</code> 层交互。</p>
+<div class="alert info"><p>这是开发 Chrome 插件中最重要的三个层概念，<a href="#">后面</a>我们还会着重去讲解。</p>
+</div>
+<h4 id="八、关于调试"><a href="#八、关于调试" class="headerlink" title="八、关于调试"></a>八、关于调试</h4><p>插件的开发过程，我们需要不断调试。因为插件的独特性，所以不同的层，调试方式是不同的。</p>
+<ul>
+<li><code>popup.html</code> 调试： 右键点击 <code>popup</code> 图标，选择「审查弹出内容」；</li>
+<li><code>content_script</code> 调试：<code>devtool -&gt; sources -&gt; Content scripts</code>；</li>
+<li><code>background</code> 调试： <code>chrome://extensions/</code> 激活开发者模式，点击对应插件「检查视图」后的「背景页」；</li>
+</ul>
+<h4 id="九、验证，打包"><a href="#九、验证，打包" class="headerlink" title="九、验证，打包"></a>九、验证，打包</h4><p>1.验证<br>打开网址：<code>chrome://extensions/</code>，选择开发者模式，选择加载已解压的扩展程序…，选择我们编写的根目录即可，如果出现类似文章开头展示的最终效果，并能实现想要实现的功能，表示验证成功；如果失败，请修改代码，重新执行此验证流程。</p>
+<p>2.打包<br>打开网址：<code>chrome://extensions/</code>，选择开发者模式，选择打包扩展程序…，选择根目录，下面的 <code>key</code> 为空即可，最后选择打包扩展程序即可；如果打包失败，请根据错误提示信息修正，如果打包成功，会在与根目录同级的目录中生成 <code>CRX</code> 插件文件和 <code>PEM 秘钥</code> 文件。</p>
+<h4 id="十、发布"><a href="#十、发布" class="headerlink" title="十、发布"></a>十、发布</h4><p>发布过程就稍微麻烦一些，我也没有去尝试。好在不少开发者都摸索了整个过程，我们可以参考：<a href="https://segmentfault.com/a/1190000000354014" target="_blank" rel="noopener">如何发布一款Chrome App</a>。大致思路如下：</p>
+<p>1.准备项目素材</p>
+<ul>
+<li>4 种大小的图标（16px, 32px, 48px, 128px）</li>
+<li>打包成 <code>zip</code>（不是 <code>crx</code>），访问开发者中心既可上传应用</li>
+<li>一套 1280x800 大小的应用运行屏幕截图</li>
+<li>一套 3 张（大中小）的宣传图</li>
+<li>一段说明文字</li>
+</ul>
+<p>2.开发者账号<br>如果你之前没有发布过，需要注册开发者账户，和 <code>Android</code>， <code>iOS</code> 开发者一样的是，需要付费。花费 <code>5$</code> ，需要 <code>Visa</code> 信用卡。</p>
+<p>如果觉得自己的插件还不错，不妨贡献出来，为 <code>Chrome</code> 插件库做一些贡献吧。</p>
+<h4 id="十一、总结"><a href="#十一、总结" class="headerlink" title="十一、总结"></a>十一、总结</h4><p>文章主要从项目构建，插件运行，异常处理，调试，打包发布等方面出发，完整的梳理了开发 <code>Chrome</code> 插件的过程。一个完整的示例，可以很快帮你入门。在知道了整个轮廓之后，我们需要进一步的摸索，所以<a href="#">后续</a>文章会增加一些深度。</p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/chrome/">chrome</a> <a class="tag tag--primary tag--small t-link" href="/tags/extensions/">extensions</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/11/12/outline-of-CSP/" data-tooltip="CSP 概要">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/11/01/mobile-debug/" data-tooltip="H5 移动调试全攻略">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/11/10/chrome-extensions-1/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/11/10/chrome-extensions-1/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/11/10/chrome-extensions-1/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/11/12/outline-of-CSP/" data-tooltip="CSP 概要">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/11/01/mobile-debug/" data-tooltip="H5 移动调试全攻略">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/11/10/chrome-extensions-1/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/11/10/chrome-extensions-1/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/11/10/chrome-extensions-1/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/11/10/chrome-extensions-1/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/11/10/chrome-extensions-1/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/11/10/chrome-extensions-1/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

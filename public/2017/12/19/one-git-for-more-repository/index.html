@@ -1,0 +1,490 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>如何配置 Git 对应多个 Repository - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="突发奇想，做一个在线的 Demo，最经济适用的办法就是利用 github.io 来演示了。那么问题来了，我本地一个客户端，如何对应多个 Github 账号呢？">
+<meta name="keywords" content="git,github">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="如何配置 Git 对应多个 Repository">
+<meta property="og:url" content="http://jartto.wang/2017/12/19/one-git-for-more-repository/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="突发奇想，做一个在线的 Demo，最经济适用的办法就是利用 github.io 来演示了。那么问题来了，我本地一个客户端，如何对应多个 Github 账号呢？">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2018-12-30T15:48:12.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="如何配置 Git 对应多个 Repository">
+<meta name="twitter:description" content="突发奇想，做一个在线的 Demo，最经济适用的办法就是利用 github.io 来演示了。那么问题来了，我本地一个客户端，如何对应多个 Github 账号呢？">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo/git0.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo/git0.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            如何配置 Git 对应多个 Repository
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2017-12-19T15:46:27+08:00">
+	  
+		    2017/12月/19 15:46:27
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>突发奇想，做一个在线的 <code>Demo</code>，最经济适用的办法就是利用 <code>github.io</code> 来演示了。那么问题来了，我本地一个客户端，如何对应多个 <code>Github</code> 账号呢？<br><a id="more"></a></p>
+<h4 id="一、问题描述"><a href="#一、问题描述" class="headerlink" title="一、问题描述"></a>一、问题描述</h4><p>假定我现在的场景是：只有一台 <code>Mac</code> ，而我想配置连接两个 <code>Github</code> 账号，你可能会失败。因为：<br><div class="alert success"><p>GitHub will use the key as means to identify you when you connect to them via SSH. As such, you cannot have multiple accounts with the same key, as GitHub won’t be able to tell then which of your accounts you want to use.</p>
+</div></p>
+<p>大致意思就是：你只有一个 SSH 公钥的话，你只能连接一个 Github 账号，否则 Github 将无法区分你想使用哪个账号。提示很明显，既然是这样，那我们就尝试添加新的私钥/公钥来解决问题。</p>
+<h4 id="二、添加私钥-公钥"><a href="#二、添加私钥-公钥" class="headerlink" title="二、添加私钥/公钥"></a>二、添加私钥/公钥</h4><p>1.在 Mac 命令行中输入：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls ~/.ssh</span><br></pre></td></tr></table></figure></p>
+<p>如果有 <code>id_rsa</code> 和 <code>id_rsa.pub</code>，说明已存在一对私钥/公钥。<br>2.创建新的私钥/公钥，并指定私钥名称，比如 <code>id_rsa_x</code>（ x 为任意名称）<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -f ~/.ssh/id_rsa_1 -C <span class="string">"yourmail@xxx.com"</span></span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p>操作完成后，该目录会多出 <code>id_rsa_1</code> 和 <code>id_rsa_1.pub</code> 两个文件。</p>
+</div>
+<h4 id="三、配置-config-文件"><a href="#三、配置-config-文件" class="headerlink" title="三、配置 config 文件"></a>三、配置 <code>config</code> 文件</h4><p>按照上述过程，我们已经创建完成了私钥/公钥，然后在 <code>~/.ssh/</code> 文件夹下创建一个 <code>config</code> 文件并打开：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim config</span><br></pre></td></tr></table></figure></p>
+<p>编辑 <code>config</code> 文件，配置不同的仓库指向不同的私钥文件。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 第一个账号，默认使用的账号</span></span><br><span class="line">Host github.com</span><br><span class="line">HostName github.com</span><br><span class="line">User git</span><br><span class="line">IdentityFile ~/.ssh/id_rsa</span><br><span class="line"><span class="comment"># 第二个账号</span></span><br><span class="line">Host second.github.com  <span class="comment"># second为前缀名，可以任意设置</span></span><br><span class="line">HostName github.com</span><br><span class="line">User git</span><br><span class="line">IdentityFile ~/.ssh/id_rsa_1</span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p>配置完 <code>config</code> 文件，接下来就是要告诉 <code>Github</code> 相关信息了。</p>
+</div>
+<h4 id="四、为-Github-添加-Deploy-keys"><a href="#四、为-Github-添加-Deploy-keys" class="headerlink" title="四、为 Github 添加 Deploy keys"></a>四、为 <code>Github</code> 添加 <code>Deploy keys</code></h4><p>首先，查看两个账号的私钥，并拷贝：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">more id_rsa.pub</span><br><span class="line">more id_rsa_1.pub</span><br></pre></td></tr></table></figure></p>
+<p>打开 <code>Github</code>，<code>Setting - Deploy keys - Add deploy key</code>，将 <code>id_rsa.pub</code> 和 <code>id_rsa_1.pub</code> 分别填入不同的 <code>Github</code> 账号，并保存。</p>
+<h4 id="五、测试-ssh-是否可用"><a href="#五、测试-ssh-是否可用" class="headerlink" title="五、测试 ssh 是否可用"></a>五、测试 <code>ssh</code> 是否可用</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br><span class="line">ssh -T git@second.github.com</span><br></pre></td></tr></table></figure>
+<p>如果出现如下提示，表示配置成功：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Hi jartto! You have successfully authenticated, but GitHub does not provide shell access.</span><br></pre></td></tr></table></figure></p>
+<h4 id="六、注意事项"><a href="#六、注意事项" class="headerlink" title="六、注意事项"></a>六、注意事项</h4><p>因为要对应不同的账号，所以需要取消 <code>git</code> 全局用户名/邮箱的设置，设置独立的用户名/邮箱：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 取消全局 用户名/邮箱 配置</span><br><span class="line">$ git config --global --unset user.name</span><br><span class="line">$ git config --global --unset user.email</span><br><span class="line"></span><br><span class="line"># 进入项目文件夹，单独设置每个repo 用户名/邮箱</span><br><span class="line">$ git config user.email &quot;xxxx@xx.com&quot;</span><br><span class="line">$ git config user.name &quot;xxxx&quot;</span><br></pre></td></tr></table></figure></p>
+<h4 id="七、ssh-如何区别不同的账号"><a href="#七、ssh-如何区别不同的账号" class="headerlink" title="七、ssh 如何区别不同的账号"></a>七、<code>ssh</code> 如何区别不同的账号</h4><p>有意思的是，<code>ssh</code> 是如何区分不同的账号呢，大概<a href="http://www.jianshu.com/p/04e9a885c5c8" target="_blank" rel="noopener">原理</a>如下：<br>1.<code>ssh</code> 客户端是通过类似 <a href="mailto:`git@github.com" target="_blank" rel="noopener">`git@github.com</a>:githubUserName/repName.git **<code>的地址来识别使用本地的哪个私钥的，地址中的</code>User<code>是</code>@<code>前面的</code>git<code>，</code>Host<code>是</code>@<code>后面的</code>github.com`。</p>
+<p>2.如果所有账号的 <code>User</code> 和 <code>Host</code> 都为 <code>git</code> 和 <code>github.com</code>，那么就只能使用一个私钥。所以要对 <code>User</code> 和 <code>Host</code> 进行配置，让每个账号使用自己的 <code>Host</code>，每个 <code>Host</code> 的域名做 <code>CNAME</code> 解析到 <code>github.com</code>，如上面配置中的 <code>Host second.github.com</code>。</p>
+<p>3.配置了别名之后，新的地址就是 <a href="mailto:`git@second.github.com" target="_blank" rel="noopener">`git@second.github.com</a>:githubUserName/repName.git**`（在添加远程仓库时使用）。</p>
+<h4 id="八、异常处理"><a href="#八、异常处理" class="headerlink" title="八、异常处理"></a>八、异常处理</h4><p>如果配置过程一帆风顺的话，可能也就不会有这篇总结了。<br><div class="alert success"><p>一些细节问题可能会导致你所有努力前功尽弃。</p>
+</div><br>1.<code>Permission denied (publickey)</code><br>如果你碰到这样的问题，可以<a href="https://help.github.com/articles/error-permission-denied-publickey/" target="_blank" rel="noopener">打出异常</a>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -vT git@github.com</span><br></pre></td></tr></table></figure></p>
+<p>然后根据提示的消息来查找解决方案</p>
+<p>2.<code>Permission to jartto1.git denied to jartto</code><br>这个意思很明显，访问被拒绝了，应该是账号没有正确对应。解决方案就是：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote <span class="built_in">set</span>-url origin jartto.github.com:jartto/jartto.github.io.git</span><br></pre></td></tr></table></figure></p>
+<h4 id="九、参考"><a href="#九、参考" class="headerlink" title="九、参考"></a>九、参考</h4><p><a href="http://www.jianshu.com/p/04e9a885c5c8" target="_blank" rel="noopener">Git 之同一台电脑连接多个远程仓库</a><br><a href="http://www.jianshu.com/p/12badb7e6c10" target="_blank" rel="noopener">Git 最著名报错 “ERROR: Permission to XXX.git denied to user” 终极解决方案</a><br><a href="https://help.github.com/articles/error-permission-denied-publickey/" target="_blank" rel="noopener">error-permission-denied-publickey</a></p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/git/">git</a> <a class="tag tag--primary tag--small t-link" href="/tags/github/">github</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/12/28/cannot-nest-git-repository/" data-tooltip="如何解决 Git 仓库嵌套问题">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/12/18/reflective-closure/" data-tooltip="反思闭包">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2017/12/19/one-git-for-more-repository/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2017/12/19/one-git-for-more-repository/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2017/12/19/one-git-for-more-repository/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/12/28/cannot-nest-git-repository/" data-tooltip="如何解决 Git 仓库嵌套问题">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/12/18/reflective-closure/" data-tooltip="反思闭包">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2017/12/19/one-git-for-more-repository/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2017/12/19/one-git-for-more-repository/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2017/12/19/one-git-for-more-repository/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2017/12/19/one-git-for-more-repository/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2017/12/19/one-git-for-more-repository/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2017/12/19/one-git-for-more-repository/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

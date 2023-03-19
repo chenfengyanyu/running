@@ -1,0 +1,522 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>30s 就可以掌握的 Nginx 片段 - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="作为一枚程序员，日常研发少不了上线部署工作。一旦走上“基建”的道路，你就会发现 Nginx 是你绕不开的一个坎。毫不夸张的说：Nginx 能顶半边天！">
+<meta name="keywords" content="nginx">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="30s 就可以掌握的 Nginx 片段">
+<meta property="og:url" content="http://jartto.wang/2023/03/12/30-seconds-of-nginx/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="作为一枚程序员，日常研发少不了上线部署工作。一旦走上“基建”的道路，你就会发现 Nginx 是你绕不开的一个坎。毫不夸张的说：Nginx 能顶半边天！">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2023-03-18T12:57:54.398Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="30s 就可以掌握的 Nginx 片段">
+<meta name="twitter:description" content="作为一枚程序员，日常研发少不了上线部署工作。一旦走上“基建”的道路，你就会发现 Nginx 是你绕不开的一个坎。毫不夸张的说：Nginx 能顶半边天！">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/nginx/nginx.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/nginx/nginx.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            30s 就可以掌握的 Nginx 片段
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2023-03-12T20:56:47+08:00">
+	  
+		    2023/3月/12 20:56:47
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>作为一枚程序员，日常研发少不了上线部署工作。一旦走上“基建”的道路，你就会发现 <code>Nginx</code> 是你绕不开的一个坎。毫不夸张的说：<code>Nginx</code> 能顶半边天！<br><a id="more"></a><br>也许你会反驳，我们有专业的运维（ <code>OP</code> ）团队，不用操心。然而实际情况却是 <code>OP</code> 每天被繁重的工单占据着，你无时无刻不在排队。大公司如此，小公司更甚。因此，储备一些 <code>Nginx</code> 知识，一定会让你事半功倍。<br><div class="alert success"><p>本文总结了日常开发中高频出现的 15 个 Nginx 配置片段，因为短小，所以你只需 30 秒就可以掌握。</p>
+</div></p>
+<h4 id="一、跨域配置"><a href="#一、跨域配置" class="headerlink" title="一、跨域配置"></a>一、跨域配置</h4><p>由于浏览器的安全策略，前端处理跨域请求的概率极高，如下是开启跨域请求常规手段。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="variable">$request_method</span> = OPTIONS ) &#123;</span><br><span class="line">    add_header <span class="string">"Access-Control-Allow-Origin"</span>  *;</span><br><span class="line">    add_header <span class="string">"Access-Control-Allow-Methods"</span> <span class="string">"GET, POST, OPTIONS, HEAD"</span>;</span><br><span class="line">    add_header <span class="string">"Access-Control-Allow-Headers"</span> <span class="string">"Authorization, Origin, X-Requested-With, Content-Type, Accept"</span>;</span><br><span class="line">    add_header <span class="string">'Access-Control-Max-Age'</span> 600;</span><br><span class="line">    <span class="built_in">return</span> 200;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="二、开启-GZip-压缩"><a href="#二、开启-GZip-压缩" class="headerlink" title="二、开启 GZip 压缩"></a>二、开启 GZip 压缩</h4><p>如果你希望压缩常规的文件类型，可以参考如下代码：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">http </span><br><span class="line">&#123;</span><br><span class="line">  include       conf/mime.types;</span><br><span class="line">  gzip on;</span><br><span class="line">  gzip_min_length  1000;</span><br><span class="line">  gzip_buffers     4 8k;   </span><br><span class="line">  gzip_http_version 1.1; </span><br><span class="line">  gzip_types       text/plain application/x-javascript text/css application/xml application/javascript application/json;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>GZip 涉及参数较多，还有 <code>gzip_comp_level</code>、<code>gzip_proxied</code>等，详情可以参考：<a href="https://www.jianshu.com/p/e0ff1e275e7f" target="_blank" rel="noopener">Nginx配置 - Gzip压缩</a></p>
+<h4 id="三、跨域传递-Cookie"><a href="#三、跨域传递-Cookie" class="headerlink" title="三、跨域传递 Cookie"></a>三、跨域传递 Cookie</h4><p><code>Chrome 80</code>以后的版本，<code>Cookie</code>默认不可跨域，除非服务器在响应头里再设置 <code>same-site</code> 属性（<code>strict</code>，<code>lax</code>，<code>none</code>）。</p>
+<ul>
+<li><code>Strict</code>最为严格，完全禁止第三方<code>Cookie</code>，跨站点时，任何情况下都不会发送<code>Cookie</code>。换言之，只有当前网页的<code>URL</code>与请求目标一致，才会带上<code>Cookie</code>。这个规则过于严格，可能造成非常不好的用户体验。比如，当前网页有一个<code>GitHub</code>链接，用户点击跳转就不会带有<code>GitHub</code>的<code>Cookie</code>，跳转过去总是未登陆状态。</li>
+<li><p><code>None</code>，<code>Cookie</code>只能通过<code>HTTPS</code>协议发送。必须同时设置<code>Secure</code>属性（<code>Cookie</code>只能通过<code>HTTPS</code>协议发送），否则无效。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Set-Cookie: widget_session=abc123; SameSite=None; Secure</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>Lax</code>规则稍稍放宽，大多数情况也是不发送第三方<code>Cookie</code>，但是导航到目标网址的<code>Get</code>请求除外。</p>
+</li>
+</ul>
+<p>还有一种方式是使用<code>proxy_pass</code>反向代理。如果只是<code>Host</code>、端口转换，则<code>Cookie</code>不会丢失。再次访问时，浏览器会发送当前的<code>Cookie</code>。当然，路径变化了，则需要设置<code>Cookie</code>的路径转换。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">location /foo &#123;</span><br><span class="line">    proxy_pass http://localhost:4000;</span><br><span class="line">    proxy_cookie_path /foo <span class="string">"/; SameSite=None; HTTPOnly; Secure"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="四、健康检查"><a href="#四、健康检查" class="headerlink" title="四、健康检查"></a>四、健康检查</h4><p><code>Nginx</code> 服务端会按照设定的间隔时间主动向后端的 <code>upstream_server</code> 发出检查请求来验证后端的各个 <code>upstream_server</code> 的状态。<br>如果得到某个服务器失败的返回超过一定次数，比如 3 次就会标记该服务器为异常，就不会将请求转发至该服务器。一般情况下后端服务器需要为这种健康检查专门提供一个低消耗的接口。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">http &#123;</span><br><span class="line">  <span class="comment"># 指定一个 upstream 负载均衡组，名称为 evalue</span></span><br><span class="line">  upstream evalue &#123;</span><br><span class="line">    <span class="comment"># 定义组内的节点服务，如果不加 weight 参数，默认就是 Round Robin ，加上了 weight 参数就是加权轮询</span></span><br><span class="line">    server 192.168.90.100:9999 weight=100;</span><br><span class="line">    server 192.168.90.101:9999 weight=100;</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># interval=3000 检查间隔 3 秒 ， rise=3 连续成功3次认为服务健康 ， fall=5 连续失败 5 次认为服务不健康 ， timeout=3000 健康检查的超时时间为 3 秒 ， type=http  检查类型 http</span></span><br><span class="line">    check interval=3000 rise=3 fall=5 timeout=3000 <span class="built_in">type</span>=http;</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># check_http_send 设定检查的行为：请求类型 url 请求协议 -&gt; HEAD /api/v1/health HTTP/1.0         </span></span><br><span class="line">    check_http_send <span class="string">"HEAD /api/v1/health HTTP/1.0\r\n\r\n"</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 设定认为返回正常的响应状态       </span></span><br><span class="line">    check_http_expect_alive http_2xx http_3xx;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="五、泛域名解析"><a href="#五、泛域名解析" class="headerlink" title="五、泛域名解析"></a>五、泛域名解析</h4><p>要在 <code>Nginx</code> 中配置域名泛解析，可以使用通配符 <code>*</code> 来实现次级域名指向同一 <code>IP</code> 地址。如下是一个简单的 <code>Nginx</code> 配置示例：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen 80;</span><br><span class="line">    server_name *.jartto.com;</span><br><span class="line">    root /var/www/jartto.com;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>上面的配置将所有以 <code>.jartto.com</code> 结尾的域名都指向 <code>/var/www/jartto.com</code> 目录下的网站。如果要配置二级域名，可以使用以下的 <code>Nginx</code> 配置：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen 80;</span><br><span class="line">    server_name *.sub.jartto.com;</span><br><span class="line">    root /var/www/sub.jartto.com;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>上面的配置将所有以 <code>.sub.example.com</code> 结尾的二级域名都指向 <code>/var/www/sub.example.com</code> 目录下的网站。需要注意的是，在使用泛解析时，可能会导致一些安全问题。因此，建议仅在必要时使用泛解析，并且要对网站进行充分保护。</p>
+<h4 id="六、使用-request-id-实现链路追踪"><a href="#六、使用-request-id-实现链路追踪" class="headerlink" title="六、使用 $request_id 实现链路追踪"></a>六、使用 $request_id 实现链路追踪</h4><p><code>Nginx</code>在<code>1.11.0</code>版本中就提供了内置变量<code>$request_id</code>，其原理就是生成 32 位的随机字符串，虽不能比拟 <code>UUID</code> 的概率，但 32 位的随机字符串的重复概率也是微不足道了，所以一般可视为 <code>UUID</code> 来使用。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">location ^~ /habo/gid &#123;</span><br><span class="line">        add_header Cache-Control no-store;</span><br><span class="line">        default_type application/javascript;</span><br><span class="line">        <span class="built_in">set</span> <span class="variable">$unionId</span> <span class="variable">$cookie_GID</span>;</span><br><span class="line">        <span class="keyword">if</span> (<span class="variable">$unionId</span> = <span class="string">""</span>) &#123;</span><br><span class="line">                <span class="built_in">set</span> <span class="variable">$unionId</span> <span class="variable">$request_id</span>;</span><br><span class="line">                add_header Set-Cookie <span class="string">"GID=<span class="variable">$&#123;unionId&#125;</span>;path=/habo/;max-age=<span class="variable">$&#123;GID_MAX_AGE&#125;</span>"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">return</span> 200 <span class="string">"document.cookie='GID=<span class="variable">$&#123;unionId&#125;</span>;path=/;max-age=<span class="variable">$&#123;GID_MAX_AGE&#125;</span>'"</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="七、限流配置"><a href="#七、限流配置" class="headerlink" title="七、限流配置"></a>七、限流配置</h4><div class="alert info"><p><code>Nginx</code>提供了两种限流方式：控制速率和控制并发连接数。</p>
+</div>
+<p>其中，控制速率是指限制单位时间内的请求次数，而控制并发连接数是指限制同时处理的请求数量。</p>
+<p>下面是一个简单的<code>Nginx</code>限流配置示例，使用<code>leaky bucket</code>算法进行限流：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">http &#123;</span><br><span class="line">    limit_req_zone <span class="variable">$binary_remote_addr</span> zone=one:10m rate=1r/s;</span><br><span class="line"></span><br><span class="line">    server &#123;</span><br><span class="line">        location / &#123;</span><br><span class="line">            limit_req zone=one burst=5;</span><br><span class="line">            proxy_pass http://backend;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在上述配置中，<code>limit_req_zone</code>用于定义一个名为<code>one</code>的共享内存区域，并将其与客户端<code>IP</code>地址相关联。这个共享内存区域最大占用<code>10MB</code>空间，并且允许每秒钟通过 1 个请求。然后，在<code>location</code>块中使用了<code>limit_req</code>指令来启用限流功能。这里设置<code>burst</code>为 5，表示当客户端在短时间内发送超过 1 个请求时，可以暂时容忍一定数量的请求超出限制。<br>需要注意的是，在实际应用中需要根据具体情况调整参数值以达到最佳效果。如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">map <span class="variable">$http_baggage_flow</span>  <span class="variable">$plimit</span> &#123;</span><br><span class="line"> <span class="string">"ptest"</span> <span class="variable">$server_name</span>;</span><br><span class="line"> default <span class="string">""</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">limit_req_zone <span class="variable">$plimit</span> zone=prelimit:10m rate=600r/s;</span><br><span class="line"> server &#123;</span><br><span class="line">  listen       443 ssl;</span><br><span class="line">  server_name   m.gaotu100.com;</span><br><span class="line">  limit_req zone=prelimit  nodelay;</span><br><span class="line">  limit_req_status 530;</span><br><span class="line"></span><br><span class="line">  location = /530.html &#123;</span><br><span class="line">      default_type application/json;</span><br><span class="line">      <span class="built_in">return</span> 200 <span class="string">'&#123;"status" : 530&#125;'</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="八、History-二级路由刷新问题"><a href="#八、History-二级路由刷新问题" class="headerlink" title="八、History 二级路由刷新问题"></a>八、History 二级路由刷新问题</h4><p><code>vue-router+webpack</code>项目线上部署时单页项目路由，刷新页面出现 <code>404</code> 问题，一般需要配置如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">location / &#123;</span><br><span class="line">　　root html;</span><br><span class="line">　　try_files <span class="variable">$uri</span> <span class="variable">$uri</span>/ @router;</span><br><span class="line">　　index index.html index.htm;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">location @router &#123;</span><br><span class="line">　　rewrite ^.*$ /index.html last;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="九、Cookie-路由识别"><a href="#九、Cookie-路由识别" class="headerlink" title="九、Cookie 路由识别"></a>九、Cookie 路由识别</h4><p>最常见的场景就是灰度发布，<code>Nginx</code> 来识别来自前端的流量，从而进行转发。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">map $http_cookie $m_upstream &#123;</span><br><span class="line">    ~*baggage-version=isolute-feat-.*$ al-bj-sre-k8s-test-istio-gateway;</span><br><span class="line">    default test.jartto.com;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">upstream al-bj-sre-k8s-test-istio-gateway &#123;</span><br><span class="line">    server 47.95.128.11:80;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="十、服务端开启图片转换"><a href="#十、服务端开启图片转换" class="headerlink" title="十、服务端开启图片转换"></a>十、服务端开启图片转换</h4><p>这里主要是设置 <code>WebP</code> 格式图片，如果你还不了解，请查看：<a href="http://jartto.wang/2020/05/02/webp-practice/"><code>WebP</code> 方案分析与实践</a>。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">map $http_accept $webp_suffix &#123;</span><br><span class="line">    default   &quot;&quot;;</span><br><span class="line">    &quot;~*webp&quot;  &quot;.webp&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">location  ~* ^/_nuxt/img/(.+\.png|jpe?g)$ &#123;</span><br><span class="line">    rewrite ^/_nuxt/img/(.+\.png|jpe?g)$ /$1 break;</span><br><span class="line">    root /apps/srv/instance/test-webp.gaotu100.com/.nuxt/dist/client/img/;</span><br><span class="line">    add_header Vary Accept;</span><br><span class="line">    try_files $uri$webp_suffix $uri =404;</span><br><span class="line">    expires 30d;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="十一、负载均衡"><a href="#十一、负载均衡" class="headerlink" title="十一、负载均衡"></a>十一、负载均衡</h4><p>负载均衡通常有四种算法：</p>
+<ul>
+<li>轮询，默认方式，每个请求按时间顺序逐一分配到不同的后端服务器，如果后端服务挂了，能自动剔除；</li>
+<li><code>weight</code>，权重分配，指定轮询几率，权重越高，在被访问的概率越大，用于后端服务器性能不均的情况；</li>
+<li><code>ip_hash</code>，每个请求按访问 <code>IP</code> 的 <code>hash</code> 结果分配，这样每个访客固定访问一个后端服务器，可以解决动态网页 <code>session</code> 共享问题。负载均衡每次请求都会重新定位到服务器集群中的某一个，那么已经登录某一个服务器的用户再重新定位到另一个服务器，其登录信息将会丢失，这样显然是不妥的；</li>
+<li><code>fair</code>（第三方），按后端服务器的响应时间分配，响应时间短的优先分配，依赖第三方插件 <code>nginx-upstream-fair</code>，使用前请先安装；<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">http &#123;</span><br><span class="line">  upstream jartto-server &#123;</span><br><span class="line">  	# ip_hash;  # ip_hash 方式</span><br><span class="line">    # fair;   # fair 方式</span><br><span class="line">    server 127.0.0.1:8081;  # 负载均衡目的服务地址</span><br><span class="line">    server 127.0.0.1:8080;</span><br><span class="line">    server 127.0.0.1:8082 weight=10;  # weight 方式，不写默认为 1</span><br><span class="line">  &#125;</span><br><span class="line"> </span><br><span class="line">  server &#123;</span><br><span class="line">    location / &#123;</span><br><span class="line">    	proxy_pass http://jartto-server;</span><br><span class="line">      proxy_connect_timeout 10;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="十二、配置-HTTPS"><a href="#十二、配置-HTTPS" class="headerlink" title="十二、配置 HTTPS"></a>十二、配置 HTTPS</h4><p>要在 <code>Nginx</code> 上配置 <code>HTTPS</code>，可以按照以下步骤操作：</p>
+<ol>
+<li>为 <code>Nginx</code> 安装 <code>SSL</code> 模块。 这可以通过使用 <code>--with-http_ssl_module</code> 选项编译 <code>Nginx</code> 或安装包含 <code>SSL</code> 模块的预构建包来完成。</li>
+<li>从受信任的证书颁发机构<code>CA</code>为您的域获取<code>SSL</code>证书。 这可以通过购买证书或从<code>Let&#39;s Encrypt</code>获得免费证书来完成。</li>
+<li><p>配置<code>Nginx</code>以使用<code>SSL</code>证书和密钥文件。这涉及将以下行添加到您的<code>Nginx</code>配置文件中：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssl_certificate /path/to/jartto.crt;</span><br><span class="line">ssl_certificate_key /path/to/jartto.key;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果需要，配置<code>Nginx</code>将<code>HTTP</code>请求重定向到<code>HTTPS</code>。 这可以使用服务器块来完成，该服务器块监听端口<code>80</code>并将所有请求重定向到端口<code>443</code>（默认 <code>HTTPS</code> 端口）。</p>
+</li>
+<li>重新启动<code>Nginx</code>以应用更改。</li>
+</ol>
+<p>下面是启用<code>HTTPS</code>并将<code>HTTP</code>请求重定向到<code>HTTPS</code>的<code>Nginx</code>配置文件示例：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen 80;</span><br><span class="line">    server_name jartto.com www.jartto.com;</span><br><span class="line">    <span class="built_in">return</span> 301 https://<span class="variable">$server_name</span><span class="variable">$request_uri</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">    listen 443 ssl;</span><br><span class="line">    server_name jartto.com www.jartto.com;</span><br><span class="line"></span><br><span class="line">    ssl_certificate /path/to/jartto.crt;</span><br><span class="line">    ssl_certificate_key /path/to/jartto.key;</span><br><span class="line">    <span class="comment"># Other SSL-related settings go here</span></span><br><span class="line">    <span class="comment"># Other server block settings go here</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>如上配置文件同时监听端口<code>80</code>和<code>443</code>，但仅在端口<code>443</code>上通过<code>HTTPS</code>提供内容。所有<code>HTTP</code>请求都使用第一个服务器块中的返回语句重定向到它们等效的<code>HTTPS URL</code>。</p>
+<h4 id="十三、图片防盗链"><a href="#十三、图片防盗链" class="headerlink" title="十三、图片防盗链"></a>十三、图片防盗链</h4><p>如果你不想图片被外网随便引用，那么可以配置图片防盗链能力，配置如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">  listen       80;        </span><br><span class="line">  server_name  *.jartto.com;</span><br><span class="line">  </span><br><span class="line">  <span class="comment"># 图片防盗链</span></span><br><span class="line">  location ~* \.(gif|jpg|jpeg|png|bmp|swf)$ &#123;</span><br><span class="line">    valid_referers none blocked server_names ~\.google\. ~\.baidu\. *.qq.com;  <span class="comment"># 只允许本机 IP 外链引用</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="variable">$invalid_referer</span>)&#123;</span><br><span class="line">      <span class="built_in">return</span> 403;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="十四、配置多-Server"><a href="#十四、配置多-Server" class="headerlink" title="十四、配置多 Server"></a>十四、配置多 Server</h4><p>要在<code>Nginx</code>中配置多个服务器，可以在<code>Nginx</code>配置文件中定义多个服务器块。每个服务器块代表一个单独的虚拟服务器，可以监听不同的端口或<code>IP</code>地址，并提供不同的内容。下面是如何在<code>Nginx</code>中配置两个虚拟服务器的示例：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">http &#123;</span><br><span class="line">  server &#123;</span><br><span class="line">    listen 80;</span><br><span class="line">    server_name www.jartto.com;</span><br><span class="line">    root /var/www/jartto.com;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># other server configuration directives</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  server &#123;</span><br><span class="line">    listen 80;</span><br><span class="line">    server_name www.another-jartto.com;</span><br><span class="line">    root /var/www/another-jartto.com;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># other server configuration directives</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>上述示例中，我们定义了两个监听端口<code>80</code>的虚拟服务器。第一个虚拟服务器配置为从目录<code>/var/www/jartto.com</code>为域<code>www.jartto.com</code>提供内容。第二个虚拟服务器配置为从目录<code>/var/www/another-jartto.com</code>为域<code>www.another-jartto.com</code>提供内容。每个服务器块都可以有自己的一组配置指令，例如<code>SSL</code>证书、访问日志、错误页面等等。 </p>
+<div class="alert info"><p>通过在<code>Nginx</code>配置文件中定义多个服务器块，我们就可以在单个<code>Nginx</code>实例上托管多个网站或应用程序。</p>
+</div>
+<h4 id="十五、动态修改配置模块"><a href="#十五、动态修改配置模块" class="headerlink" title="十五、动态修改配置模块"></a>十五、动态修改配置模块</h4><p><code>ngx_dynamic_upstream</code> 是用于使用 <code>HTTP API</code> 动态操作上游的模块，例如 <code>ngx_http_upstream_conf</code>。如果你想动态修改<code>Nginx</code>配置信息，那么不妨试试如下代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">upstream backends &#123;</span><br><span class="line">    zone zone_for_backends 1m;</span><br><span class="line">    server 127.0.0.1:6001;</span><br><span class="line">    server 127.0.0.1:6002;</span><br><span class="line">    server 127.0.0.1:6003;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">    listen 6000;</span><br><span class="line"></span><br><span class="line">    location /dynamic &#123;</span><br><span class="line">      allow 127.0.0.1;</span><br><span class="line">      deny all;</span><br><span class="line">      dynamic_upstream;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">      proxy_pass http://backends;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>使用方式如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ curl &quot;http://127.0.0.1:6000/dynamic?upstream=zone_for_backends&amp;verbose=&quot;</span><br><span class="line">server 127.0.0.1:6001 weight=1 max_fails=1 fail_timeout=10;</span><br><span class="line">server 127.0.0.1:6002 weight=1 max_fails=1 fail_timeout=10;</span><br><span class="line">server 127.0.0.1:6003 weight=1 max_fails=1 fail_timeout=10;</span><br></pre></td></tr></table></figure></p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/nginx/">nginx</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2020/07/29/istio-1/" data-tooltip="了不起的 Istio">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2023/03/12/30-seconds-of-nginx/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2023/03/12/30-seconds-of-nginx/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2023/03/12/30-seconds-of-nginx/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2020/07/29/istio-1/" data-tooltip="了不起的 Istio">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2023/03/12/30-seconds-of-nginx/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2023/03/12/30-seconds-of-nginx/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2023/03/12/30-seconds-of-nginx/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2023/03/12/30-seconds-of-nginx/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2023/03/12/30-seconds-of-nginx/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2023/03/12/30-seconds-of-nginx/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

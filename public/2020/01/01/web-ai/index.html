@@ -1,0 +1,583 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>人工智能时代，Web 前端能做什么？ - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="最近做了一个项目，通过爬虫去抓取页面快照，然后对页面兼容性进行全面测试。但是遇到一个问题，抓取到海量页面之后，难道还要人工去分析吗？">
+<meta name="keywords" content="web,ai">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="人工智能时代，Web 前端能做什么？">
+<meta property="og:url" content="http://jartto.wang/2020/01/01/web-ai/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="最近做了一个项目，通过爬虫去抓取页面快照，然后对页面兼容性进行全面测试。但是遇到一个问题，抓取到海量页面之后，难道还要人工去分析吗？">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/ai/ai.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/ai/kael.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/ai/dev.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/ai/aiweb.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/ai/face.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/ai/cnn.gif">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/ai/ml.png">
+<meta property="og:updated_time" content="2020-01-05T15:42:42.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="人工智能时代，Web 前端能做什么？">
+<meta name="twitter:description" content="最近做了一个项目，通过爬虫去抓取页面快照，然后对页面兼容性进行全面测试。但是遇到一个问题，抓取到海量页面之后，难道还要人工去分析吗？">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/ai/ai.png">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/ai/logo.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/ai/logo.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            人工智能时代，Web 前端能做什么？
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2020-01-01T22:07:24+08:00">
+	  
+		    2020/1月/01 22:07:24
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>最近做了一个项目，通过爬虫去抓取页面快照，然后对页面兼容性进行全面测试。但是遇到一个问题，抓取到海量页面之后，难道还要人工去分析吗？<br><a id="more"></a><br>类似的场景并不会少，是否可以让机器去帮我们实现，最终输出一个可靠报告？答案是肯定的，快照生成后，我们可以对大量快照进行分析，结合 OpenCV 跨平台计算机视觉库，实现图像处理和计算机视觉方面的数据分析，最终输出结果。</p>
+<div class="alert success"><p>我们总会找到一些合适的场景用机器来代替人，而 AI 正是这个支点。</p>
+</div>
+<p>AI 如果是这个时代的契机，那么作为 Web 前端，在这人工智能时代，我们能做什么？</p>
+<h4 id="一、什么是人工智能？"><a href="#一、什么是人工智能？" class="headerlink" title="一、什么是人工智能？"></a>一、什么是人工智能？</h4><p>人工智能（Artificial Intelligence），英文缩写为 AI。它是研究、开发用于模拟、延伸和扩展人的智能的理论、方法、技术及应用系统的一门新的技术科学。</p>
+<p>1.计算机科学<br>人工智能是计算机科学的一个分支，它企图了解智能的实质，并生产出一种新的能以人类智能相似的方式做出反应的智能机器，该领域的研究包括机器人、语言识别、图像识别、自然语言处理和专家系统等。</p>
+<p>2.智慧「容器」<br>人工智能从诞生以来，理论和技术日益成熟，应用领域也不断扩大，可以设想，未来人工智能带来的科技产品，将会是人类智慧的「容器」。</p>
+<p>3.信息加工<br>人工智能可以对人的意识、思维的信息过程的模拟。人工智能不是人的智能，但能像人那样思考、也可能超过人的智能。</p>
+<p>4.研究目标<br>人工智能是包括十分广泛的科学，它由不同的领域组成，如机器学习，计算机视觉等等，总的说来，人工智能研究的一个主要目标是使机器能够胜任一些通常需要人类智能才能完成的复杂工作。</p>
+<h4 id="二、有哪些场景会涉及到-AI？"><a href="#二、有哪些场景会涉及到-AI？" class="headerlink" title="二、有哪些场景会涉及到 AI？"></a>二、有哪些场景会涉及到 AI？</h4><p>如果要列举一下有哪些场景会用到 AI，我想可能不仅仅是如下这些：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/ai/ai.png" alt="ai"></p>
+<p>机器视觉，指纹识别，人脸识别，人脸对比，手势检测，视网膜识别，虹膜识别，掌纹识别，专家系统，自动规划，智能搜索，定理证明，博弈，自动程序设计，智能控制，机器人学，语言和图像理解，遗传编程，物体检测，视频跟踪等。</p>
+<div class="alert info"><p>人工智能就其本质而言，是对人的思维的信息过程的模拟。</p>
+</div>
+<p>对于人的思维模拟可以从两条道路进行，<br>1.结构模拟，仿照人脑的结构机制，制造出「类人脑」的机器；<br>2.是功能模拟，暂时撇开人脑的内部结构，而从其功能过程进行模拟。<br>现代电子计算机的产生便是对人脑思维功能的模拟，是对人脑思维的信息过程的模拟。</p>
+<h4 id="三、弱人工智能，强人工智能"><a href="#三、弱人工智能，强人工智能" class="headerlink" title="三、弱人工智能，强人工智能"></a>三、弱人工智能，强人工智能</h4><p>弱人工智能如今不断地迅猛发展，尤其是 2008 年经济危机后，美日欧希望借机器人等实现再工业化，工业机器人以比以往任何时候更快的速度发展，更加带动了弱人工智能和相关领域产业的不断突破，很多必须用人来做的工作如今已经能用机器人实现。</p>
+<div class="alert danger"><p>强人工智能则暂时处于瓶颈，还需要科学家们和人类的努力。</p>
+</div>
+<p>人工智能是依赖机器学习的，<strong>数据和算法是机器学习的核心</strong>，而数据更为重要。按照解决问题的能力，我们可以把人工智能，分成两类：</p>
+<ul>
+<li>强人工智能：拥有自我意识，具备解决通用问题的能力</li>
+<li>弱人工智能：没有自我意识，具备解决特定问题的能力</li>
+</ul>
+<p>目前，我们能看到的人工智能，几乎都是弱人工智能，在解决特定问题的能力上，超越了人类。</p>
+<h4 id="四、AI-如何影响前端"><a href="#四、AI-如何影响前端" class="headerlink" title="四、AI 如何影响前端"></a>四、AI 如何影响前端</h4><p>1.数据可视化，依赖 <code>D3.js</code>，<code>ECharts</code>，<code>WebGL</code><br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/ai/kael.png" alt="kael"></p>
+<p>2.模型可视化<br>用可视化的手段去解释模型，辅助算法同学调参。最简单的一个应用前端同学肯定非常熟悉，我们来看下图：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/ai/dev.png" alt="chrome-dev"></p>
+<p>是的，曲线函数和曲率我们很难记住，但是有相应的工具，会让一些<strong>数据和计算变得简单易懂</strong>。</p>
+<p>3.相关技术<br>提到人工智能，和前端密切相关的几个 <code>JS</code> 类库有：</p>
+<ul>
+<li>tensorflow.js<br>基于 <code>tensorflow.js Node</code> 的 <code>tvnet</code> 算法，可以提取视频中的稠密光流。</li>
+<li>deeplearning.js</li>
+<li>kera.js</li>
+</ul>
+<p>高性能计算：</p>
+<ul>
+<li>asm.js</li>
+<li>WebAssembly</li>
+<li>GPU</li>
+<li>Opencv，前端做 CV 算法，物体跟踪、图像处理、特征检测等等</li>
+</ul>
+<p>大家可能发现一个问题，一般的 <code>tensorflow</code> 模型动辄几百兆，在前端怎么跑呢？这就不得不提到 <code>MobileNet</code>，这是针对于移动端模型提出的神经网络架构，能极大地减少模型参数量，同理也能用到浏览器端上。</p>
+<p>更多细节可以查看该文章：<a href="https://www.jianshu.com/p/e5f997713a4b" target="_blank" rel="noopener">前端与人工智能</a>，介绍非常到位。</p>
+<h4 id="五、如何做？"><a href="#五、如何做？" class="headerlink" title="五、如何做？"></a>五、如何做？</h4><p>既然前端和人工智能有如此多的交集，那么我们该从何做起呢？不要着急，我们先来看一个完整的人工智能项目包含哪些内容。<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/ai/aiweb.png" alt="aiweb"></p>
+<p>上图中，可以看到一个完整的人工智能项目是由：算法，数据，工程三部分构成。</p>
+<p>工程部分我们可以理解为「大前端」，主要包含 5 部分：</p>
+<ol>
+<li>人机交互</li>
+<li>数据可视化</li>
+<li>产品 Web</li>
+<li>算法执行</li>
+<li>模型训练</li>
+</ol>
+<h4 id="六、简单应用"><a href="#六、简单应用" class="headerlink" title="六、简单应用"></a>六、简单应用</h4><p><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/ai/face.png" alt="pic"><br>1.<code>Tranck.js</code><br>就是纯浏览器的图像算法库，通过 <code>JS</code> 计算来执行算法逻辑</p>
+<p>2.<code>regl-cnn</code><br>浏览器端的数字识别类库，与 <code>track.js</code> 不同的是，它利用浏览器的 <code>WebGL</code> 才操作 <code>GPU</code>，实现了 <code>CNN</code>。</p>
+<p><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/ai/cnn.gif" alt="cnn"></p>
+<p>3.<code>ConvNetJS</code><br>浏览器端做深度学习算法训练的工具，<a href="https://cs.stanford.edu/people/karpathy/convnetjs/" target="_blank" rel="noopener">官网地址</a></p>
+<p>4.<code>Amazon Rekognition</code><br>基于同样由 <code>Amazon</code> 计算机视觉科学家开发的成熟且高度可扩展的深度学习技术，每天能够分析数十亿张 <code>Prime Photos</code> 图像。</p>
+<p>5.对比学习：<code>Keras</code> 搭建 <code>CNN</code>，<code>RNN</code> 等常用神经网络</p>
+<p>6.机器学习：<a href="https://github.com/wepe/MachineLearning" target="_blank" rel="noopener">MachineLearning</a></p>
+<p>更多内容可以查看：<br>1.<a href="http://www.bslxx.com/m/view.php?aid=1922" target="_blank" rel="noopener">浏览器里运行的人工智能</a><br>2.<a href="https://yq.aliyun.com/articles/153198?t=t1" target="_blank" rel="noopener">前端在人工智能时代能做些什么</a></p>
+<h4 id="七、深度学习"><a href="#七、深度学习" class="headerlink" title="七、深度学习"></a>七、深度学习</h4><p>深度学习，是英文 <code>Deep Learning</code> 的直译。它是实现机器学习的其中一种方式。机器学习还包含其它实现方案。</p>
+<p>深度学习里，用到了人工神经网络，这是一个用计算机模拟大脑神经元运作模式的算法。同时，这个人工神经网络的隐藏层数量还必须足够多，才能构成深度神经网络。然后喂之以大量的训练数据，就是深度学习了。</p>
+<p>换一个角度，如果隐藏层数量不多，而是每个隐藏层里包含的神经元数量很多，在形态上，它就是一个往宽度发展的神经网络结构。这时，可能就叫广度学习了。</p>
+<div class="alert success"><p>目前，深度学习还是主流，它的训练效率，优于广度学习。</p>
+</div>
+<p>我们可以体验腾讯的一个深度学习案例：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/ai/ml.png" alt="pic"></p>
+<p>更多有趣应用：<br>1.<a href="https://www.jianshu.com/p/1b33e432ba0e" target="_blank" rel="noopener"><code>TensorFlowJS</code> 学习</a><br>2.如何利用 <code>TensorFlow.js</code> 部署简单的 <a href="https://baijiahao.baidu.com/s?id=1606694239390920783&amp;wfr=spider&amp;for=pc" target="_blank" rel="noopener"><code>AI</code> 版「你画我猜」图像识别应用</a></p>
+<h4 id="八、明确几个概念"><a href="#八、明确几个概念" class="headerlink" title="八、明确几个概念"></a>八、明确几个概念</h4><p>机器学习对我们来说确实陌生，所以一定要从明确一些常用的概念，这样才能提升学习的兴趣。我们来说一些可能会涉及到的内容（我也是正在摸索，目前就知道这些，逃～）</p>
+<p>1.<strong>精确率</strong><br>是针对我们预测结果而言的，它表示的是预测为正的样本中有多少是真正的正样本。</p>
+<p>2.<strong>召回率</strong><br>是针对我们原来的样本而言的，它表示的是样本中的正例有多少被预测正确了</p>
+<p>3.<strong>监督学习</strong><br>监督学习涉及到标注数据，计算机可以使用所提供的数据来识别新的样本。<br>监督学习的两种主要类型是分类和回归。在分类中，训练的机器将把一组数据分成特定的类。</p>
+<p>4.<strong>无监督学习</strong><br>在无监督学习中，数据是未标注的。由于现实中，大多数的数据都是未标注的，因此这些算法特别有用。<br>无监督学习分为聚类和降维。</p>
+<p>5.<strong>强化学习</strong><br>强化学习使用机器的历史和经验来做出决策。强化学习的经典应用是游戏。与监督和无监督学习相反，强化学习不注重提供「正确」的答案或输出。</p>
+<h4 id="九、机器学习算法有哪些？"><a href="#九、机器学习算法有哪些？" class="headerlink" title="九、机器学习算法有哪些？"></a>九、机器学习算法有哪些？</h4><p>提到机器学习，大家肯定都会自然联想到需要很强的<strong>算法功底</strong>。没错，确实如此，所以我们需要对算法有一些了解。</p>
+<p>那么<a href="https://www.cnblogs.com/xiyushimei/p/7874019.html" target="_blank" rel="noopener">机器学习</a>主要涉及到哪几类算法呢，我们来看看：</p>
+<ul>
+<li>模式识别</li>
+<li>计算机视觉</li>
+<li>数据挖掘</li>
+<li>统计学习</li>
+<li>语音识别</li>
+<li>自然语言处理</li>
+</ul>
+<h4 id="九、机器学习涉及学科"><a href="#九、机器学习涉及学科" class="headerlink" title="九、机器学习涉及学科"></a>九、机器学习涉及学科</h4><div class="alert info"><p>主要围绕在这几方面：线性代数、微积分、概率和统计。</p>
+</div>
+<p>线性代数概念Top 3：</p>
+<ol>
+<li>矩阵运算</li>
+<li>特征值/特征向量</li>
+<li>向量空间和范数</li>
+</ol>
+<p>微积分概念Top 3：</p>
+<ol>
+<li>偏导数</li>
+<li>向量值函数</li>
+<li>方向梯度</li>
+</ol>
+<p>统计概念Top 3：</p>
+<ol>
+<li>贝叶斯定理</li>
+<li>组合学</li>
+<li>抽样方法</li>
+</ol>
+<h4 id="十、计算机视觉"><a href="#十、计算机视觉" class="headerlink" title="十、计算机视觉"></a>十、计算机视觉</h4><p><code>OpenCV</code> 是一个基于 <code>BSD</code> 许可（开源）发行的跨平台计算机视觉库，可以运行在 <code>Linux</code>、<code>Windows</code>、<code>Android</code> 和 <code>Mac OS</code> 操作系统上。</p>
+<p>它轻量级而且高效——由一系列 <code>C</code> 函数和少量 <code>C++</code> 类构成，同时提供了 <code>Python</code>、<code>Ruby</code>、<code>MATLAB</code> 等语言的接口，实现了图像处理和计算机视觉方面的很多通用算法。</p>
+<p>应用领域：<br>1、人机互动<br>2、物体识别<br>3、图像分割<br>4、人脸识别<br>5、动作识别<br>6、运动跟踪<br>7、机器人<br>8、运动分析<br>9、机器视觉<br>10、结构分析<br>11、汽车安全驾驶</p>
+<p><code>OpenCV</code> 的应用领域非常广泛，包括图像拼接、图像降噪、产品质检、人机交互、人脸识别、动作识别、动作跟踪、无人驾驶等。</p>
+<p><code>OpenCV</code> 还提供了机器学习模块，你可以使用正态贝叶斯、K最近邻、支持向量机、决策树、随机森林、人工神经网络等机器学习算法。</p>
+<p>这里推荐几个相关学习网站：<br>1.<a href="https://opencv.org" target="_blank" rel="noopener">官网</a><br>2.<a href="http://c.biancheng.net/opencv/" target="_blank" rel="noopener">OpenCV教程</a><br>3.<a href="https://www.cnblogs.com/wangyaning/p/7854046.html" target="_blank" rel="noopener">图像对比</a></p>
+<h4 id="十一、总结"><a href="#十一、总结" class="headerlink" title="十一、总结"></a>十一、总结</h4><p><code>AI</code> 涉及到很多的领域，并不是我们三言两语就能够说的明白。要真正的应用起来，还有很多的路要走。我相信，随着技术的发展，更多的场景将接入 <code>AI</code>，而 <code>Web</code> 则是其中的一个重要环节。加上 <code>Web</code> 跨平台特性，以及「算法-数据-工程」的驱动，未来在该领域一定会大放异彩。</p>
+<p>很喜欢这句话：AI makes life better. FE makes AI better.</p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/ai/">ai</a> <a class="tag tag--primary tag--small t-link" href="/tags/web/">web</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2020/01/20/system-load/" data-tooltip="系统负载看不懂？">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/10/23/css-theory-and-optimization/" data-tooltip="CSS 渲染原理以及优化策略">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2020/01/01/web-ai/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2020/01/01/web-ai/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2020/01/01/web-ai/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2020/01/20/system-load/" data-tooltip="系统负载看不懂？">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/10/23/css-theory-and-optimization/" data-tooltip="CSS 渲染原理以及优化策略">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2020/01/01/web-ai/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2020/01/01/web-ai/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2020/01/01/web-ai/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2020/01/01/web-ai/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2020/01/01/web-ai/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2020/01/01/web-ai/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

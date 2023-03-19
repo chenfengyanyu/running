@@ -1,0 +1,511 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>程序员如何减少开发中的 Bug？ - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="周会上大家抛出了一个问题，程序员如何减少开发中的 Bug？很有意思的一个话题，本篇文章我们来进行探讨与总结。">
+<meta name="keywords" content="bug">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="程序员如何减少开发中的 Bug？">
+<meta property="og:url" content="http://jartto.wang/2019/08/24/how-to-decrease-bugs/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="周会上大家抛出了一个问题，程序员如何减少开发中的 Bug？很有意思的一个话题，本篇文章我们来进行探讨与总结。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2019-08-24T06:56:26.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="程序员如何减少开发中的 Bug？">
+<meta name="twitter:description" content="周会上大家抛出了一个问题，程序员如何减少开发中的 Bug？很有意思的一个话题，本篇文章我们来进行探讨与总结。">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/Debug.jpg"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/Debug.jpg" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            程序员如何减少开发中的 Bug？
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2019-08-24T11:35:27+08:00">
+	  
+		    2019/8月/24 11:35:27
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>周会上大家抛出了一个问题，程序员如何减少开发中的 Bug？很有意思的一个话题，本篇文章我们来进行探讨与总结。<br><a id="more"></a></p>
+<h4 id="一、概述"><a href="#一、概述" class="headerlink" title="一、概述"></a>一、概述</h4><p>爱因斯坦曾经说过：「如果给我一个小时解答一道决定我生死的问题，我会花55分钟来弄清楚这道题到底是在问什么。一旦清楚了它在问什么，剩下的5分钟足够解答这个问题。」</p>
+<p>虽然我们软件开发过程不会面临生死的抉择，但是却直接影响着用户的<strong>使用感受</strong>，决定着产品的走向。所以程序员如何减少开发中的 Bug，既反映了<strong>代码质量</strong>，也反映了个<strong>人综合能力</strong>。</p>
+<p>那么我们该如何有效的减少开发中的 Bug 呢？</p>
+<div class="alert info"><p>我觉得应该从两方面说起：业务层和代码层。</p>
+</div>
+<h4 id="二、业务层"><a href="#二、业务层" class="headerlink" title="二、业务层"></a>二、业务层</h4><p>软件开发过程我们就不细说了，直接来看最重要的几个节点：</p>
+<p>1.需求讨论阶段<br>一定要明确需求，<strong>测试，开发，产品三方务必达成一致</strong>。前期如果存在没有明确的问题，那么后期就会造成无效返工和不必要的争执，这在日常开发尤为常见。</p>
+<div class="alert success"><p>所以，软件开发前期，我们都会进行「评审，反讲，评估」三个阶段。</p>
+</div>
+<p>2.开发完成阶段<br>开发完成后，程序员首先要完成「自测」，也就是软件开发中的「冒烟测试」，确保主流程无误。否则，在开发工程师提交代码后，测试工程师步履维艰，无法有效开展测试，会造成极大的资源浪费。</p>
+<p>更规范的流程需要测试工程师在需求明确之后写出「测试用例」，开发工程师在完成开发后，自行对照「测试用例」完成初步验证，之后就可以代码提测了。</p>
+<p>这么做的好处就是既保证了「高质量的代码交付」，同时减少了测试工程师的工作量，我们何乐而不为呢？</p>
+<p>3.提测<br>自测和提测有什么区别呢，从软件开发过程来看，其实开发工程师和测试工程师其实完成了不同阶段的测试：</p>
+<p>开发工程师「白盒测试」：<br>是指实际运行被测程序，<strong>通过程序的源代码进行测试而不使用用户界面</strong>。这种类型的测试需要从代码句法发现内部代码在算法、溢出、路径和条件等方面的缺点或者错误，进而加以修正。<br><div class="alert info"><p>白盒测试需要从代码句法发现内部代码在算法，溢出，路径，条件等等中的缺点或者错误，进而加以修正。</p>
+</div></p>
+<p>测试工程师实际进行的是「黑盒测试」。那么什么是「黑盒测试」呢？<br>黑盒测试也称功能测试，它是通过测试来检测每个功能是否都能正常使用。在测试中，把程序看作一个不能打开的黑盒子，<strong>在完全不考虑程序内部结构和内部特性的情况下，在程序接口进行测试</strong>。</p>
+<p>它只检查程序功能是否按照需求规格说明书的规定正常使用，程序是否能适当地接收输入数据而产生正确的输出信息。<strong>黑盒测试着眼于程序外部结构，不考虑内部逻辑结构，主要针对软件界面和软件功能进行测试</strong>。</p>
+<div class="alert warning"><p>黑盒测试是以用户的角度，从输入数据与输出数据的对应关系出发进行测试的。</p>
+</div>
+<p>很明显，如果外部特性本身设计有问题或规格说明的规定有误，用黑盒测试方法是发现不了的。黑盒测试法注重于测试软件的功能需求，主要试图发现下列几类错误。</p>
+<ul>
+<li>功能不正确或遗漏；</li>
+<li>界面错误；</li>
+<li>输入和输出错误；</li>
+<li>数据库访问错误；</li>
+<li>性能错误；</li>
+<li>初始化和终止错误等；</li>
+</ul>
+<p>更多细节请查看文章：<a href="https://baike.baidu.com/item/黑盒测试/934030?fr=aladdin" target="_blank" rel="noopener">黑盒测试</a></p>
+<h4 id="三、代码层"><a href="#三、代码层" class="headerlink" title="三、代码层"></a>三、代码层</h4><p>代码层面，我们需要从以下几方面来说起：</p>
+<p>1.<strong>Eslint 规避低级语法问题</strong><br>这个显而易见，编写代码过程发现问题，避免因为简单语法，如：漏写了逗号，变量名写错，大小写问题等</p>
+<p>2.<strong>边界处理</strong><br>做好容错，必要的判空，还有就是代码边界问题。多想一想如果数组不存在，我们如何处理？如果数组越界，我们如何修复？如果数据缺失，我们如何使页面不崩溃？</p>
+<p>3.<strong>单元测试</strong><br>如果时间允许，我们可以做好单元测试，每次编译代码，或者提测前启动脚本，确定测试脚本都覆盖到了核心代码，尽可能减少代码出错率。</p>
+<p>4.<strong>积累</strong><br>为什么说要积累，其实道理很简单。随着开发经验的增长，你可能会碰到很多问题，那么如果细心积累，其实很多错误在不知不觉中就被处理了。反之，你会不断的掉入同一个坑里，在进坑与出坑中迷失自我。那么我们如何积累呢？</p>
+<p><strong>首先</strong>，碰到自己不会的问题，如果第一时间没有解决，通过查找或者请教别人解决了，那么一定要用小本本记下来，最好使用云笔记。好处不言自明。</p>
+<p><strong>其次</strong>，要积累自己的函数库，我们经常用到的一些方法，不妨自己做一个封装，不断沉淀。也许有一天，你会发现，自己不知不知觉中写出了一个 Lodash 函数库。</p>
+<p><strong>最后</strong>，你可以积累优秀的代码片段，嗯，「我们不生产代码，只是优秀代码的搬运工」。</p>
+<p>5.学习<br>一句话，没有什么比学习优秀开源代码更有趣的事情了。<strong>阅读优秀源码，学习作者思想，站在巨人肩膀上，你才能走的更远！</strong></p>
+<div class="alert success"><p>做好上面这些，相信你一定会是一位出色的工程师。</p>
+</div>
+<h4 id="四、总结"><a href="#四、总结" class="headerlink" title="四、总结"></a>四、总结</h4><p>对于这类开放问题仁者见仁，智者见智，我相信每个人都会有自己的看法，也会有自己一套独特的方法。<strong>不管黑猫白猫，能抓住老鼠的就是好猫</strong>。对于程序员来说，能减少 Bug 的方法就是好方法。</p>
+<div class="alert info"><p>程序员群体流传一句话：不写代码就有没有 Bug。</p>
+</div>
+<p>我们不能因为怕犯错误而减少写代码，更应该知难而上，越挫越勇。要知道日常开发中 「Bug 是不可避免的，只能减少」。</p>
+<p>当然，这不应该成为我们写出 Bug 推脱的理由。不断超越，方是永恒。</p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/bug/">bug</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/09/08/web-optimization-tools/" data-tooltip="网站优化，这些工具你一定用得着">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/07/13/use-electron-5/" data-tooltip="使用 Electron5.0 构建你的 React 项目">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2019/08/24/how-to-decrease-bugs/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2019/08/24/how-to-decrease-bugs/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2019/08/24/how-to-decrease-bugs/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/09/08/web-optimization-tools/" data-tooltip="网站优化，这些工具你一定用得着">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/07/13/use-electron-5/" data-tooltip="使用 Electron5.0 构建你的 React 项目">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2019/08/24/how-to-decrease-bugs/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2019/08/24/how-to-decrease-bugs/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2019/08/24/how-to-decrease-bugs/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2019/08/24/how-to-decrease-bugs/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2019/08/24/how-to-decrease-bugs/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2019/08/24/how-to-decrease-bugs/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

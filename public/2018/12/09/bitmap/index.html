@@ -1,0 +1,548 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>究竟什么是位图？ - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="和朋友聊天，说到了大数据存储和查找方式，朋友提到了「位图」。结果我满脑子都是「位图-矢量图」，「矢量图-位图」。难道此「位图」非彼「位图」？">
+<meta name="keywords" content="位图,bitmap">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="究竟什么是位图？">
+<meta property="og:url" content="http://jartto.wang/2018/12/09/bitmap/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="和朋友聊天，说到了大数据存储和查找方式，朋友提到了「位图」。结果我满脑子都是「位图-矢量图」，「矢量图-位图」。难道此「位图」非彼「位图」？">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/bitmap/binary.png">
+<meta property="og:updated_time" content="2018-12-15T09:45:15.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="究竟什么是位图？">
+<meta name="twitter:description" content="和朋友聊天，说到了大数据存储和查找方式，朋友提到了「位图」。结果我满脑子都是「位图-矢量图」，「矢量图-位图」。难道此「位图」非彼「位图」？">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/bitmap/binary.png">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/bitmap/logo.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/bitmap/logo.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            究竟什么是位图？
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2018-12-09T17:35:22+08:00">
+	  
+		    2018/12月/09 17:35:22
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>和朋友聊天，说到了大数据存储和查找方式，朋友提到了「位图」。结果我满脑子都是「位图-矢量图」，「矢量图-位图」。难道此「位图」非彼「位图」？<br><a id="more"></a></p>
+<h4 id="一、此「位图」非彼「位图」"><a href="#一、此「位图」非彼「位图」" class="headerlink" title="一、此「位图」非彼「位图」"></a>一、此「位图」非彼「位图」</h4><p>为什么会有这样的疑惑，那是因为：位图可能是一种图片类型，也可能是数据结构的 <code>bitmap</code>。我们会逐一来剖析位图，从这两个角度入手，全面掌握位图概念。</p>
+<div class="alert success"><p>技术是一个很微妙的东西，一旦你发现它，就会无意的捕捉到更多点点滴滴。</p>
+</div>
+<h4 id="二、位图"><a href="#二、位图" class="headerlink" title="二、位图"></a>二、位图</h4><p>位图，又称为点阵图像、像素图或栅格图像，是由像素（图片元素）的单个点组成。这些点可以进行不同的排列和染色以构成图样。<br><div class="alert info"><p>位图的单位：像素（Pixel）</p>
+</div></p>
+<p>像素（Pixel）：指可以表现亮度甚至色彩变化的一个点，是构成数字图像的最小单位。像素具有大小相同、明暗和颜色的变化。特点是有固定的位置和特定的颜色值。</p>
+<p>位图有以下特点：<br>1.位图图像善于重现颜色的细微层次，能够制作出色彩和亮度变化丰富的图像；<br>2.文件庞大，不能随意缩放；<br>3.打印和输出的精度是有限的；<br>4.图形面积越大，文件的字节数越多；<br>5.文件的色彩越丰富，文件的字节数越多。</p>
+<p>位图的文件类型很多，如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">*.bmp、*.pcx、*.gif、*.jpg、*.tif</span><br><span class="line">*.psd、kodak photo</span><br><span class="line">*.pcd、corel photo</span><br><span class="line">*.cpt</span><br></pre></td></tr></table></figure></p>
+<h4 id="三、矢量图"><a href="#三、矢量图" class="headerlink" title="三、矢量图"></a>三、矢量图</h4><p>我们再来看看矢量图：矢量又称为「向量」，矢量图形中的图形元素（点和线段）称为对象，每个对象都是一个单独的个体，它具有大小、方向、轮廓、颜色和屏幕位置等属性。<br><div class="alert info"><p>简单地说，矢量图形软件就是用数学的方法来绘制矩形等基本形状。</p>
+</div></p>
+<p>矢量图有以下特点：<br>1.矢量图形能重现清晰的轮廓，线条非常光滑、且具有良好的缩放性；<br>2.因为图像中保存的是线条和图块的信息，与分辨率和图形大小无关，只与图像的复杂程度有关，所以图像文件所占的存储空间交较小；<br>3.文字编辑能力强；<br>4.与位图相比，在显示和打印方面都快的多；<br>5.缺点就是图形不真实，颜色不生动；</p>
+<p>大概格式有：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*.cdr、*.AI、*.EPS、*.dwg、*.wmf、*.emf</span><br></pre></td></tr></table></figure></p>
+<div class="alert warning"><p>通过软件，矢量图可以轻松地转化为位图。</p>
+</div>
+<p>而位图转化为矢量图就需要经过复杂而庞大的数据处理，而且生成的矢量图的质量绝对不能和原来的图形比拟。</p>
+<h4 id="四、位图的存储格式"><a href="#四、位图的存储格式" class="headerlink" title="四、位图的存储格式"></a>四、位图的存储格式</h4><div class="alert success"><p>因为本文主旨是位图，所以我们着重来写写位图。</p>
+</div>
+<p>我们知道，每张图按大小来存储，即图像的长宽像素大小。如果一张图片的像素是 <code>100*100</code>，则此图像在内存的存放是一个<code>100*100</code> 的数组，每个数组的元素是 <code>int</code> 整型（整数占用 4 个 <code>byte</code> ）。</p>
+<p>需要补充一些知识：数组中每个元素中整型数字含四位信息：<code>R-G-B-A</code>。<br>1.R: 存放 <code>Red</code> 红色通道（占一个 <code>byte</code> 取值 <code>0~255</code>）<br>2.G: <code>Green</code> 绿色通道色（占一个 <code>byte</code> 取值 <code>0~255</code> ）<br>3.B: <code>Blue</code> 蓝色通道（占一个 <code>byte</code> 取值 <code>0~255</code> ）<br>4.A：<code>Alpha</code> 通道值，即该位置像素点的透明值(占一个 <code>byte</code> 取值 <code>0~255</code>）</p>
+<div class="alert info"><p>其中 <code>RGB</code> 又是自然界三原色，通过 <code>RGB</code> 的组合可以将任何色彩表示出来。</p>
+</div>
+<p>我们举一个例子，假设有如下数组：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="number">0xffff0000</span>,<span class="number">0xffff0000</span>,<span class="number">0xffff0000</span>,<span class="number">0xffff0000</span>&#125;,</span><br><span class="line">&#123;<span class="number">0xffff0000</span>,<span class="number">0xffff0000</span>,<span class="number">0xffff0000</span>,<span class="number">0xffff0000</span>&#125;,</span><br><span class="line">&#123;<span class="number">0xffff0000</span>,<span class="number">0xffff0000</span>,<span class="number">0xffff0000</span>,<span class="number">0xffff0000</span>&#125;,</span><br><span class="line">&#123;<span class="number">0xffff0000</span>,<span class="number">0xffff0000</span>,<span class="number">0xffff0000</span>,<span class="number">0xffff0000</span>&#125;,</span><br></pre></td></tr></table></figure></p>
+<p>表示这是一张 <code>4*4</code> 像素大小的全红色的图。一个像素在屏幕上显示出来非常小，当多个不同的像素按规律摆放在一起形成有行有列的数组的时候，我们就看到了图像。</p>
+<div class="alert info"><p><code>Png</code> 和 <code>Jpeg</code> 等图像都是在这种方法的基础上加入了压缩算法，方便人们携带和存储。</p>
+</div>
+<h4 id="五、如何计算"><a href="#五、如何计算" class="headerlink" title="五、如何计算"></a>五、如何计算</h4><p>看完上面的解释，这时候我们有了大概的认识，你一定好奇图片大小是如何计算的呢？<br><div class="alert success"><p>一张图片（BitMap）占用的内存 = 图片长度 <code>*</code> 图片宽度 <code>*</code> 单位像素占用的字节数</p>
+</div></p>
+<p>注：图片长度和图片宽度的单位是像素。</p>
+<p>1.为了形象说明，我们<a href="https://blog.csdn.net/OnafioO/article/details/44656761" target="_blank" rel="noopener">举个例子</a>：一个 <code>32</code> 位的 <code>PNG</code>，像素是 <code>1204*1024</code> ，那么占用空间是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1024*1024*(32/8)</span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p>因为 <code>8 bit = 1 byte</code>，<code>32</code> 位就是 <code>4 byte</code>。</p>
+</div>
+<p>2.这里补充一下字节的概念：字节（<code>Byte /bait/ n. [C]</code>）是计算机信息技术用于计量存储容量的一种计量单位，通常情况下一字节等于八位，也表示一些计算机编程语言中的数据类型和语言字符。</p>
+<h4 id="六、面试题：100-100-的-canvas-占多少内存？"><a href="#六、面试题：100-100-的-canvas-占多少内存？" class="headerlink" title="六、面试题：100*100 的 canvas 占多少内存？"></a>六、面试题：100*100 的 canvas 占多少内存？</h4><p>无独有偶，在<a href="https://juejin.im/post/5bdeb357e51d4536140fc7df" target="_blank" rel="noopener">掘金</a>上面看到了这样一个面试题，作者是这么解说的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">我们在定义颜色的时候就是使用 rgba(r,g,b,a) 四个维度来表示，而且每个像素值就是用十六位 00-ff 表示，</span><br><span class="line">即每个维度的范围是 0~255，即 2^8 位，即 1 byte, 也就是 Uint8 能表示的范围。</span><br><span class="line">所以 100 * 100 canvas 占的内存是 100 * 100 * 4 bytes = 40,000 bytes。</span><br></pre></td></tr></table></figure></p>
+<p>这和我们上面说到的原理差不多，再回顾一下：如果一张图片的像素是 <code>100*100</code>，则此图像在内存的存放是一个<code>100*100</code> 的数组，每个数组的元素是 <code>int</code> 整型（整数占用 4 个 <code>byte</code> ）。</p>
+<div class="alert success"><p>想起高中时代老师经常黑我们的一句话，把如图一改成如图二，你们就不会做题了。</p>
+</div>
+<h4 id="七、扩展：数码相机原理"><a href="#七、扩展：数码相机原理" class="headerlink" title="七、扩展：数码相机原理"></a>七、扩展：数码相机原理</h4><p>数码相机中所谓的支持 <code>500W</code> 像素就是这个意思，代表它能处理多大的图形色彩信息的能力，像素越高，需要处理时间越长，因为数组很大。</p>
+<div class="alert info"><p>我们说的 500W 像素，就是由 500W 个这样的方块组成。像素点的尺寸是不一定的。</p>
+</div>
+<p>1.我们举个简单例子：<br>假设有一台 <code>500W</code> 像素的数码相机拍摄的图片，这张图片的实际容量是 <code>500万X3=1500万=15兆</code> ，为什么乘以 <code>3</code> 呢？因为数码相机中的感光 <code>ccd</code> 是通过红、绿、蓝三色通道，所以最终图像容量就要乘以 <code>3</code>。</p>
+<p>如果对对图片的要求非常高，那么可以采用 <code>tiff</code> 格式存储，那么这台 <code>500W</code> 像素的相机拍出的实际容量为 <code>15M</code> 的图片在文件列表中显示的文件大小也就是 <code>15M</code> 了。</p>
+<p>2.为什么计算出来的图片占用内存和实际图片尺寸大小不一致？</p>
+<ul>
+<li>内存的数据和文件的数据不一样，内存主要是解码后的每个点的数据；</li>
+<li>文件数据要看你的格式、压缩比、文件头、附加信息等等；</li>
+</ul>
+<div class="alert info"><p>因此文件数据和图片在内存中的数据差别可能会很大。</p>
+</div>
+<h4 id="八、数据结构之位图（bitmap）"><a href="#八、数据结构之位图（bitmap）" class="headerlink" title="八、数据结构之位图（bitmap）"></a>八、数据结构之位图（bitmap）</h4><div class="alert success"><p>位图<code>bitmap</code> 是一种非常常用的结构，在索引，数据压缩等方面有广泛应用。</p>
+</div>
+<p>所谓的 <code>bitmap</code> 就是用一个 <code>bit</code> 位来标记某个元素对应的 <code>value</code>， 而 <code>key</code> 即是该元素。由于采用了 <code>bit</code> 为单位来存储数据，因此在存储空间方面，可以大大节省。</p>
+<p>来看一个具体的例子，假设我们要对 <code>0-7</code> 内的 <code>5</code> 个元素 <code>(4,7,2,5,3)</code> 排序（这里假设这些元素没有重复）。那么我们就可以采用 <code>bitmap</code> 的方法来达到排序的目的。</p>
+<p>文中给出了使用 <code>bitmap</code> 进行排序的算法思路，感兴趣的同学可以移步：<a href="https://wizardforcel.gitbooks.io/the-art-of-programming-by-july/content/06.07.html" target="_blank" rel="noopener">什么是Bit-map</a></p>
+<h4 id="九、场景分析"><a href="#九、场景分析" class="headerlink" title="九、场景分析"></a>九、场景分析</h4><p>1.先看看这样的一个场景：给一台普通 <code>PC</code>，<code>2G</code> 内存，要求处理一个包含 <code>40</code> 亿个不重复并且没有排过序的无符号的 <code>int</code> 整数，给出一个整数，问如果快速地判断这个整数是否在文件 <code>40</code> 亿个数据当中？</p>
+<p>2.问题思考：<br><code>40</code> 亿个 <code>int</code> 占 <code>(40亿*4)/1024/1024/1024</code> 大概为 <code>14.9G</code> 左右，很明显内存只有 <code>2G</code> ，放不下，因此不可能将这 <code>40</code> 亿数据放到内存中计算。</p>
+<p>要快速的解决这个问题最好的方案就是将数据搁内存里，所以现在的问题就在如何在 <code>2G</code> 内存空间以内存储着 <code>40</code> 亿整数。一个 <code>int</code> 整数占 <code>4</code> 个字节的即要 <code>32bit</code> 位，如果能够用一个 <code>bit</code> 位来标识一个 <code>int</code> 整数那么存储空间将大大减少。</p>
+<p>算一下 <code>40</code> 亿个 <code>int</code> 需要的内存空间为 <code>40亿/8/1024/1024</code> 大概为 <code>476.83MB</code>，这样的话我们完全可以将这 <code>40</code> 亿个 <code>int</code> 数放到内存中进行处理。</p>
+<p>3.具体思路：<br>1 个 <code>int</code> 占 <code>4</code> 字节即 <code>4*8=32位</code> ，那么我们只需要申请一个 <code>int</code> 数组长度为 <code>int tmp[1+N/32]</code> 即可存储完这些数据，其中 <code>N</code> 代表要进行查找的总数，<code>tmp</code> 中的每个元素在内存在占 <code>32</code> 位可以对应表示十进制数 <code>0~31</code> ,所以可得到 <code>bitmap</code> 表:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tmp[0]:可表示 0~31</span><br><span class="line">tmp[1]:可表示 32~63</span><br><span class="line">tmp[2]可表示 64~95</span><br><span class="line">.......</span><br></pre></td></tr></table></figure></p>
+<p>4.那么接下来就看看十进制数如何转换为对应的 <code>bit</code> 位：<br>假设这 <code>40</code> 亿 <code>int</code> 数据为：<code>6,3,8,32,36,......</code>，那么具体的 <code>BitMap</code> 表示为：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/bitmap/binary.png" alt="binary"></p>
+<p>5.如何判断 <code>int</code> 数字在 <code>tmp</code> 数组的哪个下标，这个其实可以通过直接除以 <code>32</code> 取整数部分，例如：整数 <code>8</code> 除以<code>32</code> 取整等于 <code>0</code>，那么 <code>8</code> 就在 <code>tmp[0]</code>上。另外，我们如何知道了 <code>8</code> 在 <code>tmp[0]</code> 中的 <code>32</code> 个位中的哪个位，这种情况直接 <code>mod</code> 上 <code>32</code> 就 <code>ok</code> ，又如整数 <code>8</code> ，在 <code>tmp[0]</code> 中的第 <code>8 mod</code> 上 <code>32</code> 等于 <code>8</code>，那么整数 <code>8</code> 就在 <code>tmp[0]</code> 中的第八个 <code>bit</code> 位（从右边数起）。</p>
+<p>具体算法可以查看此篇文章，很清晰：<a href="http://blog.51cto.com/zengzhaozheng/1404108" target="_blank" rel="noopener">海量数据解决思路之 BitMap</a></p>
+<p>其实 <code>bitmap</code> 的应用场景远远不止点，比如还可以用于压缩、爬虫系统中 <code>url</code> 去重、解决全组合问题。可能有些人觉得<code>bitmap</code> 算法实现起来有点麻烦，其实某些语言是对 <code>bitmap</code> 算法进行了封装的，比如 <code>java</code> 中对应 <code>bitmap</code> 的数据结构就有 <code>bitset</code> 类。</p>
+<h4 id="十、海量数据解决思路"><a href="#十、海量数据解决思路" class="headerlink" title="十、海量数据解决思路"></a>十、海量数据解决思路</h4><p>1.给40亿个不重复的 <code>unsigned int</code> 的整数，没排过序的，然后再给一个数，如何快速判断这个数是否在那 <code>40</code> 亿个数当中？<br>思路：首先，将这 <code>40</code> 亿个数字存储到 <code>bitmap</code> 中，然后对于给出的数，判断是否在 <code>bitmap</code> 中即可。</p>
+<p>2.使用位图法判断整形数组是否存在重复？<br>答：遍历数组，一个一个放入 <code>bitmap</code>，并且检查其是否在 <code>bitmap</code> 中出现过，如果没出现放入，否则即为重复的元素。</p>
+<p>3.如何使用位图法进行整形数组排序？<br>答：首先遍历数组，得到数组的最大最小值，然后根据这个最大最小值来缩小 <code>bitmap</code> 的范围。这里需要注意对于 <code>int</code> 的负数，都要转化为 <code>unsigned int</code> 来处理，而且取位的时候，数字要减去最小值。</p>
+<p>4、在 <code>2.5</code> 亿个整数中找出不重复的整数？（注：内存不足以容纳这 <code>2.5</code> 亿个整数）<br>参考的一个方法是：采用 <code>2-Bitmap</code>（每个数分配 <code>2bit</code>，<code>00</code> 表示不存在，<code>01</code> 表示出现一次，<code>10</code> 表示多次，<code>11</code> 无意义）。其实，这里可以使用两个普通的 <code>Bitmap</code>，即第一个 <code>Bitmap</code> 存储的是整数是否出现，如果再次出现，则在第二个 <code>Bitmap</code> 中设置即可。这样的话，就可以使用简单的 <code>1-Bitmap</code> 了。</p>
+<div class="alert info"><p><a href="https://www.iteblog.com/archives/148.html" target="_blank" rel="noopener">数据结构-位图法</a>这篇文章对位图法分析非常到位，而且有更多的应用场景，强烈推荐。</p>
+</div>
+<h4 id="十一、扩展：计算机-32-位和-64-位操作系统"><a href="#十一、扩展：计算机-32-位和-64-位操作系统" class="headerlink" title="十一、扩展：计算机 32 位和 64 位操作系统"></a>十一、扩展：计算机 32 位和 64 位操作系统</h4><p>1.先明确一下概念：<br>其实我们说的 <code>32</code> 位和 <code>64</code> 位，指的是 <code>CPU</code> 每一次处理多少位的数据。对于 <code>32</code> 位 <code>CPU</code>，其一次只能处理 <code>32</code> 位（即 <code>4</code> 个字节）的数据；</p>
+<p>而 <code>64</code> 位 <code>CPU</code> 一次可以处理 <code>64</code> 位（即 <code>8</code> 个字节）的数据。从处理数据的能力方面来看，<code>64</code> 位是 <code>32</code> 位的两倍，<code>64</code> 位要比 <code>32</code> 位好。</p>
+<p>2.特点</p>
+<ul>
+<li><code>64</code> 位 <code>CPU</code> 拥有更大的寻址能力，最大支持到 <code>16GB</code> 内存，而 <code>32</code> 位只支持 <code>4G</code> 内存；</li>
+<li><code>64</code> 位 <code>CPU</code> 一次可提取 <code>64</code> 位数据，比 <code>32</code> 位提高了一倍，理论上性能会提升 <code>1</code> 倍。但这是建立在 <code>64</code>  位操作系统，<code>64</code> 位软件的基础上的。</li>
+<li><code>64</code> 位操作系统的设计初衷是为了满足机械设计和分析、三维动画、视频编辑和创作，以及科学计算和高性能计算应用程序等领域中需要大量内存和浮点性能的客户需求，而 <code>32</code> 位系统，初期并没有考虑太多。</li>
+</ul>
+<p>3.原理<br><div class="alert info"><p>8 位处理器、16 位处理器、32 位处理器和 64 位处理器，其计数都是 8 的倍数。</p>
+</div><br>它表示一个 <code>32</code> 位、<code>64</code> 位处理器区别时钟周期里，处理器处理的二进制代码数。<code>0</code> 和 <code>1</code> 就是二进制代码，线路上有电信号，则计做 <code>1</code> ,没有电信号则为 <code>0</code> 。<code>8</code> 位机有 <code>8</code> 条线路，每个时钟周期有 <code>8</code> 个电信号，组成一个字节。</p>
+<p>所以，随 <code>8</code> 位处理器上升至 <code>64</code> 位处理器，每个时钟周期传送 <code>1</code> 个字节到 <code>8</code> 个字节，关联到时钟速度提高到若干个千兆赫之后，处理器处理信息的能力越来越大。</p>
+<h4 id="十、参考"><a href="#十、参考" class="headerlink" title="十、参考"></a>十、参考</h4><p><a href="https://blog.csdn.net/OnafioO/article/details/44656761" target="_blank" rel="noopener">图片占用内存计算方法</a><br><a href="https://www.iteblog.com/archives/148.html" target="_blank" rel="noopener">数据结构：位图法</a><br><a href="https://zhidao.baidu.com/question/159967229.html" target="_blank" rel="noopener">百科</a><br><a href="https://blog.csdn.net/sscout/article/details/82314908" target="_blank" rel="noopener">图片的存储原理</a><br><a href="https://baijiahao.baidu.com/s?id=1594516556699294726&amp;wfr=spider&amp;for=pc" target="_blank" rel="noopener">32 位和 64 位操作系统</a><br><a href="https://baike.baidu.com/item/64位计算/7508532?fr=aladdin" target="_blank" rel="noopener">64位计算</a></p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/bitmap/">bitmap</a> <a class="tag tag--primary tag--small t-link" href="/tags/位图/">位图</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/12/11/git-rebase/" data-tooltip="彻底搞懂 Git-Rebase">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/12/05/git-flow/" data-tooltip="Git 版本控制之 Git-Flow">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/12/09/bitmap/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/12/09/bitmap/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/12/09/bitmap/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/12/11/git-rebase/" data-tooltip="彻底搞懂 Git-Rebase">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/12/05/git-flow/" data-tooltip="Git 版本控制之 Git-Flow">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/12/09/bitmap/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/12/09/bitmap/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/12/09/bitmap/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/12/09/bitmap/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/12/09/bitmap/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/12/09/bitmap/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

@@ -1,0 +1,533 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>CORS解决方案 - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="同源策略（Same origin policy）是一种约定，它是浏览器最核心也最基本的安全功能，如果缺少了同源策略，则浏览器的正常功能可能都会受到影响。可以说Web是构建在同源策略基础之的，浏览器只是针对同源策略的一种实现。">
+<meta name="keywords" content="cors">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="CORS解决方案">
+<meta property="og:url" content="http://jartto.wang/2016/06/27/solutions-to-CORS/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="同源策略（Same origin policy）是一种约定，它是浏览器最核心也最基本的安全功能，如果缺少了同源策略，则浏览器的正常功能可能都会受到影响。可以说Web是构建在同源策略基础之的，浏览器只是针对同源策略的一种实现。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/cors_FD8DA08A-E4CC-45CB-9E76-9D4EF37AEEB9.png">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/cors_1FBAD133-35C5-4AC4-8329-B3B433A062BA.png">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/cors_CFE74C5D-058B-468C-9D0A-8AD9931214B9.png">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/cors_Image.png">
+<meta property="og:updated_time" content="2016-06-27T07:36:22.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CORS解决方案">
+<meta name="twitter:description" content="同源策略（Same origin policy）是一种约定，它是浏览器最核心也最基本的安全功能，如果缺少了同源策略，则浏览器的正常功能可能都会受到影响。可以说Web是构建在同源策略基础之的，浏览器只是针对同源策略的一种实现。">
+<meta name="twitter:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/cors_FD8DA08A-E4CC-45CB-9E76-9D4EF37AEEB9.png">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/cors_07E8A26B-7B79-44FE-891E-22AB563CD157.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="http://7xvi3w.com1.z0.glb.clouddn.com/cors_07E8A26B-7B79-44FE-891E-22AB563CD157.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            CORS解决方案
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2016-06-27T15:03:14+08:00">
+	  
+		    2016/6月/27 15:03:14
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>同源策略（Same origin policy）是一种约定，它是浏览器最核心也最基本的安全功能，如果缺少了同源策略，则浏览器的正常功能可能都会受到影响。可以说Web是构建在同源策略基础之的，浏览器只是针对同源策略的一种实现。<br><a id="more"></a><br><div class="alert success"><p>主机名+协议+端口三者相同，被认为是同源。</p>
+</div></p>
+<h4 id="一、问题重现"><a href="#一、问题重现" class="headerlink" title="一、问题重现"></a>一、问题重现</h4><p><img src="http://7xvi3w.com1.z0.glb.clouddn.com/cors_FD8DA08A-E4CC-45CB-9E76-9D4EF37AEEB9.png" alt="cors"><br><img src="http://7xvi3w.com1.z0.glb.clouddn.com/cors_1FBAD133-35C5-4AC4-8329-B3B433A062BA.png" alt="cors"></p>
+<p>一般出现以上错误，基本可以认定，网站出现了同源策略问题，也就是出现了未经允许的跨域请求。那么如何解决此类问题呢，下面我来一一阐述。</p>
+<h4 id="二、解决方案"><a href="#二、解决方案" class="headerlink" title="二、解决方案"></a>二、解决方案</h4><p>①客户端和服务器设置<br>这里以iis服务器为例，<a href="http://enable-cors.org/server.html" target="_blank" rel="noopener">更多请移步</a><br>虽然都是iis服务器，但是版本的不同，设置也不尽相同。<br>对于iis6：<br>打开iis管理器，选择需要设置CORS的站点，右键属性；<br>选择HTTP Headers 页签；<br>点击添加按钮，输入命令，点击确定；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Access-Control-Allow-Origin：*</span><br></pre></td></tr></table></figure></p>
+<p>对于iis7：<br>新建文件命名：web.config<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">system.webServer</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">httpProtocol</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">customHeaders</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">add</span> <span class="attr">name</span>=<span class="string">"Access-Control-Allow-Origin"</span> <span class="attr">value</span>=<span class="string">"*"</span> /&gt;</span></span><br><span class="line">     <span class="tag">&lt;/<span class="name">customHeaders</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">httpProtocol</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">system.webServer</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>②JSONP<br><div class="alert success"><p>JSONP(JSON with Padding)是JSON的一种“使用模式”，可用于解决主流浏览器的跨域数据访问的问题。通俗的讲，JSONP就是动态的去加载js文件，为其src属性指定一个跨域URL。</p>
+</div></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">showPrice</span>(<span class="params">data</span>)</span>&#123;</span><br><span class="line">        alert(<span class="string">"Symbol:"</span> + data.symbol + <span class="string">", Price:"</span> + data.price);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> url = <span class="string">"ticker.js"</span>; <span class="comment">//Outer JS URL</span></span><br><span class="line">    <span class="keyword">var</span> script = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>);</span><br><span class="line">    script.setAttribute(<span class="string">'src'</span>, url);</span><br><span class="line">    <span class="comment">//load javascript</span></span><br><span class="line">    <span class="built_in">document</span>.getElementsByTagName(<span class="string">'head'</span>)[<span class="number">0</span>].appendChild(script);</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+<p>ticker.js中<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> data = &#123;<span class="attr">symbol</span>:<span class="string">'IBM'</span>, <span class="attr">price</span>:<span class="number">100</span>&#125;;</span><br><span class="line">showPrice(data);</span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p>缺点：JSONP是get形式的，承载的信息量有限。</p>
+</div>
+<h4 id="三、本地测试如何进行"><a href="#三、本地测试如何进行" class="headerlink" title="三、本地测试如何进行"></a>三、本地测试如何进行</h4><p>当然，如果我们仅仅是为了进行本地测试，那么大可不必如此麻烦，看看如下的设置吧。<br>首先，我们先来看windows系统下的设置：桌面创建Chrome，右键属性，在目标栏空格后输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--disable-web-security</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://7xvi3w.com1.z0.glb.clouddn.com/cors_CFE74C5D-058B-468C-9D0A-8AD9931214B9.png" alt="cors"><br>打开Chrome浏览器，出现以下警告，则配置成功。下面就可以进行轻松愉快的本地开发测试啦！<br><img src="http://7xvi3w.com1.z0.glb.clouddn.com/cors_Image.png" alt="cors"></p>
+<div class="alert info"><p>注意：此处打开的浏览器一定是你配置好属性的快捷方式，否则可能无效哦！</p>
+</div>
+<p>Mac下就简单多了，我们需要输入以下命令：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#老版本：</span></span><br><span class="line">open -a <span class="string">"Google Chrome"</span> --args --<span class="built_in">disable</span>-web-security</span><br><span class="line"><span class="comment">#新版本：</span></span><br><span class="line">open -a <span class="string">"Google Chrome"</span> --args --<span class="built_in">disable</span>-web-security --user-data-dir</span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p>很多人发现Mac版本的CORS不起作用了，可能的原因就是你的chrome浏览器升级了，需要新的命令来禁用CORS。</p>
+</div>
+<h4 id="四、补充"><a href="#四、补充" class="headerlink" title="四、补充"></a>四、补充</h4><p>CORS与JSONP相比，更为先进、方便和可靠。<br>① JSONP只能实现GET请求，而CORS支持所有类型的HTTP请求。<br>②使用CORS，开发者可以使用普通的XMLHttpRequest发起请求和获得数据，比起JSONP有更好的错误处理。<br>③JSONP主要被老的浏览器支持，它们往往不支持CORS，而绝大多数现代浏览器都已经支持了CORS。</p>
+<p>对一个简单的请求，没有自定义头部，要么使用GET，要么使用POST，它的主体是text/plain,请求用一个名叫Orgin的额外的头部发送。Origin头部包含请求页面的头部（协议，域名，端口），这样服务器可以很容易的决定它是否应该提供响应。</p>
+<p>服务器端对于CORS的支持，主要就是通过设置Access-Control-Allow-Origin来进行的。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Header set Access-Control-Allow-Origin *</span><br></pre></td></tr></table></figure></p>
+<p>为了防止XSS攻击我们的服务器， 我们可以限制域，比如<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Access-Control-Allow-Origin: http://jartto.wang/</span><br></pre></td></tr></table></figure></p>
+<p>很多服务都已经提供了CORS支持，比如 AWS 支持跨域资源分享功能CORS，向S3上传不需要代理。</p>
+<h4 id="五、CORS相关资源推荐"><a href="#五、CORS相关资源推荐" class="headerlink" title="五、CORS相关资源推荐"></a>五、CORS相关资源推荐</h4><p><a href="http://enable-cors.org/index.html" target="_blank" rel="noopener">1.官方网站</a><br><a href="http://my.oschina.net/dongwq/blog/137147" target="_blank" rel="noopener">2.CORS(Cross-Origin Resource Sharing) 跨域资源共享</a><br><a href="http://blog.csdn.net/cloudcraft/article/details/8986798" target="_blank" rel="noopener">3.跨域请求解决方法(JSONP, CORS)</a><br><a href="http://www.360doc.com/content/14/0106/11/15643_343005039.shtml" target="_blank" rel="noopener">4.ajax post&amp;跨域解决方案</a><br><a href="http://blog.csdn.net/hfahe/article/details/7730944" target="_blank" rel="noopener">5.html5安全：CORS（跨域资源共享）简介</a></p>
+<p>参考：<br>百度百科：<a href="http://baike.baidu.com/cors" target="_blank" rel="noopener">http://baike.baidu.com/cors</a><br>Enable CORS：<a href="http://enable-cors.org/index.html" target="_blank" rel="noopener">http://enable-cors.org/index.html</a><br>跨域请求解决方法：<a href="http://blog.csdn.net/cloudcraft/article/details/8986798" target="_blank" rel="noopener">http://blog.csdn.net/cloudcraft/article/details/8986798</a><br>javascript 之 跨域技术 CORS：<a href="http://www.xuebuyuan.com/1744068.html" target="_blank" rel="noopener">http://www.xuebuyuan.com/1744068.html</a><br><a href="http://stackoverflow.com/questions/35432749/disable-web-security-in-chrome-48-and-49" target="_blank" rel="noopener">http://stackoverflow.com/questions/35432749/disable-web-security-in-chrome-48-and-49</a></p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/cors/">cors</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/06/28/appreciation-of-the-call-and-apply/" data-tooltip="我所理解的call和apply">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/06/27/first-experience-of-pm2/" data-tooltip="PM2初体验">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2016/06/27/solutions-to-CORS/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2016/06/27/solutions-to-CORS/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2016/06/27/solutions-to-CORS/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+            
+                <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/06/28/appreciation-of-the-call-and-apply/" data-tooltip="我所理解的call和apply">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/06/27/first-experience-of-pm2/" data-tooltip="PM2初体验">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2016/06/27/solutions-to-CORS/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2016/06/27/solutions-to-CORS/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2016/06/27/solutions-to-CORS/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2016/06/27/solutions-to-CORS/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2016/06/27/solutions-to-CORS/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2016/06/27/solutions-to-CORS/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+    
+        <script>
+             var disqus_config = function () {
+                 this.page.url = 'http://jartto.wang/2016/06/27/solutions-to-CORS/';
+                 
+                    this.page.identifier = '2016/06/27/solutions-to-CORS/';
+                                  
+             };
+            (function() {
+                var d = document, s = d.createElement('script');
+                var disqus_shortname = 'jartto';
+                s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+
+
+
+</html>

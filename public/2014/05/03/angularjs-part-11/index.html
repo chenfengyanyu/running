@@ -1,0 +1,540 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>Angularjs学习笔记10~指令 Directive（三）自定义验证实例 - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="回头看看，断断续续已经连续写了10篇angularjs的总结笔记了，虽说不上经典，但是我已经竭尽全力了。本来想着，已经接手做了很多项目了，应该很容易总结。可是，事与愿违。真正动手写起来，确实困难重重。基础不牢靠、表达不清、坚持不下来都成了阻力。">
+<meta name="keywords" content="angularjs">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Angularjs学习笔记10~指令 Directive（三）自定义验证实例">
+<meta property="og:url" content="http://jartto.wang/2014/05/03/angularjs-part-11/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="回头看看，断断续续已经连续写了10篇angularjs的总结笔记了，虽说不上经典，但是我已经竭尽全力了。本来想着，已经接手做了很多项目了，应该很容易总结。可是，事与愿违。真正动手写起来，确实困难重重。基础不牢靠、表达不清、坚持不下来都成了阻力。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/angular_ya.gif">
+<meta property="og:updated_time" content="2016-07-25T02:16:19.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Angularjs学习笔记10~指令 Directive（三）自定义验证实例">
+<meta name="twitter:description" content="回头看看，断断续续已经连续写了10篇angularjs的总结笔记了，虽说不上经典，但是我已经竭尽全力了。本来想着，已经接手做了很多项目了，应该很容易总结。可是，事与愿违。真正动手写起来，确实困难重重。基础不牢靠、表达不清、坚持不下来都成了阻力。">
+<meta name="twitter:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/angular_ya.gif">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/blog_155IK010-0.jpg"/>
+        <meta class="swiftype" name="image" data-type="enum" content="http://7xvi3w.com1.z0.glb.clouddn.com/blog_155IK010-0.jpg" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            Angularjs学习笔记10~指令 Directive（三）自定义验证实例
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2014-05-03T14:46:14+08:00">
+	  
+		    2014/5月/03 14:46:14
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>回头看看，断断续续已经连续写了10篇angularjs的总结笔记了，虽说不上经典，但是我已经竭尽全力了。本来想着，已经接手做了很多项目了，应该很容易总结。可是，事与愿违。真正动手写起来，确实困难重重。基础不牢靠、表达不清、坚持不下来都成了阻力。<br><a id="more"></a><br>好在，我一直在前进，三分之二的路程已经走完。虽然艰辛，但是充满了挑战。我能想象到未来的某个时间，再去回首这个过程，定会为自己的坚持所感动。呵呵，其他都不重要，重要的是我坚持下来了，不是吗？后续还有五篇，我会再接再厉。</p>
+<p>指令分了三部分，为了避免过于零散，这里再次把目录列出来，以供参考：<br>其一，指令 Directive（一）初探<br>其二，指令 Directive（二）参数定义<br>其三，指令 Directive（三）自定义验证实例</p>
+<div class="alert success"><p>这篇笔记可能有点长，我也不是一次写完的，只要你能耐着性子看下去，肯定会受益匪浅。其他就不多说了，下面进入正题：</p>
+</div>
+<h4 id="一、用指令来扩展"><a href="#一、用指令来扩展" class="headerlink" title="一、用指令来扩展"></a>一、用指令来扩展</h4><p>第一篇关于指令的笔记中给出了两种验证方式，一般的情况下，我们可以拿来直接用。但是，如果一些特殊需求，或者想展示一些个性化的验证方式，那么我们就需要自己来扩展验证了。</p>
+<p>为了更好的说明问题，这里我用指令来做出一个类似如下图的验证效果。当然，纯粹是为了介绍一下如何使用指令，所以只做出了简单效果。如果你真打算这么用，希望你能够进行完善。<br><img src="http://7xvi3w.com1.z0.glb.clouddn.com/angular_ya.gif" alt="directive"></p>
+<h4 id="二、自定义验证示例"><a href="#二、自定义验证示例" class="headerlink" title="二、自定义验证示例"></a>二、自定义验证示例</h4><p>上面用动态图演示了一个用指令写出的验证效果，那我们来看看代码是如何实现的。</p>
+<p>①引用文件，看效果，我们很容易能看出Bootstrap的影子。对的，angularjs的一个ui框架是使用Bootstrap的，所以下列文件必不可少：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">"bootstrap.css"</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">type</span>=<span class="string">"text/css"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">'text/javascript'</span> <span class="attr">src</span>=<span class="string">'angular.js'</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">'text/javascript'</span> <span class="attr">src</span>=<span class="string">'ui-bootstrap-tpls-0.10.0.js'</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>除此之外，我又添加了另外两个js文件：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">'text/javascript'</span> <span class="attr">src</span>=<span class="string">'main.js'</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">'text/javascript'</span> <span class="attr">src</span>=<span class="string">'nbvalidate.js'</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>其中main.js为主文件，主要去构建angularjs的作用域。nbvalidate.js这个是用指令扩展的验证插件。这里，可能你有些疑问，为什么要分两个文件来做这件事，一个岂不是更好？</p>
+<p>其实，前面已经提及过，指令很大的一个优势是去做通用插件，这里我想把验证作为一个插件。当你需要进行验证，只需要把nbvalidate.js引入，nbvalidate作为依赖项，验证就可以了用了，是不是很方便？</p>
+<p>②html结构<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-app</span>=<span class="string">"myModule"</span> <span class="attr">ng-controller</span>=<span class="string">"myCtrl"</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">form</span> <span class="attr">class</span>=<span class="string">"form-horizontal"</span> <span class="attr">name</span>=<span class="string">"myform"</span> <span class="attr">role</span>=<span class="string">"form"</span> &gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"form-group"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"inputAccount"</span> <span class="attr">class</span>=<span class="string">"col-sm-2 control-label"</span>&gt;</span>账号：<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-md-2"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span>  <span class="attr">ng-model</span>=<span class="string">"user.account"</span>  <span class="attr">name</span>=<span class="string">"myAccount"</span>   <span class="attr">class</span>=<span class="string">"form-control"</span>        <span class="attr">id</span>=<span class="string">"inputAccount"</span> <span class="attr">placeholder</span>=<span class="string">"请输入数字账号"</span>/&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">my-validate</span> <span class="attr">ztype</span>=<span class="string">"account"</span> <span class="attr">zmin</span>=<span class="string">"3"</span> <span class="attr">zmax</span>=<span class="string">"6"</span> <span class="attr">zcontent</span>=<span class="string">"user.account"</span>  <span class="attr">ng-show</span>=<span class="string">"!myform.myAccount.$pristine"</span>&gt;</span><span class="tag">&lt;/<span class="name">my-validate</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"input-required"</span>&gt;</span>*<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>代码很简单，主要就是一个输入框的UI。需要注意的是上述代码中粗体部分，我们单独拿出来做分析:<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">my-validate</span> <span class="attr">ztype</span>=<span class="string">"account"</span> <span class="attr">zmin</span>=<span class="string">"3"</span> <span class="attr">zmax</span>=<span class="string">"6"</span> <span class="attr">zcontent</span>=<span class="string">"user.account"</span>  <span class="attr">ng-show</span>=<span class="string">"!myform.myAccount.$pristine"</span>&gt;</span><span class="tag">&lt;/<span class="name">my-validate</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>这里就是自定义指令的html核心部分，可以看到我创建了一个my-validate元素标签，当你需要对输入框进行验证的话，插入此段代码，基本就搞定了。</p>
+<p>除此之外，里面还有一些自定义属性，如：</p>
+<ul>
+<li>ztype=“account”：告知js逻辑，此输入框为account验证；</li>
+<li>zmin=“3”：限制输入个数最少为3；</li>
+<li>zmax=“6”：限制输入个数最多为6；</li>
+<li>zcontent=“user.account”：这里取出与之绑定的输入框的值；</li>
+<li>ng-show=“！myform.myAccount.$pristine”：控制气泡的显示，如果用户对输入框未操作，则不显示气泡。</li>
+</ul>
+<p>可以看出，基本全是自定义的元素和属性，那么它们是如何工作的呢？下面来看看两个主要的js文件，main.js和nbvalidate.js。</p>
+<p>③js文件们<br>main.js:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myApp=angular.module(<span class="string">'myModule'</span>, [<span class="string">'ui.bootstrap'</span>,<span class="string">'nbValidate'</span>]);</span><br><span class="line">myApp.controller(<span class="string">'myCtrl'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">$scope</span>)</span>&#123;</span><br><span class="line">     $scope.user=&#123;</span><br><span class="line">          <span class="comment">//篇幅原因，无关字段已经去掉</span></span><br><span class="line">          account:<span class="string">''</span></span><br><span class="line">     &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>上面代码大家应该不会陌生，创建module和controller，并且初始化了一个user对象，该对象包含account属性（这是我用来演示验证的字段）。需要注意的是代码加粗部分两个依赖项，<br>其一，ui.bootstrap是页面ui，前面已经提过。<br>其二，自定义的js文件nbValidate，很显然重要的验证逻辑都会包含在此依赖项中。</p>
+<p>nbValidate.js<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">angular.module(<span class="string">'nbValidate'</span>,[])</span><br><span class="line">     .directive(<span class="string">'myVaildate'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="comment">//验证指令</span></span><br><span class="line">     <span class="keyword">return</span>&#123;</span><br><span class="line">          restrict:<span class="string">'AE'</span>, <span class="comment">//指令在模板中的使用方式为属性或者元素</span></span><br><span class="line">          transclude:<span class="literal">true</span>,<span class="comment">//把指令元素中原来的子节点移动到一个新模板内部</span></span><br><span class="line">          scope:&#123;<span class="attr">inputVal</span>:<span class="string">"=zcontent"</span>&#125;,<span class="comment">//绑定当前zcontent属性，从而获取用户输入</span></span><br><span class="line">          templateUrl:<span class="string">'temlate.html'</span>,<span class="comment">//模板文件temlate.html，这里特指弹出的气泡html结构</span></span><br><span class="line">          link:<span class="function"><span class="keyword">function</span>(<span class="params">scope,element,attrs</span>)</span>&#123;</span><br><span class="line">               <span class="comment">//长度限制预先定义</span></span><br><span class="line">               <span class="keyword">var</span> min=attrs.zmin?attrs.zmin:<span class="number">4</span>;</span><br><span class="line">               <span class="keyword">var</span> max=attrs.zmax?attrs.zmax:<span class="number">20</span>;</span><br><span class="line">            <span class="comment">//账号验证规则</span></span><br><span class="line">               <span class="keyword">var</span> patternAccount=<span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"^([0-9])&#123;"</span>+min+<span class="string">","</span>+max+<span class="string">"&#125;$"</span>);</span><br><span class="line">               <span class="comment">//模板的显示/隐藏控制，以及气泡中的错误提示</span></span><br><span class="line">               scope.displayFlag=<span class="string">"none"</span>;</span><br><span class="line">               scope.validateContent=<span class="string">""</span>;</span><br><span class="line"></span><br><span class="line">                    scope.$watch(<span class="string">'inputVal'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="comment">//用watch来监控zcontent属性值的变化</span></span><br><span class="line">                    <span class="keyword">if</span>(scope.inputVal.length)&#123;</span><br><span class="line">                         <span class="keyword">switch</span>(attrs.ztype)&#123;</span><br><span class="line">                              <span class="keyword">case</span> <span class="string">"account"</span>:<span class="comment">//账号</span></span><br><span class="line">                                        <span class="keyword">if</span>(!patternAccount.test(scope.inputVal))&#123;</span><br><span class="line">                                             scope.displayFlag=<span class="string">"block"</span>;<span class="comment">//不能通过验证则显示错误提示气泡</span></span><br><span class="line">                                             <span class="keyword">if</span>(!patternNumber.test(scope.inputVal))&#123;</span><br><span class="line">                                                 scope.vaildateContent=<span class="string">"账号只能包含数字！"</span>;</span><br><span class="line">                                             &#125;</span><br><span class="line">                                             <span class="keyword">else</span> <span class="keyword">if</span>(scope.inputVal.length&lt;min&amp;&amp;</span><br><span class="line">                                                       scope.inputVal.length&gt;<span class="number">0</span>)&#123;</span><br><span class="line">                                                  scope.vaildateContent=<span class="string">"账号必须大于"</span>+min+<span class="string">"位！"</span>;</span><br><span class="line">                                             &#125;</span><br><span class="line">                                             <span class="keyword">else</span> <span class="keyword">if</span>(scope.inputVal.length&gt;max)&#123;</span><br><span class="line">                                                  scope.vaildateContent=<span class="string">"账号不能超过"</span>+max+<span class="string">"位！"</span>;</span><br><span class="line">                                             &#125;</span><br><span class="line">                                        &#125;</span><br><span class="line">                                        <span class="keyword">else</span>&#123;</span><br><span class="line">                                             scope.displayFlag=<span class="string">"none"</span>;</span><br><span class="line">                                        &#125;</span><br><span class="line">                                   <span class="keyword">break</span>;</span><br><span class="line">                              <span class="comment">//邮箱</span></span><br><span class="line">                        <span class="comment">//与账号类似，依次罗列其他验证逻辑</span></span><br><span class="line">                              &#125;</span><br><span class="line">                    &#125;);</span><br><span class="line">               &#125;</span><br><span class="line">          &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>这段代码有些长，相对比较复杂，代码中我已经做了注释，仔细看应该不难理解。这里，我做了两件事：<br>其一，用正则去匹配用户输入；<br>其二，根据验证结果去选择隐藏或显示模板文件；</p>
+<div class="alert danger"><p>如果你还是看不懂，希望你能够先去看看<a href="http://jartto.wang/2014/04/28/angularjs-part-10/">《指令 Directive（二）参数定义》</a>这个笔记，回过头再来看本篇笔记，难度就会小很多。学知识是循序渐进的，掌握好基础知识，后续就可以畅通无阻了。</p>
+</div>
+<p>接下来，进入到最后一个环节，我们来看看模板文件吧！</p>
+<p>④模板文件（验证气泡）<br>temlate.html<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"tooltip top fade in"</span>  <span class="attr">is-open</span>=<span class="string">"tt_isOpen"</span> <span class="attr">animation</span>=<span class="string">"tt_animation"</span> <span class="attr">placement</span>=<span class="string">"top"</span>  <span class="attr">content</span>=<span class="string">"&#123;&#123;validateContent&#125;&#125;"</span> <span class="attr">title</span>=<span class="string">""</span> <span class="attr">tooltip-popup</span>=<span class="string">""</span></span></span><br><span class="line"><span class="tag"><span class="attr">style</span>=<span class="string">"top: -33px;display: &#123;&#123;displayFlag&#125;&#125;;"</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"tooltip-arrow"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"tooltip-inner ng-binding"</span> <span class="attr">ng-bind</span>=<span class="string">"content"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>可以看出这段代码无非就是一些气泡的样式。我们还是来聚焦一下代码中的粗体部分，validateContent用来将错误信息填充到气泡中，displayFlag用来控制气泡的隐藏和显示。</p>
+<h4 id="三、总结"><a href="#三、总结" class="headerlink" title="三、总结"></a>三、总结</h4><p>到这里，关于指令一些基本用法，以及如何创建自定义指令，基本就完事了。我用三篇文章来梳理指令相关知识，确实有些乏力，不过达到入门级别应该是没问题了。如果你想深入学习，angularjs官方api应该是个不错的选择。</p>
+<p>当然，我也是初学，有的地方可能理解的不是很清楚。如果文中有错误，希望作为读者的你能够指出来。</p>
+<div class="alert info"><p>由于实际代码比较多，我只取出了一小部分来做说明。如果你需要完整的demo，请留下邮箱，我会抽空发给你的。</p>
+</div>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/angularjs/">angularjs</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2014/05/05/angularjs-part-12/" data-tooltip="Angularjs学习笔记11~服务 Service（一）内建服务">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2014/04/28/angularjs-part-10/" data-tooltip="Angularjs学习笔记09~指令 Directive（二）参数定义">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2014/05/03/angularjs-part-11/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2014/05/03/angularjs-part-11/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2014/05/03/angularjs-part-11/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+            
+                <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2014/05/05/angularjs-part-12/" data-tooltip="Angularjs学习笔记11~服务 Service（一）内建服务">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2014/04/28/angularjs-part-10/" data-tooltip="Angularjs学习笔记09~指令 Directive（二）参数定义">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2014/05/03/angularjs-part-11/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2014/05/03/angularjs-part-11/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2014/05/03/angularjs-part-11/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2014/05/03/angularjs-part-11/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2014/05/03/angularjs-part-11/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2014/05/03/angularjs-part-11/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+    
+        <script>
+             var disqus_config = function () {
+                 this.page.url = 'http://jartto.wang/2014/05/03/angularjs-part-11/';
+                 
+                    this.page.identifier = '2014/05/03/angularjs-part-11/';
+                                  
+             };
+            (function() {
+                var d = document, s = d.createElement('script');
+                var disqus_shortname = 'jartto';
+                s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+
+
+
+</html>

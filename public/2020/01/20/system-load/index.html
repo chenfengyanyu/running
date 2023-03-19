@@ -1,0 +1,508 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>系统负载看不懂？ - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="Web 开发会经历「开发-上线-部署」三个过程，部署之后站点的运行状态如何却鲜有关注。如果我们要估算网站能承受多大的并发，你可能需要真正了解系统负载。">
+<meta name="keywords" content="linux,load,system">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="系统负载看不懂？">
+<meta property="og:url" content="http://jartto.wang/2020/01/20/system-load/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="Web 开发会经历「开发-上线-部署」三个过程，部署之后站点的运行状态如何却鲜有关注。如果我们要估算网站能承受多大的并发，你可能需要真正了解系统负载。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/linux/system-load.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/linux/load-avg.png">
+<meta property="og:updated_time" content="2020-01-20T08:43:27.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="系统负载看不懂？">
+<meta name="twitter:description" content="Web 开发会经历「开发-上线-部署」三个过程，部署之后站点的运行状态如何却鲜有关注。如果我们要估算网站能承受多大的并发，你可能需要真正了解系统负载。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/linux/system-load.png">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/linux/logo.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/linux/logo.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            系统负载看不懂？
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2020-01-20T10:54:40+08:00">
+	  
+		    2020/1月/20 10:54:40
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>Web 开发会经历「开发-上线-部署」三个过程，部署之后站点的运行状态如何却鲜有关注。如果我们要估算网站能承受多大的并发，你可能需要真正了解系统负载。<br><a id="more"></a></p>
+<h4 id="一、先看场景"><a href="#一、先看场景" class="headerlink" title="一、先看场景"></a>一、先看场景</h4><p>1.服务器状态（<code>Linux</code> 服务器通过 <code>Top</code> 命令查看）<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/linux/system-load.png" alt="服务器状态"></p>
+<p>2.数据监控<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/linux/load-avg.png" alt="平均负载"></p>
+<p>上面是两个典型应用场景，我们可以直接在服务器查看系统负载。当然，也可以获取数据本地可视化显示。听起来不错，可是问题来了：</p>
+<p>Q1：<code>load average</code>: 0.03, 0.12, 0.07 是什么？<br>Q2：为什么同时监控 1 分钟，5 分钟，15 分钟？</p>
+<p>如果你对此有疑问，不妨继续阅读。</p>
+<h4 id="二、参数说明"><a href="#二、参数说明" class="headerlink" title="二、参数说明"></a>二、参数说明</h4><div class="alert info"><p>为了便于理解，我们从「一个比喻」，「两个概念」和「三个边界」来说明。</p>
+</div>
+<p>1.<strong>一个比喻</strong><br>我们可以把 <code>CPU</code> 比喻成一条马路，进程任务就是马路上飞驰的汽车，<code>Load</code> 则表示马路的拥挤程度。</p>
+<p>2.<strong>两个概念</strong><br>系统负载（System Load）：<br>系统 <code>CPU</code> 繁忙程度的度量，即有多少进程在等待被 <code>CPU</code> 调度（进程等待队列的长度）。</p>
+<p>平均负载（Load Average）：<br>一段时间内系统的平均负载，这个一段时间一般取 1 分钟、5 分钟、15 分钟。</p>
+<p>3.<strong>三个边界</strong><br>Load = 0，路上一辆车也没有；<br>Load = 0.7，一大半路上有车；<br>Load = 1，所有路段都有车，基本饱和状态，但是道路仍然能够通行；</p>
+<p>阮一峰老师<a href="https://www.ruanyifeng.com/blog/2011/07/linux_load_average_explained.html" target="_blank" rel="noopener">理解 Linux 系统负荷</a>中举的这个例子很形象：</p>
+<ul>
+<li>系统负荷为 1.7，意味着车辆太多了，桥已经被占满了（100%），后面等着上桥的车辆为路面车辆的 70%。</li>
+<li>系统负荷 2.0，意味着等待上桥的车辆与桥面的车辆一样多；</li>
+<li>系统负荷 3.0，意味着等待上桥的车辆是桥面车辆的 2 倍。</li>
+</ul>
+<p>总之，当系统负荷大于1，后面的车辆就必须等待了；系统负荷越大，过桥就必须等得越久。</p>
+<div class="alert success"><p>道路的通行能力，就是 <code>CPU</code> 的最大工作量；道路上的车辆，就是一个个等待 <code>CPU</code> 处理的进程（<code>Process</code>）。</p>
+</div>
+<h4 id="三、多核负载如何计算？"><a href="#三、多核负载如何计算？" class="headerlink" title="三、多核负载如何计算？"></a>三、多核负载如何计算？</h4><p>上文我们不管是路还是桥的例子，都是默认电脑只有一个 <code>CPU</code>，那如果多 <code>CPU</code>，情况又是如何呢？</p>
+<div class="alert success"><p>很简单，<code>2</code> 个 <code>CPU</code>，意味着电脑的处理能力翻了一倍，能够同时处理的进程数量也翻了一倍。</p>
+</div>
+<p><code>2</code> 个 <code>CPU</code> 表明系统负载可以达到 <code>2.0</code>，此时每个 <code>CPU</code> 都达到 <code>100%</code> 的工作量。如果你的服务器是 <code>4</code> 核 <code>CPU</code>，那么系统负载极限就是 <code>4.0</code>。</p>
+<h4 id="四、答题时间"><a href="#四、答题时间" class="headerlink" title="四、答题时间"></a>四、答题时间</h4><p>到这里，相信我们的 <code>Q1</code> 问题已经解决了。我们重点来看 <code>Q2</code>：为什么同时监控 <code>1</code> 分钟，<code>5</code> 分钟，<code>15</code> 分钟？</p>
+<p><a href="https://www.w3cschool.cn/architectroad/architectroad-loadaverage.html" target="_blank" rel="noopener">一分钟理解负载 LoadAverage </a> 中有很好的解释：</p>
+<ul>
+<li>Load &lt; 0.7时：系统很闲，马路上没什么车，要考虑多部署一些服务</li>
+<li>0.7 &lt; Load &lt; 1时：系统状态不错，马路可以轻松应对</li>
+<li>Load == 1时：系统马上要处理不多来了，赶紧找一下原因</li>
+<li>Load &gt; 5时：马路已经非常繁忙了，进入马路的每辆汽车都要无法很快的运行</li>
+</ul>
+<p>那么如果按照 1 分钟来评估系统负载，会被系统短暂的抖动所影响。</p>
+<div class="alert success"><p>所以 1 分钟更多是作为一个参考度量，综合 5 分钟和 10 分钟使监控指标更加准确。</p>
+</div>
+<p>1 分钟 Load &gt; 5，5 分钟 Load &lt; 1，15 分钟 Load &lt; 1<br>短期内繁忙，中长期空闲，初步判断是一个「抖动」或者是「拥塞前兆」</p>
+<p>1 分钟 Load &gt; 5，5 分钟 Load &gt; 1，15 分钟 Load &lt; 1<br>短期内繁忙，中期内紧张，很可能是一个「拥塞的开始」</p>
+<p>1 分钟 Load &gt; 5，5 分钟 Load &gt; 5，15 分钟 Load &gt; 5<br>短中长期都繁忙，系统「正在拥塞」</p>
+<p>1 分钟 Load &lt; 1，5 分钟 Load &gt; 1，15 分钟 Load &gt; 5：<br>短期内空闲，中长期繁忙，不用紧张，系统「拥塞正在好转」</p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/linux/">linux</a> <a class="tag tag--primary tag--small t-link" href="/tags/load/">load</a> <a class="tag tag--primary tag--small t-link" href="/tags/system/">system</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2020/02/02/about-gitbook/" data-tooltip="GitBook 和它有趣的插件">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2020/01/01/web-ai/" data-tooltip="人工智能时代，Web 前端能做什么？">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2020/01/20/system-load/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2020/01/20/system-load/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2020/01/20/system-load/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2020/02/02/about-gitbook/" data-tooltip="GitBook 和它有趣的插件">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2020/01/01/web-ai/" data-tooltip="人工智能时代，Web 前端能做什么？">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2020/01/20/system-load/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2020/01/20/system-load/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2020/01/20/system-load/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2020/01/20/system-load/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2020/01/20/system-load/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2020/01/20/system-load/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

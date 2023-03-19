@@ -1,0 +1,529 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>快速上手 Kafka - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="上一篇我们对 Kafka 做了很多概念性的解释，试图去理解它的内部机制。但这还远远不够，所以，这里我们来起手一个 Demo，加强理解。">
+<meta name="keywords" content="kafka,demo">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="快速上手 Kafka">
+<meta property="og:url" content="http://jartto.wang/2018/10/28/start-kafka/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="上一篇我们对 Kafka 做了很多概念性的解释，试图去理解它的内部机制。但这还远远不够，所以，这里我们来起手一个 Demo，加强理解。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/kafka4.png">
+<meta property="og:updated_time" content="2018-10-29T01:29:57.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="快速上手 Kafka">
+<meta name="twitter:description" content="上一篇我们对 Kafka 做了很多概念性的解释，试图去理解它的内部机制。但这还远远不够，所以，这里我们来起手一个 Demo，加强理解。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/kafka4.png">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/kafka3.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/kafka3.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            快速上手 Kafka
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2018-10-28T21:50:48+08:00">
+	  
+		    2018/10月/28 21:50:48
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p><a href="http://jartto.wang/2018/10/12/about-kafka/">上一篇</a>我们对 Kafka 做了很多概念性的解释，试图去理解它的内部机制。但这还远远不够，所以，这里我们来起手一个 Demo，加强理解。<br><a id="more"></a></p>
+<h4 id="一、下载-kafka"><a href="#一、下载-kafka" class="headerlink" title="一、下载 kafka"></a>一、下载 kafka</h4><p>要快速上手，我们需要<a href="https://www.apache.org/dyn/closer.cgi?path=/kafka/2.0.0/kafka_2.11-2.0.0.tgz" target="_blank" rel="noopener">下载</a> kafka 的包文件，因为下面的演示基于此。</p>
+<h4 id="二、解压并进入目录"><a href="#二、解压并进入目录" class="headerlink" title="二、解压并进入目录"></a>二、解压并进入目录</h4><p>找到上面下载好的 <code>tgz</code> 文件，解压并进入目录：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; tar -xzf kafka_2.11-2.0.0.tgz</span><br><span class="line">&gt; <span class="built_in">cd</span> kafka_2.11-2.0.0</span><br></pre></td></tr></table></figure></p>
+<h4 id="三、启动服务"><a href="#三、启动服务" class="headerlink" title="三、启动服务"></a>三、启动服务</h4><p><code>kafka</code> 使用了 <code>ZooKeeper</code>，所以我们需要先启动 <code>ZooKeeper</code> 服务。这里直接执行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; bin/zookeeper-server-start.sh config/zookeeper.properties</span><br></pre></td></tr></table></figure></p>
+<p>然后，再启动 <code>kafka</code> 服务：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; bin/kafka-server-start.sh config/server.properties</span><br></pre></td></tr></table></figure></p>
+<p>控制台会输出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">[2018-10-27 14:41:16,579] INFO [KafkaServer id=0] started (kafka.server.KafkaServer)</span><br></pre></td></tr></table></figure></p>
+<div class="alert success"><p>[KafkaServer id=0] started 可以看到服务启动了。</p>
+</div>
+<h4 id="四、创建-topic"><a href="#四、创建-topic" class="headerlink" title="四、创建 topic"></a>四、创建 topic</h4><p>这里，我们尝试创建一个 <code>test topic</code>，它只包含一个分区，只有一个副本。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test</span><br></pre></td></tr></table></figure></p>
+<p>控制台会输出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Created topic &quot;test”.</span><br></pre></td></tr></table></figure></p>
+<p>我们可以通过下面的命令，查看 <code>topic</code>列表：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; bin/kafka-topics.sh --list --zookeeper localhost:2181</span><br></pre></td></tr></table></figure></p>
+<p>控制台会输出：<code>test</code>，当然，我们也可以配置 <code>broker</code> 来创建 <code>topic</code>，从而代替手动去创建。</p>
+<h4 id="五、发送消息"><a href="#五、发送消息" class="headerlink" title="五、发送消息"></a>五、发送消息</h4><div class="alert info"><p>到这里，我们前期的准备工作都做好了，接下来我们会尝试发送一些消息。</p>
+</div>
+<p><code>kafka</code> 附带一个命令行客户端，它将从文件或标准输入中获取输入，并将其作为消息发送到 <code>kafka</code> 集群。 默认情况下，每行将作为单独的消息发送。</p>
+<p>运行 <code>producer</code> 然后在控制台输入消息，发送到服务器：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test</span><br></pre></td></tr></table></figure></p>
+<p>启动后，就进入了生产者模式，也就是可以我们可以发送消息了，输入：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; Hello, jartto!</span><br><span class="line">&gt; Let’s go!</span><br></pre></td></tr></table></figure></p>
+<h4 id="六、接收消息"><a href="#六、接收消息" class="headerlink" title="六、接收消息"></a>六、接收消息</h4><p><code>kafka</code> 还有一个命令行使用者，它会将消息转储到标准输出，这就是我们的 <code>consumer</code>。我们执行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test --from-beginning</span><br></pre></td></tr></table></figure></p>
+<p>启动后，就会输出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Hello, jartto!</span><br><span class="line">Let&apos;s go!</span><br></pre></td></tr></table></figure></p>
+<p>这样，我们就接收到了消息。这时候，在 <code>producer</code> 窗口，我们输入的消息，都会在 <code>consumer</code> 显示。下面这张图可以清楚的看到我们的所有服务，主要包含 <code>ZooKeeper</code>，<code>Topic</code>，<code>Producer</code>，<code>Consumer</code>：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/kafka4.png" alt="kafka console"></p>
+<h4 id="七、设置多代理集群"><a href="#七、设置多代理集群" class="headerlink" title="七、设置多代理集群"></a>七、设置多代理集群</h4><p>上面我们演示了单一的 <code>borker</code>，这并没有什么意思。我们来尝试一下 <code>multi-broker</code> 集群，让我们把集群扩展到三个节点，这才是真正的使用场景。</p>
+<p>首先，我们来修改一下配置文件，拷贝出两份副本：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; cp config/server.properties config/server-1.properties</span><br><span class="line">&gt; cp config/server.properties config/server-2.properties</span><br></pre></td></tr></table></figure></p>
+<p>然后稍微做一些调整，我们要在增加两个「篮子」了，我们需要为每个「篮子」编号，指定他们的监听端口，以及日志输出位置。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># config/server-1.properties</span><br><span class="line">broker.id=1</span><br><span class="line">listeners=PLAINTEXT://:9093</span><br><span class="line">log.dirs=/tmp/kafka-logs-1</span><br><span class="line"></span><br><span class="line"># config/server-2.properties</span><br><span class="line">broker.id=2</span><br><span class="line">listeners=PLAINTEXT://:9094</span><br><span class="line">log.dirs=/tmp/kafka-logs-2</span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p>因为我们启动了 Zookeeper 和 一个节点，所以这里只要启动刚才新增的这俩节点就可以了。</p>
+</div>
+<p>启动 server-1：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; bin/kafka-server-start.sh config/server-1.properties &amp;</span><br><span class="line">…</span><br><span class="line">[2018-10-27 16:06:24,642] INFO [KafkaServer id=1] started (kafka.server.KafkaServer)</span><br></pre></td></tr></table></figure></p>
+<p>启动 server-2：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; bin/kafka-server-start.sh config/server-2.properties &amp;</span><br><span class="line">...</span><br><span class="line">[2018-10-27 16:07:19,178] INFO [KafkaServer id=2] started (kafka.server.KafkaServer)</span><br></pre></td></tr></table></figure></p>
+<div class="alert warning"><p>需要注意的是：这里的 &amp; 是默认后台启动。</p>
+</div>
+<p>接下来，我们创建一个新的 <code>topic</code>，包含 3 个副本：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 3 --partitions 1 --topic my-replicated-topic</span><br></pre></td></tr></table></figure></p>
+<p>那么问题来了，我们现在有了一个集群，如果知道每个 <code>broker</code> 在干什么，如何查看呢？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; bin/kafka-topics.sh --describe --zookeeper localhost:2181 --topic my-replicated-topic</span><br><span class="line"></span><br><span class="line">Topic:my-replicated-topic    PartitionCount:1    ReplicationFactor:3    Configs:</span><br><span class="line">    Topic: my-replicated-topic    Partition: 0    Leader: 2    Replicas: 2,1,0Isr: 2,1,0</span><br></pre></td></tr></table></figure></p>
+<p>输出解释：第一行是所有分区的摘要，其次，每一行提供一个分区信息，因为我们只有一个分区，所以只有一行。</p>
+<p>这里需要解释三个概念：<br>1.<code>leader</code>：该节点负责该分区的所有的读和写，每个节点的 <code>leader</code> 都是随机选择的。<br>2.<code>replicas</code>：备份的节点列表，无论该节点是否是 <code>leader</code> 或者目前是否还活着，只是显示。<br>3.<code>isr</code>：「同步备份」的节点列表，也就是活着的节点并且正在同步 <code>leader</code>。</p>
+<p>当然，我们也可以看看 <code>test topic</code> 的相关信息：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; bin/kafka-topics.sh --describe --zookeeper localhost:2181 --topic test</span><br><span class="line">Topic:test  PartitionCount:1    ReplicationFactor:1 Configs:</span><br><span class="line">    Topic: test Partition: 0    Leader: 0   Replicas: 0 Isr: 0</span><br></pre></td></tr></table></figure></p>
+<p>这并不奇怪，刚才创建的主题没有 <code>Replicas</code>，并且在服务器 0 上，我们创建它的时候，集群中只有一个服务器，所以是 0 。</p>
+<p>接下来，我们来使用 <code>my-replicated-topic</code> 创建几条消息：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; bin/kafka-console-producer.sh --broker-list localhost:9092 --topic my-replicated-topic</span><br><span class="line">输入：</span><br><span class="line">&gt; my test message 1</span><br><span class="line">&gt; my test message 2</span><br></pre></td></tr></table></figure></p>
+<p>然后，我们来消费这几条消息：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --from-beginning --topic my-replicated-topic</span><br></pre></td></tr></table></figure></p>
+<p>可以看到，控制到收到两条消息：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">my test message 1</span><br><span class="line">my test message 2</span><br></pre></td></tr></table></figure></p>
+<h4 id="八、集群容错性"><a href="#八、集群容错性" class="headerlink" title="八、集群容错性"></a>八、集群容错性</h4><p>上面我们创建了有三个节点的集群，那么是时候检测一下容错性了。正如上面的情况，<code>Broker 1</code> 是 <code>leader</code>，我们杀掉他的进程：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; ps aux | grep server-1.properties</span><br><span class="line">7564 ttys002    0:15.91 /System/Library/Frameworks/JavaVM.framework/Versions/1.8/Home/bin/java…</span><br><span class="line">&gt; kill -9 7564</span><br></pre></td></tr></table></figure></p>
+<p>备份节点之一成为新的 <code>leader</code> ，而 <code>broker1</code> 已经不在同步备份集合里了。我们看一下目前的情况：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; bin/kafka-topics.sh --describe --zookeeper localhost:2181 --topic my-replicated-topic</span><br><span class="line">Topic:my-replicated-topic   PartitionCount:1    ReplicationFactor:3 Configs:</span><br><span class="line">    Topic: my-replicated-topic  Partition: 0    Leader: 2   Replicas: 1,2,0 Isr: 2,0</span><br></pre></td></tr></table></figure></p>
+<p>但即使最初接受写入的 <code>leader</code> 已经被干掉了，但并消息并没有丢：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --from-beginning --topic my-replicated-topic</span><br><span class="line">my test message 1</span><br><span class="line">my test message 2</span><br></pre></td></tr></table></figure></p>
+<h4 id="九、使用-Kafka-Connect-导入-导出数据"><a href="#九、使用-Kafka-Connect-导入-导出数据" class="headerlink" title="九、使用 Kafka Connect 导入/导出数据"></a>九、使用 Kafka Connect 导入/导出数据</h4><p>有时候，我们想导入或者导出一些数据，这时候就可以使用 <code>Kafka Connect</code> 来完成。对于大多数系统，可以使用 <code>Kafka Connect</code>，而不需要编写自定义集成代码。</p>
+<div class="alert info"><p>Kafka Connect 是一个可扩展的工具，运行连接器，实现与外部系统交互的自定义逻辑。</p>
+</div>
+<p>首先，<code>Mock</code> 一些数据，新建一个 <code>txt</code> 文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; echo -e &quot;foo\nbar&quot; &gt; test.txt</span><br></pre></td></tr></table></figure></p>
+<p>接下来，我们开始 2 个连接器运行在独立的模式，这意味着它们运行在一个单一的，本地的，专用的进程。我们提供 3 个配置文件作为参数。首先是 <code>Kafka Connect</code> 处理的配置，包含常见的配置，例如要连接的 <code>Kafka broker</code> 和数据的序列化格式。其余的配置文件都指定了要创建的连接器。包括连接器唯一名称，和要实例化的连接器类。以及连接器所需的任何其他配置。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; bin/connect-standalone.sh config/connect-standalone.properties config/connect-file-source.properties config/connect-file-sink.properties</span><br></pre></td></tr></table></figure>
+<p><code>kafka</code> 附带了这些示例的配置文件，并且使用了刚才我们搭建的本地集群配置并创建了 2 个连接器：<br>第一个是源连接器，从输入文件中读取并发布到Kafka主题中；<br>第二个是接收连接器，从 <code>kafka</code> 主题读取消息输出到外部文件。</p>
+<p>在启动过程中，你会看到一些日志消息，包括一些连接器实例化的说明。一旦 <code>kafka Connect</code> 进程已经开始，导入连接器应该读取从 <code>test.txt</code> 和写入到 <code>topic connect-test</code> 导出连接器从主题 <code>connect-test</code> 读取消息写入到文件<br><code>test.sink.txt</code> ，我们可以通过验证输出文件的内容来验证数据数据已经全部导出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">more test.sink.txt</span><br><span class="line">foo</span><br><span class="line">bar</span><br></pre></td></tr></table></figure></p>
+<p>注意，导入的数据也已经在 <code>Kafka</code> 主题 <code>connect-test</code> 里，所以我们可以使用该命令查看这个主题：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic connect-test --from-beginning</span><br><span class="line">&#123;&quot;schema&quot;:&#123;&quot;type&quot;:&quot;string&quot;,&quot;optional&quot;:false&#125;,&quot;payload&quot;:&quot;foo&quot;&#125;</span><br><span class="line">&#123;&quot;schema&quot;:&#123;&quot;type&quot;:&quot;string&quot;,&quot;optional&quot;:false&#125;,&quot;payload&quot;:&quot;bar&quot;&#125;</span><br><span class="line">…</span><br></pre></td></tr></table></figure></p>
+<p>连接器继续处理数据，因此我们可以添加数据到文件并通过管道移动：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;Another line&quot; &gt;&gt; test.txt</span><br></pre></td></tr></table></figure></p>
+<p>你应该会看到出现在消费者控台输出一行信息并导出到文件。</p>
+<h4 id="十、API-文档"><a href="#十、API-文档" class="headerlink" title="十、API 文档"></a>十、API 文档</h4><p>学习新东西，一定要先去<a href="http://kafka.apache.org" target="_blank" rel="noopener">官网</a>转一圈。下面是比较重要的一些点：</p>
+<ul>
+<li>API</li>
+<li>配置</li>
+<li>常用操作</li>
+<li>安全</li>
+<li>流</li>
+</ul>
+<p><code>API</code> 文档还是有很多重点内容的，这部分等回头看完了，整理整理，再行补充吧。</p>
+<h4 id="十一、总结"><a href="#十一、总结" class="headerlink" title="十一、总结"></a>十一、总结</h4><p>由于文章篇幅原因，很多细节都没有说到。本文只起到入门的作用，感兴趣的话，不妨深入学习一下。对于前端同学来说，这些就够了，因为如果你不常用，很可能很快就忘记了🙈。</p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/demo/">demo</a> <a class="tag tag--primary tag--small t-link" href="/tags/kafka/">kafka</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/10/30/html5-notification/" data-tooltip="HTML5 之消息通知（Web Notification）">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/10/23/puppeteerjs/" data-tooltip="Puppeteer 异常处理">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/10/28/start-kafka/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/10/28/start-kafka/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/10/28/start-kafka/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/10/30/html5-notification/" data-tooltip="HTML5 之消息通知（Web Notification）">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/10/23/puppeteerjs/" data-tooltip="Puppeteer 异常处理">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/10/28/start-kafka/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/10/28/start-kafka/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/10/28/start-kafka/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/10/28/start-kafka/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/10/28/start-kafka/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/10/28/start-kafka/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

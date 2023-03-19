@@ -1,0 +1,552 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>CSS 实用概要 - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="用惯了框架和 UI 库，感觉对 CSS 的基础又有些模糊了。本文将列举一些 CSS 实用的知识点，想到哪就写到哪吧！">
+<meta name="keywords" content="css">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="CSS 实用概要">
+<meta property="og:url" content="http://jartto.wang/2018/03/06/outline-of-css/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="用惯了框架和 UI 库，感觉对 CSS 的基础又有些模糊了。本文将列举一些 CSS 实用的知识点，想到哪就写到哪吧！">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2018-10-31T15:03:19.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSS 实用概要">
+<meta name="twitter:description" content="用惯了框架和 UI 库，感觉对 CSS 的基础又有些模糊了。本文将列举一些 CSS 实用的知识点，想到哪就写到哪吧！">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/outline0.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/outline0.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            CSS 实用概要
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2018-03-06T10:59:15+08:00">
+	  
+		    2018/3月/06 10:59:15
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>用惯了框架和 UI 库，感觉对 CSS 的基础又有些模糊了。本文将列举一些 CSS 实用的知识点，想到哪就写到哪吧！<br><a id="more"></a></p>
+<h4 id="一、Animation"><a href="#一、Animation" class="headerlink" title="一、Animation"></a>一、Animation</h4><p><code>Animation</code> 使用起来并不难，但是因为属于简写属性且有六个动画属性，所以很容易混淆。</p>
+<ul>
+<li>animation-name<ul>
+<li>规定需要绑定到选择器的 keyframe 名称</li>
+</ul>
+</li>
+<li>animation-duration<ul>
+<li>规定完成动画所花费的时间，以秒或毫秒计</li>
+</ul>
+</li>
+<li>animation-timing-function:linear|ease|ease-in|ease-out|ease-in-out|…<ul>
+<li>规定动画的速度曲线</li>
+</ul>
+</li>
+<li>animation-delay<ul>
+<li>规定在动画开始之前的延迟</li>
+</ul>
+</li>
+<li>animation-iteration-count:n|infinite<ul>
+<li>规定动画应该播放的次数</li>
+</ul>
+</li>
+<li>animation-direction:normal|alternate<ul>
+<li>规定是否应该轮流反向播放动画</li>
+</ul>
+</li>
+</ul>
+<div class="alert info"><p>此外，我们可能有动画停在最后一帧的需求，不要忘了 <code>CSS3</code> 的属性 <code>animation-fill-mode</code></p>
+</div>
+<ul>
+<li>animation-fill-mode : none | forwards | backwards | both;<ul>
+<li>forwards: 当动画完成后，保持最后一个属性值（在最后一个关键帧中定义）</li>
+<li>backwards: 在 animation-delay 所指定的一段时间内，在动画显示之前，应用开始属性值（在第一个关键帧中定义）</li>
+<li>both: 向前和向后填充模式都被应用</li>
+</ul>
+</li>
+</ul>
+<p>有的时候，动画也不需要自己写，可以多参考参考：<a href="https://daneden.github.io/animate.css/" target="_blank" rel="noopener">Animate.css</a></p>
+<h4 id="二、box-sizing"><a href="#二、box-sizing" class="headerlink" title="二、box-sizing"></a>二、box-sizing</h4><p>在 <code>CSS</code> 中一提到盒模型，就会提到 <code>box-sizing</code> 属性，它有俩个重要属性值：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">box-sizing: border-box|content-box;</span><br></pre></td></tr></table></figure></p>
+<p>默认是正常盒模型，也就是：<code>CSS</code> 定义的宽高只包含 <code>Content</code> 的宽高。而如果设置 <code>border-box</code>，那么就是：<code>IE</code>盒模型，<code>CSS</code> 定义的宽高包括了 <code>Content</code>，<code>Padding</code> 和 <code>Border</code>。</p>
+<h4 id="三、清除浮动的三种方式"><a href="#三、清除浮动的三种方式" class="headerlink" title="三、清除浮动的三种方式"></a>三、清除浮动的三种方式</h4><p>1.伪类法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.clearfix::after &#123;</span><br><span class="line">  content: &apos;&apos;;</span><br><span class="line">  display: block;</span><br><span class="line">  clear: both;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>2.元素法，使用 <code>clear: both;</code>，与伪类法的区别就是有没有实际的元素；<br>3.利用 <code>overflow</code> 属性，应用值为 <code>hidden</code> 或 <code>auto</code> 的 <code>overflow</code> 属性有一个有用的副作用，这会自动清理包含的任何浮动元素；<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.jartto</span> &#123;</span><br><span class="line">　<span class="attribute">background</span>: yellow;</span><br><span class="line">　<span class="attribute">overflow</span>:hidden;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>可以参考这篇文章：<a href="http://www.cnblogs.com/houyulei/archive/2011/12/16/2290229.html" target="_blank" rel="noopener">CSS 清除浮动的几种方式</a></p>
+<h4 id="四、定宽比"><a href="#四、定宽比" class="headerlink" title="四、定宽比"></a>四、定宽比</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"constant-width-to-height-ratio"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>CSS<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.constant-width-to-height-ratio</span> &#123;</span><br><span class="line">  <span class="attribute">background</span>: <span class="number">#333</span>;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">50%</span>;</span><br><span class="line">  <span class="attribute">padding-top</span>: <span class="number">50%</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="五、修改滚动条默认样式"><a href="#五、修改滚动条默认样式" class="headerlink" title="五、修改滚动条默认样式"></a>五、修改滚动条默认样式</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Document scrollbar */</span></span><br><span class="line"><span class="selector-pseudo">::-webkit-scrollbar</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">8px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-pseudo">::-webkit-scrollbar-track</span> &#123;</span><br><span class="line">  <span class="attribute">box-shadow</span>: inset <span class="number">0</span> <span class="number">0</span> <span class="number">6px</span> <span class="built_in">rgba</span>(0, 0, 0, 0.3);</span><br><span class="line">  <span class="attribute">border-radius</span>: <span class="number">10px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-pseudo">::-webkit-scrollbar-thumb</span> &#123;</span><br><span class="line">  <span class="attribute">border-radius</span>: <span class="number">10px</span>;</span><br><span class="line">  <span class="attribute">box-shadow</span>: inset <span class="number">0</span> <span class="number">0</span> <span class="number">6px</span> <span class="built_in">rgba</span>(0, 0, 0, 0.5);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* Scrollable element */</span></span><br><span class="line"><span class="selector-class">.some-element</span><span class="selector-pseudo">::webkit-scrollbar</span> &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="六、控制文本选中的颜色"><a href="#六、控制文本选中的颜色" class="headerlink" title="六、控制文本选中的颜色"></a>六、控制文本选中的颜色</h4><p>先来段文本：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"custom-text-selection"</span>&gt;</span>Select some of this text.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>使用 <code>::selection</code> 伪类来设置颜色：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.custom-text-selection</span><span class="selector-pseudo">::selection</span> &#123;</span><br><span class="line">  <span class="attribute">background</span>: deeppink;</span><br><span class="line">  <span class="attribute">color</span>: white;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>此外，通过 <code>user-select: none</code> 来设置文本不可被选择：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.unselectable</span> &#123;</span><br><span class="line">  <span class="attribute">user-select</span>: none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="七、简单的圆环-Loading"><a href="#七、简单的圆环-Loading" class="headerlink" title="七、简单的圆环 Loading"></a>七、简单的圆环 Loading</h4><p>先设置元素：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"donut"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>再定义一个圆环样式：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.donut</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: inline-block;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">4px</span> solid <span class="built_in">rgba</span>(0, 0, 0, 0.1);</span><br><span class="line">  <span class="attribute">border-left-color</span>: <span class="number">#7983ff</span>;</span><br><span class="line">  <span class="attribute">border-radius</span>: <span class="number">50%</span>;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">30px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">30px</span>;</span><br><span class="line">  <span class="attribute">animation</span>: donut-spin <span class="number">1.2s</span> linear infinite;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>最后，添加动画效果：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">keyframes</span> donut-spin &#123;</span><br><span class="line">  0% &#123;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">rotate</span>(0deg);</span><br><span class="line">  &#125;</span><br><span class="line">  100% &#123;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">rotate</span>(360deg);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="八、雕刻的文字效果"><a href="#八、雕刻的文字效果" class="headerlink" title="八、雕刻的文字效果"></a>八、雕刻的文字效果</h4><div class="alert info"><p>通过设置 <code>0px</code> 的水平阴影和 <code>2px</code> 的垂直阴影，同时将阴影调成白色，造成视觉上雕刻的感觉。</p>
+</div>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.etched-text</span> &#123;</span><br><span class="line">  <span class="attribute">text-shadow</span>: <span class="number">0</span> <span class="number">2px</span> white;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">1.5rem</span>;</span><br><span class="line">  <span class="attribute">font-weight</span>: bold;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#b8bec5</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里需要注意两点：<br>1.深色背景有利于此效果；<br>2.文字颜色适当的浅一些，形成褪色效果；</p>
+<h4 id="九、居中布局的几种方式"><a href="#九、居中布局的几种方式" class="headerlink" title="九、居中布局的几种方式"></a>九、居中布局的几种方式</h4><p>1.使用 <code>flex</code>：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.flexbox-centering</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">justify-content</span>: center;</span><br><span class="line">  <span class="attribute">align-items</span>: center;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>2.使用 <code>grid</code>：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.grid-centering</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: grid;</span><br><span class="line">  <span class="attribute">justify-content</span>: center;</span><br><span class="line">  <span class="attribute">align-items</span>: center;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>3.行高辅助：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">300px</span>;</span><br><span class="line">  <span class="attribute">line-height</span>: <span class="number">300px</span>;</span><br><span class="line">  <span class="attribute">text-align</span>: center;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="十、使用渐变"><a href="#十、使用渐变" class="headerlink" title="十、使用渐变"></a>十、使用渐变</h4><p>文字渐变：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.gradient-text</span> &#123;</span><br><span class="line">  <span class="attribute">background</span>: <span class="built_in">-webkit-linear-gradient</span>(pink, red);</span><br><span class="line">  <span class="attribute">-webkit-text-fill-color</span>: transparent;</span><br><span class="line">  <span class="attribute">-webkit-background-clip</span>: text;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>说明：</p>
+<ul>
+<li>background: -webkit-linear-gradient(…) 为文字设置渐变背景</li>
+<li>webkit-text-fill-color: transparent 使用透明色填充文字</li>
+<li>webkit-background-clip: text 用文本剪辑背景，用渐变背景填充文本作为颜色</li>
+</ul>
+<h4 id="十一、0-5px-问题"><a href="#十一、0-5px-问题" class="headerlink" title="十一、0.5px 问题"></a>十一、0.5px 问题</h4><p>也就是我们常说的 <code>Hairline</code> 问题：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.hairline-border</span> &#123;</span><br><span class="line">  <span class="attribute">box-shadow</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">1px</span>;</span><br><span class="line">&#125;</span><br><span class="line">@<span class="keyword">media</span> (min-resolution: <span class="number">2dppx</span>) &#123;</span><br><span class="line">  <span class="selector-class">.hairline-border</span> &#123;</span><br><span class="line">    <span class="attribute">box-shadow</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0.5px</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">@<span class="keyword">media</span> (min-resolution: <span class="number">3dppx</span>) &#123;</span><br><span class="line">  <span class="selector-class">.hairline-border</span> &#123;</span><br><span class="line">    <span class="attribute">box-shadow</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0.33333333px</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">@<span class="keyword">media</span> (min-resolution: <span class="number">4dppx</span>) &#123;</span><br><span class="line">  <span class="selector-class">.hairline-border</span> &#123;</span><br><span class="line">    <span class="attribute">box-shadow</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0.25px</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="十二、文本下划线动画"><a href="#十二、文本下划线动画" class="headerlink" title="十二、文本下划线动画"></a>十二、文本下划线动画</h4><p>html:<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"hover-underline-animation"</span>&gt;</span>Hover this text to see the effect!<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>css:<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.hover-underline-animation</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: inline-block;</span><br><span class="line">  <span class="attribute">position</span>: relative;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#0087ca</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.hover-underline-animation</span><span class="selector-pseudo">::after</span> &#123;</span><br><span class="line">  <span class="attribute">content</span>: <span class="string">''</span>;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">transform</span>: <span class="built_in">scaleX</span>(0);</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">2px</span>;</span><br><span class="line">  <span class="attribute">bottom</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="number">#0087ca</span>;</span><br><span class="line">  <span class="attribute">transform-origin</span>: bottom right;</span><br><span class="line">  <span class="attribute">transition</span>: transform <span class="number">0.25s</span> ease-out;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.hover-underline-animation</span><span class="selector-pseudo">:hover</span><span class="selector-pseudo">::after</span> &#123;</span><br><span class="line">  <span class="attribute">transform</span>: <span class="built_in">scaleX</span>(1);</span><br><span class="line">  <span class="attribute">transform-origin</span>: bottom left;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="十三、CSS-定义和使用变量"><a href="#十三、CSS-定义和使用变量" class="headerlink" title="十三、CSS 定义和使用变量"></a>十三、CSS 定义和使用变量</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-pseudo">:root</span> &#123;</span><br><span class="line">  <span class="attribute">--base-bottom-margin</span>: <span class="number">20px</span>;</span><br><span class="line">  <span class="attribute">--base-line-height</span>:   <span class="number">120%</span>;</span><br><span class="line">  <span class="attribute">--text-color</span>:         gray;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">h1</span> &#123;</span><br><span class="line">  <span class="attribute">margin-bottom</span>: <span class="built_in">var</span>( --base-bottom-margin );</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">42px</span>;</span><br><span class="line">  <span class="attribute">line-height</span>: <span class="built_in">var</span>( --base-line-height );</span><br><span class="line">  <span class="attribute">color</span>: <span class="built_in">var</span>( --text-color );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="十四、按钮点击效果－扩散光圈"><a href="#十四、按钮点击效果－扩散光圈" class="headerlink" title="十四、按钮点击效果－扩散光圈"></a>十四、按钮点击效果－扩散光圈</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">"mouse-cursor-gradient-tracking"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">span</span>&gt;</span>Hover me<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.mouse-cursor-gradient-tracking</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: relative;</span><br><span class="line">  <span class="attribute">background</span>: <span class="number">#7983ff</span>;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">0.5rem</span> <span class="number">1rem</span>;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">1.2rem</span>;</span><br><span class="line">  <span class="attribute">border</span>: none;</span><br><span class="line">  <span class="attribute">color</span>: white;</span><br><span class="line">  <span class="attribute">cursor</span>: pointer;</span><br><span class="line">  <span class="attribute">outline</span>: none;</span><br><span class="line">  <span class="attribute">overflow</span>: hidden;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.mouse-cursor-gradient-tracking</span> <span class="selector-tag">span</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: relative;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.mouse-cursor-gradient-tracking</span><span class="selector-pseudo">::before</span> &#123;</span><br><span class="line">  <span class="attribute">--size</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">content</span>: <span class="string">''</span>;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">left</span>: <span class="built_in">var</span>(--x);</span><br><span class="line">  <span class="attribute">top</span>: <span class="built_in">var</span>(--y);</span><br><span class="line">  <span class="attribute">width</span>: <span class="built_in">var</span>(--size);</span><br><span class="line">  <span class="attribute">height</span>: <span class="built_in">var</span>(--size);</span><br><span class="line">  <span class="attribute">background</span>: <span class="built_in">radial-gradient</span>(circle closest-side, pink, transparent);</span><br><span class="line">  <span class="attribute">transform</span>: <span class="built_in">translate</span>(-50%, -50%);</span><br><span class="line">  <span class="attribute">transition</span>: width <span class="number">0.2s</span> ease, height <span class="number">0.2s</span> ease;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.mouse-cursor-gradient-tracking</span><span class="selector-pseudo">:hover</span><span class="selector-pseudo">::before</span> &#123;</span><br><span class="line">  <span class="attribute">--size</span>: <span class="number">200px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> btn = <span class="built_in">document</span>.querySelector(<span class="string">'.mouse-cursor-gradient-tracking'</span>)</span><br><span class="line">btn.onmousemove = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> x = e.pageX - btn.offsetLeft</span><br><span class="line">  <span class="keyword">var</span> y = e.pageY - btn.offsetTop</span><br><span class="line">  btn.style.setProperty(<span class="string">'--x'</span>, x + <span class="string">'px'</span>)</span><br><span class="line">  btn.style.setProperty(<span class="string">'--y'</span>, y + <span class="string">'px'</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div class="alert warning"><p>需要注意的是：如果该元素的父元素有 position: relative，我们也需要减去父元素的 offset：</p>
+</div>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x = e.pageX - btn.offsetLeft - btn.offsetParent.offsetLeft</span><br><span class="line"><span class="keyword">var</span> y = e.pageY - btn.offsetTop - btn.offsetParent.offsetTop</span><br></pre></td></tr></table></figure>
+<h4 id="十五、使用-hover-实现弹出菜单"><a href="#十五、使用-hover-实现弹出菜单" class="headerlink" title="十五、使用 hover 实现弹出菜单"></a>十五、使用 hover 实现弹出菜单</h4><p>先来定义 <code>hover</code> 容器：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"reference"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"popout-menu"</span>&gt;</span></span><br><span class="line">    Popout menu</span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>再来定义样式：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.reference</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: relative;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.popout-menu</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">visibility</span>: hidden;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">100%</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.reference</span><span class="selector-pseudo">:hover</span> &gt; <span class="selector-class">.popout-menu</span> &#123;</span><br><span class="line">  <span class="attribute">visibility</span>: visible;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这里有两个问题：<br>其一，因为 <code>popout-menu</code> 是 <code>reference</code> 的子容器，所以悬停父容器，子容器并不会收缩；<br>其二，这里子元素使用了绝对定位，所以多个元素需要注意重叠问题；</p>
+<h4 id="十六、重置所有样式"><a href="#十六、重置所有样式" class="headerlink" title="十六、重置所有样式"></a>十六、重置所有样式</h4><p>通过一个属性，将样式重置到默认状态：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.reset-all-styles</span> &#123;</span><br><span class="line">  <span class="attribute">all</span>: initial;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="十七、CSS-实现锯齿"><a href="#十七、CSS-实现锯齿" class="headerlink" title="十七、CSS 实现锯齿"></a>十七、CSS 实现锯齿</h4><p>html：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"banner-vertical"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"banner-horizontal"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"banner"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>scss：<br><figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">body</span> &#123; <span class="attribute">margin</span>: <span class="number">2em</span>; &#125;</span><br><span class="line"><span class="selector-tag">div</span> &#123; <span class="attribute">height</span>: <span class="number">150px</span>; <span class="attribute">margin-bottom</span>: <span class="number">15px</span>; &#125;</span><br><span class="line"></span><br><span class="line">@<span class="keyword">mixin</span> saw-tooth-vertical(<span class="variable">$width</span>: 12px, <span class="variable">$bg</span>: <span class="number">#fff</span>) &#123;</span><br><span class="line">  <span class="attribute">background-image</span>:</span><br><span class="line">    /* Top jagged */</span><br><span class="line">    linear-gradient(<span class="number">135deg</span>, <span class="variable">$bg</span> <span class="number">50%</span>, transparent <span class="number">50%</span>),</span><br><span class="line">    linear-gradient(<span class="number">225deg</span>, <span class="variable">$bg</span> <span class="number">50%</span>, transparent <span class="number">50%</span>),</span><br><span class="line">    /* Bottom jagged */</span><br><span class="line">    linear-gradient(<span class="number">45deg</span>, <span class="variable">$bg</span> <span class="number">50%</span>, transparent <span class="number">50%</span>),</span><br><span class="line">    linear-gradient(-<span class="number">45deg</span>, <span class="variable">$bg</span> <span class="number">50%</span>, transparent <span class="number">50%</span>);</span><br><span class="line">  <span class="attribute">background-position</span>:</span><br><span class="line">    /* Top jagged */</span><br><span class="line">    top left, top left,</span><br><span class="line">    /* Bottom jagged */</span><br><span class="line">    bottom left, bottom left;</span><br><span class="line">  <span class="attribute">background-size</span>: <span class="variable">$width</span> <span class="variable">$width</span>;</span><br><span class="line">  <span class="attribute">background-repeat</span>: repeat-x;</span><br><span class="line">&#125;</span><br><span class="line">@<span class="keyword">mixin</span> saw-tooth-horizontal(<span class="variable">$width</span>: 12px, <span class="variable">$bg</span>: <span class="number">#fff</span>) &#123;</span><br><span class="line">  <span class="attribute">background-image</span>:</span><br><span class="line">    /* Left jagged */</span><br><span class="line">    linear-gradient(<span class="number">135deg</span>, <span class="variable">$bg</span> <span class="number">50%</span>, transparent <span class="number">50%</span>),</span><br><span class="line">    linear-gradient(<span class="number">45deg</span>, <span class="variable">$bg</span> <span class="number">50%</span>, transparent <span class="number">50%</span>),</span><br><span class="line">    /* Right jagged */</span><br><span class="line">    linear-gradient(-<span class="number">135deg</span>, <span class="variable">$bg</span> <span class="number">50%</span>, transparent <span class="number">50%</span>),</span><br><span class="line">    linear-gradient(-<span class="number">45deg</span>, <span class="variable">$bg</span> <span class="number">50%</span>, transparent <span class="number">50%</span>);</span><br><span class="line">  <span class="attribute">background-position</span>:</span><br><span class="line">    /* Left jagged */</span><br><span class="line">    top left, top left,</span><br><span class="line">    /* Right jagged */</span><br><span class="line">    top right, top right;</span><br><span class="line">  <span class="attribute">background-size</span>: <span class="variable">$width</span> <span class="variable">$width</span>;</span><br><span class="line">  <span class="attribute">background-repeat</span>: repeat-y;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.banner-vertical</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: yellowgreen;</span><br><span class="line">  @<span class="keyword">include</span> saw-tooth-vertical();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.banner-horizontal</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: crimson;</span><br><span class="line">  @<span class="keyword">include</span> saw-tooth-horizontal();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@<span class="keyword">mixin</span> saw-tooth(<span class="variable">$width</span>: 12px, <span class="variable">$bg</span>: <span class="number">#fff</span>) &#123;</span><br><span class="line">  <span class="attribute">background-image</span>:</span><br><span class="line">    /* Top jagged */</span><br><span class="line">    linear-gradient(<span class="number">135deg</span>, <span class="variable">$bg</span> <span class="number">50%</span>, transparent <span class="number">50%</span>),</span><br><span class="line">    linear-gradient(<span class="number">225deg</span>, <span class="variable">$bg</span> <span class="number">50%</span>, transparent <span class="number">50%</span>),</span><br><span class="line">    /* Bottom jagged */</span><br><span class="line">    linear-gradient(<span class="number">45deg</span>, <span class="variable">$bg</span> <span class="number">50%</span>, transparent <span class="number">50%</span>),</span><br><span class="line">    linear-gradient(-<span class="number">45deg</span>, <span class="variable">$bg</span> <span class="number">50%</span>, transparent <span class="number">50%</span>),</span><br><span class="line">    /* Left jagged */</span><br><span class="line">    linear-gradient(<span class="number">135deg</span>, <span class="variable">$bg</span> <span class="number">50%</span>, transparent <span class="number">50%</span>),</span><br><span class="line">    linear-gradient(<span class="number">45deg</span>, <span class="variable">$bg</span> <span class="number">50%</span>, transparent <span class="number">50%</span>),</span><br><span class="line">    /* Right jagged */</span><br><span class="line">    linear-gradient(-<span class="number">135deg</span>, <span class="variable">$bg</span> <span class="number">50%</span>, transparent <span class="number">50%</span>),</span><br><span class="line">    linear-gradient(-<span class="number">45deg</span>, <span class="variable">$bg</span> <span class="number">50%</span>, transparent <span class="number">50%</span>);</span><br><span class="line">  <span class="attribute">background-position</span>:</span><br><span class="line">    /* Top jagged */</span><br><span class="line">    top left, top left,</span><br><span class="line">    /* Bottom jagged */</span><br><span class="line">    bottom left, bottom left,</span><br><span class="line">    /* Left jagged */</span><br><span class="line">    top left, top left,</span><br><span class="line">    /* Right jagged */</span><br><span class="line">    top right, top right;</span><br><span class="line">  <span class="attribute">background-size</span>: <span class="variable">$width</span> <span class="variable">$width</span>;</span><br><span class="line">  <span class="attribute">background-repeat</span>: repeat-x, repeat-x, repeat-x, repeat-x, repeat-y, repeat-y, repeat-y, repeat-y;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.banner</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: skyblue;</span><br><span class="line">  @<span class="keyword">include</span> saw-tooth();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>具体实例可参考：<a href="https://codepen.io/yangg/pen/mJBWPG" target="_blank" rel="noopener">CSS saw-tooth borders</a></p>
+<h4 id="十八、控制兄弟元素"><a href="#十八、控制兄弟元素" class="headerlink" title="十八、控制兄弟元素"></a>十八、控制兄弟元素</h4><p>使用 <code>:not</code>，控制所有兄弟元素的 hover 状态，而不控制当前：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.sibling-fade</span><span class="selector-pseudo">:hover</span> <span class="selector-tag">span</span><span class="selector-pseudo">:not(</span><span class="selector-pseudo">:hover)</span> &#123;</span><br><span class="line">  <span class="attribute">opacity</span>: <span class="number">0.5</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="十九、系统默认字体设置"><a href="#十九、系统默认字体设置" class="headerlink" title="十九、系统默认字体设置"></a>十九、系统默认字体设置</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.system-font-stack</span> &#123;</span><br><span class="line">  <span class="attribute">font-family</span>: -apple-system, BlinkMacSystemFont, <span class="string">'Segoe UI'</span>, Roboto, Oxygen-Sans, Ubuntu,</span><br><span class="line">    Cantarell, <span class="string">'Helvetica Neue'</span>, Helvetica, Arial, sans-serif;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="二十、总结"><a href="#二十、总结" class="headerlink" title="二十、总结"></a>二十、总结</h4><p>文中主要示例都来参考自<a href="https://atomiks.github.io/30-seconds-of-css/#box-sizing-reset" target="_blank" rel="noopener">30 Seconds of CSS</a>，当然也适当的补充了一些相关知识，总的来说，本文其实更像是一篇 <code>CSS</code> 实用笔记，目的就是对基础知识进行一次简单回顾。</p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/css/">css</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/03/06/tips-of-mini-programs/" data-tooltip="小程序开发 Tips">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/02/09/optimise-for-web-request/" data-tooltip="Web 优化之 Request">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/03/06/outline-of-css/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/03/06/outline-of-css/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/03/06/outline-of-css/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/03/06/tips-of-mini-programs/" data-tooltip="小程序开发 Tips">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/02/09/optimise-for-web-request/" data-tooltip="Web 优化之 Request">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/03/06/outline-of-css/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/03/06/outline-of-css/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/03/06/outline-of-css/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/03/06/outline-of-css/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/03/06/outline-of-css/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/03/06/outline-of-css/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

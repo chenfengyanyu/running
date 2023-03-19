@@ -1,0 +1,525 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>进阶 PM2 - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="PM2 大大简化了 Node 任务操作，除了简单的应用外，我们还可以做一些有趣的事情。本节我们来探讨一下 PM2 的平滑启动以及数据监控。">
+<meta name="keywords" content="pm2,cluster,fork">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="进阶 PM2">
+<meta property="og:url" content="http://jartto.wang/2019/05/24/pm2-cluster/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="PM2 大大简化了 Node 任务操作，除了简单的应用外，我们还可以做一些有趣的事情。本节我们来探讨一下 PM2 的平滑启动以及数据监控。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/pm2/monit.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/pm2/pm2web.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/pm2/api.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/pm2/data.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/pm2/show.png">
+<meta property="og:updated_time" content="2019-07-09T03:15:26.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="进阶 PM2">
+<meta name="twitter:description" content="PM2 大大简化了 Node 任务操作，除了简单的应用外，我们还可以做一些有趣的事情。本节我们来探讨一下 PM2 的平滑启动以及数据监控。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/pm2/monit.png">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/pm2.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/pm2.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            进阶 PM2
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2019-05-24T19:55:22+08:00">
+	  
+		    2019/5月/24 19:55:22
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>PM2 大大简化了 Node 任务操作，除了简单的应用外，我们还可以做一些有趣的事情。本节我们来探讨一下 PM2 的平滑启动以及数据监控。<br><a id="more"></a><br>如果你还不了解 <code>PM2</code>，可以先看看<a href="http://jartto.wang/2016/06/27/first-experience-of-pm2/">PM2 初体验</a>，或者查看<a href="https://www.jianshu.com/p/f640450bd120" target="_blank" rel="noopener">PM2 用法简介</a>。</p>
+<h4 id="一、PM2-两种启动方式"><a href="#一、PM2-两种启动方式" class="headerlink" title="一、PM2 两种启动方式"></a>一、<code>PM2</code> 两种启动方式</h4><p>1.<code>cluster_mode</code>：用 <code>cluster</code> 来做负载均衡，我们不需要做任何代码的改动。<br>2.<code>fork_mode</code>：用 <code>fork</code> 模式启动（默认），这可以允许我们通过改变 <code>exec_interpreter</code> 参数，启动 <code>php</code> 或者 <code>python</code> 服务。      </p>
+<div class="alert success"><p>Node.js 给我们提供了 cluster 模块，它可以生成多个工作线程来共享同一个 TCP 连接。</p>
+</div>
+<h4 id="二、实时扩展集群"><a href="#二、实时扩展集群" class="headerlink" title="二、实时扩展集群"></a>二、实时扩展集群</h4><p>任何时候，如果我们需要增加工作线程的数量，可以通过 <code>pm2 scale &lt;app name&gt; &lt;n&gt;</code> 来对集群进行扩展。参数 <code>&lt;n&gt;</code> 指定工作线程的数量，被用来增加或减少集群数。</p>
+<div class="alert info"><p>补充：可以通过 pm2 scale app +3 的方式来指定要增加多少工作线程。</p>
+</div>
+<p><code>PM2</code> 的 <code>reload &lt;app name&gt;</code> 功能将依次重启所有的工作线程。每一个线程会等待在新的线程创建之后才会被终止掉，因此，当你在产品环境部署新的代码时，<code>Server</code> 会不间断地一直保持运行。</p>
+<h4 id="三、平滑重启"><a href="#三、平滑重启" class="headerlink" title="三、平滑重启"></a>三、平滑重启</h4><p>1.fork 模式<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">   <span class="string">"apps"</span> : [&#123;</span><br><span class="line">     <span class="string">"name"</span>         : <span class="string">"pc"</span>,</span><br><span class="line">     <span class="string">"script"</span>       : <span class="string">"jartto-server.js"</span>,</span><br><span class="line">     <span class="string">"kill_timeout"</span> : <span class="number">3000</span>,</span><br><span class="line">     <span class="string">"instances"</span>: <span class="number">2</span>,</span><br><span class="line">     <span class="string">"log_date_format"</span>: <span class="string">"YY-MM-DD HH:mm:ss Z"</span></span><br><span class="line">  &#125;]</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> httpServer = server.listen(port, error =&gt; &#123;</span><br><span class="line">   <span class="keyword">if</span> (error) &#123;</span><br><span class="line">       <span class="keyword">throw</span> error;</span><br><span class="line">  &#125;</span><br><span class="line">   process.send(<span class="string">'ready'</span>);</span><br><span class="line">&#125;);</span><br><span class="line">process.on(<span class="string">'SIGINT'</span>, () =&gt; &#123;</span><br><span class="line">   httpServer.close(<span class="function"><span class="params">error</span> =&gt;</span> &#123;</span><br><span class="line">       process.exit(error ? <span class="number">1</span> : <span class="number">0</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>2.<code>cluster</code><br>在集群模式下，有一个默认系统可在应用程序接受连接时将每个集群设置为就绪。还有一个超时，默认为 <code>3000</code> 毫秒，我们可以使用 <code>ecosystem</code> 文件中的 <code>listen_timeout</code> 属性进行设置。</p>
+<p>生成 <code>ecosystem.config.js</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 ecosystem</span><br></pre></td></tr></table></figure></p>
+<p>输出日志：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[PM2] Spawning PM2 daemon with pm2_home=/Users/jartto/.pm2</span><br><span class="line">[PM2] PM2 Successfully daemonized</span><br><span class="line">File /Users/jartto/Documents/project/ecosystem.config.js generated</span><br></pre></td></tr></table></figure></p>
+<p>简单示例：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  apps: [&#123;&#125;, &#123;&#125;], <span class="comment">// 存放每一个进程的配置信息</span></span><br><span class="line">  deploy: &#123;&#125; <span class="comment">// 包含部署配置的对象</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>之后，就可以通过 <code>startOrRestart</code> 来启动了：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">"scripts": &#123;</span><br><span class="line">    "start": "cross-env PATH_TYPE=test pm2 startOrRestart ecosystem.config.js --only jartto-test --env test",</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>关于 <code>apps</code> 和 <code>deploy</code> 下面我们来细致聊一聊。</p>
+<h4 id="四、apps-部分"><a href="#四、apps-部分" class="headerlink" title="四、apps 部分"></a>四、<code>apps</code> 部分</h4><p>上面 <code>ecosystem.config.js</code> 会生成一个简单的模版，为了更好的掌握，我们来看看更全的一些配置：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    apps : [&#123;</span><br><span class="line">        name: <span class="string">'Jartto-test'</span>, <span class="comment">// 进程名称</span></span><br><span class="line">        script: <span class="string">'./node_modules/nuxt-start/bin/nuxt-start.js'</span>, <span class="comment">// 启动脚本地址</span></span><br><span class="line">        args: <span class="string">'-p 8888 -H 0.0.0.0'</span>, <span class="comment">// 启动的配置</span></span><br><span class="line">        cwd: </span><br><span class="line">        instances: <span class="number">4</span>,</span><br><span class="line">        autorestart: <span class="literal">true</span>,</span><br><span class="line">        watch: <span class="literal">false</span>,</span><br><span class="line">        max_restarts: <span class="number">5</span>,</span><br><span class="line">        max_memory_restart: <span class="string">'1G'</span>,</span><br><span class="line">        env: &#123;</span><br><span class="line">            NODE_ENV: <span class="string">'development'</span></span><br><span class="line">        &#125;,</span><br><span class="line">        env_production: &#123;</span><br><span class="line">            NODE_ENV: <span class="string">'production'</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;],</span><br><span class="line">    deploy : &#123;</span><br><span class="line">        production : &#123;</span><br><span class="line">            user : <span class="string">'node'</span>,</span><br><span class="line">            host : <span class="string">'212.83.163.1'</span>,</span><br><span class="line">            ref : <span class="string">'origin/master'</span>,</span><br><span class="line">            repo : <span class="string">'git@github.com:repo.git'</span>,</span><br><span class="line">            path : <span class="string">'/var/www/production'</span>,</span><br><span class="line">            post-deploy : <span class="string">'npm install &amp;&amp; pm2 reload ecosystem.config.js --env production'</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>参数意义：</p>
+<ul>
+<li>apps：json 结构，apps 是一个数组，每一个数组成员就是对应一个pm2中运行的应用</li>
+<li>name：应用程序的名称</li>
+<li>cwd：应用程序所在的目录</li>
+<li>script：应用程序的脚本路径</li>
+<li>exec_interpreter：应用程序的脚本类型，这里使用的 shell，默认是 nodejs</li>
+<li>min_uptime：最小运行时间，这里设置的是 60s 即如果应用程序在 60s 内退出，pm2 会认为程序异常退出，此时触发重启 max_restarts 设置数量</li>
+<li>max_restarts：设置应用程序异常退出重启的次数，默认 15 次（从0开始计数）</li>
+<li>exec_mode：应用程序启动模式，这里设置的是 cluster_mode（集群），默认是 fork</li>
+<li>error_file：自定义应用程序的错误日志文件</li>
+<li>out_file：自定义应用程序日志文件</li>
+<li>pid_file：自定义应用程序的 pid 文件</li>
+<li>watch：是否启用监控模式，默认是 false。如果设置成 true，当应用程序变动时，pm2 会自动重载。这里也可以设置你要监控的文件。</li>
+</ul>
+<h4 id="五、deploy-部分"><a href="#五、deploy-部分" class="headerlink" title="五、deploy 部分"></a>五、<code>deploy</code> 部分</h4><p>1.生成公钥<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa</span><br><span class="line">ssh-copy-id jartto@server.com</span><br></pre></td></tr></table></figure></p>
+<p>补充说明一下：<br><code>ssh-copy-id</code> 命令可以把本地主机的公钥复制到远程主机的 <code>authorized_keys</code> 文件上，实现免密码登陆。</p>
+<p>2.配置 <code>ecosystem</code> 文件<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  apps: [&#123;</span><br><span class="line">    name: <span class="string">"app"</span>,</span><br><span class="line">    script: <span class="string">"app.js"</span></span><br><span class="line">  &#125;],</span><br><span class="line">  deploy: &#123;</span><br><span class="line">    <span class="comment">// "production" is the environment name</span></span><br><span class="line">    production: &#123;</span><br><span class="line">      <span class="comment">// SSH key path, default to $HOME/.ssh</span></span><br><span class="line">      key: <span class="string">"/path/to/some.pem"</span>,</span><br><span class="line">      <span class="comment">// SSH user</span></span><br><span class="line">      user: <span class="string">"Jartto"</span>,</span><br><span class="line">      <span class="comment">// SSH host</span></span><br><span class="line">      host: [<span class="string">"192.168.0.13"</span>],</span><br><span class="line">      <span class="comment">// SSH options with no command-line flag, see 'man ssh'</span></span><br><span class="line">      <span class="comment">// can be either a single string or an array of strings</span></span><br><span class="line">      ssh_options: <span class="string">"StrictHostKeyChecking=no"</span>,</span><br><span class="line">      <span class="comment">// GIT remote/branch</span></span><br><span class="line">      ref: <span class="string">"origin/master"</span>,</span><br><span class="line">      <span class="comment">// GIT remote</span></span><br><span class="line">      repo: <span class="string">"git@github.com:jartto/repository.git"</span>,</span><br><span class="line">      <span class="comment">// path in the server</span></span><br><span class="line">      path: <span class="string">"/var/www/jartto-repository"</span>,</span><br><span class="line">      <span class="comment">// Pre-setup command or path to a script on your local machine</span></span><br><span class="line">      <span class="string">'pre-setup'</span>: <span class="string">"apt-get install git ; ls -la"</span>,</span><br><span class="line">      <span class="comment">// Post-setup commands or path to a script on the host machine</span></span><br><span class="line">      <span class="comment">// eg: placing configurations in the shared dir etc</span></span><br><span class="line">      <span class="string">'post-setup'</span>: <span class="string">"ls -la"</span>,</span><br><span class="line">      <span class="comment">// pre-deploy action</span></span><br><span class="line">      <span class="string">'pre-deploy-local'</span>: <span class="string">"echo 'This is a local executed command'"</span>,</span><br><span class="line">      <span class="comment">// post-deploy action</span></span><br><span class="line">      <span class="string">'post-deploy'</span>: <span class="string">"npm install"</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>命令很简单，都有注释，这里就不赘述了。</p>
+<p>3.是时候启动了<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Setup deployment at remote location</span></span><br><span class="line">pm2 deploy production setup</span><br><span class="line"></span><br><span class="line"><span class="comment"># Update remote version</span></span><br><span class="line">pm2 deploy production update</span><br><span class="line"></span><br><span class="line"><span class="comment"># Revert to -1 deployment</span></span><br><span class="line">pm2 deploy production revert 1</span><br><span class="line"></span><br><span class="line"><span class="comment"># execute a command on remote servers</span></span><br><span class="line">pm2 deploy production <span class="built_in">exec</span> <span class="string">"pm2 reload all"</span></span><br></pre></td></tr></table></figure></p>
+<p>更多配置项：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">pm2 deploy &lt;configuration_file&gt; &lt;environment&gt; &lt;command&gt;</span><br><span class="line">  Commands:</span><br><span class="line">    setup                run remote setup commands</span><br><span class="line">    update               update deploy to the latest release</span><br><span class="line">    revert [n]           revert to [n]th last deployment or 1</span><br><span class="line">    curr[ent]            output current release commit</span><br><span class="line">    prev[ious]           output previous release commit</span><br><span class="line">    exec|run &lt;cmd&gt;       execute the given &lt;cmd&gt;</span><br><span class="line">    list                 list previous deploy commits</span><br><span class="line">    [ref]                deploy to [ref], the &quot;ref&quot; setting, or latest tag</span><br></pre></td></tr></table></figure></p>
+<p>了解更多，请参考<a href="https://pm2.io/doc/en/runtime/guide/easy-deploy-with-ssh/#force-deployment" target="_blank" rel="noopener">官方文档</a>。</p>
+<h4 id="六、环境变量"><a href="#六、环境变量" class="headerlink" title="六、环境变量"></a>六、环境变量</h4><p><code>pm2</code> 通过在配置文件中通过 <code>env_xx</code> 来声明不同环境的配置，然后在启动应用时，通过 <code>--env</code> 参数指定运行的环境。一个简单的示例可能如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&quot;env&quot;: &#123;</span><br><span class="line">    &quot;NODE_ENV&quot;: &quot;production&quot;,</span><br><span class="line">    &quot;REMOTE_ADDR&quot;: &quot;http://www.jartto.wang/&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;env_dev&quot;: &#123;</span><br><span class="line">    &quot;NODE_ENV&quot;: &quot;development&quot;,</span><br><span class="line">    &quot;REMOTE_ADDR&quot;: &quot;http://dev.jartto.wang/&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;env_test&quot;: &#123;</span><br><span class="line">    &quot;NODE_ENV&quot;: &quot;test&quot;,</span><br><span class="line">    &quot;REMOTE_ADDR&quot;: &quot;http://test.jartto.wang/&quot;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="七、负载均衡"><a href="#七、负载均衡" class="headerlink" title="七、负载均衡"></a>七、负载均衡</h4><p><code>PM2</code> 提供了强大的负载能力，我们可以通过如下命令来开启：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pm2 start app.js -i 3 # 开启三个进程</span><br><span class="line">pm2 start app.js -i max # 根据机器CPU核数，开启对应数目的进程</span><br></pre></td></tr></table></figure></p>
+<h4 id="八、数据监控"><a href="#八、数据监控" class="headerlink" title="八、数据监控"></a>八、数据监控</h4><p><code>PM2</code> 提供了一个数据监控命令：<code>pm2 monit</code>，执行命令后，大概界面如下：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/pm2/monit.png" alt="monit"></p>
+<p>看起来不错，可惜并不实用。大家可能发现了，在实际场景下，我们线上环境会有 <code>N</code> 台服务器，你会一台台上去看监控数据吗？</p>
+<div class="alert info"><p>显然，我们碰到了另一种场景，那么如何才能统一监控呢？</p>
+</div>
+<p>不要着急，<code>PM2</code> 为我们提供了另外一种方式，通过在 <code>Server</code> 端运行命令：<code>pm2 web</code>，我们可以在该机器启动一个监听服务：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/pm2/pm2web.png" alt="web"></p>
+<p>之后，你可以通过 <code>主机 IP:9615</code> 来获取数据，如下图：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/pm2/api.png" alt="api"></p>
+<div class="alert info"><p>获取数据可以通过客户端轮询，或者是服务端 Socket 推送，It’s up to you!</p>
+</div>
+<p>最后，我们来看看数据格式：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/pm2/data.png" alt="data"></p>
+<p>有了数据，那么可视化岂不是小菜一碟，我们就可以在本地实时监控如下数据：<br>1.服务器内存情况；<br>2.<code>CPU</code> 使用情况；<br>3.各个站点服务情况，是否正常运转，是否报错，是否频繁重启等；<br>4.服务器平均负载；<br>…</p>
+<h4 id="九、重置状态"><a href="#九、重置状态" class="headerlink" title="九、重置状态"></a>九、重置状态</h4><p>既然通过 <code>PM2</code> 来监控数据了，那么我们肯定希望每次的数据是准确的，所以这时候就可以使用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 reset jartto-test</span><br></pre></td></tr></table></figure></p>
+<p>来重置服务状态。</p>
+<h4 id="十、最终效果"><a href="#十、最终效果" class="headerlink" title="十、最终效果"></a>十、最终效果</h4><p>有了数据，可视化就非常容易了，我们来看一个简单的示例：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/pm2/show.png" alt="show"></p>
+<p>当然，你可以做的更好，快发挥你创造性，做一些有趣的事情吧！</p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/cluster/">cluster</a> <a class="tag tag--primary tag--small t-link" href="/tags/fork/">fork</a> <a class="tag tag--primary tag--small t-link" href="/tags/pm2/">pm2</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/06/11/post-message/" data-tooltip="HTML5 之跨域通讯（postMessage）">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/04/23/update-nuxt2-0/" data-tooltip="Nuxtjs 2.0 升级爬坑">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2019/05/24/pm2-cluster/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2019/05/24/pm2-cluster/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2019/05/24/pm2-cluster/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/06/11/post-message/" data-tooltip="HTML5 之跨域通讯（postMessage）">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/04/23/update-nuxt2-0/" data-tooltip="Nuxtjs 2.0 升级爬坑">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2019/05/24/pm2-cluster/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2019/05/24/pm2-cluster/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2019/05/24/pm2-cluster/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2019/05/24/pm2-cluster/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2019/05/24/pm2-cluster/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2019/05/24/pm2-cluster/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

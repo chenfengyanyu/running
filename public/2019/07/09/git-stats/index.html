@@ -1,0 +1,504 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>Git 代码统计 - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="当我们维护一个开源项目的时候，你肯定想知道哪些人比较活跃，哪些人贡献比较多。这时候就需要一个简单易用的工具，下面我来介绍几款。">
+<meta name="keywords" content="git,stats,git_stats">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Git 代码统计">
+<meta property="og:url" content="http://jartto.wang/2019/07/09/git-stats/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="当我们维护一个开源项目的时候，你肯定想知道哪些人比较活跃，哪些人贡献比较多。这时候就需要一个简单易用的工具，下面我来介绍几款。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/git/code.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/git/gitstats.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/git/activity.png">
+<meta property="og:updated_time" content="2019-07-09T08:34:23.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Git 代码统计">
+<meta name="twitter:description" content="当我们维护一个开源项目的时候，你肯定想知道哪些人比较活跃，哪些人贡献比较多。这时候就需要一个简单易用的工具，下面我来介绍几款。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/git/code.png">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/gitnest0.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/gitnest0.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            Git 代码统计
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2019-07-09T15:09:34+08:00">
+	  
+		    2019/7月/09 15:09:34
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>当我们维护一个开源项目的时候，你肯定想知道哪些人比较活跃，哪些人贡献比较多。这时候就需要一个简单易用的工具，下面我来介绍几款。<br><a id="more"></a></p>
+<h4 id="一、场景"><a href="#一、场景" class="headerlink" title="一、场景"></a>一、场景</h4><p>目前大部分的项目可能都会用到 <code>Git</code> 来做代码管理，那么我们在不断的修改项目的过程中，可能会关注如下几个问题：</p>
+<p>1.每个参与者贡献代码量，按劳分配某些资源🙈；<br>2.参与者的代码增删量，提交次数等；<br>3.统计活跃度；</p>
+<div class="alert info"><p>那么，如何来对代码量做统计呢？</p>
+</div>
+<h4 id="二、常规操作"><a href="#二、常规操作" class="headerlink" title="二、常规操作"></a>二、常规操作</h4><p>一般情况，我们可以直接通过 <code>Git log</code> 来统计，如：</p>
+<p>1.统计个人代码量：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log --author=&quot;jartto&quot; --pretty=tformat: --numstat | awk &apos;&#123; add += $1; subs += $2; loc += $1 - $2 &#125; END &#123; printf &quot;added lines: %s, removed lines: %s, total lines: %s\n&quot;, add, subs, loc &#125;&apos; -</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/git/code.png" alt="code"></p>
+<p>2.贡献值统计：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log --pretty=&apos;%aN&apos; | sort -u | wc -l</span><br></pre></td></tr></table></figure></p>
+<p>3.查看排名前 5 的贡献者：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log --pretty=&apos;%aN&apos; | sort | uniq -c | sort -k1 -n -r | head -n 5</span><br></pre></td></tr></table></figure></p>
+<div class="alert success"><p>更多 <code>log</code> 操作可以请移步：<a href="https://segmentfault.com/a/1190000008542123" target="_blank" rel="noopener">Git 代码统计</a>。</p>
+</div>
+<p>这时候，你可能在想：有没有省时省力的方式呢，顺便帮我生成报告。答案是肯定的，是时候请出我们的 <code>git_stats</code> 了。</p>
+<h4 id="三、使用-git-stats"><a href="#三、使用-git-stats" class="headerlink" title="三、使用 git_stats"></a>三、使用 git_stats</h4><p>1.首先，我们需要全局安装 <code>git_stats</code><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gem install git_stats</span><br></pre></td></tr></table></figure></p>
+<p>2.接下来，运行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git_stats generate</span><br></pre></td></tr></table></figure></p>
+<p>3.打开 <code>git_stats</code> 目录<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> git_stats &amp;&amp; open index.html</span><br></pre></td></tr></table></figure></p>
+<h4 id="四、演示"><a href="#四、演示" class="headerlink" title="四、演示"></a>四、演示</h4><p>1.概览<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/git/gitstats.png" alt="generate"></p>
+<p>2.<code>Dashboard</code> 可视化<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/git/activity.png" alt="activity"></p>
+<p>如果你对 <code>git_stats</code> 生成的一大堆文件不满意，我们还有一种方式可以「无侵入」，同时显得更加「高冷」。</p>
+<h4 id="五、补充：cloc"><a href="#五、补充：cloc" class="headerlink" title="五、补充：cloc"></a>五、补充：<code>cloc</code></h4><div class="alert info"><p>cloc 最优秀的地方就是「简洁粗暴」，我们来尝试一下。</p>
+</div>
+<p>1.尝试一下 <code>cloc</code>，首先，全局安装：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g cloc</span><br></pre></td></tr></table></figure></p>
+<p>2.简单用例<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">cloc [options] &lt;file(s)/dir(s)/git <span class="built_in">hash</span>(es)&gt;</span><br><span class="line">    Count physical lines of <span class="built_in">source</span> code and comments <span class="keyword">in</span> the given files</span><br><span class="line">    (may be archives such as compressed tarballs or zip files) and/or</span><br><span class="line">    recursively below the given directories or git commit hashes.</span><br><span class="line">    Example:    cloc src/ include/ main.c</span><br><span class="line"></span><br><span class="line">cloc [options] --diff &lt;set1&gt;  &lt;set2&gt;</span><br><span class="line">    Compute differences of physical lines of <span class="built_in">source</span> code and comments</span><br><span class="line">    between any pairwise combination of directory names, archive</span><br><span class="line">    files or git commit hashes.</span><br><span class="line">    Example:    cloc --diff Python-3.5.tar.xz python-3.6/</span><br></pre></td></tr></table></figure></p>
+<p>3.使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Usage: cloc [options] &lt;file(s)/dir(s)/git hash(es)&gt; | &lt;set 1&gt; &lt;set 2&gt; | &lt;report files&gt;</span><br></pre></td></tr></table></figure></p>
+<p>进入项目，执行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cloc .</span><br></pre></td></tr></table></figure></p>
+<p>稍等片刻，就会有一个输出结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">-----------------------------------------------------------------------------------</span><br><span class="line">Language                         files          blank        comment           code</span><br><span class="line">-----------------------------------------------------------------------------------</span><br><span class="line">JavaScript                       10319         172724         254924         951843</span><br><span class="line">HTML                               679         120179           3665         224595</span><br><span class="line">JSON                              1714            256              0         182127</span><br><span class="line">Markdown                          1400          63461              2         171768</span><br><span class="line">C++                                 69           3538           3197          20331</span><br><span class="line">Python                              51           4292           7801          19137</span><br><span class="line">C/C++ Header                       117           3628           2033          18942</span><br><span class="line">CSS                                113           2011            823          16594</span><br><span class="line">XML                                 32           4427           1300          11277</span><br><span class="line">Sass                                65            282            414           4255</span><br><span class="line">Stylus                              60            539            593           3215</span><br><span class="line">YAML                               189            324            413           3039</span><br><span class="line">D                                   57              0              0           3003</span><br><span class="line">EJS                                113             43              8           2160</span><br><span class="line">reStructuredText                    18            681             51           2122</span><br><span class="line">Bourne Shell                        20            394            398           1875</span><br><span class="line">SVG                                  5              0              1           1646</span><br><span class="line">LESS                                13             26             33           1343</span><br><span class="line">make                                42            378            245           1310</span><br><span class="line">TypeScript                          17            276            584           1161</span><br><span class="line">Perl                                 1             87            170            582</span><br><span class="line">DTD                                  1            179            177            514</span><br><span class="line">m4                                   2             40              2            266</span><br><span class="line">Lisp                                 3             42             38            264</span><br><span class="line">Bourne Again Shell                   8             43             24            161</span><br><span class="line">C                                    4             40             37            149</span><br><span class="line">Ruby                                 6             24              5            140</span><br><span class="line">JSON5                                2              0              0            123</span><br><span class="line">CoffeeScript                         3             18             28             99</span><br><span class="line">Handlebars                           4             18              0             96</span><br><span class="line">Smarty                               6             17             30             91</span><br><span class="line">Windows Resource File                1              1              1             33</span><br><span class="line">DOS Batch                            5              2              0             16</span><br><span class="line">IDL                                  1              1              0             11</span><br><span class="line">zsh                                  1              4             13              7</span><br><span class="line">-----------------------------------------------------------------------------------</span><br></pre></td></tr></table></figure></p>
+<p>4.更多的使用命令，可以查看帮助<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cloc --help</span><br></pre></td></tr></table></figure></p>
+<h4 id="六、总结"><a href="#六、总结" class="headerlink" title="六、总结"></a>六、总结</h4><p>上文介绍了三种 <code>Git</code> 代码统计方式：</p>
+<p>1.通过 <code>Git log</code> 统计，稍微会麻烦一些，需要有一些 <code>awk</code> 知识的储备；<br>2.使用插件 <code>git_stats</code> 来生成可视化报告，对用户友好。美中不足就是会在当前项目增加很多 <code>html</code> 统计可视化文件；<br>3.命令行工具 <code>cloc</code>，简单易用，无侵入，使用门槛低；</p>
+<div class="alert success"><p>综上所述，我们可以按照自己的使用场景来灵活的选用不同方式。</p>
+</div>
+<h4 id="七、参考文档"><a href="#七、参考文档" class="headerlink" title="七、参考文档"></a>七、参考文档</h4><ul>
+<li><a href="https://segmentfault.com/a/1190000008542123" target="_blank" rel="noopener">Git 代码统计</a></li>
+<li><a href="https://www.zhihu.com/question/22004842/answer/177254508" target="_blank" rel="noopener">有哪些比较好用的代码量统计工具？</a></li>
+</ul>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/git/">git</a> <a class="tag tag--primary tag--small t-link" href="/tags/git-stats/">git_stats</a> <a class="tag tag--primary tag--small t-link" href="/tags/stats/">stats</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/07/13/use-electron-5/" data-tooltip="使用 Electron5.0 构建你的 React 项目">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/06/11/post-message/" data-tooltip="HTML5 之跨域通讯（postMessage）">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2019/07/09/git-stats/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2019/07/09/git-stats/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2019/07/09/git-stats/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/07/13/use-electron-5/" data-tooltip="使用 Electron5.0 构建你的 React 项目">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/06/11/post-message/" data-tooltip="HTML5 之跨域通讯（postMessage）">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2019/07/09/git-stats/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2019/07/09/git-stats/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2019/07/09/git-stats/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2019/07/09/git-stats/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2019/07/09/git-stats/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2019/07/09/git-stats/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

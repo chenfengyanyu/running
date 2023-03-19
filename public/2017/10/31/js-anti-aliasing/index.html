@@ -1,0 +1,526 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>JS 反混淆 - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="在使用某插件的过程中，大量个性化需求不能满足，于是我有了更改源码的冲动。翻遍所有角落，只找了一份压缩混淆的 js 文件，能否反混淆，这是本节讨论的重点。">
+<meta name="keywords" content="js,反混淆">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="JS 反混淆">
+<meta property="og:url" content="http://jartto.wang/2017/10/31/js-anti-aliasing/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="在使用某插件的过程中，大量个性化需求不能满足，于是我有了更改源码的冲动。翻遍所有角落，只找了一份压缩混淆的 js 文件，能否反混淆，这是本节讨论的重点。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/aliasing1.png-blog">
+<meta property="og:updated_time" content="2017-11-20T11:09:42.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS 反混淆">
+<meta name="twitter:description" content="在使用某插件的过程中，大量个性化需求不能满足，于是我有了更改源码的冲动。翻遍所有角落，只找了一份压缩混淆的 js 文件，能否反混淆，这是本节讨论的重点。">
+<meta name="twitter:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/aliasing1.png-blog">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/aliasing0.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="http://7xvi3w.com1.z0.glb.clouddn.com/aliasing0.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            JS 反混淆
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2017-10-31T06:29:59+08:00">
+	  
+		    2017/10月/31 06:29:59
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>在使用某插件的过程中，大量个性化需求不能满足，于是我有了更改源码的冲动。翻遍所有角落，只找了一份压缩混淆的 js 文件，能否反混淆，这是本节讨论的重点。<br><a id="more"></a></p>
+<h4 id="一、场景复现"><a href="#一、场景复现" class="headerlink" title="一、场景复现"></a>一、场景复现</h4><p>先来说说几种我们迫切需要知道源码的情况：<br>1.阅读源码，当然，大部分开源的代码都是可以直接查看的；<br>2.对某插件做个性化的需求更改，这时候你渴望看到未混淆压缩的代码；<br>3.为了增加代码分析的难度，混淆（obfuscate）工具被应用到了许多恶意软件（如 0day 挂马、跨站攻击等）当中。分析人员为了掀开恶意软件的面纱，首先就得对脚本进行反混淆（deobfuscate）处理。<br>4.当你准备抄袭别人代码时，这个稍微有点不可描述🙈；</p>
+<p>本文，我们假设是在前两种场景的条件下，来探索一下 js 反混淆问题。</p>
+<h4 id="二、寻求方案"><a href="#二、寻求方案" class="headerlink" title="二、寻求方案"></a>二、寻求方案</h4><p>为了快速的解决问题，我们首先尝试一下现有方案：<br>1.<a href="http://jsnice.org/" target="_blank" rel="noopener">jsnice</a><br><img src="http://7xvi3w.com1.z0.glb.clouddn.com/aliasing1.png-blog" alt="aliasing1"><br>一个简单的示例：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">chunkData</span>(<span class="params">e, t</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> n = [];</span><br><span class="line">  <span class="keyword">var</span> r = e.length;</span><br><span class="line">  <span class="keyword">var</span> i = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (; i &lt; r; i += t) &#123;</span><br><span class="line">    <span class="keyword">if</span> (i + t &lt; r) &#123;</span><br><span class="line">      n.push(e.substring(i, i + t));</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      n.push(e.substring(i, r));</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> n;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>解析后：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;string&#125; str</span></span><br><span class="line"><span class="comment"> * @param &#123;number&#125; step</span></span><br><span class="line"><span class="comment"> * @return &#123;?&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">chunkData</span>(<span class="params">str, step</span>) </span>&#123;</span><br><span class="line">  <span class="comment">/** @type &#123;Array&#125; */</span></span><br><span class="line">  <span class="keyword">var</span> colNames = [];</span><br><span class="line">  <span class="keyword">var</span> len = str.length;</span><br><span class="line">  <span class="comment">/** @type &#123;number&#125; */</span></span><br><span class="line">  <span class="keyword">var</span> i = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (;i &lt; len;i += step) &#123;</span><br><span class="line">    <span class="keyword">if</span> (i + step &lt; len) &#123;</span><br><span class="line">      colNames.push(str.substring(i, i + step));</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      colNames.push(str.substring(i, len));</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> colNames;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>是不是反混淆之后，可读性强了很多。</p>
+<p>2.<a href="http://tool.chinaz.com/tools/jscodeconfusion.aspx" target="_blank" rel="noopener">js 代码混淆站长工具</a><br>我们先从 Lodash 找一段演示代码，如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">arrayReduce</span>(<span class="params">array, iteratee, accumulator, initAccum</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> index = <span class="number">-1</span>,</span><br><span class="line">      length = array == <span class="literal">null</span> ? <span class="number">0</span> : array.length;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (initAccum &amp;&amp; length) &#123;</span><br><span class="line">    accumulator = array[++index];</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">while</span> (++index &lt; length) &#123;</span><br><span class="line">    accumulator = iteratee(accumulator, array[index], index, array);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> accumulator;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>普通混淆后，就变成了这样：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">arrayReduce</span>(<span class="params">RkeVlNGo1, ZPgGaWYOP2, uFMz3, dHyv4</span>) </span>&#123;  <span class="keyword">var</span> tTsFyC5 = <span class="number">-1</span>,      sh6 = RkeVlNGo1 == <span class="literal">null</span> ? <span class="number">0</span> : RkeVlNGo1[<span class="string">"\x6c\x65\x6e\x67\x74\x68"</span>];  <span class="keyword">if</span> (dHyv4 &amp;&amp; sh6) &#123;    uFMz3 = RkeVlNGo1[++tTsFyC5];  &#125;  <span class="keyword">while</span> (++tTsFyC5 &lt; sh6) &#123;    uFMz3 = ZPgGaWYOP2(uFMz3, RkeVlNGo1[tTsFyC5], tTsFyC5, RkeVlNGo1);  &#125;  <span class="keyword">return</span> uFMz3;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>为了测试一下如何反混淆，我们将混淆后代码拷贝到 <a href="http://jsnice.org/" target="_blank" rel="noopener">jsnice</a> ：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;Object&#125; collection</span></span><br><span class="line"><span class="comment"> * @param &#123;?&#125; callback</span></span><br><span class="line"><span class="comment"> * @param &#123;Text&#125; accumulator</span></span><br><span class="line"><span class="comment"> * @param &#123;number&#125; a</span></span><br><span class="line"><span class="comment"> * @return &#123;?&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">arrayReduce</span>(<span class="params">collection, callback, accumulator, a</span>) </span>&#123;</span><br><span class="line">  <span class="comment">/** @type &#123;number&#125; */</span></span><br><span class="line">  <span class="keyword">var</span> index = <span class="number">-1</span>;</span><br><span class="line">  <span class="keyword">var</span> b = collection == <span class="literal">null</span> ? <span class="number">0</span> : collection[<span class="string">"length"</span>];</span><br><span class="line">  <span class="keyword">if</span> (a &amp;&amp; b) &#123;</span><br><span class="line">    accumulator = collection[++index];</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">for</span> (;++index &lt; b;) &#123;</span><br><span class="line">    accumulator = callback(accumulator, collection[index], index, collection);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> accumulator;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>可以看到，普通混淆后，代码还是可以做一些复原。好的，我们加大力度，采用加密压缩方式：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">eval</span>(<span class="function"><span class="keyword">function</span>(<span class="params">p,a,c,k,e,d</span>)</span>&#123;e=<span class="function"><span class="keyword">function</span>(<span class="params">c</span>)</span>&#123;<span class="keyword">return</span>(c&lt;a?<span class="string">""</span>:e(<span class="built_in">parseInt</span>(c/a)))+((c=c%a)&gt;<span class="number">35</span>?<span class="built_in">String</span>.fromCharCode(c+<span class="number">29</span>):c.toString(<span class="number">36</span>))&#125;;<span class="keyword">if</span>(!<span class="string">''</span>.replace(<span class="regexp">/^/</span>,<span class="built_in">String</span>))&#123;<span class="keyword">while</span>(c--)d[e(c)]=k[c]||e(c);k=[<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;<span class="keyword">return</span> d[e]&#125;];e=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="keyword">return</span><span class="string">'\\w+'</span>&#125;;c=<span class="number">1</span>;&#125;;<span class="keyword">while</span>(c--)<span class="keyword">if</span>(k[c])p=p.replace(<span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">'\\b'</span>+e(c)+<span class="string">'\\b'</span>,<span class="string">'g'</span>),k[c]);<span class="keyword">return</span> p;&#125;(<span class="string">'b a(2,7,4,6)&#123;9 3=-1,5=2==8?0:2.5;e(6&amp;&amp;5)&#123;4=2[++3]&#125;d(++3&lt;5)&#123;4=7(4,2[3],3,2)&#125;c 4&#125;'</span>,<span class="number">15</span>,<span class="number">15</span>,<span class="string">'||array|index|accumulator|length|initAccum|iteratee|null|var|arrayReduce|function|return|while|if'</span>.split(<span class="string">'|'</span>),<span class="number">0</span>,&#123;&#125;))</span><br></pre></td></tr></table></figure></p>
+<p>这次代码明显多了，而 jsnice 也反混淆失败了：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">eval</span>(<span class="function"><span class="keyword">function</span>(<span class="params">str, n, name, pair, func, opt_attributes</span>) </span>&#123;</span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * @param &#123;number&#125; i</span></span><br><span class="line"><span class="comment">   * @return &#123;?&#125;</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  func = <span class="function"><span class="keyword">function</span>(<span class="params">i</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span>(i &lt; n ? <span class="string">""</span> : func(<span class="built_in">parseInt</span>(i / n))) + ((i = i % n) &gt; <span class="number">35</span> ? <span class="built_in">String</span>.fromCharCode(i + <span class="number">29</span>) : i.toString(<span class="number">36</span>));</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="string">""</span>.replace(<span class="regexp">/^/</span>, <span class="built_in">String</span>)) &#123;</span><br><span class="line">    <span class="keyword">for</span> (;name--;) &#123;</span><br><span class="line">      opt_attributes[func(name)] = pair[name] || func(name);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/** @type &#123;Array&#125; */</span></span><br><span class="line">    pair = [<span class="function"><span class="keyword">function</span>(<span class="params">timeoutKey</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> opt_attributes[timeoutKey];</span><br><span class="line">    &#125;];</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * @return &#123;?&#125;</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    func = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="string">"\\w+"</span>;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="comment">/** @type &#123;number&#125; */</span></span><br><span class="line">    name = <span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">for</span> (;name--;) &#123;</span><br><span class="line">    <span class="keyword">if</span> (pair[name]) &#123;</span><br><span class="line">      <span class="comment">/** @type &#123;string&#125; */</span></span><br><span class="line">      str = str.replace(<span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"\\b"</span> + func(name) + <span class="string">"\\b"</span>, <span class="string">"g"</span>), pair[name]);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> str;</span><br><span class="line">&#125;(<span class="string">"b a(2,7,4,6)&#123;9 3=-1,5=2==8?0:2.5;e(6&amp;&amp;5)&#123;4=2[++3]&#125;d(++3&lt;5)&#123;4=7(4,2[3],3,2)&#125;c 4&#125;"</span>, <span class="number">15</span>, <span class="number">15</span>, <span class="string">"||array|index|accumulator|length|initAccum|iteratee|null|var|arrayReduce|function|return|while|if"</span>.split(<span class="string">"|"</span>), <span class="number">0</span>, &#123;&#125;));</span><br></pre></td></tr></table></figure></p>
+<p>这段代码，地球人已经没法读懂了，乱七八糟的。那么，问题来了，加密混淆的代码真的没有办法复原吗？</p>
+<h4 id="三、思维突破"><a href="#三、思维突破" class="headerlink" title="三、思维突破"></a>三、思维突破</h4><p>从上面的演示可以看出来，加密之后的混淆，已经完全无法反混淆了。除非我们知道混淆算法，可是混淆方式不计其数，你需要知晓它的混淆方式，并制定出反混淆算法，那估计会累死。</p>
+<div class="alert danger"><p>如果我们这么想的话，那么就陷入了泥潭，甚至无法自救。那么，突破点到底在哪里呢？</p>
+</div>
+<p>众所周知，JavaScript 是解释性语言，它严重依赖游览器。不管 JavaScript 如何混淆，<strong>最终浏览器都会知道最真实的代码</strong>。所以，我们还得以浏览器为突破口。</p>
+<p>首先，同步一下原始代码：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">arrayReduce</span>(<span class="params">array, iteratee, accumulator, initAccum</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> index = <span class="number">-1</span>,</span><br><span class="line">      length = array == <span class="literal">null</span> ? <span class="number">0</span> : array.length;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">typeof</span>(iteratee) ===<span class="string">'function'</span>) <span class="keyword">throw</span> <span class="string">'jartto-test'</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (initAccum &amp;&amp; length) &#123;</span><br><span class="line">    accumulator = array[++index];</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">while</span> (++index &lt; length) &#123;</span><br><span class="line">    accumulator = iteratee(accumulator, array[index], index, array);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> accumulator;</span><br><span class="line">&#125;</span><br><span class="line">arrayReduce();</span><br></pre></td></tr></table></figure></p>
+<p>其次，确定源码中是否包含在 <code>eval</code> 中，参考代码如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">eval</span>(<span class="function"><span class="keyword">function</span>(<span class="params">p,a,c,k,e,d</span>)</span>&#123;e=<span class="function"><span class="keyword">function</span>(<span class="params">c</span>)</span>&#123;<span class="keyword">return</span>(c&lt;a?<span class="string">""</span>:e(<span class="built_in">parseInt</span>(c/a)))+((c=c%a)&gt;<span class="number">35</span>?<span class="built_in">String</span>.fromCharCode(c+<span class="number">29</span>):c.toString(<span class="number">36</span>))&#125;;<span class="keyword">if</span>(!<span class="string">''</span>.replace(<span class="regexp">/^/</span>,<span class="built_in">String</span>))&#123;<span class="keyword">while</span>(c--)d[e(c)]=k[c]||e(c);k=[<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;<span class="keyword">return</span> d[e]&#125;];e=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="keyword">return</span><span class="string">'\\w+'</span>&#125;;c=<span class="number">1</span>;&#125;;<span class="keyword">while</span>(c--)<span class="keyword">if</span>(k[c])p=p.replace(<span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">'\\b'</span>+e(c)+<span class="string">'\\b'</span>,<span class="string">'g'</span>),k[c]);<span class="keyword">return</span> p;&#125;(<span class="string">'9 a(2,6,4,7)&#123;d 3=-1,5=2==e?0:2.5;8(b(6)===\'9\')h\'i-g\';8(7&amp;&amp;5)&#123;4=2[++3]&#125;c(++3&lt;5)&#123;4=6(4,2[3],3,2)&#125;f 4&#125;a();'</span>,<span class="number">19</span>,<span class="number">19</span>,<span class="string">'||array|index|accumulator|length|iteratee|initAccum|if|function|arrayReduce|typeof|while|var|null|return|test|throw|jartto'</span>.split(<span class="string">'|'</span>),<span class="number">0</span>,&#123;&#125;))</span><br></pre></td></tr></table></figure></p>
+<p>然后，查找关键字 <code>throw</code>，如果有，那就成功了一大步；<br>最后，改动源码，让源码抛出异常，让 Eval Code 还原出真实代码；</p>
+<div class="alert info"><p>可以看到，为了演示，我们让源代码具有某些特性，然而实际情况会远远复杂于此；</p>
+</div>
+<p>思维启蒙：<a href="http://www.xyhtml5.com/break-confusion-javascript-code.html" target="_blank" rel="noopener">一招破解混淆后的 JavaScript 代码</a></p>
+<h4 id="四、相关工具介绍"><a href="#四、相关工具介绍" class="headerlink" title="四、相关工具介绍"></a>四、相关工具介绍</h4><p>我们先来看一下，目前常用的混淆工具：</p>
+<ul>
+<li><a href="http://yui.github.io/yuicompressor/" target="_blank" rel="noopener">YUI Compressor</a></li>
+<li><a href="https://developers.google.com/closure/compiler/" target="_blank" rel="noopener">Google Closure Compiler</a></li>
+<li><a href="https://github.com/mishoo/UglifyJS" target="_blank" rel="noopener">UglifyJS</a></li>
+<li><a href="https://jscrambler.com/" target="_blank" rel="noopener">JScrambler</a></li>
+</ul>
+<p>反混淆工具：</p>
+<ul>
+<li><a href="http://jsbeautifier.org/" target="_blank" rel="noopener">jsbeautifier</a></li>
+<li><a href="http://relentless-coding.org/projects/jsdetox/" target="_blank" rel="noopener">JSDetox</a></li>
+</ul>
+<p>了解更多，请参考：<a href="http://www.freebuf.com/articles/web/97945.html" target="_blank" rel="noopener">几种常见的JavaScript混淆和反混淆工具分析实战</a></p>
+<h4 id="五、了解混淆手段"><a href="#五、了解混淆手段" class="headerlink" title="五、了解混淆手段"></a>五、了解混淆手段</h4><p>1.base62 编码，其最明显的特征是生成的代码以 eval(function(p,a,c,k,e,r)) 开头；<br><div class="alert info"><p>看到这里，上述站长工具的加密方式，就不难理解了。</p>
+</div><br>这类混淆的关键思想在于将需要执行的代码进行一次编码，在执行的时候还原出浏览器可执行的合法的脚本，然后执行之。看上去和可执行文件的加壳有那么点类似。Javascript 提供了将字符串当做代码执行（evaluate）的能力，可以通过 Function 构造器、eval、setTimeout、setInterval 将字符串传递给 js 引擎进行解析执行。</p>
+<p>无论代码如何进行变形，其最终都要调用一次 eval 等函数。解密的方法不需要对其算法做任何分析，只需要简单地找到这个最终的调用，改为 console.log 或者其他方式，将程序解码后的结果按照字符串输出即可。</p>
+<p>2.隐写术<br>严格说这不能称之为混淆，只是将 js 代码隐藏到了特定的介质当中。如通过最低有效位（LSB）算法嵌入到图片的 RGB 通道、隐藏在图片 EXIF 元数据、隐藏在 HTML 空白字符等。</p>
+<p>比如这个耸人听闻的议题：《一张图片黑掉你》在图片中嵌入恶意程序，正是使用了最低有效位平面算法。结合 HTML5 的 canvas 或者处理二进制数据的 TypeArray，脚本可以抽取出载体中隐藏的数据（如代码）。</p>
+<p>隐写的方式同样需要解码程序和动态执行，所以破解的方式和前者相同，在浏览器上下文中劫持替换关键函数调用的行为，改为文本输出即可得到载体中隐藏的代码。</p>
+<p>3.复杂表达式<br>代码混淆不一定会调用 eval，也可以通过在代码中填充无效的指令来增加代码复杂度，极大地降低可读性。Javascript 中存在许多称得上丧心病狂的特性，这些特性组合起来，可以把原本简单的字面量（Literal）、成员访问（MemberExpression）、函数调用（CallExpression）等代码片段变得难以阅读。</p>
+<p>举个简单的例子，可能会更好理解：</p>
+<ol>
+<li>访问一个对象的成员有两种方法——点运算符和下标运算符。调用 window 的 eval 方法，既可以写成 window.eval()，也可以 window[‘eval’]；</li>
+<li>为了让代码更变态一些，混淆器选用第二种写法，然后再在字符串字面量上做文章。先把字符串拆成几个部分：’e’ + ‘v’ + ‘al’；</li>
+<li>这样看上去还是很明显，再利用一个数字进制转换的技巧：14..toString(15) + 31..toString(32) + 0xf1.toString(22)；</li>
+<li>一不做二不休，把数字也展开：(0b1110).toString(4&lt;&lt;2) + (‘ ‘.charCodeAt() - 1).toString(Math.log(0x100000000) / Math.log(2)) + 0xf1.toString(11 &lt;&lt; 1)；</li>
+<li>最后的效果：window<a href="&#39;alert(1">(2*7).toString(4&lt;&lt;2) + (‘ ‘.charCodeAt() - 1).toString(Math.log(0x100000000) / Math.log(2)) + 0xf1.toString(11 &lt;&lt; 1)</a>‘)</li>
+</ol>
+<p>在 js 中可以找到许多这样互逆的运算，通过使用随机生成的方式将其组合使用，可以把简单的表达式无限复杂化。</p>
+<p>到这里，我已经晕头转向了。深入了解，请移步<a href="http://blog.knownsec.com/2015/08/use-estools-aid-deobfuscate-javascript/" target="_blank" rel="noopener">使用 estools 辅助反混淆 Javascript</a></p>
+<h4 id="六、写在最后"><a href="#六、写在最后" class="headerlink" title="六、写在最后"></a>六、写在最后</h4><p>JavaScript 作为一个以函数式为核心的多范式动态弱类型脚本语言，因为它的灵活性，导致了源代码在经过一些压缩工具处理后，变得极难还原。</p>
+<p>也有可能，当我们费劲心思还原出来的代码，也许只是与源代码运行流程一致的另一套代码。当然，我们可以继续探索，发掘未知的领域。</p>
+<h4 id="七、了解更多"><a href="#七、了解更多" class="headerlink" title="七、了解更多"></a>七、了解更多</h4><ul>
+<li><a href="https://www.blackglory.me/l1l-document-all-features-detailed-js-confused-with-anti-aliasing-process/" target="_blank" rel="noopener">l1l=document.all 特征 JS 混淆器反混淆流程详解</a></li>
+<li><a href="https://www.blackglory.me/javascript-deobfuscate-general-routines-and-tips-chapter-1/" target="_blank" rel="noopener">反混淆的技巧和套路</a></li>
+<li><a href="https://www.zhihu.com/question/47047191" target="_blank" rel="noopener">前端如何给 JS 加密</a></li>
+</ul>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/js/">js</a> <a class="tag tag--primary tag--small t-link" href="/tags/反混淆/">反混淆</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/11/01/range-slider-for-jquery/" data-tooltip="jQuery 插件 range.slider">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/10/23/html5-drag/" data-tooltip="HTML5 拖放实现">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2017/10/31/js-anti-aliasing/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2017/10/31/js-anti-aliasing/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2017/10/31/js-anti-aliasing/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/11/01/range-slider-for-jquery/" data-tooltip="jQuery 插件 range.slider">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/10/23/html5-drag/" data-tooltip="HTML5 拖放实现">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2017/10/31/js-anti-aliasing/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2017/10/31/js-anti-aliasing/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2017/10/31/js-anti-aliasing/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2017/10/31/js-anti-aliasing/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2017/10/31/js-anti-aliasing/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2017/10/31/js-anti-aliasing/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

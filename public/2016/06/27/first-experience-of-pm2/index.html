@@ -1,0 +1,537 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>PM2初体验 - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="Advanced, production process manager for Node.js">
+<meta name="keywords" content="pm2">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="PM2初体验">
+<meta property="og:url" content="http://jartto.wang/2016/06/27/first-experience-of-pm2/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="Advanced, production process manager for Node.js">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/pm2_1CB6B592-F09D-4596-947D-CC83EDB4C69C.png">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/pm2_A34F2719-404E-4EBB-A25C-3BB0CF91D52B.png">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/pm2_F5685E2B-4411-4B70-95F8-6F20F93694CE.png">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/pm2_F61BF742-15D7-48D8-A366-CFC5B9A0EA4C.png">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/pm2_A37555E8-09C9-4EE8-9719-759A75A6DF4D.png">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/pm2_15778CD6-CB49-45A1-BEBD-87F9EB41DB94.png">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/pm2_99103C3D-DBA7-4E32-8823-FA79DD374052.png">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/pm2_A47D4592-BD8C-472D-B316-FB8E6767AF43.png">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/pm2_C29214F7-4CD0-4880-AE33-DB26FCDC2D1E.png">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/pm2_D6BB0D23-D618-4BB8-B29D-9A830B8E0E51.png">
+<meta property="og:updated_time" content="2016-06-28T05:54:32.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PM2初体验">
+<meta name="twitter:description" content="Advanced, production process manager for Node.js">
+<meta name="twitter:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/pm2_1CB6B592-F09D-4596-947D-CC83EDB4C69C.png">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/pm2_3E086008-0B62-4169-957E-46EE544F070E.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="http://7xvi3w.com1.z0.glb.clouddn.com/pm2_3E086008-0B62-4169-957E-46EE544F070E.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            PM2初体验
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2016-06-27T13:37:27+08:00">
+	  
+		    2016/6月/27 13:37:27
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>Advanced, production process manager for Node.js<br><a id="more"></a></p>
+<h4 id="一、安装"><a href="#一、安装" class="headerlink" title="一、安装"></a>一、安装</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo npm install pm2 -g</span><br></pre></td></tr></table></figure>
+<h4 id="二、启动一个项目"><a href="#二、启动一个项目" class="headerlink" title="二、启动一个项目"></a>二、启动一个项目</h4><p>进入目标文件夹，<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 start fs.js</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://7xvi3w.com1.z0.glb.clouddn.com/pm2_1CB6B592-F09D-4596-947D-CC83EDB4C69C.png" alt="pm2"></p>
+<h4 id="三、尽管去启动你的项目"><a href="#三、尽管去启动你的项目" class="headerlink" title="三、尽管去启动你的项目"></a>三、尽管去启动你的项目</h4><p><img src="http://7xvi3w.com1.z0.glb.clouddn.com/pm2_A34F2719-404E-4EBB-A25C-3BB0CF91D52B.png" alt="pm2"></p>
+<h4 id="四、监测所有的进程"><a href="#四、监测所有的进程" class="headerlink" title="四、监测所有的进程"></a>四、监测所有的进程</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 monit</span><br></pre></td></tr></table></figure>
+<p><img src="http://7xvi3w.com1.z0.glb.clouddn.com/pm2_F5685E2B-4411-4B70-95F8-6F20F93694CE.png" alt="pm2"></p>
+<h4 id="五、列出所有进程"><a href="#五、列出所有进程" class="headerlink" title="五、列出所有进程"></a>五、列出所有进程</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 list</span><br></pre></td></tr></table></figure>
+<p><img src="http://7xvi3w.com1.z0.glb.clouddn.com/pm2_F61BF742-15D7-48D8-A366-CFC5B9A0EA4C.png" alt="pm2"></p>
+<h4 id="六、查看一个具体的进程详细情况"><a href="#六、查看一个具体的进程详细情况" class="headerlink" title="六、查看一个具体的进程详细情况"></a>六、查看一个具体的进程详细情况</h4><p>通过id或者name来查看某一具体进程：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 show &lt;id|name&gt;</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://7xvi3w.com1.z0.glb.clouddn.com/pm2_A37555E8-09C9-4EE8-9719-759A75A6DF4D.png" alt="pm2"></p>
+<h4 id="七、停止进程"><a href="#七、停止进程" class="headerlink" title="七、停止进程"></a>七、停止进程</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 stop &lt;id|name|all|json|stdin&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="http://7xvi3w.com1.z0.glb.clouddn.com/pm2_15778CD6-CB49-45A1-BEBD-87F9EB41DB94.png" alt="pm2"></p>
+<h4 id="八、重启进程"><a href="#八、重启进程" class="headerlink" title="八、重启进程"></a>八、重启进程</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 restart &lt;id|name|all|json|stdin&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="http://7xvi3w.com1.z0.glb.clouddn.com/pm2_99103C3D-DBA7-4E32-8823-FA79DD374052.png" alt="pm2"></p>
+<h4 id="九、删除进程"><a href="#九、删除进程" class="headerlink" title="九、删除进程"></a>九、删除进程</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 delete &lt;name|id|script|all|json|stdin&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="http://7xvi3w.com1.z0.glb.clouddn.com/pm2_A47D4592-BD8C-472D-B316-FB8E6767AF43.png" alt="pm2"></p>
+<h4 id="十、查看日志"><a href="#十、查看日志" class="headerlink" title="十、查看日志"></a>十、查看日志</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 logs</span><br></pre></td></tr></table></figure>
+<p><img src="http://7xvi3w.com1.z0.glb.clouddn.com/pm2_C29214F7-4CD0-4880-AE33-DB26FCDC2D1E.png" alt="pm2"></p>
+<h4 id="十一、自动重启应用watch"><a href="#十一、自动重启应用watch" class="headerlink" title="十一、自动重启应用watch"></a>十一、自动重启应用watch</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 start fs.js --watch</span><br></pre></td></tr></table></figure>
+<p><img src="http://7xvi3w.com1.z0.glb.clouddn.com/pm2_D6BB0D23-D618-4BB8-B29D-9A830B8E0E51.png" alt="pm2"></p>
+<div class="alert info"><p>这里需要注意：pm2 stop 2 将不能停止watch，必须pm2 stop –watch 2</p>
+</div>
+<h4 id="十二、相关资源："><a href="#十二、相关资源：" class="headerlink" title="十二、相关资源："></a>十二、相关资源：</h4><p>1.官网<br><a href="http://pm2.keymetrics.io/" target="_blank" rel="noopener">http://pm2.keymetrics.io/</a><br>2.github地址<br><a href="https://github.com/Unitech/PM2" target="_blank" rel="noopener">https://github.com/Unitech/PM2</a><br>3.nodejs监视系统<br><a href="https://app.keymetrics.io/#/register" target="_blank" rel="noopener">https://app.keymetrics.io/#/register</a><br>4.快速开始<br><a href="https://github.com/Unitech/PM2/blob/master/ADVANCED_README.md#quick-start-1" target="_blank" rel="noopener">https://github.com/Unitech/PM2/blob/master/ADVANCED_README.md#quick-start-1</a></p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/pm2/">pm2</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/06/27/solutions-to-CORS/" data-tooltip="CORS解决方案">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/06/26/talk-about-the-internet/" data-tooltip="大话互联网">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2016/06/27/first-experience-of-pm2/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2016/06/27/first-experience-of-pm2/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2016/06/27/first-experience-of-pm2/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+            
+                <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/06/27/solutions-to-CORS/" data-tooltip="CORS解决方案">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/06/26/talk-about-the-internet/" data-tooltip="大话互联网">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2016/06/27/first-experience-of-pm2/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2016/06/27/first-experience-of-pm2/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2016/06/27/first-experience-of-pm2/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2016/06/27/first-experience-of-pm2/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2016/06/27/first-experience-of-pm2/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2016/06/27/first-experience-of-pm2/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+    
+        <script>
+             var disqus_config = function () {
+                 this.page.url = 'http://jartto.wang/2016/06/27/first-experience-of-pm2/';
+                 
+                    this.page.identifier = '2016/06/27/first-experience-of-pm2/';
+                                  
+             };
+            (function() {
+                var d = document, s = d.createElement('script');
+                var disqus_shortname = 'jartto';
+                s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+
+
+
+</html>

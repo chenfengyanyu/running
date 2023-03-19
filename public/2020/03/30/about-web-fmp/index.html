@@ -1,0 +1,521 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>网站性能指标 - FMP - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="对于前端童鞋来说，优化是一个永恒的话题。上线并不是网站开发的终点，如何吸引用户、提升用户体验，应该成为我们 F2E 的追求目标。">
+<meta name="keywords" content="web,lighthouse,fmp,optimization">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="网站性能指标 - FMP">
+<meta property="og:url" content="http://jartto.wang/2020/03/30/about-web-fmp/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="对于前端童鞋来说，优化是一个永恒的话题。上线并不是网站开发的终点，如何吸引用户、提升用户体验，应该成为我们 F2E 的追求目标。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/fmp/lighthouse.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/fmp/fmp1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/fmp/fmp2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/fmp/fmp.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/fmp/score.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/fmp/layout.png">
+<meta property="og:updated_time" content="2020-03-30T03:13:15.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="网站性能指标 - FMP">
+<meta name="twitter:description" content="对于前端童鞋来说，优化是一个永恒的话题。上线并不是网站开发的终点，如何吸引用户、提升用户体验，应该成为我们 F2E 的追求目标。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/fmp/lighthouse.png">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/fmp/logo.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/fmp/logo.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            网站性能指标 - FMP
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2020-03-30T11:13:15+08:00">
+	  
+		    2020/3月/30 11:13:15
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>对于前端童鞋来说，优化是一个永恒的话题。上线并不是网站开发的终点，如何吸引用户、提升用户体验，应该成为我们 <code>F2E</code> 的追求目标。<br><a id="more"></a><br>如果你对优化还不了解，建议先阅读如下两篇文章：</p>
+<ol>
+<li><a href="http://jartto.wang/2019/02/16/web-optimization/">网站优化实战</a></li>
+<li><a href="http://jartto.wang/2019/09/08/web-optimization-tools/">网站优化，这些工具你一定用得着</a></li>
+</ol>
+<p>当然，衡量网站性能的指标有很多，今天我们就来看一个「令人费解而又头疼」的指标 - <code>FMP</code>。</p>
+<div class="alert success"><p><code>First Meaningful Paint</code> 是指页面的首要内容出现在屏幕上的时间。</p>
+</div>
+<h4 id="一、FMP-之怪现象"><a href="#一、FMP-之怪现象" class="headerlink" title="一、FMP 之怪现象"></a>一、FMP 之怪现象</h4><p>目前尚无标准化的 <code>FMP</code> 定义，因此也没有性能条目类型。 部分原因在于很难以通用的方式确定「有效」对于所有页面意味着什么。但是，一般来说，在单个页面或单个应用中，最好是将 <code>FMP</code> 视为主角元素呈现在屏幕上的时刻。</p>
+<p>所以，我们经常会面临这样的问题：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/fmp/lighthouse.png" alt="Lighthouse 评分"><br><code>FCP</code> 在可接受范围，但是 <code>FMP</code> 却完全失控。</p>
+<p>也可能是这样的问题：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/fmp/fmp1.png" alt="Performance FMP"></p>
+<p>或许还有这样的问题：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/fmp/fmp2.png" alt="Performance FMP"></p>
+<p>为什么结构类似的站点，<code>FMP</code> 加载却千差万别。要了解 <code>FMP</code> 我们需要知道它的计算规则，下面让我们一层层抽丝剥茧。</p>
+<h4 id="二、刨根问底"><a href="#二、刨根问底" class="headerlink" title="二、刨根问底"></a>二、刨根问底</h4><p>究竟是什么导致 <code>FMP</code> 的时机差距如此之大？或许我们可以从 <code>FMP</code> 定义来说起。</p>
+<p><code>When FMP and FCP are the same time in seconds, they share the same identical score. If FMP is slower than FCP, say when there&#39;s iframe content loading, then the FMP score will be lower than the FCP score.</code></p>
+<p>什么意思呢，我们先来看一张官方图片：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/fmp/fmp.png" alt="FMP 评分规则"></p>
+<p>如果 <code>FCP</code> 是 <code>1.5s</code>，<code>FMP</code> 是 <code>3s</code>，那么 <code>FCP</code> 分数将会是 <code>99</code>，但是 <code>FMP</code> 分数将是 <code>75</code>。</p>
+<p>除了上述影响外，我们还需要关注 <code>Lighthouse V3</code> 的记分规则：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/fmp/score.png" alt="记分规则"></p>
+<p>虽然 <code>FMP</code> 权重仅为 <code>1</code> ，很遗憾，因为如上规则的存在，我们站点无法到达满分💯。</p>
+<div class="alert info"><p>确定页面上最关键的主角元素之后，我们应确保初始脚本加载仅包含渲染这些元素并使其可交互所需的代码。</p>
+</div>
+<p>相关源码：<br><a href="https://github.com/GoogleChrome/lighthouse/blob/master/lighthouse-core/audits/metrics/first-meaningful-paint.js" target="_blank" rel="noopener">Lighthouse FMP 源码</a><br><a href="https://medium.com/@aswin_s/score-a-perfect-100-in-lighthouse-audits-part-1-3199163037" target="_blank" rel="noopener">Score a perfect 100 in Lighthouse audits</a></p>
+<h4 id="三、重要结论"><a href="#三、重要结论" class="headerlink" title="三、重要结论"></a>三、重要结论</h4><p>了解了相关计算规则之后，我们继续来剖析 <code>FMP</code>。对于不同的站点，首要内容是不同的，例如：</p>
+<ul>
+<li>对于博客文章：「大标题」 + 「首屏文字」是首要内容；</li>
+<li>对于百度或者 <code>Google</code> 的搜索结果页：「首屏的结果」就是首要内容；</li>
+<li>对于淘宝等购物网站来说，图片会极为重要，因此它是首要内容；</li>
+</ul>
+<div class="alert danger"><p>需要注意的是，通常首要内容是不包括 Headers 和导航条的。</p>
+</div>
+<p>为了方便理解，我们用一个简单的公式表示：「首次有效绘制 = 具有最大布局变化的绘制」。</p>
+<p>很好，此刻我们不用纠结「首次有效渲染」了，转而去了解「最大布局变化的绘制」。基于 <code>Chromium</code> 的实现，这个绘制是使用 <code>LayoutAnalyzer</code> 进行计算的，它会收集所有的布局变化，当布局发生最大变化时得出时间。</p>
+<p>具有最大布局变化的绘制如何计算呢？<br>1.侦听页面元素的变化；<br>2.遍历每次新增的元素，并计算这些元素的得分总；<br>3.如果元素可见，得分为 <code>1 * weight</code>，如果元素不可见，得分为 <code>0</code>；</p>
+<p>还是很抽象，我们继续探索 <code>LayoutAnalyzer</code>，在源码中得到如下公式：<br><div class="alert info"><p>布局显著性 = 添加的对象数目 / max(1, 页面高度 / 屏幕高度)</p>
+</div></p>
+<p>这下清晰了，既然可以算出来，那么优化 <code>FMP</code> 指日可待。从上面可以看出来「布局显著性」是通过添加对象数目与页面高度来计算的。似乎对象数目成了解决问题的关键节点。</p>
+<p>我们继续探索，如何去找到对象数目呢？很简单，打开 <code>Chrome DevTool</code>，切到 <code>Layout</code> 面板。如果你还不会使用 <code>Layout</code> 面板，可以先看看<a href="http://jartto.wang/2019/09/08/web-optimization-tools/">网站优化工具</a>。</p>
+<p>这里就不展开了，直接上图，看看红框部分：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/fmp/layout.png" alt="Layout Objects"></p>
+<p>惊不惊喜，我们精简 <code>DOM</code> 似乎可以将公式中分子变小，或者让页面高度大于屏幕高度。到这里，所有谜团都解开了，优化 <code>FMP</code> 也就变得毫无挑战了。</p>
+<p>相关源码：<br><a href="https://cs.chromium.org/chromium/src/third_party/blink/renderer/core/layout/layout_analyzer.h?type=cs&amp;q=LayoutAnalyzer&amp;sq=package:chromium&amp;g=0&amp;l=76" target="_blank" rel="noopener">LayoutAnalyzer 源码</a><br><a href="https://www.chromium.org/developers/how-tos/trace-event-profiling-tool/trace-event-reading" target="_blank" rel="noopener">Tracing Results</a><br><a href="https://www.chromium.org/developers/how-tos/trace-event-profiling-tool/trace-event-reading" target="_blank" rel="noopener">Understanding about:tracing results</a></p>
+<h4 id="五、总结"><a href="#五、总结" class="headerlink" title="五、总结"></a>五、总结</h4><p>我们从扑簌迷离的 <code>FMP</code> 表象一层层找到了 <code>Lighthouse</code> 的记分规则，又从 <code>Tracing Results</code> 中得知最大布局变化的计算规则，因此转向 <code>LayoutAnalyzer</code> 源码研究，最终找到 <code>Layout Objects</code>，从而解决了问题。虽然波折，但结局令人舒适。</p>
+<p>最后，再啰嗦一下，以下结论对理解 <code>FMP</code> 很重要：</p>
+<ul>
+<li>对于博客文章：「大标题」 + 「首屏文字」是首要内容；</li>
+<li>对于百度或者 <code>Google</code> 的搜索结果页：「首屏的结果」就是首要内容；</li>
+<li>对于淘宝等购物网站来说，图片会极为重要，因此它是首要内容；</li>
+</ul>
+<p>如果你觉得还是过于复杂，不妨去试试 <code>SSR</code> 吧，<code>FMP</code> 将不再是烦恼。</p>
+<p>文章最后，打个小广告吧。如果你想搭上在线教育的快车，快速成长，不妨加入我们。一起成长，一起学习，一起挑战更多有趣的事情，「跟谁学-高途课堂」欢迎你，请将简历私我～</p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/fmp/">fmp</a> <a class="tag tag--primary tag--small t-link" href="/tags/lighthouse/">lighthouse</a> <a class="tag tag--primary tag--small t-link" href="/tags/optimization/">optimization</a> <a class="tag tag--primary tag--small t-link" href="/tags/web/">web</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2020/04/05/about-wrk/" data-tooltip="Web「性能测试」知多少？">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2020/03/29/web-tti/" data-tooltip="聚焦 Web 性能指标 TTI">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2020/03/30/about-web-fmp/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2020/03/30/about-web-fmp/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2020/03/30/about-web-fmp/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2020/04/05/about-wrk/" data-tooltip="Web「性能测试」知多少？">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2020/03/29/web-tti/" data-tooltip="聚焦 Web 性能指标 TTI">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2020/03/30/about-web-fmp/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2020/03/30/about-web-fmp/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2020/03/30/about-web-fmp/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2020/03/30/about-web-fmp/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2020/03/30/about-web-fmp/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2020/03/30/about-web-fmp/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

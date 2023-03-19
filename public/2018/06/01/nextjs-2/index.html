@@ -1,0 +1,524 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>Next.js 使用指南2－路由与加载 - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="书接上文 Next.js 使用指南1-基本规则，这节我们将过渡到一些高级的功能。涉及到的内容包含：路由、高阶组件、预加载、动态路由等等，快来开始吧！">
+<meta name="keywords" content="react,nextjs">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Next.js 使用指南2－路由与加载">
+<meta property="og:url" content="http://jartto.wang/2018/06/01/nextjs-2/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="书接上文 Next.js 使用指南1-基本规则，这节我们将过渡到一些高级的功能。涉及到的内容包含：路由、高阶组件、预加载、动态路由等等，快来开始吧！">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2018-10-31T14:59:23.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Next.js 使用指南2－路由与加载">
+<meta name="twitter:description" content="书接上文 Next.js 使用指南1-基本规则，这节我们将过渡到一些高级的功能。涉及到的内容包含：路由、高阶组件、预加载、动态路由等等，快来开始吧！">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/nextjs.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/nextjs.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            Next.js 使用指南2－路由与加载
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2018-06-01T22:13:01+08:00">
+	  
+		    2018/6月/01 22:13:01
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>书接上文 <a href="http://jartto.wang/2018/05/27/nextjs-1/">Next.js 使用指南1-基本规则</a>，这节我们将过渡到一些高级的功能。涉及到的内容包含：路由、高阶组件、预加载、动态路由等等，快来开始吧！<br><a id="more"></a></p>
+<h4 id="一、路由拦截"><a href="#一、路由拦截" class="headerlink" title="一、路由拦截"></a>一、路由拦截</h4><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Router <span class="keyword">from</span> <span class="string">'next/router'</span></span><br><span class="line"></span><br><span class="line">Router.beforePopState(<span class="function">(<span class="params">&#123; url, <span class="keyword">as</span>, options &#125;</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// I only want to allow these two routes!</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">as</span> !== <span class="string">"/"</span> || <span class="keyword">as</span> !== <span class="string">"/other"</span>) &#123;</span><br><span class="line">    <span class="comment">// Have SSR render bad routes as a 404.</span></span><br><span class="line">    <span class="built_in">window</span>.location.href = <span class="keyword">as</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p><code>Router</code> 有如下的属性和方法，我们可以根据实际情况来使用：</p>
+<ul>
+<li>route - 返回当前路由</li>
+<li>pathname - 返回当前路径包含 query 部分</li>
+<li>query - 返回 query 对象，默认为 {}</li>
+<li>asPath - 浏览器中的实际路径，包含 query 部分</li>
+<li>push(url, as=url) - performs a pushState call with the given url</li>
+<li>replace(url, as=url) - performs a replaceState call with the given url</li>
+<li>beforePopState(cb=function) - intercept popstate before router processes the event.</li>
+</ul>
+<h4 id="二、路由事件"><a href="#二、路由事件" class="headerlink" title="二、路由事件"></a>二、路由事件</h4><p>为了满足更多的业务场景，我们可能需要监听路由事件，这时候，有一些事件是可以用的：</p>
+<ul>
+<li>onRouteChangeStart(url) - Fires when a route starts to change</li>
+<li>onRouteChangeComplete(url) - Fires when a route changed completely</li>
+<li>onRouteChangeError(err, url) - Fires when there’s an error when changing routes</li>
+<li>onBeforeHistoryChange(url) - Fires just before changing the browser’s history</li>
+</ul>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Router.onRouteChangeStart = <span class="function"><span class="params">url</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'App is changing to: '</span>, url)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果不需要监听了，请释放它：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Router.onRouteChangeStart = null</span><br></pre></td></tr></table></figure></p>
+<p>如果路由载入取消，就会触发<code>routeChangeError</code>,参数 <code>err</code> 的属性 <code>cancelled</code> 就被设置成了 <code>true</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Router.onRouteChangeError = (err, url) =&gt; &#123;</span><br><span class="line">  if (err.cancelled) &#123;</span><br><span class="line">    console.log(`Route to $&#123;url&#125; was cancelled!`)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="三、浅路由模式"><a href="#三、浅路由模式" class="headerlink" title="三、浅路由模式"></a>三、浅路由模式</h4><p>所谓浅路由模式，其实就是不再初始化 <code>getInitalProps</code>，但是我们依然可以得到更新的 <code>pathname</code> 和 <code>query</code>。使用方法如下：<br><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Current URL is "/"</span></span><br><span class="line"><span class="keyword">const</span> href = <span class="string">'/?counter=10'</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">as</span> = href</span><br><span class="line">Router.push(href, <span class="keyword">as</span>, &#123; <span class="attr">shallow</span>: <span class="literal">true</span> &#125;)</span><br></pre></td></tr></table></figure></p>
+<p>更多的使用场景，可能类似与分页数据，我们只改变 <code>page</code> ，而不需要整个初始化。当然，我们可以监听：<br><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">componentWillReceiveProps(nextProps) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; pathname, query &#125; = nextProps.url</span><br><span class="line">  <span class="comment">// fetch data based on the new query</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<div class="alert danger"><p>需要注意的是：浅路由模式只支持相同的 URL，如果页面路由变化，还是会触发 getInitialProps。</p>
+</div>
+<h4 id="四、使用高阶组件"><a href="#四、使用高阶组件" class="headerlink" title="四、使用高阶组件"></a>四、使用高阶组件</h4><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; withRouter &#125; <span class="keyword">from</span> <span class="string">'next/router'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> ActiveLink = <span class="function">(<span class="params">&#123; children, router, href &#125;</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> style = &#123;</span><br><span class="line">    marginRight: <span class="number">10</span>,</span><br><span class="line">    color: router.pathname === href? <span class="string">'red'</span> : <span class="string">'black'</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> handleClick = <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">    e.preventDefault()</span><br><span class="line">    router.push(href)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;a href=&#123;href&#125; onClick=&#123;handleClick&#125; style=&#123;style&#125;&gt;</span><br><span class="line">      &#123;children&#125;</span><br><span class="line">    &lt;<span class="regexp">/a&gt;</span></span><br><span class="line"><span class="regexp">  )</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">export default withRouter(ActiveLink)</span></span><br></pre></td></tr></table></figure>
+<div class="alert info"><p>这时候，router 中就会有我们需要的所有参数，使用起来还是蛮方便的。</p>
+</div>
+<h4 id="五、预加载页面"><a href="#五、预加载页面" class="headerlink" title="五、预加载页面"></a>五、预加载页面</h4><p>通过预取 <code>Next.js</code> 只下载 <code>JS</code> 代码，当页面开始渲染，可能需要等待数据。<br><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Link <span class="keyword">from</span> <span class="string">'next/link'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// example header component</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> () =&gt;</span><br><span class="line">  &lt;nav&gt;</span><br><span class="line">    &lt;ul&gt;</span><br><span class="line">      &lt;li&gt;</span><br><span class="line">        &lt;Link prefetch href=<span class="string">"/"</span>&gt;</span><br><span class="line">          &lt;a&gt;Home&lt;<span class="regexp">/a&gt;</span></span><br><span class="line"><span class="regexp">        &lt;/</span>Link&gt;</span><br><span class="line">      &lt;<span class="regexp">/li&gt;</span></span><br><span class="line"><span class="regexp">      &lt;li&gt;</span></span><br><span class="line"><span class="regexp">        &lt;Link prefetch href="/</span>about<span class="string">"&gt;</span></span><br><span class="line"><span class="string">          &lt;a&gt;About&lt;/a&gt;</span></span><br><span class="line"><span class="string">        &lt;/Link&gt;</span></span><br><span class="line"><span class="string">      &lt;/li&gt;</span></span><br><span class="line"><span class="string">      &lt;li&gt;</span></span><br><span class="line"><span class="string">        &lt;Link prefetch href="</span>/contact<span class="string">"&gt;</span></span><br><span class="line"><span class="string">          &lt;a&gt;Contact&lt;/a&gt;</span></span><br><span class="line"><span class="string">        &lt;/Link&gt;</span></span><br><span class="line"><span class="string">      &lt;/li&gt;</span></span><br><span class="line"><span class="string">    &lt;/ul&gt;</span></span><br><span class="line"><span class="string">  &lt;/nav&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>当然，这并不是预加载的妙用，真正的作用请看下面的例子：<br><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Router <span class="keyword">from</span> <span class="string">'next/router'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> (&#123; url &#125;) =&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;a onClick=&#123;() =&gt; setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> url.pushTo(<span class="string">'/dynamic'</span>), <span class="number">100</span>)&#125;&gt;</span><br><span class="line">      A route transition will happen after <span class="number">100</span>ms</span><br><span class="line">    &lt;<span class="regexp">/a&gt;</span></span><br><span class="line"><span class="regexp">    &#123;/</span><span class="regexp">/ but we can prefetch it!</span></span><br><span class="line"><span class="regexp">    Router.prefetch('/</span>dynamic<span class="string">')&#125;</span></span><br><span class="line"><span class="string">  &lt;/div&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>我们即将跳转 <code>dynamic</code>，可以进行预加载。</p>
+<h4 id="六、禁用默认路由"><a href="#六、禁用默认路由" class="headerlink" title="六、禁用默认路由"></a>六、禁用默认路由</h4><p>如果想禁用默认路由，需要添加文件 <code>next.config.js</code> ，并增加配置：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// next.config.js</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  useFileSystemPublicRoutes: <span class="literal">false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="七、动态前缀"><a href="#七、动态前缀" class="headerlink" title="七、动态前缀"></a>七、动态前缀</h4><p>动态修改路径前缀，适合有 <code>CDN</code> 配置的静态资源部署：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> next = <span class="built_in">require</span>(<span class="string">'next'</span>)</span><br><span class="line"><span class="keyword">const</span> micro = <span class="built_in">require</span>(<span class="string">'micro'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> dev = process.env.NODE_ENV !== <span class="string">'production'</span></span><br><span class="line"><span class="keyword">const</span> app = next(&#123; dev &#125;)</span><br><span class="line"><span class="keyword">const</span> handle = app.getRequestHandler()</span><br><span class="line"></span><br><span class="line">app.prepare().then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> server = micro(<span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// Add assetPrefix support based on the hostname</span></span><br><span class="line">    <span class="keyword">if</span> (req.headers.host === <span class="string">'my-app.com'</span>) &#123;</span><br><span class="line">      app.setAssetPrefix(<span class="string">'http://jartto.cdn.com/myapp'</span>)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      app.setAssetPrefix(<span class="string">''</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    handleNextRequests(req, res)</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  server.listen(port, (err) =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span> (err) &#123;</span><br><span class="line">      <span class="keyword">throw</span> err</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`&gt; Ready on http://localhost:<span class="subst">$&#123;port&#125;</span>`</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<h4 id="八、动态引入"><a href="#八、动态引入" class="headerlink" title="八、动态引入"></a>八、动态引入</h4><ul>
+<li><p>简单用法：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> dynamic <span class="keyword">from</span> <span class="string">'next/dynamic'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> DynamicComponent = dynamic(<span class="keyword">import</span>(‘./jartto<span class="string">'))</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">export default () =&gt;</span></span><br><span class="line"><span class="string">&lt;div&gt;</span></span><br><span class="line"><span class="string">&lt;DynamicComponent /&gt;</span></span><br><span class="line"><span class="string">&lt;p&gt;HOME PAGE is here!&lt;/p&gt;</span></span><br><span class="line"><span class="string">&lt;/div&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>增加自定义组件</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> dynamic <span class="keyword">from</span> <span class="string">'next/dynamic'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> DynamicComponentWithCustomLoading = dynamic(</span><br><span class="line">  <span class="keyword">import</span>(<span class="string">'../components/jartto'</span>),</span><br><span class="line">  &#123;</span><br><span class="line">    loading: <span class="function"><span class="params">()</span> =&gt;</span> &lt;p&gt;...&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">)</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">export default () =&gt;</span></span><br><span class="line"><span class="regexp">  &lt;div&gt;</span></span><br><span class="line"><span class="regexp">    &lt;DynamicComponentWithCustomLoading /</span>&gt;</span><br><span class="line">    &lt;p&gt;HOME PAGE is here!<span class="xml"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line">  &lt;<span class="regexp">/div&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>禁止服务端渲染</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> dynamic <span class="keyword">from</span> <span class="string">'next/dynamic'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> DynamicComponentWithNoSSR = dynamic(<span class="keyword">import</span>(<span class="string">'./image'</span>), &#123;</span><br><span class="line">ssr: <span class="literal">false</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> () =&gt;</span><br><span class="line">&lt;div&gt;</span><br><span class="line">&lt;DynamicComponentWithNoSSR /&gt;</span><br><span class="line">&lt;p&gt;Hello Jartto!<span class="xml"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line">&lt;<span class="regexp">/div&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>加载多个模块</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> dynamic <span class="keyword">from</span> <span class="string">'next/dynamic'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> HelloBundle = dynamic(&#123;</span><br><span class="line">  modules: <span class="function"><span class="params">props</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> components = &#123;</span><br><span class="line">      Hello1: <span class="keyword">import</span>(<span class="string">'../components/jartto1'</span>),</span><br><span class="line">      Hello2: <span class="keyword">import</span>(<span class="string">'../components/jartto2'</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Add remove components based on props</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> components</span><br><span class="line">  &#125;,</span><br><span class="line">  render: <span class="function">(<span class="params">props, &#123; Hello1, Hello2 &#125;</span>) =&gt;</span></span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;h1&gt;</span><br><span class="line">        &#123;props.title&#125;</span><br><span class="line">      &lt;<span class="regexp">/h1&gt;</span></span><br><span class="line"><span class="regexp">      &lt;Hello1 /</span>&gt;</span><br><span class="line">      &lt;Hello2 /&gt;</span><br><span class="line">    &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&#125;)</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">export default () =&gt; &lt;HelloBundle title="Dynamic Bundle" /</span>&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="九、自定义"><a href="#九、自定义" class="headerlink" title="九、自定义"></a>九、自定义<app></app></h4><p>在 <code>Next.js</code> 使用 <code>App</code> 组件来初始化页面，当然，我们也可以覆写它，从而控制页面的初始化。具体实例如下：</p>
+<ul>
+<li>在页面变化之间保持布局</li>
+<li>浏览页面时保持状态</li>
+<li>自定义异常处理</li>
+<li>注入附加数据</li>
+</ul>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> App, &#123;Container&#125; <span class="keyword">from</span> <span class="string">'next/app'</span></span><br><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">MyApp</span> <span class="keyword">extends</span> <span class="title">App</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">async</span> getInitialProps (&#123; Component, router, ctx &#125;) &#123;</span><br><span class="line">    <span class="keyword">let</span> pageProps = &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (Component.getInitialProps) &#123;</span><br><span class="line">      pageProps = <span class="keyword">await</span> Component.getInitialProps(ctx)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> &#123;pageProps&#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render () &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123;Component, pageProps&#125; = <span class="keyword">this</span>.props</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">Container</span>&gt;</span></span></span><br><span class="line">      &lt;Component &#123;...pageProps&#125; /&gt;</span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">Container</span>&gt;</span></span></span><br><span class="line"><span class="xml">  &#125;</span></span><br><span class="line"><span class="xml">&#125;</span></span><br></pre></td></tr></table></figure>
+<div class="alert warning"><p>注意，我们需要创建 ./pages/_app.js，来覆写 App 类。需要重启服务才能生效！</p>
+</div>
+<h4 id="十、总结"><a href="#十、总结" class="headerlink" title="十、总结"></a>十、总结</h4><p>这节内容主要集中在路由和加载方面，如果我们需要更大的控制权，应该会用到高级配置。请查看：<a href="http://jartto.wang/2018/06/08/nextjs-3/">Next.js 使用指南3-高级配置</a>。</p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/nextjs/">nextjs</a> <a class="tag tag--primary tag--small t-link" href="/tags/react/">react</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/06/08/nextjs-3/" data-tooltip="Next.js 使用指南3－高级配置">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/05/27/nextjs-1/" data-tooltip="Next.js 使用指南1－基本规则">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/06/01/nextjs-2/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/06/01/nextjs-2/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/06/01/nextjs-2/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/06/08/nextjs-3/" data-tooltip="Next.js 使用指南3－高级配置">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/05/27/nextjs-1/" data-tooltip="Next.js 使用指南1－基本规则">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/06/01/nextjs-2/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/06/01/nextjs-2/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/06/01/nextjs-2/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/06/01/nextjs-2/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/06/01/nextjs-2/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/06/01/nextjs-2/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

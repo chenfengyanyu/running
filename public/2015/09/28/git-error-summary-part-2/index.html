@@ -1,0 +1,535 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>git错误汇总（下） - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="由于篇幅有限，我们接着把剩下的问题汇总一下。这都是实在的干货，我真是太有心了，也不知道有没有人点赞😊。废话不多说，我们直入正题，从七开始吧～">
+<meta name="keywords" content="git,错误汇总">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="git错误汇总（下）">
+<meta property="og:url" content="http://jartto.wang/2015/09/28/git-error-summary-part-2/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="由于篇幅有限，我们接着把剩下的问题汇总一下。这都是实在的干货，我真是太有心了，也不知道有没有人点赞😊。废话不多说，我们直入正题，从七开始吧～">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/blog_9A5246ED-9E43-42B3-9A84-1C9D8B461BC5.png">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/blog_6DB344AF-66FC-479E-A62F-77155919BA45.png">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/blog_ED01E167-54D4-4245-9F9D-5F3772B074E9.png">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/blog_4D119908-2F9C-4AD9-8699-119223F38CDA.png">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/blog_56B1AB35-2F5E-47FF-A889-B469DBD095FE.png">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/blog_6A759CE9-5487-47D5-A16A-ECBE675C0CCD.png">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/blog_D42CB1FB-EDBE-4AE1-99D2-F20CA4C7220D.png">
+<meta property="og:updated_time" content="2016-07-25T02:21:07.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="git错误汇总（下）">
+<meta name="twitter:description" content="由于篇幅有限，我们接着把剩下的问题汇总一下。这都是实在的干货，我真是太有心了，也不知道有没有人点赞😊。废话不多说，我们直入正题，从七开始吧～">
+<meta name="twitter:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/blog_9A5246ED-9E43-42B3-9A84-1C9D8B461BC5.png">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/blog_43A0391D-8F3C-4215-B75B-D2A4CB356BA4.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="http://7xvi3w.com1.z0.glb.clouddn.com/blog_43A0391D-8F3C-4215-B75B-D2A4CB356BA4.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            git错误汇总（下）
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2015-09-28T23:29:18+08:00">
+	  
+		    2015/9月/28 23:29:18
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>由于篇幅有限，我们接着把剩下的问题汇总一下。这都是实在的干货，我真是太有心了，也不知道有没有人点赞😊。废话不多说，我们直入正题，从七开始吧～<br><a id="more"></a></p>
+<h4 id="七、未监视的工作树文件，如何处理？"><a href="#七、未监视的工作树文件，如何处理？" class="headerlink" title="七、未监视的工作树文件，如何处理？"></a>七、未监视的工作树文件，如何处理？</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">error: Untracked working tree file &apos;gulpfile.js&apos; would be overwritten by merge.  Aborting</span><br></pre></td></tr></table></figure>
+<p>解决方案如下：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard HEAD</span><br><span class="line"><span class="comment">#删除untracked文件，参数fd是强制并删除目录</span></span><br><span class="line">git clean -fd </span><br><span class="line">git pull</span><br></pre></td></tr></table></figure></p>
+<h4 id="八、代码冲突了，以谁的版本为准？"><a href="#八、代码冲突了，以谁的版本为准？" class="headerlink" title="八、代码冲突了，以谁的版本为准？"></a>八、代码冲突了，以谁的版本为准？</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Your local changes to the following files would be overwritten by merge</span><br><span class="line">error: Your local changes to the following files would be overwritten by merge</span><br></pre></td></tr></table></figure>
+<p>如果希望保留生产服务器上所做的改动,仅仅并入新配置项, 处理方法如下:<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git stash</span><br><span class="line">git pull</span><br><span class="line">git stash pop</span><br></pre></td></tr></table></figure></p>
+<p>然后可以使用如下命令：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff -w +文件名</span><br></pre></td></tr></table></figure></p>
+<p>反过来,如果希望用代码库中的文件完全覆盖本地工作版本. 方法如下:<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard</span><br><span class="line">git pull</span><br></pre></td></tr></table></figure></p>
+<p>其中git reset是针对版本,如果想针对文件回退本地修改,使用<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">untracked working tree file</span><br></pre></td></tr></table></figure></p>
+<h4 id="九、git放弃本地修改，强制更新"><a href="#九、git放弃本地修改，强制更新" class="headerlink" title="九、git放弃本地修改，强制更新"></a>九、git放弃本地修改，强制更新</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git fetch --all</span><br><span class="line">git reset --hard origin/master</span><br><span class="line">git fetch</span><br></pre></td></tr></table></figure>
+<p>这里需要注意的是：git fetch只是下载远程的库的内容，不做任何的合并，git reset 把HEAD指向刚刚下载的最新的版本。</p>
+<h4 id="十、取消本地修改"><a href="#十、取消本地修改" class="headerlink" title="十、取消本地修改"></a>十、取消本地修改</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -- README.md</span><br></pre></td></tr></table></figure>
+<p>此操作将丢弃本地修改</p>
+<h4 id="十一、取消本地暂存文件操作，即取消-git-add"><a href="#十一、取消本地暂存文件操作，即取消-git-add" class="headerlink" title="十一、取消本地暂存文件操作，即取消 git add"></a>十一、取消本地暂存文件操作，即取消 git add</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset HEAD README.md</span><br></pre></td></tr></table></figure>
+<p><img src="http://7xvi3w.com1.z0.glb.clouddn.com/blog_9A5246ED-9E43-42B3-9A84-1C9D8B461BC5.png" alt="git"></p>
+<h4 id="十二、修改上一次commit-提交信息"><a href="#十二、修改上一次commit-提交信息" class="headerlink" title="十二、修改上一次commit 提交信息"></a>十二、修改上一次commit 提交信息</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -- amend</span><br></pre></td></tr></table></figure>
+<p><img src="http://7xvi3w.com1.z0.glb.clouddn.com/blog_6DB344AF-66FC-479E-A62F-77155919BA45.png" alt="git"></p>
+<p>程序进入了vim模式（如果对vim编辑器不太熟悉，猛戳这里！<a href="http://jartto.wang/2015/10/03/skilful-with-vim/">《熟练使用vim编辑器》</a>），编辑之后:wq!保存并退出，接下来我们来查看commit提交日志：</p>
+<p><img src="http://7xvi3w.com1.z0.glb.clouddn.com/blog_ED01E167-54D4-4245-9F9D-5F3772B074E9.png" alt="git"></p>
+<h4 id="十三、彻底撤销最近的提交"><a href="#十三、彻底撤销最近的提交" class="headerlink" title="十三、彻底撤销最近的提交"></a>十三、彻底撤销最近的提交</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard HEAD^</span><br></pre></td></tr></table></figure>
+<p>引用回退到前一次，而且工作区和暂存区都会回退到上一次提交的状态。自上一次以来的提交全部丢失。适用于完全恢复到上一个版本：<br><img src="http://7xvi3w.com1.z0.glb.clouddn.com/blog_4D119908-2F9C-4AD9-8699-119223F38CDA.png" alt="git"></p>
+<h4 id="十四、回退到上一次提交的状态，按照某一次的commit完全反向的进行一次commit-代码回滚到上个版本，并提交git"><a href="#十四、回退到上一次提交的状态，按照某一次的commit完全反向的进行一次commit-代码回滚到上个版本，并提交git" class="headerlink" title="十四、回退到上一次提交的状态，按照某一次的commit完全反向的进行一次commit.(代码回滚到上个版本，并提交git)"></a>十四、回退到上一次提交的状态，按照某一次的commit完全反向的进行一次commit.(代码回滚到上个版本，并提交git)</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git revert HEAD</span><br></pre></td></tr></table></figure>
+<p><img src="http://7xvi3w.com1.z0.glb.clouddn.com/blog_56B1AB35-2F5E-47FF-A889-B469DBD095FE.png" alt="git"><br>git log –oneline查看日志<br><img src="http://7xvi3w.com1.z0.glb.clouddn.com/blog_6A759CE9-5487-47D5-A16A-ECBE675C0CCD.png" alt="git"><br>git reset –hard a103285 我们接着回到之前的版本<br><img src="http://7xvi3w.com1.z0.glb.clouddn.com/blog_D42CB1FB-EDBE-4AE1-99D2-F20CA4C7220D.png" alt="git"><br>可以看到我们的HEAD已经指到了a103285，于是，我们完成了一次回退。</p>
+<div class="alert info"><p>基本上就这些了，以后再碰到新的问题，我接着往下写吧。</p>
+</div>
+<p>参考：<br><a href="http://blog.chinaunix.net/uid-10415985-id-4142896.html" target="_blank" rel="noopener">http://blog.chinaunix.net/uid-10415985-id-4142896.html</a><br><a href="http://www.cnblogs.com/leehongee/p/3674570.html" target="_blank" rel="noopener">http://www.cnblogs.com/leehongee/p/3674570.html</a><br><a href="http://blog.csdn.net/cankingapp/article/details/18312117" target="_blank" rel="noopener">http://blog.csdn.net/cankingapp/article/details/18312117</a><br><a href="http://www.oschina.net/translate/10-tips-git-next-level" target="_blank" rel="noopener">http://www.oschina.net/translate/10-tips-git-next-level</a></p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/git/">git</a> <a class="tag tag--primary tag--small t-link" href="/tags/错误汇总/">错误汇总</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/10/01/advantage-and-disadvantages-of-Ajax/" data-tooltip="浅谈AJAX的优缺点">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/09/26/git-error-summary-part-1/" data-tooltip="git错误汇总（上）">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2015/09/28/git-error-summary-part-2/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2015/09/28/git-error-summary-part-2/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2015/09/28/git-error-summary-part-2/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+            
+                <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/10/01/advantage-and-disadvantages-of-Ajax/" data-tooltip="浅谈AJAX的优缺点">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/09/26/git-error-summary-part-1/" data-tooltip="git错误汇总（上）">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2015/09/28/git-error-summary-part-2/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2015/09/28/git-error-summary-part-2/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2015/09/28/git-error-summary-part-2/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2015/09/28/git-error-summary-part-2/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2015/09/28/git-error-summary-part-2/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2015/09/28/git-error-summary-part-2/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+    
+        <script>
+             var disqus_config = function () {
+                 this.page.url = 'http://jartto.wang/2015/09/28/git-error-summary-part-2/';
+                 
+                    this.page.identifier = '2015/09/28/git-error-summary-part-2/';
+                                  
+             };
+            (function() {
+                var d = document, s = d.createElement('script');
+                var disqus_shortname = 'jartto';
+                s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+
+
+
+</html>

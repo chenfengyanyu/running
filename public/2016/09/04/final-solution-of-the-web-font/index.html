@@ -1,0 +1,545 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>web font 终极解决方案 - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="绝大多数情况下，我们在网页开发中都要使用web安全字体。高傲的设计师肯定不局限于安全字体，那么问题来了：我们如何保证客户端对字体的显示一致性，本文对此进行深入探讨。">
+<meta name="keywords" content="web,font">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="web font 终极解决方案">
+<meta property="og:url" content="http://jartto.wang/2016/09/04/final-solution-of-the-web-font/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="绝大多数情况下，我们在网页开发中都要使用web安全字体。高傲的设计师肯定不局限于安全字体，那么问题来了：我们如何保证客户端对字体的显示一致性，本文对此进行深入探讨。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/ttf2woff.png">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/webfont1.png">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/webfont2.png">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/webfont3.png">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/webfont4.png">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/webfont5.png">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/webfont6.png">
+<meta property="og:updated_time" content="2016-09-08T15:36:51.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="web font 终极解决方案">
+<meta name="twitter:description" content="绝大多数情况下，我们在网页开发中都要使用web安全字体。高傲的设计师肯定不局限于安全字体，那么问题来了：我们如何保证客户端对字体的显示一致性，本文对此进行深入探讨。">
+<meta name="twitter:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/ttf2woff.png">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/ani_font.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="http://7xvi3w.com1.z0.glb.clouddn.com/ani_font.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            web font 终极解决方案
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2016-09-04T17:19:15+08:00">
+	  
+		    2016/9月/04 17:19:15
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>绝大多数情况下，我们在网页开发中都要使用web安全字体。高傲的设计师肯定不局限于安全字体，那么问题来了：我们如何保证客户端对字体的显示一致性，本文对此进行深入探讨。<br><a id="more"></a><br>我们从头说起，设计师要求使用苹方字体，可是这并不是一个web安全字体。这意味着，如果客户端没有该字体库，那么我们的用户将看到一些默认字体，这违背了我们最初“显示一致性”的美好愿景。</p>
+<p>怎么办，关于这个问题，我做出了以下尝试。</p>
+<h4 id="一、查找方案"><a href="#一、查找方案" class="headerlink" title="一、查找方案"></a>一、查找方案</h4><p>不是什么大问题，先百度一下，很快我查到了某中文字库，大致用法如下：<br>先引入js类库<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"//cdn.webfont.youziku.com/wwwroot/js/wf/youziku.api.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>嵌入如下js代码片段：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">   $youziku.load(<span class="string">"body"</span>, <span class="string">"e1a2967b916d487f9814ebca91628dc1"</span>, <span class="string">"PingFangSC_L"</span>);</span></span><br><span class="line"><span class="undefined">   $youziku.draw();</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>效果是达到了，可是当看到要收费的时候，我已经不爱你了👻。</p>
+<p>第三方的方案还要收费，显然并不完美。那怎么办，一定还有其他方案，我们继续搜索。</p>
+<h4 id="二、下载字体"><a href="#二、下载字体" class="headerlink" title="二、下载字体"></a>二、下载字体</h4><p>找个免费的试试？好吧，去下载苹方字体，我自己引入字体包。结果却找不到下载的链接😅，全是广告，广告，广告。。。</p>
+<p>内事不决问百度，外事不决问谷歌。果然，捕获到三个网站：<br>1.<a href="http://www.google.com/webfonts" target="_blank" rel="noopener">http://www.google.com/webfonts</a><br>2.<a href="http://www.dafont.com" target="_blank" rel="noopener">http://www.dafont.com</a><br>3.<a href="http://priguy.com/pingfang-fonts-download/" target="_blank" rel="noopener">http://priguy.com/pingfang-fonts-download/</a></p>
+<p>如愿以偿的找到了苹方的下载地址，天无绝人之路啊！</p>
+<p>历尽千辛万苦，总算找到了一个苹方字体库。下载之后发现文件后缀是ttf，浏览器中加载不出来。。。</p>
+<p>可以从css的使用方式中看出端倪：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">font-face</span> &#123;<span class="attribute">font-family</span>: <span class="string">'iconfont'</span>;</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">url</span>(<span class="string">'fonts/iconfont.eot'</span>); <span class="comment">/* IE9*/</span></span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">url</span>(<span class="string">'fonts/iconfont.eot?#iefix'</span>) <span class="built_in">format</span>(<span class="string">'embedded-opentype'</span>), <span class="comment">/* IE6-IE8 */</span></span><br><span class="line">    <span class="built_in">url</span>(<span class="string">'fonts/iconfont.woff'</span>) <span class="built_in">format</span>(<span class="string">'woff'</span>), <span class="comment">/* chrome、firefox */</span></span><br><span class="line">    <span class="built_in">url</span>(<span class="string">'fonts/iconfont.ttf'</span>) <span class="built_in">format</span>(<span class="string">'truetype'</span>), <span class="comment">/* chrome、firefox、opera、Safari, Android, iOS 4.2+*/</span></span><br><span class="line">    <span class="built_in">url</span>(<span class="string">'fonts/iconfont.svg#iconfont'</span>) <span class="built_in">format</span>(<span class="string">'svg'</span>); <span class="comment">/* iOS 4.1- */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>于是乎，我又想着有没有一个在线工具可以将ttf转化成woff，那这样问题就迎刃而解了。</p>
+<h4 id="三、字体转换"><a href="#三、字体转换" class="headerlink" title="三、字体转换"></a>三、字体转换</h4><p>继续探索，翻到了一些中文字体提供商，没准有解决方案呢。<br><a href="https://www.justfont.com/fonts" target="_blank" rel="noopener">https://www.justfont.com/fonts</a></p>
+<p>好吧，都是vip，除了收费，你们还能干啥？</p>
+<p>web中font-face中文字体如何截取使用？<br><a href="http://www.zhihu.com/question/40098697" target="_blank" rel="noopener">http://www.zhihu.com/question/40098697</a></p>
+<p>不知道这哥们对回答满意不，反正我觉得没啥用。</p>
+<p>好不容易找到一个可以转化字体的网站，结果告诉我这个：<br><a href="https://everythingfonts.com/ttf-to-woff" target="_blank" rel="noopener">https://everythingfonts.com/ttf-to-woff</a><br><img src="http://7xvi3w.com1.z0.glb.clouddn.com/ttf2woff.png" alt="ttf-to-woff"><br>找了一圈，大致问题如下：<br>1.文件太大的不能转换（下载到的苹方ttf为11M）；<br>2.只支持英文转换，中文的字体不能转换；<br>3.可以转换，但需要付费下载的；</p>
+<p>显然我并不满意，看来还得继续，到底别人是怎么实现的：<a href="https://www.pingxx.com/?from=1&amp;desc=baidu" target="_blank" rel="noopener">譬如这个网站</a></p>
+<h4 id="四、终级解决方案"><a href="#四、终级解决方案" class="headerlink" title="四、终级解决方案"></a>四、终级解决方案</h4><p>真是太失望了，不就是想转换一下字体吗，没一个靠谱的。那我自己来搞，是时候展现真正的技术了～</p>
+<p>大致思路如下，这里我借助了开源项目fontmin（<a href="https://github.com/ecomfe/fontmin" target="_blank" rel="noopener">传送门</a>）：<br>1.加载fontmin；<br>2.指定转换文件，并指定输出目录，如果没有则创建；<br>3.转换为eot、woff以及svg格式输出；<br>4.svg格式文件较大，借助imagemin（<a href="https://github.com/imagemin/imagemin-svgo" target="_blank" rel="noopener">传送门</a>）对其进行压缩处理，之后输出；</p>
+<p>我们创建index.js，如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Fontmin = <span class="built_in">require</span>(<span class="string">'fontmin'</span>);</span><br><span class="line"><span class="keyword">var</span> imagemin = <span class="built_in">require</span>(<span class="string">'imagemin'</span>);</span><br><span class="line"><span class="keyword">var</span> svgo = <span class="built_in">require</span>(<span class="string">'imagemin-svgo'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> fontmin = <span class="keyword">new</span> Fontmin()</span><br><span class="line">    .src(<span class="string">'PingFang-Light.ttf'</span>)</span><br><span class="line">    .dest(<span class="string">'build/'</span>)</span><br><span class="line">    .use(Fontmin.ttf2eot())</span><br><span class="line">    .use(Fontmin.ttf2woff(&#123;</span><br><span class="line">        deflate: <span class="literal">true</span></span><br><span class="line">    &#125;))</span><br><span class="line">    .use(Fontmin.ttf2svg());</span><br><span class="line"></span><br><span class="line">    <span class="comment">//压缩svg图片</span></span><br><span class="line">    imagemin([<span class="string">'build/*.svg'</span>], <span class="string">'build/optimize'</span>, &#123;</span><br><span class="line">        use: [svgo()]</span><br><span class="line">    &#125;).then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'Images optimized'</span>);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    fontmin.run(<span class="function"><span class="keyword">function</span> (<span class="params">err, files</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (err) &#123;</span><br><span class="line">        <span class="keyword">throw</span> err;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">console</span>.log(files[<span class="number">0</span>]);</span><br><span class="line">    <span class="comment">// =&gt; &#123; contents: &lt;Buffer 00 01 00 ...&gt; &#125;</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>嗯，看起来不错，终于实现了。你可以去github上面clone该项目（<a href="https://github.com/chenfengyanyu/web-font-convert" target="_blank" rel="noopener">传送门</a>），最好能给个星哦😍</p>
+<p>到这里，我觉得还有瑕疵。ttf大小为11M，转换的woff大小为7M左右，那么我们网页引用，会不会加载不起来呢？<br><img src="http://7xvi3w.com1.z0.glb.clouddn.com/webfont1.png" alt="font_console"></p>
+<p>看起来好像也不是什么问题了。</p>
+<p>那如果我们追求极致的体验呢，如何对字体压缩？也就是精简字体包，那该如何操作？</p>
+<h4 id="五、字体精简与压缩"><a href="#五、字体精简与压缩" class="headerlink" title="五、字体精简与压缩"></a>五、字体精简与压缩</h4><p>踏破铁鞋无觅处，得来全不费功夫。关于字体压缩，我找到了这个：<br><a href="https://github.com/aui/font-spider" target="_blank" rel="noopener">字蛛</a>是一个智能 WebFont 压缩工具，它能自动分析出页面使用的 WebFont 并进行按需压缩。</p>
+<p>我们先来安装：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install font-spider -g</span><br></pre></td></tr></table></figure></p>
+<p>找到html文件目录，运行：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">font-spider zh/*.html</span><br></pre></td></tr></table></figure></p>
+<p>来看看效果：<br><img src="http://7xvi3w.com1.z0.glb.clouddn.com/webfont2.png" alt="font_console"><br>压缩前后，文件大小对比<br><img src="http://7xvi3w.com1.z0.glb.clouddn.com/webfont3.png" alt="font_console"></p>
+<div class="alert info"><p>注意：字蛛会分析页面使用的webfont，也就意味着他只抓取静态页面的font</p>
+</div>
+<p>看起来不错，可是，这又是什么鬼：<br><img src="http://7xvi3w.com1.z0.glb.clouddn.com/webfont4.png" alt="webfont"><br>部分空格被替换成了！号，这肯定是零容忍啊，怎么办?</p>
+<h4 id="六、意外收获"><a href="#六、意外收获" class="headerlink" title="六、意外收获"></a>六、意外收获</h4><p>解决方案：<a href="https://github.com/aui/font-spider/issues/102" target="_blank" rel="noopener">https://github.com/aui/font-spider/issues/102</a></p>
+<p>正愁字体文件无法编辑呢，结果发现了<a href="http://font.baidu.com/editor/" target="_blank" rel="noopener">某度字体编辑器</a>，来试试这个：（建议使用chrome浏览器，safari浏览器保存会出异常）<br><img src="http://7xvi3w.com1.z0.glb.clouddn.com/webfont5.png" alt="font_console"><br>删除！号，我们重新保存，引入字体，刷新一下：<br><img src="http://7xvi3w.com1.z0.glb.clouddn.com/webfont6.png" alt="font_console"><br>整个世界都豁然明亮了！</p>
+<h4 id="八、font资源库"><a href="#八、font资源库" class="headerlink" title="八、font资源库"></a>八、font资源库</h4><p>1.字蛛<br><a href="http://font-spider.org" target="_blank" rel="noopener">http://font-spider.org</a><br>2.fonts.com<br><a href="https://www.fonts.com" target="_blank" rel="noopener">https://www.fonts.com</a><br>3.某中文字库<br><a href="http://www.youziku.com/webfont/index/47066" target="_blank" rel="noopener">http://www.youziku.com/webfont/index/47066</a><br>4.google到的资源<br><a href="http://www.google.com/webfonts" target="_blank" rel="noopener">http://www.google.com/webfonts</a><br><a href="http://www.dafont.com" target="_blank" rel="noopener">http://www.dafont.com</a></p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/font/">font</a> <a class="tag tag--primary tag--small t-link" href="/tags/web/">web</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/09/08/exception-of-the-homebrew-installation/" data-tooltip="安装Homebrew异常处理">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/08/23/js-animation-library-recommendation/" data-tooltip="js动画库推荐">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2016/09/04/final-solution-of-the-web-font/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2016/09/04/final-solution-of-the-web-font/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2016/09/04/final-solution-of-the-web-font/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+            
+                <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/09/08/exception-of-the-homebrew-installation/" data-tooltip="安装Homebrew异常处理">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/08/23/js-animation-library-recommendation/" data-tooltip="js动画库推荐">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2016/09/04/final-solution-of-the-web-font/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2016/09/04/final-solution-of-the-web-font/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2016/09/04/final-solution-of-the-web-font/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2016/09/04/final-solution-of-the-web-font/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2016/09/04/final-solution-of-the-web-font/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2016/09/04/final-solution-of-the-web-font/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+    
+        <script>
+             var disqus_config = function () {
+                 this.page.url = 'http://jartto.wang/2016/09/04/final-solution-of-the-web-font/';
+                 
+                    this.page.identifier = '2016/09/04/final-solution-of-the-web-font/';
+                                  
+             };
+            (function() {
+                var d = document, s = d.createElement('script');
+                var disqus_shortname = 'jartto';
+                s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+
+
+
+</html>

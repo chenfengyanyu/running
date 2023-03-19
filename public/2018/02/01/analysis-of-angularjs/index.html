@@ -1,0 +1,537 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>剖析 Angularjs 语法 - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="前端的框架不计其数，学习的速度真是追不上更新速度。那么问题来了，如何才能以不变应万变呢？很多童鞋可能猜到了，对，就是看源码。既知其然又知其所以然。">
+<meta name="keywords" content="angularjs">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="剖析 Angularjs 语法">
+<meta property="og:url" content="http://jartto.wang/2018/02/01/analysis-of-angularjs/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="前端的框架不计其数，学习的速度真是追不上更新速度。那么问题来了，如何才能以不变应万变呢？很多童鞋可能猜到了，对，就是看源码。既知其然又知其所以然。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/angular1.png">
+<meta property="og:updated_time" content="2018-10-31T14:52:46.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="剖析 Angularjs 语法">
+<meta name="twitter:description" content="前端的框架不计其数，学习的速度真是追不上更新速度。那么问题来了，如何才能以不变应万变呢？很多童鞋可能猜到了，对，就是看源码。既知其然又知其所以然。">
+<meta name="twitter:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/angular1.png">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/angular0.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/angular0.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            剖析 Angularjs 语法
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2018-02-01T22:54:56+08:00">
+	  
+		    2018/2月/01 22:54:56
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>前端的框架不计其数，学习的速度真是追不上更新速度。那么问题来了，如何才能以不变应万变呢？很多童鞋可能猜到了，对，就是看源码。既知其然又知其所以然。<br><a id="more"></a></p>
+<h4 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h4><p>写文章的时候，我去看了一下官网文档，已然更新至 <code>V5.2.3</code> 了。有意思的是，在上级的「英明决定」下，我们还在用着 <code>V1.3</code> 的版本。怀着对知识的敬畏以及渴望，这一次我决定弄懂所有的问题，做一次彻底了断吧。也许，以后再也用不到这个版本了。</p>
+<div class="alert success"><p>再次感谢 <code>Will</code> 童鞋的分享，让我有了重新认识 <code>Angularjs</code> 的机会！</p>
+</div>
+<h4 id="二、明确框架和类库"><a href="#二、明确框架和类库" class="headerlink" title="二、明确框架和类库"></a>二、明确框架和类库</h4><p>被很多人问过：“框架和类库的区别是什么？”，可能大家有一些感官的认识，但是却又很难形容。那么我们不妨来逐个分析一下这两个问题：</p>
+<p>1.什么是框架？<br>框架，是一套完整的解决方案，使用框架的时候，需要把你的代码放到框架合适的地方，框架会在合适的时机调用你的代码。</p>
+<p>2.什么是类库？<br>库，本质上是一些函数的集合。每次调用函数，实现一个特定的功能，接着把控制权交给使用者。</p>
+<p>3.主要区别</p>
+<ul>
+<li>You call Library, Framework calls you</li>
+<li>核心点：谁起到主导作用（控制反转）<ul>
+<li>框架中控制整个流程的是框架</li>
+<li>使用库，由开发人员决定如何调用库中提供的方法（辅助）</li>
+</ul>
+</li>
+<li>好莱坞原则：Don’t call us, we’ll call you.</li>
+<li>框架的侵入性很高（从头到尾）</li>
+</ul>
+<div class="alert info"><p>结论：Angularjs 是框架，React 是类库。</p>
+</div>
+<p>更多细节的比较，可以<a href="https://juejin.im/entry/5a54b747518825734216c3df" target="_blank" rel="noopener">参考这里</a></p>
+<h4 id="三、双向绑定"><a href="#三、双向绑定" class="headerlink" title="三、双向绑定"></a>三、双向绑定</h4><p><code>Angularjs</code> 是以数据双向绑定出名的一个框架，视图的变更会影响到模型，同理，模型的变更也能影响到视图。为什么会如此神奇，底层的实现原理到底是怎样的呢？下面我们来细节拆分，举例说明吧：<br>首先，先来一个 <code>html</code> 结构：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">button</span> <span class="attr">ng-click</span>=<span class="string">"week = '周几'"</span>&gt;</span>修改日期<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">ng-model</span>=<span class="string">"week"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>如上，我们设置了一个 <code>ng-click</code> 方法，以及一个 <code>ng-model</code> ，涉及到了 <code>week</code> 变量。经过 <code>$compile</code> 编译之后，实际是做了这样的处理：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$scope.watch(<span class="string">'week'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">el</span>)</span>&#123;</span><br><span class="line">  el.innerHTML = $interpolate(el.innerHTML);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<h4 id="四、关于-Scope"><a href="#四、关于-Scope" class="headerlink" title="四、关于 Scope"></a>四、关于 Scope</h4><p>作用域是一个指向应用模型的对象。它是表达式的执行环境。作用域有层次结构，这个层次和相应的 <code>DOM</code> 几乎是一样的。作用域能监控表达式和传递事件。</p>
+<div class="alert success"><p>我们可以把作用域和它的属性当做是用来渲染视图的数据。作用域是视图唯一相关联的变化来源。</p>
+</div>
+<p>作用域的特点：</p>
+<ul>
+<li>作用域提供APIs（$watch）来观察模型的变化。</li>
+<li>作用域提供APIs($apply)将任何模型的改变从“AngularJS领域(Angularrealm)”通过系统映射到视图上。</li>
+<li>作用域能通过共享模型成员的方式嵌套到应用组件上。一个作用域从父作用域继承属性。</li>
+<li>作用域提供表达式执行的上下文。比如说表达式：<code></code></li>
+</ul>
+<div class="alert info"><p>本身是无意义的，除非把它放到指定 username 属性的作用域中。</p>
+</div>
+<h4 id="五、强大的-eval"><a href="#五、强大的-eval" class="headerlink" title="五、强大的 $eval"></a>五、强大的 $eval</h4><p>在Angular中，有几种方式可以在作用域的上下文上执行代码，最简单的一种就是$eval。它使用一个函数作参数，所做的事情是立即执行这个传入的函数，并且把作用域自身当作参数传递给它，返回的是这个函数的返回值。$eval也可以有第二个参数，它所做的仅仅是把这个参数传递给这个函数。</p>
+<p>$eval的实现很简单：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Scope.prototype.$<span class="built_in">eval</span> = <span class="function"><span class="keyword">function</span>(<span class="params">expr, locals</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> expr(<span class="keyword">this</span>, locals);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<h4 id="六、依赖注入实现原理"><a href="#六、依赖注入实现原理" class="headerlink" title="六、依赖注入实现原理"></a>六、依赖注入实现原理</h4><p>下来看看依赖注入是如何定义的：<br>依赖注入，也就是 <code>Dependency injection</code>，是一种软件设计模式，用来处理代码的依赖关系。<br>开发指南中提到，用三种方法让函数获得它的需要依赖。</p>
+<ul>
+<li>其一，它的依赖是能被创建的，一般用new操作符就行。</li>
+<li>其二，能够通过全局变量查找依赖。</li>
+<li>其三，依赖能在需要时被导入。</li>
+</ul>
+<p>前两种方式都不是很好，因为它们需要对依赖硬编码，使得修改依赖的时候变得困难。特别是在测试的时候不好办，因为对某个部分进行孤立的测试常常需要模拟它的依赖。第三种方式是最好的，因为它不必在组件中去主动需找和获取依赖，而是由外界将依赖传入。</p>
+<p>①推断依赖：这是最简单的处理依赖的方法，就是假设函数的参数名就是依赖的名字。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">MyController</span>(<span class="params">$scope,greeter</span>)</span>&#123;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>给出一个注入器可以通过检查声明来获取函数名，从而知道需要的依赖的函数。在上面的例子中，<code>$scope</code> 和<code>greeter</code> 是需要注入到函数中的依赖。</p>
+<p>②$inject标记：要允许压缩类库重命名函数参数，同时注入器又能正确处理依赖的话，函数需要使用$inject属性。这个属性是一个包含依赖的名称的数组。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> MyController = <span class="function"><span class="keyword">function</span>(<span class="params">renamed$scope, renamedGreeter</span>) </span>&#123;&#125;</span><br><span class="line">MyController.$inject = [<span class="string">'$scope'</span>, <span class="string">'greeter'</span>];</span><br></pre></td></tr></table></figure></p>
+<p>注意 <code>$inject</code> 标记里的值和函数声明的参数是对应的。这种方式适合用于控制器的声明，因为控制器有了明确的声明标记。</p>
+<p>③行内标记<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">someModule.factory(<span class="string">'greeter'</span>, [<span class="string">'$window'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">renamed$window</span>) </span>&#123;...&#125;]);</span><br></pre></td></tr></table></figure></p>
+<p>更多的细节，请参考我之前的这篇文章：<a href="http://jartto.wang/2014/04/24/angularjs-part-7/">Angularjs学习笔记06~依赖注入 DI</a></p>
+<h4 id="七、-injector"><a href="#七、-injector" class="headerlink" title="七、$injector"></a>七、$injector</h4><ul>
+<li>是什么：根据名字获取组件的⽅方法。</li>
+<li>地⽅：从缓存⾥里里找，没有的话实例例化一个应⽤，一般只有⼀个 $injector 实例。 </li>
+<li>如何产生: bootstrap 里 createInjector</li>
+</ul>
+<p>结合 $injector 使⽤ module ⾥的数据<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// module.js</span></span><br><span class="line">angular.module(<span class="string">'App'</span>)</span><br><span class="line">  ...</span><br><span class="line">  .constant(<span class="string">'num1'</span>, <span class="number">3</span>)</span><br><span class="line">  .constant(<span class="string">'num2'</span>, <span class="number">2</span>)</span><br><span class="line"><span class="comment">// app.js</span></span><br><span class="line">angular.module(<span class="string">'App'</span>, []).controller(<span class="string">'Controller'</span>, [<span class="string">'$scope'</span>, <span class="string">'week'</span>, <span class="string">'$injector'</span>,    <span class="function"><span class="keyword">function</span>(<span class="params">$scope, week, $injector</span>) </span>&#123;</span><br><span class="line">￼    <span class="function"><span class="keyword">function</span> <span class="title">sum</span> (<span class="params">num1, num2</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> num1 + num2;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">const</span> num1 = $injector.get(<span class="string">'num1'</span>);</span><br><span class="line">    <span class="keyword">const</span> num2 = $injector.get(<span class="string">'num2'</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(sum(num1, num2));</span><br><span class="line">  &#125;</span><br><span class="line">]);</span><br></pre></td></tr></table></figure></p>
+<h4 id="八、无处不在的-Provider"><a href="#八、无处不在的-Provider" class="headerlink" title="八、无处不在的 Provider"></a>八、无处不在的 Provider</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> invokeLater = <span class="function"><span class="keyword">function</span>(<span class="params">service, method, arrayMethod, queue</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    queue = queue || invokeQueue;</span><br><span class="line">    queue[arrayMethod || <span class="string">'push'</span>]([service, method, <span class="built_in">arguments</span>]);</span><br><span class="line">    <span class="keyword">return</span> moduleInstance;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> moduleInstance = &#123;</span><br><span class="line">  name: name,</span><br><span class="line">  requires: requires,</span><br><span class="line">  constant: invokeLater(<span class="string">'$provide'</span>, <span class="string">'constant'</span>, <span class="string">'unshift'</span>),</span><br><span class="line">  provider: invokeLater(<span class="string">'$provide'</span>, <span class="string">'provider'</span>),</span><br><span class="line">  factory: invokeLater(<span class="string">'$provide'</span>, <span class="string">'factory'</span>),</span><br><span class="line">  value: invokeLater(<span class="string">'$provide'</span>, <span class="string">'value'</span>),</span><br><span class="line">  service: invokeLater(<span class="string">'$provide'</span>, <span class="string">'service'</span>),</span><br><span class="line">  decorator: invokeLater(<span class="string">'$provide'</span>, <span class="string">'decorator'</span>),</span><br><span class="line">  filter: invokeLater(<span class="string">'$filterProvider'</span>, <span class="string">'register'</span>),</span><br><span class="line">  directive: invokeLater(<span class="string">'$compileProvider'</span>, <span class="string">'directive'</span>),</span><br><span class="line">  controller: invokeLater(<span class="string">'$controllerProvider'</span>, <span class="string">'register'</span>),</span><br><span class="line">  component: invokeLater(<span class="string">'$compileProvider'</span>, <span class="string">'component'</span>),</span><br><span class="line"></span><br><span class="line">  config: invokeLater(<span class="string">'$injector'</span>, <span class="string">'invoke'</span>, <span class="string">'push'</span>, configBlocks),</span><br><span class="line">  run: <span class="function"><span class="keyword">function</span>(<span class="params">fn</span>) </span>&#123;</span><br><span class="line">    moduleInstance._runBlocks.push(fn);</span><br><span class="line">    <span class="keyword">return</span> moduleInstance;</span><br><span class="line">  &#125;,</span><br><span class="line">  _invokeQueue: invokeQueue,</span><br><span class="line">  _configBlocks: configBlocks,</span><br><span class="line">  _runBlocks: []</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="九、-apply-和-digest"><a href="#九、-apply-和-digest" class="headerlink" title="九、$apply 和 $digest"></a>九、$apply 和 $digest</h4><p>$apply 会使 ng 进入 $digest cycle, 并从 $rootScope 开始遍历(深度优先)检查数据变更。$digest 仅会检查该 scope 和它的子 scope，当你确定当前操作仅影响它们时，用 $digest 可以稍微提升性能。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> $apply = <span class="function"><span class="params">exp</span> =&gt;</span> &#123;</span><br><span class="line">  $<span class="built_in">eval</span>(exp);</span><br><span class="line">  $rootScope.$digest();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>$digest()触发条件：</p>
+<ol>
+<li>DOM事件</li>
+<li>ajax相应事件</li>
+<li>$timeout, $interval</li>
+<li>手动执行执行$digest()或$apply()</li>
+<li>浏览器Location变更事件 ($location)</li>
+</ol>
+<h4 id="十、脏值检测"><a href="#十、脏值检测" class="headerlink" title="十、脏值检测"></a>十、脏值检测</h4><p>我们摘录出脏值检测的核心代码，先来研究一下源代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">function Scope() &#123; </span><br><span class="line">  this.$$watchers = [];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Scope.prototype.$watch = function (watchFn, listenerFn) &#123; </span><br><span class="line">  var watcher = &#123;</span><br><span class="line">    watchFn: watchFn,</span><br><span class="line">    listenerFn: listenerFn</span><br><span class="line">  &#125;;</span><br><span class="line">  this.$$watchers.push(watcher);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Scope.prototype.$digest = function () &#123;</span><br><span class="line">  var self = this;</span><br><span class="line">  var newValue, oldValue; _.forEach(this.$$watchers, function (watcher) &#123;</span><br><span class="line">    newValue = watcher.watchFn(self);</span><br><span class="line">    oldValue = watcher.last;</span><br><span class="line">    if (newValue !== oldValue) &#123;</span><br><span class="line">      watcher.last = newValue;</span><br><span class="line">      watcher.listenerFn(newValue, oldValue, self);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;); </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>脏值检测简单来说就是给每个需要绑定的元素加个 <code>watcher</code>，缓存下 <code>oldValue</code>，然后定时遍历所有的<code>watcher</code>，比较 <code>newValue</code> 和 <code>oldValue</code>，如果变化了做更新操作。</p>
+<h4 id="十一、启动流程"><a href="#十一、启动流程" class="headerlink" title="十一、启动流程"></a>十一、启动流程</h4><p><img src="http://7xvi3w.com1.z0.glb.clouddn.com/angular1.png" alt="启动流程"></p>
+<h4 id="十二、参考资源"><a href="#十二、参考资源" class="headerlink" title="十二、参考资源"></a>十二、参考资源</h4><p><a href="https://github.com/teropa/build-your-own-angularjs" target="_blank" rel="noopener">build-your-own-angularjs</a></p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/angularjs/">angularjs</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/02/08/count-pit-of-mini-programs/" data-tooltip="细数小程序的坑">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/01/25/quick-start-mini-programs/" data-tooltip="快速上手小程序">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/02/01/analysis-of-angularjs/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/02/01/analysis-of-angularjs/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/02/01/analysis-of-angularjs/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/02/08/count-pit-of-mini-programs/" data-tooltip="细数小程序的坑">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/01/25/quick-start-mini-programs/" data-tooltip="快速上手小程序">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/02/01/analysis-of-angularjs/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/02/01/analysis-of-angularjs/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/02/01/analysis-of-angularjs/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/02/01/analysis-of-angularjs/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/02/01/analysis-of-angularjs/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/02/01/analysis-of-angularjs/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

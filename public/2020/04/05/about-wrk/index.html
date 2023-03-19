@@ -1,0 +1,512 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>Web「性能测试」知多少？ - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="身为前端的你，是否会有这样的烦恼：随着访问用户的成倍增加，站点变得越来越脆弱。任何的访问过慢或崩溃都将是一场灾难。">
+<meta name="keywords" content="web,wrk">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Web「性能测试」知多少？">
+<meta property="og:url" content="http://jartto.wang/2020/04/05/about-wrk/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="身为前端的你，是否会有这样的烦恼：随着访问用户的成倍增加，站点变得越来越脆弱。任何的访问过慢或崩溃都将是一场灾难。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2020-04-06T15:22:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Web「性能测试」知多少？">
+<meta name="twitter:description" content="身为前端的你，是否会有这样的烦恼：随着访问用户的成倍增加，站点变得越来越脆弱。任何的访问过慢或崩溃都将是一场灾难。">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo/wrk.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo/wrk.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            Web「性能测试」知多少？
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2020-04-05T21:44:12+08:00">
+	  
+		    2020/4月/05 21:44:12
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>身为前端的你，是否会有这样的烦恼：随着访问用户的成倍增加，站点变得越来越脆弱。任何的访问过慢或崩溃都将是一场灾难。<br><a id="more"></a><br>这就对我们工程师提出了更高的要求，要保障网站的「可访问性」和「稳定性」都维持在一个较高水平。那么，是时候了解了解 <code>Web</code> 性能测试了！</p>
+<h4 id="一、情景再现"><a href="#一、情景再现" class="headerlink" title="一、情景再现"></a>一、情景再现</h4><p>有一个大型推广活动来了，类似与抢火车票、淘宝双十一，你能否回答 <code>Boss</code> 的如下问题？<br>1.我们的网站是否能扛住如此的高并发？<br>2.服务器单机 <code>QPS</code> 是多少？<br>3.如果站点扛不住，扩容的话，需要几台？<br>…</p>
+<p>一连串的问题，如果你招架不住，不妨仔细<a href="http://jartto.wang/2020/04/05/about-wrk/">阅读本文</a>。</p>
+<h4 id="二、什么是性能测试？"><a href="#二、什么是性能测试？" class="headerlink" title="二、什么是性能测试？"></a>二、什么是性能测试？</h4><p>要回答上面的问题，需要我们有一些知识储备。不着急，循序渐进，各个击破。<br><div class="alert success"><p>一般来说「性能测试」包括压力测试、负载测试、容量测试三种主要测试类型。</p>
+</div></p>
+<p><strong>1.压力测试 <code>StressTest</code></strong><br>压力测试可以测试网站在某个特定的持续的压力下运行的稳定性。</p>
+<p><strong>2.负载测试 <code>LoadTest</code></strong><br>负载测试是为了检验系统在给定负载下是否能达到预期性能指标。</p>
+<p><strong>3.容量测试 <code>CapabilityTest</code></strong><br>容量测试针对数据库而言，是在数据库中有较大数量的数据记录情况下对系统进行的测试。</p>
+<p>内容比较多，为了专注聚焦，我们本节主要来看一下压力测试。</p>
+<h4 id="三、压力测试"><a href="#三、压力测试" class="headerlink" title="三、压力测试"></a>三、压力测试</h4><p>压力测试是通过不断向被测系统施加压力，测试系统在压力情况下的性能表现。主要考察当前软硬件环境下系统所能承受的最大负荷并帮助开发人员找出系统瓶颈所在。我们可以模拟巨大的流量请求以查看应用程序在峰值使用情况以及服务器状况。</p>
+<div class="alert info"><p>有效的压力测试将应用以下这些关键条件：重复，并发，量级，随机变化。</p>
+</div>
+<p><strong>需要注意的是</strong>：压力测试并不会报告是什么导致了问题。它只会报告这有了问题，例如：查询页面在并发 1000 个用户使用时变慢下来，但它不会显示什么导致了变慢。</p>
+<p>捕获到的性能统计数据例如 <code>CPU</code> 和内存使用量只是强调了潜在的问题区域，但并不会指出实际的根源在应用程序的什么地方。</p>
+<p>更多的概念可以查看：<a href="https://blog.csdn.net/weixin_40296254/article/details/80247111" target="_blank" rel="noopener">为什么要进行压力测试?</a>。</p>
+<h4 id="四、核心指标"><a href="#四、核心指标" class="headerlink" title="四、核心指标"></a>四、核心指标</h4><p>了解了上述压力测试之后，我们先不着急进行网站压测，补充几个可以让你事半功倍的核心指标：</p>
+<p>1.什么是 <code>TPS</code> ？<br>即 <code>Transactions Per Second</code> 的缩写，每秒处理的事务数目。一个事务是指一个客户机向服务器发送请求然后服务器做出反应的过程。客户机在发送请求时开始计时，收到服务器响应后结束计时，以此来计算使用的时间和完成的事务个数，最终利用这些信息作出的评估分。</p>
+<div class="alert warning"><p>一个事务可能对应多个请求，这与数据库的事务操作极其相似。</p>
+</div>
+<p>2.什么是 <code>QPS</code> ？<br><code>Queries Per Second</code> 的缩写，每秒能处理查询数目，是对一个特定的查询服务器在规定时间内所处理流量多少的衡量标准。</p>
+<p><strong>需要注意的是</strong>：虽然名义上是查询的意思，但实际上，现在习惯于对单一接口服务的处理能力用 <code>QPS</code> 进行表述（即使它并不是查询操作）。</p>
+<p>3.什么是 <code>RT</code> ？<br>响应时间，处理一次请求所需要的平均处理时间。我们一般会关注 <code>90th</code> 请求的的处理时间，因为可能因网络情况出现极端情况，长尾数据会对我们产生干扰。</p>
+<p>4.系统 <code>CPU</code> 利用率<br>如果系统的 <code>CPU</code> 使用率已经很高，说明我们的系统是个计算度很复杂的系统，这时候如果 <code>QPS</code> 已经上不去了，就需要赶紧扩容，通过增加机器分担计算的方式来提高系统的吞吐量。</p>
+<p>5.系统内存<br>如果 <code>CPU</code> 使用率一般，但是系统的 <code>QPS</code> 上不去，说明我们的机器并没有忙于计算，而是受到其他资源的限制，如内存、<code>I/O</code>。这时候首先看下内存是不是已经不够了，如果内存不够了，那就赶紧扩容了。</p>
+<h4 id="五、QPS-如何计算？"><a href="#五、QPS-如何计算？" class="headerlink" title="五、QPS 如何计算？"></a>五、QPS 如何计算？</h4><p><code>QPS</code> 并没有准确的计算公式，但是实际压测中我们完全可以按照如下模型进行估算：<br><div class="alert info"><p>原理：每天 80% 的访问集中在 20% 的时间里，这 20% 时间叫做「峰值时间」。</p>
+</div></p>
+<p>公式：( 总 <code>PV</code> 数 <em> <code>80%</code> ) / ( 每天秒数 </em> <code>20%</code> ) = 峰值时间每秒请求数(<code>QPS</code>)<br>机器：峰值时间每秒 <code>QPS</code> / 单台机器的 <code>QPS</code> = 需要的机器</p>
+<p>问：每天 <code>300w PV</code> 的在单台机器上，这台机器需要多少 <code>QPS</code>？<br>答：<code>( 3000000 * 0.8 ) / (86400 * 0.2 ) = 139 (QPS)</code></p>
+<p>问：如果一台机器的 <code>QPS</code> 是 <code>58</code> ，需要几台机器来支持？<br>答：<code>139 / 58 = 3</code></p>
+<p>具体的计算公式可以参考这篇文章：<a href="#">峰值 <code>QPS</code> 和机器计算公式</a>。</p>
+<h4 id="六、推荐工具"><a href="#六、推荐工具" class="headerlink" title="六、推荐工具"></a>六、推荐工具</h4><p><a href="https://www.zhihu.com/question/21861449" target="_blank" rel="noopener">压测工具</a>有很多，<code>JMeter</code>，<code>LoadRunner</code>，<code>WebLoad</code>，<code>NeoLoad</code>，<code>Loadster</code>，<code>TcpCopy</code>，<code>AB</code>，<code>WebBench</code> 等等，恐怕一时间无法说完。但是论起上手能力，就要说说我们的主角 <code>wrk</code> 了。</p>
+<p><a href="https://github.com/wg/wrk" target="_blank" rel="noopener"><code>wrk</code></a> 是一款针对 <code>Http</code> 协议的基准测试工具，它能够在单机多核 <code>CPU</code> 的条件下，使用系统自带的高性能 <code>I/O</code> 机制，如 <code>Epoll</code>，<code>Kqueue</code> 等，通过多线程和事件模式，对目标机器产生大量的负载。</p>
+<p>有多容易，我们不妨试试看？</p>
+<p>1.安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/wg/wrk.git  </span><br><span class="line">cd wrk  </span><br><span class="line">make</span><br></pre></td></tr></table></figure></p>
+<p>注意使用 <code>./wrk</code> 命令启动。</p>
+<p>2.基本使用<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wrk -t12 -c400 -d30s http://127.0.0.1:8080/jartto</span><br></pre></td></tr></table></figure></p>
+<p>参数说明：<br><code>-c</code>：<code>HTTP</code> 连接数，每一个线程处理 <code>N</code> = 连接数/线程数<br><code>-d</code>：持续时间，<code>2s</code>，<code>2m</code>，<code>2h</code><br><code>-t</code>：总的线程数<br><code>-s</code>：脚本，可以是 <code>Lua</code> 脚本<br><code>-H</code>：增加 <code>HTTP header</code>，例如：<code>User-Agent: jartto</code><br><code>--latency</code>：输出时间统计的细节<br><code>--timeout</code>：超时时间</p>
+<p>3.输出<br>上面我们使用 <code>12</code> 线程，保持打开 <code>400</code> 个 <code>Http</code> 连接，执行 <code>30s</code>。脚本运行完毕会输出：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Running 30s <span class="built_in">test</span> @ http://127.0.0.1:8080/jartto</span><br><span class="line">  12 threads and 400 connections</span><br><span class="line">  Thread Stats   Avg      Stdev     Max   +/- Stdev</span><br><span class="line">    Latency   635.91us    0.89ms  12.92ms   93.69%</span><br><span class="line">    Req/Sec    56.20k     8.07k   62.00k    86.54%</span><br><span class="line">  22464657 requests <span class="keyword">in</span> 30.00s, 17.76GB <span class="built_in">read</span></span><br><span class="line">Requests/sec: 748868.53</span><br><span class="line">Transfer/sec:    606.33MB</span><br></pre></td></tr></table></figure></p>
+<p>输出说明：<br><code>Latency</code>：响应时间<br><code>Req/Sec</code>：每个线程每秒钟的完成的请求数<br><code>Avg</code>：平均<br><code>Max</code>：最大<br><code>Stdev</code>：标准差<br><code>+/- Stdev</code>： 正负一个标准差占比</p>
+<div class="alert danger"><p>标准差大说明样本离散程度高，系统性能波动大。</p>
+</div>
+<p>在压测过程中，一般线程数不宜过多，<code>CPU</code> 核数的 <code>2-4</code> 倍就可以了。 太多反而因为线程切换过多造成效率降低， 因为 <code>wrk</code> 不是使用每个连接一个线程的模型， 而是通过异步网络 <code>I/O</code> 提升并发量。</p>
+<p>所以网络通信不会阻塞线程执行，这也是 <code>wrk</code> 可以用很少的线程模拟大量网路连接的原因。</p>
+<h4 id="七、高级定制"><a href="#七、高级定制" class="headerlink" title="七、高级定制"></a>七、高级定制</h4><p>到这里，相信文章开头提出的问题，你已经可以很好的回答了。我们不妨继续升级，来一些高级定制。可能很多童鞋注意到了上面文档中提到的 <code>-s</code> 参数了，我们先看看官方文档：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">An optional LuaJIT script can perform HTTP request generation, response processing, </span><br><span class="line">and custom reporting.</span><br></pre></td></tr></table></figure></p>
+<p><code>LuaJIT</code> 脚本可以执行 <code>HTTP</code> 请求生成，响应处理和自定义报告。这里是 <code>Lua</code> 的一些<a href="https://github.com/wg/wrk/tree/master/scripts" target="_blank" rel="noopener">案例</a>。鉴于篇幅过长，本节我们先了解到这里，精彩部分我们就留到<a href="#">下一篇</a>继续探讨吧！</p>
+<p>文章最后，打个小广告吧。如果你想搭上在线教育的快车，快速成长，不妨加入我们。一起成长，一起学习，一起挑战更多有趣的事情，「跟谁学-高途课堂」欢迎你，请将简历私我～</p>
+<!-- `wrk` 中执行 `HTTP` 请求的时候，调用 `Lua` 分为 `3` 个阶段，`setup`，`running`，`done`，每个 `wrk` 线程中都有独立的脚本环境。 -->
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/web/">web</a> <a class="tag tag--primary tag--small t-link" href="/tags/wrk/">wrk</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2020/05/02/webp-practice/" data-tooltip="WebP 方案分析与实践">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2020/03/30/about-web-fmp/" data-tooltip="网站性能指标 - FMP">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2020/04/05/about-wrk/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2020/04/05/about-wrk/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2020/04/05/about-wrk/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2020/05/02/webp-practice/" data-tooltip="WebP 方案分析与实践">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2020/03/30/about-web-fmp/" data-tooltip="网站性能指标 - FMP">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2020/04/05/about-wrk/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2020/04/05/about-wrk/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2020/04/05/about-wrk/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2020/04/05/about-wrk/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2020/04/05/about-wrk/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2020/04/05/about-wrk/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

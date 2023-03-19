@@ -1,0 +1,611 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>初探 Electron - 理论篇 - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="提起构建桌面应用，最先想到的肯定是 NW.js ，但却一直不温不火。直到 Electron 的出现，将这一切推向了巅峰，前端的触手伸向了更为广阔的系统应用。">
+<meta name="keywords" content="electron">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="初探 Electron - 理论篇">
+<meta property="og:url" content="http://jartto.wang/2018/01/03/first-exploration-electron/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="提起构建桌面应用，最先想到的肯定是 NW.js ，但却一直不温不火。直到 Electron 的出现，将这一切推向了巅峰，前端的触手伸向了更为广阔的系统应用。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/electron/start.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/electron/demo.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/electron/desk.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/electron/render.png">
+<meta property="og:updated_time" content="2019-12-19T09:27:04.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="初探 Electron - 理论篇">
+<meta name="twitter:description" content="提起构建桌面应用，最先想到的肯定是 NW.js ，但却一直不温不火。直到 Electron 的出现，将这一切推向了巅峰，前端的触手伸向了更为广阔的系统应用。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/electron/start.jpeg">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/electron0.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/electron0.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            初探 Electron - 理论篇
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2018-01-03T22:17:24+08:00">
+	  
+		    2018/1月/03 22:17:24
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>提起构建桌面应用，最先想到的肯定是 NW.js ，但却一直不温不火。直到 Electron 的出现，将这一切推向了巅峰，前端的触手伸向了更为广阔的系统应用。<br><a id="more"></a></p>
+<div class="alert danger"><p>文章首发于 Jartto’s blog ，转载文章请务必以超链接形式标明文章出处。</p>
+</div>
+<p>Electron5.0 有一些变化，具体可以查看<a href="http://jartto.wang/2019/07/13/use-electron-5/">本文</a>。</p>
+<h4 id="一、Electron-是什么？"><a href="#一、Electron-是什么？" class="headerlink" title="一、Electron 是什么？"></a>一、Electron 是什么？</h4><p><code>Electron</code> 是由 <code>Github</code> 开发，用 <code>HTML</code>，<code>CSS</code> 和 <code>JavaScript</code> 来构建跨平台桌面应用程序的一个开源库。 <code>Electron</code> 通过将 <code>Chromium</code> 和 <code>Node.js</code> 合并到同一个运行时环境中，并将其打包为 <code>Mac</code>，<code>Windows</code> 和 <code>Linux</code> 系统下的应用来实现这一目的。<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/electron/start.jpeg" alt="elctron"></p>
+<div class="alert success"><p><code>Chromium</code> 是 <code>Google</code> 为发展 <code>Chrome</code> 浏览器而启动的开源项目，<code>Chromium</code> 相当于 <code>Chrome</code> 的工程版或称实验版（尽管 <code>Chrome</code> 自身也有 <code>β</code> 版阶段），新功能会率先在 <code>Chromium</code> 上实现，待验证后才会应用在<code>Chrome</code> 上，故 <code>Chrome</code> 的功能会相对落后但较稳定。</p>
+</div>
+<h4 id="二、快速启动"><a href="#二、快速启动" class="headerlink" title="二、快速启动"></a>二、快速启动</h4><div class="alert info"><p>先照着官网的教程快速启动一个项目，这是最简单粗暴的入门步骤。</p>
+</div>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 克隆示例项目的仓库</span></span><br><span class="line">$ git <span class="built_in">clone</span> https://github.com/electron/electron-quick-start</span><br><span class="line"><span class="comment"># 进入这个仓库</span></span><br><span class="line">$ <span class="built_in">cd</span> electron-quick-start</span><br><span class="line"><span class="comment"># 安装依赖并运行</span></span><br><span class="line">$ npm install &amp;&amp; npm start</span><br></pre></td></tr></table></figure>
+<h4 id="三、简单示例"><a href="#三、简单示例" class="headerlink" title="三、简单示例"></a>三、简单示例</h4><p>项目启动后，你会看到一个 <code>Hello World!</code> 应用窗口，很简单，就不细说了。我更感兴趣的是 <code>Electron API Demos app</code> ，大家可以去<a href="https://electronjs.org" target="_blank" rel="noopener">官网下载</a>：</p>
+<p><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/electron/demo.png" alt="Electron API Demos app"></p>
+<p>在 <code>Electron API Demos app</code> 中，我们可以查看官方 API 和 一些 Demo 演示，强烈建议去实际感受一下。只有你知道了它的强大之处，你才会兴奋不已，点燃学习的激情。</p>
+<h4 id="四、目录结构"><a href="#四、目录结构" class="headerlink" title="四、目录结构"></a>四、目录结构</h4><p>好了，言归正传，我们用官方起手项目来做一个简单的说明。先来看看基本目录结构：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── LICENSE.md</span><br><span class="line">├── README.md</span><br><span class="line">├── index.html</span><br><span class="line">├── main.js</span><br><span class="line">├── node_modules</span><br><span class="line">│   ├── @types</span><br><span class="line">│   ├── ajv</span><br><span class="line">│   ├── ansi-regex</span><br><span class="line">│   ├── ...</span><br><span class="line">│   ├── wrappy</span><br><span class="line">│   ├── xtend</span><br><span class="line">│   └── yauzl</span><br><span class="line">├── package.json</span><br><span class="line">└── renderer.js</span><br></pre></td></tr></table></figure></p>
+<p>这里我们主要关注如下这三个文件：<br>1.<code>main.js</code>，也就是整个应用的入口，主要用来创建桌面应用窗口，并监听主进程的事件。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; app, BrowserWindow &#125; = <span class="built_in">require</span>(<span class="string">'electron'</span>)</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>)</span><br><span class="line"><span class="keyword">const</span> url = <span class="built_in">require</span>(<span class="string">'url'</span>)</span><br><span class="line"><span class="keyword">let</span> mainWindow</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createWindow</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  mainWindow = <span class="keyword">new</span> BrowserWindow(&#123;<span class="attr">width</span>: <span class="number">800</span>, <span class="attr">height</span>: <span class="number">600</span>&#125;)</span><br><span class="line">  <span class="comment">// 启动文件入口，如 index.html</span></span><br><span class="line">  mainWindow.loadURL(url.format(&#123;</span><br><span class="line">    pathname: path.join(__dirname, <span class="string">'index.html'</span>),</span><br><span class="line">    protocol: <span class="string">'file:'</span>,</span><br><span class="line">    slashes: <span class="literal">true</span></span><br><span class="line">  &#125;))</span><br><span class="line">  <span class="comment">// 开启 Chromium DevTools</span></span><br><span class="line">  mainWindow.webContents.openDevTools()</span><br><span class="line">  <span class="comment">// 监听窗口关闭事件</span></span><br><span class="line">  mainWindow.on(<span class="string">'closed'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    mainWindow = <span class="literal">null</span></span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 加载就绪</span></span><br><span class="line">app.on(<span class="string">'ready'</span>, createWindow)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 监听所有窗口关闭的事件</span></span><br><span class="line">app.on(<span class="string">'window-all-closed'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (process.platform !== <span class="string">'darwin'</span>) &#123;</span><br><span class="line">    app.quit()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 激活窗口</span></span><br><span class="line">app.on(<span class="string">'activate'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (mainWindow === <span class="literal">null</span>) &#123;</span><br><span class="line">    createWindow()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>2.<code>index.html</code> ，属于渲染进程，单纯的页面而已。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Hello World!<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello World!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 在渲染进程中可以使用所有的 Node.js APIs --&gt;</span></span><br><span class="line">    We are using Node.js <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"><span class="built_in">document</span>.write(process.versions.node)</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span>,</span><br><span class="line">    Chromium <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"><span class="built_in">document</span>.write(process.versions.chrome)</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span>,</span><br><span class="line">    and Electron <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"><span class="built_in">document</span>.write(process.versions.electron)</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span>.</span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">      <span class="comment">// 当然，我们也可以引入其他 js 文件</span></span></span><br><span class="line"><span class="javascript">      <span class="built_in">require</span>(<span class="string">'./renderer.js'</span>)</span></span><br><span class="line"><span class="undefined">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>3.<code>renderer.js</code> ，属于渲染进程，也就是我们页面的业务逻辑所要加载的 <code>JS</code>，简单的例子可能如下。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> myNotification = <span class="keyword">new</span> Notification(<span class="string">'Jartto'</span>, &#123;</span><br><span class="line">  body: <span class="string">'Hello Everybody!'</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">myNotification.onclick = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Click!'</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<div class="alert warning"><p>主进程和渲染进程下文会做具体说明，这里只需理解大致的代码结构即可。</p>
+</div>
+<h4 id="五、整装代发"><a href="#五、整装代发" class="headerlink" title="五、整装代发"></a>五、整装代发</h4><p>在开始 <code>Coding</code> 前，我们需要认识一下桌面应用的基本构成，以及基础模块。这里以 <code>OS X</code> 示例：</p>
+<p><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/electron/desk.png" alt="base modules"></p>
+<p>上图列出了一个桌面应用应该涵盖的基本特征，当然，还有更多无法视觉感知，但却依然重要的底层模块。下文将一一罗列，并尽量用示例说明。</p>
+<div class="alert success"><p><a href="https://github.com/chenfengyanyu/my-web-accumulation/tree/master/electron-quick-start" target="_blank" rel="noopener">代码示例</a>都放在 <code>Github</code> 上，欢迎 <code>Star</code>。</p>
+</div>
+<h4 id="六、主进程与渲染进程"><a href="#六、主进程与渲染进程" class="headerlink" title="六、主进程与渲染进程"></a>六、主进程与渲染进程</h4><div class="alert warning"><p>学习 Electron 最重要的就是要搞懂主进程和渲染进程，否则某个进程的特有方法很可能会调用失败。</p>
+</div>
+<p><code>Electron</code> 中，由 <code>package.json</code> 中的 <code>main.js</code> 运行出来的进程为主进程(Main Process)。主进程用于创建 <code>GUI</code> 界面以便 <code>web</code> 页面的展示。<code>Electron</code> 由 <code>Chromium</code> 负责页面的显示，所以当创建一个页面时，就会对应的创建渲染进程(Renderer Process)。</p>
+<p><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/electron/render.png" alt="Electron Process"></p>
+<p>主进程通过创建 <code>BrowserWindow</code> 对象来创建 <code>web</code> 显示页面，<code>BrowserWindow</code> 运行在他自己的渲染进程中。当 <code>BrowserWindow</code> 被销毁时，对应的渲染进程也会终止。</p>
+<h4 id="七、进程间通信"><a href="#七、进程间通信" class="headerlink" title="七、进程间通信"></a>七、进程间通信</h4><p>既然有两个进程，那么肯定会涉及到进程间相互通讯，这里介绍两个概念：<br>1.<code>Electron ipcMain</code> 模块<br><code>ipcMain</code> 模块是类 <code>EventEmitter</code> 的实例。当在主进程中使用它的时候，它控制着由渲染进程(web page)发送过来的异步或同步消息。从渲染进程发送过来的消息将触发事件。</p>
+<p>2.<code>Electron ipcRenderer</code> 模块<br><code>pcRenderer</code> 模块是一个 <code>EventEmitter</code> 类的实例。它提供了有限的方法，你可以从渲染进程向主进程发送同步或异步消息。也可以收到主进程的相应。</p>
+<p>在主进程中，也就是 <code>main.js</code> 中，添加如下代码：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 主进程</span></span><br><span class="line"><span class="keyword">const</span> ipcMain = <span class="built_in">require</span>(<span class="string">'electron'</span>).ipcMain;</span><br><span class="line">ipcMain.on(<span class="string">'asynchronous-message'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">event, arg</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(arg);  <span class="comment">// prints "ping"</span></span><br><span class="line">  event.sender.send(<span class="string">'asynchronous-reply'</span>, <span class="string">'pong'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">ipcMain.on(<span class="string">'synchronous-message'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">event, arg</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(arg);  <span class="comment">// prints "ping"</span></span><br><span class="line">  event.returnValue = <span class="string">'pong'</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>在渲染进程，也就是 <code>ipc/index.js</code> 文件中添加如下代码：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 渲染进程 (web page).</span></span><br><span class="line"><span class="keyword">const</span> ipcRenderer = <span class="built_in">require</span>(<span class="string">'electron'</span>).ipcRenderer;</span><br><span class="line"><span class="built_in">console</span>.log(ipcRenderer.sendSync(<span class="string">'synchronous-message'</span>, <span class="string">'sync-ping'</span>)); <span class="comment">// prints "pong"</span></span><br><span class="line"></span><br><span class="line">ipcRenderer.on(<span class="string">'asynchronous-reply'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">event, arg</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(arg); <span class="comment">// prints "pong"</span></span><br><span class="line">&#125;);</span><br><span class="line">ipcRenderer.send(<span class="string">'asynchronous-message'</span>, <span class="string">'async-ping'</span>);</span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p>详细代码可以查看<a href="https://github.com/chenfengyanyu/my-web-accumulation/tree/master/electron-quick-start" target="_blank" rel="noopener">代码示例：ipc </a></p>
+</div>
+<p>还有一种进程间的通讯方式：<code>Electron remote</code> 模块。<br><div class="alert success"><p><code>remote</code> 模块提供了一种在渲染进程（网页）和主进程之间进行进程间通讯（IPC）的简便途径。</p>
+</div></p>
+<p>通过 <code>remote</code> 调用主进程中 <code>BrowserWindow</code> 来创建应用窗口：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 渲染进程</span></span><br><span class="line"><span class="keyword">const</span> remote = <span class="built_in">require</span>(<span class="string">'electron'</span>).remote;</span><br><span class="line"><span class="keyword">const</span> BrowserWindow = remote.BrowserWindow;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> win = <span class="keyword">new</span> BrowserWindow(&#123; <span class="attr">width</span>: <span class="number">100</span>, <span class="attr">height</span>: <span class="number">100</span> &#125;);</span><br><span class="line">win.loadURL(<span class="string">'http://www.jartto.wang'</span>);</span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p>详细代码可以查看<a href="https://github.com/chenfengyanyu/my-web-accumulation/tree/master/electron-quick-start" target="_blank" rel="noopener">代码示例：remote </a></p>
+</div>
+<h4 id="八、BrowserWindow-模块"><a href="#八、BrowserWindow-模块" class="headerlink" title="八、BrowserWindow 模块"></a>八、BrowserWindow 模块</h4><p>在主进程 <code>main.js</code> 中，我们也看到了 <code>BrowserWindow</code> 的使用，简单的调用窗口很容易，更复杂的应用可能需要我们去翻阅<a href="https://electronjs.org/docs/api/browser-window" target="_blank" rel="noopener">文档</a>，熟读 <code>API</code>。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在主进程中.</span></span><br><span class="line"><span class="keyword">const</span> &#123;BrowserWindow&#125; = <span class="built_in">require</span>(<span class="string">'electron'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 或者从渲染进程中使用 `remote`.</span></span><br><span class="line"><span class="comment">// const &#123;BrowserWindow&#125; = require('electron').remote</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> win = <span class="keyword">new</span> BrowserWindow(&#123;<span class="attr">width</span>: <span class="number">800</span>, <span class="attr">height</span>: <span class="number">600</span>&#125;)</span><br><span class="line">win.on(<span class="string">'closed'</span>, () =&gt; &#123;</span><br><span class="line">  win = <span class="literal">null</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 加载远程 URL</span></span><br><span class="line">win.loadURL(<span class="string">'http://jartto.wang'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 或加载本地 HTML 文件</span></span><br><span class="line">win.loadURL(<span class="string">`file://<span class="subst">$&#123;__dirname&#125;</span>/app/index.html`</span>)</span><br></pre></td></tr></table></figure></p>
+<h4 id="九、使用-Webview"><a href="#九、使用-Webview" class="headerlink" title="九、使用 Webview"></a>九、使用 Webview</h4><p>与 <code>iframe</code> 不同，<code>webview</code> 和你的应用运行的是不同的进程。它不拥有渲染进程的权限，并且应用和嵌入内容之间的交互全部都是异步的，因为这能保证应用的安全性不受嵌入内容的影响。</p>
+<p><code>webview</code> 运行在渲染进程中，我们添加如下的 <code>js</code> 代码：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> webview = <span class="built_in">document</span>.getElementById(<span class="string">"foo"</span>);</span><br><span class="line">  <span class="keyword">var</span> indicator = <span class="built_in">document</span>.querySelector(<span class="string">".indicator"</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> loadstart = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    indicator.innerText = <span class="string">"loading..."</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">var</span> loadstop = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    indicator.innerText = <span class="string">""</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  webview.addEventListener(<span class="string">"did-start-loading"</span>, loadstart);</span><br><span class="line">  webview.addEventListener(<span class="string">"did-stop-loading"</span>, loadstop);</span><br><span class="line">  webview.addEventListener(<span class="string">"dom-ready"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// webview.openDevTools();</span></span><br><span class="line">    <span class="built_in">console</span>.log(webview.getTitle());</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>并在 <code>html</code> 中添加两个容器：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"indicator"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">webview</span> <span class="attr">id</span>=<span class="string">"foo"</span> <span class="attr">src</span>=<span class="string">"http://www.jartto.wang/"</span>&gt;</span><span class="tag">&lt;/<span class="name">webview</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>为了避免太过丑陋，我们增加如下 css 代码：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">body</span> &#123; <span class="attribute">margin</span>: <span class="number">0</span>; &#125;</span><br><span class="line"><span class="selector-id">#foo</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100vh</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>ok，<code>webview</code> 的使用就这么简单的搞定了。</p>
+<div class="alert info"><p>详细代码可以查看<a href="https://github.com/chenfengyanyu/my-web-accumulation/tree/master/electron-quick-start" target="_blank" rel="noopener">代码示例：webview </a></p>
+</div>
+<h4 id="十、Dialog-模块"><a href="#十、Dialog-模块" class="headerlink" title="十、Dialog 模块"></a>十、Dialog 模块</h4><p><code>Dialog</code> 模块提供了 <code>API</code> 来展示原生的系统对话框，例如打开文件框，<code>alert</code> 框，这样 <code>web</code> 应用可以给用户带来跟系统应用相同的体验。下面给出简单的示例：</p>
+<p>1.打开选择文件和目录<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> win = ...;  <span class="comment">// BrowserWindow in which to show the dialog</span></span><br><span class="line"><span class="keyword">const</span> dialog = <span class="built_in">require</span>(<span class="string">'electron'</span>).dialog;</span><br><span class="line"><span class="built_in">console</span>.log(dialog.showOpenDialog(&#123; <span class="attr">properties</span>: [ <span class="string">'openFile'</span>, <span class="string">'openDirectory'</span>, <span class="string">'multiSelections'</span> ]&#125;));</span><br></pre></td></tr></table></figure></p>
+<p>2.错误框提示<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> dialog = <span class="built_in">require</span>(<span class="string">'electron'</span>).dialog;</span><br><span class="line">dialog.showErrorBox(<span class="string">'Jartto'</span>, <span class="string">'Hello world'</span>);</span><br><span class="line"><span class="comment">// 或者传入更多的参数</span></span><br><span class="line"><span class="comment">// console.log(dialog.showMessageBox(&#123;</span></span><br><span class="line"><span class="comment">//   browserWindow: mainWindow,</span></span><br><span class="line"><span class="comment">//   options: &#123;</span></span><br><span class="line"><span class="comment">//     type: 'error',</span></span><br><span class="line"><span class="comment">//     title: 'Jartto',</span></span><br><span class="line"><span class="comment">//     message: 'Hello World',</span></span><br><span class="line"><span class="comment">//   &#125;</span></span><br><span class="line"><span class="comment">// &#125;));</span></span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p>详细代码可以查看<a href="https://github.com/chenfengyanyu/my-web-accumulation/tree/master/electron-quick-start" target="_blank" rel="noopener">代码示例：main.js </a></p>
+</div>
+<h4 id="十一、Global-Shortcut-模块"><a href="#十一、Global-Shortcut-模块" class="headerlink" title="十一、Global-Shortcut 模块"></a>十一、Global-Shortcut 模块</h4><p><code>global-shortcut</code> 模块可以便捷的为您设置(注册/注销)各种自定义操作的快捷键，下面我们来为应用注册一个 <code>ctrl+x</code> 的全局快捷键，当我们按下快捷键，系统弹窗消息反馈给我们：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> globalShortcut = <span class="built_in">require</span>(<span class="string">'electron'</span>).globalShortcut;</span><br><span class="line"><span class="keyword">const</span> dialog = <span class="built_in">require</span>(<span class="string">'electron'</span>).dialog;</span><br><span class="line"></span><br><span class="line">app.on(<span class="string">'ready'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  createWindow();</span><br><span class="line">  <span class="comment">// Register a 'ctrl+x' shortcut listener.</span></span><br><span class="line">  <span class="keyword">var</span> ret = globalShortcut.register(<span class="string">'ctrl+x'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    dialog.showErrorBox(<span class="string">'Jartto'</span>, <span class="string">'ctrl+x is pressed'</span>)</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (!ret) &#123;</span><br><span class="line">    dialog.showErrorBox(<span class="string">'Jartto'</span>, <span class="string">'registration failed'</span>)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Check whether a shortcut is registered.</span></span><br><span class="line">  <span class="built_in">console</span>.log(globalShortcut.isRegistered(<span class="string">'ctrl+x'</span>));</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">app.on(<span class="string">'will-quit'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// Unregister a shortcut.</span></span><br><span class="line">  globalShortcut.unregister(<span class="string">'ctrl+x'</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Unregister all shortcuts.</span></span><br><span class="line">  globalShortcut.unregisterAll();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p>详细代码可以查看<a href="https://github.com/chenfengyanyu/my-web-accumulation/tree/master/electron-quick-start" target="_blank" rel="noopener">代码示例：main.js </a></p>
+</div>
+<h4 id="十二、Menu-模块"><a href="#十二、Menu-模块" class="headerlink" title="十二、Menu 模块"></a>十二、Menu 模块</h4><p><code>Menu</code> 分为三种，每种菜单的用法也不一样，下面我们分别举例说明：<br>1.系统菜单<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 窗口菜单</span></span><br><span class="line"><span class="keyword">const</span> remote = <span class="built_in">require</span>(<span class="string">'electron'</span>).remote;</span><br><span class="line"><span class="keyword">const</span> Menu = remote.Menu;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> template = [...]; <span class="comment">// 省略参数，具体请查看 demo</span></span><br><span class="line"><span class="keyword">let</span> menu = Menu.buildFromTemplate(template);</span><br><span class="line"></span><br><span class="line">Menu.setApplicationMenu(menu);</span><br></pre></td></tr></table></figure></p>
+<p>2.上下文菜单<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> remote = <span class="built_in">require</span>(<span class="string">'electron'</span>).remote;</span><br><span class="line"><span class="keyword">const</span> Menu = remote.Menu;</span><br><span class="line"><span class="keyword">const</span> MenuItem = remote.MenuItem;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 右键菜单</span></span><br><span class="line"><span class="keyword">var</span> menu = <span class="keyword">new</span> Menu();</span><br><span class="line">menu.append(<span class="keyword">new</span> MenuItem(&#123; <span class="attr">label</span>: <span class="string">'MenuItem1'</span>, <span class="attr">click</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="built_in">console</span>.log(<span class="string">'item 1 clicked'</span>); &#125; &#125;));</span><br><span class="line">menu.append(<span class="keyword">new</span> MenuItem(&#123; <span class="attr">type</span>: <span class="string">'separator'</span> &#125;));</span><br><span class="line">menu.append(<span class="keyword">new</span> MenuItem(&#123; <span class="attr">label</span>: <span class="string">'MenuItem2'</span>, <span class="attr">type</span>: <span class="string">'checkbox'</span>, <span class="attr">checked</span>: <span class="literal">true</span> &#125;));</span><br><span class="line"></span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">'contextmenu'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">  e.preventDefault();</span><br><span class="line">  menu.popup(remote.getCurrentWindow());</span><br><span class="line">&#125;, <span class="literal">false</span>);</span><br></pre></td></tr></table></figure></p>
+<p>3.托盘菜单<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> appIcon = <span class="keyword">new</span> Tray(path.normalize(__dirname + <span class="string">'/image/icon.png'</span>));</span><br><span class="line"><span class="keyword">let</span> contextMenu = Menu.buildFromTemplate([</span><br><span class="line">  &#123; <span class="attr">label</span>: <span class="string">'菜单一'</span>, <span class="attr">type</span>: <span class="string">'radio'</span> &#125;,</span><br><span class="line">  &#123; <span class="attr">label</span>: <span class="string">'菜单二'</span>, <span class="attr">type</span>: <span class="string">'radio'</span> &#125;,</span><br><span class="line">  &#123; <span class="attr">label</span>: <span class="string">'菜单三'</span>, <span class="attr">type</span>: <span class="string">'radio'</span>, <span class="attr">checked</span>: <span class="literal">true</span> &#125;,</span><br><span class="line">  &#123; <span class="attr">label</span>: <span class="string">'关于'</span>, <span class="attr">type</span>: <span class="string">'radio'</span> &#125;</span><br><span class="line">]);</span><br><span class="line"></span><br><span class="line">appIcon.setContextMenu(contextMenu);</span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p>详细代码可以查看<a href="https://github.com/chenfengyanyu/my-web-accumulation/tree/master/electron-quick-start" target="_blank" rel="noopener">代码示例：menu </a></p>
+</div>
+<h4 id="十三、Electron-power-monitor"><a href="#十三、Electron-power-monitor" class="headerlink" title="十三、Electron power-monitor"></a>十三、Electron power-monitor</h4><p><code>power-monitor</code> 模块是用来监听能源区改变的。只能在主进程中使用。在 <code>app</code> 模块的 <code>ready</code> 事件触发之后就不能使用这个模块了。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 能源区变化，系统挂起和恢复，交流电和电池切换时</span></span><br><span class="line"><span class="built_in">require</span>(<span class="string">'electron'</span>).powerMonitor.on(<span class="string">'suspend'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'The system is going to sleep'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">require</span>(<span class="string">'electron'</span>).powerMonitor.on(<span class="string">'on-ac'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'The system is using AC power'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p>详细代码可以查看<a href="https://github.com/chenfengyanyu/my-web-accumulation/tree/master/electron-quick-start" target="_blank" rel="noopener">代码示例：main.js </a></p>
+</div>
+<h4 id="十四、系统托盘-Tray"><a href="#十四、系统托盘-Tray" class="headerlink" title="十四、系统托盘 Tray"></a>十四、系统托盘 Tray</h4><p>在 OS X 中，托盘一般会出现在显示器右上角的位置，一个简单的示例可能如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">appIcon = <span class="keyword">new</span> Tray(path.normalize(__dirname + <span class="string">'/image/icon.png'</span>));</span><br><span class="line"><span class="keyword">var</span> contextMenu = Menu.buildFromTemplate([</span><br><span class="line">  &#123; <span class="attr">label</span>: <span class="string">'Item1'</span>, <span class="attr">type</span>: <span class="string">'radio'</span> &#125;,</span><br><span class="line">  &#123; <span class="attr">label</span>: <span class="string">'Item2'</span>, <span class="attr">type</span>: <span class="string">'radio'</span> &#125;,</span><br><span class="line">  &#123; <span class="attr">label</span>: <span class="string">'Item3'</span>, <span class="attr">type</span>: <span class="string">'radio'</span>, <span class="attr">checked</span>: <span class="literal">true</span> &#125;,</span><br><span class="line">  &#123; <span class="attr">label</span>: <span class="string">'Item4'</span>, <span class="attr">type</span>: <span class="string">'radio'</span> &#125;</span><br><span class="line">]);</span><br><span class="line"><span class="built_in">console</span>.log(appIcon);</span><br><span class="line">appIcon.setToolTip(<span class="string">'This is my application.'</span>);</span><br><span class="line">appIcon.setContextMenu(contextMenu);</span><br></pre></td></tr></table></figure></p>
+<p>如果想同时支持展示不同分辨率的图片，你可以将拥有不同 <code>size</code> 的图片放在同一个文件夹下，不用 <code>DPI</code> 后缀.例如 :<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">images/</span><br><span class="line">├── icon.png</span><br><span class="line">├── icon@2x.png</span><br><span class="line">└── icon@3x.png</span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p>详细代码可以查看<a href="https://github.com/chenfengyanyu/my-web-accumulation/tree/master/electron-quick-start" target="_blank" rel="noopener">代码示例：main.js </a></p>
+</div>
+<h4 id="十五、Electron-desktopCapturer-模块"><a href="#十五、Electron-desktopCapturer-模块" class="headerlink" title="十五、Electron desktopCapturer 模块"></a>十五、Electron desktopCapturer 模块</h4><p><code>desktopCapturer</code> 模块可用来获取可用资源，这个资源可通过 <code>getUserMedia</code> 捕获得到。这样，我们就可以随便捕获其他的窗口，以及显示屏内容了。这里我们来抓取名称是 <code>Screen 2</code> 的屏幕，代码如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在渲染进程中.</span></span><br><span class="line"><span class="keyword">var</span> desktopCapturer = <span class="built_in">require</span>(<span class="string">'electron'</span>).desktopCapturer;</span><br><span class="line"></span><br><span class="line">desktopCapturer.getSources(&#123;<span class="attr">types</span>: [<span class="string">'window'</span>, <span class="string">'screen'</span>]&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">error, sources</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'sources'</span>, sources);</span><br><span class="line">  <span class="keyword">if</span> (error) <span class="keyword">throw</span> error;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; sources.length; ++i) &#123;</span><br><span class="line">    <span class="keyword">if</span> (sources[i].name == <span class="string">"Screen 2"</span>) &#123;</span><br><span class="line">      navigator.webkitGetUserMedia(&#123;</span><br><span class="line">        audio: <span class="literal">false</span>,</span><br><span class="line">        video: &#123;</span><br><span class="line">          mandatory: &#123;</span><br><span class="line">            chromeMediaSource: <span class="string">'desktop'</span>,</span><br><span class="line">            chromeMediaSourceId: sources[i].id,</span><br><span class="line">            minWidth: <span class="number">1280</span>,</span><br><span class="line">            maxWidth: <span class="number">1280</span>,</span><br><span class="line">            minHeight: <span class="number">720</span>,</span><br><span class="line">            maxHeight: <span class="number">720</span></span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;, gotStream, getUserMediaError);</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">gotStream</span>(<span class="params">stream</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(stream, <span class="string">'stream'</span>);</span><br><span class="line">  <span class="built_in">document</span>.querySelector(<span class="string">'video'</span>).src = URL.createObjectURL(stream);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getUserMediaError</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'getUserMediaError'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在 <code>html</code> 中，需要添加 <code>video</code> 元素：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">video</span>&gt;</span> desktop capturer <span class="tag">&lt;/<span class="name">video</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>学习过程中，我尝试了去捕获一个视频窗口，这样的话，我们就可以抓取不同窗口的内容放在同一个窗口中，是不是有点类似监控系统呢。</p>
+<p><code>sources</code> 是一个 <code>Source</code> 对象数组, 每个 <code>Source</code> 表示了一个捕获的屏幕或单独窗口，并且有如下属性 :</p>
+<ul>
+<li>id String - 在 navigator.webkitGetUserMedia 中使用的捕获窗口或屏幕的 id . 格式为 window:XX 或 screen:XX，XX 是一个随机数.</li>
+<li>name String - 捕获窗口或屏幕的描述名 . 如果资源为屏幕，名字为 Entire Screen 或 Screen <index>; 如果资源为窗口, 名字为窗口的标题.</index></li>
+<li>thumbnail NativeImage - 缩略图.</li>
+</ul>
+<div class="alert info"><p>详细代码可以查看<a href="https://github.com/chenfengyanyu/my-web-accumulation/tree/master/electron-quick-start" target="_blank" rel="noopener">代码示例：desktopCapturer </a></p>
+</div>
+<h4 id="十六、Electron-webFrame-模块"><a href="#十六、Electron-webFrame-模块" class="headerlink" title="十六、Electron webFrame 模块"></a>十六、Electron webFrame 模块</h4><p>接着继续上面的话题，我们要将所有窗口都捕获在一个窗口显示，那么你可能会用到 <code>web-frame</code> ，该模块允许你自定义如何渲染当前网页。例如，放大当前页到 <code>200%</code>。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> webFrame = <span class="built_in">require</span>(<span class="string">'electron'</span>).webFrame;</span><br><span class="line">webFrame.setZoomFactor(<span class="number">2</span>);</span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p>详细代码可以查看<a href="https://github.com/chenfengyanyu/my-web-accumulation/tree/master/electron-quick-start" target="_blank" rel="noopener">代码示例：webFrame </a></p>
+</div>
+<h4 id="十七、Electron-clipboard-模块"><a href="#十七、Electron-clipboard-模块" class="headerlink" title="十七、Electron clipboard 模块"></a>十七、Electron clipboard 模块</h4><p><code>clipboard</code> 模块提供方法来供复制和粘贴操作，非常实用的一个功能。下面例子展示了如何将一个字符串写入 <code>clipboard</code> :<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> clipboard = <span class="built_in">require</span>(<span class="string">'electron'</span>).clipboard;</span><br><span class="line">clipboard.writeText(<span class="string">'Hello Jartto!'</span>);</span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p>详细代码可以查看<a href="https://github.com/chenfengyanyu/my-web-accumulation/tree/master/electron-quick-start" target="_blank" rel="noopener">代码示例：clipboard </a></p>
+</div>
+<h4 id="十八、Electron-crashReporter-模块"><a href="#十八、Electron-crashReporter-模块" class="headerlink" title="十八、Electron crashReporter 模块"></a>十八、Electron crashReporter 模块</h4><p><code>crash-reporter</code> 模块开启发送应用崩溃报告，这个就没什么好说了，收集反馈信息为了更好的用户体验。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> crashReporter = <span class="built_in">require</span>(<span class="string">'electron'</span>).crashReporter;</span><br><span class="line"></span><br><span class="line">crashReporter.start(&#123;</span><br><span class="line">  productName: <span class="string">'Jartto'</span>,</span><br><span class="line">  companyName: <span class="string">'Jartto blog'</span>,</span><br><span class="line">  submitURL: <span class="string">'http://jartto.com/url-to-submit'</span>,</span><br><span class="line">  autoSubmit: <span class="literal">true</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<h4 id="十九、Electron-screen-模块"><a href="#十九、Electron-screen-模块" class="headerlink" title="十九、Electron screen 模块"></a>十九、Electron screen 模块</h4><p><code>screen</code> 模块检索屏幕的 <code>size</code>，显示，鼠标位置等的信息。在 <code>app</code> 模块的 <code>ready</code> 事件触发之前不可使用这个模块。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> electron = <span class="built_in">require</span>(<span class="string">'electron'</span>);</span><br><span class="line"><span class="keyword">const</span> app = electron.app;</span><br><span class="line"><span class="keyword">const</span> BrowserWindow = electron.BrowserWindow;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> mainWindow;</span><br><span class="line"></span><br><span class="line">app.on(<span class="string">'ready'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> electronScreen = electron.screen;</span><br><span class="line">  <span class="keyword">var</span> size = electronScreen.getPrimaryDisplay().workAreaSize;</span><br><span class="line">  mainWindow = <span class="keyword">new</span> BrowserWindow(&#123; <span class="attr">width</span>: size.width, <span class="attr">height</span>: size.height &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<h4 id="二十、Electron-shell-模块"><a href="#二十、Electron-shell-模块" class="headerlink" title="二十、Electron shell 模块"></a>二十、Electron shell 模块</h4><p><code>shell</code> 模块提供了集成其他桌面客户端的关联功能。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">在渲染进程中使用</span><br><span class="line"><span class="keyword">const</span> &#123; shell &#125; = <span class="built_in">require</span>(<span class="string">'electron'</span>)</span><br><span class="line"><span class="comment">// 播放声音</span></span><br><span class="line">shell.beep();</span><br><span class="line"><span class="comment">// shell.openItem('/Users/Jartto/Documents/my-demo');</span></span><br><span class="line">shell.openExternal(<span class="string">'http://jartto.wang'</span>);</span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p>详细代码可以查看<a href="https://github.com/chenfengyanyu/my-web-accumulation/tree/master/electron-quick-start" target="_blank" rel="noopener">代码示例：shell </a></p>
+</div>
+<h4 id="二十一、Notification-通知模块"><a href="#二十一、Notification-通知模块" class="headerlink" title="二十一、Notification 通知模块"></a>二十一、Notification 通知模块</h4><p>所有三个操作系统都提供了应用程序向用户发送通知的手段。 <code>Electron</code> 允许开发者使用 <code>HTML5 Notification API</code> 发送通知，并使用当前运行的操作系统的本地通知 <code>API</code> 来显示它。<br><div class="alert danger"><p>注意: 由于这是一个 HTML5 API，它只能在渲染器进程中使用。 如果你想在主进程中显示通知，请查看 Notification 模块.</p>
+</div><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> myNotification = <span class="keyword">new</span> Notification(<span class="string">'Jartto'</span>, &#123;</span><br><span class="line">  body: <span class="string">'Hello Everybody!'</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">myNotification.onclick = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'通知被点击'</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p>详细代码可以查看<a href="https://github.com/chenfengyanyu/my-web-accumulation/tree/master/electron-quick-start" target="_blank" rel="noopener">代码示例：notification </a></p>
+</div>
+<h4 id="二十二、在-Dock-中显示"><a href="#二十二、在-Dock-中显示" class="headerlink" title="二十二、在 Dock 中显示"></a>二十二、在 Dock 中显示</h4><p>在 <code>OS X</code> 中 <code>Dock</code> 默认会被打开，我们还可以在主进程中做一些额外的控制，如隐藏、设置菜单等操作。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">app.dock.hide();</span><br><span class="line">app.dock.setMenu(menu);</span><br></pre></td></tr></table></figure></p>
+<h4 id="二十三、Demo-汇总"><a href="#二十三、Demo-汇总" class="headerlink" title="二十三、Demo 汇总"></a>二十三、Demo 汇总</h4><p>所有的示例代码都在这里，为了方便切换启动页面，我们通过不同的目录来区分，你只需要更改 <code>main.js</code> 中 <code>path</code> 中的路径即可，如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mainWindow.loadURL(url.format(&#123;</span><br><span class="line">  pathname: path.join(__dirname, <span class="string">'$&#123;dir-name&#125;/index.html'</span>),</span><br><span class="line">  protocol: <span class="string">'file:'</span>,</span><br><span class="line">  slashes: <span class="literal">true</span></span><br><span class="line">&#125;))</span><br></pre></td></tr></table></figure></p>
+<p><code>Demo</code> 目录结构如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── LICENSE.md</span><br><span class="line">├── README.md</span><br><span class="line">├── clipboard</span><br><span class="line">│   ├── index.html</span><br><span class="line">│   └── index.js</span><br><span class="line">├── desktopCapturer</span><br><span class="line">│   ├── index.css</span><br><span class="line">│   ├── index.html</span><br><span class="line">│   └── index.js</span><br><span class="line">├── file</span><br><span class="line">│   ├── index.html</span><br><span class="line">│   └── index.js</span><br><span class="line">├── image</span><br><span class="line">│   ├── icon.png</span><br><span class="line">│   ├── icon@1x.png</span><br><span class="line">│   └── icon@2x.png</span><br><span class="line">├── index.html</span><br><span class="line">├── ipc</span><br><span class="line">│   ├── index.html</span><br><span class="line">│   └── index.js</span><br><span class="line">├── main.js</span><br><span class="line">├── menu</span><br><span class="line">│   ├── index.html</span><br><span class="line">│   ├── index.js</span><br><span class="line">│   └── index1.js</span><br><span class="line">├── node_modules</span><br><span class="line">│   ├── @types</span><br><span class="line">│   ├── _@types_node@7.0.50@@types</span><br><span class="line">│   ├── _ajv@5.5.2@ajv</span><br><span class="line">│   ├── ...</span><br><span class="line">│   ├── wrappy</span><br><span class="line">│   ├── xtend</span><br><span class="line">│   └── yauzl</span><br><span class="line">├── notification</span><br><span class="line">│   ├── index.html</span><br><span class="line">│   └── index.js</span><br><span class="line">├── offline</span><br><span class="line">│   └── index.html</span><br><span class="line">├── package.json</span><br><span class="line">├── remote</span><br><span class="line">│   ├── index.html</span><br><span class="line">│   └── index.js</span><br><span class="line">├── renderer.js</span><br><span class="line">├── shell</span><br><span class="line">│   ├── index.html</span><br><span class="line">│   └── index.js</span><br><span class="line">├── webFrame</span><br><span class="line">│   ├── index.html</span><br><span class="line">│   └── index.js</span><br><span class="line">└── webview</span><br><span class="line">    ├── index.html</span><br><span class="line">    └── index.js</span><br></pre></td></tr></table></figure></p>
+<p>你可以更改 <code>${dir-name}</code> 来切换不同的启动项，查看演示。</p>
+<h4 id="二十四、代码调试"><a href="#二十四、代码调试" class="headerlink" title="二十四、代码调试"></a>二十四、代码调试</h4><p>要开发一个完整的 <code>Electron</code> 应用，肯定会用到代码调试，这里暂且分为两部分调试：<br>1.对 <code>GUI</code> 的调试，也就是主进程的调试，可以借助开发工具，这里我用 <code>VS Code</code> 来举例说明：</p>
+<ul>
+<li>在 <code>.vscode</code> 目录下添加 <code>launch.json</code> 文件，如果有的话，直接第二步；</li>
+<li><p>打开 <code>launch.json</code>，写入如下配置；</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"version"</span>: <span class="string">"0.2.0"</span>,</span><br><span class="line">  <span class="attr">"configurations"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"type"</span>: <span class="string">"node"</span>,</span><br><span class="line">      <span class="attr">"request"</span>: <span class="string">"launch"</span>,</span><br><span class="line">      <span class="attr">"name"</span>: <span class="string">"Electron Main"</span>,</span><br><span class="line">      <span class="attr">"protocol"</span>: <span class="string">"auto"</span>,</span><br><span class="line">      <span class="attr">"program"</span>: <span class="string">"$&#123;workspaceFolder&#125;/electron-quick-start/main.js"</span></span><br><span class="line">    &#125;,</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>运行 <code>debug</code>，就可以了;</p>
+</li>
+</ul>
+<p>2.渲染进程调试，可以开启调试工具：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 主进程中使用</span></span><br><span class="line">mainWindow.webContents.openDevTools()</span><br></pre></td></tr></table></figure></p>
+<p>之后的调试就向你在 <code>Chrome</code> 中使用 <code>DevTool</code> 一样，简单而又高效。</p>
+<h4 id="二十五、打包发布"><a href="#二十五、打包发布" class="headerlink" title="二十五、打包发布"></a>二十五、打包发布</h4><div class="alert success"><p><code>Electron</code> 应用开发完成之后，打包生产相应平台应用，通常推荐的工具有 <code>electron-packager</code> 和 <code>asar</code>。</p>
+</div>
+<p>1.用 <code>electron-packager</code> 为所有系统打包你的应用很简单。简单来说，<code>electron-packager</code> 帮你完成所有用<code>Electron</code> 打包你应用的工作，最终生成你要发布的平台的安装包。</p>
+<p>它可以作为 <code>CLI</code> 应用或构建过程的一部分，更复杂的构建情况不在本文所涉及范围内，但我们如果能用打包脚本，会使打包更简单。用 <code>electron-packager</code> 比较麻烦，打包应用的基本命令是：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">electron-packager &lt;location of project&gt; &lt;name of project&gt; &lt;platform&gt; &lt;architecture&gt; &lt;electron version&gt; &lt;optional options&gt;</span><br></pre></td></tr></table></figure></p>
+<p>具体的参数说明如下：</p>
+<ul>
+<li><code>location of project</code> 是你项目文件夹的位置；</li>
+<li><code>name of project</code> 定义你的项目名；</li>
+<li><code>platform</code> 决定要构建的平台（<em>all</em> 包括 Windows ，Mac 和 Linux ）；</li>
+<li><code>architecture</code> 决定构建哪个构架下（x86或x64，all表示两者）；</li>
+<li><code>electron version</code> 让你选择要用的 <code>Electron</code> 版本；</li>
+</ul>
+<div class="alert warning"><p>第一次打包用时比较久，因为要下载平台的二进制文件，随后的打包将会快的多。</p>
+</div>
+<p>在 <code>OS X</code> 下打包应用的命令如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">electron-packager ~/Projects/jartto-demo MyElectron --all --version=0.30.2 --out=~/Desktop --overwrite --icon=~/Projects/jartto-demo/app/img/app-icon.icns</span><br></pre></td></tr></table></figure></p>
+<p>命令的选项理解起来都比较简单。为了获得精美的图标，你首先要找一款类似这个软件可以把 <code>PNG</code> 文件转换到这些格式的工具，把它转换成 <code>.icns</code> 格式（ <code>Mac</code> 用）或者 <code>.ico</code> 格式（ <code>Window</code> 用）。如果在非 <code>Windows</code> 系统给<code>Windows</code> 平台的应用打包，你需要安装 <code>wine</code>（ <code>Mac</code> 用户用 <code>brew</code> ，<code>Linux</code> 用户用 <code>apt-get</code>）。</p>
+<p>每次都打这么长的命令很不方便，可以在 <code>package.json</code> 中加另一个脚本。首先，把 <code>electron-packager</code> 作为开发依赖安装：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev electron-packager</span><br></pre></td></tr></table></figure></p>
+<p>现在我们可以在 <code>package.json</code> 中添加脚本：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">"scripts": &#123;</span><br><span class="line">  "start": "electron .",</span><br><span class="line">  "package": "electron-packager ./ MyElectron --all --out ~/Desktop/jartto-demo --version 0.30.2 --overwrite --icon=./app/img/app-icon.icns"</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在命令行里执行下面的命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run-script package</span><br></pre></td></tr></table></figure></p>
+<p>这个打包命令会启动 <code>electron-packager</code>，在当前目录下找到目标应用文件，打包，保存到桌面。如果你用的是<code>Windows</code> 系统，需要修改脚本，不过改动很小。</p>
+<p>2.使用 <code>asar</code><br>安装 <code>asar</code><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm i asar -g</span><br><span class="line">npm i asar --save-dev</span><br></pre></td></tr></table></figure></p>
+<p>编辑 <code>package.json</code><br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">"scripts": &#123;</span><br><span class="line">    "start": "electron .",</span><br><span class="line">    "build": "electron-packager . MyFirstApp --ignore=node_modules/electron-* --platform=win32 --arch=x64 --version=0.32.3",</span><br><span class="line">    "package": "asar pack MyFirstApp-win32-x64/resources/app MyFirstApp-win32-x64/resources/app.asar &amp;&amp; rm -rf MyFirstApp-win32-x64/resources/app"</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>然后执行：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run package</span><br></pre></td></tr></table></figure></p>
+<h4 id="二十六、Electron-源代码结构"><a href="#二十六、Electron-源代码结构" class="headerlink" title="二十六、Electron 源代码结构"></a>二十六、Electron 源代码结构</h4><div class="alert success"><p>当然，如果你需要深入了解 <code>Electron</code> ，官方也提供了一些帮助，我们可以通过如下的结构来深入学习。</p>
+</div>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">Electron</span><br><span class="line">├──atom - Electron 的源代码</span><br><span class="line">|  ├── app - 系统入口代码</span><br><span class="line">|  ├── browser - 包含了主窗口、UI 和其他所有与主进程有关的东西，它会告诉渲染进程如何管理页面</span><br><span class="line">|  |   ├── lib - 主进程初始化代码中 JavaScript 部分的代码</span><br><span class="line">|  |   ├── ui - 不同平台上 UI 部分的实现</span><br><span class="line">|  |   |   ├── cocoa - Cocoa 部分的源代码</span><br><span class="line">|  |   |   ├── gtk - GTK+ 部分的源代码</span><br><span class="line">|  |   |   └── win - Windows GUI 部分的源代码</span><br><span class="line">|  |   ├── default_app - 在没有指定 app 的情况下 Electron 启动时默认显示的页面</span><br><span class="line">|  |   ├── api - 主进程 API 的实现</span><br><span class="line">|  |   |   └── lib - API 实现中 Javascript 部分的代码</span><br><span class="line">|  |   ├── net - 网络相关的代码</span><br><span class="line">|  |   ├── mac - 与 Mac 有关的 Objective-C 代码</span><br><span class="line">|  |   └── resources - 图标，平台相关的文件等</span><br><span class="line">|  ├── renderer - 运行在渲染进程中的代码</span><br><span class="line">|  |   ├── lib - 渲染进程初始化代码中 JavaScript 部分的代码</span><br><span class="line">|  |   └── api - 渲染进程 API 的实现</span><br><span class="line">|  |       └── lib - API 实现中 Javascript 部分的代码</span><br><span class="line">|  └── common - 同时被主进程和渲染进程用到的代码，包括了一些用来将 node 的事件循环</span><br><span class="line">|      |        整合到 Chromium 的事件循环中时用到的工具函数和代码</span><br><span class="line">|      ├── lib - 同时被主进程和渲染进程使用到的 Javascript 初始化代码</span><br><span class="line">|      └── api - 同时被主进程和渲染进程使用到的 API 的实现以及 Electron 内置模块的基础设施</span><br><span class="line">|          └── lib - API 实现中 Javascript 部分的代码</span><br><span class="line">├── chromium_src - 从 Chromium 项目中拷贝来的代码</span><br><span class="line">├── docs - 英语版本的文档</span><br><span class="line">├── docs-translations - 各种语言版本的文档翻译</span><br><span class="line">├── spec - 自动化测试</span><br><span class="line">├── atom.gyp - Electron 的构建规则</span><br><span class="line">└── common.gypi - 为诸如 `node` 和 `breakpad` 等其他组件准备的编译设置和构建规则</span><br></pre></td></tr></table></figure>
+<h4 id="二十七、学习资源"><a href="#二十七、学习资源" class="headerlink" title="二十七、学习资源"></a>二十七、学习资源</h4><p>学习过程中，发现了很多不错的资源，分享给大家，共同进步吧：<br><a href="https://electronjs.org/docs" target="_blank" rel="noopener">Electron 官方文档</a><br><a href="https://www.w3cschool.cn/electronmanual/wcx31ql6.html" target="_blank" rel="noopener">Electron 中文文档</a><br><a href="https://segmentfault.com/a/1190000006207600" target="_blank" rel="noopener">Electron 的入门学习</a><br><a href="http://get.ftqq.com/7870.get" target="_blank" rel="noopener">用 Electron 开发桌面应用</a><br><a href="https://github.com/pfan123/electron-docs" target="_blank" rel="noopener">Electron-Docs</a><br><a href="https://github.com/eugeneCN/vue-electron-music" target="_blank" rel="noopener">vue，electron 实现网易云音乐客户端</a><br><a href="https://github.com/sindresorhus/awesome-electron" target="_blank" rel="noopener">awesome electron</a><br><a href="https://segmentfault.com/a/1190000006919539" target="_blank" rel="noopener">使用 Electron 构建跨平台的抓取桌面程序</a><br><a href="https://www.npmjs.com/package/electron-builder" target="_blank" rel="noopener">electron-builder</a><br><a href="https://github.com/mainyaa/gulp-electron" target="_blank" rel="noopener">gulp-electron</a></p>
+<h4 id="二十八、写在最后"><a href="#二十八、写在最后" class="headerlink" title="二十八、写在最后"></a>二十八、写在最后</h4><p>由于篇幅实在是太长了，所以我打算把开发中遇到的问题留在后续文章中说明。这里先剧透一下，后续应该还会有两篇总结性的文章，标题已经想好了，我会在<a href="https://github.com/chenfengyanyu/source" target="_blank" rel="noopener"> github </a>持续更新。先留个传送门吧！</p>
+<ul>
+<li><a href="http://jartto.wang/2018/01/04/first-exploration-electron-2/">初探 Electron - 升华篇</a></li>
+<li><a href="http://jartto.wang/2018/01/14/first-exploration-electron-3/">初探 Electron - 实践篇1</a></li>
+</ul>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/electron/">electron</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/01/04/first-exploration-electron-2/" data-tooltip="初探 Electron - 升华篇">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/12/28/cannot-nest-git-repository/" data-tooltip="如何解决 Git 仓库嵌套问题">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/01/03/first-exploration-electron/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/01/03/first-exploration-electron/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/01/03/first-exploration-electron/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/01/04/first-exploration-electron-2/" data-tooltip="初探 Electron - 升华篇">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/12/28/cannot-nest-git-repository/" data-tooltip="如何解决 Git 仓库嵌套问题">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/01/03/first-exploration-electron/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/01/03/first-exploration-electron/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/01/03/first-exploration-electron/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/01/03/first-exploration-electron/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/01/03/first-exploration-electron/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/01/03/first-exploration-electron/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

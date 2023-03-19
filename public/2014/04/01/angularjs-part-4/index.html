@@ -1,0 +1,540 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>Angularjs学习笔记03~数据绑定 Data-Binding - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="这节我们主要讨论一下数据绑定，了解angularjs的双向数据绑定模型比传统的单向数据绑定优越在哪里？">
+<meta name="keywords" content="angularjs">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Angularjs学习笔记03~数据绑定 Data-Binding">
+<meta property="og:url" content="http://jartto.wang/2014/04/01/angularjs-part-4/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="这节我们主要讨论一下数据绑定，了解angularjs的双向数据绑定模型比传统的单向数据绑定优越在哪里？">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/blog_angular_oneway.png">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/blog_angular_twoway.png">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/blog_angular1.png">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/blog_angular_sort.png">
+<meta property="og:updated_time" content="2016-06-24T02:30:08.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Angularjs学习笔记03~数据绑定 Data-Binding">
+<meta name="twitter:description" content="这节我们主要讨论一下数据绑定，了解angularjs的双向数据绑定模型比传统的单向数据绑定优越在哪里？">
+<meta name="twitter:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/blog_angular_oneway.png">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/blog_155IK010-0.jpg"/>
+        <meta class="swiftype" name="image" data-type="enum" content="http://7xvi3w.com1.z0.glb.clouddn.com/blog_155IK010-0.jpg" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            Angularjs学习笔记03~数据绑定 Data-Binding
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2014-04-01T09:34:17+08:00">
+	  
+		    2014/4月/01 09:34:17
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>这节我们主要讨论一下数据绑定，了解angularjs的双向数据绑定模型比传统的单向数据绑定优越在哪里？<br><a id="more"></a></p>
+<h4 id="一、AngularJS中的数据绑定"><a href="#一、AngularJS中的数据绑定" class="headerlink" title="一、AngularJS中的数据绑定"></a>一、AngularJS中的数据绑定</h4><p>先来说说什么是数据绑定吧！开发指南中是这样给出定义的:</p>
+<blockquote>
+<p>“AngularJS中的数据绑定就是模型与视图间的自动同步。这种实现方式让你能专心地处理你的模型。视图总是模型的投影。当模型改变，视图就会反映这种改变，反之亦然。”</p>
+</blockquote>
+<p>那么，顾名思义双向绑定就是视图随模型的改变而改变，模型的变化也会使视图发生改变。如果一味的强调双向数据绑定，可能并不能准确的表述双向绑定的优越性，下面两幅图将“传统的数据绑定”即单向数据绑定与angularjs的“双向数据绑定”进行对比说明，这样我们就能很好的理解所谓的双向绑定了。这里的图也是摘自开发指南O(∩_∩)O</p>
+<p>①传统的模板系统数据绑定：<br>就像下面这幅图所展示的，它们将Model和Template结合生成视图。这个结合过程产生的视图不是动态更新的。更糟的是，任何用户和视图的交互都不会反映到模型。而我们要做的就是写视图和模型双向的同步代码，这也就是我们通常用ajax来实现的局部动态刷新。</p>
+<p><img src="http://7xvi3w.com1.z0.glb.clouddn.com/blog_angular_oneway.png" alt="databinding"></p>
+<p>②angularjs模板中数据绑定：<br>AngularJS模板的工作原理与传统模板单向数据绑定有以下两点不同：<br>第一，模板（附加了自定义属性等标记的未经编译的HTML）是由浏览器编译的；<br>第二，编译最后产生的是一个动态的视图。</p>
+<p>为什么是动态视图呢？这里动态指的是视图的任何变化都会直接反应到模型，反之亦然。这使得模型总是应用状态的唯一标识，这大大简化了开发人员的编程工作。因为视图只是模型的投影，控制器完全和视图分离了，并且视图对它来说是透明的。这使得测试变得更简单，因为你不需要关心相关的DOM或者浏览器变化了。</p>
+<p><img src="http://7xvi3w.com1.z0.glb.clouddn.com/blog_angular_twoway.png" alt="databinding"></p>
+<p>《用Angularjs开发下一代web应用》中是这样描述数据绑定的：</p>
+<blockquote>
+<p>在jQuery中，我们会把HTML模板字符串和数据混合起来，然后把获得的结果插入Dom中我们所期望的位置，插入的方式是吧结果设置给一个占位符元素的innerHTML属性。</p>
+</blockquote>
+<p>以上机制工作的相当不错，但是当你想要把最新的数据插入到UI中，或者根据用户输入来修改数据的时候，你就需要做很多及其繁琐的工作来保证数据的状态是正确的，并且UI和javascript属性要同时正确。</p>
+<p>如果我们可以仅仅声明UI中的某个部分需要映射到某个javascript属性，然后让它们去同步，这种编程风格叫做数据绑定。</p>
+<blockquote>
+<p>说明：不难看出，angularjs所做的双向数据绑定为我们确实带来了很大的方便，我们只需要去做一些逻辑处理，剩下的动态更新就全部交给angularjs来完成，这使得开发人员可以从繁重的更新dom环节中解脱出来。这样，提升工作效率的同时，代码量不知不觉也减少了，那我们何乐而不为呢？</p>
+</blockquote>
+<h4 id="二、代码演示"><a href="#二、代码演示" class="headerlink" title="二、代码演示"></a>二、代码演示</h4><p>语言永远都是最苍白无力的，既然这样，这里我就用实例来进行说明，先来一个简单的输入框双向绑定：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-app</span>=<span class="string">"myApp"</span> <span class="attr">ng-controller</span>=<span class="string">"myCtrl"</span>&gt;</span> 请输入姓名：</span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">ng-model</span>=<span class="string">"name"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">br</span> &gt;</span>您好,&#123;&#123;name&#125;&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myApp = angular.module(<span class="string">"myApp"</span> , []).</span><br><span class="line">controller(<span class="string">"myCtrl"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">$scope</span>) </span>&#123;</span><br><span class="line">    $scope.name = <span class="string">"wang"</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>说明：controller中对name进行了初始化，视图层中用ng-model来对name进行绑定，当input内容被改变，中的值也跟随改变，这就是我们所说的数据双向绑定。</p>
+<p><img src="http://7xvi3w.com1.z0.glb.clouddn.com/blog_angular1.png" alt="angularjs"></p>
+<div class="alert info"><p>演示地址：<a href="http://jsfiddle.net/Au79V/" target="_blank" rel="noopener">http://jsfiddle.net/Au79V/</a></p>
+</div>
+<p>《Angularjs入门教程》中用下拉列表对数据进行排序，这里我也借用这一方式，模拟双向数据绑定效果：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-app</span>=<span class="string">"myApp"</span> <span class="attr">ng-controller</span>=<span class="string">"myCtrl"</span>&gt;</span></span><br><span class="line">    通过 &#123;&#123;orderBy &#125;&#125;排序:</span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">ng-model</span>=<span class="string">"orderBy"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"name"</span>&gt;</span>姓名 <span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"age"</span>&gt;</span>年龄 <span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span> &gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ul</span> &gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span> <span class="attr">ng-repeat</span>=<span class="string">"x in users |orderBy:orderBy"</span>&gt;</span> 姓名：&#123;&#123; x.name&#125;&#125;</span><br><span class="line">            <span class="tag">&lt;<span class="name">p</span>&gt;</span> 年龄：&#123;&#123; x.age&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ul</span> &gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myApp = angular.module(<span class="string">"myApp"</span> , []).</span><br><span class="line">controller(<span class="string">"myCtrl"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">$scope</span>) </span>&#123;</span><br><span class="line">    $scope.users = [&#123;</span><br><span class="line">        <span class="string">"name"</span>: <span class="string">"c张三"</span> ,</span><br><span class="line">        <span class="string">"age"</span>: <span class="number">0</span></span><br><span class="line">    &#125;, &#123;</span><br><span class="line">        <span class="string">"name"</span>: <span class="string">"a李四"</span> ,</span><br><span class="line">        <span class="string">"age"</span>: <span class="number">1</span></span><br><span class="line">    &#125;, &#123;</span><br><span class="line">        <span class="string">"name"</span>: <span class="string">"b王五"</span> ,</span><br><span class="line">        <span class="string">"age"</span>: <span class="number">2</span></span><br><span class="line">    &#125;];</span><br><span class="line"></span><br><span class="line">    $scope.orderBy = <span class="string">'age'</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>效果如下：<br><img src="http://7xvi3w.com1.z0.glb.clouddn.com/blog_angular_sort.png" alt="databinding"></p>
+<div class="alert info"><p>演示地址：<a href="http://jsfiddle.net/Au79V/" target="_blank" rel="noopener">http://jsfiddle.net/Au79V/</a></p>
+</div>
+<p>说明：这个例子实现了通过调整下拉框的年龄和姓名，对列表进行排序，很明显这里也是双向数据绑定。如果你不了解ng-repeat，不用在意，后续我还会具体进行说明，这里你需要理解的是我们在controller中模拟了一个user对象，并初始化了三条假数据，然后在视图层展示出来。</p>
+<p>参考文章：<br>《Angularjs 开发指南》<br>《Angularjs入门教程-双向绑定》：<a href="http://www.ituring.com.cn/article/15764#" target="_blank" rel="noopener">http://www.ituring.com.cn/article/15764#</a><br>《用Angularjs开发下一代web应用》</p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/angularjs/">angularjs</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2014/04/14/angularjs-part-5/" data-tooltip="Angularjs学习笔记04~过滤器 Filter">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2014/03/29/angularjs-part-3/" data-tooltip="Angularjs学习笔记02~控制器Controller">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2014/04/01/angularjs-part-4/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2014/04/01/angularjs-part-4/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2014/04/01/angularjs-part-4/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+            
+                <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2014/04/14/angularjs-part-5/" data-tooltip="Angularjs学习笔记04~过滤器 Filter">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2014/03/29/angularjs-part-3/" data-tooltip="Angularjs学习笔记02~控制器Controller">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2014/04/01/angularjs-part-4/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2014/04/01/angularjs-part-4/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2014/04/01/angularjs-part-4/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2014/04/01/angularjs-part-4/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2014/04/01/angularjs-part-4/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2014/04/01/angularjs-part-4/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+    
+        <script>
+             var disqus_config = function () {
+                 this.page.url = 'http://jartto.wang/2014/04/01/angularjs-part-4/';
+                 
+                    this.page.identifier = '2014/04/01/angularjs-part-4/';
+                                  
+             };
+            (function() {
+                var d = document, s = d.createElement('script');
+                var disqus_shortname = 'jartto';
+                s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+
+
+
+</html>

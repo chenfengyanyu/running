@@ -1,0 +1,493 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>用 Python 爬取 2018 前端热点 - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="下午无聊在刷公众号，突然发现一篇文章「前端一年精选好文，请打包带走」。在这个跨年的日子里，我本来应该开着电视，看着跨年晚会。">
+<meta name="keywords" content="F2E,前端,python">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="用 Python 爬取 2018 前端热点">
+<meta property="og:url" content="http://jartto.wang/2018/12/31/f2e-2018/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="下午无聊在刷公众号，突然发现一篇文章「前端一年精选好文，请打包带走」。在这个跨年的日子里，我本来应该开着电视，看着跨年晚会。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/2018f2e/word.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/2018f2e/mask.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/2018f2e/array.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/2018f2e/tags.jpg">
+<meta property="og:updated_time" content="2019-01-01T08:50:14.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="用 Python 爬取 2018 前端热点">
+<meta name="twitter:description" content="下午无聊在刷公众号，突然发现一篇文章「前端一年精选好文，请打包带走」。在这个跨年的日子里，我本来应该开着电视，看着跨年晚会。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/2018f2e/word.png">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/2018f2e/python.jpeg"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/2018f2e/python.jpeg" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            用 Python 爬取 2018 前端热点
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2018-12-31T21:45:23+08:00">
+	  
+		    2018/12月/31 21:45:23
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>下午无聊在刷公众号，突然发现一篇文章「前端一年精选好文，请打包带走」。在这个跨年的日子里，我本来应该开着电视，看着跨年晚会。<br><a id="more"></a></p>
+<h4 id="一、起因"><a href="#一、起因" class="headerlink" title="一、起因"></a>一、起因</h4><p>反复琢磨，我还是很好奇：这一年，前端精选好文都有哪些？</p>
+<div class="alert info"><p>翻了一下，有 130 多篇文章。</p>
+</div>
+<p>我又退缩了，看完猴年马月了，还是先收藏吧。于是关掉手机，准备放飞自我。突然，脑子里一闪，打包，带走？嗯，我有了一个大胆的想法。</p>
+<h4 id="二、想法"><a href="#二、想法" class="headerlink" title="二、想法"></a>二、想法</h4><p>既然一时半会儿看不完，何不看一下趋势，把握一下今年前端界的热点。<br><div class="alert success"><p>说到热点，还有什么比热词分析更直接的了。对，我要生成词云。</p>
+</div><br>大体思路如下：<br>1.首先，要拿到文章中的关键词，需要使用爬虫；<br>2.为了不那么枯燥，我决定采用图片蒙版来做背景；<br>3.统计关键词出现的频率，进行分词；<br>4.过滤掉干扰词汇；<br>5.生成图片；</p>
+<div class="alert info"><p>热词集合的图片就是我最终的目标。</p>
+</div>
+<h4 id="三、使用爬虫"><a href="#三、使用爬虫" class="headerlink" title="三、使用爬虫"></a>三、使用爬虫</h4><p>1.没什么好选择的，直接使用 <code>Python</code> 插件 <code>BeautifulSoup</code>，我们先拿到 <code>Dom</code> 元素：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*- </span></span><br><span class="line"><span class="keyword">from</span> os <span class="keyword">import</span> path</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line"></span><br><span class="line">html_doc = <span class="string">"""</span></span><br><span class="line"><span class="string">&lt;body id="activity-detail"&gt;   </span></span><br><span class="line"><span class="string">&lt;div id="js_article" class="rich_media"&gt;</span></span><br><span class="line"><span class="string">    &lt;div id="js_top_ad_area" class="top_banner"&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="string">    &lt;div class="rich_media_inner"&gt;</span></span><br><span class="line"><span class="string">      ...</span></span><br><span class="line"><span class="string">    &lt;/div&gt;</span></span><br><span class="line"><span class="string">&lt;/div&gt;</span></span><br><span class="line"><span class="string">&lt;/body&gt;</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line">soup = BeautifulSoup(html_doc)</span><br><span class="line"><span class="comment"># 可以抓到 a 标签内容</span></span><br><span class="line"><span class="comment"># print(soup.find_all('a'))</span></span><br><span class="line"><span class="comment"># 也直接抓取所有文本</span></span><br><span class="line">print(soup.get_text())</span><br><span class="line"></span><br><span class="line"><span class="comment"># 打开文件，逐行写入</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'&#123;&#125;/result/word.txt'</span>.format(sys.path[<span class="number">0</span>]),<span class="string">'w'</span>) <span class="keyword">as</span> f:</span><br><span class="line">  f.writelines(soup.get_text());</span><br></pre></td></tr></table></figure></p>
+<p>为了确定内容是否都抓到了，我们先进行打印：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/2018f2e/word.png" alt="word"><br>看到这些，基本上我们需要的内容已经就绪了，继续下一步。</p>
+<h4 id="四、生成图片"><a href="#四、生成图片" class="headerlink" title="四、生成图片"></a>四、生成图片</h4><p>1.使用 <code>Photoshop</code>，制作一个 <code>F2E</code> 字样的蒙版文件，如下图：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/2018f2e/mask.png" alt="mask"></p>
+<p>2.使用 <code>Python</code> 插件 <code>jieba</code> 进行分词：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">jieba_processing_txt</span><span class="params">(text)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> word <span class="keyword">in</span> userdict_list:</span><br><span class="line">        jieba.add_word(word)</span><br><span class="line"></span><br><span class="line">    mywordlist = []</span><br><span class="line">    seg_list = jieba.cut(text, cut_all=<span class="literal">False</span>)</span><br><span class="line">    liststr = <span class="string">'/ '</span>.join(seg_list)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">with</span> io.open(stopwords_path, encoding=<span class="string">'utf-8'</span>) <span class="keyword">as</span> f_stop:</span><br><span class="line">        f_stop_text = f_stop.read()</span><br><span class="line">        f_stop_seg_list = f_stop_text.splitlines()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> myword <span class="keyword">in</span> liststr.split(<span class="string">'/'</span>):</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> (myword.strip() <span class="keyword">in</span> f_stop_seg_list) <span class="keyword">and</span> len(myword.strip()) &gt; <span class="number">1</span>:</span><br><span class="line">            mywordlist.append(myword)</span><br><span class="line">    <span class="keyword">print</span> (mywordlist)</span><br><span class="line">    <span class="keyword">return</span> <span class="string">' '</span>.join(mywordlist)</span><br></pre></td></tr></table></figure></p>
+<p>分词后，我们打印 <code>mywordlist</code>：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/2018f2e/array.png" alt="array"></p>
+<div class="alert success"><p>整齐的数组，没有半点瑕疵。确定过眼神，是我要的数组。</p>
+</div>
+<p>3.使用 <code>woldcloud</code> 来生成词云图片：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wc = WordCloud(font_path=font_path, background_color=<span class="string">"white"</span>, max_words=<span class="number">2000</span>          mask=back_coloring,max_font_size=<span class="number">60</span>, random_state=<span class="number">42</span>, width=<span class="number">1000</span>, height=<span class="number">860</span>, margin=<span class="number">2</span>,)</span><br><span class="line"></span><br><span class="line">wc.generate(jieba_processing_txt(mytext))</span><br><span class="line">wc.to_file(path.join(d, imgname1))</span><br></pre></td></tr></table></figure></p>
+<p>4.为了去除干扰，我们还需要过滤掉无用的关键词，如：发布，整理，功能，介绍，已经，使用，可以，电脑等等<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">userdict_list = [<span class="string">'我们'</span>, <span class="string">'什么'</span>, <span class="string">'发布'</span>, <span class="string">'整理'</span>, <span class="string">'功能'</span>, </span><br><span class="line"><span class="string">'介绍'</span>,<span class="string">'已经'</span>,<span class="string">'使用'</span>,<span class="string">'可以'</span>,<span class="string">'电脑'</span>,<span class="string">'尽快'</span>,<span class="string">'收藏'</span>,<span class="string">'最后'</span>,<span class="string">'公众'</span>,<span class="string">'支持'</span>,<span class="string">'微信'</span>,<span class="string">'需要'</span>,<span class="string">'这些'</span>]</span><br></pre></td></tr></table></figure></p>
+<div class="alert danger"><p>这里不得不吐槽一下，乱起八糟的广告真的很多，感觉自己在抓 2018 年的广告热词。</p>
+</div>
+<p>到这里就结束了，感兴趣的童鞋可以看看 <a href="https://github.com/chenfengyanyu/my-web-accumulation/tree/master/python-dom" target="_blank" rel="noopener">Demo</a></p>
+<h4 id="五、打包带走"><a href="#五、打包带走" class="headerlink" title="五、打包带走"></a>五、打包带走</h4><p>嗯，运行程序，我们最终得到了一张图片：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/2018f2e/tags.jpg" alt="tag"><br>大体一看，2018 年，前端还是那些老样子，不过我们可以了解到一些特点：<br>1.<code>JavaScript</code> 的文章还是很多；<br>2.<code>React</code> 和 <code>Vue</code> 仍然是主流；<br>3.<code>Flutter</code> 出现的晚，但是上升趋势不容小觑；<br>4.<code>Nodejs</code>，<code>Electron</code> 还是很受前端欢迎；<br>5.<code>TypeScript</code> 和 <code>GraphQL</code> 仍然有不少的讨论；<br>6.优化、构建、开源、线路图仍然是前端的关注点；<br>7.全栈仍是前端的追逐目标；<br>…</p>
+<p>任务完成，收工。这里还是得特别感谢前端之巅小编辛苦的整理。这些前端精选资源，我真的打包带走了。</p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/F2E/">F2E</a> <a class="tag tag--primary tag--small t-link" href="/tags/python/">python</a> <a class="tag tag--primary tag--small t-link" href="/tags/前端/">前端</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/01/06/f2e-interview/" data-tooltip="前端面试官的套路，你懂吗？">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/12/26/web-worker/" data-tooltip="HTML5之多线程（Web Worker）">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/12/31/f2e-2018/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/12/31/f2e-2018/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/12/31/f2e-2018/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/01/06/f2e-interview/" data-tooltip="前端面试官的套路，你懂吗？">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/12/26/web-worker/" data-tooltip="HTML5之多线程（Web Worker）">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/12/31/f2e-2018/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/12/31/f2e-2018/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/12/31/f2e-2018/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/12/31/f2e-2018/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/12/31/f2e-2018/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/12/31/f2e-2018/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

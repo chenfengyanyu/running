@@ -1,0 +1,548 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>再谈ie浏览器兼容问题 - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="随着技术日新月异的发展，我以为已经可以完全甩掉ie浏览器，驰骋在新技术的海洋里。却不想，ie兼容问题如影随行。">
+<meta name="keywords" content="js,ie,hack,浏览器兼容">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="再谈ie浏览器兼容问题">
+<meta property="og:url" content="http://jartto.wang/2016/12/06/talk-about-ie-compatible-over-again/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="随着技术日新月异的发展，我以为已经可以完全甩掉ie浏览器，驰骋在新技术的海洋里。却不想，ie兼容问题如影随行。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/20161202_compatible.png">
+<meta property="og:updated_time" content="2020-01-20T03:39:19.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="再谈ie浏览器兼容问题">
+<meta name="twitter:description" content="随着技术日新月异的发展，我以为已经可以完全甩掉ie浏览器，驰骋在新技术的海洋里。却不想，ie兼容问题如影随行。">
+<meta name="twitter:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/20161202_compatible.png">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/20161202_ie.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="http://7xvi3w.com1.z0.glb.clouddn.com/20161202_ie.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            再谈ie浏览器兼容问题
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2016-12-06T12:25:40+08:00">
+	  
+		    2016/12月/06 12:25:40
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>随着技术日新月异的发展，我以为已经可以完全甩掉ie浏览器，驰骋在新技术的海洋里。却不想，ie兼容问题如影随行。<br><a id="more"></a><br>当然，尝试解决ie浏览器兼容问题，并不代表我会去拥护它。我想做的只是为解决浏览器兼容提供一些个人思路，毕竟，很多公司还会有此类的需求。</p>
+<div class="alert info"><p>这里，我将提供一套解决方案，以及如果碰到ie浏览器兼容问题，我们该怎么办？</p>
+</div>
+<h4 id="一、明确你要兼容的浏览器范围"><a href="#一、明确你要兼容的浏览器范围" class="headerlink" title="一、明确你要兼容的浏览器范围"></a>一、明确你要兼容的浏览器范围</h4><p>很简单，当你明确了要兼容的浏览器范围，不需要兼容的浏览器就可以一并处理了。例如：直接弹出提示，指引用户下载chrome，firefox等现代浏览器。简单粗暴，但却有效。</p>
+<p>那么我们如何去过滤呢，这时候，条件注释就可以上场了，用法如下：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--[if !IE]&gt; 除IE外都可识别 &lt;![endif]--&gt;</span></span><br><span class="line"><span class="comment">&lt;!--[if IE]&gt; 所有的IE可识别 &lt;![endif]--&gt;</span></span><br><span class="line"><span class="comment">&lt;!--[if IE 6]&gt; 仅IE6可识别 &lt;![endif]--&gt;</span></span><br><span class="line"><span class="comment">&lt;!--[if lt IE 6]&gt; IE6以及IE6以下版本可识别 &lt;![endif]--&gt;</span></span><br><span class="line"><span class="comment">&lt;!--[if gte IE 6]&gt; IE6以及IE6以上版本可识别 &lt;![endif]--&gt;</span></span><br><span class="line"><span class="comment">&lt;!--[if IE 7]&gt; 仅IE7可识别 &lt;![endif]--&gt;</span></span><br><span class="line"><span class="comment">&lt;!--[if lt IE 7]&gt; IE7以及IE7以下版本可识别 &lt;![endif]--&gt;</span></span><br><span class="line"><span class="comment">&lt;!--[if gte IE 7]&gt; IE7以及IE7以上版本可识别 &lt;![endif]--&gt;</span></span><br><span class="line"><span class="comment">&lt;!--[if IE 8]&gt; 仅IE8可识别 &lt;![endif]--&gt;</span></span><br><span class="line"><span class="comment">&lt;!--[if IE 9]&gt; 仅IE9可识别 &lt;![endif]--&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>符号解释：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">!(非)：[if !IE]</span><br><span class="line">lt(小于)：[if lt IE 6]</span><br><span class="line">lte(小于或等于)：[if lte IE 6]</span><br><span class="line">gt(大于)：[if gt IE 8]</span><br><span class="line">gte(大于或等于)：[if gte IE 9]</span><br><span class="line">&amp;(与)：[if (gt IE 6)&amp;(lt IE 8)]</span><br><span class="line">|(或)：[if (IE 6)|(IE 7)]</span><br></pre></td></tr></table></figure></p>
+<p>嗯，不错，一大半的负担被卸掉了。</p>
+<p>因为我足够幸运，只需要解决ie9浏览器的兼容问题。所以，可以这么写：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--[if lte IE 8]&gt;&lt;script src="/zh/assets/js/ie-warning.js"&gt;&lt;/script&gt;&lt;![endif]--&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>js中设置了cookie和url重定向，引导用户去下载chrome浏览器，这里就不细说了。</p>
+<p>当然，兼容问题哪有这么容易就搞定的，我们继续往下走～</p>
+<h4 id="二、检查页面中的伪类和伪元素"><a href="#二、检查页面中的伪类和伪元素" class="headerlink" title="二、检查页面中的伪类和伪元素"></a>二、检查页面中的伪类和伪元素</h4><p>这里还是以ie9示例，下面列出ie9对伪类的支持情况：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">//ie9不支持的伪类和伪元素</span><br><span class="line">:default </span><br><span class="line">:valid</span><br><span class="line">:invalid</span><br><span class="line">:in-range</span><br><span class="line">ut-of-range</span><br><span class="line">:required</span><br><span class="line">ptional</span><br><span class="line">:read-only</span><br><span class="line">:read-write</span><br><span class="line">::before</span><br><span class="line">::after</span><br><span class="line">::first-letter</span><br><span class="line">::first-line</span><br><span class="line">::value</span><br><span class="line">::choices</span><br><span class="line">::repeat-item</span><br><span class="line">::repeat-index</span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p>如果你要兼容ie8，你肯定也会搜到一份类似的支持文档，其他ie版本以此类推。</p>
+</div>
+<p>对于不支持的情况，我们只能换方案，举个简单🌰：<br>清除浮动的方式有很多，为了代码优雅，恰巧我们选择了用after伪元素的方式，如下：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.clear</span><span class="selector-pseudo">:after</span> &#123;</span><br><span class="line">　<span class="attribute">content</span>:<span class="string">"."</span>;</span><br><span class="line">　<span class="attribute">height</span>:<span class="number">0</span>;</span><br><span class="line">　<span class="attribute">visibility</span>:hidden;</span><br><span class="line">　<span class="attribute">display</span>:block;</span><br><span class="line">　<span class="attribute">clear</span>:both;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>很好，ie9说：“不可以！”。好，那就换一个大家都比较容易接受的方案，如下：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.clean</span>&#123;</span><br><span class="line">	<span class="attribute">clear</span>:both;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>不外乎就是在页面加个空容器，虽然不优雅，但足够通用。</p>
+<p>说了这么多，想表达的意思无非就是：<br><div class="alert success"><p>不支持的伪类和伪元素，换通用的方案去兼容。</p>
+</div></p>
+<h4 id="三、排查css3兼容问题"><a href="#三、排查css3兼容问题" class="headerlink" title="三、排查css3兼容问题"></a>三、排查css3兼容问题</h4><p>如果你对css3浏览器支持情况不是很了解，点击这里<a href="http://caniuse.com/#search=transform" target="_blank" rel="noopener">检测</a><br><img src="http://7xvi3w.com1.z0.glb.clouddn.com/20161202_compatible.png" alt="检测动图"></p>
+<h4 id="四、使用css-hack"><a href="#四、使用css-hack" class="headerlink" title="四、使用css hack"></a>四、使用css hack</h4><p>到这里，浏览器危险属性已经都排查完了。我们开始局部细节调整，这里就需要用到css hack了。<br>ie6 hack:<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">Selector</span> &#123; <span class="attribute">_property</span>: value; &#125; <span class="comment">/* property: value 表示 css 的属性名: 属性值 下同 */</span></span><br><span class="line">Selector &#123; _property/**/: /**/value; &#125;</span><br><span class="line"><span class="selector-tag">Selector</span> &#123; <span class="attribute">-property</span>: value; &#125; <span class="comment">/*IE6 css hack常用习惯推荐使用下划线_ */</span></span><br></pre></td></tr></table></figure></p>
+<p>ie7 hack:<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">*+<span class="selector-tag">html</span> <span class="selector-tag">Selector</span> &#123;&#125;</span><br><span class="line">*<span class="selector-pseudo">:first-child+html</span> <span class="selector-tag">Selector</span> &#123;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>ie8 hack:<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">Selector</span> &#123; <span class="comment">/* 注意看value值的 */</span></span><br><span class="line">    <span class="attribute">property</span>: value1; <span class="comment">/* W3C MODEL */</span></span><br><span class="line">    <span class="attribute">property</span>: value2\<span class="number">0</span>; <span class="comment">/* IE 8+ */</span></span><br><span class="line">    <span class="attribute">property</span>: value1\<span class="number">9</span>\<span class="number">0</span>; <span class="comment">/* IE 9+ */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>ie6,7,8共有hack:<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">Selector</span> &#123; <span class="attribute">property</span>: value\<span class="number">9</span>; &#125;</span><br></pre></td></tr></table></figure></p>
+<p>ie6,7共有hack：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Selector &#123; *property: value; &#125;</span><br><span class="line">Selector &#123; #property: value; &#125;</span><br><span class="line">Selector &#123; +property: value; &#125;</span><br></pre></td></tr></table></figure></p>
+<p>ie8 hack:<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">Selector</span> &#123; <span class="attribute">property</span>: value\<span class="number">0</span>; &#125;</span><br></pre></td></tr></table></figure></p>
+<p>ie9 hack:<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">Selector</span> &#123; <span class="attribute">property</span>: value\<span class="number">9</span>\<span class="number">0</span>; &#125;</span><br></pre></td></tr></table></figure></p>
+<p>根据实际的应用场景，选择不同的hack，用css覆写就可以了。再举一个简单的栗子：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// ie9 hack</span><br><span class="line"><span class="selector-class">.index_scrm</span>&#123;</span><br><span class="line">    .swiper-wrapper&#123;</span><br><span class="line">        <span class="selector-tag">overflow</span><span class="selector-pseudo">:hidden</span>\9\0;</span><br><span class="line">        <span class="selector-tag">height</span>: 380<span class="selector-tag">px</span>\9\0;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>想了解更详细的css hack，请走这边：<a href="http://www.webhj.com/hj-650.html" target="_blank" rel="noopener">传送门</a></p>
+<h4 id="五、js判断浏览器类型"><a href="#五、js判断浏览器类型" class="headerlink" title="五、js判断浏览器类型"></a>五、js判断浏览器类型</h4><p>css hack也用上了，但是某种情况下，hack也并不完美。所以，我们再加一道保险，用js来做局部控制。<br><div class="alert info"><p>这里使用js检测浏览器类型，不仅仅是为了解决兼容问题，还可以干一些你想干的其他事情，不要被局限。</p>
+</div><br>方式一：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> isIE=!!<span class="built_in">window</span>.ActiveXObject;</span><br><span class="line"><span class="keyword">var</span> isIE6=isIE&amp;&amp;!<span class="built_in">window</span>.XMLHttpRequest;</span><br><span class="line"><span class="keyword">var</span> isIE8=isIE&amp;&amp;!!<span class="built_in">document</span>.documentMode;</span><br><span class="line"><span class="keyword">var</span> isIE7=isIE&amp;&amp;!isIE6&amp;&amp;!isIE8;</span><br><span class="line"><span class="keyword">if</span> (isIE)&#123;</span><br><span class="line">	<span class="keyword">if</span> (isIE6)&#123;</span><br><span class="line">		alert(<span class="string">'ie6'</span>);</span><br><span class="line">	&#125;<span class="keyword">else</span> <span class="keyword">if</span> (isIE8)&#123;</span><br><span class="line">		alert(<span class="string">'ie8'</span>);</span><br><span class="line">	&#125;<span class="keyword">else</span> <span class="keyword">if</span> (isIE7)&#123;</span><br><span class="line">		alert(<span class="string">'ie7'</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>方式二：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(navigator.appName == <span class="string">'Microsoft Internet Explorer'</span> &amp;&amp; navigator.appVersion.match(<span class="regexp">/6./i</span>)==<span class="string">'6.'</span>)&#123; </span><br><span class="line">	alert(<span class="string">'IE 6'</span>); </span><br><span class="line">&#125; </span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>(navigator.appName == <span class="string">'Microsoft Internet Explorer'</span> &amp;&amp; navigator.appVersion.match(<span class="regexp">/7./i</span>)==<span class="string">'7.'</span>)&#123; </span><br><span class="line">	alert(<span class="string">'IE 7'</span>); </span><br><span class="line">&#125; </span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>(navigator.appName == <span class="string">'Microsoft Internet Explorer'</span> &amp;&amp; navigator.appVersion.match(<span class="regexp">/8./i</span>)==<span class="string">'8.'</span>)&#123; </span><br><span class="line">	alert(<span class="string">'IE 8'</span>); </span><br><span class="line">&#125; </span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>(navigator.appName == <span class="string">'Microsoft Internet Explorer'</span> &amp;&amp; navigator.appVersion.match(<span class="regexp">/9./i</span>)==<span class="string">'9.'</span>)&#123; </span><br><span class="line">	alert(<span class="string">'IE 9'</span>); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>方式三：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(navigator.userAgent.indexOf(<span class="string">'Opera'</span>) != <span class="number">-1</span>) &#123; </span><br><span class="line">	alert(<span class="string">'Opera'</span>); </span><br><span class="line">&#125; </span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>(navigator.userAgent.indexOf(<span class="string">'MSIE'</span>) != <span class="number">-1</span>) &#123; </span><br><span class="line">	alert(<span class="string">'Internet Explorer'</span>); </span><br><span class="line">&#125; </span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>(navigator.userAgent.indexOf(<span class="string">'Firefox'</span>) != <span class="number">-1</span>) &#123; </span><br><span class="line">	alert(<span class="string">'Firefox'</span>); </span><br><span class="line">&#125; </span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>(navigator.userAgent.indexOf(<span class="string">'Netscape'</span>) != <span class="number">-1</span>) &#123; </span><br><span class="line">	alert(<span class="string">'Netscape'</span>); </span><br><span class="line">&#125; </span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>(navigator.userAgent.indexOf(<span class="string">'Safari'</span>) != <span class="number">-1</span>) &#123; </span><br><span class="line">	alert(<span class="string">'Safari'</span>); </span><br><span class="line">&#125; </span><br><span class="line"><span class="keyword">else</span>&#123; </span><br><span class="line">	alert(<span class="string">'无法识别的浏览器。'</span>); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>方式四：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(!+<span class="string">'\v1'</span> &amp;&amp; !<span class="string">'1'</span>[<span class="number">0</span>])&#123; </span><br><span class="line">	alert(<span class="string">'ie6或ie7'</span>) </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>以上js代码基本覆盖了大部分主流浏览器，到这里90%以上的浏览器兼容问题应该都可以搞定了吧。</p>
+<h4 id="六、我的问题清单"><a href="#六、我的问题清单" class="headerlink" title="六、我的问题清单"></a>六、我的问题清单</h4><p>大概总结一下，以下是已知ie9的兼容问题：<br>1.swiper3.0以上，不支持ie9；<br>解决方案：换swiper2.*版本，或者换插件。</p>
+<p>2.after等伪元素不支持；<br>解决方案：用div或者其他元素等效替代。</p>
+<p>3.ie9支持的属性background-size怎么也会失效；<br>解决方案：如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">//这么用</span><br><span class="line">&gt;.two &#123;</span><br><span class="line">    background-image: url(../image/yunzi/temp04.png);</span><br><span class="line">    background-size: 100%;</span><br><span class="line">    width: 300px;</span><br><span class="line">    background-position: center;</span><br><span class="line">&#125;</span><br><span class="line">//而不要这么用</span><br><span class="line">&gt;.three &#123;</span><br><span class="line">    background-image: url(../image/yunzi/temp05.gif);</span><br><span class="line">    background-size: 170%;//不给宽度，容易受影响，显示异常</span><br><span class="line">    background-position: center 5%;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>4.flex布局失效，如何解决；<br>解决方案：用float或者flex.css库去兼容。</p>
+<p>5.display: none\9\0失效，需要改成display: none\9，好奇怪;<br>解决方案：好奇怪，不按套路？</p>
+<p>6.ie9中特定条件下绝对定位失效？<br>相对定位内的绝对定位元素内部的相对定位元素，ie9下会嵌套异常。<br>解决方案：简化嵌套结构。</p>
+<p>7.keyframes ，ie9不兼容；<br>解决方案：降级动画。</p>
+<p>8.ie9中img只给width或者height会塌陷；<br>解决方案：严格按照图片比例，来计算显示比例，两个属性都要设值，否则图片显示异常。</p>
+<h4 id="七、小结"><a href="#七、小结" class="headerlink" title="七、小结"></a>七、小结</h4><p>文章结构我反复改了很多次，无非想让整个解决方案清晰明了。如果有不当或者表达不清楚的地方，希望大家可以提出来。共同探讨，共同进步～</p>
+<h4 id="八、参考文章"><a href="#八、参考文章" class="headerlink" title="八、参考文章"></a>八、参考文章</h4><p>浏览器类型判断：<br><a href="http://www.jb51.net/article/27876.htm" target="_blank" rel="noopener">http://www.jb51.net/article/27876.htm</a><br>css hack：<br><a href="http://www.webhj.com/hj-650.html" target="_blank" rel="noopener">http://www.webhj.com/hj-650.html</a><br>ie9伪类支持：<br><a href="http://blog.csdn.net/lml_little/article/details/51074779" target="_blank" rel="noopener">http://blog.csdn.net/lml_little/article/details/51074779</a><br>css3属性检测：<br><a href="http://caniuse.com/#search=transform" target="_blank" rel="noopener">http://caniuse.com/#search=transform</a></p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/hack/">hack</a> <a class="tag tag--primary tag--small t-link" href="/tags/ie/">ie</a> <a class="tag tag--primary tag--small t-link" href="/tags/js/">js</a> <a class="tag tag--primary tag--small t-link" href="/tags/浏览器兼容/">浏览器兼容</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/12/08/yslow-add-expires-headers/" data-tooltip="yslow 优化之 add expires headers">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/11/02/linux-common-command/" data-tooltip="linux 实用命令">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2016/12/06/talk-about-ie-compatible-over-again/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2016/12/06/talk-about-ie-compatible-over-again/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2016/12/06/talk-about-ie-compatible-over-again/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+            
+                <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/12/08/yslow-add-expires-headers/" data-tooltip="yslow 优化之 add expires headers">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/11/02/linux-common-command/" data-tooltip="linux 实用命令">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2016/12/06/talk-about-ie-compatible-over-again/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2016/12/06/talk-about-ie-compatible-over-again/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2016/12/06/talk-about-ie-compatible-over-again/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2016/12/06/talk-about-ie-compatible-over-again/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2016/12/06/talk-about-ie-compatible-over-again/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2016/12/06/talk-about-ie-compatible-over-again/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+    
+        <script>
+             var disqus_config = function () {
+                 this.page.url = 'http://jartto.wang/2016/12/06/talk-about-ie-compatible-over-again/';
+                 
+                    this.page.identifier = '2016/12/06/talk-about-ie-compatible-over-again/';
+                                  
+             };
+            (function() {
+                var d = document, s = d.createElement('script');
+                var disqus_shortname = 'jartto';
+                s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+
+
+
+</html>

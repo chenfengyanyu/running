@@ -1,0 +1,556 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>UmiJs 尝鲜 - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="前文构建你的 Dva2 中提到了 UmiJs，但并未深入讨论。这节开个专题，主要探讨 UmiJs 如何使用、注意事项、以及问题处理。">
+<meta name="keywords" content="umi,umijs">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="UmiJs 尝鲜">
+<meta property="og:url" content="http://jartto.wang/2018/05/24/taste-of-umi/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="前文构建你的 Dva2 中提到了 UmiJs，但并未深入讨论。这节开个专题，主要探讨 UmiJs 如何使用、注意事项、以及问题处理。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2018-10-31T15:01:39.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="UmiJs 尝鲜">
+<meta name="twitter:description" content="前文构建你的 Dva2 中提到了 UmiJs，但并未深入讨论。这节开个专题，主要探讨 UmiJs 如何使用、注意事项、以及问题处理。">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/umijs.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/umijs.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            UmiJs 尝鲜
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2018-05-24T09:00:23+08:00">
+	  
+		    2018/5月/24 09:00:23
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>前文<a href="http://jartto.wang/2018/05/24/build-your-dva2/">构建你的 Dva2</a> 中提到了 UmiJs，但并未深入讨论。这节开个专题，主要探讨 UmiJs 如何使用、注意事项、以及问题处理。<br><a id="more"></a></p>
+<h4 id="一、是什么？"><a href="#一、是什么？" class="headerlink" title="一、是什么？"></a>一、是什么？</h4><p><code>umi</code> 是 <code>next.js</code> 风格的框架，所以沿用了 <code>pages</code> 下的文件即路由的方式，这种方式简单直观，而且省去了额外的一份配置，是默认的推荐方式。</p>
+<p>另外，我们考虑到有些复杂的场景下约定式路由无法满足，或者就是有人偏爱配置的方式，所以依然提供了配置式的路由。</p>
+<div class="alert info"><p>注意：约定式路由和配置式路由是二选一的，并不是 <code>merge</code> 的关系，目录下有 <code>_routes.json</code> 时会优先用配置式。</p>
+</div>
+<h4 id="二、umi-定位"><a href="#二、umi-定位" class="headerlink" title="二、umi 定位"></a>二、umi 定位</h4><p>根据作者的描述：umi[工具 + 路由] + dva[数据] + antd(-mobile)[视图]</p>
+<p>当然，我们如果不用 <code>umi</code> 的话，工具用 <code>webpack + webpack-dev-server + babel + postcss + ...</code> ，路由用 <code>react-router</code> 也是可以实现的。</p>
+<div class="alert success"><p>咦，有没有惊奇的发现，你少了很多工作？</p>
+</div>
+<p>引用官网上的描述：这是上一代的使用方式，工具是工具，库是库，泾渭分明。而近来，我们发现工具和库其实可以糅合在一起，工具也是框架的一部分。通过约定、自动生成和解析代码等方式来辅助开发，减少开发者要写的代码量。</p>
+<p><code>next.js</code> 如此，<code>umi</code> 也如此，<code>Compilers are the New Frameworks</code> 。</p>
+<h4 id="三、umi-和-dva-以及-roadhog-是什么关系？"><a href="#三、umi-和-dva-以及-roadhog-是什么关系？" class="headerlink" title="三、umi 和 dva 以及 roadhog 是什么关系？"></a>三、umi 和 dva 以及 roadhog 是什么关系？</h4><p>相信大家都比较关心这个问题，我们为什么要使用它？简单来说：</p>
+<ul>
+<li>dva 是数据流</li>
+<li>roadhog 是通用工具</li>
+<li>umi 是框架，包含路由和工具，很多的约定，很多的性能优化，以及开发体验优化</li>
+</ul>
+<p>然后，<code>umi</code> 和 <code>roadhog</code> 共用同一个底层 <code>af-webpack</code>，他们在功能上有一定重叠，可以说 <code>umi</code> 包含 <code>roadhog</code>，<code>react</code> 项目可以尝试一下 <code>umi</code>。</p>
+<h4 id="四、约定大于配置"><a href="#四、约定大于配置" class="headerlink" title="四、约定大于配置"></a>四、约定大于配置</h4><div class="alert success"><p>既然提到了约定大于配置，这说明目录的结构需要遵守一些约定，所以你在项目中可能找不到 Router 路由文件。</p>
+</div>
+<p>首先，使用 <code>npm</code> 或 <code>yarn</code> 来全局安装：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm i umi -g</span><br><span class="line"><span class="comment"># yarn global add umi</span></span><br></pre></td></tr></table></figure></p>
+<p>打印版本号：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">umi -v</span><br></pre></td></tr></table></figure></p>
+<div class="alert warning"><p><code>Umi</code> 暂时没有提供脚手架，之后可能会添加。</p>
+</div>
+<p>其次，创建并进入应用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir myapp &amp;&amp; cd myapp</span><br></pre></td></tr></table></figure></p>
+<p>最后，启动应用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">umi dev</span><br></pre></td></tr></table></figure></p>
+<p>在 <code>Umi</code> 中，需要记住的规则就是：约定大于配置。下面我们来看一个约定的目录：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── dist/                          <span class="comment">// 构建产物目录</span></span><br><span class="line">└── src/                           <span class="comment">// 源码目录，可选，把里面的内容直接移到外面即可</span></span><br><span class="line">    ├── layouts/</span><br><span class="line">    │   └── index.js               <span class="comment">// 全局布局</span></span><br><span class="line">    ├── pages/                     <span class="comment">// 页面目录，里面的文件即路由</span></span><br><span class="line">        ├── .umi/                  <span class="comment">// dev 临时目录，需添加到 .gitignore</span></span><br><span class="line">        ├── .umi-production/       <span class="comment">// build 临时目录，会自动删除</span></span><br><span class="line">        ├── <span class="built_in">document</span>.ejs           <span class="comment">// HTML 模板</span></span><br><span class="line">        ├── <span class="number">404.</span>js                 <span class="comment">// 404 页面</span></span><br><span class="line">        ├── page1.js               <span class="comment">// 页面 1，任意命名</span></span><br><span class="line">        └── page2.js               <span class="comment">// 页面 2，任意命名</span></span><br><span class="line">    ├── global.css                 <span class="comment">// 约定的全局样式文件，自动引入，也可以用 global.less</span></span><br><span class="line">    ├── _routes.json               <span class="comment">// 路由配置，和文件路由二选一</span></span><br><span class="line">├── test/                          <span class="comment">// 测试用例放这里</span></span><br><span class="line">├── .umirc.js                      <span class="comment">// umi 配置</span></span><br><span class="line">├── .webpackrc                     <span class="comment">// webpack 配置</span></span><br><span class="line">└── package.json</span><br></pre></td></tr></table></figure></p>
+<p>还有几条约定，大致如下：</p>
+<ul>
+<li>约定 _layout.js 目录下路由的父级组件，可通过 props.children 渲染子路由，或通过 route.routes 定制子路由的渲染</li>
+<li>有 _layout.js 时才会有嵌套，无 _layout.js 则平级渲染</li>
+<li>目录下有 page.js 时 _layout.js 无效，因为目录路由没有子路由，无嵌套需求</li>
+</ul>
+<h4 id="五、目录路由"><a href="#五、目录路由" class="headerlink" title="五、目录路由"></a>五、目录路由</h4><p>有些场景下文件路由无法满足需求，比如我们需要组织 <code>dva</code> 的 <code>models</code>、<code>services</code> 等等，所以 <code>umi</code> 支持一个目录作为路由的方式。约定是：目录下如果有 <code>page.js</code>，则作为路由解析。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Route</span> <span class="attr">exact</span> <span class="attr">path</span>=<span class="string">"/"</span> <span class="attr">component</span>=<span class="string">&#123;require(</span>'<span class="attr">..</span>/<span class="attr">index.js</span>')<span class="attr">.default</span>&#125; /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Route</span> <span class="attr">exact</span> <span class="attr">path</span>=<span class="string">"/users/detail"</span> <span class="attr">component</span>=<span class="string">&#123;require(</span>'<span class="attr">..</span>/<span class="attr">users</span>/<span class="attr">detail.js</span>')<span class="attr">.default</span>&#125;&#125; /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Route</span> <span class="attr">exact</span> <span class="attr">path</span>=<span class="string">"/list"</span> <span class="attr">component</span>=<span class="string">&#123;require(</span>'<span class="attr">..</span>/<span class="attr">list</span>/<span class="attr">page.js</span>')<span class="attr">.default</span>&#125;&#125; /&gt;</span></span><br></pre></td></tr></table></figure>
+<div class="alert warning"><p>注意 /users/detail.js 和 /list/page.js 的区别。</p>
+</div>
+<h4 id="六、变量路由"><a href="#六、变量路由" class="headerlink" title="六、变量路由"></a>六、变量路由</h4><p>那如果我需要传递一些路由参数呢，这时候需要用到变量路由。<code>umi</code> 里约定，文件名或目录名里的 <code>$</code> 会被替换为 :。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Route</span> <span class="attr">exact</span> <span class="attr">path</span>=<span class="string">"/"</span> <span class="attr">component</span>=<span class="string">&#123;require(</span>'<span class="attr">..</span>/<span class="attr">index.js</span>')<span class="attr">.default</span>&#125; /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Route</span> <span class="attr">exact</span> <span class="attr">path</span>=<span class="string">"/users/:userId"</span> <span class="attr">component</span>=<span class="string">&#123;require(</span>'<span class="attr">..</span>/<span class="attr">users</span>/$<span class="attr">userId.js</span>')<span class="attr">.default</span>&#125;&#125; /&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>比如以下目录结构：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">+ pages/</span><br><span class="line">  + $post/</span><br><span class="line">    - index.js</span><br><span class="line">    - comments.js</span><br><span class="line">  + users/</span><br><span class="line">    $id.js</span><br><span class="line">  - index.js</span><br></pre></td></tr></table></figure></p>
+<p>会生成路由配置如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  &#123; path: &apos;/&apos;: exact: true, component: &apos;./pages/index.js&apos; &#125;,</span><br><span class="line">  &#123; path: &apos;/users/:id&apos;: exact: true, component: &apos;./pages/users/$id.js&apos; &#125;,</span><br><span class="line">  &#123; path: &apos;/:post/&apos;: exact: true, component: &apos;./pages/$post/index.js&apos; &#125;,</span><br><span class="line">  &#123; path: &apos;/:post/comments&apos;: exact: true, component: &apos;./pages/$post/comments.js&apos; &#125;,</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
+<h4 id="七、配置式路由"><a href="#七、配置式路由" class="headerlink" title="七、配置式路由"></a>七、配置式路由</h4><p><code>umi</code> 里约定可通过 <code>_routes.json</code> 配置路由，如果有 <code>_routes.json</code>，则会忽略 <code>pages</code> 下文件即路由的规则。大致如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  &#123; &quot;path&quot;: &quot;/&quot;, &quot;exact&quot;: true, &quot;component&quot;: &quot;./components/a&quot; &#125;,</span><br><span class="line">  &#123; &quot;path&quot;: &quot;/list&quot;, &quot;component&quot;: &quot;./pages/b&quot;, &quot;meta&quot;: &#123; &quot;Route&quot;: &quot;./routes/PrivateRoute.js&quot; &#125; &#125;,</span><br><span class="line">  &#123; &quot;path&quot;: &quot;/users&quot;, &quot;component&quot;: &quot;./pages/users/_layout&quot;,</span><br><span class="line">    &quot;routes&quot;: [</span><br><span class="line">      &#123; &quot;path&quot;: &quot;/users/detail&quot;, &quot;exact&quot;: true, &quot;component&quot;: &quot;./pages/users/detail&quot; &#125;,</span><br><span class="line">      &#123; &quot;path&quot;: &quot;/users/:id&quot;, &quot;exact&quot;: true, &quot;component&quot;: &quot;./pages/users/id&quot; &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
+<p>这里需要注意几个问题：</p>
+<ul>
+<li>component 为指向文件的相对路径，而非 React 组件</li>
+<li>支持通过 routes 实现嵌套路由</li>
+<li>支持通过 meta.Route 实现权限路由</li>
+</ul>
+<h4 id="八、嵌套路由"><a href="#八、嵌套路由" class="headerlink" title="八、嵌套路由"></a>八、嵌套路由</h4><p><code>umi</code> 里约定目录下有 <code>_layout.js</code> 时会以生成嵌套路由，以 <code>_layout.js</code> 为该目录的 <code>layout</code> 。比如以下目录结构：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">+ pages/</span><br><span class="line">  + users/</span><br><span class="line">    - _layout.js</span><br><span class="line">    - $id.js</span><br><span class="line">    - index.js</span><br></pre></td></tr></table></figure></p>
+<p>会生成路由配置如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  &#123; path: &apos;/users&apos;: exact: false, component: &apos;./pages/users/_layout.js&apos;</span><br><span class="line">    routes: [</span><br><span class="line">     &#123; path: &apos;/users/&apos;, exact: true, component: &apos;./pages/users/index.js&apos; &#125;,</span><br><span class="line">     &#123; path: &apos;/users/:id&apos;, exact: true, component: &apos;./pages/users/$id.js&apos; &#125;,</span><br><span class="line">   ],</span><br><span class="line">  &#125;,</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p>这个就很清晰了，我们可以单独为某个路由应用样式。</p>
+</div>
+<h4 id="九、添加-404-页面"><a href="#九、添加-404-页面" class="headerlink" title="九、添加 404 页面"></a>九、添加 404 页面</h4><p><code>umi</code> 中约定 <code>pages</code> 目录下的 <code>404.js</code> 为 <code>404</code> 页面，这个文件需要返回 <code>React</code> 组件。比如：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> () =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div&gt;Jartto: I am a customized <span class="number">404</span> page&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">  );</span></span><br><span class="line"><span class="regexp">&#125;;</span></span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p>开发模式下，umi 会添加一个默认的 404 页面，但你仍然可通过精确地访问 /404 来验证 404 页面。</p>
+</div>
+<h4 id="十、面包屑"><a href="#十、面包屑" class="headerlink" title="十、面包屑"></a>十、面包屑</h4><p>面包屑在网页开发中起着非常重要的作用，有没有简单省心的用法呢？答案是肯定的，在 umi 中，我们可以这样使用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install react-router-breadcrumbs-hoc --save</span><br></pre></td></tr></table></figure></p>
+<p>然后实现一个 Breakcrumbs.js，比如：<br><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> NavLink <span class="keyword">from</span> <span class="string">'umi/navlink'</span>;</span><br><span class="line"><span class="keyword">import</span> withBreadcrumbs <span class="keyword">from</span> <span class="string">'react-router-breadcrumbs-hoc'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 更多配置请移步 https://github.com/icd2k3/react-router-breadcrumbs-hoc</span></span><br><span class="line"><span class="keyword">const</span> routes = [</span><br><span class="line">  &#123; <span class="attr">path</span>: <span class="string">'/'</span>, <span class="attr">breadcrumb</span>: <span class="string">'首页'</span> &#125;,</span><br><span class="line">  &#123; <span class="attr">path</span>: <span class="string">'/list'</span>, <span class="attr">breadcrumb</span>: <span class="string">'List Page'</span> &#125;,</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> withBreadcrumbs(routes)(<span class="function">(<span class="params">&#123; breadcrumbs &#125;</span>) =&gt;</span> (</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &#123;breadcrumbs.map(<span class="function">(<span class="params">breadcrumb, index</span>) =&gt;</span> (</span><br><span class="line">      &lt;span key=&#123;breadcrumb.key&#125;&gt;</span><br><span class="line">        &lt;NavLink to=&#123;breadcrumb.props.match.url&#125;&gt;</span><br><span class="line">          &#123;breadcrumb&#125;</span><br><span class="line">        &lt;<span class="regexp">/NavLink&gt;</span></span><br><span class="line"><span class="regexp">        &#123;(index &lt; breadcrumbs.length - 1) &amp;&amp; &lt;i&gt; /</span> &lt;<span class="regexp">/i&gt;&#125;</span></span><br><span class="line"><span class="regexp">      &lt;/</span>span&gt;</span><br><span class="line">    ))&#125;</span><br><span class="line">  &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">));</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="十一、配置-HTML-模板"><a href="#十一、配置-HTML-模板" class="headerlink" title="十一、配置 HTML 模板"></a>十一、配置 HTML 模板</h4><p>当然，你也可以配置你的默认模板，新建 <code>pages/document.ejs</code>，<code>umi</code> 约定如果这个文件存在，会作为默认模板，内容上可以参考 <code>umi</code> 内置模板，需要保证出现：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"root"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>那如果针对某些特定页面使用模版呢，这时候需要用到配置文件，我们来修改 <code>.umirc.js</code>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;pages&quot;: &#123;</span><br><span class="line">    &quot;/&quot;: &#123; document: &quot;./a.ejs&quot; &#125;,</span><br><span class="line">    &quot;/list&quot;: &#123; document: &quot;./b.ejs&quot; &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p>优先级是：pages 里指定 &gt; pages/document.ejs &gt; umi 内置模板。</p>
+</div>
+<h4 id="十二、按需加载"><a href="#十二、按需加载" class="headerlink" title="十二、按需加载"></a>十二、按需加载</h4><p>出于性能的考虑，很多场景我们都需要模块或组件进行按需加载，通过 <code>umi/dynamic</code> 接口实现，比如：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> dynamic <span class="keyword">from</span> <span class="string">'umi/dynamic'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> delay = <span class="function">(<span class="params">timeout</span>) =&gt;</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> setTimeout(resolve, timeout));</span><br><span class="line"><span class="keyword">const</span> App = dynamic(<span class="keyword">async</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">await</span> delay(<span class="comment">/* 1s */</span><span class="number">1000</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="params">()</span> =&gt;</span> &lt;div&gt;I will render after <span class="number">1</span>s&lt;<span class="regexp">/div&gt;;</span></span><br><span class="line"><span class="regexp">&#125;);</span></span><br></pre></td></tr></table></figure></p>
+<p>此外，也可以通过 <code>import()</code> 实现，比如：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span>(<span class="string">'g2'</span>).then(<span class="function"><span class="params">()</span> =&gt;</span> &#123; <span class="comment">// do something with g2&#125;);</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="十三、部署"><a href="#十三、部署" class="headerlink" title="十三、部署"></a>十三、部署</h4><p>使用了 <code>umi</code> ，部署也很容易，直接运行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">umi build</span><br></pre></td></tr></table></figure></p>
+<p>举一个简单的例子，比如像这样的目录结构：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">./pages</span><br><span class="line">├── index.css</span><br><span class="line">├── index.js</span><br><span class="line">└── list.js</span><br></pre></td></tr></table></figure></p>
+<p>build 之后就变成了：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">./dist</span><br><span class="line">├── index.html</span><br><span class="line">└── static</span><br><span class="line">    ├── pages__index.5c0f5f51.async.js</span><br><span class="line">    ├── pages__list.f940b099.async.js</span><br><span class="line">    ├── umi.2eaebd79.js</span><br><span class="line">    └── umi.f4cb51da.css</span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p>index.html 会加载 umi.{hash}.js 和 umi.{hash}.css，然后按需加载 index 和 list 两个页面的 JS。</p>
+</div>
+<p>如果需要部署到 <code>CDN</code>，那么大量的使用按需加载，就需要配置 <code>publicPath</code>，找到 <code>.webpackrc</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;publicPath&quot;: &quot;http://yourcdn/path/to/static/&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>还有一种更简单的方式，使用环境变量，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PUBLIC_PATH=http://jarttocdn/path/to/static/ umi build</span><br></pre></td></tr></table></figure></p>
+<p>此外，如果你需要部署到非根目录，这时候可能需要用到 <code>BASE_URL</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">BASE_URL=/path/to/yourapp/ umi build</span><br></pre></td></tr></table></figure></p>
+<h4 id="十四、如何解决-login-页不使用-layout-问题"><a href="#十四、如何解决-login-页不使用-layout-问题" class="headerlink" title="十四、如何解决 login 页不使用 layout 问题"></a>十四、如何解决 login 页不使用 layout 问题</h4><p>umi 里约定 src 目录下的 layouts/index.js 为全局路由，返回一个 React 组件，通过 props.children 渲染子组件。比如：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span>(<span class="params">props</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;Header /&gt;</span><br><span class="line">      &#123; props.children &#125;</span><br><span class="line">      &lt;Footer /&gt;</span><br><span class="line">    &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">  );</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p>那如果我的登录页不需要使用全局 layout ，怎么办？虽然 umi 中并不支持，但是我们仍然可以采取一些手段，参考如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span>(<span class="params">props</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (props.location.path === <span class="string">'/login'</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">SimpleLayout</span>&gt;</span>&#123; props.children &#125;<span class="tag">&lt;/<span class="name">SimpleLayout</span>&gt;</span></span></span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;Header /&gt;</span><br><span class="line">      &#123; props.children &#125;</span><br><span class="line">      &lt;Footer /&gt;</span><br><span class="line">    &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">  );</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="十五、环境变量"><a href="#十五、环境变量" class="headerlink" title="十五、环境变量"></a>十五、环境变量</h4><p>部署的时候，我们要按照不同的服务器环境去打包，这时候就需要使用环境变量了。我们需要先安装 <code>cross-env</code>，<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install cross-env --save</span><br></pre></td></tr></table></figure></p>
+<p>然后配置 <code>package.json</code>：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">"build-release": "cross-env HOST=http://test.jartto.com umi build",</span><br><span class="line">"build-test": "cross-env HOST=http://pro.jartto.net umi build",</span><br></pre></td></tr></table></figure></p>
+<p>这里我配置了一个测试环境和一个正式环境的 <code>HOST</code>。接下来，需要 修改 <code>.webpackrc.js</code>：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export default &#123;</span><br><span class="line">"define": &#123; "process.env.HOST": process.env.HOST&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<div class="alert warning"><p>这里一定要配置，否则环境变量并没有什么卵用。</p>
+</div>
+<p>最后，创建自己的配置文件 <code>config.js</code><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> SELF = &#123;</span><br><span class="line">  url: process.env.HOST ? process.env.HOST : <span class="string">'http://127.0.0.1'</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> SELF;</span><br></pre></td></tr></table></figure></p>
+<p>此外，umi 提供了很多环境变量可以直接使用，具体请参考<a href="https://umijs.org/docs/zh-Hans/introduction.html" target="_blank" rel="noopener">环境变量</a></p>
+<h4 id="十六、路由跳转"><a href="#十六、路由跳转" class="headerlink" title="十六、路由跳转"></a>十六、路由跳转</h4><p>有两种使用场景可做参考：<br>1.静态跳转<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Link <span class="keyword">from</span> <span class="string">'umi/link'</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> () =&gt; ( <span class="xml"><span class="tag">&lt;<span class="name">Link</span> <span class="attr">to</span>=<span class="string">"/list"</span>&gt;</span>Go to jartto's page<span class="tag">&lt;/<span class="name">Link</span>&gt;</span></span> );</span><br></pre></td></tr></table></figure></p>
+<p>2.方法跳转<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> router <span class="keyword">from</span> <span class="string">'umi/router'</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">goToListPage</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  router.push(<span class="string">'/list'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="十七、build-访问路由后-404"><a href="#十七、build-访问路由后-404" class="headerlink" title="十七、build 访问路由后 404"></a>十七、build 访问路由后 404</h4><p>几个方案供选择：</p>
+<ul>
+<li>改用 hashHistory，在 .umirc.js 里配 hashHistory: true</li>
+<li>静态化，在 .umirc.js 里配 exportStatic: true</li>
+<li>服务端配置路由 fallback 到 index.html</li>
+</ul>
+<p>这些在官方文档中都可以看到，也是开发中最容易碰到的问题。</p>
+<h4 id="十八、总结"><a href="#十八、总结" class="headerlink" title="十八、总结"></a>十八、总结</h4><p><code>umijs</code> 还是挺让人惊喜的，它让我可以专注去写业务，不需要花费太多的经历在配置上。所以，如果手头有一些比较急的项目，不妨拿来试试。</p>
+<p>当我知道它借鉴了 <code>nextjs</code> 的思想后，越发想去了解一下 <code>nextjs</code>。好吧，趁着热劲，去探索一下 <code>nextjs</code> 的神秘世界吧！</p>
+<h4 id="十九、相关资源"><a href="#十九、相关资源" class="headerlink" title="十九、相关资源"></a>十九、相关资源</h4><p><a href="https://umijs.org/docs/en/introduction.html" target="_blank" rel="noopener">官网地址</a><br><a href="https://github.com/umijs/umi" target="_blank" rel="noopener">Github</a></p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/umi/">umi</a> <a class="tag tag--primary tag--small t-link" href="/tags/umijs/">umijs</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/05/27/nextjs-1/" data-tooltip="Next.js 使用指南1－基本规则">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/05/24/build-your-dva2/" data-tooltip="构建你的 Dva2">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/05/24/taste-of-umi/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/05/24/taste-of-umi/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/05/24/taste-of-umi/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/05/27/nextjs-1/" data-tooltip="Next.js 使用指南1－基本规则">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/05/24/build-your-dva2/" data-tooltip="构建你的 Dva2">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/05/24/taste-of-umi/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/05/24/taste-of-umi/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/05/24/taste-of-umi/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/05/24/taste-of-umi/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/05/24/taste-of-umi/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/05/24/taste-of-umi/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

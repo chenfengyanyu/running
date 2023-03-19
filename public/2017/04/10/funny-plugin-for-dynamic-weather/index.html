@@ -1,0 +1,511 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>有趣的动态天气图标插件 - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="偶然发现一个国外的网站接入了天气板块，很有意思的是该网站所有的天气图标都是会动的。于是我便有了学（chao）习（xi）的念头，我们来一探究竟。">
+<meta name="keywords" content="plugin">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="有趣的动态天气图标插件">
+<meta property="og:url" content="http://jartto.wang/2017/04/10/funny-plugin-for-dynamic-weather/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="偶然发现一个国外的网站接入了天气板块，很有意思的是该网站所有的天气图标都是会动的。于是我便有了学（chao）习（xi）的念头，我们来一探究竟。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/weather2.png-blog">
+<meta property="og:updated_time" content="2017-11-12T12:01:03.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="有趣的动态天气图标插件">
+<meta name="twitter:description" content="偶然发现一个国外的网站接入了天气板块，很有意思的是该网站所有的天气图标都是会动的。于是我便有了学（chao）习（xi）的念头，我们来一探究竟。">
+<meta name="twitter:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/weather2.png-blog">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/weather0.gif"/>
+        <meta class="swiftype" name="image" data-type="enum" content="http://7xvi3w.com1.z0.glb.clouddn.com/weather0.gif" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            有趣的动态天气图标插件
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2017-04-10T23:22:48+08:00">
+	  
+		    2017/4月/10 23:22:48
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>偶然发现一个国外的网站接入了天气板块，很有意思的是该网站所有的天气图标都是会动的。于是我便有了学（chao）习（xi）的念头，我们来一探究竟。<br><a id="more"></a></p>
+<h4 id="一、顺藤摸瓜"><a href="#一、顺藤摸瓜" class="headerlink" title="一、顺藤摸瓜"></a>一、顺藤摸瓜</h4><p>通过审查元素，我们很快定位到了一个叫 <code>skycons</code> 的 <code>js</code> 类库，顺藤摸瓜找到了 <a href="https://github.com/darkskyapp/skycons" target="_blank" rel="noopener">github 地址</a>。美中不足的是，<code>skycons</code> 文档地址不能访问了，于是顺手下载了一份 skycons.js 文件。</p>
+<div class="alert success"><p>OK，万事具备，下面我们开始分步剖析。</p>
+</div>
+<h4 id="二、简单示例"><a href="#二、简单示例" class="headerlink" title="二、简单示例"></a>二、简单示例</h4><p>首先，添加 <code>canvas</code>，并设置 <code>id</code>，以备后续使用，宽高可以随意设置，如下:<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">"jartto"</span> <span class="attr">width</span>=<span class="string">"128"</span> <span class="attr">height</span>=<span class="string">"128"</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>其次，我们实例化 <code>Skycons</code>：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> skycons = <span class="keyword">new</span> Skycons(&#123;<span class="string">'color'</span>: <span class="string">'pink'</span>&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>然后，在我们的元素上通过 <code>canvas id</code> 来添加动画，并选择<a href="#animateType">动画类型</a>：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">skycons.add(<span class="string">'jartto'</span>, Skycons.PARTLY_CLOUDY_DAY);</span><br></pre></td></tr></table></figure></p>
+<p>最后，别忘了：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">skycons.play();</span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p>通过调用 skycons.play() 来播放动画。</p>
+</div>
+<p>这样，一个简单的示例就完成了，是不是很简单呢？下面我们来看看参数详解。</p>
+<h4 id="三、参数详解"><a href="#三、参数详解" class="headerlink" title="三、参数详解"></a>三、<a name="animateType">参数详解</a></h4><p>可设置的天气类型参数：</p>
+<ul>
+<li>CLEAR_DAY</li>
+<li>PARTLY_CLOUDY_DAY</li>
+<li>CLOUDY</li>
+<li>RAIN</li>
+<li>SLEET</li>
+<li>SNOW</li>
+<li>WIND</li>
+<li>FOG</li>
+</ul>
+<p>添加动画：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 通过 canvas</span></span><br><span class="line">skycons.add(<span class="string">'jartto1'</span>, Skycons.PARTLY_CLOUDY_DAY);</span><br><span class="line"><span class="comment">// 通过 元素 id</span></span><br><span class="line">skycons.add(<span class="built_in">document</span>.getElementById(<span class="string">'jartto2'</span>), Skycons.PARTLY_CLOUDY_DAY);</span><br></pre></td></tr></table></figure></p>
+<p>播放动画：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">skycons.play();</span><br></pre></td></tr></table></figure></p>
+<p>暂停动画：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">skycons.pause()</span><br></pre></td></tr></table></figure></p>
+<p>动态更改 icon ：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">skycons.set(<span class="string">'jartto1'</span>, Skycons.PARTLY_CLOUDY_NIGHT);</span><br></pre></td></tr></table></figure></p>
+<p>移除动画：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">skycons.remove(<span class="string">'jartto2'</span>);</span><br></pre></td></tr></table></figure></p>
+<h4 id="四、实际应用"><a href="#四、实际应用" class="headerlink" title="四、实际应用"></a>四、实际应用</h4><p>为了更好的说明问题，我们来做一个天气板块：<br>首先，引入 <code>skycons</code> 文件：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"js/skycons.js"</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>其次，创建html结构：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">"box"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">span</span>&gt;</span>晴：CLEAR_DAY<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">"jartto1"</span> <span class="attr">width</span>=<span class="string">"100"</span> <span class="attr">height</span>=<span class="string">"100"</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">span</span>&gt;</span>夜间晴：CLEAR_NIGHT<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">"jartto2"</span> <span class="attr">width</span>=<span class="string">"100"</span> <span class="attr">height</span>=<span class="string">"100"</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  .....</span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>最后，添加 js 代码：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> lists = [<span class="string">'CLEAR_DAY'</span>,<span class="string">'CLEAR_NIGHT'</span>,<span class="string">'PARTLY_CLOUDY_DAY'</span>,<span class="string">'PARTLY_CLOUDY_NIGHT'</span>,<span class="string">'CLOUDY'</span>,<span class="string">'RAIN'</span>,<span class="string">'SLEET'</span>,<span class="string">'SNOW'</span>,<span class="string">'WIND'</span>,<span class="string">'FOG'</span>];</span><br><span class="line"></span><br><span class="line">lists.map(<span class="function">(<span class="params">item,index</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 随机一个色值</span></span><br><span class="line">  <span class="keyword">let</span> color = <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random() * (<span class="number">2</span> &lt;&lt; <span class="number">23</span>)).toString(<span class="number">16</span>);</span><br><span class="line">  <span class="comment">// 实例化 Skycons</span></span><br><span class="line">  <span class="keyword">let</span> skycons = <span class="keyword">new</span> Skycons(&#123; <span class="attr">color</span>: <span class="string">`#<span class="subst">$&#123;color&#125;</span>`</span>&#125;);</span><br><span class="line">  skycons.add(<span class="string">`jartto<span class="subst">$&#123;index+<span class="number">1</span>&#125;</span>`</span>, Skycons[item]);</span><br><span class="line">  skycons.play();</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>是不是很简单呢，更多请查看：<a href="https://github.com/chenfengyanyu/my-web-accumulation/tree/master/skycons" target="_blank" rel="noopener">代码地址</a>。</p>
+<h4 id="五、问题汇总"><a href="#五、问题汇总" class="headerlink" title="五、问题汇总"></a>五、问题汇总</h4><p>1.实际的天气状况可能有很多，而 skycons 提供的选择并不多；<br><img src="http://7xvi3w.com1.z0.glb.clouddn.com/weather2.png-blog" alt="weather2"><br><div class="alert info"><p>解决方案：合并同类的天气状况，可能的代码如下:</p>
+</div><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span> (code) &#123;</span><br><span class="line">  <span class="keyword">case</span> <span class="string">'100'</span>:</span><br><span class="line">    val = <span class="string">'CLEAR_DAY'</span>;</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">  <span class="keyword">case</span> <span class="string">'101'</span>:</span><br><span class="line">    val = <span class="string">'CLOUDY'</span>;</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">  <span class="keyword">case</span> <span class="string">'102'</span>:</span><br><span class="line">  <span class="keyword">case</span> <span class="string">'103'</span>:</span><br><span class="line">  <span class="keyword">case</span> <span class="string">'104'</span>:</span><br><span class="line">    val = <span class="string">'PARTLY_CLOUDY_DAY'</span>;</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">  ...</span><br><span class="line"></span><br><span class="line">  <span class="keyword">default</span>:</span><br><span class="line">    val = <span class="string">'CLEAR_DAY'</span>;</span><br></pre></td></tr></table></figure></p>
+<h4 id="六、源码分析"><a href="#六、源码分析" class="headerlink" title="六、源码分析"></a>六、源码分析</h4><p>因为看不到文档，所以很好奇，大概瞅了一些源码。当然，也并不是一无所获，譬如：<br>1.<code>requestAnimationFram</code> 的兼容处理：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> raf = global.requestAnimationFrame       ||</span><br><span class="line">          global.webkitRequestAnimationFrame ||</span><br><span class="line">          global.mozRequestAnimationFrame    ||</span><br><span class="line">          global.oRequestAnimationFrame      ||</span><br><span class="line">          global.msRequestAnimationFrame     ,</span><br><span class="line">    caf = global.cancelAnimationFrame        ||</span><br><span class="line">          global.webkitCancelAnimationFrame  ||</span><br><span class="line">          global.mozCancelAnimationFrame     ||</span><br><span class="line">          global.oCancelAnimationFrame       ||</span><br><span class="line">          global.msCancelAnimationFrame      ;</span><br></pre></td></tr></table></figure></p>
+<p>2.<code>add</code> 方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">add: function(el, draw) &#123;</span><br><span class="line">  var obj;</span><br><span class="line"></span><br><span class="line">  if(typeof el === &quot;string&quot;)</span><br><span class="line">    el = document.getElementById(el);</span><br><span class="line"></span><br><span class="line">  // canvas 不存在则不执行</span><br><span class="line">  if(el === null)</span><br><span class="line">    return;</span><br><span class="line"></span><br><span class="line">  // 对用户传如参数进行格式化处理，做了一些简单的容错，因为要直接调用方法</span><br><span class="line">  draw = this._determineDrawingFunction(draw);</span><br><span class="line"></span><br><span class="line">  // 当然，如果方法不存在，也得跳出</span><br><span class="line">  if(typeof draw !== &quot;function&quot;)</span><br><span class="line">    return;</span><br><span class="line"></span><br><span class="line">  obj = &#123;</span><br><span class="line">    element: el,</span><br><span class="line">    context: el.getContext(&quot;2d&quot;),</span><br><span class="line">    drawing: draw</span><br><span class="line">  &#125;;</span><br><span class="line">  // 将每次添加的对象保存在数组中，方便修改和删除操作</span><br><span class="line">  this.list.push(obj);</span><br><span class="line">  this.draw(obj, KEYFRAME);</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p><code>add</code> 方法操作的是一个数组，也就意味着，我们只需要实例化一次 <code>skycons</code> 就可以添加多个 <code>icons</code> 。</p>
+</div>
+<p>3.定时器的时间设置技巧 1000 / 60，动画更加流畅：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">play: function() &#123;</span><br><span class="line">  var self = this;</span><br><span class="line"></span><br><span class="line">  this.pause();</span><br><span class="line">  this.interval = requestInterval(function() &#123;</span><br><span class="line">    var now = Date.now(), i;</span><br><span class="line"></span><br><span class="line">    for(i = self.list.length; i--; )</span><br><span class="line">      self.draw(self.list[i], now);</span><br><span class="line">  &#125;, 1000 / 60);</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></p>
+<p>起初不太理解作者为何要设置这个数值，后来才意识到：<br><div class="alert info"><p>大多数电脑显示器的刷新频率是 60 Hz，大概相当于每秒钟重绘 60 次。</p>
+</div></p>
+<p>大多数浏览器都会对重绘操作加以限制，不超过显示器的重绘频率，因为即使超过那个频率用户体验也不会有提升。因此，最平滑动画的最佳循环间隔是 1000 ms / 60，约等于 16.6 ms 。</p>
+<p>4.各种 canvas 画太阳，云彩，风等方法，可以参考。<br><div class="alert success"><p>源码比较简单，详情请查看：<a href="https://github.com/chenfengyanyu/my-web-accumulation/blob/master/skycons/skycons.js" target="_blank" rel="noopener">源码地址</a></p>
+</div></p>
+<h4 id="七、相关资源"><a href="#七、相关资源" class="headerlink" title="七、相关资源"></a>七、相关资源</h4><p>1.<a href="https://github.com/darkskyapp/skycons" target="_blank" rel="noopener">skycons</a><br>2.<a href="https://www.heweather.com/documents/condition" target="_blank" rel="noopener">天气 API</a><br>3.<a href="https://www.cnblogs.com/xiaohuochai/p/5777186.html" target="_blank" rel="noopener">requestAnimationFrame</a></p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/plugin/">plugin</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/04/15/nginx-exception-handling/" data-tooltip="Nginx 使用与异常处理">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/03/28/about-js-array/" data-tooltip="JS 数组操作汇总">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2017/04/10/funny-plugin-for-dynamic-weather/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2017/04/10/funny-plugin-for-dynamic-weather/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2017/04/10/funny-plugin-for-dynamic-weather/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/04/15/nginx-exception-handling/" data-tooltip="Nginx 使用与异常处理">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/03/28/about-js-array/" data-tooltip="JS 数组操作汇总">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2017/04/10/funny-plugin-for-dynamic-weather/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2017/04/10/funny-plugin-for-dynamic-weather/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2017/04/10/funny-plugin-for-dynamic-weather/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2017/04/10/funny-plugin-for-dynamic-weather/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2017/04/10/funny-plugin-for-dynamic-weather/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2017/04/10/funny-plugin-for-dynamic-weather/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

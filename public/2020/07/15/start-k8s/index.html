@@ -1,0 +1,653 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>一文了解 Kubernetes - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="上一节我们着重讲解了 Docker，其实遗留了一个大问题。Docker 虽好用，但面对强大的集群，成千上万的容器，突然感觉不香了。">
+<meta name="keywords" content="k8s,docker">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="一文了解 Kubernetes">
+<meta property="og:url" content="http://jartto.wang/2020/07/15/start-k8s/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="上一节我们着重讲解了 Docker，其实遗留了一个大问题。Docker 虽好用，但面对强大的集群，成千上万的容器，突然感觉不香了。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/k8s/intro.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/k8s/iaas.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/k8s/k8s.png">
+<meta property="og:updated_time" content="2020-07-15T00:18:26.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一文了解 Kubernetes">
+<meta name="twitter:description" content="上一节我们着重讲解了 Docker，其实遗留了一个大问题。Docker 虽好用，但面对强大的集群，成千上万的容器，突然感觉不香了。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/k8s/intro.png">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/k8s/logo.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/k8s/logo.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            一文了解 Kubernetes
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2020-07-15T06:12:04+08:00">
+	  
+		    2020/7月/15 06:12:04
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p><a href="http://jartto.wang/2020/07/04/learn-docker/">上一节</a>我们着重讲解了 <code>Docker</code>，其实遗留了一个大问题。<code>Docker</code> 虽好用，但面对强大的集群，成千上万的容器，突然感觉不香了。<br><a id="more"></a><br>这时候就需要我们的主角 <code>Kubernetes</code> 上场了，先来了解一下 <code>K8s</code> 的基本概念，后面再介绍实践，由浅入深步步为营。</p>
+<p><strong>关于 <code>K8s</code> 的基本概念，我们将会围绕如下七点展开：</strong><br>1.<code>Docker</code> 的管理痛点<br>2.什么是 <code>K8s</code>？<br>3.云架构 &amp; 云原生<br>4.<code>K8s</code> 架构原理<br>5.<code>K8s</code> 核心组件<br>6.<code>K8s</code> 的服务注册与发现<br>7.关键问题</p>
+<h4 id="一、Docker-的管理痛点"><a href="#一、Docker-的管理痛点" class="headerlink" title="一、Docker 的管理痛点"></a>一、Docker 的管理痛点</h4><p>如果想要将 <code>Docker</code> 应用于庞大的业务实现，是存在困难的<strong>编排</strong>、<strong>管理</strong>和<strong>调度</strong>问题。于是，我们迫切需要一套管理系统，对 <code>Docker</code> 及容器进行更高级更灵活的管理。</p>
+<p><code>Kubernetes</code> 应运而生！<code>Kubernetes</code>，名词源于希腊语，意为「舵手」或「飞行员」。<code>Google</code> 在 <code>2014</code> 年开源了 <code>Kubernetes</code> 项目，建立在 <code>Google</code> 在大规模运行生产工作负载方面拥有十几年的经验的基础上，结合了社区中最好的想法和实践。</p>
+<div class="alert info"><p>K8s 是 Kubernetes 的缩写，用 8 替代了 「ubernete」，下文我们将使用简称。</p>
+</div>
+<h4 id="二、什么是-K8s-？"><a href="#二、什么是-K8s-？" class="headerlink" title="二、什么是 K8s ？"></a>二、什么是 K8s ？</h4><p><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/k8s/intro.png" alt="K8s 介绍"><br><code>K8s</code> 是一个可移植的、可扩展的开源平台，用于<strong>管理容器化的工作负载和服务，可促进声明式配置和自动化</strong>。<code>K8s</code> 拥有一个庞大且快速增长的生态系统。<code>K8s</code> 的服务、支持和工具广泛可用。</p>
+<p>通过 <code>K8s</code> 我们可以：<br>1.快速部署应用<br>2.快速扩展应用<br>3.无缝对接新的应用功能<br>4.节省资源，优化硬件资源的使用</p>
+<p><code>K8s</code> 有如下特点:<br>1.可移植: 支持公有云，私有云，混合云，多重云 <code>multi-cloud</code><br>2.可扩展: 模块化，插件化，可挂载，可组合<br>3.自动化: 自动部署，自动重启，自动复制，自动伸缩/扩展</p>
+<h4 id="三、云架构-amp-云原生"><a href="#三、云架构-amp-云原生" class="headerlink" title="三、云架构 &amp; 云原生"></a>三、云架构 &amp; 云原生</h4><p>1.云和 <code>K8s</code> 是什么关系<br>云就是使用容器构建的一套服务集群网络，云由很多的大量容器构成。<code>K8s</code> 就是用来管理云中的容器。</p>
+<p>2.常见几类云架构</p>
+<ul>
+<li><code>On-Premises</code> (本地部署)</li>
+<li><code>iaas</code>（基础设施即服务）<ul>
+<li>用户：租用（购买|分配权限）云主机，用户不需要考虑网络，<code>DNS</code>，硬件环境方面的问题。</li>
+<li>运营商：提供网络，存储，<code>DNS</code>，这样服务就叫做基础设施服务</li>
+</ul>
+</li>
+<li><code>paas</code>（平台即服务）<ul>
+<li><code>mysql/es/mq/...</code></li>
+</ul>
+</li>
+<li><code>saas</code>（软件即服务）<ul>
+<li>钉钉</li>
+<li>财务管理</li>
+</ul>
+</li>
+<li><code>serverless</code><ul>
+<li>无服务，不需要服务器。站在用户的角度考虑问题，用户只需要使用云服务器即可，在云服务器所在的基础环境，软件环境都不需要用户关心。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/k8s/iaas.png" alt="常见云架构图示"></p>
+<p>如果觉得不好理解，推荐阅读这篇文章：<a href="https://www.zhihu.com/question/21641778/answer/62523535" target="_blank" rel="noopener">如何通俗解释 IaaS、PaaS、SaaS 的区别</a></p>
+<div class="alert info"><p>可以预见：未来服务开发都是 Serverless，企业都构建了自己的私有云环境，或者是使用公有云环境。</p>
+</div>
+<p>3.云原生<br>为了让应用程序（项目，服务软件）都运行在云上的解决方案，这样的方案叫做<strong>云原生</strong>。</p>
+<p>云原生有如下特点：</p>
+<ul>
+<li>容器化，所有服务都必须部署在容器中</li>
+<li>微服务，<code>Web</code> 服务架构式服务架构</li>
+<li><code>CI/CD</code></li>
+<li><code>DevOps</code></li>
+</ul>
+<h4 id="四、K8s-架构原理"><a href="#四、K8s-架构原理" class="headerlink" title="四、K8s 架构原理"></a>四、K8s 架构原理</h4><p>1.<code>K8s</code> 架构<br>概括来说 <code>K8s</code> 架构就是一个 <code>Master</code> 对应一群 <code>Node</code> 节点。</p>
+<p><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/k8s/k8s.png" alt="K8s 架构图示"></p>
+<p>下面我们来逐一介绍 <code>K8s</code> 架构图中的 <code>Master</code> 和 <code>Node</code>。</p>
+<p>2.<code>Master</code> 节点结构如下：</p>
+<ul>
+<li><code>apiserver</code> 即 <code>K8s</code> 网关，所有的指令请求都必须要经过 <code>apiserver</code>；</li>
+<li><code>scheduler</code> 调度器，使用调度算法，把请求资源调度到某一个 <code>node</code> 节点；</li>
+<li><code>controller</code> 控制器，维护 <code>K8s</code> 资源对象；</li>
+<li><code>etcd</code> 存储资源对象；</li>
+</ul>
+<p>3.<code>Node</code>节点</p>
+<ul>
+<li><code>kubelet</code> 在每一个 <code>node</code> 节点都存在一份，在 <code>node</code> 节点上的资源操作指令由 <code>kubelet</code> 来执行；</li>
+<li><code>kube-proxy</code> 代理服务，处理服务间负载均衡；</li>
+<li><code>pod</code> 是 <code>k8s</code> 管理的基本单元（最小单元），<code>pod</code> 内部是容器，<code>k8s</code> 不直接管理容器，而是管理<code>pod</code>；</li>
+<li><code>docker</code> 运行容器的基础环境，容器引擎；</li>
+<li><code>fluentd</code> 日志收集服务；</li>
+</ul>
+<p>在介绍完 <code>K8s</code> 架构后，我们又引入了很多技术名词。不要着急，先有<strong>整体概念，再各个击破</strong>。请耐心<a href="http://jartto.wang/2020/07/15/start-k8s/">阅读下文</a>，相信你一定会有不一样的收获。</p>
+<h4 id="五、K8s-核心组件"><a href="#五、K8s-核心组件" class="headerlink" title="五、K8s 核心组件"></a>五、K8s 核心组件</h4><p>1.<code>K8s</code> 组件<br><code>K8s</code> 是用来管理容器，但是不直接操作容器，最小操作单元是 <code>Pod</code> （间接管理容器）</p>
+<ul>
+<li>一个 <code>Master</code> 有一群 <code>Node</code> 节点与之对应</li>
+<li><code>Master</code> 节点不存储容器，只负责调度、网管、控制器、资源对象存储</li>
+<li>容器的存储在 <code>Node</code> 节点，容器是存储在 <code>Pod</code> 内部的）</li>
+<li><code>Pod</code> 内部可以有一个容器，或者多个容器</li>
+<li><code>Kubelet</code> 负责本地 <code>Pod</code> 的维护</li>
+<li><code>Kube-proxy</code> 负责负载均衡，在多个 <code>Pod</code> 之间来做负载均衡</li>
+</ul>
+<p>2.<code>Pod</code> 是什么？</p>
+<ul>
+<li><code>pod</code> 也是一个容器，这个容器中装的是 <code>Docker</code> 创建的容器，<code>Pod</code> 用来封装容器的一个容器，<code>Pod</code> 是一个虚拟化分组；</li>
+<li><code>Pod</code> 相当于独立主机，可以封装一个或者多个容器；</li>
+</ul>
+<div class="alert success"><p>Pod 有自己的 IP 地址、主机名，相当于一台独立沙箱环境。</p>
+</div>
+<p>3.<code>Pod</code> 到底用来干什么？<br>通常情况下，在服务部署时候，使用 <code>Pod</code> 来管理一组相关的服务。一个 <code>Pod</code> 中要么部署一个服务，要么部署一组有关系的服务。</p>
+<div class="alert warning"><p>一组相关的服务是指：在链式调用的调用连路上的服务。</p>
+</div>
+<p>4.<code>Web</code> 服务集群如何实现？<br>实现服务集群：只需要复制多方 <code>Pod</code> 的副本即可，这也是 <code>K8s</code> 管理的先进之处，<code>K8s</code> 如果继续扩容，只需要控制 <code>Pod</code> 的数量即可，缩容道理类似。</p>
+<p>5.<code>Pod</code> 底层网络，数据存储是如何进行的？</p>
+<ul>
+<li><code>Pod</code> 内部容器创建之前，必须先创建 <code>Pause</code> 容器；</li>
+<li>服务容器之间访问 <code>localhost</code> ，相当于访问本地服务一样，性能非常高；</li>
+</ul>
+<p>6.<code>ReplicaSet</code> 副本控制器<br>控制 <code>Pod</code> 副本「服务集群」的数量，永远与预期设定的数量保持一致即可。当有 <code>Pod</code> 服务宕机时候，副本控制器将会立马重新创建一个新的 <code>Pod</code>，永远保证副本为设置数量。</p>
+<p>副本控制器：标签选择器-选择维护一组相关的服务（它自己的服务）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">selector：</span><br><span class="line">    app = web</span><br><span class="line">    Release = stable</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>ReplicationController 副本控制器：单选</li>
+<li>ReplicaSet 副本控制器：单选，复合选择</li>
+</ul>
+<div class="alert danger"><p>在新版的 <code>K8s</code> 中，建议使用 <code>ReplicaSet</code> 作为副本控制器，<code>ReplicationController</code> 不再使用了。</p>
+</div>
+<p>7.<code>Deployment</code> 部署对象</p>
+<ul>
+<li>服务部署结构模型</li>
+<li>滚动更新</li>
+</ul>
+<p><code>ReplicaSet</code> 副本控制器控制 <code>Pod</code> 副本的数量。但是，项目的需求在不断迭代、不断的更新，项目版本将会不停的的发版。版本的变化，如何做到服务更新？</p>
+<p>部署模型：</p>
+<ul>
+<li><code>ReplicaSet</code> 不支持滚动更新，<code>Deployment</code> 对象支持滚动更新，通常和 <code>ReplicaSet</code> 一起使用；</li>
+<li><code>Deployment</code> 管理 <code>ReplicaSet</code>，<code>RS</code> 重新建立新的 <code>RS</code>，创建新的 <code>Pod</code>；</li>
+</ul>
+<p>8.<code>MySQL</code> 使用容器化部署，存在什么样的问题？</p>
+<ul>
+<li>容器是生命周期的，一旦宕机，数据丢失</li>
+<li><code>Pod</code> 部署，<code>Pod</code> 有生命周期，数据丢失</li>
+</ul>
+<div class="alert danger"><p>对于 K8s 来说，不能使用 Deployment 部署<strong>有状态</strong>服务。</p>
+</div>
+<p>通常情况下，<code>Deployment</code> 被用来部署无状态服务，那么对于有状态服务的部署，使用 <code>StatefulSet</code> 进行有状态服务的部署。</p>
+<p>什么是<strong>有状态服务</strong>？</p>
+<ul>
+<li>有实时的数据需要存储</li>
+<li>有状态服务集群中，把某一个服务抽离出去，一段时间后再加入机器网络，如果集群网络无法使用</li>
+</ul>
+<p>什么是<strong>无状态服务</strong>？</p>
+<ul>
+<li>没有实时的数据需要存储</li>
+<li>无状态服务集群中，把某一个服务抽离出去，一段时间后再加入机器网络，对集群服务没有任何影响</li>
+</ul>
+<p>9.<code>StatefulSet</code><br>为了解决有状态服务使用容器化部署的一个问题。</p>
+<ul>
+<li>部署模型</li>
+<li>有状态服务</li>
+</ul>
+<p><code>StatefulSet</code> 保证 <code>Pod</code> 重新建立后，<code>Hostname</code> 不会发生变化，<code>Pod</code> 就可以通过 <code>Hostname</code> 来关联数据。</p>
+<h4 id="六、K8s-的服务注册与发现"><a href="#六、K8s-的服务注册与发现" class="headerlink" title="六、K8s 的服务注册与发现"></a>六、K8s 的服务注册与发现</h4><p><strong>1.<code>Pod</code> 的结构是怎样的？</strong></p>
+<ul>
+<li><code>Pod</code> 相当于一个容器，<code>Pod</code> 有独立 <code>IP</code> 地址，也有自己的 <code>Hostname</code>，利用 <code>Namespace</code> 进行资源隔离，独立沙箱环境。</li>
+<li><code>Pod</code> 内部封装的是容器，可以封装一个，或者多个容器（通常是一组相关的容器）</li>
+</ul>
+<p><strong>2.<code>Pod</code> 网络</strong></p>
+<ul>
+<li><code>Pod</code> 有自己独立的 <code>IP</code> 地址</li>
+<li><code>Pod</code> 内部容器之间访问采用 <code>Localhost</code> 访问</li>
+</ul>
+<div class="alert info"><p>Pod 内部容器访问是 Localhost，Pod 之间的通信属于远程访问。</p>
+</div>
+<p><strong>3.<code>Pod</code> 是如何对外提供服务访问的？</strong><br><code>Pod</code> 是虚拟的资源对象（进程），没有对应实体（物理机，物理网卡）与之对应，无法直接对外提供服务访问。</p>
+<p>那么该<strong>如何解决这个问题</strong>呢？<br><code>Pod</code> 如果想要对外提供服务，必须绑定物理机端口。也就是说在物理机上开启端口，让这个端口和 <code>Pod</code> 的端口进行映射，这样就可以通过物理机进行数据包的转发。</p>
+<div class="alert success"><p>概括来说：先通过物理机 IP + Port 进行访问，再进行数据包转发。</p>
+</div>
+<p><strong>4.一组相关的 <code>Pod</code> 副本，如何实现访问负载均衡？</strong><br>我们先明确一个概念，<code>Pod</code> 是一个进程，是有<strong>生命周期</strong>的。宕机、版本更新，都会创建新的 <code>Pod</code>。这时候 <code>IP</code> 地址会发生变化，<code>Hostname</code> 会发生变化，使用 <code>Nginx</code> 做负载均衡就不太合适了。</p>
+<p>所以我们需要依赖 <code>Service</code> 的能力。</p>
+<p><strong>5.<code>Service</code> 如何实现负载均衡？</strong><br>简单来说，<code>Service</code> 资源对象包括如下三部分：</p>
+<ul>
+<li><code>Pod IP</code>：<code>Pod</code> 的 <code>IP</code> 地址</li>
+<li><code>Node IP</code>：物理机 <code>IP</code> 地址</li>
+<li><code>Cluster IP</code>：虚拟 <code>IP</code> ，是由 <code>K8s</code> 抽象出的 <code>Service</code> 对象，这个 <code>Service</code> 对象就是一个 <code>VIP</code> 的资源对象</li>
+</ul>
+<p><strong>6.<code>Service VIP</code> 更深入原理探讨</strong></p>
+<ul>
+<li><code>Service</code> 和 <code>Pod</code> 都是一个进程，<code>Service</code> 也不能对外网提供服务；</li>
+<li><code>Service</code> 和 <code>Pod</code> 之间可以直接进行通信，它们的通信属于局域网通信；</li>
+<li>把请求交给 <code>Service</code> 后，<code>Service</code> 使用 <code>iptable</code>，<code>ipvs</code> 做数据包的分发；</li>
+</ul>
+<p><strong>7.<code>Service</code> 对象是如何和 <code>Pod</code> 进行关联的？</strong></p>
+<ul>
+<li>不同的业务有不同的 <code>Service</code>；</li>
+<li><code>Service</code> 和 <code>Pod</code> 通过标签选择器进行关联；  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">selector：</span><br><span class="line">    app=x 选择一组订单的服务 pod ，创建一个 service；</span><br><span class="line">    通过 endpoints 存放一组 pod ip；</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><code>Service</code> 通过标签选择器选择一组相关的副本，然后创建一个 <code>Service</code>。</p>
+<p><strong>8.<code>Pod</code> 宕机、发布新的版本的时候，<code>Service</code> 如何发现 <code>Pod</code> 已经发生了变化？</strong><br>每个 <code>Pod</code> 中都有 <code>Kube-Proxy</code>，监听所有 <code>Pod</code>。如果发现 <code>Pod</code> 有变化，就动态更新（<code>etcd</code> 中存储）对应的 <code>IP</code> 映射关系。</p>
+<h4 id="七、关键问题"><a href="#七、关键问题" class="headerlink" title="七、关键问题"></a>七、关键问题</h4><p><strong>1.企业使用 <code>K8s</code> 主要用来做什么？</strong></p>
+<ul>
+<li><p><strong>自动化运维平台</strong><br>创业型公司，中小型企业，使用 <code>K8s</code> 构建一套自动化运维平台，自动维护服务数量，保持服务永远和预期的数据保持一致性，让服务可以永远提供服务。这样最直接的好处就是降本增效。</p>
+</li>
+<li><p><strong>充分利用服务器资源</strong><br>互联网企业，有很多服务器资源「物理机」，为了充分利用服务器资源，使用 <code>K8s</code> 构建私有云环境，项目运行在云。<strong>这在大型互联网公司尤为重要</strong>。</p>
+</li>
+<li><p><strong>服务的无缝迁移</strong><br>项目开发中，产品需求不停的迭代，更新产品。这就意味着项目不停的发布新的版本，而 <code>K8s</code> 可以实现项目从开发到生产无缝迁移。</p>
+</li>
+</ul>
+<p><strong>2.<code>K8s</code> 服务的负载均衡是如何实现的？</strong><br><code>Pod</code> 中的容器很可能因为各种原因发生故障而死掉。<code>Deployment</code> 等 <code>Controller</code> 会通过动态创建和销毁 <code>Pod</code> 来保证应用整体的健壮性。换句话说，<code>Pod</code> 是脆弱的，但应用是健壮的。每个 <code>Pod</code> 都有自己的 <code>IP</code> 地址。当 <code>controller</code> 用新 <code>Pod</code> 替代发生故障的 <code>Pod</code> 时，新 <code>Pod</code> 会分配到新的 <code>IP</code> 地址。</p>
+<p>这样就产生了一个问题：如果一组 <code>Pod</code> 对外提供服务（比如 <code>HTTP</code>），它们的 <code>IP</code> 很有可能发生变化，那么客户端如何找到并访问这个服务呢？</p>
+<p><code>K8s</code> 给出的解决方案是 <code>Service</code>。 <code>Kubernetes Service</code> 从逻辑上代表了一组 <code>Pod</code>，具体是哪些 <code>Pod</code> 则是由 <code>Label</code> 来挑选。</p>
+<p><code>Service</code> 有自己 <code>IP</code>，而且这个 <code>IP</code> 是不变的。客户端只需要访问 <code>Service</code> 的 <code>IP</code>，<code>K8s</code> 则负责建立和维护 <code>Service</code> 与 <code>Pod</code> 的映射关系。无论后端 <code>Pod</code> 如何变化，对客户端不会有任何影响，因为 <code>Service</code> 没有变。</p>
+<p><strong>3.无状态服务一般使用什么方式进行部署？</strong><br><code>Deployment</code> 为 <code>Pod</code> 和 <code>ReplicaSet</code> 提供了一个 声明式定义方法，通常被用来部署无状态服务。</p>
+<p><code>Deployment</code> 的主要作用：<br>定义 <code>Deployment</code> 来创建 <code>Pod</code> 和 <code>ReplicaSet</code> 滚动升级和回滚应用扩容和索容暂停和继续。<code>Deployment</code>不仅仅可以滚动更新，而且可以进行回滚，如果发现升级到 <code>V2</code> 版本后，服务不可用，可以迅速回滚到 <code>V1</code> 版本。</p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/docker/">docker</a> <a class="tag tag--primary tag--small t-link" href="/tags/k8s/">k8s</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2020/07/29/istio-1/" data-tooltip="了不起的 Istio">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2020/07/04/learn-docker/" data-tooltip="Docker 边学边用">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2020/07/15/start-k8s/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2020/07/15/start-k8s/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2020/07/15/start-k8s/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2020/07/29/istio-1/" data-tooltip="了不起的 Istio">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2020/07/04/learn-docker/" data-tooltip="Docker 边学边用">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2020/07/15/start-k8s/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2020/07/15/start-k8s/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2020/07/15/start-k8s/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2020/07/15/start-k8s/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2020/07/15/start-k8s/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2020/07/15/start-k8s/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

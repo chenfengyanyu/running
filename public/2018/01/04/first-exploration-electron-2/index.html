@@ -1,0 +1,546 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>初探 Electron - 升华篇 - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="由于初探 Electron - 理论篇中基础概念太多，导致篇幅过长，影响阅读效果。所以我决定将 Electron 余下部分在本文继续探讨。">
+<meta name="keywords" content="electron">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="初探 Electron - 升华篇">
+<meta property="og:url" content="http://jartto.wang/2018/01/04/first-exploration-electron-2/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="由于初探 Electron - 理论篇中基础概念太多，导致篇幅过长，影响阅读效果。所以我决定将 Electron 余下部分在本文继续探讨。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2018-12-30T15:39:11.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="初探 Electron - 升华篇">
+<meta name="twitter:description" content="由于初探 Electron - 理论篇中基础概念太多，导致篇幅过长，影响阅读效果。所以我决定将 Electron 余下部分在本文继续探讨。">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/electron0.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/electron0.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            初探 Electron - 升华篇
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2018-01-04T21:33:14+08:00">
+	  
+		    2018/1月/04 21:33:14
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>由于<a href="http://jartto.wang/2018/01/03/first-exploration-electron/">初探 Electron - 理论篇</a>中基础概念太多，导致篇幅过长，影响阅读效果。所以我决定将 Electron 余下部分在本文继续探讨。<br><a id="more"></a></p>
+<h4 id="一、如何引入-jQuery？"><a href="#一、如何引入-jQuery？" class="headerlink" title="一、如何引入 jQuery？"></a>一、如何引入 jQuery？</h4><p>在 <code>Electron</code> 中，如果引入 <code>jQuery</code> 的话，可能会有这样的错误：<code>jQuery is not defined</code>，我们需要这样处理：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;<span class="built_in">window</span>.$ = <span class="built_in">window</span>.jQuery = <span class="built_in">require</span>(<span class="string">'jquery'</span>);<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure></p>
+<p>如果报出 <code>Cannot find module &#39;jquery&#39;</code> 这样的错，请检查你的 jQuery 是否安装：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install jquery --save</span><br></pre></td></tr></table></figure></p>
+<p>可以参考如下两篇文章：</p>
+<ul>
+<li><a href="https://stackoverflow.com/questions/32621988/electron-jquery-is-not-defined" target="_blank" rel="noopener">Electron: jQuery is not defined</a></li>
+<li><a href="https://github.com/electron/electron/issues/254" target="_blank" rel="noopener">jQuery isn’t set globally because “module” is defined</a></li>
+</ul>
+<h4 id="二、使用-scss-或-less"><a href="#二、使用-scss-或-less" class="headerlink" title="二、使用 scss 或 less"></a>二、使用 scss 或 less</h4><ul>
+<li>less：<a href="https://www.npmjs.com/package/electron-less" target="_blank" rel="noopener">electron-less</a></li>
+<li>node-sass</li>
+</ul>
+<h4 id="三、引入构建工具"><a href="#三、引入构建工具" class="headerlink" title="三、引入构建工具"></a>三、引入构建工具</h4><ul>
+<li>webpack：<a href="https://auth0.com/blog/create-a-desktop-app-with-angular-2-and-electron/" target="_blank" rel="noopener">anuglar and webpack</a></li>
+<li>gulp</li>
+</ul>
+<h4 id="四、使用-React-进行开发"><a href="#四、使用-React-进行开发" class="headerlink" title="四、使用 React 进行开发"></a>四、使用 React 进行开发</h4><p>如果你想使用 <code>React</code> 来开发，请参考<a href="http://blog.csdn.net/arnozhang12/article/details/51735815" target="_blank" rel="noopener"></a></p>
+<h4 id="五、使用-Angularjs-进行开发"><a href="#五、使用-Angularjs-进行开发" class="headerlink" title="五、使用 Angularjs 进行开发"></a>五、使用 Angularjs 进行开发</h4><p>同理，一篇用 <code>Angularjs</code> 开发 <code>Electron</code> 的文章，可以<a href="https://auth0.com/blog/create-a-desktop-app-with-angular-2-and-electron/" target="_blank" rel="noopener">参考一下</a>。</p>
+<h4 id="六、如何发送请求？"><a href="#六、如何发送请求？" class="headerlink" title="六、如何发送请求？"></a>六、如何发送请求？</h4><ul>
+<li>使用 <a href="https://github.com/request/request" target="_blank" rel="noopener">request</a></li>
+<li>使用 <a href="https://github.com/visionmedia/superagent" target="_blank" rel="noopener">SuperAgent</a></li>
+<li>使用 <a href="http://bluebirdjs.com/docs/getting-started.html" target="_blank" rel="noopener">bluebird</a></li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="built_in">Promise</span> = <span class="built_in">require</span>( <span class="string">'bluebird'</span> );</span><br><span class="line"><span class="keyword">var</span> request = <span class="built_in">require</span>( <span class="string">'superagent-bluebird-promise'</span> );</span><br><span class="line">request</span><br><span class="line">.get( <span class="string">'http://xxxx.com'</span> )</span><br><span class="line">.then( <span class="function"><span class="keyword">function</span> (<span class="params"> res </span>) </span>&#123;</span><br><span class="line"><span class="comment">// do something when resolved</span></span><br><span class="line">&#125;, <span class="function"><span class="keyword">function</span> (<span class="params"> err </span>) </span>&#123;</span><br><span class="line"> <span class="comment">// do something when rejected</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h4 id="七、使用-ES6"><a href="#七、使用-ES6" class="headerlink" title="七、使用 ES6"></a>七、使用 ES6</h4><p>安装好 <code>babel</code> 后，还需要进行配置。我们通过 <code>babel</code> 官网了解到，需要在项目目录下放置一个 <code>.babelrc</code> 文件，让 <code>babel</code> 知道转换哪些代码。我们的 <code>.babelrc</code> 文件内容如下：<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"presets"</span>: [</span><br><span class="line">    <span class="string">"es2015"</span>,</span><br><span class="line">    <span class="string">"react"</span></span><br><span class="line">  ],</span><br><span class="line"></span><br><span class="line">  <span class="attr">"plugins"</span>: [</span><br><span class="line">    <span class="string">"transform-object-rest-spread"</span></span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>通过 <code>presets</code> 和 <code>plugins</code> 两个子项，我们告知 <code>babel</code> 转换 <code>ES6</code> 和 <code>React JSX</code> 风格的代码，另外还需转换 <code>ES6</code> 中的 <code>spread</code> 语法。</p>
+<p>更多详情，请<a href="http://blog.csdn.net/arnozhang12/article/details/51735815" target="_blank" rel="noopener">参考</a>。</p>
+<h4 id="八、监听代码变化：watchify"><a href="#八、监听代码变化：watchify" class="headerlink" title="八、监听代码变化：watchify"></a>八、监听代码变化：watchify</h4><p>另外，我们需要在 <code>package.json</code> 文件中配置 <code>watchify</code>，让其可以自动检测本地代码变化，并且自动转换代码。<code>package.json</code> 如下：<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">// package.json</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  <span class="attr">"name"</span>: <span class="string">"demoapps"</span>,</span><br><span class="line">  <span class="attr">"version"</span>: <span class="string">"1.0.0"</span>,</span><br><span class="line">  <span class="attr">"description"</span>: <span class="string">""</span>,</span><br><span class="line">  <span class="attr">"author"</span>: <span class="string">"arnozhang"</span>,</span><br><span class="line">  <span class="attr">"main"</span>: <span class="string">"index.js"</span>,</span><br><span class="line">  <span class="attr">"scripts"</span>: &#123;</span><br><span class="line">    <span class="attr">"start"</span>: <span class="string">"electron ."</span>,</span><br><span class="line">    <span class="attr">"watch"</span>: <span class="string">"watchify app/appEntry.js -t babelify -o public/js/bundle.js --debug --verbose"</span>,</span><br><span class="line">    <span class="attr">"package"</span>: <span class="string">"electron-packager ./ DemoApps --overwrite --app-version=1.0.0 --platform=win32 --arch=all --out=../DemoApps --version=1.2.1 --icon=./public/img/app-icon.icns"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"devDependencies"</span>: &#123;</span><br><span class="line">    <span class="attr">"babel"</span>: <span class="string">"^6.5.2"</span>,</span><br><span class="line">    <span class="attr">"babel-plugin-transform-es2015-spread"</span>: <span class="string">"^6.8.0"</span>,</span><br><span class="line">    <span class="attr">"babel-plugin-transform-object-rest-spread"</span>: <span class="string">"^6.8.0"</span>,</span><br><span class="line">    <span class="attr">"babel-preset-es2015"</span>: <span class="string">"^6.9.0"</span>,</span><br><span class="line">    <span class="attr">"babel-preset-react"</span>: <span class="string">"^6.5.0"</span>,</span><br><span class="line">    <span class="attr">"babelify"</span>: <span class="string">"^7.3.0"</span>,</span><br><span class="line">    <span class="attr">"browserify"</span>: <span class="string">"^13.0.1"</span>,</span><br><span class="line">    <span class="attr">"electron-packager"</span>: <span class="string">"^7.0.3"</span>,</span><br><span class="line">    <span class="attr">"electron-prebuilt"</span>: <span class="string">"^1.2.1"</span>,</span><br><span class="line">    <span class="attr">"electron-reload"</span>: <span class="string">"^1.0.0"</span>,</span><br><span class="line">    <span class="attr">"watchify"</span>: <span class="string">"^3.7.0"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"dependencies"</span>: &#123;</span><br><span class="line">    <span class="attr">"material-ui"</span>: <span class="string">"^0.15.0"</span>,</span><br><span class="line">    <span class="attr">"react"</span>: <span class="string">"^15.1.0"</span>,</span><br><span class="line">    <span class="attr">"react-color"</span>: <span class="string">"2.1.0"</span>,</span><br><span class="line">    <span class="attr">"react-dom"</span>: <span class="string">"^15.1.0"</span>,</span><br><span class="line">    <span class="attr">"react-tap-event-plugin"</span>: <span class="string">"^1.0.0"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>通过 <code>package.json</code> 文件，我们在 <code>scripts</code> 下面配置了三个命令：<code>start</code>、<code>watch</code>、<code>package</code>，分别用于启动 <code>App</code>、检测并转换代码、打包 <code>App</code>。<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">start： electron . </span><br><span class="line">watch：watchify app/appEntry.js -t babelify -o public/js/bundle.js –debug –verbose </span><br><span class="line">package：electron-packager ./ DemoApps –overwrite –app-version=1.0.0 –platform=win32 –arch=all –out=../DemoApps –version=1.2.1 –icon=./public/img/app-icon.icns</span><br></pre></td></tr></table></figure></p>
+<p>然后我们在命令行下通过 <code>npm run xxx</code> ，可以运行上面定义好的命令。我们看到，通过 <code>babelify</code> 将代码转换输出到 <code>public/js/bundle.js</code> 目录下，所以我们发布时只需要发布这一个转换好的 <code>js</code> 文件即可。</p>
+<p>更多详情，请<a href="http://blog.csdn.net/arnozhang12/article/details/51735815" target="_blank" rel="noopener">参考</a>。</p>
+<h4 id="九、如何减小-Electron-打包出来的应用的体积"><a href="#九、如何减小-Electron-打包出来的应用的体积" class="headerlink" title="九、如何减小 Electron 打包出来的应用的体积"></a>九、如何减小 Electron 打包出来的应用的体积</h4><p><code>Electron</code> 应用体积动辄一百多兆的体积从他发布的第一天起到现在一直被人诟病，而其体积之所以如此之大的原因在于 <code>Electron</code> 为其跨平台的支持，在内部打包了整个 <code>V8</code> 引擎，相当于一个功能完整的浏览器。<a href="https://changkun.us/archives/2017/03/217/" target="_blank" rel="noopener">优化方式</a>如下：</p>
+<ol>
+<li>使用 yarn clean</li>
+<li>将应用程序打包后再分发</li>
+<li>定制应用的更新功能</li>
+</ol>
+<h4 id="十、去除视觉闪烁"><a href="#十、去除视觉闪烁" class="headerlink" title="十、去除视觉闪烁"></a>十、去除视觉闪烁</h4><p>在加载页面时，渲染进程第一次完成绘制时，会发出 <code>ready-to-show</code> 事件 。 在此事件后显示窗口将没有视觉闪烁：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;BrowserWindow&#125; = <span class="built_in">require</span>(<span class="string">'electron'</span>) </span><br><span class="line"><span class="keyword">let</span> win = <span class="keyword">new</span> BrowserWindow(&#123;<span class="attr">show</span>: <span class="literal">false</span>&#125;) </span><br><span class="line">win.once(<span class="string">'ready-to-show'</span>, () =&gt; &#123; win.show() &#125;)</span><br></pre></td></tr></table></figure></p>
+<h4 id="十一、Shell-模块异常之-Cannot-find-module-‘shell’"><a href="#十一、Shell-模块异常之-Cannot-find-module-‘shell’" class="headerlink" title="十一、Shell 模块异常之 Cannot find module ‘shell’"></a>十一、Shell 模块异常之 Cannot find module ‘shell’</h4><p>如果遇到这样的错，请按照如下操作：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const electron = require(<span class="string">'electron'</span>);</span><br><span class="line">const shell = electron.shell;</span><br></pre></td></tr></table></figure></p>
+<div class="alert success"><p>请注意：<code>shell</code> 不是单独的 <code>node</code> 模块，而是 <code>electron</code> 中封装的一个 <code>shell</code> 对象。</p>
+</div>
+<h4 id="十二、vs-code-debugger-模式报错：Cannot-read-property-‘on’-of-undefined"><a href="#十二、vs-code-debugger-模式报错：Cannot-read-property-‘on’-of-undefined" class="headerlink" title="十二、vs-code debugger 模式报错：Cannot read property ‘on’ of undefined"></a>十二、vs-code debugger 模式报错：Cannot read property ‘on’ of undefined</h4><p>解决方案如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">I just upgraded VS Code and debugging is working fine.</span><br></pre></td></tr></table></figure></p>
+<p>如果不行的话，再试试：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> electron = <span class="built_in">require</span>(<span class="string">'electron'</span>);</span><br><span class="line"><span class="keyword">const</span> app = <span class="built_in">require</span>(<span class="string">'app'</span>);</span><br><span class="line"><span class="keyword">const</span> BrowserWindow = <span class="built_in">require</span>(<span class="string">'browser-window'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>更多详情，请参考如下两篇文章：</p>
+<ul>
+<li><a href="https://github.com/electron/electron-quick-start/issues/170" target="_blank" rel="noopener">Cannot debug electron-quick-start in VSCode</a></li>
+<li><a href="https://github.com/electron/electron-quick-start/issues/30" target="_blank" rel="noopener">TypeError: Cannot read property ‘on’ of undefined</a></li>
+</ul>
+<h4 id="十三、Electron-会在什么时候升级到最新版本的-Chrome？"><a href="#十三、Electron-会在什么时候升级到最新版本的-Chrome？" class="headerlink" title="十三、Electron 会在什么时候升级到最新版本的 Chrome？"></a>十三、Electron 会在什么时候升级到最新版本的 Chrome？</h4><p>通常来说，在稳定版的 <code>Chrome</code> 发布后两周内，官方会更新 <code>Electron</code> 内的 <code>Chrome</code> 版本。</p>
+<p>官方只会使用 <code>stable</code> 版本的 <code>Chrome</code>。但如果在 <code>beta</code> 或 <code>dev</code> 版本中有一个重要的更新，官方会把补丁应用到现版本的 <code>Chrome</code> 上。</p>
+<h4 id="十四、Electron-会在什么时候升级到最新版本的-Node-js？"><a href="#十四、Electron-会在什么时候升级到最新版本的-Node-js？" class="headerlink" title="十四、Electron 会在什么时候升级到最新版本的 Node.js？"></a>十四、Electron 会在什么时候升级到最新版本的 Node.js？</h4><p>官方通常会在最新版的 <code>Node.js</code> 发布后一个月左右将 <code>Electron</code> 更新到这个版本的 <code>Node.js</code>。官方通过这种方式来避免新版本的 <code>Node.js</code> 带来的 <code>bug</code>（这种 <code>bug</code> 太常见了）。</p>
+<p><code>Node.js</code> 的新特性通常是由新版本的 <code>V8</code> 带来的。由于 <code>Electron</code> 使用的是 <code>Chrome</code> 浏览器中附带的 <code>V8</code> 引擎，所以 <code>Electron</code> 内往往已经有了部分新版本 <code>Node.js</code> 才有的崭新特性。</p>
+<h4 id="十五、为什么应用的窗口、托盘在一段时间后不见了？"><a href="#十五、为什么应用的窗口、托盘在一段时间后不见了？" class="headerlink" title="十五、为什么应用的窗口、托盘在一段时间后不见了？"></a>十五、为什么应用的窗口、托盘在一段时间后不见了？</h4><div class="alert info"><p>这通常是因为用来存放窗口、托盘的变量被垃圾收集了。</p>
+</div>
+<p>大家可以参考以下两篇文章来了解为什么会遇到这个问题。</p>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Memory_Management" target="_blank" rel="noopener">内存管理</a></li>
+<li><a href="https://msdn.microsoft.com/library/bzt2dkta.aspx" target="_blank" rel="noopener">变量作用域</a></li>
+</ul>
+<p>如果你只是要一个快速的修复方案，你可以用下面的方式改变变量的作用域，防止这个变量被垃圾收集。从<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">app.on(<span class="string">'ready'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> tray = <span class="keyword">new</span> Tray(<span class="string">'/path/to/icon.png'</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>改为<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> tray = <span class="literal">null</span>;</span><br><span class="line">app.on(<span class="string">'ready'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  tray = <span class="keyword">new</span> Tray(<span class="string">'/path/to/icon.png'</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<h4 id="十六、在-Electron-中，我为什么不能用-jQuery、RequireJS、Meteor、AngularJS？"><a href="#十六、在-Electron-中，我为什么不能用-jQuery、RequireJS、Meteor、AngularJS？" class="headerlink" title="十六、在 Electron 中，我为什么不能用 jQuery、RequireJS、Meteor、AngularJS？"></a>十六、在 Electron 中，我为什么不能用 jQuery、RequireJS、Meteor、AngularJS？</h4><p>因为 <code>Electron</code> 在运行环境中引入了 <code>Node.js</code>，所以在 <code>DOM</code> 中有一些额外的变量，比如 <code>module</code>、<code>exports</code> 和 <code>require</code>。这导致了许多库不能正常运行，因为它们也需要将同名的变量加入运行环境中。</p>
+<p>我们可以通过禁用 <code>Node.js</code> 来解决这个问题，用如下的方式：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在主进程中</span></span><br><span class="line"><span class="keyword">var</span> mainWindow = <span class="keyword">new</span> BrowserWindow(&#123;</span><br><span class="line">  webPreferences: &#123;</span><br><span class="line">    nodeIntegration: <span class="literal">false</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>假如你依然需要使用 <code>Node.js</code> 和 <code>Electron</code> 提供的 <code>API</code>，你需要在引入那些库之前将这些变量重命名，比如：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript"><span class="comment">// 重命名 Electron 提供的 require</span></span></span><br><span class="line"><span class="javascript"><span class="built_in">window</span>.nodeRequire = <span class="built_in">require</span>;</span></span><br><span class="line"><span class="javascript"><span class="keyword">delete</span> <span class="built_in">window</span>.require;</span></span><br><span class="line"><span class="javascript"><span class="keyword">delete</span> <span class="built_in">window</span>.exports;</span></span><br><span class="line"><span class="javascript"><span class="keyword">delete</span> <span class="built_in">window</span>.module;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"jquery.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="十七、为什么-require-‘electron’-xxx-的结果是-undefined？"><a href="#十七、为什么-require-‘electron’-xxx-的结果是-undefined？" class="headerlink" title="十七、为什么 require(‘electron’).xxx 的结果是 undefined？"></a>十七、为什么 require(‘electron’).xxx 的结果是 undefined？</h4><p>在使用 <code>Electron</code> 的提供的模块时，你可能会遇到和以下类似的错误：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="built_in">require</span>(<span class="string">'electron'</span>).webFrame.setZoomFactor(<span class="number">1.0</span>);</span><br><span class="line">Uncaught <span class="built_in">TypeError</span>: Cannot read property <span class="string">'setZoomLevel'</span> <span class="keyword">of</span> <span class="literal">undefined</span></span><br></pre></td></tr></table></figure></p>
+<p>这是因为你在项目中或者在全局中安装了 <code>npm</code> 上获取的 <code>electron</code> 模块，它把 <code>Electron</code> 的内置模块覆写了。</p>
+<p>你可以通过以下方式输出 <code>electron</code> 模块的路径来确认你是否使用了正确的模块。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="built_in">require</span>.resolve(<span class="string">'electron'</span>));</span><br></pre></td></tr></table></figure></p>
+<p>确认以下它是不是像下面这样的：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"/path/to/Electron.app/Contents/Resources/atom.asar/renderer/api/lib/exports/electron.js"</span></span><br></pre></td></tr></table></figure></p>
+<p>假如输出的路径类似于 <code>node_modules/electron/index.js</code>，那么你需要移除或者重命名 <code>npm</code> 上的 <code>electron</code> 模块。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm uninstall electron</span><br><span class="line">npm uninstall -g electron</span><br></pre></td></tr></table></figure></p>
+<p>如果你依然遇到了这个问题，你可能需要检查一下拼写或者是否在错误的进程中调用了这个模块。比如，<code>require(&#39;electron&#39;).app</code> 只能在主进程中使用, 然而 <code>require(&#39;electron&#39;).webFrame</code> 只能在渲染进程中使用。</p>
+<p>更多问题，请移步<a href="https://www.w3cschool.cn/electronmanual/electronmanual-electron-faq.html" target="_blank" rel="noopener"> Electron 常见问题</a></p>
+<h4 id="十八、Electron-could-not-be-found-No-hard-resets-for-you"><a href="#十八、Electron-could-not-be-found-No-hard-resets-for-you" class="headerlink" title="十八、Electron could not be found. No hard resets for you!"></a>十八、Electron could not be found. No hard resets for you!</h4><p>如下方案可以<a href="https://github.com/yan-foto/electron-reload/issues/16" target="_blank" rel="noopener">解决</a>：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">'electron-reload'</span>)(__dirname, &#123;</span><br><span class="line">  electron: <span class="built_in">require</span>(<span class="string">'$&#123;__dirname&#125;/../../node_modules/electron'</span>),</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<h4 id="十九、使用-electron-prebuilt-compile-替换-electron"><a href="#十九、使用-electron-prebuilt-compile-替换-electron" class="headerlink" title="十九、使用 electron-prebuilt-compile 替换 electron"></a>十九、使用 electron-prebuilt-compile 替换 electron</h4><div class="alert info"><p>Install electron-prebuilt-compile instead of the electron</p>
+</div>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install electron-prebuilt-compile --save-dev</span><br></pre></td></tr></table></figure>
+<p>会报出这样的异常：<code>Path must be a string. Received undefined at assertPath</code></p>
+<h4 id="二十、打包异常"><a href="#二十、打包异常" class="headerlink" title="二十、打包异常"></a>二十、打包异常</h4><p>当我们配置好安装 <code>electron-packager</code> 并配置好 <code>package.json</code> 启动 <code>npm run package</code> 的时候，可能会碰到这样的错误：<br><div class="alert danger"><p>Using electron-prebuilt-compile with Electron Packager requires specifying an exact Electron version</p>
+</div><br>还有这样的错误：<br><div class="alert danger"><p>Unable to determine Electron version. Please specify an Electron version</p>
+</div><br>这时候一定要安装 <code>electron</code><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev electron</span><br></pre></td></tr></table></figure></p>
+<p>出现问题的原因可能是 <code>electron-prebuilt-compile</code> 与 <code>electron</code> 冲突造成的，我这里就是因为冲突，所以我卸载了 <code>electron</code> 包。</p>
+<h4 id="二十一、写在最后"><a href="#二十一、写在最后" class="headerlink" title="二十一、写在最后"></a>二十一、写在最后</h4><p>陆续写了两篇 <code>Electron</code> 文章后，我们需要更实际的去完成一个项目，这样才能融汇贯通。嗯，下一篇文章即将出炉：<a href="http://jartto.wang/2018/01/14/first-exploration-electron-3/">初探 Electron - 实践篇1</a></p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/electron/">electron</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/01/14/first-exploration-electron-3/" data-tooltip="初探 Electron - 实践篇1">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/01/03/first-exploration-electron/" data-tooltip="初探 Electron - 理论篇">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/01/04/first-exploration-electron-2/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/01/04/first-exploration-electron-2/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/01/04/first-exploration-electron-2/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/01/14/first-exploration-electron-3/" data-tooltip="初探 Electron - 实践篇1">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/01/03/first-exploration-electron/" data-tooltip="初探 Electron - 理论篇">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/01/04/first-exploration-electron-2/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/01/04/first-exploration-electron-2/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/01/04/first-exploration-electron-2/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/01/04/first-exploration-electron-2/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/01/04/first-exploration-electron-2/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/01/04/first-exploration-electron-2/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

@@ -1,0 +1,556 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>Next.js 使用指南1－基本规则 - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="提起服务端渲染，大伙肯定并不陌生。不论是前端渲染还是服务端渲染，都是值得我们深入研究的。这节我们来了解一下 React 服务端渲染框架 Next.js。">
+<meta name="keywords" content="react,nextjs">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Next.js 使用指南1－基本规则">
+<meta property="og:url" content="http://jartto.wang/2018/05/27/nextjs-1/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="提起服务端渲染，大伙肯定并不陌生。不论是前端渲染还是服务端渲染，都是值得我们深入研究的。这节我们来了解一下 React 服务端渲染框架 Next.js。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2018-10-31T14:59:13.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Next.js 使用指南1－基本规则">
+<meta name="twitter:description" content="提起服务端渲染，大伙肯定并不陌生。不论是前端渲染还是服务端渲染，都是值得我们深入研究的。这节我们来了解一下 React 服务端渲染框架 Next.js。">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/nextjs.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/nextjs.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            Next.js 使用指南1－基本规则
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2018-05-27T06:12:45+08:00">
+	  
+		    2018/5月/27 06:12:45
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>提起服务端渲染，大伙肯定并不陌生。不论是前端渲染还是服务端渲染，都是值得我们深入研究的。这节我们来了解一下 React 服务端渲染框架 Next.js。<br><a id="more"></a></p>
+<h4 id="一、服务端渲染"><a href="#一、服务端渲染" class="headerlink" title="一、服务端渲染"></a>一、服务端渲染</h4><div class="alert success"><p>服务端渲染，是指页面的渲染和生成由服务器来完成，并将渲染好的页面返回客户端。而客户端渲染是页面的生成和数据的渲染过程是在客户端（浏览器或 APP ）完成。</p>
+</div>
+<p>当大家提到服务端渲染(SSR: Server Side Rendering)，首先想到的好处肯定是有利于 <code>SEO</code>，但这个并不是唯一的好处。还有更大的好处，譬如：</p>
+<ul>
+<li>服务器端渲染能更快地显示页面；</li>
+<li>服务器对浏览器进行响应是在 HTML 页面可以渲染的时候，因此浏览器可以不用等待所有的 JavaScript 被下载和执行就可以开始渲染；</li>
+<li>当浏览器下载并执行页面所需的 JavaScript 和其他资源时，不会出现 “白屏” 现象；</li>
+</ul>
+<h4 id="二、Next-js-是什么？"><a href="#二、Next-js-是什么？" class="headerlink" title="二、Next.js 是什么？"></a>二、Next.js 是什么？</h4><p><a href="https://nextjs.org/docs/#setup" target="_blank" rel="noopener">Next.js</a> 是一个基于 <code>React</code> 实现的服务端渲染框架。主要有如下功能：</p>
+<ul>
+<li>服务器端渲染(默认)</li>
+<li>自动代码切分, 加速页面加载</li>
+<li>简单的客户端路由(基于页面)</li>
+<li>基于 Webpack 的开发环境, 支持热模块替换(HMR: Hot Module Replacement)</li>
+<li>使用 React 的 JSX 和 ES6 的 module，模块化和维护更方便</li>
+<li>可以使用 Express 或其他 Node.js 服务器实现</li>
+<li>使用 Babel 和 Webpack 配置定制</li>
+</ul>
+<h4 id="三、安装与配置"><a href="#三、安装与配置" class="headerlink" title="三、安装与配置"></a>三、安装与配置</h4><p>先来执行安装操作：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save next react react-dom</span><br></pre></td></tr></table></figure></p>
+<div class="alert warning"><p>注意：Next.js only supports React 16.</p>
+</div>
+<p>为方便使用，我们写入 <code>package.json</code> 配置：<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"scripts"</span>: &#123;</span><br><span class="line">    <span class="attr">"dev"</span>: <span class="string">"next"</span>,</span><br><span class="line">    <span class="attr">"build"</span>: <span class="string">"next build"</span>,</span><br><span class="line">    <span class="attr">"start"</span>: <span class="string">"next start"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="四、快速开始"><a href="#四、快速开始" class="headerlink" title="四、快速开始"></a>四、快速开始</h4><div class="alert success"><p>通过上面的操作，我们已经安装和配置好 Nextjs 的使用环境，是时候表演真正的技术了。</p>
+</div>
+<p>首先，在根目录下建立 <code>pages</code> 文件夹，并新增子文件 <code>index.js</code>，写入：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> () =&gt; <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>Welcome to jartto's blog!<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br></pre></td></tr></table></figure></p>
+<p>然后，启动服务：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run dev</span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p>如果需要修改端口号：<code>npm run dev -- -p 8888</code></p>
+</div>
+<p>最后，打开 <code>http://localhost:3000</code> ，看到 <code>Welcome to jartto&#39;s blog!</code> 就表明你已经成功了。什么，这么简单，我不需要配置路由吗？</p>
+<p>是的，<code>Next.js</code> 的思想就是约定大于配置，这也就是我们需要将页面放到 <code>pages</code> 文件夹中的原因。如果你觉得 <code>Next.js</code> 上手比较难的话，可以先了解一下国产版 <a href="http://jartto.wang/2018/05/24/taste-of-umi/">UmiJs 尝鲜</a>。</p>
+<h4 id="五、修改-CSS-使用方式"><a href="#五、修改-CSS-使用方式" class="headerlink" title="五、修改 CSS 使用方式"></a>五、修改 CSS 使用方式</h4><p><code>Next.js</code> 默认使用 <code>styled-jsx</code>：<br><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> () =&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    Hello world</span><br><span class="line">    &lt;p&gt;scoped!<span class="xml"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line">    &lt;style jsx&gt;&#123;<span class="string">`</span></span><br><span class="line"><span class="string">      p &#123;</span></span><br><span class="line"><span class="string">        color: blue;</span></span><br><span class="line"><span class="string">      &#125;</span></span><br><span class="line"><span class="string">      div &#123;</span></span><br><span class="line"><span class="string">        background: red;</span></span><br><span class="line"><span class="string">      &#125;</span></span><br><span class="line"><span class="string">      @media (max-width: 600px) &#123;</span></span><br><span class="line"><span class="string">        div &#123;</span></span><br><span class="line"><span class="string">          background: blue;</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">      &#125;</span></span><br><span class="line"><span class="string">    `</span>&#125;&lt;<span class="regexp">/style&gt;</span></span><br><span class="line"><span class="regexp">    &lt;style global jsx&gt;&#123;`</span></span><br><span class="line"><span class="regexp">      body &#123;</span></span><br><span class="line"><span class="regexp">        background: black;</span></span><br><span class="line"><span class="regexp">      &#125;</span></span><br><span class="line"><span class="regexp">    `&#125;&lt;/</span>style&gt;</span><br><span class="line">  &lt;<span class="regexp">/div&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>当然，我们也可以扩展 <code>css</code>，<code>sass</code>，<code>less</code>，<code>stylus</code>：</p>
+<ul>
+<li>next-css</li>
+<li>next-sass</li>
+<li>next-less</li>
+<li>next-stylus</li>
+</ul>
+<h4 id="六、静态资源如何引用？"><a href="#六、静态资源如何引用？" class="headerlink" title="六、静态资源如何引用？"></a>六、静态资源如何引用？</h4><p>首先，我们需要在项目根目录创建 <code>static</code> 文件夹：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir static</span><br></pre></td></tr></table></figure></p>
+<p>然后，在 <code>pages</code> 目录下新建：<code>demo.js</code>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export default () =&gt; &lt;img src=&quot;/static/img/jartto.png&quot; alt=“jartto&apos;s blog&quot; /&gt;</span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p>注意上面图片的引用方式：/static/img/jartto.png</p>
+</div>
+<h4 id="七、使用页头组件："><a href="#七、使用页头组件：" class="headerlink" title="七、使用页头组件："></a>七、使用页头组件：<head><meta name="generator" content="Hexo 3.8.0"></head></h4><p>我们修改 <code>index</code> 文件：<br><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Head <span class="keyword">from</span> <span class="string">'next/head'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> () =&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;Head&gt;</span><br><span class="line">      &lt;title&gt;Jartto<span class="string">'s Nextjs Demo&lt;/title&gt;</span></span><br><span class="line"><span class="string">      &lt;meta name="viewport" content="initial-scale=1.0, width=device-width" /&gt;</span></span><br><span class="line"><span class="string">    &lt;/Head&gt;</span></span><br><span class="line"><span class="string">    &lt;p&gt;Hello world!&lt;/p&gt;</span></span><br><span class="line"><span class="string">  &lt;/div&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>那如果有两个 <code>Head</code> 组件呢？如下代码所示：<br><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Head <span class="keyword">from</span> <span class="string">'next/head'</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> () =&gt; (</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;Head&gt;</span><br><span class="line">      &lt;title&gt;My page title&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">      &lt;meta name="viewport" content="initial-scale=1.0, width=device-width" key="viewport" /</span>&gt;</span><br><span class="line">    &lt;<span class="regexp">/Head&gt;</span></span><br><span class="line"><span class="regexp">    &lt;Head&gt;</span></span><br><span class="line"><span class="regexp">      &lt;meta name="viewport" content="initial-scale=1.2, width=device-width" key="viewport" /</span>&gt;</span><br><span class="line">    &lt;<span class="regexp">/Head&gt;</span></span><br><span class="line"><span class="regexp">    &lt;p&gt;Hello world!&lt;/</span>p&gt;</span><br><span class="line">  &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">)</span></span><br></pre></td></tr></table></figure></p>
+<div class="alert warning"><p>注意：这时候只有第二个 meta 是生效的。</p>
+</div>
+<h4 id="八、关于热更新"><a href="#八、关于热更新" class="headerlink" title="八、关于热更新"></a>八、关于热更新</h4><p>当我们在做修改的时候，页面自动进行了刷新，<code>HMR</code> 已经默认支持了。</p>
+<h4 id="九、获取数据"><a href="#九、获取数据" class="headerlink" title="九、获取数据"></a>九、获取数据</h4><p>注意：<code>getInitialProps</code> 不能使用在子组件中，只能使用在 <code>pages</code> 中。<br><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">async</span> getInitialProps(&#123; req &#125;) &#123;</span><br><span class="line">    <span class="keyword">const</span> userAgent = req ? req.headers[<span class="string">'user-agent'</span>] : navigator.userAgent</span><br><span class="line">    <span class="keyword">return</span> &#123; userAgent &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        Hello World &#123;<span class="keyword">this</span>.props.userAgent&#125;</span><br><span class="line">      &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    )</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p>Notice that to load data when the page loads, we use getInitialPropswhich is an async static method. It can asynchronously fetch anything that resolves to a JavaScript plain Object, which populates props.</p>
+<p>Data returned from getInitialProps is serialized when server rendering, similar to a JSON.stringify. Make sure the returned object from getInitialProps is a plain Object and not using Date, Mapor Set.</p>
+<p>For the initial page load, getInitialProps will execute on the server only. getInitialProps will only be executed on the client when navigating to a different route via the Link component or using the routing APIs.</p>
+<p>也可以使用在无状态组件中：<br><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Page = <span class="function">(<span class="params">&#123; stars &#125;</span>) =&gt;</span></span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    Next stars: &#123;stars&#125;</span><br><span class="line">  &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">Page.getInitialProps = async (&#123; req &#125;) =&gt; &#123;</span></span><br><span class="line"><span class="regexp">  const res = await fetch('https:/</span><span class="regexp">/api.github.com/</span>repos/zeit/next.js<span class="string">')</span></span><br><span class="line"><span class="string">  const json = await res.json()</span></span><br><span class="line"><span class="string">  return &#123; stars: json.stargazers_count &#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">export default Page</span></span><br></pre></td></tr></table></figure></p>
+<p>需要注意的是：<code>getInitalProps</code> 返回的上下文对象包括如下属性：</p>
+<ul>
+<li>pathname - path section of URL</li>
+<li>query - query string section of URL parsed as an object</li>
+<li>asPath - String of the actual path (including the query) shows in the browser</li>
+<li>req - HTTP request object (server only)</li>
+<li>res - HTTP response object (server only)</li>
+<li>jsonPageRes - Fetch Response object (client only)</li>
+<li>err - Error object if any error is encountered during the rendering</li>
+</ul>
+<h4 id="十、页面跳转"><a href="#十、页面跳转" class="headerlink" title="十、页面跳转"></a>十、页面跳转</h4><ul>
+<li><p>静态跳转：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// pages/index.js</span></span><br><span class="line"><span class="keyword">import</span> Link <span class="keyword">from</span> <span class="string">'next/link'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> () =&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;Link href=<span class="string">"/about"</span>&gt;</span><br><span class="line">      &lt;a&gt;here&lt;<span class="regexp">/a&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>Link&gt;</span><br><span class="line">    to read more</span><br><span class="line">  &lt;<span class="regexp">/div&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>静态传参</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这样，跳转后就会携带参数：http://localhost:3000/image?name=Jartto</span></span><br><span class="line"><span class="keyword">import</span> Link <span class="keyword">from</span> <span class="string">'next/link'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> () =&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;Link href=&#123;&#123; <span class="attr">pathname</span>: <span class="string">'/image'</span>, <span class="attr">query</span>: &#123; <span class="attr">name</span>: <span class="string">'Jartto'</span> &#125; &#125;&#125;&gt;</span><br><span class="line">      &lt;a&gt;here&lt;<span class="regexp">/a&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>Link&gt;</span><br><span class="line">    to read more</span><br><span class="line">  &lt;<span class="regexp">/div&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>可以带参数 replace</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这样会覆盖之前的路由</span></span><br><span class="line"><span class="keyword">import</span> Link <span class="keyword">from</span> <span class="string">'next/link'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> () =&gt;</span><br><span class="line">&lt;div&gt;</span><br><span class="line">  &lt;Link href=&#123;&#123; <span class="attr">pathname</span>: <span class="string">'/image'</span>, <span class="attr">query</span>: &#123; <span class="attr">name</span>: <span class="string">'Jartto'</span> &#125; &#125;&#125; replace&gt;</span><br><span class="line">    &lt;a&gt;here&lt;<span class="regexp">/a&gt;</span></span><br><span class="line"><span class="regexp">  &lt;/</span>Link&gt;</span><br><span class="line">  to read more</span><br><span class="line">&lt;<span class="regexp">/div&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>支持 <code>onClick</code></p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 添加 onclick事件，不需要额外提供 a 标签</span></span><br><span class="line"><span class="keyword">import</span> Link <span class="keyword">from</span> <span class="string">'next/link'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> () =&gt;</span><br><span class="line">&lt;div&gt;</span><br><span class="line">  Click&#123;<span class="string">' '</span>&#125;</span><br><span class="line">  &lt;Link href=&#123;&#123; <span class="attr">pathname</span>: <span class="string">'/image'</span>, <span class="attr">query</span>: &#123; <span class="attr">name</span>: <span class="string">'Jartto'</span> &#125; &#125;&#125; replace&gt;</span><br><span class="line">    &lt;a&gt; here &lt;<span class="regexp">/a&gt;</span></span><br><span class="line"><span class="regexp">  &lt;/</span>Link&gt;</span><br><span class="line">  to read more</span><br><span class="line">&lt;<span class="regexp">/div&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>方法跳转</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Router <span class="keyword">from</span> <span class="string">'next/router'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> () =&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    Click &lt;span onClick=&#123;() =&gt; Router.push(<span class="string">'/about'</span>)&#125;&gt;here&lt;<span class="regexp">/span&gt; to read more</span></span><br><span class="line"><span class="regexp">  &lt;/</span>div&gt;</span><br></pre></td></tr></table></figure>
+<p>或者这样：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Router <span class="keyword">from</span> <span class="string">'next/router'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> handler = <span class="function"><span class="params">()</span> =&gt;</span></span><br><span class="line">  Router.push(&#123;</span><br><span class="line">    pathname: <span class="string">'/about'</span>,</span><br><span class="line">    query: &#123; <span class="attr">name</span>: <span class="string">'Jartto'</span> &#125;</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> () =&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    Click &lt;span onClick=&#123;handler&#125;&gt;here&lt;<span class="regexp">/span&gt; to read more</span></span><br><span class="line"><span class="regexp">  &lt;/</span>div&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="十一、阻止默认链接滚动"><a href="#十一、阻止默认链接滚动" class="headerlink" title="十一、阻止默认链接滚动"></a>十一、阻止默认链接滚动</h4><p>默认链接滚动，也就是我们常说的锚定位。我们可以添加 <code>scroll</code> 来控制：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;Link scroll=&#123;false&#125; href=&quot;/?counter=10&quot;&gt;&lt;a&gt;Disables scrolling&lt;/a&gt;&lt;/Link&gt;</span><br><span class="line">&lt;Link href=&quot;/?counter=10&quot;&gt;&lt;a&gt;Changes with scrolling to top&lt;/a&gt;&lt;/Link&gt;</span><br></pre></td></tr></table></figure></p>
+<div class="alert warning"><p>注意：我们设置了 scroll={false} 来阻止默认链接滚动。</p>
+</div>
+<h4 id="十二、总结"><a href="#十二、总结" class="headerlink" title="十二、总结"></a>十二、总结</h4><p>到这里，基础知识已经都讲完了。接下来，我们来增加一下难度，欢迎关注后两篇文章：</p>
+<ul>
+<li><a href="http://jartto.wang/2018/06/01/nextjs-2/">Next.js 使用指南2-路由与加载</a></li>
+<li><a href="http://jartto.wang/2018/06/08/nextjs-3/">Next.js 使用指南3-高级配置</a></li>
+</ul>
+<p>最近搞了一个 <a href="https://github.com/f2e-awesome/knowledge" target="_blank" rel="noopener">F2E-Awesome</a>，主要收集前端需要掌握的知识图谱。对前端发展感兴趣的童鞋，可以了解一下。</p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br/>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br/>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/nextjs/">nextjs</a> <a class="tag tag--primary tag--small t-link" href="/tags/react/">react</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/06/01/nextjs-2/" data-tooltip="Next.js 使用指南2－路由与加载">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/05/24/taste-of-umi/" data-tooltip="UmiJs 尝鲜">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/05/27/nextjs-1/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/05/27/nextjs-1/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/05/27/nextjs-1/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"/></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/06/01/nextjs-2/" data-tooltip="Next.js 使用指南2－路由与加载">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/05/24/taste-of-umi/" data-tooltip="UmiJs 尝鲜">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/05/27/nextjs-1/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/05/27/nextjs-1/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/05/27/nextjs-1/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/05/27/nextjs-1/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/05/27/nextjs-1/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/05/27/nextjs-1/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

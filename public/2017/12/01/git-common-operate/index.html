@@ -1,0 +1,544 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>Git 常规操作 - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="不得不说 Git 改变了我们的编程习惯，随时版本备份百利而无一害。我们不能只停留在熟练使用 add,pull,push 等基本命令的层次，是时候扩展技能了。">
+<meta name="keywords" content="git">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Git 常规操作">
+<meta property="og:url" content="http://jartto.wang/2017/12/01/git-common-operate/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="不得不说 Git 改变了我们的编程习惯，随时版本备份百利而无一害。我们不能只停留在熟练使用 add,pull,push 等基本命令的层次，是时候扩展技能了。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2018-12-30T15:19:12.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Git 常规操作">
+<meta name="twitter:description" content="不得不说 Git 改变了我们的编程习惯，随时版本备份百利而无一害。我们不能只停留在熟练使用 add,pull,push 等基本命令的层次，是时候扩展技能了。">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/github0.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/github0.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            Git 常规操作
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2017-12-01T20:32:22+08:00">
+	  
+		    2017/12月/01 20:32:22
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>不得不说 Git 改变了我们的编程习惯，随时版本备份百利而无一害。我们不能只停留在熟练使用 <code>add</code>,<code>pull</code>,<code>push</code> 等基本命令的层次，是时候扩展技能了。<br><a id="more"></a></p>
+<h4 id="一、Config"><a href="#一、Config" class="headerlink" title="一、Config"></a>一、Config</h4><p>先 <code>git config --help</code> 打印出使用说明：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">NAME</span><br><span class="line">  git-config - Get and <span class="built_in">set</span> repository or global options</span><br><span class="line"></span><br><span class="line">SYNOPSIS</span><br><span class="line">  git config [&lt;file-option&gt;] [<span class="built_in">type</span>] [--show-origin] [-z|--null] name [value [value_regex]]</span><br><span class="line">  git config [&lt;file-option&gt;] [<span class="built_in">type</span>] --add name value</span><br><span class="line">  git config [&lt;file-option&gt;] [<span class="built_in">type</span>] --replace-all name value [value_regex]</span><br><span class="line">  git config [&lt;file-option&gt;] [<span class="built_in">type</span>] [--show-origin] [-z|--null] --get name [value_regex]</span><br><span class="line">  git config [&lt;file-option&gt;] [<span class="built_in">type</span>] [--show-origin] [-z|--null] --get-all name [value_regex]</span><br><span class="line">  git config [&lt;file-option&gt;] [<span class="built_in">type</span>] [--show-origin] [-z|--null] [--name-only] --get-regexp name_regex [value_regex]</span><br><span class="line">  git config [&lt;file-option&gt;] [<span class="built_in">type</span>] [-z|--null] --get-urlmatch name URL</span><br><span class="line">  git config [&lt;file-option&gt;] --<span class="built_in">unset</span> name [value_regex]</span><br><span class="line">  git config [&lt;file-option&gt;] --<span class="built_in">unset</span>-all name [value_regex]</span><br><span class="line">  git config [&lt;file-option&gt;] --rename-section old_name new_name</span><br><span class="line">  git config [&lt;file-option&gt;] --remove-section name</span><br><span class="line">  git config [&lt;file-option&gt;] [--show-origin] [-z|--null] [--name-only] -l | --list</span><br><span class="line">  git config [&lt;file-option&gt;] --get-color name [default]</span><br><span class="line">  git config [&lt;file-option&gt;] --get-colorbool name [stdout-is-tty]</span><br><span class="line">  git config [&lt;file-option&gt;] -e | --edit</span><br></pre></td></tr></table></figure></p>
+<p>可以看到，<code>config</code> 也有很多用法，我们只选一些常见的操作来说明：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># 取消全局 用户名/邮箱 配置</span><br><span class="line">$ git config --global --unset user.name</span><br><span class="line">$ git config --global --unset user.email</span><br><span class="line"></span><br><span class="line"># 进入项目文件夹，单独设置每个仓库用户名/邮箱</span><br><span class="line">$ git config user.email &quot;xxxx@xx.com&quot;</span><br><span class="line">$ git config user.name &quot;xxxx&quot;</span><br><span class="line"></span><br><span class="line"># 查看某个仓库下的配置文件</span><br><span class="line">git config -l</span><br><span class="line"></span><br><span class="line"># 查看全局配置</span><br><span class="line">git config --global -l</span><br></pre></td></tr></table></figure></p>
+<h4 id="二、Stash"><a href="#二、Stash" class="headerlink" title="二、Stash"></a>二、Stash</h4><p>我们先来看看 <code>git stash --help</code> 的使用帮助：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">NAME</span><br><span class="line">  git-stash - Stash the changes <span class="keyword">in</span> a dirty working directory away</span><br><span class="line"></span><br><span class="line">SYNOPSIS</span><br><span class="line">  git stash list [&lt;options&gt;]</span><br><span class="line">  git stash show [&lt;stash&gt;]</span><br><span class="line">  git stash drop [-q|--quiet] [&lt;stash&gt;]</span><br><span class="line">  git stash ( pop | apply ) [--index] [-q|--quiet] [&lt;stash&gt;]</span><br><span class="line">  git stash branch &lt;branchname&gt; [&lt;stash&gt;]</span><br><span class="line">  git stash [save [-p|--patch] [-k|--[no-]keep-index] [-q|--quiet]</span><br><span class="line">              [-u|--include-untracked] [-a|--all] [&lt;message&gt;]]</span><br><span class="line">  git stash clear</span><br><span class="line">  git stash create [&lt;message&gt;]</span><br><span class="line">  git stash store [-m|--message &lt;message&gt;] [-q|--quiet] &lt;commit&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">DESCRIPTION</span><br><span class="line">  Use git stash when you want to record the current state of the working directory and the index, but want to go back to a clean working directory. The</span><br><span class="line">  <span class="built_in">command</span> saves your <span class="built_in">local</span> modifications away and reverts the working directory to match the HEAD commit.</span><br></pre></td></tr></table></figure></p>
+<p>上述解释很清楚了，我们来看看一些应用场景：<br><code>git stash</code> 可用来暂存当前正在进行的工作， 比如想 <code>pull</code> 最新代码， 又不想加新 <code>commit</code>， 或者另外一种情况，为了 <code>fix</code> 一个紧急的 <code>bug</code>,  先 <code>stash</code>, 使返回到自己上一个 <code>commit</code>, 改完 <code>bug</code> 之后再 <code>stash pop</code>, 继续原来的工作。</p>
+<p>基本用法如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">git stash</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"><span class="keyword">do</span> some work</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">git stash pop</span><br></pre></td></tr></table></figure></p>
+<p>当然，我们可以为每次 <code>stash</code> 加上别名：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash save <span class="string">"fix jartto's blog bugs"</span></span><br></pre></td></tr></table></figure></p>
+<p>多次使用 <code>git stash</code> 命令后，栈里将充满了未提交的代码，这时候我们可以使用 <code>list</code> 命令来选择应用回来的版本：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash list</span><br></pre></td></tr></table></figure></p>
+<p>确定好要应用回来的版本，找到对应版本号，使用：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash apply stash@&#123;1&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这样就可以将你指定版本号为 <code>stash@{1}</code> 的工作取出来。</p>
+<p>既然是 <code>list</code> ，那可能会用到删除某次的暂存，请慎用：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash drop stash@&#123;1&#125;</span><br></pre></td></tr></table></figure></p>
+<p>嗯，很好，当所有暂存版本都应用后，我们可以选择是否清除 <code>stash</code>，命令如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash clear</span><br></pre></td></tr></table></figure></p>
+<p>了解更多，请参考：<br><a href="http://blog.csdn.net/wh_19910525/article/details/7784901" target="_blank" rel="noopener">git stash 和 git stash pop</a><br><a href="https://git-scm.com/docs/git-stash" target="_blank" rel="noopener">git stash</a></p>
+<h4 id="三、Remote"><a href="#三、Remote" class="headerlink" title="三、Remote"></a>三、Remote</h4><p>我们先来看看 <code>git remote --help</code> 的使用帮助：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">NAME</span><br><span class="line">  git-remote - Manage <span class="built_in">set</span> of tracked repositories</span><br><span class="line"></span><br><span class="line">SYNOPSIS</span><br><span class="line">  git remote [-v | --verbose]</span><br><span class="line">  git remote add [-t &lt;branch&gt;] [-m &lt;master&gt;] [-f] [--[no-]tags] [--mirror=&lt;fetch|push&gt;] &lt;name&gt; &lt;url&gt;</span><br><span class="line">  git remote rename &lt;old&gt; &lt;new&gt;</span><br><span class="line">  git remote remove &lt;name&gt;</span><br><span class="line">  git remote <span class="built_in">set</span>-head &lt;name&gt; (-a | --auto | -d | --delete | &lt;branch&gt;)</span><br><span class="line">  git remote <span class="built_in">set</span>-branches [--add] &lt;name&gt; &lt;branch&gt;...</span><br><span class="line">  git remote get-url [--push] [--all] &lt;name&gt;</span><br><span class="line">  git remote <span class="built_in">set</span>-url [--push] &lt;name&gt; &lt;newurl&gt; [&lt;oldurl&gt;]</span><br><span class="line">  git remote <span class="built_in">set</span>-url --add [--push] &lt;name&gt; &lt;newurl&gt;</span><br><span class="line">  git remote <span class="built_in">set</span>-url --delete [--push] &lt;name&gt; &lt;url&gt;</span><br><span class="line">  git remote [-v | --verbose] show [-n] &lt;name&gt;...</span><br><span class="line">  git remote prune [-n | --dry-run] &lt;name&gt;...</span><br><span class="line">  git remote [-v | --verbose] update [-p | --prune] [(&lt;group&gt; | &lt;remote&gt;)...]</span><br></pre></td></tr></table></figure></p>
+<p>同样，我们挑几个常用命令来说明：<br>1.<code>git</code> 显示远程分支：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote show origin</span><br></pre></td></tr></table></figure></p>
+<p>2.<code>git</code> 删除远程分支：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin --delete jartto-hotfix</span><br></pre></td></tr></table></figure></p>
+<p>3.添加源：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add  origin git@192.168.1.1:<span class="built_in">test</span>/jartto-blog.git</span><br></pre></td></tr></table></figure></p>
+<p>4.修改源地址：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote <span class="built_in">set</span>-url origin git@jartto.wang:<span class="built_in">test</span>/jartto-blog.git</span><br></pre></td></tr></table></figure></p>
+<p>5.删除源<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看源列表</span></span><br><span class="line">git remote</span><br><span class="line">git remote rm origin</span><br></pre></td></tr></table></figure></p>
+<h4 id="四、Cherry-pick"><a href="#四、Cherry-pick" class="headerlink" title="四、Cherry-pick"></a>四、Cherry-pick</h4><p>先看看 <code>Git</code> 怎么定义 <code>cherry-pick</code> 命令的：<br><div class="alert info"><p>Given one or more existing commits, apply the change each one introduces, recording a new commit for each. This requires your working tree to be clean (no modifications from the HEAD commit).</p>
+</div></p>
+<p>When it is not obvious how to apply a change, the following happens:</p>
+<ol>
+<li>The current branch and HEAD pointer stay at the last commit successfully made.</li>
+<li>The CHERRY_PICK_HEAD ref is set to point at the commit that introduced the change that is difficult to apply.</li>
+<li>Paths in which the change applied cleanly are updated both in the index file and in your working tree.</li>
+<li>For conflicting paths, the index file records up to three versions, as described in the “TRUE MERGE” section of git-merge(1). The working tree files will include a description of the conflict bracketed by the usual conflict markers &lt;&lt;&lt;&lt;&lt;&lt;&lt; and &gt;&gt;&gt;&gt;&gt;&gt;&gt;.</li>
+<li>No other modifications are made.</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">NAME</span><br><span class="line">  git-cherry-pick - Apply the changes introduced by some existing commits</span><br><span class="line"></span><br><span class="line">SYNOPSIS</span><br><span class="line">  git cherry-pick [--edit] [-n] [-m parent-number] [-s] [-x] [--ff]</span><br><span class="line">                    [-S[&lt;keyid&gt;]] &lt;commit&gt;...</span><br><span class="line">  git cherry-pick --<span class="built_in">continue</span></span><br><span class="line">  git cherry-pick --quit</span><br><span class="line">  git cherry-pick --abort</span><br><span class="line"></span><br><span class="line">OPTIONS</span><br><span class="line"><span class="comment"># Commits to cherry-pick. For a more complete list of ways to spell commits, see gitrevisions(7). Sets of commits can be passed but no traversal is done by default, as if the --no-walk option was specified, see git-rev-list(1). Note that specifying a range will feed all &lt;commit&gt;... arguments to a single revision walk (see a later example that uses maint master..next).</span></span><br><span class="line">&lt;commit&gt;...</span><br><span class="line">      </span><br><span class="line"><span class="comment"># With this option, git cherry-pick will let you edit the commit message prior to committing.</span></span><br><span class="line">-e, --edit</span><br><span class="line"></span><br><span class="line"><span class="comment"># When recording the commit, append a line that says "(cherry picked from commit ...)" to the original commit message in order to indicate which commit this change was cherry-picked from. This is done only for cherry picks without conflicts. Do not use this option if you are cherry-picking from your private branch because the information is useless to the recipient. If on the other hand you are cherry-picking between two publicly visible branches (e.g. backporting a fix to a maintenance branch for an older release from a development branch), adding this information can be useful.    </span></span><br><span class="line">-x</span><br><span class="line"></span><br><span class="line"><span class="comment"># It used to be that the command defaulted to do -x described above, and -r was to disable it. Now the default is not to do -x so this option is a no-op.</span></span><br><span class="line">-r</span><br><span class="line"></span><br><span class="line"><span class="comment"># Usually you cannot cherry-pick a merge because you do not know which side of the merge should be considered the mainline. This option specifies the parent number (starting from 1) of the mainline and allows cherry-pick to replay the change relative to the specified parent.</span></span><br><span class="line">-m parent-number, --mainline parent-number</span><br><span class="line">      </span><br><span class="line"><span class="comment"># Usually the command automatically creates a sequence of commits. This flag applies the changes necessary to cherry-pick each named commit to your working tree and the index, without making any commit. In addition, when this option is used, your index does not have to match the HEAD commit. The cherry-pick is done against the beginning state of your index. This is useful when cherry-picking more than one commits effect to your index in a row.</span></span><br><span class="line">-n, --no-commit</span><br><span class="line">      </span><br><span class="line"><span class="comment"># Add Signed-off-by line at the end of the commit message. See the signoff option in git-commit(1) for more information.</span></span><br><span class="line">-s, --signoff</span><br><span class="line">      </span><br><span class="line"><span class="comment"># GPG-sign commits. The keyid argument is optional and defaults to the committer identity; if specified, it must be stuck to the option without a space.</span></span><br><span class="line">-S[&lt;keyid&gt;], --gpg-sign[=&lt;keyid&gt;]</span><br><span class="line">      </span><br><span class="line"><span class="comment"># If the current HEAD is the same as the parent of the cherry-picked commit, then a fast forward to this commit will be performed.</span></span><br><span class="line">--ff</span><br><span class="line">      </span><br><span class="line"><span class="comment"># By default, cherry-picking an empty commit will fail, indicating that an explicit invocation of git commit --allow-empty is required. This option overrides that behavior, allowing empty commits to be preserved automatically in a cherry-pick. Note that when "--ff" is in effect, empty commits that meet the "fast-forward" requirement will be kept even without this option. Note also, that use of this option only keeps commits that were initially empty (i.e. the commit recorded the same tree as its parent). Commits which are made empty due to a previous commit are dropped. To force the inclusion of those commits use --keep-redundant-commits.</span></span><br><span class="line">--allow-empty</span><br><span class="line">      </span><br><span class="line"><span class="comment"># By default, cherry-picking a commit with an empty message will fail. This option overrides that behavior, allowing commits with empty messages to be cherry picked.</span></span><br><span class="line">--allow-empty-message</span><br><span class="line">      </span><br><span class="line"><span class="comment"># If a commit being cherry picked duplicates a commit already in the current history, it will become empty. By default these redundant commits cause cherry-pick to stop so the user can examine the commit. This option overrides that behavior and creates an empty commit object. Implies --allow-empty.</span></span><br><span class="line">--keep-redundant-commits</span><br><span class="line">      </span><br><span class="line"><span class="comment"># Use the given merge strategy. Should only be used once. See the MERGE STRATEGIES section in git-merge(1) for details.</span></span><br><span class="line">--strategy=&lt;strategy&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># Pass the merge strategy-specific option through to the merge strategy. See git-merge(1) for details.</span></span><br><span class="line">-X&lt;option&gt;, --strategy-option=&lt;option&gt;</span><br><span class="line">      </span><br><span class="line"></span><br><span class="line">SEQUENCER SUBCOMMANDS</span><br><span class="line"><span class="comment"># Continue the operation in progress using the information in .git/sequencer. Can be used to continue after resolving conflicts in a failed cherry-pick or revert.</span></span><br><span class="line">--<span class="built_in">continue</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Forget about the current operation in progress. Can be used to clear the sequencer state after a failed cherry-pick or revert.</span></span><br><span class="line">--quit</span><br><span class="line">    </span><br><span class="line"><span class="comment"># Cancel the operation and return to the pre-sequence state.</span></span><br><span class="line">--abort</span><br></pre></td></tr></table></figure>
+<p>从打印出来的帮助信息中也可以看出来 <code>cherry-pick</code> 的用法和场景比较复杂，我们先从 <code>git</code> 帮助文档中的示例下手：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Apply the change introduced by the commit at the tip of the master branch and create a new commit with this change.</span></span><br><span class="line">git cherry-pick master</span><br><span class="line"></span><br><span class="line"><span class="comment"># Apply the changes introduced by all commits that are ancestors of master but not of HEAD to produce new commits.</span></span><br><span class="line">git cherry-pick ..master, git cherry-pick ^HEAD master</span><br><span class="line">  </span><br><span class="line"><span class="comment"># Apply the changes introduced by all commits that are ancestors of maint or next, but not master or any of its ancestors. Note that the latter does not mean maint and everything between master and next; specifically, maint will not be used if it is included in master.</span></span><br><span class="line">git cherry-pick maint next ^master, git cherry-pick maint master..next</span><br><span class="line">  </span><br><span class="line"><span class="comment"># Apply the changes introduced by the fifth and third last commits pointed to by master and create 2 new commits with these changes.</span></span><br><span class="line">git cherry-pick master~4 master~2</span><br><span class="line">  </span><br><span class="line"><span class="comment"># Apply to the working tree and the index the changes introduced by the second last commit pointed to by master and by the last commit pointed to by next, but do not create any commit with these changes.</span></span><br><span class="line">git cherry-pick -n master~1 next</span><br><span class="line">  </span><br><span class="line"><span class="comment"># If history is linear and HEAD is an ancestor of next, update the working tree and advance the HEAD pointer to match next. Otherwise, apply the changes introduced by those commits that are in next but not HEAD to the current branch, creating a new commit for each new change.</span></span><br><span class="line">git cherry-pick --ff ..next</span><br><span class="line">  </span><br><span class="line"><span class="comment"># Apply the changes introduced by all commits on the master branch that touched README to the working tree and index, so the result can be inspected and made into a single new commit if suitable.</span></span><br><span class="line">git rev-list --reverse master -- README | git cherry-pick -n --stdin</span><br></pre></td></tr></table></figure></p>
+<div class="alert success"><p>当执行完 <code>cherry-pick</code> 以后，将会生成一个新的提交；这个新的提交的哈希值和原来的不同，但标识名一样；</p>
+</div>
+<p>这么多说明文档，可能也很难理解，我们来列举一些实际场景：</p>
+<p>1.项目刚上线完毕，你需要紧急更改线上 <code>bug</code>，你基于线上版本切出了 <code>hotfix</code> 版本并提交，修复了问题：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b hotfix release</span><br></pre></td></tr></table></figure></p>
+<p>此时，你切回自己的开发分之，发现版本落后了，可以有两个操作：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 方法一：拉取分支变更</span></span><br><span class="line">git pull origin hotfix</span><br><span class="line"></span><br><span class="line"><span class="comment"># 方法二：在开发分支重新提交 hotfix 变更</span></span><br><span class="line">git cherry-pick 268c2e21c4746492ead78e5a162bc444f4b4a7fc</span><br></pre></td></tr></table></figure></p>
+<p>2.如果你的应用已经发布了一个版本2.0, 代码分支叫 <code>release-2.0</code>, 现在正在开发 3.0, 代码的分支叫 <code>dev-3.0</code>. 那么有一天产品说, 要把正在开发的某个特性提前上线, 也就是说要把 <code>dev-3.0</code> 分支上的某些更改移到 2.x 的版本上, 那么怎么办呢?</p>
+<p>基于 <code>release-2.0</code> 分支新建分支<code>release-2.1</code> , 并且到新创建的分支上:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b release-2.1 release-2.0</span><br></pre></td></tr></table></figure></p>
+<p>将 <code>dev-3.0</code> 分支上的某些 <code>commit</code> 在 <code>release-2.1</code> 分支上重演，例如：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git cherry-pick </span><br><span class="line">20c2f506d789bb9f041050dc2c1e954fa3fb6910 </span><br><span class="line">2633961a16b0dda7b767b9264662223a2874dfa9 </span><br><span class="line">5d5929eafd1b03fd4e7b6aa15a6c571fbcb3ceb4</span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p><code>cherry-pick</code> 会重演某些 <code>commit</code> , 即把某些 <code>commit</code> 的更改重新执行一遍。</p>
+</div>
+<p>3.<code>cherry-pick</code> 不仅可以用在不同分支之间, 还可以用在同一个分支上。比如说你在某一个向某个分支中添加了一个功能， 后来处于某种原因把它给删除了，然而后来某一天你又要添加上这个功能了，这时候就可以使用 <code>cherry-pick</code> 把添加那个功能的 <code>commit</code>，再重演一遍。请参考：<a href="http://www.jianshu.com/p/d577dcc36a08" target="_blank" rel="noopener">git cherry-pick 用法</a>。</p>
+<p>4.<a href="https://www.zhihu.com/question/27804571" target="_blank" rel="noopener">知乎</a>上看到了另一种场景，有一条主分支 <code>master</code>，进行过两次提交（ <code>m0</code> 和 <code>m1</code> ）。此时，新开了一个分支 <code>develop</code> 做开发，进行了三次提交（ <code>d0</code> 、<code>d1</code> 和 <code>d2</code>）。如果只想将 <code>d2</code> 这次提交合并到主分支 <code>master</code> 就会产生一个冲突，需要用户手动去编辑，问题是，如何避免冲突？</p>
+<p><a href="https://www.zhihu.com/question/27804571/answer/38192329" target="_blank" rel="noopener">答一</a>：你无法 <code>cherry-pick</code> 的原因是，你 <code>d2</code> 修改的文件，已经在 <code>d1</code>（or <code>d0</code>） 被修改过了，所以 <code>cherry-pick</code> 并不知道如何删除和增加对应的 <code>lines</code>，所以就冲突了。你唯一的办法就是解决冲突。</p>
+<p><a href="https://www.zhihu.com/question/27804571/answer/38167731" target="_blank" rel="noopener">答二</a>：<code>cherry-pick</code> 只会将一个 <code>commit</code> 引入的更改应用到当前的 <code>commit</code> 上。而你的命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git cherry-pick d2的哈希码</span><br></pre></td></tr></table></figure></p>
+<p>只会将从 <code>d1-&gt;d2</code> 的修改引入到 <code>m1</code> 中，这样当然会造成冲突。正确的做法是：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git checkout master</span><br><span class="line">git cherry-pick --no-commit d0的哈希 d1的哈希 d2的哈希</span><br><span class="line">git commit -m <span class="string">"merged commit"</span></span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p><code>--no-commit</code> 参数是防止 <code>cherry-pick</code> 每一次应用更改都 <code>commit</code> 一次。</p>
+</div>
+<p>除此之外，还有一个命令是等效的：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge d2 --squash</span><br></pre></td></tr></table></figure></p>
+<h4 id="五、Reset"><a href="#五、Reset" class="headerlink" title="五、Reset"></a>五、Reset</h4><p>先来理解两个概念：<br>1.四个区</p>
+<ul>
+<li>工作区(Working Area)</li>
+<li>暂存区(Stage)</li>
+<li>本地仓库(Local Repository)</li>
+<li>远程仓库(Remote Repository)</li>
+</ul>
+<p>2.五种状态<br>代码进入每一个区成功之后会产生一个状态，再加上最初始的一个状态，一共是5种状态：</p>
+<ul>
+<li>未修改(Origin)</li>
+<li>已修改(Modified)</li>
+<li>已暂存(Staged)</li>
+<li>已提交(Committed)</li>
+<li>已推送(Pushed)</li>
+</ul>
+<p>下面来说具体说明几种状态中的撤销操作：<br>1.已修改，未暂存<br>如果我们只是修改了文件，但还没有执行 <code>git add .</code>，这时候我们的文件还在工作区，并没有进入暂存区，可以用如下命令进行撤销操作：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout .</span><br></pre></td></tr></table></figure></p>
+<p>或者执行：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard</span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p>简单来说，<code>git add .</code> 的反向操作就是 <code>git checkout .</code></p>
+</div>
+<p>2.已暂存，未提交<br>假如你已经执行了 <code>git add .</code>，但还没有执行 <code>git commit -m &quot;comment&quot;</code>。这个阶段，想要撤销，可以执行如下命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git reset</span><br><span class="line">git checkout .</span><br></pre></td></tr></table></figure></p>
+<p>当然，也可以执行：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard</span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p><code>git reset</code> 只是把修改退回到了 <code>git add .</code> 之前的状态，也就是说文件本身还处于已修改未暂存状态，你如果想退回未修改状态，还需要执行 <code>git checkout .</code>。</p>
+</div>
+<p>3.已提交，未推送<br>你的手太快，你既执行了 <code>git add .</code>，又执行了 <code>git commit</code>，这时候你的代码已经进入了你的本地仓库，然而你后悔了，怎么办？不要着急，还有办法。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard origin/master</span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p>还是这个 <code>git reset --hard</code>命令，只不过这次多了一个参数origin/master，正如我们上面讲过的，origin/master代表远程仓库，既然你已经污染了你的本地仓库，那么就从远程仓库把代码取回来吧。</p>
+</div>
+<p>4.已推送<br>更糟糕的是，你既 <code>git add</code> 了，又 <code>git commit</code> 了，并且还 <code>git push</code> 了，这时你的代码已经进入远程仓库。如果想要撤销，执行如下命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard HEAD^</span><br><span class="line">git push -f</span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p>简单来说：由于你的本地仓库和远程仓库是等价的，你只需要先恢复本地仓库，再强制 <code>push</code> 到远程仓库就好了：</p>
+</div>
+<p>此处参考，<a href="http://mp.weixin.qq.com/s/akvB2DO_1dpUrf-ol77MwQ" target="_blank" rel="noopener">Git 的 4 个阶段的撤销更改</a></p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/git/">git</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/12/03/exploration-the-encryption/" data-tooltip="初探加密算法">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/11/28/h5-user-media/" data-tooltip="HTML5 之摄像头调用（User Media API）">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2017/12/01/git-common-operate/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2017/12/01/git-common-operate/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2017/12/01/git-common-operate/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/12/03/exploration-the-encryption/" data-tooltip="初探加密算法">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/11/28/h5-user-media/" data-tooltip="HTML5 之摄像头调用（User Media API）">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2017/12/01/git-common-operate/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2017/12/01/git-common-operate/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2017/12/01/git-common-operate/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2017/12/01/git-common-operate/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2017/12/01/git-common-operate/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2017/12/01/git-common-operate/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

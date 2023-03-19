@@ -1,0 +1,504 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>算法学习思路 - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="很多前端童鞋对算法都有莫名的恐惧，究其原因无非两点：其一，对算法不了解；其二，没有找到实际应用场景。">
+<meta name="keywords" content="algorithm">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="算法学习思路">
+<meta property="og:url" content="http://jartto.wang/2019/04/07/learn-algorithm/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="很多前端童鞋对算法都有莫名的恐惧，究其原因无非两点：其一，对算法不了解；其二，没有找到实际应用场景。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/algorithm/dog2.gif">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/algorithm/dog1.gif">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/algorithm/leetcode.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/algorithm/leetcode2.png">
+<meta property="og:updated_time" content="2019-04-07T13:54:18.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="算法学习思路">
+<meta name="twitter:description" content="很多前端童鞋对算法都有莫名的恐惧，究其原因无非两点：其一，对算法不了解；其二，没有找到实际应用场景。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/algorithm/dog2.gif">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/algorithm/logo.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/algorithm/logo.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            算法学习思路
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2019-04-07T19:06:18+08:00">
+	  
+		    2019/4月/07 19:06:18
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/算法实践/">算法实践</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>很多前端童鞋对算法都有莫名的恐惧，究其原因无非两点：其一，对算法不了解；其二，没有找到实际应用场景。<br><a id="more"></a></p>
+<h4 id="一、为什么学习算法？"><a href="#一、为什么学习算法？" class="headerlink" title="一、为什么学习算法？"></a>一、为什么学习算法？</h4><p>这是个很有意思的问题，对算法感兴趣的人，不需要问为什么，算法对他们可能是一种兴趣。曾经有位同事，他刷遍了所有算法题，只要有算法竞赛，他都会去参加。当然，也取得了不错的成绩，甚至有了自己的世界排名。</p>
+<p>一次闲聊中，我抛出了这个问题，他笑着说：没有为什么，就是觉得好玩。我一直好奇，为什么有人会觉得算法好玩，兴趣点究竟在哪里？</p>
+<div class="alert info"><p>其实兴趣算一部分，而另一部分则是对编程能力的提升以及思维的扩展。</p>
+</div>
+<p>编程语言虽然该学，但是学习计算机算法和理论更重要，因为计算机语言和开发平台日新月异，但万变不离其宗的是那些算法和理论。</p>
+<p>我们用两张趣图来看看差别：<br>1.学习算法前，你可能这样：<br><div class="figure left" style="width:70%;"><a class="fancybox" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/algorithm/dog2.gif" title data-fancybox-group="travel" target="_blank" rel="noopener"><img class="fig-img" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/algorithm/dog2.gif" style="width:70%;" alt></a></div><div style="clear:both;"></div></p>
+<p>2.学习算法后，你变的机灵了：<br><div class="figure left" style="width:70%;"><a class="fancybox" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/algorithm/dog1.gif" title data-fancybox-group="travel" target="_blank" rel="noopener"><img class="fig-img" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/algorithm/dog1.gif" style="width:70%;" alt></a></div><div style="clear:both;"></div></p>
+<h4 id="二、如何入门？"><a href="#二、如何入门？" class="headerlink" title="二、如何入门？"></a>二、如何入门？</h4><p>那么如何学习算法呢？这里我推荐一本书《算法图解》，超薄的小册。书中通过一些简单有趣的例子来阐述算法的应用场景。之所以选它作为入门，是因为我们可以用很短的时间去翻读。</p>
+<p>如果你还是觉得很麻烦，不用怕，我已经帮你准备好了学习笔记：</p>
+<ul>
+<li><a href="http://jartto.wang/2018/11/22/algorithm1/">算法图解1 - 二分查找和大O表示法</a></li>
+<li><a href="http://jartto.wang/2018/11/25/algorithm2/">算法图解2 - 数组和链表</a></li>
+<li><a href="http://jartto.wang/2018/11/26/algorithm3/">算法图解3 - 递归，快排</a></li>
+<li><a href="http://jartto.wang/2018/11/27/algorithm4/">算法图解4 - 散列表</a></li>
+<li><a href="http://jartto.wang/2018/11/28/algorithm5/">算法图解5 - 图和广度优先搜索</a></li>
+<li><a href="http://jartto.wang/2018/11/29/algorithm6/">算法图解6 - 狄克斯特拉算法与贪婪算法</a></li>
+<li><a href="http://jartto.wang/2018/11/29/algorithm7/">算法图解7 - 动态规划</a></li>
+</ul>
+<p>书中是围绕 <code>Python</code> 来写的，为了更适合前端童鞋阅读，我已经将相关代码用 <code>JS</code> 实现了一遍。当然，还是有很多的细节，还需要深入的去理解。但是最起码，我不再惧怕算法了，反而慢慢有点喜欢了。</p>
+<div class="alert info"><p>算法的重中之重是培养算法思维。如果你能对算法灵活运用，那么就「大成」了。</p>
+</div>
+<h4 id="三、后面的路怎么走？"><a href="#三、后面的路怎么走？" class="headerlink" title="三、后面的路怎么走？"></a>三、后面的路怎么走？</h4><p>入门从来都不是一件简单的事情，在我们打开这扇神秘大门之后，将会有更多的宝藏需要我们去挖掘。</p>
+<p>想要精通算法，在第一本书读完之后，我们还有更多的目标需要去完成。这里由浅入深的列举一些算法经典书籍，供大家参考学习：</p>
+<p>1.入门系列：<br>《算法图解》《大话数据结构》<br>2.教科书之类：<br>《数据结构与算法分析》<br>3.进阶之旅：<br>《算法导论》<br>4.针对面试准备：<br>《剑指 Offer》《编程珠玑》<br>5.扩展阅读：<br>《算法之美》《算法帝国》<br>6.实践操作：<br>《算法竞赛入门经典》《力扣题库》</p>
+<p>算法其实有很多经典书籍，我们没有那么多的时间去逐一翻阅，但是我们可以有一条明确的学习路线。</p>
+<div class="alert success"><p>这条学习路线就是：入门 - 进阶 - 实践 - 升华</p>
+</div>
+<h4 id="四、配合实践"><a href="#四、配合实践" class="headerlink" title="四、配合实践"></a>四、配合实践</h4><p>其实<a href="http://jartto.wang/2019/04/07/learn-algorithm/">上面</a>已经提到了，在我们掌握算法思维之后，最为重要的一点就是刷题。相信很多童鞋都听过 <code>LeetCode</code> ，目前题库大概有 1000＋ 题目，没事了就去刷刷。</p>
+<div class="figure left" style="width:70%;"><a class="fancybox" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/algorithm/leetcode.png" title data-fancybox-group="travel" target="_blank" rel="noopener"><img class="fig-img" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/algorithm/leetcode.png" style="width:70%;" alt></a></div><div style="clear:both;"></div>
+<p>当然，刷题也可以由浅入深，先从简单的入手吧！<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/algorithm/leetcode2.png" alt="leetcode"></p>
+<h4 id="五、推荐学习"><a href="#五、推荐学习" class="headerlink" title="五、推荐学习"></a>五、推荐学习</h4><p><a href="https://github.com/trekhleb/javascript-algorithms/blob/master/README.zh-CN.md" target="_blank" rel="noopener">JavaScript 算法与数据结构</a><br><a href="http://algorithm-visualizer.org/#path=sorting/bucket/basic" target="_blank" rel="noopener">可视化学习算法的好工具</a><br><a href="https://www.zhihu.com/question/24964987" target="_blank" rel="noopener">互联网公司最常见的面试算法题有哪些？</a><br><a href="https://github.com/chenfengyanyu/interview" target="_blank" rel="noopener">算法练习，和我一起来刷题吧～</a></p>
+<h4 id="六、总结"><a href="#六、总结" class="headerlink" title="六、总结"></a>六、总结</h4><p>文章陆陆续续说了这么多，大体总结如下：<br>1.算法很重要，尤其是对于前端童鞋；<br>2.算法学习最好由浅入深，先了解算法思维，再去理解实际应用；<br>3.从一本小而薄的书开启，逐步全面的掌握相关知识体系；<br>4.推荐速成路线：《算法图解》-《剑指 Offer》- LeetCode 刷题 -《算法之美》-《算法导论》；<br>5.去努力实践，刷刷题库，参加参加竞赛；</p>
+<p>好了，就这些吧，祝大家早日搞定算法，带上算法的王冠，去领略算法之美吧。</p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/algorithm/">algorithm</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/04/07/learn-interview/" data-tooltip="如何成为合格的技术面试官？">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/02/16/web-optimization/" data-tooltip="网站优化实战">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2019/04/07/learn-algorithm/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2019/04/07/learn-algorithm/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2019/04/07/learn-algorithm/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/04/07/learn-interview/" data-tooltip="如何成为合格的技术面试官？">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/02/16/web-optimization/" data-tooltip="网站优化实战">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2019/04/07/learn-algorithm/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2019/04/07/learn-algorithm/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2019/04/07/learn-algorithm/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2019/04/07/learn-algorithm/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2019/04/07/learn-algorithm/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2019/04/07/learn-algorithm/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

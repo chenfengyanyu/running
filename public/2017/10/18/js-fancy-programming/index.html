@@ -1,0 +1,523 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>JS 花式编程 - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="炫技可能是程序员的癖好，加之 JS 的神奇 Feature，所以各种编程中的奇技淫巧层出不穷。最近看了几篇挺火的文章，觉得挺有意思，特此收集。">
+<meta name="keywords" content="js">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="JS 花式编程">
+<meta property="og:url" content="http://jartto.wang/2017/10/18/js-fancy-programming/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="炫技可能是程序员的癖好，加之 JS 的神奇 Feature，所以各种编程中的奇技淫巧层出不穷。最近看了几篇挺火的文章，觉得挺有意思，特此收集。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2017-11-04T14:51:55.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS 花式编程">
+<meta name="twitter:description" content="炫技可能是程序员的癖好，加之 JS 的神奇 Feature，所以各种编程中的奇技淫巧层出不穷。最近看了几篇挺火的文章，觉得挺有意思，特此收集。">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/fancyjs0.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="http://7xvi3w.com1.z0.glb.clouddn.com/fancyjs0.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            JS 花式编程
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2017-10-18T23:05:03+08:00">
+	  
+		    2017/10月/18 23:05:03
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>炫技可能是程序员的癖好，加之 JS 的神奇 Feature，所以各种编程中的奇技淫巧层出不穷。最近看了几篇挺火的文章，觉得挺有意思，特此收集。<br><a id="more"></a></p>
+<h4 id="一、在-if-中使用逗号表达式"><a href="#一、在-if-中使用逗号表达式" class="headerlink" title="一、在 if 中使用逗号表达式"></a>一、在 if 中使用逗号表达式</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="keyword">let</span> a = <span class="number">1</span>, <span class="keyword">let</span> b = a) <span class="built_in">console</span>.log(b);</span><br></pre></td></tr></table></figure>
+<div class="alert success"><p>Jartto: 值得一提的是，逗号表达式会执行每一部分，而结果是逗号后部分。</p>
+</div>
+<h4 id="二、有趣的-try-catch"><a href="#二、有趣的-try-catch" class="headerlink" title="二、有趣的 try catch"></a>二、有趣的 try catch</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">try &#123;</span><br><span class="line">    something</span><br><span class="line">&#125; catch (e) &#123;</span><br><span class="line">    window.location.href =</span><br><span class="line">        &quot;http://stackoverflow.com/search?q=[js]+&quot; +</span><br><span class="line">        e.message;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="三、生成随机字符串"><a href="#三、生成随机字符串" class="headerlink" title="三、生成随机字符串"></a>三、生成随机字符串</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Math</span>.random().toString(<span class="number">16</span>).substring(<span class="number">2</span>) <span class="comment">// "5c31298e546e2"</span></span><br><span class="line"><span class="built_in">Math</span>.random().toString(<span class="number">36</span>).substring(<span class="number">2</span>) <span class="comment">// "isx80x30s2"</span></span><br></pre></td></tr></table></figure>
+<div class="alert success"><p>Jartto: 我如果没记错，这是某企业的笔试题。</p>
+</div>
+<h4 id="四、JS-中-void-的使用"><a href="#四、JS-中-void-的使用" class="headerlink" title="四、JS 中 void 的使用"></a>四、<code>JS</code> 中 <code>void</code> 的使用</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> data = <span class="keyword">void</span> <span class="number">0</span>; <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+<div class="alert success"><p>Jartto: void在JavaScript中是一个操作符，对传入的操作不执行并且返回 undefined。</p>
+</div>
+<p>我们经常在 <code>href</code> 中写 <code>javascript:void(0)</code>，其实通过 <code>void</code> 来操作不执行。</p>
+<h4 id="五、隐式取整"><a href="#五、隐式取整" class="headerlink" title="五、隐式取整"></a>五、隐式取整</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = ~~<span class="number">2.33</span>; <span class="comment">// 2</span></span><br><span class="line"><span class="keyword">let</span> b = <span class="number">2.33</span> | <span class="number">0</span>; <span class="comment">// 2</span></span><br><span class="line"><span class="keyword">let</span> c = <span class="number">2.33</span> &gt;&gt; <span class="number">0</span>; <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
+<h4 id="六、金钱格式化-1-234-567-890"><a href="#六、金钱格式化-1-234-567-890" class="headerlink" title="六、金钱格式化 1,234,567,890"></a>六、金钱格式化 <code>1,234,567,890</code></h4><p>方式一：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Let test1 = <span class="string">'1234567890'</span>;</span><br><span class="line">Let format = test1.replace(<span class="regexp">/\B(?=(\d&#123;3&#125;)+(?!\d))/g</span>, <span class="string">','</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(format); <span class="comment">// 1,234,567,890</span></span><br></pre></td></tr></table></figure></p>
+<p>方式二：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">formatCash</span>(<span class="params">str</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> str.split(<span class="string">''</span>).reverse().reduce(<span class="function">(<span class="params">prev, next, index</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> ((index % <span class="number">3</span>) ? next : (next + <span class="string">','</span>)) + prev;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(formatCash(<span class="string">'1234567890'</span>)); <span class="comment">// 1,234,567,890</span></span><br></pre></td></tr></table></figure></p>
+<p>方式三：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>(<span class="number">1234567890</span>).toLocaleString();</span><br></pre></td></tr></table></figure></p>
+<h4 id="七、隐式转换字符串类型成数字"><a href="#七、隐式转换字符串类型成数字" class="headerlink" title="七、隐式转换字符串类型成数字"></a>七、隐式转换字符串类型成数字</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="string">'1a'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(+a); <span class="comment">// NaN</span></span><br></pre></td></tr></table></figure>
+<p>等价于：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> b = <span class="built_in">Number</span>(<span class="string">'1a'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(b); <span class="comment">// NaN</span></span><br></pre></td></tr></table></figure></p>
+<div class="alert success"><p>Jartto: 规范编程的话，请避免隐式转换，众所周知，隐式转换不符合语意化编程。</p>
+</div>
+<h4 id="八、隐式转换布尔类型"><a href="#八、隐式转换布尔类型" class="headerlink" title="八、隐式转换布尔类型"></a>八、隐式转换布尔类型</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> b = !! a;</span><br></pre></td></tr></table></figure>
+<h4 id="九、注意-parseInt"><a href="#九、注意-parseInt" class="headerlink" title="九、注意 parseInt"></a>九、注意 <code>parseInt</code></h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">parseInt</span>(<span class="number">0.0000007</span>) === <span class="number">7</span> <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<h4 id="十、数组去重"><a href="#十、数组去重" class="headerlink" title="十、数组去重"></a>十、数组去重</h4><p>方式一：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[...new <span class="built_in">Set</span>([<span class="number">1</span>, <span class="string">"1"</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">3</span>])]</span><br></pre></td></tr></table></figure></p>
+<p>方式二：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = [<span class="number">1</span>, <span class="number">1</span>, <span class="string">"1"</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="string">"2"</span>, <span class="number">3</span>, <span class="number">3</span>, <span class="string">"3"</span>];</span><br><span class="line"><span class="keyword">let</span> b = <span class="built_in">Array</span>.from(<span class="keyword">new</span> <span class="built_in">Set</span>(a));</span><br><span class="line"><span class="built_in">console</span>.log(b);</span><br></pre></td></tr></table></figure></p>
+<p>方式三：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Array</span>.prototype.unique3 = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"> <span class="keyword">var</span> res = [];</span><br><span class="line"> <span class="keyword">var</span> json = &#123;&#125;;</span><br><span class="line"> <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.length; i++)&#123;</span><br><span class="line">  <span class="keyword">if</span>(!json[<span class="keyword">this</span>[i]])&#123;</span><br><span class="line">   res.push(<span class="keyword">this</span>[i]);</span><br><span class="line">   json[<span class="keyword">this</span>[i]] = <span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> arr = [<span class="number">112</span>,<span class="number">112</span>,<span class="number">34</span>,<span class="string">'你好'</span>,<span class="number">112</span>,<span class="number">112</span>,<span class="number">34</span>,<span class="string">'你好'</span>,<span class="string">'str'</span>,<span class="string">'str1'</span>];</span><br><span class="line">alert(arr.unique3());</span><br></pre></td></tr></table></figure></p>
+<p>原理：</p>
+<ol>
+<li>创建一个新的数组存放结果</li>
+<li>创建一个空对象</li>
+<li>for循环时，每次取出一个元素与对象进行对比，如果这个元素不重复，则把它存放到结果数组中，同时把这个元素的内容作为对象的一个属性，并赋值为1，存入到第2步建立的对象中。</li>
+</ol>
+<div class="alert info"><p>至于如何对比，就是每次从原数组中取出一个元素，然后到对象中去访问这个属性，如果能访问到值，则说明重复。</p>
+</div>
+<h4 id="十一、用最短的代码实现一个长度为m-6-且值都n-8-的数组"><a href="#十一、用最短的代码实现一个长度为m-6-且值都n-8-的数组" class="headerlink" title="十一、用最短的代码实现一个长度为m(6)且值都n(8)的数组"></a>十一、用最短的代码实现一个长度为m(6)且值都n(8)的数组</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Array</span>(<span class="number">6</span>).fill(<span class="number">8</span>);</span><br></pre></td></tr></table></figure>
+<p>或：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[...<span class="string">'8'</span>.repeat(<span class="number">6</span>)];</span><br></pre></td></tr></table></figure></p>
+<h4 id="十二、apply-取一个数组的最大值和最小值"><a href="#十二、apply-取一个数组的最大值和最小值" class="headerlink" title="十二、apply 取一个数组的最大值和最小值"></a>十二、<code>apply</code> 取一个数组的最大值和最小值</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> numbers = [<span class="number">5</span>, <span class="number">458</span> , <span class="number">120</span> , <span class="number">-215</span> , <span class="number">228</span> , <span class="number">400</span> , <span class="number">122205</span>, <span class="number">-85411</span>];</span><br><span class="line"><span class="keyword">let</span> maxInNumbers = <span class="built_in">Math</span>.max.apply(<span class="built_in">Math</span>, numbers);</span><br><span class="line"><span class="keyword">let</span> minInNumbers = <span class="built_in">Math</span>.min.apply(<span class="built_in">Math</span>, numbers);</span><br></pre></td></tr></table></figure>
+<h4 id="十三、将-argruments-对象转换成数组"><a href="#十三、将-argruments-对象转换成数组" class="headerlink" title="十三、将 argruments 对象转换成数组"></a>十三、将 <code>argruments</code> 对象转换成数组</h4><p>方式一：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> argArray1 = <span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>);</span><br></pre></td></tr></table></figure></p>
+<p>方式二，<code>ES6</code> 写法：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> argArray2 = <span class="built_in">Array</span>.from(<span class="built_in">arguments</span>);</span><br></pre></td></tr></table></figure></p>
+<h4 id="十四、交换两个数的值"><a href="#十四、交换两个数的值" class="headerlink" title="十四、交换两个数的值"></a>十四、交换两个数的值</h4><p>方式一：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">1</span>, b = <span class="number">2</span>;</span><br><span class="line">[a, b] = [b, a];</span><br></pre></td></tr></table></figure></p>
+<p>方式二：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">1</span>, b = <span class="number">2</span>, c;</span><br><span class="line">c = a;</span><br><span class="line">a = b;</span><br><span class="line">b = c;</span><br><span class="line"><span class="built_in">console</span>.log(a, b);</span><br></pre></td></tr></table></figure></p>
+<div class="alert success"><p>Jartto: 方式二是学 C 语言时记忆最准的了🙈。</p>
+</div>
+<h4 id="十五、统计字符串中相同字符出现的次数（参考）"><a href="#十五、统计字符串中相同字符出现的次数（参考）" class="headerlink" title="十五、统计字符串中相同字符出现的次数（参考）"></a>十五、统计字符串中相同字符出现的次数（<a href="https://www.zhihu.com/question/46943112/answer/103585546" target="_blank" rel="noopener">参考</a>）</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = <span class="string">'abcdaabc'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> info = arr.split(<span class="string">''</span>).reduce(<span class="function">(<span class="params">p, k</span>) =&gt;</span> (p[k]++ || (p[k] = <span class="number">1</span>), p), &#123;&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(info); <span class="comment">//&#123; a: 3, b: 2, c: 2, d: 1 &#125;</span></span><br></pre></td></tr></table></figure>
+<h4 id="十六、是否包含某元素"><a href="#十六、是否包含某元素" class="headerlink" title="十六、是否包含某元素"></a>十六、是否包含某元素</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(~<span class="string">"asdf"</span>.lastIndexOf(<span class="string">"a"</span>))&#123;</span><br><span class="line">  alert(<span class="string">"exists"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div class="alert info"><p>~是移位操作，找不到下标返回-1，移位之后是0，恰好0==false；找到的话，至少返回0，移位后是1，也就是true</p>
+</div>
+<h4 id="十七、includes-和-indexOf-区别"><a href="#十七、includes-和-indexOf-区别" class="headerlink" title="十七、includes 和 indexOf 区别"></a>十七、<code>includes</code> 和 <code>indexOf</code> 区别</h4><h4 id="十八、将-n-维数组破开成一维（参考）"><a href="#十八、将-n-维数组破开成一维（参考）" class="headerlink" title="十八、将 n 维数组破开成一维（参考）"></a>十八、将 n 维数组破开成一维（<a href="https://www.zhihu.com/question/46943112/answer/115665473" target="_blank" rel="noopener">参考</a>）</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> foo0 = [<span class="number">1</span>, [<span class="number">2</span>, <span class="number">3</span>], [<span class="number">4</span>, <span class="number">5</span>, [<span class="number">6</span>,<span class="number">7</span>,[<span class="number">8</span>]]], [<span class="number">9</span>], <span class="number">10</span>]; <span class="keyword">var</span> foo1 = foo0.join(<span class="string">','</span>).split(<span class="string">','</span>); </span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(foo1); <span class="comment">//["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]</span></span><br></pre></td></tr></table></figure>
+<h4 id="十九、浮点取整"><a href="#十九、浮点取整" class="headerlink" title="十九、浮点取整"></a>十九、浮点取整</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2.3</span>  &gt;&gt; <span class="number">0</span></span><br></pre></td></tr></table></figure>
+<div class="alert success"><p>Jartto: 按位操作只能针对 <code>int</code> 类型，所以 <code>js</code> 在做按位操作时，会自动把 <code>float</code> 转换成 <code>int</code>。</p>
+</div>
+<h4 id="二十、随机颜色值"><a href="#二十、随机颜色值" class="headerlink" title="二十、随机颜色值"></a>二十、随机颜色值</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random() * (<span class="number">2</span> &lt;&lt; <span class="number">23</span>)).toString(<span class="number">16</span>);</span><br></pre></td></tr></table></figure>
+<h4 id="二十一、总结"><a href="#二十一、总结" class="headerlink" title="二十一、总结"></a>二十一、总结</h4><p>恰巧看到了几篇文章，觉得自己从中学到了一些知识，于是逐一尝试并加上了自己的理解，总结而出。理解这些 JS 的奇技淫巧，也许并不能提高我们在实际中的编程能力，但起码不会成为你读一些小众插件源码的障碍，这就够了。</p>
+<h4 id="二十二、参考"><a href="#二十二、参考" class="headerlink" title="二十二、参考"></a>二十二、参考</h4><ol>
+<li><a href="https://github.com/jawil/blog/issues/24" target="_blank" rel="noopener">这些 JavaScript 编程黑科技</a></li>
+<li><a href="https://github.com/aemkei/jsfuck" target="_blank" rel="noopener">JS Fuck</a></li>
+<li><a href="https://www.zhihu.com/question/46943112" target="_blank" rel="noopener">短小却令人惊叹的 JavaScript 代码</a></li>
+<li><a href="http://www.jb51.net/article/46154.htm" target="_blank" rel="noopener">JS 数组去重</a></li>
+</ol>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/js/">js</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/10/23/html5-drag/" data-tooltip="HTML5 拖放实现">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/10/06/js-async-and-await/" data-tooltip="掌握 Async/Await">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2017/10/18/js-fancy-programming/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2017/10/18/js-fancy-programming/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2017/10/18/js-fancy-programming/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/10/23/html5-drag/" data-tooltip="HTML5 拖放实现">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/10/06/js-async-and-await/" data-tooltip="掌握 Async/Await">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2017/10/18/js-fancy-programming/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2017/10/18/js-fancy-programming/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2017/10/18/js-fancy-programming/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2017/10/18/js-fancy-programming/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2017/10/18/js-fancy-programming/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2017/10/18/js-fancy-programming/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

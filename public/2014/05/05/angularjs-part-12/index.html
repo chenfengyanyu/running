@@ -1,0 +1,525 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>Angularjs学习笔记11~服务 Service（一）内建服务 - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="经历了前三篇“指令”的摧残之后，我们还得接受更严格的考验。这节我们再来看angular另一个重要知识块service。这里我打算用两篇笔记去阐述，主要分为“内建服务”和“创建服务（自定义服务）”。">
+<meta name="keywords" content="angularjs">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Angularjs学习笔记11~服务 Service（一）内建服务">
+<meta property="og:url" content="http://jartto.wang/2014/05/05/angularjs-part-12/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="经历了前三篇“指令”的摧残之后，我们还得接受更严格的考验。这节我们再来看angular另一个重要知识块service。这里我打算用两篇笔记去阐述，主要分为“内建服务”和“创建服务（自定义服务）”。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2016-06-24T08:32:31.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Angularjs学习笔记11~服务 Service（一）内建服务">
+<meta name="twitter:description" content="经历了前三篇“指令”的摧残之后，我们还得接受更严格的考验。这节我们再来看angular另一个重要知识块service。这里我打算用两篇笔记去阐述，主要分为“内建服务”和“创建服务（自定义服务）”。">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/blog_155IK010-0.jpg"/>
+        <meta class="swiftype" name="image" data-type="enum" content="http://7xvi3w.com1.z0.glb.clouddn.com/blog_155IK010-0.jpg" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            Angularjs学习笔记11~服务 Service（一）内建服务
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2014-05-05T16:16:45+08:00">
+	  
+		    2014/5月/05 16:16:45
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>经历了前三篇“指令”的摧残之后，我们还得接受更严格的考验。这节我们再来看angular另一个重要知识块service。这里我打算用两篇笔记去阐述，主要分为“内建服务”和“创建服务（自定义服务）”。<br><a id="more"></a></p>
+<p>当然，angular服务是相当复杂的，我理解比较浅，所以只能从边缘部分做一些简单的介绍。好多书籍不都是从入门到精通嘛，我们先来个入门，精通的事就靠你的个人兴趣了。很多高手都反映，angular的学习曲线很陡，不易掌握。正因为如此，多看书，多实践才是突破的唯一途径。吐槽：好像跑偏了哎，突破跟service有毛关系啊。。。</p>
+<p>这节，angular“内建服务”的主场，让我们直奔主题。</p>
+<h4 id="一、Service"><a href="#一、Service" class="headerlink" title="一、Service"></a>一、Service</h4><p>说到angular中的service，有人这样解释：在一个应用中，负责提供一个接口，把特定函数需要的方法放在一起。<a href="http://www.angularjs.cn/A00L" target="_blank" rel="noopener">angular开发指南</a>中是这么说的，</p>
+<blockquote>
+<p>“服务是一种由服务器端带到客户端的特性，它由来已久。AngularJS应用中的服务是一些用依赖注入捆绑在一起的可替换的对象。服务是最常和依赖注入一起用的，它也是AngularJS中的关键特性”。</p>
+</blockquote>
+<p>其实，大概意思都差不多。除此之外，开发指南中关于services还有另外两条说明：<br>①angular只在应用组件依赖它的时候去初始化service；<br>②每一个组件依赖于一个service，该service引用自service工厂函数产生的单实例；</p>
+<div class="alert info"><p>如果你觉得上面的话读起来怪怪的，请不要在意。个人建议，你最好去官网查看API，体验原汁原味的英文，那才是其乐无穷啊。原文被我翻译过来，貌似带了一些陕西方言的赶脚。好了，不开玩笑了，接着往下走。</p>
+</div>
+<h4 id="二、内建服务"><a href="#二、内建服务" class="headerlink" title="二、内建服务"></a>二、内建服务</h4><p>AngularJS 提供了一组常用操作的服务。和其他的内建变量或者标识符一样，内建服务名称也总是以”$”开头。另外你也可以创建你自己的服务，我会在下节笔记中详细介绍。这里我们来聚焦内建服务，首先我们来看看angularjs中有哪些常用的内建服务以及他们的含义。</p>
+<p>①$http：angular的核心服务，通过浏览器的XMLHttpRequest对象或者JSONP，为远程HTTP服务器的通信提供便利。<br>②$location：对地址栏中的URL的一系列操作<br>③$log：安全的将信息写入浏览器控制台，也就是控制台输出<br>④$timeout：angular包装了window.setTimeout，我更习惯叫它定时器<br>⑤$q：异步请求使用，promise/deferred模板<br>⑥$routeProvider：路由<br>。。。。。。</p>
+<p>当然angular的内建服务还是很多的，除此之外还有$animate、$compile、$document、$interval、$parse、$filter、$window等。这里我就不一一介绍了，如果你比较感兴趣的话，<a href="http://www.ngnice.com/docs/api/ng/service" target="_blank" rel="noopener">请点击这里</a></p>
+<h4 id="三、如何使用？"><a href="#三、如何使用？" class="headerlink" title="三、如何使用？"></a>三、如何使用？</h4><p>要使用AngularJS服务，你只要在需要的地方（控制器，或其他服务）指出依赖就行了。AngularJS的依赖注入系统会帮你完成剩下的事情。它负责实例化，查找左右依赖，并且按照工场函数要求的样子传递依赖。</p>
+<p>一个简单的例子可能如下所示：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">angular.module(<span class="string">'myServiceModule'</span>, []).</span><br><span class="line">  controller(<span class="string">'MyController'</span>, [<span class="string">'$scope'</span>,<span class="string">'notify'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">$scope, notify</span>) </span>&#123;</span><br><span class="line">    $scope.callNotify = <span class="function"><span class="keyword">function</span>(<span class="params">msg</span>) </span>&#123;</span><br><span class="line">      notify(msg);</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;]).</span><br><span class="line">factory(<span class="string">'notify'</span>, [<span class="string">'$window'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">win</span>) </span>&#123;<span class="comment">//定义服务名称</span></span><br><span class="line">    <span class="keyword">var</span> msgs = [];</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">msg</span>) </span>&#123;<span class="comment">//定义方法</span></span><br><span class="line">      msgs.push(msg);</span><br><span class="line">      <span class="keyword">if</span> (msgs.length == <span class="number">3</span>) &#123;</span><br><span class="line">        win.alert(msgs.join(<span class="string">"\n"</span>));</span><br><span class="line">        msgs = [];</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;]);</span><br></pre></td></tr></table></figure></p>
+<p>如上述代码所示，这个服务依赖于$window服务（会被当成参数传递给工场函数），并且只是个函数。这个服务的任务是存储所有的通知；在第三个通知以后，服务会用window的alert来输出所有的通知。</p>
+<h4 id="四、将服务注入到控制器中"><a href="#四、将服务注入到控制器中" class="headerlink" title="四、将服务注入到控制器中"></a>四、将服务注入到控制器中</h4><p>将服务用作控制器的依赖和将服务用作其他服务的依赖很类似。还是用同一段代码来展示，请注意其中的细微差别：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">angular.module(<span class="string">'MyServiceModule'</span>, []).</span><br><span class="line">factory(<span class="string">'notify'</span>, [<span class="string">'$window'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">win</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> msgs = [];</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">msg</span>) </span>&#123;</span><br><span class="line">      msgs.push(msg);</span><br><span class="line">      <span class="keyword">if</span> (msgs.length == <span class="number">3</span>) &#123;</span><br><span class="line">        win.alert(msgs.join(<span class="string">"\n"</span>));</span><br><span class="line">        msgs = [];</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;]);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myController</span>(<span class="params">scope, notifyService</span>) </span>&#123;<span class="comment">//参数名允许不一致，但不建议</span></span><br><span class="line">  scope.callNotify = <span class="function"><span class="keyword">function</span>(<span class="params">msg</span>) </span>&#123;</span><br><span class="line">    notifyService(msg);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line">myController.$inject = [<span class="string">'$scope'</span>,<span class="string">'notify'</span>];<span class="comment">//使用$inject属性来显式地指定依赖</span></span><br></pre></td></tr></table></figure></p>
+<p>为了说明问题，我又请来了祖师爷（开发指南）。开发指南中对该段代码加粗部分的解释如下：</p>
+<blockquote>
+<p>“因为Javascript是一种动态语言，依赖注入系统无法通过静态类型来知道应该注入什么样的服务（静态类型语言就可以）。所以，你应该$inject的属性来指定服务的名字，这个属性是一个包含这需要注入的服务的名字字符串的数组。名字要和服务注册到系统时的名字匹配。服务的名称的顺序也很重要：当执行工场函数时传递的参数是依照数组里的顺序的。但是工场函数中参数的名字不重要，但最好还是和服务本身的名字一样。”</p>
+</blockquote>
+<p>ps：总算接近尾声了，累死了！service也属于angular中的重点知识，所以查了不少资料，但是感觉描述的不够清楚。我功力尚浅，只能粗浅的理解，难免有不当之处，请多多谅解。当然，有问题的话，欢迎拍砖~</p>
+<p>参考链接：<br>《Angularjs 开发指南》<br>angularjs中文社区：<br><a href="http://www.angularjs.cn/A00L" target="_blank" rel="noopener">http://www.angularjs.cn/A00L</a><br>angularjs services API：<br><a href="http://www.ngnice.com/docs/guide/services" target="_blank" rel="noopener">http://www.ngnice.com/docs/guide/services</a></p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/angularjs/">angularjs</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2014/05/08/angularjs-part-13/" data-tooltip="Angularjs学习笔记12~服务 Service（二）创建服务">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2014/05/03/angularjs-part-11/" data-tooltip="Angularjs学习笔记10~指令 Directive（三）自定义验证实例">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2014/05/05/angularjs-part-12/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2014/05/05/angularjs-part-12/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2014/05/05/angularjs-part-12/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+            
+                <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2014/05/08/angularjs-part-13/" data-tooltip="Angularjs学习笔记12~服务 Service（二）创建服务">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2014/05/03/angularjs-part-11/" data-tooltip="Angularjs学习笔记10~指令 Directive（三）自定义验证实例">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2014/05/05/angularjs-part-12/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2014/05/05/angularjs-part-12/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2014/05/05/angularjs-part-12/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2014/05/05/angularjs-part-12/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2014/05/05/angularjs-part-12/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2014/05/05/angularjs-part-12/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+    
+        <script>
+             var disqus_config = function () {
+                 this.page.url = 'http://jartto.wang/2014/05/05/angularjs-part-12/';
+                 
+                    this.page.identifier = '2014/05/05/angularjs-part-12/';
+                                  
+             };
+            (function() {
+                var d = document, s = d.createElement('script');
+                var disqus_shortname = 'jartto';
+                s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+
+
+
+</html>

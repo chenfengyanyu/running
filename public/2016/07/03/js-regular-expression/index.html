@@ -1,0 +1,540 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>js之强大的正则表达式 - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="刚学js那会，头一次接触正则就是在表单验证提交数据的时候。当然，正则表达式不仅仅局限于此，那么这几年我又学到了哪些？咱们从头屡屡，算是阶段性总结吧！">
+<meta name="keywords" content="js,正则">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="js之强大的正则表达式">
+<meta property="og:url" content="http://jartto.wang/2016/07/03/js-regular-expression/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="刚学js那会，头一次接触正则就是在表单验证提交数据的时候。当然，正则表达式不仅仅局限于此，那么这几年我又学到了哪些？咱们从头屡屡，算是阶段性总结吧！">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2016-07-03T15:37:51.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="js之强大的正则表达式">
+<meta name="twitter:description" content="刚学js那会，头一次接触正则就是在表单验证提交数据的时候。当然，正则表达式不仅仅局限于此，那么这几年我又学到了哪些？咱们从头屡屡，算是阶段性总结吧！">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/regexp_1E7489A1-CE11-4278-A7DA-EAD874DC3C3F.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="http://7xvi3w.com1.z0.glb.clouddn.com/regexp_1E7489A1-CE11-4278-A7DA-EAD874DC3C3F.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            js之强大的正则表达式
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2016-07-03T10:48:38+08:00">
+	  
+		    2016/7月/03 10:48:38
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>刚学js那会，头一次接触正则就是在表单验证提交数据的时候。当然，正则表达式不仅仅局限于此，那么这几年我又学到了哪些？咱们从头屡屡，算是阶段性总结吧！<br><a id="more"></a></p>
+<h4 id="一、关于正则表达式"><a href="#一、关于正则表达式" class="headerlink" title="一、关于正则表达式"></a>一、关于正则表达式</h4><p>这里引用一下李炎恢老师对正则的定义：<br>正则表达式 (regular expression)是一个描述字符模式的对象。 ECMAScript的RegExp类<br>表示正则表达式，而 String 和 RegExp 都定义了使用正则表达式进行强大的模式匹配和文本 检索与替换的函数。</p>
+<p>正则表达式主要用来验证客户端的输入数据。用户填写完表单单击按钮之后，表单就会 被发送到服务器，在服务器端通常会用PHP、ASP.NET等服务器脚本对其进行进一步处理。 因为客户端验证，可以节约大量的服务器端的系统资源,并且提供更好的用户体验。</p>
+<h4 id="二、创建方式"><a href="#二、创建方式" class="headerlink" title="二、创建方式"></a>二、创建方式</h4><p>方式一：使用new的方式<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> box = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">'box'</span>); <span class="comment">//第一个参数字符串</span></span><br><span class="line"><span class="keyword">var</span> box = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">'box'</span>, <span class="string">'ig'</span>); <span class="comment">//第二个参数可选模式修饰符</span></span><br></pre></td></tr></table></figure></p>
+<p>方式二：使用字面量方式<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> box = <span class="regexp">/box/</span>; <span class="comment">//直接用两个反斜杠</span></span><br><span class="line"><span class="keyword">var</span> box = <span class="regexp">/box/ig</span>; <span class="comment">//在第二个斜杠后面加上模式修饰符</span></span><br></pre></td></tr></table></figure></p>
+<p>模式修饰符的可选参数:</p>
+<ul>
+<li>i:忽略大小写</li>
+<li>g:全局匹配</li>
+<li>m:多行匹配</li>
+</ul>
+<h4 id="三、细数正则表达式的一些规则"><a href="#三、细数正则表达式的一些规则" class="headerlink" title="三、细数正则表达式的一些规则"></a>三、细数正则表达式的一些规则</h4><p>我们先来看看RegExp对象的方法：</p>
+<ul>
+<li>test：在字符串中测试模式匹配,返回 true 或 false</li>
+<li>exec：在字符串中执行匹配搜索,返回结果数组</li>
+<li>match(pattern)：返回 pattern 中的子串或 null</li>
+<li>replace(pattern, replacement)：用 replacement 替换 pattern</li>
+<li>search(pattern)：返回字符串中 pattern 开始位置</li>
+<li>split(pattern)：返回字符串按指定 pattern 拆分的数组</li>
+</ul>
+<p>我们来看一个简单的示例：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> pattern = <span class="regexp">/box/i</span>;</span><br><span class="line"><span class="keyword">var</span> str = <span class="string">'This is a Box!'</span>; </span><br><span class="line">alert(pattern.test(str));</span><br></pre></td></tr></table></figure></p>
+<p>当然，我们可以简写一下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alert(<span class="regexp">/box/i</span>.test(<span class="string">'This is a Box!'</span>));</span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p>至于其他的方法，如exec，match，replace用法都大同小异，你需要做的就是：记住他们的规则以及返回值。</p>
+</div>
+<p>正则强大之处在于它的匹配，我们来看看匹配规则：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">.:匹配除换行符外的任意字符</span><br><span class="line">[a-z0-9]:匹配括号中的字符集中的任意字符</span><br><span class="line">[^a-z0-9]:匹配任意不在括号中的字符集中的字符</span><br><span class="line">\d:匹配数字</span><br><span class="line">\D:匹配非数字,同 [^0-9]相同</span><br><span class="line">\w:匹配字母和数字及 _</span><br><span class="line">\W:匹配非字母和数字及 _</span><br><span class="line">\0:匹配 null 字符</span><br><span class="line">\b:匹配空格字符</span><br><span class="line">\f:匹配进纸字符</span><br><span class="line">\n:匹配换行符</span><br><span class="line">\r:匹配回车字符</span><br><span class="line">\t:匹配制表符</span><br><span class="line">\s:匹配空白字符、空格、制表符和换行符</span><br><span class="line">\S:匹配非空白字符</span><br><span class="line"></span><br><span class="line">^:行首匹配</span><br><span class="line">$:行尾匹配</span><br><span class="line">\A:只有匹配字符串开始处</span><br><span class="line">\b:匹配单词边界,词在 []内时无效</span><br><span class="line">\B:匹配非单词边界</span><br><span class="line">\G:匹配当前搜索的开始位置</span><br><span class="line">\Z:匹配字符串结束处或行尾</span><br><span class="line">\z:只匹配字符串结束处</span><br><span class="line"></span><br><span class="line">x?:匹配 0 个或 1 个 x</span><br><span class="line">x*:匹配 0 个或任意多个 x</span><br><span class="line">x+:匹配至少一个 x</span><br><span class="line">(xyz)+:匹配至少一个 (xyz)</span><br><span class="line">x&#123;m,n&#125;:匹配最少 m 个、最多 n 个 x</span><br><span class="line"></span><br><span class="line">this|where|logo:匹配 this 或 where 或 logo 中任意一个</span><br><span class="line">(string):用于反向引用的分组</span><br><span class="line">\1 或$1:匹配第一个分组中的内容</span><br><span class="line">\2 或$2:匹配第二个分组中的内容</span><br><span class="line">\3 或$3:匹配第三个分组中的内容</span><br></pre></td></tr></table></figure></p>
+<p>熟记这些规则，我们就可以随心所欲的完成任意匹配了，举个🌰：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*使用字符类匹配 */</span></span><br><span class="line"><span class="keyword">var</span> pattern = <span class="regexp">/g[a-zA-Z_]*gle/</span>; </span><br><span class="line"><span class="keyword">var</span> str = <span class="string">'google'</span>; </span><br><span class="line">alert(pattern.test(str));<span class="comment">//true</span></span><br></pre></td></tr></table></figure></p>
+<p>是不是很简单呢，赶快去做一些有创造性的事情吧！</p>
+<h4 id="四、常用正则积累"><a href="#四、常用正则积累" class="headerlink" title="四、常用正则积累"></a>四、常用正则积累</h4><p>验证手机号：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myreg = <span class="regexp">/^(((13[0-9]&#123;1&#125;)|(15[0-9]&#123;1&#125;)|(18[0-9]&#123;1&#125;))+\d&#123;8&#125;)$/</span>;</span><br><span class="line"><span class="keyword">if</span>(!myreg.test($(<span class="string">"#phone"</span>).val()))</span><br><span class="line">&#123;</span><br><span class="line">    alert(<span class="string">'请输入有效的手机号码！'</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>用正则怎样去除重复的字符串，只保留未重复的。<br>如：var str= “aaabbbcccddde”;<br>结果为 abcde。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">removeRepeat</span>(<span class="params">str</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> reg = <span class="regexp">/(.)(?=.*\1)/g</span>;</span><br><span class="line">	<span class="keyword">var</span> result = str.replace(reg, <span class="string">""</span>);</span><br><span class="line">	<span class="built_in">console</span>.log(result);</span><br><span class="line">&#125;</span><br><span class="line">removeRepeat(<span class="string">"aaabbbcccddde"</span>);<span class="comment">//输出abcde</span></span><br><span class="line">removeRepeat(<span class="string">"aaabbbcccdded"</span>);<span class="comment">//输出abced</span></span><br></pre></td></tr></table></figure></p>
+<p>匹配小数点后面两位：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s=<span class="string">"1，2，234，234.264234，1234.1234"</span>;</span><br><span class="line"><span class="comment">//不要四舍五入的：</span></span><br><span class="line"><span class="built_in">console</span>.log(s.replace(<span class="regexp">/(\.\d)\d+/ig</span>,<span class="string">"$1"</span>) )<span class="comment">//1，2，234，234.2，1234.1</span></span><br><span class="line"><span class="comment">//要四舍五入的：</span></span><br><span class="line"><span class="built_in">console</span>.log(s.replace(<span class="regexp">/\d+\.\d+/ig</span>,a))<span class="comment">//1，2，234，234.3，1234.1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//此处乱入一个修复小数点后一位的方法：</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params">v</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> ((v*<span class="number">1</span>).toFixed(<span class="number">1</span>));</span><br><span class="line">&#125;</span><br><span class="line">a(<span class="number">12455.4545</span>)<span class="comment">//"12455.5"</span></span><br></pre></td></tr></table></figure></p>
+<p>是否为url：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isURL</span>(<span class="params">str</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span>!!str.match(<span class="regexp">/(((^https?:(?:\/\/)?)(?:[-;:&amp;=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&amp;=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&amp;;%@.\w_]*)#?(?:[\w]*))?)$/g</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>匹配img中的src：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//思路分两步：作者（yanue）.</span></span><br><span class="line"><span class="comment">//1，匹配出图片img标签（即匹配出所有图片），过滤其他不需要的字符</span></span><br><span class="line"><span class="comment">//2.从匹配出来的结果（img标签中）循环匹配出图片地址（即src属性）</span></span><br><span class="line"><span class="keyword">var</span> str = <span class="string">"this is test string &lt;img src=\"http:www.yanue.net/test.jpg\" width='50' &gt; 123 and the end &lt;img src=\"所有地址也能匹配.jpg\" /&gt; 33! &lt;img src=\"/uploads/attached/image/20120426/20120426225658_92565.png\" alt=\"\" /&gt;"</span></span><br><span class="line"><span class="comment">//匹配图片（g表示匹配所有结果i表示区分大小写）</span></span><br><span class="line"><span class="keyword">var</span> imgReg = <span class="regexp">/&lt;img.*?(?:&gt;|\/&gt;)/gi</span>;</span><br><span class="line"><span class="comment">//匹配src属性</span></span><br><span class="line"><span class="keyword">var</span> srcReg = <span class="regexp">/src=[\'\"]?([^\'\"]*)[\'\"]?/i</span>;</span><br><span class="line"><span class="keyword">var</span> arr = str.match(imgReg);</span><br><span class="line">alert(<span class="string">'所有已成功匹配图片的数组：'</span>+arr);</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">    <span class="keyword">var</span> src = arr[i].match(srcReg);</span><br><span class="line">    <span class="comment">//获取图片地址</span></span><br><span class="line">    <span class="keyword">if</span>(src[<span class="number">1</span>])&#123;</span><br><span class="line">       alert(<span class="string">'已匹配的图片地址'</span>+(i+<span class="number">1</span>)+<span class="string">'：'</span>+src[<span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//当然你也可以替换src属性</span></span><br><span class="line">    <span class="keyword">if</span> (src[<span class="number">0</span>]) &#123;</span><br><span class="line">        <span class="keyword">var</span> t = src[<span class="number">0</span>].replace(<span class="regexp">/src/i</span>, <span class="string">"href"</span>);</span><br><span class="line">        <span class="comment">//alert(t);</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>js获取字符串长度（中文算2个字,英文一个）：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getStrLength</span>(<span class="params">str</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> cArr = str.match(<span class="regexp">/[^\x00-\xff]/ig</span>);</span><br><span class="line">    <span class="keyword">return</span> str.length + (cArr == <span class="literal">null</span> ? <span class="number">0</span> : cArr.length);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>使用正则将金额用逗号隔开：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fmoney</span>(<span class="params">s, n</span>) </span>&#123;  </span><br><span class="line">    n = n &gt; <span class="number">0</span> &amp;&amp; n &lt;= <span class="number">20</span> ? n : <span class="number">2</span>;  </span><br><span class="line">    s = <span class="built_in">parseFloat</span>((s + <span class="string">""</span>).replace(<span class="regexp">/[^\d\.-]/g</span>, <span class="string">""</span>)).toFixed(n) + <span class="string">""</span>;  </span><br><span class="line">    <span class="keyword">var</span> l = s.split(<span class="string">"."</span>)[<span class="number">0</span>].split(<span class="string">""</span>).reverse(), r = s.split(<span class="string">"."</span>)[<span class="number">1</span>];  </span><br><span class="line">    t = <span class="string">""</span>;  </span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; l.length; i++) &#123;  </span><br><span class="line">        t += l[i] + ((i + <span class="number">1</span>) % <span class="number">3</span> == <span class="number">0</span> &amp;&amp; (i + <span class="number">1</span>) != l.length ? <span class="string">","</span> : <span class="string">""</span>);  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="keyword">return</span> t.split(<span class="string">""</span>).reverse().join(<span class="string">""</span>) + <span class="string">"."</span> + r;  </span><br><span class="line">&#125;  </span><br><span class="line">fmoney(<span class="number">123456.9832</span>,<span class="number">3</span>)<span class="comment">//123,456.983</span></span><br></pre></td></tr></table></figure></p>
+<p>还有h5中的用法：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span> =<span class="string">"text"</span> <span class="attr">required</span> =<span class="string">"required"</span> <span class="attr">autofocus</span> =<span class="string">"autofocus"</span> <span class="attr">pattern</span> =<span class="string">"[a-zA-Z]&#123;6,18&#125;"</span> <span class="attr">placeholder</span> =<span class="string">"请输入姓名"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span> =<span class="string">"email"</span> <span class="attr">placeholder</span> =<span class="string">"123456@qq.com"</span> /&gt;</span>//HTLM5邮箱验证</span><br></pre></td></tr></table></figure></p>
+<p>洋洋洒洒码了半天，临近尾声突然想起了一句话：“在最初的几年，你知道的不足以让你明白，你了解的是多么少！”所以，奋斗吧，少年！</p>
+<p>参考：<br><div class="alert info"><p>正则表达式均来自网上，以下是涉及到的正则表达式引用链接。</p>
+</div><br><a href="http://www.daimajiayuan.com/sitejs-18604-1.html" target="_blank" rel="noopener">http://www.daimajiayuan.com/sitejs-18604-1.html</a><br><a href="http://blog.sina.com.cn/s/blog_65c2ec5e0101j133.html" target="_blank" rel="noopener">http://blog.sina.com.cn/s/blog_65c2ec5e0101j133.html</a><br><a href="http://www.soulteary.com/2014/12/05/better-url-regexp-in-js.html" target="_blank" rel="noopener">http://www.soulteary.com/2014/12/05/better-url-regexp-in-js.html</a><br><a href="http://yanue.net/post-11.html" target="_blank" rel="noopener">http://yanue.net/post-11.html</a><br><a href="http://blog.csdn.net/evangel_z/article/details/12839657" target="_blank" rel="noopener">http://blog.csdn.net/evangel_z/article/details/12839657</a></p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/js/">js</a> <a class="tag tag--primary tag--small t-link" href="/tags/正则/">正则</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/07/07/faverite-subject-of-border-image/" data-tooltip="有趣的border-image">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/07/02/explanation-of-the-jquery-cookie/" data-tooltip="jquery之cookie详解">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2016/07/03/js-regular-expression/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2016/07/03/js-regular-expression/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2016/07/03/js-regular-expression/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+            
+                <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/07/07/faverite-subject-of-border-image/" data-tooltip="有趣的border-image">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/07/02/explanation-of-the-jquery-cookie/" data-tooltip="jquery之cookie详解">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2016/07/03/js-regular-expression/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2016/07/03/js-regular-expression/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2016/07/03/js-regular-expression/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2016/07/03/js-regular-expression/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2016/07/03/js-regular-expression/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2016/07/03/js-regular-expression/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+    
+        <script>
+             var disqus_config = function () {
+                 this.page.url = 'http://jartto.wang/2016/07/03/js-regular-expression/';
+                 
+                    this.page.identifier = '2016/07/03/js-regular-expression/';
+                                  
+             };
+            (function() {
+                var d = document, s = d.createElement('script');
+                var disqus_shortname = 'jartto';
+                s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+
+
+
+</html>

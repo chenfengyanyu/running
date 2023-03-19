@@ -1,0 +1,565 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>走进svg - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="SVG 即 Scalable Vector Graphics，是一种用来绘制矢量图的 HTML5 标签。">
+<meta name="keywords" content="svg">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="走进svg">
+<meta property="og:url" content="http://jartto.wang/2016/09/10/step-in-svg/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="SVG 即 Scalable Vector Graphics，是一种用来绘制矢量图的 HTML5 标签。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2016-09-13T15:02:20.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="走进svg">
+<meta name="twitter:description" content="SVG 即 Scalable Vector Graphics，是一种用来绘制矢量图的 HTML5 标签。">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/svg.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="http://7xvi3w.com1.z0.glb.clouddn.com/svg.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            走进svg
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2016-09-10T20:45:50+08:00">
+	  
+		    2016/9月/10 20:45:50
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>SVG 即 Scalable Vector Graphics，是一种用来绘制矢量图的 HTML5 标签。<br><a id="more"></a></p>
+<h4 id="svg引入方式"><a href="#svg引入方式" class="headerlink" title="svg引入方式"></a>svg引入方式</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- &lt;embed&gt; 标签被所有主流的浏览器支持，并允许使用脚本。pluginspage 属性指向下载插件的 URL --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">embed</span> <span class="attr">src</span>=<span class="string">"rect.svg"</span> <span class="attr">width</span>=<span class="string">"300"</span> <span class="attr">height</span>=<span class="string">"100"</span> </span></span><br><span class="line"><span class="tag"><span class="attr">type</span>=<span class="string">"image/svg+xml"</span></span></span><br><span class="line"><span class="tag"><span class="attr">pluginspage</span>=<span class="string">"http://www.adobe.com/svg/viewer/install/"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- &lt;object&gt; 标签是 HTML 4 的标准标签，被所有较新的浏览器支持。它的缺点是不允许使用脚本。codebase 属性指向下载插件的 URL。 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">object</span> <span class="attr">data</span>=<span class="string">"rect.svg"</span> <span class="attr">width</span>=<span class="string">"300"</span> <span class="attr">height</span>=<span class="string">"100"</span> </span></span><br><span class="line"><span class="tag"><span class="attr">type</span>=<span class="string">"image/svg+xml"</span></span></span><br><span class="line"><span class="tag"><span class="attr">codebase</span>=<span class="string">"http://www.adobe.com/svg/viewer/install/"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- &lt;iframe&gt; 标签可工作在大部分的浏览器中。 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">src</span>=<span class="string">"rect.svg"</span> <span class="attr">width</span>=<span class="string">"300"</span> <span class="attr">height</span>=<span class="string">"100"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="绘制一个圆：1-svg"><a href="#绘制一个圆：1-svg" class="headerlink" title="绘制一个圆：1.svg"></a>绘制一个圆：1.svg</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">circle</span> <span class="attr">cx</span>=<span class="string">"100"</span> <span class="attr">cy</span>=<span class="string">"50"</span> <span class="attr">r</span>=<span class="string">"40"</span> <span class="attr">stroke</span>=<span class="string">"black"</span> <span class="attr">stroke-width</span>=<span class="string">"2"</span> <span class="attr">fill</span>=<span class="string">"red"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="矩形，透明度，圆角：2-svg"><a href="#矩形，透明度，圆角：2-svg" class="headerlink" title="矩形，透明度，圆角：2.svg"></a>矩形，透明度，圆角：2.svg</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">rect</span> <span class="attr">x</span>=<span class="string">"300"</span> <span class="attr">y</span>=<span class="string">"100"</span> <span class="attr">width</span>=<span class="string">"250"</span> <span class="attr">height</span>=<span class="string">"250"</span> <span class="attr">style</span>=<span class="string">"fill:blue;stroke:pink;stroke-width:5;</span></span></span><br><span class="line"><span class="tag"><span class="string">fill-opacity:0.1;stroke-opacity:0.9"</span>/&gt;</span></span><br><span class="line"><span class="comment">&lt;!--rx 和 ry 属性可使矩形产生圆角--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">rect</span> <span class="attr">x</span>=<span class="string">"550"</span> <span class="attr">y</span>=<span class="string">"0"</span> <span class="attr">rx</span>=<span class="string">"20"</span> <span class="attr">ry</span>=<span class="string">"20"</span> <span class="attr">width</span>=<span class="string">"250"</span> <span class="attr">height</span>=<span class="string">"100"</span> <span class="attr">style</span>=<span class="string">"fill:red;stroke:black;</span></span></span><br><span class="line"><span class="tag"><span class="string">stroke-width:5;opacity:0.5"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="椭圆：3-svg"><a href="#椭圆：3-svg" class="headerlink" title="椭圆：3.svg"></a>椭圆：3.svg</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 椭圆有不同的 x 和 y 半径，而圆的 x 和 y 半径是相同的 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">ellipse</span> <span class="attr">cx</span>=<span class="string">"300"</span> <span class="attr">cy</span>=<span class="string">"150"</span> <span class="attr">rx</span>=<span class="string">"150"</span> <span class="attr">ry</span>=<span class="string">"80"</span> <span class="attr">style</span>=<span class="string">"fill:rgb(200,100,50);stroke:rgb(0,0,100);stroke-width:2"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="线条：4-svg"><a href="#线条：4-svg" class="headerlink" title="线条：4.svg"></a>线条：4.svg</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 起点x1y1，终点x2y2 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">line</span> <span class="attr">x1</span>=<span class="string">"0"</span> <span class="attr">y1</span>=<span class="string">"0"</span> <span class="attr">x2</span>=<span class="string">"300"</span> <span class="attr">y2</span>=<span class="string">"300"</span> <span class="attr">style</span>=<span class="string">"stroke:rgb(99,99,99);stroke-width:2"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="三角形，多边形：5-svg"><a href="#三角形，多边形：5-svg" class="headerlink" title="三角形，多边形：5.svg"></a>三角形，多边形：5.svg</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 三角形 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">polygon</span> <span class="attr">points</span>=<span class="string">"640,351 600,210 770,20"</span> <span class="attr">style</span>=<span class="string">"fill:#FF9800; stroke:#795548;stroke-width:2"</span>/&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 四边形 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">polygon</span> <span class="attr">points</span>=<span class="string">"420,100 500,210 410,320 323,234"</span> <span class="attr">style</span>=<span class="string">"fill:#cccccc;stroke:#000000;stroke-width:1"</span>/&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 五角星 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">polygon</span> <span class="attr">points</span>=<span class="string">"100,10 40,180 190,60 10,60 160,180"</span> <span class="attr">style</span>=<span class="string">"fill:#F44336;stroke:#F44336;fill-rule:nonzero;"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="svg编辑器创建：6-svg"><a href="#svg编辑器创建：6-svg" class="headerlink" title="svg编辑器创建：6.svg"></a>svg编辑器创建：6.svg</h4><blockquote>
+<p>通过AI钢笔工具绘制，导出svg格式</p>
+</blockquote>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">svg</span> <span class="attr">version</span>=<span class="string">"1.1"</span> <span class="attr">id</span>=<span class="string">"图层_1"</span> <span class="attr">xmlns</span>=<span class="string">"http://www.w3.org/2000/svg"</span> <span class="attr">xmlns:xlink</span>=<span class="string">"http://www.w3.org/1999/xlink"</span> <span class="attr">x</span>=<span class="string">"0px"</span> <span class="attr">y</span>=<span class="string">"0px"</span> <span class="attr">viewBox</span>=<span class="string">"0 0 960 560"</span> <span class="attr">style</span>=<span class="string">"enable-background:new 0 0 960 560;"</span> <span class="attr">xml:space</span>=<span class="string">"preserve"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="css">    <span class="selector-class">.st0</span> &#123;</span></span><br><span class="line"><span class="css">        <span class="selector-tag">fill</span>: <span class="selector-id">#FFFFFF</span>;</span></span><br><span class="line"><span class="css">        <span class="selector-tag">stroke</span>: <span class="selector-id">#000000</span>;</span></span><br><span class="line"><span class="undefined">        stroke-miterlimit: 10;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined">    </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">path</span> <span class="attr">id</span>=<span class="string">"XMLID_1_"</span> <span class="attr">class</span>=<span class="string">"st0"</span> <span class="attr">d</span>=<span class="string">"M77,82c76.3,259.8,128.7,318.6,164,</span></span></span><br><span class="line"><span class="tag"><span class="string">    316c54.2-3.9,54.3-150.9,149-183c88.7-30.1,153.1,77.2,266,74</span></span></span><br><span class="line"><span class="tag"><span class="string">	c67.3-1.9,158.3-43.3,264-214"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="折线：7-svg"><a href="#折线：7-svg" class="headerlink" title="折线：7.svg"></a>折线：7.svg</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 折线，当然也可以画直线 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">polyline</span> <span class="attr">points</span>=<span class="string">"100,100 200,100 200,200 300,200"</span> <span class="attr">style</span>=<span class="string">"fill:white;stroke:red;stroke-width:2"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="path应用：8-svg"><a href="#path应用：8-svg" class="headerlink" title="path应用：8.svg"></a>path应用：8.svg</h4><ul>
+<li>M = moveto      </li>
+<li>L = lineto      </li>
+<li>H = horizontal lineto     </li>
+<li>V = vertical lineto     </li>
+<li>C = curveto     </li>
+<li>S = smooth curveto     </li>
+<li>Q = quadratic Belzier curve      </li>
+<li>T = smooth quadratic Belzier curveto      </li>
+<li>A = elliptical Arc     </li>
+<li>Z = closepath     </li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">path</span> <span class="attr">d</span>=<span class="string">"M100 100 L200 100 L200 200 L300 200"</span> <span class="attr">style</span>=<span class="string">"fill:white;stroke:green;stroke-width:2"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="滤镜使用：9-svg"><a href="#滤镜使用：9-svg" class="headerlink" title="滤镜使用：9.svg"></a>滤镜使用：9.svg</h4><ul>
+<li>feBlend      </li>
+<li>feColorMatrix      </li>
+<li>feComponentTransfer     </li>
+<li>feComposite    </li>
+<li>feConvolveMatrix    </li>
+<li>feDiffuseLighting       </li>
+<li>feDisplacementMap      </li>
+<li>feFlood        </li>
+<li>feGaussianBlur     </li>
+<li>feImage     </li>
+<li>feMerge    </li>
+<li>feMorphology    </li>
+<li>feOffset     </li>
+<li>feSpecularLighting    </li>
+<li>feTile    </li>
+<li>feTurbulence    </li>
+<li>feDistantLight    </li>
+<li>fePointLight       </li>
+<li>feSpotLight       </li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">defs</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">filter</span> <span class="attr">id</span>=<span class="string">"Gaussian_Blur"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">feGaussianBlur</span> <span class="attr">in</span>=<span class="string">"SourceGraphic"</span> <span class="attr">stdDeviation</span>=<span class="string">"3"</span> /&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">filter</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">defs</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">ellipse</span> <span class="attr">cx</span>=<span class="string">"200"</span> <span class="attr">cy</span>=<span class="string">"150"</span> <span class="attr">rx</span>=<span class="string">"70"</span> <span class="attr">ry</span>=<span class="string">"40"</span> <span class="attr">style</span>=<span class="string">"fill:#9acd32;stroke:#ccc;stroke-width:2;filter:url(#Gaussian_Blur)"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<p> 1.<filter> 标签的 id 属性可为滤镜定义一个唯一的名称（同一滤镜可被文档中的多个元素使用）<br> 2.filter:url 属性用来把元素链接到滤镜。当链接滤镜 id 时，必须使用 # 字符<br> 3.滤镜效果是通过 <fegaussianblur> 标签进行定义的。fe 后缀可用于所有的滤镜<br> 4.<fegaussianblur> 标签的 stdDeviation 属性可定义模糊的程度<br> 5.in=”SourceGraphic” 这个部分定义了由整个图像创建效果    </fegaussianblur></fegaussianblur></filter></p>
+<h4 id="线性渐变，放射性渐变：10-svg"><a href="#线性渐变，放射性渐变：10-svg" class="headerlink" title="线性渐变，放射性渐变：10.svg"></a>线性渐变，放射性渐变：10.svg</h4><ul>
+<li>当 y1 和 y2 相等，而 x1 和 x2 不同时，可创建水平渐变</li>
+<li>当 x1 和 x2 相等，而 y1 和 y2 不同时，可创建垂直渐变</li>
+<li>当 x1 和 x2 不同，且 y1 和 y2 不同时，可创建角形渐变</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 线性渐变 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">defs</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">linearGradient</span> <span class="attr">id</span>=<span class="string">"orange_red"</span> <span class="attr">x1</span>=<span class="string">"0%"</span> <span class="attr">y1</span>=<span class="string">"0%"</span> <span class="attr">x2</span>=<span class="string">"0%"</span> <span class="attr">y2</span>=<span class="string">"100%"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">stop</span> <span class="attr">offset</span>=<span class="string">"0%"</span> <span class="attr">style</span>=<span class="string">"stop-color:rgb(255,255,0);stop-opacity:1"</span>/&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">stop</span> <span class="attr">offset</span>=<span class="string">"100%"</span> <span class="attr">style</span>=<span class="string">"stop-color:rgb(255,0,0);stop-opacity:0.5"</span>/&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">linearGradient</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">defs</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">ellipse</span> <span class="attr">cx</span>=<span class="string">"200"</span> <span class="attr">cy</span>=<span class="string">"190"</span> <span class="attr">rx</span>=<span class="string">"85"</span> <span class="attr">ry</span>=<span class="string">"55"</span> <span class="attr">style</span>=<span class="string">"fill:url(#orange_red)"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><lineargradient> 标签的 id 属性可为渐变定义一个唯一的名称</lineargradient></li>
+<li>fill:url(#orange_red) 属性把 ellipse 元素链接到此渐变</li>
+<li><lineargradient> 标签的 x1、x2、y1、y2 属性可定义渐变的开始和结束位置</lineargradient></li>
+<li>渐变的颜色范围可由两种或多种颜色组成。每种颜色通过一个 <stop> 标签来规定。offset 属性用来定义渐变的开始和结束位置。</stop></li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- cx,cy确定迳向的水平和垂直位置 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">defs</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">radialGradient</span> <span class="attr">id</span>=<span class="string">"grey_blue"</span> <span class="attr">cx</span>=<span class="string">"50%"</span> <span class="attr">cy</span>=<span class="string">"50%"</span> <span class="attr">r</span>=<span class="string">"50%"</span> <span class="attr">fx</span>=<span class="string">"50%"</span> <span class="attr">fy</span>=<span class="string">"50%"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">stop</span> <span class="attr">offset</span>=<span class="string">"0%"</span> <span class="attr">style</span>=<span class="string">"stop-color:rgb(200,200,200);stop-opacity:0"</span>/&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">stop</span> <span class="attr">offset</span>=<span class="string">"100%"</span> <span class="attr">style</span>=<span class="string">"stop-color:rgb(0,0,255);stop-opacity:0.8"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">radialGradient</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">defs</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">ellipse</span> <span class="attr">cx</span>=<span class="string">"500"</span> <span class="attr">cy</span>=<span class="string">"200"</span> <span class="attr">rx</span>=<span class="string">"110"</span> <span class="attr">ry</span>=<span class="string">"100"</span> <span class="attr">style</span>=<span class="string">"fill:url(#grey_blue)"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="demo地址"><a href="#demo地址" class="headerlink" title="demo地址"></a>demo地址</h4><p><a href="https://github.com/chenfengyanyu/svg" target="_blank" rel="noopener">https://github.com/chenfengyanyu/svg</a></p>
+<p>参考资料：<br>w3school:<br><a href="http://www.w3school.com.cn/svg/index.asp" target="_blank" rel="noopener">http://www.w3school.com.cn/svg/index.asp</a><br>svg类库snap.svg.js，像操作dom一样操作svg资源<br><a href="http://snapsvg.io" target="_blank" rel="noopener">http://snapsvg.io</a><br>基本的svg动画<br><a href="https://msdn.microsoft.com/zh-cn/library/gg193979" target="_blank" rel="noopener">https://msdn.microsoft.com/zh-cn/library/gg193979</a></p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/svg/">svg</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/09/13/jobs/" data-tooltip="机会推荐">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/09/08/exception-of-the-homebrew-installation/" data-tooltip="安装Homebrew异常处理">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2016/09/10/step-in-svg/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2016/09/10/step-in-svg/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2016/09/10/step-in-svg/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+            
+                <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/09/13/jobs/" data-tooltip="机会推荐">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/09/08/exception-of-the-homebrew-installation/" data-tooltip="安装Homebrew异常处理">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2016/09/10/step-in-svg/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2016/09/10/step-in-svg/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2016/09/10/step-in-svg/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2016/09/10/step-in-svg/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2016/09/10/step-in-svg/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2016/09/10/step-in-svg/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+    
+        <script>
+             var disqus_config = function () {
+                 this.page.url = 'http://jartto.wang/2016/09/10/step-in-svg/';
+                 
+                    this.page.identifier = '2016/09/10/step-in-svg/';
+                                  
+             };
+            (function() {
+                var d = document, s = d.createElement('script');
+                var disqus_shortname = 'jartto';
+                s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+
+
+
+</html>

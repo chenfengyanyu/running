@@ -1,0 +1,540 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>初探 Electron - 实践篇1 - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="经历过前两篇的洗礼，相信大家已经掌握了 Electron 基本的用法，那么还在等什么，快上手项目试试吧！">
+<meta name="keywords" content="electron">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="初探 Electron - 实践篇1">
+<meta property="og:url" content="http://jartto.wang/2018/01/14/first-exploration-electron-3/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="经历过前两篇的洗礼，相信大家已经掌握了 Electron 基本的用法，那么还在等什么，快上手项目试试吧！">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/electron7.png">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/electron8.png">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/electron9.png">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/electron10.png">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/electron12.png">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/electron13.png">
+<meta property="og:updated_time" content="2018-12-30T15:39:52.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="初探 Electron - 实践篇1">
+<meta name="twitter:description" content="经历过前两篇的洗礼，相信大家已经掌握了 Electron 基本的用法，那么还在等什么，快上手项目试试吧！">
+<meta name="twitter:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/electron7.png">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/electron0.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/electron0.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            初探 Electron - 实践篇1
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2018-01-14T22:53:49+08:00">
+	  
+		    2018/1月/14 22:53:49
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>经历过<a href="http://jartto.wang/2018/01/03/first-exploration-electron/">前两篇</a>的洗礼，相信大家已经掌握了 Electron 基本的用法，那么还在等什么，快上手项目试试吧！<br><a id="more"></a><br><div class="alert info"><p>查看<a href="http://jartto.wang/2018/01/14/first-exploration-electron-3/">原文</a>，获得更好的体验哦～</p>
+</div></p>
+<p>实践篇将以项目主导，我打算由浅入深从零到一去完成该项目，我们来做一个图片文字识别工具 <a href="https://github.com/" target="_blank" rel="noopener"><code>Electron-OCR</code></a>，目标如下：</p>
+<ul>
+<li>图片上传：拖拽或点击上传</li>
+<li>图片预览：上传完成，直接进入预览页，同时执行文字识别</li>
+<li>菜单页：简单的导航列表，持续扩充</li>
+<li>在线演示功能：提供了更多的图片，便于演示效果</li>
+<li>繁体字识别：繁体字需要调用付费接口，所以需要单独处理，增加了繁体校准功能</li>
+<li>大图裁切：为了精准识别，需要将图片化繁为简</li>
+<li>体验优化：图片识别成功后返回结果，并拷贝入粘贴板，支持语音播报</li>
+<li>…</li>
+</ul>
+<p>涉及到的技术如下：<br><div class="alert success"><p>electron, electron-compile, electron-reload, react, react-router@4, react-motion, ES6/ES7, Promise, Surperagent, Less, CSS-Modules, eslint, babelrc, cropper, Material-UI…</p>
+</div></p>
+<h4 id="一、先睹为快"><a href="#一、先睹为快" class="headerlink" title="一、先睹为快"></a>一、先睹为快</h4><p>本文的示例代码已经放在了 <a href="https://github.com/chenfengyanyu/electron-ocr" target="_blank" rel="noopener"><code>Github</code></a> 上，效果图如下：</p>
+<div class="figure left fig-33" style="width:;"><a class="fancybox" href="http://7xvi3w.com1.z0.glb.clouddn.com/electron7.png" title data-fancybox-group="travel" target="_blank" rel="noopener"><img class="fig-img" src="http://7xvi3w.com1.z0.glb.clouddn.com/electron7.png" alt></a></div>
+<div class="figure left fig-33" style="width:;"><a class="fancybox" href="http://7xvi3w.com1.z0.glb.clouddn.com/electron8.png" title data-fancybox-group="travel" target="_blank" rel="noopener"><img class="fig-img" src="http://7xvi3w.com1.z0.glb.clouddn.com/electron8.png" alt></a></div>
+<div class="figure left fig-33" style="width:;"><a class="fancybox" href="http://7xvi3w.com1.z0.glb.clouddn.com/electron9.png" title data-fancybox-group="travel" target="_blank" rel="noopener"><img class="fig-img" src="http://7xvi3w.com1.z0.glb.clouddn.com/electron9.png" alt></a></div>
+<div class="figure left fig-33" style="width:;"><a class="fancybox" href="http://7xvi3w.com1.z0.glb.clouddn.com/electron10.png" title data-fancybox-group="travel" target="_blank" rel="noopener"><img class="fig-img" src="http://7xvi3w.com1.z0.glb.clouddn.com/electron10.png" alt></a></div>
+<div class="figure left fig-33" style="width:;"><a class="fancybox" href="http://7xvi3w.com1.z0.glb.clouddn.com/electron12.png" title data-fancybox-group="travel" target="_blank" rel="noopener"><img class="fig-img" src="http://7xvi3w.com1.z0.glb.clouddn.com/electron12.png" alt></a></div>
+<div class="figure left fig-33" style="width:;"><a class="fancybox" href="http://7xvi3w.com1.z0.glb.clouddn.com/electron13.png" title data-fancybox-group="travel" target="_blank" rel="noopener"><img class="fig-img" src="http://7xvi3w.com1.z0.glb.clouddn.com/electron13.png" alt></a></div>
+<p>你可以直接 <code>clone</code> 项目 <code>npm i &amp; npm run start</code> 运行，或者按照本文的思路一步步实现。</p>
+<h4 id="二、创建项目"><a href="#二、创建项目" class="headerlink" title="二、创建项目"></a>二、创建项目</h4><p>首先，我们本地创建项目 <code>Electron-OCR-demo</code>，如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 找到合适的目录，创建项目</span></span><br><span class="line"><span class="built_in">cd</span> demos </span><br><span class="line">mkdir Electron-OCR-demo</span><br></pre></td></tr></table></figure></p>
+<h4 id="三、初始化项目"><a href="#三、初始化项目" class="headerlink" title="三、初始化项目"></a>三、初始化项目</h4><p>1.创建 <code>app</code> 文件夹，用于存放前端项目主体文件；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir app</span><br></pre></td></tr></table></figure></p>
+<p>2.创建 <code>service</code> 文件夹，存放请求服务文件以及后端文件；<br>3.创建 <code>.gitignore</code> 文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi .gitignore</span><br></pre></td></tr></table></figure></p>
+<p>并写入规则：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.vscode</span><br><span class="line">node_modules</span><br><span class="line">.<span class="built_in">log</span></span><br></pre></td></tr></table></figure></p>
+<p>5.增加 README.md 文件；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">touch README.md</span><br></pre></td></tr></table></figure></p>
+<p>6.初始化 <code>package.json</code> 文件：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm init</span><br></pre></td></tr></table></figure></p>
+<p>ok，大功告成，我们来同步一下此时的项目结构：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── README.md</span><br><span class="line">├── app</span><br><span class="line">├── .gitignore</span><br><span class="line">├── package.json</span><br><span class="line">└── service</span><br></pre></td></tr></table></figure></p>
+<h4 id="四、快速开始"><a href="#四、快速开始" class="headerlink" title="四、快速开始"></a>四、快速开始</h4><p>上面我们做了一些前期的准备工作，既然是用 <code>ELectron</code> 来做，那么当然需要安装依赖了：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install electron --save-dev</span><br></pre></td></tr></table></figure></p>
+<div class="alert warning"><p>安装比较慢，建议使用淘宝镜像 <code>cnpm install electron --save-dev</code> 来安装。</p>
+</div>
+<p>我们先来运行一个简单示例，进入 <code>app</code> 目录，添加三个文件，分别是：<br>1.<code>main.js</code><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; app, BrowserWindow &#125; = <span class="built_in">require</span>(<span class="string">'electron'</span>)</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>)</span><br><span class="line"><span class="keyword">const</span> url = <span class="built_in">require</span>(<span class="string">'url'</span>)</span><br><span class="line"><span class="keyword">let</span> mainWindow</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createWindow</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  mainWindow = <span class="keyword">new</span> BrowserWindow(&#123;<span class="attr">width</span>: <span class="number">800</span>, <span class="attr">height</span>: <span class="number">600</span>&#125;)</span><br><span class="line">  <span class="comment">// 启动文件入口，如 index.html</span></span><br><span class="line">  mainWindow.loadURL(url.format(&#123;</span><br><span class="line">    pathname: path.join(__dirname, <span class="string">'index.html'</span>),</span><br><span class="line">    protocol: <span class="string">'file:'</span>,</span><br><span class="line">    slashes: <span class="literal">true</span></span><br><span class="line">  &#125;))</span><br><span class="line">  <span class="comment">// 开启 Chromium DevTools</span></span><br><span class="line">  mainWindow.webContents.openDevTools()</span><br><span class="line">  <span class="comment">// 监听窗口关闭事件</span></span><br><span class="line">  mainWindow.on(<span class="string">'closed'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    mainWindow = <span class="literal">null</span></span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 加载就绪</span></span><br><span class="line">app.on(<span class="string">'ready'</span>, createWindow)</span><br><span class="line"><span class="comment">// 监听所有窗口关闭的事件</span></span><br><span class="line">app.on(<span class="string">'window-all-closed'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (process.platform !== <span class="string">'darwin'</span>) &#123;</span><br><span class="line">    app.quit()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 激活窗口</span></span><br><span class="line">app.on(<span class="string">'activate'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (mainWindow === <span class="literal">null</span>) &#123;</span><br><span class="line">    createWindow()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>2.<code>index.html</code><br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Hello World!<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello World!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">      <span class="comment">// 当然，我们也可以引入其他 js 文件</span></span></span><br><span class="line"><span class="javascript">      <span class="built_in">require</span>(<span class="string">'./renderer.js'</span>)</span></span><br><span class="line"><span class="undefined">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>3.<code>render.js</code><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> myNotification = <span class="keyword">new</span> Notification(<span class="string">'Jartto'</span>, &#123;</span><br><span class="line">  body: <span class="string">'Hello Everybody!'</span></span><br><span class="line">&#125;)</span><br><span class="line">myNotification.onclick = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Click!'</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<div class="alert danger"><p>如果你不懂这是在干什么，建议先阅读 <a href="http://jartto.wang/2018/01/03/first-exploration-electron/">初探 Electron - 理论篇</a></p>
+</div>
+<p>最后一步，设置启动项，打开 <code>package.json</code>：<br>将 <code>&quot;main&quot;: &quot;index.js&quot;</code> 修改为：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">"main": "app/main.js",</span><br></pre></td></tr></table></figure></p>
+<p>同时增加 <code>&quot;start&quot;: &quot;electron .&quot;</code> 配置项，指定使用 <code>Electron</code> 启动：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&quot;scripts&quot;: &#123;</span><br><span class="line">  &quot;start&quot;: &quot;electron .&quot;,</span><br><span class="line">  &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></p>
+<p>接下来，我们打开命令行，执行：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run start</span><br></pre></td></tr></table></figure></p>
+<p>如果你看到了窗口中的 <code>Hello World!</code>，那么恭喜你，示例已经正确运行了。</p>
+<h4 id="五、继续升级"><a href="#五、继续升级" class="headerlink" title="五、继续升级"></a>五、继续升级</h4><p>我们通过手动创建完成了和官网起手项目类似的功能，但路还有些远，我们来做一些升级工作，使用 <code>react</code> 来开发项目。<br><div class="alert info"><p><code>react</code> 需要额外的一些解析，所以我们借助 <a href="https://github.com/electron-userland/electron-compile" target="_blank" rel="noopener"><code>electron-compile</code></a> 来动态编译。</p>
+</div></p>
+<p>先来安装 <code>react, react-dom, electron-compile</code>，如果太慢请考虑使用 <code>cnpm</code> :<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install electron-compilers --save-dev</span><br><span class="line">npm install react react-dom electron-compile --save</span><br></pre></td></tr></table></figure></p>
+<p>因为要预编译文件，所以我们需要为 <code>electron-compile</code> 指定入口文件，在项目根目录下新建 <code>index.js</code> 文件，写入：<br><div class="alert info"><p>注意，记得将 <code>package.json</code> 中，做同步修改 <code>&quot;main&quot;: &quot;index.js&quot;</code> ！</p>
+</div><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>);</span><br><span class="line"><span class="keyword">let</span> appRoot = path.join(__dirname, <span class="string">''</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">require</span>(<span class="string">'electron-compile'</span>).init(appRoot, <span class="built_in">require</span>.resolve(<span class="string">'./app/main'</span>));</span><br></pre></td></tr></table></figure></p>
+<div class="alert success"><p>这里先指定在 <code>app</code> 目录下的启动文件 <code>main.js</code>，其实也就是该目录下的主进程文件。</p>
+</div>
+<p>接下来，我们用 <code>react</code> 改写一下 <code>render.js</code>，修改如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> ReactDOM <span class="keyword">from</span> <span class="string">'react-dom'</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainWindow</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">constructor</span>(props) &#123;</span><br><span class="line">    <span class="keyword">super</span>(props);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">this</span>.state = &#123;</span><br><span class="line">      </span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        Good, React Ready!</span><br><span class="line">      &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    );</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">const mainWndComponent = ReactDOM.render(</span></span><br><span class="line"><span class="regexp">  &lt;MainWindow/</span>&gt;, <span class="built_in">document</span>.getElementById(<span class="string">'content'</span>));</span><br></pre></td></tr></table></figure></p>
+<p>最后一步，去 <code>index.html</code> 注册 <code>react</code> 组件：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span> Electron-OCR <span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"content"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">      <span class="built_in">require</span>(<span class="string">'./render.js'</span>);</span></span><br><span class="line"><span class="undefined">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>基本工作完成，我们试着启动一下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run start</span><br></pre></td></tr></table></figure></p>
+<p>什么，没启动起来？<br><div class="alert danger"><p>Uncaught SyntaxError: Unexpected token import</p>
+</div></p>
+<p>不要紧张，我们还需要增加个编译规则文件，这很重要！</p>
+<h4 id="六、配置编译规则"><a href="#六、配置编译规则" class="headerlink" title="六、配置编译规则"></a>六、配置编译规则</h4><p>大家可能都配置过或者间接使用过 <a href="https://babeljs.cn/docs/usage/babelrc/" target="_blank" rel="noopener"><code>babelrc</code></a> 做转换编译，<code>electron-compile</code> 中的 <code>.compilerc</code> 如出一辙，我们先创建文件：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">touch .compilerc</span><br></pre></td></tr></table></figure></p>
+<p>然后写入我们的规则，如下：<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"env"</span>: &#123;</span><br><span class="line">    <span class="attr">"development"</span>: &#123;</span><br><span class="line">      <span class="attr">"application/javascript"</span>: &#123;</span><br><span class="line">        <span class="attr">"presets"</span>: [<span class="string">"env"</span>, <span class="string">"react"</span>],</span><br><span class="line">        <span class="attr">"sourceMaps"</span>: <span class="string">"inline"</span>,</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="attr">"text/less"</span>: &#123;</span><br><span class="line">        <span class="attr">"dumpLineNumbers"</span>: <span class="string">"comments"</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">"production"</span>: &#123;</span><br><span class="line">      <span class="attr">"application/javascript"</span>: &#123;</span><br><span class="line">        <span class="attr">"presets"</span>: [<span class="string">"env"</span>, <span class="string">"react"</span>],</span><br><span class="line">        <span class="attr">"sourceMaps"</span>: <span class="string">"none"</span>,</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p>这里记得安装依赖包文件 <code>babel-preset-env</code> 和 <code>babel-preset-react</code></p>
+</div>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install babel-preset-env babel-preset-react --save-dev</span><br></pre></td></tr></table></figure>
+<p>OK，搞定，来看看此时我们的 <code>package.json</code> 文件：<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"name"</span>: <span class="string">"electron-ocr-demo"</span>,</span><br><span class="line">  <span class="attr">"version"</span>: <span class="string">"1.0.0"</span>,</span><br><span class="line">  <span class="attr">"description"</span>: <span class="string">""</span>,</span><br><span class="line">  <span class="attr">"main"</span>: <span class="string">"index.js"</span>,</span><br><span class="line">  <span class="attr">"scripts"</span>: &#123;</span><br><span class="line">    <span class="attr">"start"</span>: <span class="string">"electron ."</span>,</span><br><span class="line">    <span class="attr">"test"</span>: <span class="string">"echo \"Error: no test specified\" &amp;&amp; exit 1"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"keywords"</span>: [</span><br><span class="line">    <span class="string">"electron"</span>,</span><br><span class="line">    <span class="string">"demo"</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">"author"</span>: <span class="string">"jartto"</span>,</span><br><span class="line">  <span class="attr">"license"</span>: <span class="string">"ISC"</span>,</span><br><span class="line">  <span class="attr">"devDependencies"</span>: &#123;</span><br><span class="line">    <span class="attr">"babel-preset-env"</span>: <span class="string">"^1.6.1"</span>,</span><br><span class="line">    <span class="attr">"babel-preset-react"</span>: <span class="string">"^6.24.1"</span>,</span><br><span class="line">    <span class="attr">"electron"</span>: <span class="string">"^1.7.10"</span>,</span><br><span class="line">    <span class="attr">"electron-compilers"</span>: <span class="string">"^5.9.0"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"dependencies"</span>: &#123;</span><br><span class="line">    <span class="attr">"electron-compile"</span>: <span class="string">"^6.4.2"</span>,</span><br><span class="line">    <span class="attr">"react"</span>: <span class="string">"^16.2.0"</span>,</span><br><span class="line">    <span class="attr">"react-dom"</span>: <span class="string">"^16.2.0"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>此时的项目结构应该如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── app</span><br><span class="line">│   ├── index.html</span><br><span class="line">│   ├── main.js</span><br><span class="line">│   └── render.js</span><br><span class="line">├── node_modules</span><br><span class="line">│   ├── ...</span><br><span class="line">├── service</span><br><span class="line">├── .compilerc</span><br><span class="line">├── .gitignore</span><br><span class="line">├── index.js</span><br><span class="line">├── package.json</span><br><span class="line">└── README.md</span><br></pre></td></tr></table></figure></p>
+<p>一切就绪，启动 <code>npm run start</code>，如果你看到：<code>Good, React Ready!</code> ，那么恭喜你，<code>react</code> 和 <code>compile</code> 文件已经可以正常工作了。</p>
+<h4 id="六、热启动"><a href="#六、热启动" class="headerlink" title="六、热启动"></a>六、热启动</h4><p>太棒了，美中不足的就是 <code>react</code> 不能热加载，没关系，我们还有 <code>electron-reload</code>，先安装依赖包：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install electron-reload --save-dev</span><br></pre></td></tr></table></figure></p>
+<p>同时，需要在主进程文件 main.js 中增加如下代码：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> isDevelopment = <span class="literal">true</span>;</span><br><span class="line"><span class="keyword">if</span> (isDevelopment) &#123;</span><br><span class="line">  <span class="comment">/* eslint-disable */</span></span><br><span class="line">  <span class="built_in">require</span>(<span class="string">'electron-reload'</span>)(__dirname, &#123;</span><br><span class="line">    electron: <span class="built_in">require</span>(<span class="string">'$&#123;__dirname&#125;/../../node_modules/electron'</span>),</span><br><span class="line">    ignored: <span class="regexp">/node_modules|[\/\\]\./</span></span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>重新启动，快更新文件试试吧，热更新也已经就绪了！</p>
+<h4 id="七、回顾小结"><a href="#七、回顾小结" class="headerlink" title="七、回顾小结"></a>七、回顾小结</h4><p>实践篇，我们从零到一搭建了一个用 <code>react</code> 来开发 <code>electron</code> 的简单框架，完成了支持 <code>es6</code> 的编译配置，同时也添加了热加载。到这里，项目已经初具规模，你可以去做任何想做的事情了～</p>
+<p>下一节，我们将继续深入，对框架做一些易用性的优化以及补充，逐步完善项目。传送门在此：<a href="http://jartto.wang/2018/01/21/first-exploration-electron-4/">初探 Electron - 实践篇2</a>。</p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/electron/">electron</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/01/16/shallow-to-discuss-block-chain/" data-tooltip="浅谈区块链">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/01/04/first-exploration-electron-2/" data-tooltip="初探 Electron - 升华篇">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/01/14/first-exploration-electron-3/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/01/14/first-exploration-electron-3/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/01/14/first-exploration-electron-3/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/01/16/shallow-to-discuss-block-chain/" data-tooltip="浅谈区块链">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/01/04/first-exploration-electron-2/" data-tooltip="初探 Electron - 升华篇">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/01/14/first-exploration-electron-3/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/01/14/first-exploration-electron-3/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/01/14/first-exploration-electron-3/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/01/14/first-exploration-electron-3/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/01/14/first-exploration-electron-3/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/01/14/first-exploration-electron-3/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

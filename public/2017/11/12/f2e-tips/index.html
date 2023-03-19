@@ -1,0 +1,520 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>CSS 实用 Tips - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="作为前端，日常开发充满了各种挑战与乐趣，我们穷尽一切在奇葩的需求中提升用户体验。本文将列举一些前端开发中碰到的小众需求，并提供解决方案以供参考。">
+<meta name="keywords" content="css,web">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="CSS 实用 Tips">
+<meta property="og:url" content="http://jartto.wang/2017/11/12/f2e-tips/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="作为前端，日常开发充满了各种挑战与乐趣，我们穷尽一切在奇葩的需求中提升用户体验。本文将列举一些前端开发中碰到的小众需求，并提供解决方案以供参考。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/tips1.png-blog">
+<meta property="og:updated_time" content="2018-11-12T02:57:16.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSS 实用 Tips">
+<meta name="twitter:description" content="作为前端，日常开发充满了各种挑战与乐趣，我们穷尽一切在奇葩的需求中提升用户体验。本文将列举一些前端开发中碰到的小众需求，并提供解决方案以供参考。">
+<meta name="twitter:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/tips1.png-blog">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/css-tips.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/css-tips.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            CSS 实用 Tips
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2017-11-12T21:19:26+08:00">
+	  
+		    2017/11月/12 21:19:26
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>作为前端，日常开发充满了各种挑战与乐趣，我们穷尽一切在奇葩的需求中提升用户体验。本文将列举一些前端开发中碰到的小众需求，并提供解决方案以供参考。<br><a id="more"></a></p>
+<h4 id="一、修改鼠标手势图标"><a href="#一、修改鼠标手势图标" class="headerlink" title="一、修改鼠标手势图标"></a>一、修改鼠标手势图标</h4><p>很多童鞋可能都用过：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cursor: pointer | wait | hand | text | move | not-allowed;</span><br></pre></td></tr></table></figure></p>
+<p>但是，它还支持用户自定义图片，你知道吗？<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cursor: url(jartto.cur), url(http://jartto.wang/jartto.gif), auto;</span><br></pre></td></tr></table></figure></p>
+<p>下图为各浏览器支持情况：<br><img src="http://7xvi3w.com1.z0.glb.clouddn.com/tips1.png-blog" alt="tips1"><br><div class="alert success"><p>记得在定义完自定义的游标之后在末尾加上一般性的游标，以防那些url所定义的游标不能使用。</p>
+</div><br>这里有详细说明：<br>1.<a href="https://www.cnblogs.com/MY0101/p/6130089.html" target="_blank" rel="noopener">css cursor 的可选值（鼠标的各种样式）</a><br>2.<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_User_Interface/Using_URL_values_for_the_cursor_property" target="_blank" rel="noopener">Using URL values for the cursor property</a></p>
+<h4 id="二、box-shadow-三边阴影"><a href="#二、box-shadow-三边阴影" class="headerlink" title="二、box-shadow 三边阴影"></a>二、box-shadow 三边阴影</h4><p><code>box-shadow</code> 大家都不陌生，我们一般这么用：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">box-shadow</span>: <span class="selector-tag">h-shadow</span> <span class="selector-tag">v-shadow</span> <span class="selector-tag">blur</span> <span class="selector-tag">spread</span> <span class="selector-tag">color</span> <span class="selector-tag">inset</span>;</span><br></pre></td></tr></table></figure></p>
+<p>可是三边阴影该如何设置呢？请不要忽视设计师的脑洞🙈：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#shadowBox</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="number">#ddd</span>;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">0px</span> auto;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">10px</span>;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">220px</span>;</span><br><span class="line">  <span class="attribute">box-shadow</span>: <span class="number">0px</span> <span class="number">8px</span> <span class="number">10px</span> gray,</span><br><span class="line">        -<span class="number">10px</span> <span class="number">8px</span> <span class="number">15px</span> gray, <span class="number">10px</span> <span class="number">8px</span> <span class="number">15px</span> gray;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>也许你会用得到，详情请参考：<a href="https://stackoverflow.com/questions/8738768/css-box-shadow-on-three-sides-of-a-div" target="_blank" rel="noopener">CSS box-shadow on three sides of a div?</a></p>
+<h4 id="三、超好用的-currentColor"><a href="#三、超好用的-currentColor" class="headerlink" title="三、超好用的 currentColor"></a>三、超好用的 currentColor</h4><p>先来举个例子，html代码：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"##"</span> <span class="attr">class</span>=<span class="string">"link"</span>&gt;</span><span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"icon"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span>返回<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>css 代码：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.icon</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: inline-block;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">16px</span>; </span><br><span class="line">  <span class="attribute">height</span>: <span class="number">20px</span>;</span><br><span class="line">  <span class="attribute">background-image</span>: <span class="built_in">url</span>(http:jartto.wang/test.png);</span><br><span class="line">  <span class="attribute">background-color</span>: currentColor; <span class="comment">/* 该颜色控制图标的颜色 */</span></span><br><span class="line">  <span class="attribute">background-position</span>: <span class="number">0</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.link</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#333</span>; <span class="comment">/* 虽然改变的是文字颜色，但是图标颜色也一起变化了 */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<div class="alert success"><p>currentColor 表示“当前的标签所继承的文字颜色”</p>
+</div>
+<p>了解更多，请参考：<a href="http://www.zhangxinxu.com/wordpress/2014/10/currentcolor-css3-powerful-css-keyword/" target="_blank" rel="noopener">CSS3 超高校级好用 CSS 变量</a></p>
+<h4 id="四、png-图片如何改颜色"><a href="#四、png-图片如何改颜色" class="headerlink" title="四、png 图片如何改颜色"></a>四、png 图片如何改颜色</h4><p>网页中大多使用透明图片 <code>png</code> 格式，可是如果有天产品经理说，这个图标颜色能不能改成红色，恰巧设计师不能支持你，你该如何办？<br>其一：自己重新 <code>ps</code> 一下图片，换个颜色；<br>其二：只能上 <code>svg</code> 喽，搞成 <code>icon font</code>；</p>
+<p>这里，我们来说第三种方式，妙不妙可以试试哦！<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.icon</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: inline-block;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">20px</span>; </span><br><span class="line">  <span class="attribute">height</span>: <span class="number">20px</span>;</span><br><span class="line">  <span class="attribute">overflow</span>: hidden;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.icon-del</span> &#123;</span><br><span class="line">  <span class="attribute">background</span>: <span class="built_in">url</span>(delete.png) no-repeat center;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.icon</span> &gt; <span class="selector-class">.icon</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: relative;</span><br><span class="line">  <span class="attribute">left</span>: -<span class="number">20px</span>;</span><br><span class="line">  <span class="attribute">border-right</span>: <span class="number">20px</span> solid transparent; <span class="comment">/*下文注意点 2 有解释*/</span></span><br><span class="line">  <span class="attribute">-webkit-filter</span>: <span class="built_in">drop-shadow</span>(20px 0);</span><br><span class="line">  <span class="attribute">filter</span>: <span class="built_in">drop-shadow</span>(20px 0);    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>html 代码:<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">strong</span>&gt;</span>原始图标<span class="tag">&lt;/<span class="name">strong</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"icon icon-del"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">strong</span>&gt;</span>可以变色的图标<span class="tag">&lt;/<span class="name">strong</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"icon"</span>&gt;</span><span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"icon icon-del"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>需要注意几点：<br>1.对于背景透明的 <code>png</code> 小图标而言，如果我们施加一个不带模糊的投影，就等同于生成了另外一个颜色的小图标；<br>2.在 <code>chrome</code> 浏览器下，如果一个元素的主体部分，无论以何种方式，只要在页面中不可见，其 <code>drop-shadow</code> 是不可见的。实体部分哪怕有 <code>1px</code> 可见，则 <code>drop-shadow</code> 完全可见。</p>
+<div class="alert success"><p>原理其实很简单，使用了 <code>css3</code> 滤镜 <code>filter</code> 中的 <code>drop-shadow</code>，<code>drop-shadow</code> 滤镜可以给元素或图片非透明区域添加投影。</p>
+</div>
+<p>了解更多，请参考：<br>1.<a href="http://www.zhangxinxu.com/wordpress/2016/06/png-icon-change-color-by-css/" target="_blank" rel="noopener">PNG 格式小图标的 CSS 任意颜色赋色技术</a><br>2.<a href="http://www.zhangxinxu.com/study/201606/png-icon-color-fill.html" target="_blank" rel="noopener">demo 演示</a></p>
+<h4 id="五、vh-与-vw"><a href="#五、vh-与-vw" class="headerlink" title="五、vh 与 vw"></a>五、vh 与 vw</h4><div class="alert info"><p>相对于视口的宽度。视口被均分为 <code>100</code> 单位的 <code>vw</code>，<code>vh</code> 同理。</p>
+</div>
+<p>我一般会在强制某一个容器占一整屏的时候使用，如：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span>&#123;</span><br><span class="line">  <span class="attribute">height</span>: <span class="built_in">calc</span>(100vh - 50px);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>视口高度减去页头固定区域，剩下的高度设置给容器。当然，我们也可以用它设置大小，如下：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">h1</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">8vw</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>如果视口的宽度是 <code>200mm</code>，那么上述代码中h1元素的字号将为 <code>16mm</code>，即 (8x200)/100</p>
+<p>值得注意的是，<code>less</code> 中使用需要加 <code>～</code><br><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">min-height</span>: <span class="string">~"calc(100vh - 68px)"</span>;</span><br></pre></td></tr></table></figure></p>
+<p>此外，还有一些如 <code>ch</code> ，<code>vmax</code>，<code>vmin</code> 等属性等着你去扩展，详情请移步：<a href="http://www.css88.com/book/css/values/length/vw.htm" target="_blank" rel="noopener">css 参考手册之 vw</a></p>
+<h4 id="六、如何去掉-chrome-input-的背景黄色"><a href="#六、如何去掉-chrome-input-的背景黄色" class="headerlink" title="六、如何去掉 chrome input 的背景黄色"></a>六、如何去掉 chrome input 的背景黄色</h4><p>当我们在做登陆页面的时候，在 <code>chrome</code> 中 <code>input</code> 会带上自动补全的黄色背景，大大影响美观。很多网站都没有去处理，但这并不难处理。作为高逼格的前端，这里就可以体现出你的价值，解决方案如下：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">input</span><span class="selector-pseudo">:-webkit-autofill</span> &#123;</span><br><span class="line">  <span class="attribute">-webkit-box-shadow</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">0px</span> <span class="number">1000px</span> <span class="built_in">rgba</span>(255, 255, 255, 0.5) inset <span class="meta">!important</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>当然，你也可以使用方案二，如下：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">input</span><span class="selector-pseudo">:-webkit-autofill</span> &#123;</span><br><span class="line">  <span class="attribute">-webkit-animation-name</span>: autofill;</span><br><span class="line">  <span class="attribute">-webkit-animation-fill-mode</span>: both;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@-<span class="keyword">webkit</span>-<span class="keyword">keyframes</span> autofill &#123;</span><br><span class="line">  <span class="selector-tag">to</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">    <span class="attribute">background</span>: transparent;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>深入了解请移步：<br>1.<a href="http://blog.csdn.net/wangxiaohui6687/article/details/10149579" target="_blank" rel="noopener">chrome 表单自动填充去掉 input 黄色背景解决方案</a><br>2.<a href="https://stackoverflow.com/questions/2781549/removing-input-background-colour-for-chrome-autocomplete" target="_blank" rel="noopener">Removing input background colour for Chrome autocomplete</a></p>
+<h4 id="七、chrome-中设置小于-12px-的字体"><a href="#七、chrome-中设置小于-12px-的字体" class="headerlink" title="七、chrome 中设置小于 12px 的字体"></a>七、chrome 中设置小于 12px 的字体</h4><p>这种改小字体，绝大部分肯定都是设计师的需求，因为小显得精致。<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">ant-checkbox-wrapper</span> &#123;</span><br><span class="line"> <span class="attribute">cursor</span>: pointer;</span><br><span class="line"> <span class="attribute">font-size</span>: <span class="number">10px</span>;</span><br><span class="line"> <span class="attribute">display</span>: inline-block;</span><br><span class="line"> -webkit-text-size-adjust: none; // 不支持</span><br><span class="line"> <span class="selector-tag">transform</span>: <span class="selector-tag">scale</span>(0<span class="selector-class">.9</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="八、0-5px-border-如何操作"><a href="#八、0-5px-border-如何操作" class="headerlink" title="八、0.5px border 如何操作"></a>八、0.5px border 如何操作</h4><p>现行方法大致有如下几条：<br>1.使用渐变 <code>linear-gradient</code> 来操作，但需要注意浏览器兼容前缀；<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.div</span><span class="selector-pseudo">::after</span> &#123;</span><br><span class="line">  <span class="attribute">content</span>: <span class="string">" "</span>;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">1px</span>;</span><br><span class="line">  <span class="attribute">background-image</span>: <span class="built_in">linear-gradient</span>(0deg, transparent 50%, #e0e0e0 50%);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>2.缩放 <code>scale</code> 处理：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span><span class="selector-pseudo">::after</span>&#123;</span><br><span class="line">  <span class="attribute">content</span>: <span class="string">""</span>;</span><br><span class="line">  <span class="attribute">display</span>: block;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">left</span>: -<span class="number">50%</span>;</span><br><span class="line">  <span class="attribute">bottom</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">200%</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">1px</span>;</span><br><span class="line">  <span class="attribute">background</span>: <span class="number">#c3c3c3</span>;</span><br><span class="line">  <span class="attribute">-webkit-transform</span>: <span class="built_in">scale</span>(0.5);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>3.使用 <code>background-image</code> 和 <code>css3</code> 的九宫格裁减<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.bd-t</span><span class="selector-pseudo">::after</span> &#123;</span><br><span class="line">  <span class="attribute">content</span>: <span class="string">" "</span>;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">border-top</span>: <span class="number">1px</span> solid transparent;</span><br><span class="line">  <span class="comment">/* 下面用 stretch 和 round 都可以 */</span></span><br><span class="line">  <span class="attribute">border-image</span>: <span class="built_in">url</span>(<span class="string">'pic.png'</span>) <span class="number">2</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> stretch; </span><br><span class="line">  <span class="attribute">-webkit-border-image</span>: <span class="built_in">url</span>(<span class="string">'pic.png'</span>) <span class="number">2</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> stretch;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>深入了解可以参考：<br>1.<a href="http://blog.csdn.net/tyro_java/article/details/52013531" target="_blank" rel="noopener">使用 css3 做 0.5px 的细线</a><br>2.<a href="http://www.cnblogs.com/raoyunxiao/p/4241982.html" target="_blank" rel="noopener">移动端页面0.5px border的实现</a></p>
+<h4 id="九、border-颜色渐变"><a href="#九、border-颜色渐变" class="headerlink" title="九、border 颜色渐变"></a>九、border 颜色渐变</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">border-color</span><span class="selector-pseudo">:red</span> <span class="selector-tag">green</span> <span class="selector-tag">blue</span> <span class="selector-tag">pink</span>;</span><br></pre></td></tr></table></figure>
+<div class="alert info"><p>“border-width” 属性如果单独使用的话是不会起作用的。请首先使用 “border-style” 属性来设置边框。</p>
+</div>
+<h4 id="十、css3-画小箭头"><a href="#十、css3-画小箭头" class="headerlink" title="十、css3 画小箭头"></a>十、css3 画小箭头</h4><p>这里推荐两种方式：<br>其一，通过 border 来实现<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*箭头向上*/</span></span><br><span class="line"><span class="selector-class">.arrow-up</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>:<span class="number">0</span>;</span><br><span class="line">  <span class="attribute">height</span>:<span class="number">0</span>;</span><br><span class="line">  <span class="attribute">border-left</span>:<span class="number">30px</span> solid transparent;</span><br><span class="line">  <span class="attribute">border-right</span>:<span class="number">30px</span> solid transparent;</span><br><span class="line">  <span class="attribute">border-bottom</span>:<span class="number">30px</span> solid <span class="number">#fff</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*箭头向下*/</span></span><br><span class="line"><span class="selector-class">.arrow-down</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>:<span class="number">0</span>;</span><br><span class="line">  <span class="attribute">height</span>:<span class="number">0</span>;</span><br><span class="line">  <span class="attribute">border-left</span>:<span class="number">20px</span> solid transparent;</span><br><span class="line">  <span class="attribute">border-right</span>:<span class="number">20px</span> solid transparent;</span><br><span class="line">  <span class="attribute">border-top</span>:<span class="number">20px</span> solid <span class="number">#0066cc</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>其二，拼凑法（伪类或元素），将 <code>div</code> 隐藏两边或设置 <code>z-index</code>，然后旋转，放到合适位置。<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">bottom</span>: -<span class="number">2px</span>;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">7px</span>;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">10px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">10px</span>;</span><br><span class="line">  <span class="attribute">transform</span>: <span class="built_in">rotate</span>(-45deg);</span><br><span class="line">  <span class="attribute">z-index</span>: -<span class="number">1</span>; <span class="comment">/* 放在容器后，被遮盖住*/</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>比较简单，就不赘述了。</p>
+<h4 id="十一、有趣的-drop-shadow"><a href="#十一、有趣的-drop-shadow" class="headerlink" title="十一、有趣的 drop-shadow"></a>十一、有趣的 drop-shadow</h4><p>用法如下：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">filter</span>: <span class="selector-tag">drop-shadow</span>(<span class="selector-tag">x</span>偏移, <span class="selector-tag">y</span>偏移, 模糊大小, 色值);</span><br><span class="line"><span class="selector-tag">filter</span><span class="selector-pseudo">:drop-shadow(5px</span> 5<span class="selector-tag">px</span> 10<span class="selector-tag">px</span> <span class="selector-tag">black</span>)</span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p>CSS3 滤镜 filter 中的 drop-shadow，drop-shadow 滤镜可以给元素或图片非透明区域添加投影。</p>
+</div>
+<p>上文中已经提到了一种使用场景，这里还想说另一种，即使用拼凑法作出的小气泡，如果气泡需要阴影的话，请用 <code>drop-shadow</code> 来替代 <code>box-shadow</code>。</p>
+<p>更多细节请查看：<a href="http://www.zhangxinxu.com/wordpress/2016/05/css3-filter-drop-shadow-vs-box-shadow/" target="_blank" rel="noopener">drop-shadow 滤镜与 box-shadow 区别应用</a></p>
+<h4 id="十二、修改浏览器默认滚动条"><a href="#十二、修改浏览器默认滚动条" class="headerlink" title="十二、修改浏览器默认滚动条"></a>十二、修改浏览器默认滚动条</h4><p>有时候一些不期而遇的滚动条会让页面很尴尬，这时候你还可以强行美化一下，参考代码如下：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*滚动条 start*/</span></span><br><span class="line"><span class="selector-pseudo">::-webkit-scrollbar</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">1px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">4px</span>;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="number">#F5F5F5</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*定义滚动条轨道 内阴影+圆角*/</span></span><br><span class="line"><span class="selector-pseudo">::-webkit-scrollbar-track</span> &#123;</span><br><span class="line">  <span class="attribute">box-shadow</span>: inset <span class="number">0</span> <span class="number">0</span> <span class="number">6px</span> <span class="built_in">rgba</span>(0,0,0,0.3);</span><br><span class="line">  <span class="attribute">background</span>: <span class="number">#fff</span> ;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*定义滑块 内阴影+圆角*/</span></span><br><span class="line"><span class="selector-pseudo">::-webkit-scrollbar-thumb</span> &#123;</span><br><span class="line">  <span class="attribute">border-radius</span>: <span class="number">3px</span>;</span><br><span class="line">  <span class="attribute">box-shadow</span>: inset <span class="number">0</span> <span class="number">0</span> <span class="number">6px</span> <span class="built_in">rgba</span>(0,0,0,.3);</span><br><span class="line">  // background-color:rgba(7, 170, 247, 0.7);</span><br><span class="line">  <span class="selector-tag">background-color</span>: <span class="selector-tag">transparent</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-pseudo">::-webkit-scrollbar-thumb</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">  <span class="attribute">border-radius</span>: <span class="number">3px</span>;</span><br><span class="line">  <span class="attribute">box-shadow</span>: inset <span class="number">0</span> <span class="number">0</span> <span class="number">6px</span> <span class="built_in">rgba</span>(0,0,0,.3);</span><br><span class="line">  <span class="attribute">background-color</span>:<span class="built_in">rgba</span>(7, 170, 247, 1);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>细节请参考：<a href="http://blog.csdn.net/ning0_o/article/details/52188953" target="_blank" rel="noopener">修改浏览器默认的滚动条样式</a></p>
+<h4 id="十三、safari-placeholder-bugs"><a href="#十三、safari-placeholder-bugs" class="headerlink" title="十三、safari placeholder bugs"></a>十三、safari placeholder bugs</h4><p>在项目中遇到 <code>input</code> 的 <code>placeholder</code> 在 <code>safari</code> 下设置行高失效的问题，解决思路如下：<br>1.使用 <code>padding</code> 使提示文字居中，如果 <code>font-size:14px</code>, <code>UI</code> 高度为 <code>40px</code>,我们可以设 <code>height：14px,padding:13px 0;</code><br>2.使用 <code>line-height:1px;</code><br>3.使用 <code>vertical-align: middle;</code></p>
+<div class="alert info"><p>补充一条：Safari 来写 hack 即 [;line-height:1;]</p>
+</div>
+<p>详情请参考：<a href="http://www.cnblogs.com/humaotegong/p/6629060.html?utm_source=itdadao&amp;utm_medium=referral" target="_blank" rel="noopener">input 的 placeholder 在 safari 下设置行高失效</a></p>
+<h4 id="十四、总结"><a href="#十四、总结" class="headerlink" title="十四、总结"></a>十四、总结</h4><p>这些都是在我日常开发中碰到的奇葩问题，回头想想其实挺有意思，遂整理总结之。如果日常开发中没有一些挑战，那开发还有什么乐趣。</p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/css/">css</a> <a class="tag tag--primary tag--small t-link" href="/tags/web/">web</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/11/13/Exploring-the-principle-of-CSS-parsing/" data-tooltip="探究 CSS 解析原理">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/11/08/js-dig-ore/" data-tooltip="何谓 JS 挖矿">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2017/11/12/f2e-tips/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2017/11/12/f2e-tips/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2017/11/12/f2e-tips/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/11/13/Exploring-the-principle-of-CSS-parsing/" data-tooltip="探究 CSS 解析原理">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/11/08/js-dig-ore/" data-tooltip="何谓 JS 挖矿">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2017/11/12/f2e-tips/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2017/11/12/f2e-tips/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2017/11/12/f2e-tips/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2017/11/12/f2e-tips/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2017/11/12/f2e-tips/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2017/11/12/f2e-tips/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

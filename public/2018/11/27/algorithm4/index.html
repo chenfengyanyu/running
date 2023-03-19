@@ -1,0 +1,503 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>算法图解4 - 散列表 - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="听到散列表，第一时间想到 Python 中的 Dict，可是我们是前端。那么散列表在 JS 中是如何描述的呢？这节，我们来一探究竟。">
+<meta name="keywords" content="algorithm">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="算法图解4 - 散列表">
+<meta property="og:url" content="http://jartto.wang/2018/11/27/algorithm4/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="听到散列表，第一时间想到 Python 中的 Dict，可是我们是前端。那么散列表在 JS 中是如何描述的呢？这节，我们来一探究竟。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2019-04-07T13:55:09.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="算法图解4 - 散列表">
+<meta name="twitter:description" content="听到散列表，第一时间想到 Python 中的 Dict，可是我们是前端。那么散列表在 JS 中是如何描述的呢？这节，我们来一探究竟。">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/algorithm/logo.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/algorithm/logo.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            算法图解4 - 散列表
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2018-11-27T21:53:37+08:00">
+	  
+		    2018/11月/27 21:53:37
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/算法实践/">算法实践</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>听到散列表，第一时间想到 <code>Python</code> 中的 <code>Dict</code>，可是我们是前端。那么散列表在 JS 中是如何描述的呢？这节，我们来一探究竟。<br><a id="more"></a></p>
+<h4 id="一、散列表"><a href="#一、散列表" class="headerlink" title="一、散列表"></a>一、散列表</h4><div class="alert info"><p>使用散列函数和数组创建了一种被称为散列表 hash table 的数据结构。</p>
+</div>
+<p><code>Python</code> 提供的散列表实现为字典 ，你可使用函数 <code>dict</code> 来创建散列表。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">book = dict()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>book[<span class="string">"jartto"</span>] = <span class="number">0.67</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>book[<span class="string">"milk"</span>] = <span class="number">1.49</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>book[<span class="string">"avocado"</span>] = <span class="number">1.49</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">print</span> book</span><br><span class="line"></span><br><span class="line">&#123;<span class="string">'avocado'</span>: <span class="number">1.49</span>, <span class="string">'jartto'</span>: <span class="number">0.67</span>, <span class="string">'milk'</span>: <span class="number">1.49</span>&#125;</span><br></pre></td></tr></table></figure></p>
+<p>散列表由键和值组成。在前面的散列表 <code>book</code> 中，键为商品名，值为商品价格。散列表将键映射到值。</p>
+<p>那么 JS 中如何实现呢？<br><div class="alert success"><p>其实 Map 对应的就是散列表，一种 Hash Map 结构。</p>
+</div><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> book = <span class="keyword">new</span> <span class="built_in">Map</span>();</span><br><span class="line">book.set(<span class="string">'jartto'</span>, <span class="number">0.67</span>);</span><br><span class="line">book.set(<span class="string">'milk'</span>, <span class="number">1.49</span>);</span><br><span class="line">book.set(<span class="string">'avocado'</span>, <span class="number">1.49</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(book); <span class="comment">// &#123;"jartto" =&gt; 0.67, "milk" =&gt; 1.49, "avocado" =&gt; 1.49&#125;</span></span><br><span class="line"></span><br><span class="line">book.get(<span class="string">'jartto'</span>); <span class="comment">// 0.67</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="二、散列表特性"><a href="#二、散列表特性" class="headerlink" title="二、散列表特性"></a>二、散列表特性</h4><p>1.散列函数总是将同样的输入映射到相同的索引。<br>2.散列函数将不同的输入映射到不同的索引。<br>3.散列函数知道数组有多大，只返回有效的索引。如果数组包含 5 个元素，散列函数就不会返回无效索引 100。</p>
+<div class="alert warning"><p>注意：对于同样的输入，散列表必须返回同样的输出。</p>
+</div>
+<h4 id="三、请问下面哪些散列函数是一致的？"><a href="#三、请问下面哪些散列函数是一致的？" class="headerlink" title="三、请问下面哪些散列函数是一致的？"></a>三、请问下面哪些散列函数是一致的？</h4><p>1.<code>f(x) = 1</code> 　←——无论输入是什么，都返回 1<br>2.<code>f(x) = rand()</code> 　←——每次都返回一个随机数<br>3.<code>f(x) = next_empty_slot()</code> 　←——返回散列表中下一个空位置的索引<br>4.<code>f(x) = len(x)</code> 　←——将字符串的长度用作索引</p>
+<h4 id="四、防止重复"><a href="#四、防止重复" class="headerlink" title="四、防止重复"></a>四、防止重复</h4><p>假设我们要做一个投票统计，每个人只允许投票一次，为此，首先创建一个散列表，用于记录已投票的人。有人来投票时，检查他是否在散列表中。</p>
+<div class="alert danger"><p>书中均为 Python 实现，这里我们都转为 JS 实现。</p>
+</div>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> voted = <span class="keyword">new</span> <span class="built_in">Map</span>();</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkVoter</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(voted.has(name)) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'kick them out!'</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        voted.set(name, <span class="literal">true</span>);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'let them vote!'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">checkVoter(<span class="string">'jartto'</span>) <span class="comment">// let them vote!</span></span><br><span class="line">checkVoter(<span class="string">'jartto'</span>) <span class="comment">// kick them out!</span></span><br></pre></td></tr></table></figure>
+<h4 id="五、总结"><a href="#五、总结" class="headerlink" title="五、总结"></a>五、总结</h4><p>这里总结一下，散列表适合用于：<br>1.模拟映射关系；<br>2.防止重复；<br>3.缓存/记住数据，以免服务器再通过处理来生成它们。</p>
+<p>注意：<br>1.散列函数很重要。前面的散列函数将所有的键都映射到一个位置，而最理想的情况是，散列函数将键均匀地映射到散列表的不同位置。<br>2.如果散列表存储的链表很长，散列表的速度将急剧下降。然而，如果使用的散列函数很好 ，这些链表就不会很长！</p>
+<h4 id="六、补充：性能"><a href="#六、补充：性能" class="headerlink" title="六、补充：性能"></a>六、补充：性能</h4><p>散列表的性能：<br>1.查找：平均 O(1)，最糟 O(n)<br>2.插入：平均 O(1)，最糟 O(n)<br>3.删除：平均 O(1)，最糟 O(n)</p>
+<div class="alert info"><p>在平均情况下，散列表执行各种操作的时间都为 O(1)。</p>
+</div>
+<h4 id="七、散列表实现原理"><a href="#七、散列表实现原理" class="headerlink" title="七、散列表实现原理"></a>七、散列表实现原理</h4><p>这里，我们需要理解两个概念：</p>
+<ul>
+<li>装填因子：散列表使用数组来存储数据，因此你需要计算数组中被占用的位置数。</li>
+<li>调整长度：装填因子大于 1，就意味着有数据是没有存储位置的。</li>
+</ul>
+<p>一旦填装因子开始增大，就需要在散列表中添加位置，这被称为调整长度 <code>resizing</code>。通常将数组增长一倍。</p>
+<div class="alert success"><p>填装因子越低，发生冲突的可能性越小，散列表的性能越高。</p>
+</div>
+<p>一个不错的经验规则是：一旦填装因子大于 <code>0.7</code>，就调整散列表的长度。良好的散列函数让数组中的值呈均匀分布。糟糕的散列函数让值扎堆，导致大量的冲突。</p>
+<h4 id="八、学习目录"><a href="#八、学习目录" class="headerlink" title="八、学习目录"></a>八、学习目录</h4><ul>
+<li><a href="http://jartto.wang/2018/11/22/algorithm1/">算法图解1 - 二分查找和大O表示法</a></li>
+<li><a href="http://jartto.wang/2018/11/25/algorithm2/">算法图解2 - 数组和链表</a></li>
+<li><a href="http://jartto.wang/2018/11/26/algorithm3/">算法图解3 - 递归，快排</a></li>
+<li><a href="http://jartto.wang/2018/11/27/algorithm4/">算法图解4 - 散列表</a></li>
+<li><a href="http://jartto.wang/2018/11/28/algorithm5/">算法图解5 - 图和广度优先搜索</a></li>
+<li><a href="http://jartto.wang/2018/11/29/algorithm6/">算法图解6 - 狄克斯特拉算法与贪婪算法</a></li>
+<li><a href="http://jartto.wang/2018/11/29/algorithm7/">算法图解7 - 动态规划</a></li>
+</ul>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/algorithm/">algorithm</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/11/28/algorithm5/" data-tooltip="算法图解5 - 图和广度优先搜索">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/11/26/algorithm3/" data-tooltip="算法图解3 - 递归，快排">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/11/27/algorithm4/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/11/27/algorithm4/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/11/27/algorithm4/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/11/28/algorithm5/" data-tooltip="算法图解5 - 图和广度优先搜索">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/11/26/algorithm3/" data-tooltip="算法图解3 - 递归，快排">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/11/27/algorithm4/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/11/27/algorithm4/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/11/27/algorithm4/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/11/27/algorithm4/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/11/27/algorithm4/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/11/27/algorithm4/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

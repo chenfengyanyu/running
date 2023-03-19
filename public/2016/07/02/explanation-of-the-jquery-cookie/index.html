@@ -1,0 +1,521 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>jquery之cookie详解 - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="前两天搞定了一个拖拽存储的h5控件，写了一个总结，其中用到了cookie存储。结果有同事问我关于cookie的问题，我竟然说不出所以然来。纯粹是指哪打哪，用哪写哪，根本就没有完全搞明白。">
+<meta name="keywords" content="jquery,cookie">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="jquery之cookie详解">
+<meta property="og:url" content="http://jartto.wang/2016/07/02/explanation-of-the-jquery-cookie/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="前两天搞定了一个拖拽存储的h5控件，写了一个总结，其中用到了cookie存储。结果有同事问我关于cookie的问题，我竟然说不出所以然来。纯粹是指哪打哪，用哪写哪，根本就没有完全搞明白。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2016-07-02T10:43:03.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="jquery之cookie详解">
+<meta name="twitter:description" content="前两天搞定了一个拖拽存储的h5控件，写了一个总结，其中用到了cookie存储。结果有同事问我关于cookie的问题，我竟然说不出所以然来。纯粹是指哪打哪，用哪写哪，根本就没有完全搞明白。">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/cookie_0B2EC51C.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="http://7xvi3w.com1.z0.glb.clouddn.com/cookie_0B2EC51C.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            jquery之cookie详解
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2016-07-02T18:07:37+08:00">
+	  
+		    2016/7月/02 18:07:37
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>前两天搞定了一个拖拽存储的h5控件，写了一个总结，其中用到了cookie存储。结果有同事问我关于cookie的问题，我竟然说不出所以然来。纯粹是指哪打哪，用哪写哪，根本就没有完全搞明白。<br><a id="more"></a><br>想起了一句歌词：“他说他会打野，真的只会打野”，熟悉LOL的同学应该不会陌生😄</p>
+<p>想想也是，这样的学习根本无效率可言。所以花些时间把cookie搞明白，也把jquery cookie 函数参数列表列举出来，同时补充些新学到的东西吧，算是共同学习吧。</p>
+<h4 id="一、cookie是什么？"><a href="#一、cookie是什么？" class="headerlink" title="一、cookie是什么？"></a>一、cookie是什么？</h4><p>①关于cookie；<br>cookie，有时也用其复数形式cookies，指某些网站为了辨别用户身份、进行session跟踪而储存在用户本地终端上的数据（通常经过加密）。<br>cookie是由服务器端生成，发送给User-Agent（一般是浏览器），浏览器会将Cookie的key/value保存到某个目录下的文本文件内，下次请求同一网站时就发送该cookie给服务器（前提是浏览器设置为启用cookie）。</p>
+<p>②cookie能做什么；<br>服务器可以利用cookies包含信息的任意性来筛选并经常性维护这些信息，以判断在HTTP传输中的状态。<br><div class="alert info"><p>cookies最典型的应用是判定注册用户是否已经登录网站，用户可能会得到提示，是否在下一次进入此网站时保留用户信息以便简化登录手续，这些都是cookies的功用。另一个重要应用场合是“购物车”之类处理。用户可能会在一段时间内在同一家网站的不同页面中选择不同的商品，这些信息都会写入cookies，以便在最后付款时提取信息。</p>
+</div><br>③cookie很完美吗？有利也有弊，cookie也有一些众所周知的缺点。<br>其一，cookie只能存储少量数据，，一般来说，设置大约4KB的数据，这意味着它不能接受文件或邮件那样的大数据；</p>
+<p>其二，只要有请求涉及cookie，cookie就要在服务器和浏览器之间来回传送。也就是说，cookie数据在网络上是可见的，这些数据在不加密的情况下会有安全隐患。同时，无论加载哪个相关的URL，cookie中的数据都会消耗网络带宽。</p>
+<h4 id="二、jquery-cookie插件如何使用？"><a href="#二、jquery-cookie插件如何使用？" class="headerlink" title="二、jquery cookie插件如何使用？"></a>二、jquery cookie插件如何使用？</h4><p>应用jquery cookie插件需要引入jquery.cookie.js,当然jquery.js也必不可少。简单的用法类似这样，存值：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$.cookie(<span class="string">'flag'</span>,<span class="string">'true'</span>,&#123;<span class="attr">path</span>:<span class="string">'/'</span>,<span class="attr">expires</span>:<span class="number">1</span>&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>取值：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$.cookie(<span class="string">'flag'</span>);</span><br></pre></td></tr></table></figure></p>
+<p><a href="http://plugins.jquery.com/cookie/" target="_blank" rel="noopener">下载地址</a></p>
+<h4 id="三、cookie函数参数列表"><a href="#三、cookie函数参数列表" class="headerlink" title="三、cookie函数参数列表"></a>三、cookie函数参数列表</h4><p>下面是对cookie的一些操作：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$.cookie(<span class="string">'key'</span>);                   <span class="comment">// 获取cookie key的值</span></span><br><span class="line">$.cookie(<span class="string">'key'</span>, <span class="string">'value'</span>);     <span class="comment">// 设置cookie，属性key=value</span></span><br><span class="line">$.cookie(<span class="string">'key'</span>, <span class="string">'value'</span>, &#123; <span class="attr">expires</span>: num &#125;);  <span class="comment">// 设置过期时间为num，单位为天，负数的话，效果等同删除该cookie</span></span><br><span class="line">$.cookie(<span class="string">'key'</span>, <span class="literal">null</span>);         <span class="comment">// 删除 cookie</span></span><br><span class="line">$.cookie(<span class="string">'key'</span>, <span class="string">'value'</span>, &#123;<span class="attr">expires</span>: num, <span class="attr">path</span>: <span class="string">'/'</span>, <span class="attr">domain</span>: domain, <span class="attr">secure</span>: <span class="literal">true</span>&#125;); <span class="comment">//新建一个cookie 包括有效期、存储路径、域名、安全等</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="四、cookie与Html5-Web-Storage-API"><a href="#四、cookie与Html5-Web-Storage-API" class="headerlink" title="四、cookie与Html5 Web Storage API"></a>四、cookie与Html5 Web Storage API</h4><p>①区别<br>正因为cookie是如此的实用、方便，类似cookie的HTML5 Web Storage应运而生，比起单纯的cookie来说，HTML5 Web Storage拥有更多的优点。<br>许多情况下，即使不使用网络或远程服务器也能达到同样的目的，开发者可以将数据存储在JavaScript对象中，对象在页面加载时保存，并且容易获取。通过sessionStorage或localStorage，在打开新窗口或新标签以及重新启动浏览器时，开发人员可以选择是否激活这些数据。此外，使用Web Storage API可以保存高达数兆字节的大数据。<br>在HTML5的各项特性中，Web Storage的浏览器支持度是非常好的，而且HTML5 Web Storage已经逐渐成为Web应用中最安全的API之一了。</p>
+<p>②检测是否支持Web Storage<br>通过window.sessionStorage和window.localStorage可以检测浏览器是否支持Web Storage。</p>
+<p>③Web Storage API设置与取值<br>设置数据：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.sessionStorage.setItem(<span class="string">'Key'</span>,<span class="string">'Value'</span>);</span><br></pre></td></tr></table></figure></p>
+<p>获取数据：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.sessionStorage.getItem(<span class="string">'Key'</span>);</span><br></pre></td></tr></table></figure></p>
+<p>当然Web Storage API还有很多函数和其他特性，这里就不一一列举了。</p>
+<h4 id="五、一个demo"><a href="#五、一个demo" class="headerlink" title="五、一个demo"></a>五、一个demo</h4><p>写了一个简单的应用，主要是检测IE7浏览器，如果是的话，弹出一个提示框。提示框有关闭按钮，当用户点击该按钮后，一段时间内将不再提示，具体代码如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> flag = <span class="literal">false</span>;</span><br><span class="line">$(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(navigator.appVersion.match(<span class="regexp">/7./i</span>) == <span class="string">'7.'</span>)&#123;</span><br><span class="line">		sildOut();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sildOut</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> temp = $.cookie(<span class="string">'flag'</span>);</span><br><span class="line">	<span class="keyword">if</span>(!temp)&#123;</span><br><span class="line">		$(<span class="string">'.outside'</span>).show(<span class="number">1500</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">closeDiv</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	$(<span class="string">'.outside'</span>).hide(<span class="number">1000</span>);</span><br><span class="line">	$.cookie(<span class="string">'flag'</span>,<span class="string">'true'</span>,&#123;<span class="attr">path</span>:<span class="string">'/'</span>,<span class="attr">expires</span>:<span class="number">0.5</span>&#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>参考文章：<br>①<a href="http://baike.baidu.com/link?url=zxrX-UXaMVK5BL3sCdmsTQVN7Ys0rTKWOOkgdy-ur1k2zPybEmMBOKnp-W_5qbnw3ulrDmesXtn3QgAZtnbE3i1OeZ7W1W8Ml_psgK-1C2e" target="_blank" rel="noopener">http://baike.baidu.com/link?url=zxrX-UXaMVK5BL3sCdmsTQVN7Ys0rTKWOOkgdy-ur1k2zPybEmMBOKnp-W_5qbnw3ulrDmesXtn3QgAZtnbE3i1OeZ7W1W8Ml_psgK-1C2e</a></p>
+<p>②<a href="http://www.nowamagic.net/jquery/jquery_Jquerycookie.php" target="_blank" rel="noopener">http://www.nowamagic.net/jquery/jquery_Jquerycookie.php</a></p>
+<p>③HTML5 高级程序设计</p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/cookie/">cookie</a> <a class="tag tag--primary tag--small t-link" href="/tags/jquery/">jquery</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/07/03/js-regular-expression/" data-tooltip="js之强大的正则表达式">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/06/30/how-to-use-search-engines-to-grasp-ajax/" data-tooltip="如何让搜索引擎抓取ajax内容？">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2016/07/02/explanation-of-the-jquery-cookie/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2016/07/02/explanation-of-the-jquery-cookie/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2016/07/02/explanation-of-the-jquery-cookie/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+            
+                <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/07/03/js-regular-expression/" data-tooltip="js之强大的正则表达式">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/06/30/how-to-use-search-engines-to-grasp-ajax/" data-tooltip="如何让搜索引擎抓取ajax内容？">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2016/07/02/explanation-of-the-jquery-cookie/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2016/07/02/explanation-of-the-jquery-cookie/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2016/07/02/explanation-of-the-jquery-cookie/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2016/07/02/explanation-of-the-jquery-cookie/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2016/07/02/explanation-of-the-jquery-cookie/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2016/07/02/explanation-of-the-jquery-cookie/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+    
+        <script>
+             var disqus_config = function () {
+                 this.page.url = 'http://jartto.wang/2016/07/02/explanation-of-the-jquery-cookie/';
+                 
+                    this.page.identifier = '2016/07/02/explanation-of-the-jquery-cookie/';
+                                  
+             };
+            (function() {
+                var d = document, s = d.createElement('script');
+                var disqus_shortname = 'jartto';
+                s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+
+
+
+</html>

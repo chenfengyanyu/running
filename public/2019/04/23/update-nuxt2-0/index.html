@@ -1,0 +1,513 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>Nuxtjs 2.0 升级爬坑 - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="当我在升级 Nuxt2.0 的过程，遇到了很多问题，逐一查找解决，废了不少时间。回头想想，真希望在升级的时候看到这样一篇文章，让我少走一些弯路。">
+<meta name="keywords" content="ppt,impress">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Nuxtjs 2.0 升级爬坑">
+<meta property="og:url" content="http://jartto.wang/2019/04/23/update-nuxt2-0/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="当我在升级 Nuxt2.0 的过程，遇到了很多问题，逐一查找解决，废了不少时间。回头想想，真希望在升级的时候看到这样一篇文章，让我少走一些弯路。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/nuxt/diff.png">
+<meta property="og:updated_time" content="2019-04-23T13:18:01.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Nuxtjs 2.0 升级爬坑">
+<meta name="twitter:description" content="当我在升级 Nuxt2.0 的过程，遇到了很多问题，逐一查找解决，废了不少时间。回头想想，真希望在升级的时候看到这样一篇文章，让我少走一些弯路。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/nuxt/diff.png">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/nuxt/nuxt.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/nuxt/nuxt.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            Nuxtjs 2.0 升级爬坑
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2019-04-23T19:58:32+08:00">
+	  
+		    2019/4月/23 19:58:32
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>当我在升级 Nuxt2.0 的过程，遇到了很多问题，逐一查找解决，废了不少时间。回头想想，真希望在升级的时候看到这样一篇文章，让我少走一些弯路。<br><a id="more"></a><br><div class="alert success"><p>这篇文章的意义也在于此，希望对大家能有所帮助。</p>
+</div></p>
+<h4 id="一、为什么要从-Nuxt1-0-升级到-Nuxt2-0？"><a href="#一、为什么要从-Nuxt1-0-升级到-Nuxt2-0？" class="headerlink" title="一、为什么要从 Nuxt1.0 升级到 Nuxt2.0？"></a>一、为什么要从 <code>Nuxt1.0</code> 升级到 <code>Nuxt2.0</code>？</h4><p>我们来看看 <code>Nuxt2.0</code> 有哪些<a href="https://www.cnblogs.com/zhuanzhuanfe/p/9101932.html" target="_blank" rel="noopener">更新</a>：</p>
+<p>1.支持 <code>webpack4</code><br><code>webpack4</code> 有很多优化的提升，升级后就可以嗨皮的使用了。</p>
+<p>2.弃掉了 <code>venders</code><br>我们以前一直使用 <code>vendors chunk</code>，这次发布后，我们不再使用 <code>CommonsChunkPlugin</code>，所以不必明确指定 <code>vendors</code>。</p>
+<p><code>Nuxt</code> 自动添加了核心的 <code>packages</code> (包括 <code>vue</code>, <code>vue-router</code>, <code>babel-runtime</code>…)到 <code>Cache Group</code>中。</p>
+<div class="alert info"><p>这使得 <code>webpack</code> 可以用最合理的方式拆分你的代码。</p>
+</div>
+<p>3.<code>chunk splitting</code> 的完全控制<br>尽管 <code>nuxt</code> 试图提供最有效的分割，但现在可以使用 <code>build.splitChunks</code> 选项完全控制它，并且可以选择禁用每个路由的异步块。</p>
+<p>4.<code>Vue Loader 15 and mini-css-extract-plugin</code><br><code>Vue-Loader 15</code> 进行了完全的重写，它使用了一种完全不同的新架构，能够将 <code>webpack</code> 配置中定义的任何规则应用于 <code>*.vue</code> 文件内。</p>
+<p>对于 <code>CSS</code> 抽取，使用一个新的插件 <code>mini-css-extract-plugin</code>，它支持 <code>CSS</code> 和 <code>SourceMaps</code>（<code>CSS splitting</code>）的按需加载，并构建在新的 <code>webpack v4</code> 特性（<code>module types</code>）上。</p>
+<p>5.<code>nuxt es modules</code><br>我们可以在 <code>nuxt.config.js</code> 中使用 <code>import</code>, <code>export</code>, 服务器 <code>middleware</code>, <code>modules</code> 。</p>
+<p>6.<code>CLI</code> 改善<br><code>nuxt2.0</code> 自动检测配置项和测试环境，并将切换到一个称为 <code>minimalCLI</code> 的特殊模式，其中包含更少的详细消息。</p>
+<h4 id="二、升级-2-0"><a href="#二、升级-2-0" class="headerlink" title="二、升级 2.0"></a>二、升级 2.0</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install nuxt@latest</span><br></pre></td></tr></table></figure>
+<h4 id="三、记得重新安装一下依赖"><a href="#三、记得重新安装一下依赖" class="headerlink" title="三、记得重新安装一下依赖"></a>三、记得重新安装一下依赖</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i</span><br></pre></td></tr></table></figure>
+<h4 id="四、升级问题"><a href="#四、升级问题" class="headerlink" title="四、升级问题"></a>四、升级问题</h4><p>问题一：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Module build failed: TypeError: Cannot read property &apos;eslint&apos; of undefined</span><br></pre></td></tr></table></figure></p>
+<p>碰到这个问题，是因为 <code>isClient</code> 新版本已经移除了，我们试着<a href="https://github.com/nuxt/nuxt.js/issues/3216" target="_blank" rel="noopener">理解一下</a>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">isClient was removed in nuxt-edge, it should be replaced by process.client in your nuxt.config.js as below.</span><br></pre></td></tr></table></figure></p>
+<p><code>Nuxtjs1.0</code> 我们是这么用：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">extend(config, &#123; isDev, isClient &#125;) &#123;</span><br><span class="line">    <span class="keyword">if</span> (isDev &amp;&amp; isClient) &#123;</span><br><span class="line">        config.module.rules.push(&#123;</span><br><span class="line">        enforce: <span class="string">"pre"</span>,</span><br><span class="line">        test: <span class="regexp">/\.(js|vue)$/</span>,</span><br><span class="line">        loader: <span class="string">"eslint-loader"</span>,</span><br><span class="line">        exclude: <span class="regexp">/(node_modules)/</span></span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>所以应该修改成：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">extend (config, &#123; isDev &#125;) &#123;</span><br><span class="line">  <span class="keyword">if</span> (isDev &amp;&amp; process.client) &#123;</span><br><span class="line">        config.module.rules.push(&#123;</span><br><span class="line">          enforce: <span class="string">'pre'</span>,</span><br><span class="line">          test: <span class="regexp">/\.(js|vue)$/</span>,</span><br><span class="line">          loader: <span class="string">'eslint-loader'</span>,</span><br><span class="line">          exclude: <span class="regexp">/(node_modules)/</span></span><br><span class="line">        &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p>注意 isClient 和 process.client！</p>
+</div>
+<p>问题二：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">ERROR  Failed to compile with 1 errors</span><br><span class="line">error  <span class="keyword">in</span> ./.nuxt/router.js</span><br><span class="line"></span><br><span class="line">Module parse failed: Unexpected token (24:8)</span><br><span class="line">You may need an appropriate loader to handle this file <span class="built_in">type</span>.</span><br><span class="line">|</span><br><span class="line">| var _5f05608f = <span class="keyword">function</span> <span class="function"><span class="title">_5f05608f</span></span>() &#123;</span><br><span class="line">&gt;     <span class="built_in">return</span> import(<span class="string">'../pages/account/index.vue'</span> /* webpackChunkName: <span class="string">"pages/account/index"</span> */).<span class="keyword">then</span>(<span class="keyword">function</span> (m) &#123;</span><br><span class="line">|         <span class="built_in">return</span> m.default || m;</span><br><span class="line">|     &#125;);</span><br><span class="line"></span><br><span class="line">@ ./.nuxt/index.js 334:14-36</span><br><span class="line">@ ./.nuxt/client.js</span><br><span class="line">@ multi webpack-hot-middleware/client?name=client&amp;reload=<span class="literal">true</span>&amp;timeout=30000&amp;path=/__webpack_hmr ./.nuxt/client.js</span><br></pre></td></tr></table></figure></p>
+<p>碰到这个问题，应该是某些包不兼容，所以可以先清除 <code>node_modules</code>，重新安装：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rm -rf node_modules/</span><br><span class="line">npm i</span><br></pre></td></tr></table></figure></p>
+<p>问题三：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Error: Plugin/Preset files are not allowed to export objects, only functions</span><br></pre></td></tr></table></figure></p>
+<p>这个问题是因为 <code>Babel7</code> 的更新，所以我们需要<a href="https://stackoverflow.com/questions/47830273/babel-plugin-preset-files-are-not-allowed-to-export-objects-only-functions" target="_blank" rel="noopener">更新配置文件</a>：</p>
+<p>首先修改 <code>package.json</code>：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">"devDependencies": &#123;</span><br><span class="line">    "@babel/core": "^7.1.6",</span><br><span class="line">    "@babel/preset-env": "^7.1.6",</span><br><span class="line">    "@babel/preset-react": "^7.0.0",</span><br><span class="line">    "babel-loader": "^8.0.4",</span><br><span class="line">    "webpack": "^4.25.1",</span><br><span class="line">    "webpack-cli": "^3.1.2"</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>接着更改 <code>nuxt.config.js</code>，如果使用了动态导入，需要注意<a href="https://github.com/styleguidist/react-styleguidist/issues/987" target="_blank" rel="noopener">如下配置</a>：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">presets: [<span class="string">'@babel/env'</span>, <span class="string">'@babel/react'</span>],</span><br><span class="line">plugins: [</span><br><span class="line">  <span class="string">'@babel/plugin-syntax-dynamic-import'</span></span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
+<p>问题四：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">This dependency was not found: vant/lib/vant-css/index.css in ./plugins/vant.js</span><br><span class="line">import &apos;vant/lib/vant-css/index.css&apos;;</span><br></pre></td></tr></table></figure></p>
+<p>我们发现升级后，第三方 <code>UI</code> 库的样式找不到了，通过查找，发现是文件<a href="https://youzan.github.io/vant/#/zh-CN/quickstart" target="_blank" rel="noopener">引用路径</a>发生了变化：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue’;</span></span><br><span class="line"><span class="string">import Vant from '</span>vant’;</span><br><span class="line"><span class="keyword">import</span> <span class="string">'vant/lib/index.css’;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Vue.use(Vant);</span></span><br></pre></td></tr></table></figure></p>
+<p>问题五：静态资源加载异常<br><div class="alert warning"><p>这个异常很明显，图片全部访问不了了，所以一定要注意看看 <code>Nuxt2.0</code> 做了<a href="https://zh.nuxtjs.org/guide/assets/" target="_blank" rel="noopener">哪些更改</a>。</p>
+</div></p>
+<p>请注意: 从 <code>Nuxt2.0</code> 开始，<code>~/alias</code> 将无法在 <code>CSS</code> 文件中正确解析。你必须在 <code>url CSS</code> 引用中使用 <code>~assets</code>（没有斜杠）或 <code>@</code> 别名，即 <code>background:url(&quot;~assets/banner.svg&quot;)</code></p>
+<p>问题六：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">WARN  Using an Array as build.postcss will be deprecated in Nuxt 3. Please switch to the object declaration</span><br></pre></td></tr></table></figure></p>
+<div class="alert danger"><p>意思很明了，postcss 以后需要用<a href="https://zh.nuxtjs.org/faq/postcss-plugins/" target="_blank" rel="noopener">对象声明</a>，不再支持数组方式。</p>
+</div>
+<p>我们将：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">postcss: [</span><br><span class="line">    <span class="built_in">require</span>(<span class="string">"postcss-px2rem-exclude"</span>)(&#123;</span><br><span class="line">        remUnit: <span class="number">75</span>,</span><br><span class="line"></span><br><span class="line">        exclude: <span class="regexp">/node_modules|vant/</span></span><br><span class="line"></span><br><span class="line">    &#125;),</span><br><span class="line">    <span class="built_in">require</span>(<span class="string">'autoprefixer'</span>)(&#123;</span><br><span class="line">        browsers: [<span class="string">'Android &gt;= 4.0'</span>, <span class="string">'iOS &gt;= 7'</span>]</span><br><span class="line"></span><br><span class="line">    &#125;)</span><br><span class="line">],</span><br></pre></td></tr></table></figure></p>
+<p>替换成：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">postcss: &#123;</span><br><span class="line">    <span class="string">'postcss-px2rem-exclude'</span>: &#123;</span><br><span class="line">        emUnit: <span class="number">75</span>,</span><br><span class="line">        exclude: <span class="string">'/node_modules|vant/'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">'autoprefixer'</span>: &#123;</span><br><span class="line">        browsers: [<span class="string">'Android &gt;= 4.0'</span>, <span class="string">'iOS &gt;= 7’]</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">&#125;,</span></span><br></pre></td></tr></table></figure></p>
+<p>问题七：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ReferenceError：regeneratorRuntime is not defined</span><br></pre></td></tr></table></figure></p>
+<p>需要增加 babel <a href="https://github.com/nuxt/nuxt.js/issues/934" target="_blank" rel="noopener">运行时编译</a>，配置 <code>package.json</code>：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">"babel-plugin-transform-runtime": "^6.23.0",</span><br></pre></td></tr></table></figure></p>
+<p>修改 <code>nuxt.config.js</code> 中的配置：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">plugins: [</span><br><span class="line">  <span class="string">'@babel/plugin-syntax-dynamic-import'</span>,</span><br><span class="line">  <span class="string">'@babel/transform-runtime'</span></span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
+<p>问题八：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EACCES: permission denied, mkdir &apos;/Users/jartto/Documents/project/primary-station/node_modules/.cache’</span><br></pre></td></tr></table></figure></p>
+<p>使用 <code>sudo</code> 启动，例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo npm run start</span><br></pre></td></tr></table></figure></p>
+<p>问题九：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ERROR in Sentry CLI Plugin: Command failed: /apps/srv/instance/test-touch.gaotu100.com/node_modules/@sentry/cli/sentry-cli releases new 2.4.0</span><br><span class="line">error: An organization slug is required (provide with --org)</span><br><span class="line"></span><br><span class="line">Add --log-level=[info|debug] or export SENTRY_LOG_LEVEL=[info|debug] to see more output.</span><br><span class="line">Please attach the full debug log to all bug reports.</span><br></pre></td></tr></table></figure></p>
+<p>这个问题类似和问题一一样，注意替换 <code>isClient</code>。</p>
+<h4 id="五、升级前后对比"><a href="#五、升级前后对比" class="headerlink" title="五、升级前后对比"></a>五、升级前后对比</h4><p><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/nuxt/diff.png" alt="diff"></p>
+<p><a href="http://jartto.wang/2019/04/23/update-nuxt2-0/">如上</a>截图，我们只取了一部分，但是可以看到，文件被更细粒度的进行了拆分。这完全要归功于 <code>splitChunks</code>。当然，更多优化点和细节你可以慢慢来体会。</p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/impress/">impress</a> <a class="tag tag--primary tag--small t-link" href="/tags/ppt/">ppt</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/05/24/pm2-cluster/" data-tooltip="进阶 PM2">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/04/15/amusing-ppt/" data-tooltip="酷炫的 HTML5 网页 PPT">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2019/04/23/update-nuxt2-0/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2019/04/23/update-nuxt2-0/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2019/04/23/update-nuxt2-0/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/05/24/pm2-cluster/" data-tooltip="进阶 PM2">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/04/15/amusing-ppt/" data-tooltip="酷炫的 HTML5 网页 PPT">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2019/04/23/update-nuxt2-0/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2019/04/23/update-nuxt2-0/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2019/04/23/update-nuxt2-0/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2019/04/23/update-nuxt2-0/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2019/04/23/update-nuxt2-0/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2019/04/23/update-nuxt2-0/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

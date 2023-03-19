@@ -1,0 +1,499 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>构建你的 Dva2 - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="一直是 Ant Design 的深度用户，手头有新项目，都会毫不犹豫的选择 Dva＋Roadhog＋Ant Design 。让我眼前一亮的是，Dva 有升级版本了。">
+<meta name="keywords" content="dva2">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="构建你的 Dva2">
+<meta property="og:url" content="http://jartto.wang/2018/05/24/build-your-dva2/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="一直是 Ant Design 的深度用户，手头有新项目，都会毫不犹豫的选择 Dva＋Roadhog＋Ant Design 。让我眼前一亮的是，Dva 有升级版本了。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2018-10-31T14:56:37.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="构建你的 Dva2">
+<meta name="twitter:description" content="一直是 Ant Design 的深度用户，手头有新项目，都会毫不犹豫的选择 Dva＋Roadhog＋Ant Design 。让我眼前一亮的是，Dva 有升级版本了。">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/dva2.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/dva2.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            构建你的 Dva2
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2018-05-24T08:58:47+08:00">
+	  
+		    2018/5月/24 08:58:47
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>一直是 Ant Design 的深度用户，手头有新项目，都会毫不犹豫的选择 Dva＋Roadhog＋Ant Design 。让我眼前一亮的是，Dva 有升级版本了。<br><a id="more"></a></p>
+<h4 id="一、先来看-dva2"><a href="#一、先来看-dva2" class="headerlink" title="一、先来看 dva2"></a>一、先来看 dva2</h4><p>2.0 最主要的变化是提取了 <code>dva-core</code>，是仅封装了 <code>redux</code> 和 <code>redux-saga</code> 的纯数据流方案。这使得 <code>dva</code> 可以应用在除 <code>react</code> 之外的其他领域，比如 <code>RN</code>、小程序、游戏、<code>vue</code> 等领域；</p>
+<p>同时也可满足同一领域的多种实现，比如为 <code>react</code> 应用不同的路由方案的 <code>dva-react-router-3</code> 和 <code>dva-no-router</code>。</p>
+<div class="alert info"><p>如上，我们可以理解 dva2 做了抽离，优化，以及部分 bug 修复。</p>
+</div>
+<h4 id="二、有哪些改进？"><a href="#二、有哪些改进？" class="headerlink" title="二、有哪些改进？"></a>二、有哪些改进？</h4><p>对于新的版本，我们可能会比较关心有哪些改进。电影可能会越拍越烂，框架则不同，每一次更新都会有所改进。那么 <code>dva2</code> 具体有哪些优化和改进呢？</p>
+<p>1.为了方便在视图层 <code>dispatch action</code> 并处理回调， <code>dispatch</code> 里 <code>effect</code> 类型的 <code>action</code> 可以返回 <code>Promise</code> 了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dispatch(&#123; type: &apos;count/addAsync&apos; &#125;)</span><br><span class="line">  .then(() =&gt; &#123;</span><br><span class="line">    console.log(&apos;jartto:done&apos;);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure></p>
+<p>2.新增 <code>dva/dynamic</code> 接口，配合 <code>react-router@4</code> 处理组件的按需加载。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">const Users = dynamic(&#123;</span><br><span class="line">  app,</span><br><span class="line">  models: () =&gt; [</span><br><span class="line">    import(&apos;./models/users&apos;),</span><br><span class="line">  ],</span><br><span class="line">  component: () =&gt; import(&apos;./routes/Users&apos;),</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">// render</span><br><span class="line">&lt;Route exact path=&quot;/users:jartto&quot; component=&#123;Users&#125; /&gt;</span><br></pre></td></tr></table></figure></p>
+<p>3.<code>take</code> 自动补全 <code>namespace</code> 前缀<br><div class="alert warning"><p>注：之前手动加 namespace 的会收到一个 warning。</p>
+</div><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  namespace: &apos;count&apos;,</span><br><span class="line">  effects: &#123;</span><br><span class="line">    *a(action, &#123; take &#125;) &#123;</span><br><span class="line">      // Before</span><br><span class="line">      yield take(&apos;count/b&apos;);</span><br><span class="line"></span><br><span class="line">      // After</span><br><span class="line">      yield take(&apos;b&apos;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>4.<code>effect</code> 前后会额外触发 <code>/@@start</code> 和 <code>/@@end</code> 的 <code>action</code>，可利用此约定实现 <code>put</code> 的同步执行。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">yield put(&#123; type: &apos;addDelay&apos;, payload: &#123; amount: 2 &#125; &#125;);</span><br><span class="line">yield take(&apos;addDelay/@@end&apos;);</span><br><span class="line">const count = yield select(state =&gt; state.count);</span><br><span class="line">yield put(&#123; type: &apos;addDelay&apos;, payload: &#123; amount: count, delay: 0 &#125; &#125;);</span><br></pre></td></tr></table></figure></p>
+<p>更多 dva2 的细节，请看<a href="https://github.com/sorrycc/blog/issues/48" target="_blank" rel="noopener">作者介绍</a>。</p>
+<h4 id="三、使用了-umi，umi-plugin-dva"><a href="#三、使用了-umi，umi-plugin-dva" class="headerlink" title="三、使用了 umi，umi-plugin-dva"></a>三、使用了 umi，umi-plugin-dva</h4><p><code>umi</code> 是什么鬼，看到它，我的内心是拒绝的。但在使用后，被它的简单粗暴所折服，所以决定花点时间学习一下。</p>
+<p><code>umi</code> 是 <code>next.js</code> 风格的框架，所以沿用了 <code>pages</code> 下的文件即路由的方式，这种方式简单直观，而且省去了额外的一份配置，是默认的推荐方式。</p>
+<p>这里就不细节深入了，预知详情可查看我的后续文章 <a href="http://jartto.wang/2018/05/24/taste-of-umi/">UmiJs 尝鲜</a>。</p>
+<h4 id="四、检测环境"><a href="#四、检测环境" class="headerlink" title="四、检测环境"></a>四、检测环境</h4><ul>
+<li>node 8.4 或以上</li>
+<li>cnpm 或 yarn</li>
+</ul>
+<p>安装 <code>cnpm</code>:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g cnpm --registry=https://registry.npm.taobao.org</span><br></pre></td></tr></table></figure></p>
+<p>查看版本：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cnpm -v</span><br></pre></td></tr></table></figure></p>
+<h4 id="五、安装-dva-cli"><a href="#五、安装-dva-cli" class="headerlink" title="五、安装 dva-cli"></a>五、安装 dva-cli</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i dva-cli@next -g</span><br></pre></td></tr></table></figure>
+<p>查看版本号：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dva -v</span><br><span class="line">dva-cli version 1.0.0-bea.2</span><br></pre></td></tr></table></figure></p>
+<h4 id="六、创建应用"><a href="#六、创建应用" class="headerlink" title="六、创建应用"></a>六、创建应用</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dva new jarttoDemo</span><br><span class="line">cd jarttoDemo</span><br></pre></td></tr></table></figure>
+<h4 id="七、生成-users-路由"><a href="#七、生成-users-路由" class="headerlink" title="七、生成 users 路由"></a>七、生成 users 路由</h4><p>新建 <code>src/pages/users/page.js</code>，内容如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> () =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      Users Page</span><br><span class="line">    &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">  )</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="八、构造-users-model-和-service"><a href="#八、构造-users-model-和-service" class="headerlink" title="八、构造 users model 和 service"></a>八、构造 users model 和 service</h4><p>新增 <code>src/pages/users/models/users.js</code>，内容如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> usersService <span class="keyword">from</span> <span class="string">'../services/users'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  namespace: <span class="string">'users'</span>,</span><br><span class="line">  state: &#123;</span><br><span class="line">    list: [],</span><br><span class="line">    total: <span class="literal">null</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  reducers: &#123;</span><br><span class="line">    save(state, &#123; <span class="attr">payload</span>: &#123; <span class="attr">data</span>: list, total &#125; &#125;) &#123;</span><br><span class="line">      <span class="keyword">return</span> &#123; ...state, list, total &#125;;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  effects: &#123;</span><br><span class="line">    *fetch(&#123; <span class="attr">payload</span>: &#123; page &#125; &#125;, &#123; call, put &#125;) &#123;</span><br><span class="line">      <span class="keyword">const</span> &#123; data, headers &#125; = <span class="keyword">yield</span> call(usersService.fetch, &#123; page &#125;);</span><br><span class="line">      <span class="keyword">yield</span> put(&#123; <span class="attr">type</span>: <span class="string">'save'</span>, <span class="attr">payload</span>: &#123; data, <span class="attr">total</span>: headers[<span class="string">'x-total-count'</span>] &#125; &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  subscriptions: &#123;</span><br><span class="line">    setup(&#123; dispatch, history &#125;) &#123;</span><br><span class="line">      <span class="keyword">return</span> history.listen(<span class="function">(<span class="params">&#123; pathname, query &#125;</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (pathname === <span class="string">'/users'</span>) &#123;</span><br><span class="line">          dispatch(&#123; <span class="attr">type</span>: <span class="string">'fetch'</span>, <span class="attr">payload</span>: query &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>新增 <code>src/pages/users/services/users.js</code>：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> request <span class="keyword">from</span> <span class="string">'../../../utils/request'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">fetch</span>(<span class="params">&#123; page = <span class="number">1</span> &#125;</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> request(<span class="string">`/api/users?_page=<span class="subst">$&#123;page&#125;</span>&amp;_limit=5`</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>由于我们需要从 <code>response headers</code> 中获取 <code>total users</code> 数量，所以需要改造下 <code>src/utils/request.js</code>：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> fetch <span class="keyword">from</span> <span class="string">'dva/fetch'</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkStatus</span>(<span class="params">response</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (response.status &gt;= <span class="number">200</span> &amp;&amp; response.status &lt; <span class="number">300</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> response;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> error = <span class="keyword">new</span> <span class="built_in">Error</span>(response.statusText);</span><br><span class="line">  error.response = response;</span><br><span class="line">  <span class="keyword">throw</span> error;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Requests a URL, returning a promise.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * @param  &#123;string&#125; url       The URL we want to request</span></span><br><span class="line"><span class="comment"> * @param  &#123;object&#125; [options] The options we want to pass to "fetch"</span></span><br><span class="line"><span class="comment"> * @return &#123;object&#125;           An object containing either "data" or "err"</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">request</span>(<span class="params">url, options</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> response = <span class="keyword">await</span> fetch(url, options);</span><br><span class="line"></span><br><span class="line">  checkStatus(response);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> data = <span class="keyword">await</span> response.json();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> ret = &#123;</span><br><span class="line">    data,</span><br><span class="line">    headers: &#123;&#125;,</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (response.headers.get(<span class="string">'x-total-count'</span>)) &#123;</span><br><span class="line">    ret.headers[<span class="string">'x-total-count'</span>] = response.headers.get(<span class="string">'x-total-count'</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="九、添加-layout"><a href="#九、添加-layout" class="headerlink" title="九、添加 layout"></a>九、添加 layout</h4><p>添加 <code>layout</code> 布局，使得我们可以在首页和用户列表页之间来回切换。<code>umi</code> 里约定 <code>layouts/index.js</code> 为全局路由，所以我们新增 <code>src/layouts/index.js</code> 和 <code>CSS</code> 文件即可。</p>
+<h4 id="十、处理-loading-状态"><a href="#十、处理-loading-状态" class="headerlink" title="十、处理 loading 状态"></a>十、处理 loading 状态</h4><p>dva 有一个管理 effects 执行的 hook，并基于此封装了 dva-loading 插件。通过这个插件，我们可以不必一遍遍地写 showLoading 和 hideLoading，当发起请求时，插件会自动设置数据里的 loading 状态为 true 或 false 。然后我们在渲染 components 时绑定并根据这个数据进行渲染。</p>
+<p>umi-plugin-dva 默认内置了 dva-loading 插件。</p>
+<p>然后在 src/components/Users/Users.js 里绑定 loading 数据：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">mapStateToProps</span>(<span class="params">state</span>) </span>&#123;</span><br><span class="line">   <span class="keyword">const</span> &#123; list, total, page &#125; = state.users;</span><br><span class="line">   <span class="keyword">return</span> &#123;</span><br><span class="line">      list,</span><br><span class="line">      total,</span><br><span class="line">      page,</span><br><span class="line">      loading: state.loading.models.users,</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="十一、总结"><a href="#十一、总结" class="headerlink" title="十一、总结"></a>十一、总结</h4><p>我们可以照着作者的教程一步步去实践，其实 <code>dva2</code> 对开发者还是挺友好的。我们不需要太多额外处理，唯一需要注意的是 <code>umi</code>，改变了路由的配置方式。</p>
+<p>关于 <code>umi</code> ，请看下文：<a href="http://jartto.wang/2018/05/24/taste-of-umi/">UmiJs 尝鲜</a>。</p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/dva2/">dva2</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/05/24/taste-of-umi/" data-tooltip="UmiJs 尝鲜">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/05/19/learn-python-1/" data-tooltip="Python 笔记1 - 简单语法">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/05/24/build-your-dva2/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/05/24/build-your-dva2/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/05/24/build-your-dva2/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/05/24/taste-of-umi/" data-tooltip="UmiJs 尝鲜">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/05/19/learn-python-1/" data-tooltip="Python 笔记1 - 简单语法">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/05/24/build-your-dva2/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/05/24/build-your-dva2/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/05/24/build-your-dva2/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/05/24/build-your-dva2/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/05/24/build-your-dva2/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/05/24/build-your-dva2/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

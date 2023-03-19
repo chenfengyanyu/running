@@ -1,0 +1,560 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>Python 笔记3 - Open 文件操作 - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="简单语法支撑不起 Python，文件操作却是重中之重。这节我们来探索一下 Python 中内置函数 Open()，让你从此爱上文件操作。">
+<meta name="keywords" content="python,open">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Python 笔记3 - Open 文件操作">
+<meta property="og:url" content="http://jartto.wang/2018/06/24/learn-python-3/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="简单语法支撑不起 Python，文件操作却是重中之重。这节我们来探索一下 Python 中内置函数 Open()，让你从此爱上文件操作。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2018-10-31T15:01:11.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python 笔记3 - Open 文件操作">
+<meta name="twitter:description" content="简单语法支撑不起 Python，文件操作却是重中之重。这节我们来探索一下 Python 中内置函数 Open()，让你从此爱上文件操作。">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/python1.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/python1.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            Python 笔记3 - Open 文件操作
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2018-06-24T20:27:34+08:00">
+	  
+		    2018/6月/24 20:27:34
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p><a href="http://jartto.wang/2018/06/12/learn-python-2/">简单语法</a>支撑不起 Python，文件操作却是重中之重。这节我们来探索一下 Python 中内置函数 Open()，让你从此爱上文件操作。<br><a id="more"></a></p>
+<h4 id="一、简介"><a href="#一、简介" class="headerlink" title="一、简介"></a>一、简介</h4><p><code>Python open()</code> 函数用于打开一个文件，创建一个 <code>file</code> 对象，相关的方法才可以调用它进行读写。</p>
+<h4 id="二、Open-文件操作"><a href="#二、Open-文件操作" class="headerlink" title="二、Open 文件操作"></a>二、Open 文件操作</h4><p>先来一个示例直观感受一下吧，我们打开一个文件，并读取文件内容：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line">result = []</span><br><span class="line"><span class="keyword">with</span> open(<span class="string">r'&#123;&#125;/README.md'</span>.format(sys.path[<span class="number">0</span>]), <span class="string">'r'</span>) <span class="keyword">as</span> fp:</span><br><span class="line">  <span class="keyword">for</span> line <span class="keyword">in</span> fp.readlines():</span><br><span class="line">    result.append(line)</span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p>代码很简单，先创建了一个空数组，然后按行读取文件内容，并存入数组。</p>
+</div>
+<p>存完后，又觉得无聊，我要把读到的内容输出到指定的文件中：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'&#123;&#125;/jartto.txt'</span>.format(sys.path[<span class="number">0</span>]),<span class="string">'w'</span>) <span class="keyword">as</span> f:</span><br><span class="line">  f.writelines(result);</span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p>打开 jartto.txt 文件，将上一步读取到的 result 结果，写入其中。</p>
+</div>
+<p>从头到尾我们貌似做了无用功，但是你却对文件读写操作有了整体的认识。我们继续，是时候解开 <code>Python</code> 中 <code>Open()</code> 函数的面纱了！</p>
+<h4 id="三、函数语法"><a href="#三、函数语法" class="headerlink" title="三、函数语法"></a>三、函数语法</h4><p>要真正理解 <code>Open</code> 方法，我们需要做一些功课：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">open(name[, mode[, buffering]])</span><br></pre></td></tr></table></figure></p>
+<p>参数说明：</p>
+<ul>
+<li>name: 一个包含了你要访问的文件名称的字符串值。</li>
+<li>mode: mode 决定了打开文件的模式：只读，写入，追加等。所有可取值见如下的完全列表。这个参数是非强制的，默认文件访问模式为只读(r)。</li>
+<li>buffering: 如果 buffering 的值被设为 0，就不会有寄存。如果 buffering 的值取 1，访问文件时会寄存行。如果将 buffering 的值设为大于 1 的整数，表明了这就是的寄存区的缓冲大小。如果取负值，寄存区的缓冲大小则为系统默认。</li>
+</ul>
+<div class="alert success"><p>关于 <code>mode</code> 这里多说一句：最常用的模式可能是 r 和 w</p>
+</div>
+<p>参数说明：</p>
+<ul>
+<li>r: 以只读方式打开文件。文件的指针将会放在文件的开头。这是默认模式。</li>
+<li>rb: 以二进制格式打开一个文件用于只读。文件指针将会放在文件的开头。这是默认模式。</li>
+<li>r+: 打开一个文件用于读写。文件指针将会放在文件的开头。</li>
+<li>rb+: 以二进制格式打开一个文件用于读写。文件指针将会放在文件的开头。</li>
+<li>w: 打开一个文件只用于写入。如果该文件已存在则打开文件，并从开头开始编辑，即原有内容会被删除。如果该文件不存在，创建新文件。</li>
+<li>wb: 以二进制格式打开一个文件只用于写入。如果该文件已存在则打开文件，并从开头开始编辑，即原有内容会被删除。如果该文件不存在，创建新文件。</li>
+<li>w+: 打开一个文件用于读写。如果该文件已存在则打开文件，并从开头开始编辑，即原有内容会被删除。如果该文件不存在，创建新文件。</li>
+<li>wb+: 以二进制格式打开一个文件用于读写。如果该文件已存在则打开文件，并从开头开始编辑，即原有内容会被删除。如果该文件不存在，创建新文件。</li>
+<li>a: 打开一个文件用于追加。如果该文件已存在，文件指针将会放在文件的结尾。也就是说，新的内容将会被写入到已有内容之后。如果该文件不存在，创建新文件进行写入。</li>
+<li>ab: 以二进制格式打开一个文件用于追加。如果该文件已存在，文件指针将会放在文件的结尾。也就是说，新的内容将会被写入到已有内容之后。如果该文件不存在，创建新文件进行写入。</li>
+<li>a+: 打开一个文件用于读写。如果该文件已存在，文件指针将会放在文件的结尾。文件打开时会是追加模式。如果该文件不存在，创建新文件用于读写。</li>
+<li>ab+: 以二进制格式打开一个文件用于追加。如果该文件已存在，文件指针将会放在文件的结尾。如果该文件不存在，创建新文件用于读写。</li>
+</ul>
+<div class="alert warning"><p>name 和 mode 都不难理解，上文示例已经应用到了，那 buffering 是什么鬼？</p>
+</div>
+<h4 id="四、关于-Buffering"><a href="#四、关于-Buffering" class="headerlink" title="四、关于 Buffering"></a>四、关于 Buffering</h4><p>官方解释如下：<br>The optional buffering argument specifies the file’s desired buffer size: 0 means unbuffered, 1 means line buffered, any other positive value means use a buffer of (approximately) that size. A negative buffering means to use the system default, which is usually line buffered for tty devices and fully buffered for other files. If omitted, the system default is used.</p>
+<ul>
+<li><p>若 <code>Buffering</code> 为 <code>0</code> 或 <code>False</code> ，没有缓冲区；</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line">f = open(<span class="string">r'&#123;&#125;/jartto.txt'</span>.format(sys.path[<span class="number">0</span>]), <span class="string">'w'</span>, <span class="literal">False</span>)</span><br><span class="line">f.write(<span class="string">'Jartto\'s blog'</span>)</span><br></pre></td></tr></table></figure>
+<p>去 <code>jartto.txt</code> 文件查看，字符串已被写入文件。</p>
+</li>
+<li><p>若为 <code>1</code> 或 <code>True</code> 有缓冲区；</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">f = open(<span class="string">r'&#123;&#125;/jartto.txt'</span>.format(sys.path[<span class="number">0</span>]), <span class="string">'w'</span>, <span class="literal">True</span>) </span><br><span class="line">f.write(<span class="string">'Jartto\'s blog'</span>)</span><br></pre></td></tr></table></figure>
+<div class="alert info"><p>若缓冲区满了则自动写入文件 jartto.txt 中，否则需要 f.flush() 或 f.close(),才能写入 jartto.txt 文件；</p>
+</div>
+</li>
+</ul>
+<ul>
+<li><p>若为其他正数则表示缓冲区大小； </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">f = open(<span class="string">r'&#123;&#125;/jartto.txt'</span>.format(sys.path[<span class="number">0</span>]), <span class="string">'w'</span>, <span class="number">20</span>)</span><br></pre></td></tr></table></figure>
+<p>有缓冲区，缓冲区大小 20 字节。当写入字符串少于 20 字节时，先写入缓冲区，需要 <code>flush()</code> 或 <code>close()</code>,才能写入 <code>jartto.txt</code> 文件；<br>当字符串不少于 20 字节时，先写入缓冲区，若缓冲区满了，则自动写入 <code>jartto.txt</code> 文件，依次类推，最后缓冲区中的内容需 <code>f.flush</code> 或 <code>f.close()</code> ,才能写入 <code>jartto.txt</code> 文件；</p>
+</li>
+<li><p>若为负数，则使用默认缓冲区大小； </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">f = open(<span class="string">r'&#123;&#125;/jartto.txt'</span>.format(sys.path[<span class="number">0</span>]), <span class="string">'w'</span>, <span class="number">-1</span>) </span><br><span class="line">f.write(<span class="string">'Jartto\'s blog'</span>)</span><br></pre></td></tr></table></figure>
+<p>先写入缓冲区，若缓冲区满了则自动写入文件 <code>jartto.txt</code> 中，否则需要 <code>f.flush()</code> 或 <code>f.close()</code> 才能写入文件。</p>
+</li>
+</ul>
+<div class="alert danger"><p>这里有个问题，为什么要写入缓冲区，Buffering 是不是可有可无？</p>
+</div>
+<p>在网上查到一个关于缓冲区作用的描述：<br>FileInputStream/FileOutputStream 每次调用 read()/write() 都会触发一个 IO 操作。<br>BufferedInputStream/BufferedOutputSteam 调用 read()/write() 并不会每次都触发一个 IO 操作，只是写到内部的buffer里面，而只有内部的 buffer 满了或者调用 flush() 才会触发 IO 操作。</p>
+<div class="alert info"><p>IO 操作越少，性能越好。</p>
+</div>
+<p>操作系统不仅会将硬盘上的文件读到内存作为缓存使用，也会在内存开辟另外一段空间给内存的数据做缓存处理。意义何在？</p>
+<p>为了管理，也为了效率。</p>
+<ul>
+<li>内存与内存之间的数据交换，比内存与硬盘之间的数据交换速率高了两个数量级。</li>
+<li>当内存上的某个进程需要数据的时候，如果内存缓存有匹配的数据，则直接在缓存区取，如果没有，再去硬盘上读。（写也同理）</li>
+<li>代码需要进行频繁的IO操作时，意义就体现出来了。</li>
+</ul>
+<p>扩展阅读：</p>
+<ul>
+<li><a href="https://blog.csdn.net/u011878795/article/details/52194644" target="_blank" rel="noopener">关于 python open 函数缓冲区</a></li>
+<li><a href="https://segmentfault.com/q/1010000004947600" target="_blank" rel="noopener">在程序里读取磁盘文件时，为什么需要使用缓冲区</a></li>
+</ul>
+<h4 id="五、File-对象方法"><a href="#五、File-对象方法" class="headerlink" title="五、File 对象方法"></a>五、File 对象方法</h4><p><code>Open()</code> 函数从来都不是单用的，它与文件操作密不可分，所以请不要离开，再了解一下 <code>File</code> 对象方法？</p>
+<ul>
+<li>file.read([size]) size未指定则返回整个文件,如果文件大小&gt;2倍内存则有问题.f.read()读到文件尾时返回””(空字串)</li>
+<li>file.readline() 返回一行</li>
+<li>file.readlines([size]) 返回包含size行的列表,size 未指定则返回全部行</li>
+<li>for line in f: print line #通过迭代器访问</li>
+<li>f.write(“hello\n”) #如果要写入字符串以外的数据,先将他转换为字符串.</li>
+<li>f.tell() 返回一个整数,表示当前文件指针的位置(就是到文件头的比特数).</li>
+<li>f.seek(偏移量,[起始位置]) 用来移动文件指针.<ul>
+<li>偏移量:单位:比特,可正可负</li>
+<li>起始位置:0-文件头,默认值;1-当前位置;2-文件尾</li>
+</ul>
+</li>
+<li>f.close() 关闭文件</li>
+</ul>
+<h4 id="六、file-与-open"><a href="#六、file-与-open" class="headerlink" title="六、file() 与 open()"></a>六、file() 与 open()</h4><p>两者都能够打开文件，对文件进行操作，也具有相似的用法和参数。但是，这两种文件打开方式却有着本质的区别：</p>
+<ul>
+<li><code>file</code> 为文件类，用 <code>file()</code> 来打开文件，相当于这是在构造文件类</li>
+<li>用 <code>open()</code> 打开文件，是用 <code>python</code> 的内建函数来操作</li>
+</ul>
+<p>又到了留下线索的时候了，下一篇：<a href="#">Python 笔记4 - OS 与 Sys 模块</a></p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/open/">open</a> <a class="tag tag--primary tag--small t-link" href="/tags/python/">python</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/06/29/talk-about-license/" data-tooltip="简话开源协议">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/06/12/learn-python-2/" data-tooltip="Python 笔记2 - 常用操作">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/06/24/learn-python-3/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/06/24/learn-python-3/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/06/24/learn-python-3/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/06/29/talk-about-license/" data-tooltip="简话开源协议">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/06/12/learn-python-2/" data-tooltip="Python 笔记2 - 常用操作">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/06/24/learn-python-3/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/06/24/learn-python-3/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/06/24/learn-python-3/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/06/24/learn-python-3/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/06/24/learn-python-3/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/06/24/learn-python-3/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

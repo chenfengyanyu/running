@@ -1,0 +1,535 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>细说 Mockjs - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="随着技术的不断发展，前后端分离已成为 Web 的标准。前端工程师需要更加独立的去做一些事情，别再傻傻的等后端工程师的 API 文档了，确定需求，我们就可以开始了。">
+<meta name="keywords" content="mockjs">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="细说 Mockjs">
+<meta property="og:url" content="http://jartto.wang/2017/01/05/detail-of-mockjs/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="随着技术的不断发展，前后端分离已成为 Web 的标准。前端工程师需要更加独立的去做一些事情，别再傻傻的等后端工程师的 API 文档了，确定需求，我们就可以开始了。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2017-12-04T03:01:26.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="细说 Mockjs">
+<meta name="twitter:description" content="随着技术的不断发展，前后端分离已成为 Web 的标准。前端工程师需要更加独立的去做一些事情，别再傻傻的等后端工程师的 API 文档了，确定需求，我们就可以开始了。">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/mockjs0.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="http://7xvi3w.com1.z0.glb.clouddn.com/mockjs0.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            细说 Mockjs
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2017-01-05T10:18:40+08:00">
+	  
+		    2017/1月/05 10:18:40
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>随着技术的不断发展，前后端分离已成为 Web 的标准。前端工程师需要更加独立的去做一些事情，别再傻傻的等后端工程师的 API 文档了，确定需求，我们就可以开始了。<br><a id="more"></a><br>文章将列举日常开发中常用的 Mock 用法，更多扩展请参考：<a href="http://mockjs.com/examples.html" target="_blank" rel="noopener">代码示例</a>。</p>
+<h4 id="一、引入方式"><a href="#一、引入方式" class="headerlink" title="一、引入方式"></a>一、引入方式</h4><p>1.引入 <code>js</code> 文件：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"http://mockjs.com/dist/mock.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>2.<code>node</code> 引入及示例：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 安装</span></span><br><span class="line">npm install mockjs</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用</span></span><br><span class="line"><span class="keyword">var</span> Mock = <span class="built_in">require</span>(<span class="string">'mockjs'</span>);</span><br><span class="line"><span class="keyword">var</span> data = Mock.mock(&#123;</span><br><span class="line">    <span class="string">'list|1-10'</span>: [&#123;</span><br><span class="line">        <span class="string">'id|+1'</span>: <span class="number">1</span></span><br><span class="line">    &#125;]</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">JSON</span>.stringify(data, <span class="literal">null</span>, <span class="number">4</span>))</span><br></pre></td></tr></table></figure></p>
+<p>3.<code>bower</code> 安装以及引入：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install -g bower</span><br><span class="line">bower install --save mockjs</span><br></pre></td></tr></table></figure></p>
+<p><code>HTML</code> 引入注意路径：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=&quot;text/javascript&quot; src=&quot;./bower_components/mockjs/dist/mock.js&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
+<p>4.RequireJS (AMD)<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 配置 Mock 路径</span></span><br><span class="line"><span class="built_in">require</span>.config(&#123;</span><br><span class="line">  paths:&#123;</span><br><span class="line">    <span class="string">'mock'</span>:<span class="string">'http://mockjs.com/dist/mock'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 加载 Mock</span></span><br><span class="line"><span class="built_in">require</span>([<span class="string">'mock'</span>], <span class="function"><span class="keyword">function</span>(<span class="params">Mock</span>)</span>&#123;</span><br><span class="line">    <span class="comment">// 使用 Mock</span></span><br><span class="line">    <span class="keyword">var</span> data = Mock.mock(&#123;</span><br><span class="line">        <span class="string">'list|1-10'</span>: [&#123;</span><br><span class="line">            <span class="string">'id|+1'</span>: <span class="number">1</span></span><br><span class="line">        &#125;]</span><br><span class="line">    &#125;);</span><br><span class="line">    $(<span class="string">'&lt;pre&gt;'</span>).text(<span class="built_in">JSON</span>.stringify(data, <span class="literal">null</span>, <span class="number">4</span>))</span><br><span class="line">        .appendTo(<span class="string">'body'</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>5.Sea.js (CMD)<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">seajs.config(&#123;</span><br><span class="line">  alias: &#123;</span><br><span class="line">    <span class="string">"mock"</span>: <span class="string">"http://mockjs.com/0.1/dist/mock.js"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 加载 Mock</span></span><br><span class="line">seajs.use(<span class="string">'mock'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">Mock</span>)</span>&#123;</span><br><span class="line">    <span class="comment">// 使用 Mock</span></span><br><span class="line">    <span class="keyword">var</span> data = Mock.mock(&#123;</span><br><span class="line">        <span class="string">'list|1-10'</span>: [&#123;</span><br><span class="line">            <span class="string">'id|+1'</span>: <span class="number">1</span></span><br><span class="line">        &#125;]</span><br><span class="line">    &#125;);</span><br><span class="line">    $(<span class="string">'&lt;pre&gt;'</span>).text(<span class="built_in">JSON</span>.stringify(data, <span class="literal">null</span>, <span class="number">4</span>))</span><br><span class="line">        .appendTo(<span class="string">'body'</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<h4 id="二、字符串操作"><a href="#二、字符串操作" class="headerlink" title="二、字符串操作"></a>二、字符串操作</h4><p>1.生成随机长度字符串 <code>&#39;name|min-max&#39;: string</code>:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Mock.mock(&#123;</span><br><span class="line">  <span class="string">"string|1-10"</span>: <span class="string">"★"</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>2.生成指定字符串长度， <code>&#39;name|count&#39;: string</code>:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Mock.mock(&#123;</span><br><span class="line">  <span class="string">"string|3"</span>: <span class="string">"★★★"</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p>此处 count 为指定字符串循环次数。</p>
+</div>
+<h4 id="三、Number-类型"><a href="#三、Number-类型" class="headerlink" title="三、Number 类型"></a>三、Number 类型</h4><p>1.生成 1－100 之间的整数，<code>&#39;name|min-max&#39;: number</code>：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Mock.mock(&#123;</span><br><span class="line">  <span class="string">"number|1-100"</span>: <span class="number">100</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>2.生成 1-100 间个数小于 10 位的小数，<code>&#39;name|min-max.dmin-dmax&#39;: number</code>：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Mock.mock(&#123;</span><br><span class="line">  <span class="string">"number|1-100.1-10"</span>: <span class="number">1</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>3.生成大于 123.1 且位数小于 10位的小数：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Mock.mock(&#123;</span><br><span class="line">  <span class="string">"number|123.1-10"</span>: <span class="number">1</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<h4 id="四、布尔类型"><a href="#四、布尔类型" class="headerlink" title="四、布尔类型"></a>四、布尔类型</h4><p>1.随机生成 boolen 类型的属性，<code>&#39;name|1&#39;: boolean</code>：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Mock.mock(&#123;</span><br><span class="line">  <span class="string">"boolean|1"</span>: <span class="literal">true</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<h4 id="五、生成对象"><a href="#五、生成对象" class="headerlink" title="五、生成对象"></a>五、生成对象</h4><p>1.从指定对象中随机选择两条数据，<code>&#39;name|count&#39;: object</code>：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Mock.mock(&#123;</span><br><span class="line">  <span class="string">"object|2"</span>: &#123;</span><br><span class="line">    <span class="string">"310000"</span>: <span class="string">"上海市"</span>,</span><br><span class="line">    <span class="string">"320000"</span>: <span class="string">"江苏省"</span>,</span><br><span class="line">    <span class="string">"330000"</span>: <span class="string">"浙江省"</span>,</span><br><span class="line">    <span class="string">"340000"</span>: <span class="string">"安徽省"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>输出：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"object"</span>: &#123;</span><br><span class="line">    <span class="string">"320000"</span>: <span class="string">"江苏省"</span>,</span><br><span class="line">    <span class="string">"330000"</span>: <span class="string">"浙江省"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>2.选择 2-4 位指定位数属性，<code>&#39;name|min-max&#39;: object</code>:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Mock.mock(&#123;</span><br><span class="line">  <span class="string">"object|2-4"</span>: &#123;</span><br><span class="line">    <span class="string">"110000"</span>: <span class="string">"北京市"</span>,</span><br><span class="line">    <span class="string">"120000"</span>: <span class="string">"天津市"</span>,</span><br><span class="line">    <span class="string">"130000"</span>: <span class="string">"河北省"</span>,</span><br><span class="line">    <span class="string">"140000"</span>: <span class="string">"山西省"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<h4 id="六、数组操作"><a href="#六、数组操作" class="headerlink" title="六、数组操作"></a>六、数组操作</h4><p>1.随机选择给定数组中某 1 项，<code>&#39;name|1&#39;: array</code>：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Mock.mock(&#123;</span><br><span class="line">  <span class="string">"array|1"</span>: [</span><br><span class="line">    <span class="string">"AMD"</span>,</span><br><span class="line">    <span class="string">"CMD"</span>,</span><br><span class="line">    <span class="string">"UMD"</span></span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>结果：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"array"</span>: <span class="string">"CMD"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>2.在给定数组中选择 1 项，生成 1-10 次：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Mock.mock(&#123;</span><br><span class="line">  <span class="string">"array|1-10"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">"name|+1"</span>: [</span><br><span class="line">        <span class="string">"Hello"</span>,</span><br><span class="line">        <span class="string">"Mock.js"</span>,</span><br><span class="line">        <span class="string">"!"</span></span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>3.随机生成 1-10 个给定数组项，｀’name|min-max’: array｀：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Mock.mock(&#123;</span><br><span class="line">  <span class="string">"array|1-10"</span>: [</span><br><span class="line">    <span class="string">"Mock.js"</span></span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>4.将数组项复制 1-10 次：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Mock.mock(&#123;</span><br><span class="line">  <span class="string">"array|1-10"</span>: [</span><br><span class="line">    <span class="string">"Hello"</span>,</span><br><span class="line">    <span class="string">"Mock.js"</span>,</span><br><span class="line">    <span class="string">"!"</span></span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>5.拷贝数组项三次，<code>&#39;name|count&#39;: array</code>：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Mock.mock(&#123;</span><br><span class="line">  <span class="string">"array|3"</span>: [</span><br><span class="line">    <span class="string">"Mock.js"</span></span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>同理：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Mock.mock(&#123;</span><br><span class="line">  <span class="string">"array|3"</span>: [</span><br><span class="line">    <span class="string">"Hello"</span>,</span><br><span class="line">    <span class="string">"Mock.js"</span>,</span><br><span class="line">    <span class="string">"!"</span></span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>结果为：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"array"</span>: [</span><br><span class="line">    <span class="string">"Hello"</span>,</span><br><span class="line">    <span class="string">"Mock.js"</span>,</span><br><span class="line">    <span class="string">"!"</span>,</span><br><span class="line">    <span class="string">"Hello"</span>,</span><br><span class="line">    <span class="string">"Mock.js"</span>,</span><br><span class="line">    <span class="string">"!"</span>,</span><br><span class="line">    <span class="string">"Hello"</span>,</span><br><span class="line">    <span class="string">"Mock.js"</span>,</span><br><span class="line">    <span class="string">"!"</span></span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="七、调用方法"><a href="#七、调用方法" class="headerlink" title="七、调用方法"></a>七、调用方法</h4><p>1.可以将方法作为返回值：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Mock.mock(&#123;</span><br><span class="line">  <span class="string">'foo'</span>: <span class="string">'Syntax Demo'</span>,</span><br><span class="line">  <span class="string">'name'</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.foo</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>结果：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"foo"</span>: <span class="string">"Syntax Demo"</span>,</span><br><span class="line">  <span class="string">"name"</span>: <span class="string">"Syntax Demo"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="八、正则表达式"><a href="#八、正则表达式" class="headerlink" title="八、正则表达式"></a>八、正则表达式</h4><p>1.按照正则规则生成字符串：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Mock.mock(&#123;</span><br><span class="line">  <span class="string">'regexp'</span>: <span class="regexp">/[a-z][A-Z][0-9]/</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>结果为：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"regexp"</span>: <span class="string">"kN6"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>2.生成 5-10 位数字：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Mock.mock(&#123;</span><br><span class="line">  <span class="string">'regexp'</span>: <span class="regexp">/\d&#123;5,10&#125;/</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<h4 id="九、数据占位符定义"><a href="#九、数据占位符定义" class="headerlink" title="九、数据占位符定义"></a>九、数据占位符定义</h4><p>1.生成 boolean 类型：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Random.boolean() <span class="comment">// true</span></span><br><span class="line">Mock.mock(<span class="string">'@boolean'</span>) <span class="comment">// false</span></span><br><span class="line">Mock.mock(<span class="string">'@boolean()'</span>) <span class="comment">// false</span></span><br></pre></td></tr></table></figure></p>
+<p>2.生成 60-100 间的整数：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Random.integer(<span class="number">60</span>, <span class="number">100</span>)</span><br></pre></td></tr></table></figure></p>
+<p>3.生成 60-100 之间浮点数，且小数点后保留 3-5 位：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Random.float(<span class="number">60</span>, <span class="number">100</span>, <span class="number">3</span>)</span><br><span class="line">Random.float(<span class="number">60</span>, <span class="number">100</span>, <span class="number">3</span>, <span class="number">5</span>)</span><br></pre></td></tr></table></figure></p>
+<p>4.生成步近值为 2 的数组序列：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Random.range(<span class="number">1</span>, <span class="number">10</span>, <span class="number">2</span>)</span><br></pre></td></tr></table></figure></p>
+<p>结果：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>,<span class="number">9</span>]</span><br></pre></td></tr></table></figure></p>
+<h4 id="十、生成日期格式字符串"><a href="#十、生成日期格式字符串" class="headerlink" title="十、生成日期格式字符串"></a>十、生成日期格式字符串</h4><p>1.生成日期：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Random.date(<span class="string">'yyyy-MM-dd'</span>) <span class="comment">// "2008-04-11"</span></span><br><span class="line">Mock.mock(<span class="string">'@date("yyyy-MM-dd")'</span>) <span class="comment">// "1979-05-03"</span></span><br></pre></td></tr></table></figure></p>
+<p>2.生成时间：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Random.time(<span class="string">'A HH:mm:ss'</span>) <span class="comment">// "PM 16:21:17"</span></span><br><span class="line">Random.time(<span class="string">'HH:mm:ss'</span>) <span class="comment">// "12:20:39"</span></span><br></pre></td></tr></table></figure></p>
+<p>3.生成日期和时间：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Random.datetime(<span class="string">'yyyy-MM-dd A HH:mm:ss'</span>) <span class="comment">// "2008-01-18 PM 21:45:12"</span></span><br><span class="line">Mock.mock(<span class="string">'@datetime("yyyy-MM-dd A HH:mm:ss")'</span>) <span class="comment">// "2005-08-01 AM 00:07:46"</span></span><br></pre></td></tr></table></figure></p>
+<p>4.当前时间：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Random.now() <span class="comment">// "2017-12-03 19:02:13"</span></span><br><span class="line">Mock.mock(<span class="string">'@now'</span>) <span class="comment">// "2017-12-03 19:02:13"</span></span><br><span class="line">Mock.mock(<span class="string">'@now()'</span>) <span class="comment">// "2017-12-03 19:02:13"</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="十一、占位图片"><a href="#十一、占位图片" class="headerlink" title="十一、占位图片"></a>十一、占位图片</h4><p>1.<code>Random.image( size?, background?, foreground?, format?, text? )</code>:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 200*100 的图片</span></span><br><span class="line">Random.image(<span class="string">'200x100'</span>) </span><br><span class="line"></span><br><span class="line"><span class="comment">// 生成背景色为 #50B347 前景色为 #FFF，写着 jartt 的图片</span></span><br><span class="line">Random.image(<span class="string">'200x100'</span>, <span class="string">'#50B347'</span>, <span class="string">'#FFF'</span>, <span class="string">'jartt'</span>) </span><br><span class="line"></span><br><span class="line"><span class="comment">// 还可以指定生成的图片格式，如：png</span></span><br><span class="line">Random.image(<span class="string">'200x100'</span>, <span class="string">'#894FC4'</span>, <span class="string">'#FFF'</span>, <span class="string">'png'</span>, <span class="string">'jartto'</span>)</span><br></pre></td></tr></table></figure></p>
+<h4 id="十二、生成色值"><a href="#十二、生成色值" class="headerlink" title="十二、生成色值"></a>十二、生成色值</h4><p>1.默认生成 16 进制：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Random.color() <span class="comment">// "#79f28d"</span></span><br><span class="line">Mock.mock(<span class="string">'@color'</span>) <span class="comment">// "#79f28d"</span></span><br><span class="line">Mock.mock(<span class="string">'@color()'</span>) <span class="comment">// "#79f28d"</span></span><br></pre></td></tr></table></figure></p>
+<p>2.还有 rgb 和 rgba：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Random.rgb() <span class="comment">// "rgb(242, 171, 121)"</span></span><br><span class="line">Mock.mock(<span class="string">'@rgb'</span>)</span><br><span class="line">Mock.mock(<span class="string">'@rgb()'</span>)</span><br></pre></td></tr></table></figure></p>
+<h4 id="十三、生成英文-中文段落"><a href="#十三、生成英文-中文段落" class="headerlink" title="十三、生成英文/中文段落"></a>十三、生成英文/中文段落</h4><p>1.随机生成 1-3 段英文段落，<code>Random.paragraph( min?, max? )</code>：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Random.paragraph(<span class="number">1</span>,<span class="number">3</span>)</span><br><span class="line">Mock.mock(<span class="string">'@paragraph(1,3)'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>2.随机生成 3-5 个英文句子，<code>Random.sentence( min?, max? )</code>：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Random.sentence( len )</span></span><br><span class="line">Random.sentence(<span class="number">5</span>)</span><br><span class="line">Mock.mock(<span class="string">'@sentence(5)'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// Random.sentence( min, max )</span></span><br><span class="line">Random.sentence(<span class="number">3</span>, <span class="number">5</span>)</span><br><span class="line">Mock.mock(<span class="string">'@sentence(3, 5)'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>3.英文单词和英文标题：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Random.word( len )</span></span><br><span class="line">Random.word(<span class="number">5</span>)</span><br><span class="line">Mock.mock(<span class="string">'@word(5)'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// Random.word( min, max )</span></span><br><span class="line">Random.word(<span class="number">3</span>, <span class="number">5</span>)</span><br><span class="line">Mock.mock(<span class="string">'@word(3, 5)'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>4.中文段落：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Random.cparagraph( len )</span></span><br><span class="line">Random.cparagraph(<span class="number">2</span>)</span><br><span class="line">Mock.mock(<span class="string">'@cparagraph(2)'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// Random.cparagraph( min, max )</span></span><br><span class="line">Random.cparagraph(<span class="number">1</span>, <span class="number">3</span>)</span><br><span class="line">Mock.mock(<span class="string">'@cparagraph(1, 3)'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>5.中文句子：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Random.csentence( len )</span></span><br><span class="line">Random.csentence(<span class="number">5</span>)</span><br><span class="line">Mock.mock(<span class="string">'@csentence(5)'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// Random.csentence( min, max )</span></span><br><span class="line">Random.csentence(<span class="number">3</span>, <span class="number">5</span>)</span><br><span class="line">Mock.mock(<span class="string">'@csentence(3, 5)'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>6.随机汉字：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Random.cword( min, max )</span></span><br><span class="line">Random.cword(<span class="number">3</span>, <span class="number">5</span>)</span><br><span class="line">Mock.mock(<span class="string">'@cword(3, 5)'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// Random.cword( pool, min, max )</span></span><br><span class="line">Random.cword(<span class="string">'零一二三四五六七八九十'</span>, <span class="number">5</span>, <span class="number">7</span>)</span><br><span class="line">Mock.mock(<span class="string">'@cword("零一二三四五六七八九十", 5, 7)'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>结果：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Random.cword( min, max )</span></span><br><span class="line"><span class="string">"活第听参"</span></span><br><span class="line"><span class="string">"总算场"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Random.cword( pool, min, max )</span></span><br><span class="line"><span class="string">"一三七一二八"</span></span><br><span class="line"><span class="string">"五九八三七七"</span></span><br></pre></td></tr></table></figure></p>
+<p>7.汉字标题：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Random.ctitle( len )</span></span><br><span class="line">Random.ctitle(<span class="number">5</span>)</span><br><span class="line">Mock.mock(<span class="string">'@ctitle(5)'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// Random.ctitle( min, max )</span></span><br><span class="line">Random.ctitle(<span class="number">3</span>, <span class="number">5</span>)</span><br><span class="line">Mock.mock(<span class="string">'@ctitle(3, 5)'</span>)</span><br></pre></td></tr></table></figure></p>
+<h4 id="十四、中英文姓名"><a href="#十四、中英文姓名" class="headerlink" title="十四、中英文姓名"></a>十四、中英文姓名</h4><p>1.生成英文名字<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Random.name()</span></span><br><span class="line">Random.name()</span><br><span class="line">Mock.mock(<span class="string">'@name'</span>)</span><br><span class="line">Mock.mock(<span class="string">'@name()'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>结果：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Random.name()</span></span><br><span class="line"><span class="string">"Patricia Clark"</span></span><br><span class="line"><span class="string">"Mary Jones"</span></span><br><span class="line"><span class="string">"Jose Miller"</span></span><br></pre></td></tr></table></figure></p>
+<p>2.汉语名字：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Random.cname()</span></span><br><span class="line">Random.cname()</span><br><span class="line">Mock.mock(<span class="string">'@cname'</span>)</span><br><span class="line">Mock.mock(<span class="string">'@cname()'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>结果：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Random.cname()</span></span><br><span class="line"><span class="string">"卢明"</span></span><br><span class="line"><span class="string">"黎洋"</span></span><br><span class="line"><span class="string">"董芳"</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="十五、地址相关"><a href="#十五、地址相关" class="headerlink" title="十五、地址相关"></a>十五、地址相关</h4><p>1.生成 URL：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Random.url()</span></span><br><span class="line">Random.url() <span class="comment">// "mailto://wiau.gp/ashkjy"</span></span><br><span class="line">Mock.mock(<span class="string">'@url'</span>)</span><br><span class="line">Mock.mock(<span class="string">'@url()'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>2.生成 Email：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Random.email()</span></span><br><span class="line">Random.email() <span class="comment">// "h.qbhlgrab@srec.gm"</span></span><br><span class="line">Mock.mock(<span class="string">'@email'</span>)</span><br><span class="line">Mock.mock(<span class="string">'@email()'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>3.生成 ip：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Random.ip()</span></span><br><span class="line">Random.ip() <span class="comment">// "71.1.205.35"</span></span><br><span class="line">Mock.mock(<span class="string">'@ip'</span>)</span><br><span class="line">Mock.mock(<span class="string">'@ip()'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>4.生成区域：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Random.region()</span></span><br><span class="line">Random.region() <span class="comment">// "华南"</span></span><br><span class="line">Mock.mock(<span class="string">'@region'</span>) <span class="comment">// "西北"</span></span><br><span class="line">Mock.mock(<span class="string">'@region()'</span>) <span class="comment">// "西北"</span></span><br></pre></td></tr></table></figure></p>
+<p>5.生成省：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Random.province()</span></span><br><span class="line">Random.province() <span class="comment">// "江西省"</span></span><br><span class="line">Mock.mock(<span class="string">'@province'</span>)</span><br><span class="line">Mock.mock(<span class="string">'@province()'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>6.生成城市：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Random.city()</span></span><br><span class="line">Random.city()</span><br><span class="line">Mock.mock(<span class="string">'@city'</span>)</span><br><span class="line">Mock.mock(<span class="string">'@city()'</span>)</span><br><span class="line"><span class="comment">// Random.city( prefix )</span></span><br><span class="line">Random.city(<span class="literal">true</span>)</span><br><span class="line">Mock.mock(<span class="string">'@city(true)'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>结果：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Random.city()</span></span><br><span class="line"><span class="string">"桂林市"</span></span><br><span class="line"><span class="string">"海口市"</span></span><br><span class="line"><span class="string">"玉溪市"</span></span><br><span class="line"><span class="comment">// Random.city( prefix )</span></span><br><span class="line"><span class="string">"内蒙古自治区 呼伦贝尔市"</span></span><br><span class="line"><span class="string">"宁夏回族自治区 银川市"</span></span><br></pre></td></tr></table></figure></p>
+<p>7.区县：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Random.county()</span></span><br><span class="line">Random.county() <span class="comment">// "南沙群岛"</span></span><br><span class="line">Mock.mock(<span class="string">'@county'</span>)</span><br><span class="line">Mock.mock(<span class="string">'@county()'</span>)</span><br><span class="line"><span class="comment">// Random.county( prefix )</span></span><br><span class="line">Random.county(<span class="literal">true</span>) <span class="comment">// "黑龙江省 齐齐哈尔市 克东县"</span></span><br><span class="line">Mock.mock(<span class="string">'@county(true)'</span>)</span><br></pre></td></tr></table></figure></p>
+<h4 id="十六、Helper"><a href="#十六、Helper" class="headerlink" title="十六、Helper"></a>十六、Helper</h4><p>1.首字母大写：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Random.capitalize( word )</span></span><br><span class="line">Random.capitalize(<span class="string">'hello'</span>)</span><br><span class="line">Mock.mock(<span class="string">'@capitalize("hello")'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>2.转大小写：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Random.upper( str )</span></span><br><span class="line">Random.upper(<span class="string">'hello'</span>)</span><br><span class="line">Mock.mock(<span class="string">'@upper("hello")'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// Random.lower( str )</span></span><br><span class="line">Random.lower(<span class="string">'HELLO'</span>)</span><br><span class="line">Mock.mock(<span class="string">'@lower("HELLO")'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>3.数组随机取值：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Random.pick( arr )</span></span><br><span class="line">Random.pick([<span class="string">'a'</span>, <span class="string">'e'</span>, <span class="string">'i'</span>, <span class="string">'o'</span>, <span class="string">'u'</span>]) <span class="comment">// 'a'</span></span><br><span class="line">Mock.mock(<span class="string">'@pick(["a", "e", "i", "o", "u"])'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>4.打乱数组项顺序：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Random.shuffle( arr )</span></span><br><span class="line">Random.shuffle([<span class="string">'a'</span>, <span class="string">'e'</span>, <span class="string">'i'</span>, <span class="string">'o'</span>, <span class="string">'u'</span>]) <span class="comment">// ["o","e","i","u","a"]</span></span><br><span class="line">Mock.mock(<span class="string">'@shuffle(["a", "e", "i", "o", "u"])'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>5.生成 guid：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Random.guid()</span></span><br><span class="line">Random.guid()</span><br><span class="line">Mock.mock(<span class="string">'@guid'</span>)</span><br><span class="line">Mock.mock(<span class="string">'@guid()'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>6.生成 id：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Random.id()</span></span><br><span class="line">Random.id()</span><br><span class="line">Mock.mock(<span class="string">'@id'</span>)</span><br><span class="line">Mock.mock(<span class="string">'@id()'</span>)</span><br></pre></td></tr></table></figure></p>
+<h4 id="十七、补充说明"><a href="#十七、补充说明" class="headerlink" title="十七、补充说明"></a>十七、补充说明</h4><p>文章只是展示了 <code>Mockjs</code> 的基本用法规则，更多的实用场景请参考如下链接：<br><a href="http://mockjs.com/examples.html" target="_blank" rel="noopener">代码示例</a><br><a href="http://mockjs.com/0.1/" target="_blank" rel="noopener">文档地址</a></p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/mockjs/">mockjs</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/01/17/xhr-or-fetch-api/" data-tooltip="XHR or Fetch API ?">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/12/14/together-to-learn-ant-design-of-react/" data-tooltip="一起来学习Ant Design">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2017/01/05/detail-of-mockjs/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2017/01/05/detail-of-mockjs/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2017/01/05/detail-of-mockjs/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/01/17/xhr-or-fetch-api/" data-tooltip="XHR or Fetch API ?">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/12/14/together-to-learn-ant-design-of-react/" data-tooltip="一起来学习Ant Design">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2017/01/05/detail-of-mockjs/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2017/01/05/detail-of-mockjs/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2017/01/05/detail-of-mockjs/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2017/01/05/detail-of-mockjs/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2017/01/05/detail-of-mockjs/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2017/01/05/detail-of-mockjs/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

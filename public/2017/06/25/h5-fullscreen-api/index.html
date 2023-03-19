@@ -1,0 +1,520 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>HTML5 之全屏（Full Screen API） - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="技术日新月异，各大浏览器对 HTML5 的支持也越来越好，我们不妨大胆的使用 HTML5 API 来提升用户体验。这一节我们来看看 Full Screen API 的使用及原理。">
+<meta name="keywords" content="HTML5,Fullscreen,API">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="HTML5 之全屏（Full Screen API）">
+<meta property="og:url" content="http://jartto.wang/2017/06/25/h5-fullscreen-api/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="技术日新月异，各大浏览器对 HTML5 的支持也越来越好，我们不妨大胆的使用 HTML5 API 来提升用户体验。这一节我们来看看 Full Screen API 的使用及原理。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/fullscreen1.png">
+<meta property="og:updated_time" content="2018-10-30T00:09:35.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HTML5 之全屏（Full Screen API）">
+<meta name="twitter:description" content="技术日新月异，各大浏览器对 HTML5 的支持也越来越好，我们不妨大胆的使用 HTML5 API 来提升用户体验。这一节我们来看看 Full Screen API 的使用及原理。">
+<meta name="twitter:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/fullscreen1.png">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/h5.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/h5.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            HTML5 之全屏（Full Screen API）
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2017-06-25T07:46:52+08:00">
+	  
+		    2017/6月/25 07:46:52
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>技术日新月异，各大浏览器对 HTML5 的支持也越来越好，我们不妨大胆的使用 HTML5 API 来提升用户体验。这一节我们来看看 Full Screen API 的使用及原理。<br><a id="more"></a></p>
+<h4 id="一、使用场景"><a href="#一、使用场景" class="headerlink" title="一、使用场景"></a>一、使用场景</h4><p>1.当我们看视频的时候，为提升用户体验，可能会需要视频窗口全屏化；<br>2.如果你恰好在对接地图业务，一张全屏的地图可能会更有视觉冲击力；<br>3.动态展示图片或动画全屏预览；<br>…</p>
+<p>场景很多，但是使用 Full Screen API 一行代码就搞定了：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'.your-container'</span>)[<span class="number">0</span>].webkitRequestFullscreen();</span><br></pre></td></tr></table></figure></p>
+<p>是不是很酷，当然，这只适用与 <code>webkit</code> 内核浏览器的情况，而且还是最理想状态👻。</p>
+<h4 id="二、浏览器支持情况"><a href="#二、浏览器支持情况" class="headerlink" title="二、浏览器支持情况"></a>二、浏览器支持情况</h4><p><img src="http://7xvi3w.com1.z0.glb.clouddn.com/fullscreen1.png" alt="Full Screen API"><br><div class="alert success"><p>可以看到，基本上所有浏览器都支持了，除了 <code>iOS Safari</code> 和 <code>Opera Mini</code> ，所以移动端应用需谨慎。</p>
+</div></p>
+<h4 id="三、参数详解"><a href="#三、参数详解" class="headerlink" title="三、参数详解"></a>三、参数详解</h4><ul>
+<li><p>检测全屏是否可用</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//full-sreen available</span></span><br><span class="line"><span class="keyword">if</span>(</span><br><span class="line">  <span class="built_in">document</span>.fullscreenEnable||</span><br><span class="line">  <span class="built_in">document</span>.webkitFullscreenEnabled||</span><br><span class="line">  <span class="built_in">document</span>.mozFullScreenEnabled||</span><br><span class="line">  <span class="built_in">document</span>.msFullscreenEnabled</span><br><span class="line">)&#123;</span><br><span class="line">...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>全屏：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> i = <span class="built_in">document</span>.getElementById(myimage);</span><br><span class="line"><span class="comment">// go full-screen</span></span><br><span class="line"><span class="keyword">if</span> (i.requestFullscreen) &#123;</span><br><span class="line">    i.requestFullscreen();</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (i.webkitRequestFullscreen) &#123;</span><br><span class="line">    i.webkitRequestFullscreen();</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (i.mozRequestFullScreen) &#123;</span><br><span class="line">    i.mozRequestFullScreen();</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (i.msRequestFullscreen) &#123;</span><br><span class="line">    i.msRequestFullscreen();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>退出全屏：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// exit full-screen</span></span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">document</span>.exitFullscreen) &#123;</span><br><span class="line">    <span class="built_in">document</span>.exitFullscreen();</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">document</span>.webkitExitFullscreen) &#123;</span><br><span class="line">    <span class="built_in">document</span>.webkitExitFullscreen();</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">document</span>.mozCancelFullScreen) &#123;</span><br><span class="line">    <span class="built_in">document</span>.mozCancelFullScreen();</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">document</span>.msExitFullscreen) &#123;</span><br><span class="line">    <span class="built_in">document</span>.msExitFullscreen();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>当进入或者退出全屏模式时将触发这个事件:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.addEventListener(fullscreenchange, FShandler);</span><br><span class="line"><span class="built_in">document</span>.addEventListener(webkitfullscreenchange, FShandler);</span><br><span class="line"><span class="built_in">document</span>.addEventListener(mozfullscreenchange, FShandler);</span><br><span class="line"><span class="built_in">document</span>.addEventListener(MSFullscreenChange, FShandler);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>全屏操作可能会失败。例如 <code>iframes</code> 没有 <code>allowfullscreen</code> 属性或者是以窗口形式显示的内容也许会引起冲突。因此一个 <code>fullscreenerror</code> 也许会被触发：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.addEventListener(fullscreenerror, FSerrorhandler);</span><br><span class="line"><span class="built_in">document</span>.addEventListener(webkitfullscreenerror, FSerrorhandler);</span><br><span class="line"><span class="built_in">document</span>.addEventListener(mozfullscreenerror, FSerrorhandler);</span><br><span class="line"><span class="built_in">document</span>.addEventListener(MSFullscreenError, FSerrorhandler);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="四、全屏中添加-CSS-样式"><a href="#四、全屏中添加-CSS-样式" class="headerlink" title="四、全屏中添加 CSS 样式"></a>四、全屏中添加 CSS 样式</h4><p>全屏后，我们也可以控制元素样式，请注意 <code>-webkit-full-screen</code> 伪类：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#jartto</span><span class="selector-pseudo">:-webkit-full-screen</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">background</span>: yellow;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>不同的浏览器会添加不同的伪类，使用时一定要注意兼容性：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-pseudo">:-webkit-full-screen</span> &#123; &#125;</span><br><span class="line"><span class="selector-pseudo">:-moz-full-screen</span> &#123; &#125;</span><br><span class="line"><span class="selector-pseudo">:-ms-fullscreen</span> &#123; &#125;</span><br><span class="line"><span class="selector-pseudo">:fullscreen</span> &#123; &#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="五、更多示例"><a href="#五、更多示例" class="headerlink" title="五、更多示例"></a>五、更多示例</h4><p>1.全屏视频元素：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">video</span> <span class="attr">controls</span> <span class="attr">id</span>=<span class="string">"myvideo"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">"somevideo.webm"</span>&gt;</span><span class="tag">&lt;/<span class="name">source</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">"somevideo.mp4"</span>&gt;</span><span class="tag">&lt;/<span class="name">source</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">video</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> elem = <span class="built_in">document</span>.getElementById(<span class="string">"myvideo"</span>);</span><br><span class="line"><span class="keyword">if</span> (elem.requestFullscreen) &#123;</span><br><span class="line">  elem.requestFullscreen();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2.监听 <code>enter</code> 按键：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.addEventListener(<span class="string">"keydown"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (e.keyCode == <span class="number">13</span>) &#123;</span><br><span class="line">    toggleFullScreen();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;, <span class="literal">false</span>);</span><br></pre></td></tr></table></figure></p>
+<p>3.全屏／退出全屏切换<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">toggleFullScreen</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">document</span>.fullscreenElement) &#123;</span><br><span class="line">      <span class="built_in">document</span>.documentElement.requestFullscreen();</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">document</span>.exitFullscreen) &#123;</span><br><span class="line">      <span class="built_in">document</span>.exitFullscreen();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="六、插件源码分析"><a href="#六、插件源码分析" class="headerlink" title="六、插件源码分析"></a>六、插件源码分析</h4><p>既然 Full Screen API 使用如此简单，那么为什么有人为此写了插件？我们带着问题来看看几个流行的全屏插件的源码，尝试着自己找出答案。</p>
+<p>源码很简单，我们来过一遍：<br>1.先来看看 <a href="https://github.com/rafrex/fscreen/blob/master/src/index.js" target="_blank" rel="noopener">fscreen</a>：</p>
+<ul>
+<li><p>确定是否存在 <code>window.document</code> 对象</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="built_in">document</span> = <span class="keyword">typeof</span> <span class="built_in">window</span> !== <span class="string">'undefined'</span> &amp;&amp; <span class="keyword">typeof</span> <span class="built_in">window</span>.document !== <span class="string">'undefined'</span> ? <span class="built_in">window</span>.document : &#123;&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>大量的兼容检测</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> webkit = [</span><br><span class="line">  <span class="string">'webkitFullscreenEnabled'</span>,</span><br><span class="line">  <span class="string">'webkitFullscreenElement'</span>,</span><br><span class="line">  <span class="string">'webkitRequestFullscreen'</span>,</span><br><span class="line">  <span class="string">'webkitExitFullscreen'</span>,</span><br><span class="line">  <span class="string">'webkitfullscreenchange'</span>,</span><br><span class="line">  <span class="string">'webkitfullscreenerror'</span>,</span><br><span class="line">];</span><br><span class="line"><span class="keyword">const</span> vendor = (</span><br><span class="line">  (<span class="string">'fullscreenEnabled'</span> <span class="keyword">in</span> <span class="built_in">document</span> &amp;&amp; <span class="built_in">Object</span>.keys(key)) ||</span><br><span class="line">  (webkit[<span class="number">0</span>] <span class="keyword">in</span> <span class="built_in">document</span> &amp;&amp; webkit) ||</span><br><span class="line">  (moz[<span class="number">0</span>] <span class="keyword">in</span> <span class="built_in">document</span> &amp;&amp; moz) ||</span><br><span class="line">  (ms[<span class="number">0</span>] <span class="keyword">in</span> <span class="built_in">document</span> &amp;&amp; ms) ||</span><br><span class="line">  []</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>封装方法支持<br>1.requestFullscreen<br>2.fullscreenEnabled<br>3.fullscreenElement<br>4.onfullscreenchange<br>5.onfullscreenerror</p>
+</li>
+</ul>
+<p>2.再来看看 <a href="https://github.com/sindresorhus/screenfull.js/blob/gh-pages/src/screenfull.js" target="_blank" rel="noopener">screenful</a> ，相比来说，<code>screenfull.js</code> 做的更加完善：<br><div class="alert success"><p>需要注意的是，参数 <code>Element.ALLOW_KEYBOARD_INPUT</code> 使全屏状态中可以键盘输入。</p>
+</div></p>
+<ul>
+<li><p>增加了 <code>commonjs</code> 和 键盘事件嗅探</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> isCommonjs = <span class="keyword">typeof</span> <span class="built_in">module</span> !== <span class="string">'undefined'</span> &amp;&amp; <span class="built_in">module</span>.exports;</span><br><span class="line"><span class="keyword">var</span> keyboardAllowed = <span class="keyword">typeof</span> Element !== <span class="string">'undefined'</span> &amp;&amp; <span class="string">'ALLOW_KEYBOARD_INPUT'</span> <span class="keyword">in</span> Element;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>核心代码片段，相比 <code>fscreen</code> 感觉更加清晰易懂</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> screenfull = &#123;</span><br><span class="line">  request: <span class="function"><span class="keyword">function</span> (<span class="params">elem</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> request = fn.requestFullscreen;</span><br><span class="line"></span><br><span class="line">    elem = elem || <span class="built_in">document</span>.documentElement;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Work around Safari 5.1 bug: reports support for</span></span><br><span class="line">    <span class="comment">// keyboard in fullscreen even though it doesn't.</span></span><br><span class="line">    <span class="comment">// Browser sniffing, since the alternative with</span></span><br><span class="line">    <span class="comment">// setTimeout is even worse.</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="regexp">/ Version\/5\.1(?:\.\d+)? Safari\//</span>.test(navigator.userAgent)) &#123;</span><br><span class="line">      elem[request]();</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      elem[request](keyboardAllowed &amp;&amp; Element.ALLOW_KEYBOARD_INPUT);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  exit: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">document</span>[fn.exitFullscreen]();</span><br><span class="line">  &#125;,</span><br><span class="line">  toggle: <span class="function"><span class="keyword">function</span> (<span class="params">elem</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.isFullscreen) &#123;</span><br><span class="line">      <span class="keyword">this</span>.exit();</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">this</span>.request(elem);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  onchange: <span class="function"><span class="keyword">function</span> (<span class="params">callback</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.on(<span class="string">'change'</span>, callback);</span><br><span class="line">  &#125;,</span><br><span class="line">  onerror: <span class="function"><span class="keyword">function</span> (<span class="params">callback</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.on(<span class="string">'error'</span>, callback);</span><br><span class="line">  &#125;,</span><br><span class="line">  on: <span class="function"><span class="keyword">function</span> (<span class="params">event, callback</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> eventName = eventNameMap[event];</span><br><span class="line">    <span class="keyword">if</span> (eventName) &#123;</span><br><span class="line">      <span class="built_in">document</span>.addEventListener(eventName, callback, <span class="literal">false</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  off: <span class="function"><span class="keyword">function</span> (<span class="params">event, callback</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> eventName = eventNameMap[event];</span><br><span class="line">    <span class="keyword">if</span> (eventName) &#123;</span><br><span class="line">      <span class="built_in">document</span>.removeEventListener(eventName, callback, <span class="literal">false</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  raw: fn</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="七、总结"><a href="#七、总结" class="headerlink" title="七、总结"></a>七、总结</h4><p>到这里，大家可能都明白了，其实 <code>HTML5 Full Screen API</code> 的使用很简单，但浏览器的差异导致我们不得不添加很多的兼容代码。所以，如果你不想自己维护代码，可以使用 <code>screenfull.js</code> 这样的类库，它可以平滑过渡这些差异。</p>
+<h4 id="八、更多资源"><a href="#八、更多资源" class="headerlink" title="八、更多资源"></a>八、更多资源</h4><p><a href="https://developer.mozilla.org/en-US/docs/Web/API/Fullscreen_API" target="_blank" rel="noopener">Fullscreen API</a><br><a href="https://www.2cto.com/kf/201411/348423.html" target="_blank" rel="noopener">How to Use HTML5 FUll Screen API</a></p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/API/">API</a> <a class="tag tag--primary tag--small t-link" href="/tags/Fullscreen/">Fullscreen</a> <a class="tag tag--primary tag--small t-link" href="/tags/HTML5/">HTML5</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/07/05/use-es6-2/" data-tooltip="ES6 边学边用二">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/06/09/use-es6/" data-tooltip="ES6 边学边用一">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2017/06/25/h5-fullscreen-api/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2017/06/25/h5-fullscreen-api/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2017/06/25/h5-fullscreen-api/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/07/05/use-es6-2/" data-tooltip="ES6 边学边用二">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/06/09/use-es6/" data-tooltip="ES6 边学边用一">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2017/06/25/h5-fullscreen-api/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2017/06/25/h5-fullscreen-api/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2017/06/25/h5-fullscreen-api/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2017/06/25/h5-fullscreen-api/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2017/06/25/h5-fullscreen-api/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2017/06/25/h5-fullscreen-api/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

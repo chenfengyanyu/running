@@ -1,0 +1,577 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>linux 实用命令 - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="对 linux 常用命令不熟，导致每次应用的时候都需要去查询。偶然看到一篇文章描述的比较全面，搜集过来，以备后续查看。">
+<meta name="keywords" content="api,linux">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="linux 实用命令">
+<meta property="og:url" content="http://jartto.wang/2016/11/02/linux-common-command/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="对 linux 常用命令不熟，导致每次应用的时候都需要去查询。偶然看到一篇文章描述的比较全面，搜集过来，以备后续查看。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2016-12-12T03:36:29.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="linux 实用命令">
+<meta name="twitter:description" content="对 linux 常用命令不熟，导致每次应用的时候都需要去查询。偶然看到一篇文章描述的比较全面，搜集过来，以备后续查看。">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/linux2.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="http://7xvi3w.com1.z0.glb.clouddn.com/linux2.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            linux 实用命令
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2016-11-02T21:29:53+08:00">
+	  
+		    2016/11月/02 21:29:53
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>对 linux 常用命令不熟，导致每次应用的时候都需要去查询。偶然看到一篇文章描述的比较全面，搜集过来，以备后续查看。</p>
+<a id="more"></a>
+<h4 id="一、更改文件或者文件夹的拥有者"><a href="#一、更改文件或者文件夹的拥有者" class="headerlink" title="一、更改文件或者文件夹的拥有者"></a>一、更改文件或者文件夹的拥有者</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chown [-cfhvR] [--<span class="built_in">help</span>] [--version] user[:group] file...</span><br></pre></td></tr></table></figure>
+<p>参数格式 :<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">user : 新的档案拥有者的使用者 IDgroup : 新的档案拥有者的使用者群体(group)</span><br><span class="line">-c : 若该档案拥有者确实已经更改，才显示其更改动作</span><br><span class="line">-f : 若该档案拥有者无法被更改也不要显示错误讯息</span><br><span class="line">-h : 只对于连结(link)进行变更，而非该 link 真正指向的档案</span><br><span class="line">-v : 显示拥有者变更的详细资料</span><br><span class="line">-R : 对目前目录下的所有档案与子目录进行相同的拥有者变更(即以递回的方式逐个变更)</span><br></pre></td></tr></table></figure></p>
+<p>如：更改目录拥有者为oracle<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chown -R oracle:oinstall /oracle/u01/app/oracle</span><br></pre></td></tr></table></figure></p>
+<h4 id="二、修改权限"><a href="#二、修改权限" class="headerlink" title="二、修改权限"></a>二、修改权限</h4><p>改变文件的读写和执行权限，有符号法和八进制数字法。<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod (change mode)</span><br></pre></td></tr></table></figure></p>
+<p>选项：<br>(1)符号法：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">chmod &#123;u|g|o|a&#125;&#123;+|-|=&#125;&#123;r|w|x&#125; filename</span><br><span class="line">          u (user)   表示用户本人。</span><br><span class="line">          g (group)  表示同组用户。</span><br><span class="line">          o (oher)   表示其他用户。</span><br><span class="line">          a (all)    表示所有用户。</span><br><span class="line">          +          用于给予指定用户的许可权限。</span><br><span class="line">          -          用于取消指定用户的许可权限。</span><br><span class="line">          =          将所许可的权限赋给文件。</span><br><span class="line">          r (<span class="built_in">read</span>)   读许可，表示可以拷贝该文件或目录的内容。</span><br><span class="line">          w (write)  写许可，表示可以修改该文件或目录的内容。</span><br><span class="line">          x (execute)执行许可，表示可以执行该文件或进入目录。</span><br></pre></td></tr></table></figure></p>
+<p>(2)八进制数字法：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">chmod abc file</span><br><span class="line">  其中a,b,c各为一个八进制数字，分别表示User、Group、及Other的权限。</span><br><span class="line">          4 (100)    表示可读。</span><br><span class="line">          2 (010)    表示可写。</span><br><span class="line">          1 (001)    表示可执行。</span><br><span class="line">  若要rwx属性则4+2+1=7；</span><br><span class="line">  若要rw-属性则4+2=6；</span><br><span class="line">  若要r-x属性则4+1=5。</span><br></pre></td></tr></table></figure></p>
+<p>举几个实用例子：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># chmod a+rx filename</span></span><br><span class="line">让所有用户可以读和执行文件filename。</span><br><span class="line"><span class="comment"># chmod go-rx filename</span></span><br><span class="line">取消同组和其他用户的读和执行文件filename的权限。</span><br><span class="line"><span class="comment"># chmod 741 filename</span></span><br><span class="line">让本人可读写执行、同组用户可读、其他用户可执行文件filename。</span><br><span class="line"><span class="comment"># chmod -R 755 /home/oracle</span></span><br><span class="line">递归更改目录权限，本人可读写执行、同组用户可读可执行、其他用户可读可执行</span><br></pre></td></tr></table></figure></p>
+<h4 id="三、修改文件日期"><a href="#三、修改文件日期" class="headerlink" title="三、修改文件日期"></a>三、修改文件日期</h4><p>改变文件的日期，不对文件的内容做改动，若文件不存在则建立新文件。<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">touch filename</span><br></pre></td></tr></table></figure></p>
+<h4 id="四、链接文件"><a href="#四、链接文件" class="headerlink" title="四、链接文件"></a>四、链接文件</h4><p>为文件或目录建立一个链。其中，filename和directory是源文件名和源目录名；<br>linkname和pathname分别表示与源文件或源目录名相链接的文件或目录。<br>选项 -s 为文件或目录建立符号链接。不加-s表示为文件或目录建立硬链接。<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ln [option] filename linkname</span><br><span class="line">ln [option] directory pathname</span><br><span class="line">ln -s filename linkname</span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p>链接的目地在于，对一个文件或目录赋予两个以上的名字，使其可以出现在不同的目录中，既可以使文件或目录共享，又可以节省磁盘空间。</p>
+</div>
+<h4 id="五、显示日期"><a href="#五、显示日期" class="headerlink" title="五、显示日期"></a>五、显示日期</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">date</span><br></pre></td></tr></table></figure>
+<h4 id="六、显示日历"><a href="#六、显示日历" class="headerlink" title="六、显示日历"></a>六、显示日历</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cal (calendar)</span><br><span class="line">cal [month] year</span><br><span class="line">cal 1998</span><br></pre></td></tr></table></figure>
+<h4 id="七、显示文件头部"><a href="#七、显示文件头部" class="headerlink" title="七、显示文件头部"></a>七、显示文件头部</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">head [option] filename</span><br></pre></td></tr></table></figure>
+<p>选项：缺省  显示文件的头10行。<br>          -i    显示文件的开始 i行。</p>
+<h4 id="八、显示文件尾部"><a href="#八、显示文件尾部" class="headerlink" title="八、显示文件尾部"></a>八、显示文件尾部</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tail [option] filename</span><br></pre></td></tr></table></figure>
+<p>选项：缺省  显示文件的末10行。<br>-i    显示文件最后 i 行。<br>+i    从文件的第i行开始显示。</p>
+<h4 id="九、显示用户标识"><a href="#九、显示用户标识" class="headerlink" title="九、显示用户标识"></a>九、显示用户标识</h4><p>显示用户标识及用户所属的所有组。<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">id [option] [user]</span><br><span class="line">id username</span><br></pre></td></tr></table></figure></p>
+<p>选项：<br>-a 显示用户名、用户标识及用户所属的所有组</p>
+<h4 id="十、查看当前登录的用户"><a href="#十、查看当前登录的用户" class="headerlink" title="十、查看当前登录的用户"></a>十、查看当前登录的用户</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">users</span><br></pre></td></tr></table></figure>
+<h4 id="十一、显示当前正在系统中的所有用户名字，使用终端设备号，注册时间。"><a href="#十一、显示当前正在系统中的所有用户名字，使用终端设备号，注册时间。" class="headerlink" title="十一、显示当前正在系统中的所有用户名字，使用终端设备号，注册时间。"></a>十一、显示当前正在系统中的所有用户名字，使用终端设备号，注册时间。</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">who</span><br></pre></td></tr></table></figure>
+<h4 id="十二、显示出当前终端上使用的用户"><a href="#十二、显示出当前终端上使用的用户" class="headerlink" title="十二、显示出当前终端上使用的用户"></a>十二、显示出当前终端上使用的用户</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">whoami</span><br></pre></td></tr></table></figure>
+<h4 id="十三、寻找文件"><a href="#十三、寻找文件" class="headerlink" title="十三、寻找文件"></a>十三、寻找文件</h4><p>在所给的路经名下寻找符合表达式相匹配的文件<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">find pathname [option] expression</span><br><span class="line">find ./ -name <span class="string">'*abc*'</span> -<span class="built_in">print</span></span><br></pre></td></tr></table></figure></p>
+<p>选项：<br>-name     表示文件名<br>-user     用户名，选取该用户所属的文件<br>-size     按大小查找，以block为单位，一个block是512B<br>-mtime n  按最后一次修改时间查找，选取n天内被修改的文件<br>-perm     按权限查找<br>-type      按文件类型查找<br>-atime    按最后一次访问时间查找</p>
+<h4 id="十四、搜索文件中匹配符"><a href="#十四、搜索文件中匹配符" class="headerlink" title="十四、搜索文件中匹配符"></a>十四、搜索文件中匹配符</h4><p>逐行搜索所指定的文件或标准输入，并显示匹配模式的每一行。<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grep [option] pattern filenames</span><br><span class="line">grep -i <span class="string">'error'</span> ./<span class="built_in">test</span>/test.log</span><br></pre></td></tr></table></figure></p>
+<p>选项：<br>-i    匹配时忽略大小写<br>-v 找出模式失配的行</p>
+<h4 id="十五、统计文件字数"><a href="#十五、统计文件字数" class="headerlink" title="十五、统计文件字数"></a>十五、统计文件字数</h4><p>统计文件中的文件行数、字数和字符数。<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wc [option] filename</span><br><span class="line">wc -c ./<span class="built_in">test</span>/run.sh</span><br></pre></td></tr></table></figure></p>
+<p>选项：若缺省文件名则指标准输入<br>-l 统计文件的行数<br>-w 统计文件的单词数<br>-c 统计文件的字符数</p>
+<h4 id="十六、显示磁盘空间"><a href="#十六、显示磁盘空间" class="headerlink" title="十六、显示磁盘空间"></a>十六、显示磁盘空间</h4><p>显示磁盘空间的使用情况，包括文件系统安装的目录名、块设备名、总字节数、已用字节数、剩余字节数占用百分比。<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df [option]</span><br><span class="line">df -hi</span><br></pre></td></tr></table></figure></p>
+<p>选项：<br>-a：显示全部的档案系统和各分割区的磁盘使用情形<br>-i：显示i -nodes的使用量<br>-k：大小用k来表示 (默认值)<br>-t：显示某一个档案系统的所有分割区磁盘使用量<br>-x：显示不是某一个档案系统的所有分割区磁盘使用量<br>-T：显示每个分割区所属的档案系统名称<br>-h: 表示使用「Human-readable」的输出，也就是在档案系统大小使用 GB、MB 等易读的格式。</p>
+<h4 id="十七、查询档案或目录的磁盘使用空间"><a href="#十七、查询档案或目录的磁盘使用空间" class="headerlink" title="十七、查询档案或目录的磁盘使用空间"></a>十七、查询档案或目录的磁盘使用空间</h4><p>以指定的目录下的子目录为单位，显示每个目录内所有档案所占用的磁盘空间大小<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">du [option] [filename]</span><br><span class="line">du -a</span><br><span class="line">du -sh /etc 只显示该目录的总合</span><br><span class="line">du /etc | sort -nr | more 统计结果用sort 指令进行排序，</span><br><span class="line">sort 的参数 -nr 表示要以数字排序法进行反向排序。</span><br></pre></td></tr></table></figure></p>
+<p>选项：<br>-a：显示全部目录和其次目录下的每个档案所占的磁盘空间<br>-b：大小用bytes来表示 (默认值为k bytes)<br>-c：最后再加上总计 (默认值)<br>-s：只显示各档案大小的总合<br>-x：只计算同属同一个档案系统的档案<br>-L：计算所有的档案大小<br>-h: 表示档案系统大小使用 GB、MB 等易读的格式。</p>
+<h4 id="十八、显示进程"><a href="#十八、显示进程" class="headerlink" title="十八、显示进程"></a>十八、显示进程</h4><p>显示系统中进程的信息。包括进程ID、控制进程终端、执行时间和命令。<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ps [option]</span><br><span class="line">% ps -ef</span><br></pre></td></tr></table></figure></p>
+<p>选项：<br>-a 显示所有进程信息<br>-U uidlist 列出这个用户的所有进程<br>-e 显示当前运行的每一个进程信息<br>-f 显示一个完整的列表<br>-x 显示包括没有终端控制的进程状况 。</p>
+<h4 id="十九、终止进程"><a href="#十九、终止进程" class="headerlink" title="十九、终止进程"></a>十九、终止进程</h4><p>向指定的进程送信号或终止进程。kill指令的用途是送一个signal给某一个process，因为大部份送的都是用来杀掉 process 的 SIGKILL 或 SIGHUP ，因此称为 kill。<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">kill</span> [option] pid</span><br><span class="line"><span class="built_in">kill</span> -9 pid</span><br></pre></td></tr></table></figure></p>
+<p>选项：<br>-9  强行终止进程<br><div class="alert info"><p>pid标示进程号，可由ps命令得到。也可以用 kill -l 来察看可代替 signal 号码的数目字。</p>
+</div></p>
+<h4 id="二十、查看自己的IP地址"><a href="#二十、查看自己的IP地址" class="headerlink" title="二十、查看自己的IP地址"></a>二十、查看自己的IP地址</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ifconfig -a</span><br></pre></td></tr></table></figure>
+<h4 id="二十一、查看路由表"><a href="#二十一、查看路由表" class="headerlink" title="二十一、查看路由表"></a>二十一、查看路由表</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -rn</span><br></pre></td></tr></table></figure>
+<h4 id="二十二、远程登录"><a href="#二十二、远程登录" class="headerlink" title="二十二、远程登录"></a>二十二、远程登录</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">telnet hostname</span><br></pre></td></tr></table></figure>
+<h4 id="二十三、文件传输"><a href="#二十三、文件传输" class="headerlink" title="二十三、文件传输"></a>二十三、文件传输</h4><p>网络文件传输及远程操作。<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ftp hostname</span><br></pre></td></tr></table></figure></p>
+<p>选项：ftp命令：<br>cd [dirname]  进入远程机的目录<br>lcd [dirname] 设置本地机的目录<br>dir/ls        显示远程的目录文件<br>bin           以二进制方式进行传输<br>asc           以文本文件方式进行传输<br>get/mget      从远程机取一个或多个文件<br>put/mput      向远程机送一个或多个文件<br>prompt        打开或关闭多个文件传送时的交互提示<br>close         关闭与远程机的连接<br>quit          退出ftp<br>!/exit ftp登陆状态下，!表示暂时退出ftp状态回到本地目录，exit表示返回ftp状态</p>
+<h4 id="二十四、查看自己的电子邮件"><a href="#二十四、查看自己的电子邮件" class="headerlink" title="二十四、查看自己的电子邮件"></a>二十四、查看自己的电子邮件</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mailx</span><br></pre></td></tr></table></figure>
+<p>选项：<br>-delete  删除<br>-next    下一个<br>-quit    退出<br>-reply   回复</p>
+<h4 id="二十五、帮助用户回忆执行过的命令"><a href="#二十五、帮助用户回忆执行过的命令" class="headerlink" title="二十五、帮助用户回忆执行过的命令"></a>二十五、帮助用户回忆执行过的命令</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">history</span></span><br></pre></td></tr></table></figure>
+<h4 id="二十六、网上对话"><a href="#二十六、网上对话" class="headerlink" title="二十六、网上对话"></a>二十六、网上对话</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">talk username</span><br></pre></td></tr></table></figure>
+<div class="alert info"><p>对话时系统把终端分为上下两部分，上半部显示自己键入信息，下半部显示对方用户键入的信息。键入delete或Ctrl+C则结束对话。</p>
+</div>
+<h4 id="二十七、允许或拒绝其它用户向自己所用的终端发送信息"><a href="#二十七、允许或拒绝其它用户向自己所用的终端发送信息" class="headerlink" title="二十七、允许或拒绝其它用户向自己所用的终端发送信息"></a>二十七、允许或拒绝其它用户向自己所用的终端发送信息</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mesg [n/y]</span><br></pre></td></tr></table></figure>
+<p>选项：<br>-n 拒绝其它用户向自己所用的终端写信息<br>-y 允许其它用户向自己所用的终端写信息（缺省值）</p>
+<h4 id="二十八、给其他用户写信息"><a href="#二十八、给其他用户写信息" class="headerlink" title="二十八、给其他用户写信息"></a>二十八、给其他用户写信息</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">write username [ttyname]</span><br></pre></td></tr></table></figure>
+<div class="alert info"><p>若对方没有拒绝，两用户可进行交谈，键入EOF或Ctrl+C则结束对话。</p>
+</div>
+<h4 id="二十九、创建、修改、删除用户和群组"><a href="#二十九、创建、修改、删除用户和群组" class="headerlink" title="二十九、创建、修改、删除用户和群组"></a>二十九、创建、修改、删除用户和群组</h4><p>a. 创建群组：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#创建群组名为oinstall的组</span></span><br><span class="line">groupadd oinstall    </span><br><span class="line"><span class="comment">#创建组号是344的组，此时在/etc/passwd文件中产生一个组ID（GID）是344的项目。</span></span><br><span class="line">groupadd -g 344 dba</span><br></pre></td></tr></table></figure></p>
+<p>b. 修改群组：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#改变用户组帐号的属性</span></span><br><span class="line">groupmod</span><br><span class="line"><span class="comment">#用户组帐号名</span></span><br><span class="line">groupmod –g 新的GID</span><br><span class="line"><span class="comment">#此命令由于改变用户组的名称</span></span><br><span class="line">groupmod –n 新组名 原组名</span><br></pre></td></tr></table></figure></p>
+<p>c. 删除群组：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#删除指定的组帐号</span></span><br><span class="line">groupdel 组名</span><br></pre></td></tr></table></figure></p>
+<p>d. 新建用户：<br>命令：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">useradd [－d home] [－s shell] [－c comment] [－m [－k template]]</span><br><span class="line">[－f inactive] [－e expire ] [－p passwd] [－r] name</span><br><span class="line"><span class="comment">#创建Oracle用户</span></span><br><span class="line">useradd -g oinstall -G dba oracle</span><br></pre></td></tr></table></figure></p>
+<p>主要参数<br>-c：加上备注文字，备注文字保存在passwd的备注栏中。<br>-d：指定用户登入时的启始目录。<br>-D：变更预设值。<br>-e：指定账号的有效期限，缺省表示永久有效。<br>-f：指定在密码过期后多少天即关闭该账号。<br>-g：指定用户所属的群组。<br>-G：指定用户所属的附加群组。<br>-m：自动建立用户的登入目录。<br>-M：不要自动建立用户的登入目录。<br>-n：取消建立以用户名称为名的群组。<br>-r：建立系统账号。<br>-s：指定用户登入后所使用的shell。<br>-u：指定用户ID号。</p>
+<p>e. 删除用户<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#删除指定的用户帐号</span></span><br><span class="line">userdel 用户名</span><br><span class="line"><span class="comment">#删除指定的用户帐号及宿主目录</span></span><br><span class="line">userdel –r 用户名(userdel 用户名;rm 用户名)</span><br><span class="line"><span class="comment">#把kkk用户加入root组里</span></span><br><span class="line">useradd -g root kkk</span><br></pre></td></tr></table></figure></p>
+<p>f. 修改用户<br>修改已有用户的信息<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#把用户user2改名为user1</span></span><br><span class="line"><span class="comment">#usermod -l user2 user1</span></span><br></pre></td></tr></table></figure></p>
+<p>usermod –l 旧用户名 新用户名： 修改用户名<br>usermod –L 用户名： 用于锁定指定用户账号，使其不能登陆系统<br>usermod –U 用户名： 对锁定的用户帐号进行解锁<br>passwd –d 用户名： 使帐号无口令，即用户不需要口令就能登录系统</p>
+<h4 id="三十、启动、关闭防火墙"><a href="#三十、启动、关闭防火墙" class="headerlink" title="三十、启动、关闭防火墙"></a>三十、启动、关闭防火墙</h4><p>永久打开或则关闭<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chkconfig iptables on</span><br><span class="line">chkconfig iptables off</span><br></pre></td></tr></table></figure></p>
+<p>即时生效：重启后还原<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">service iptables start</span><br><span class="line">service iptables stop</span><br></pre></td></tr></table></figure></p>
+<p>或者：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/etc/init.d/iptables start</span><br><span class="line">/etc/init.d/iptables stop</span><br></pre></td></tr></table></figure></p>
+<h4 id="三十一、vi技巧"><a href="#三十一、vi技巧" class="headerlink" title="三十一、vi技巧"></a>三十一、vi技巧</h4><p>a. 进入输入模式<br>新增 (append)<br>a ：从光标所在位置後面开始新增资料，光标後的资料随新增资料向後移动。<br>A：从光标所在列最後面的地方开始新增资料。</p>
+<p>插入 (insert)<br>i：从光标所在位置前面开始插入资料，光标後的资料随新增资料向後移动。<br>I ：从光标所在列的第一个非空白字元前面开始插入资料。</p>
+<p>开始 (open)<br>o ：在光标所在列下新增一列并进入输入模式。<br>O: 在光标所在列上方新增一列并进入输入模式。<br>b. 退出vi<br>在指令模式下键入:q,:q!,:wq或:x(注意:号），就会退出vi。其中:wq和:x是存盘退出，而:q是直接退出，如果文件已有新的变化，vi会提示你保存文件而:q命令也会失效，这时你可以用:w命令保存文件后再用:q 退出，或用:wq或:x命令退出，如果你不想保存改变后的文件，你就需要用:q!命令，这个命令将不保存文件而直接退出vi。</p>
+<p>c. 删除与修改文件的命令：<br>x：删除光标所在字符。<br>dd ：删除光标所在的列。<br>r ：修改光标所在字元，r 後接著要修正的字符。<br>R：进入取替换状态，新增文字会覆盖原先文字，直到按 [ESC] 回到指令模式下为止。<br>s：删除光标所在字元，并进入输入模式。<br>S：删除光标所在的列，并进入输入模式。</p>
+<p>d. 屏幕翻滚类命令<br>Ctrl+u: 向文件首翻半屏<br>Ctrl+d: 向文件尾翻半屏<br>Ctrl+f: 向文件尾翻一屏<br>Ctrl＋b: 向文件首翻一屏<br>nz: 将第n行滚至屏幕顶部，不指定n时将当前行滚至屏幕顶部。</p>
+<p>e. 删除命令<br>ndw或ndW: 删除光标处开始及其后的n-1个字<br>do: 删至行首<br>d$: 删至行尾<br>ndd: 删除当前行及其后n-1行<br>x或X: 删除一个字符，x删除光标后的，而X删除光标前的<br>Ctrl+u: 删除输入方式下所输入的文本</p>
+<p>f. 搜索及替换命令<br>/pattern: 从光标开始处向文件尾搜索pattern<br>?pattern: 从光标开始处向文件首搜索pattern<br>n: 在同一方向重复上一次搜索命令<br>N: 在反方向上重复上一次搜索命令<br>:s/p1/p2/g: 将当前行中所有p1均用p2替代<br>:n1,n2s/p1/p2/g: 将第n1至n2行中所有p1均用p2替代<br>:g/p1/s//p2/g: 将文件中所有p1均用p2替换</p>
+<p>g. 复制，黏贴<br>(1) 选定文本块，使用v进入可视模式；移动光标键选定内容<br>(2) 复制选定块到缓冲区，用y；复制整行，用yy<br>(3) 剪切选定块到缓冲区，用d；剪切整行用dd<br>(4) 粘贴缓冲区中的内容，用p</p>
+<div class="alert info"><p>内容来自<a href="http://blog.csdn.net/wojiaopanpan/article/details/7286430/" target="_blank" rel="noopener">linux 命令</a>，我只是做了简单的格式调整，感谢作者。</p>
+</div>
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/api/">api</a> <a class="tag tag--primary tag--small t-link" href="/tags/linux/">linux</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/12/06/talk-about-ie-compatible-over-again/" data-tooltip="再谈ie浏览器兼容问题">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/10/25/does-js-guarantee-object-property-order/" data-tooltip="js能够保证object属性的输出顺序吗？">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2016/11/02/linux-common-command/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2016/11/02/linux-common-command/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2016/11/02/linux-common-command/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+            
+                <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/12/06/talk-about-ie-compatible-over-again/" data-tooltip="再谈ie浏览器兼容问题">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/10/25/does-js-guarantee-object-property-order/" data-tooltip="js能够保证object属性的输出顺序吗？">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2016/11/02/linux-common-command/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2016/11/02/linux-common-command/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2016/11/02/linux-common-command/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2016/11/02/linux-common-command/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2016/11/02/linux-common-command/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2016/11/02/linux-common-command/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+    
+        <script>
+             var disqus_config = function () {
+                 this.page.url = 'http://jartto.wang/2016/11/02/linux-common-command/';
+                 
+                    this.page.identifier = '2016/11/02/linux-common-command/';
+                                  
+             };
+            (function() {
+                var d = document, s = d.createElement('script');
+                var disqus_shortname = 'jartto';
+                s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+
+
+
+</html>

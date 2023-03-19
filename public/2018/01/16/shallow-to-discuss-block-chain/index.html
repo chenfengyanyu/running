@@ -1,0 +1,534 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>浅谈区块链 - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="区块链的风头真是一浪高过一浪，有种「千树万树梨花开」的感觉。技术永远都在革新，我们不能停止学习的脚步。简单的做一些了解，增加茶余饭后的谈资吧！">
+<meta name="keywords" content="区块链,block-chain">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="浅谈区块链">
+<meta property="og:url" content="http://jartto.wang/2018/01/16/shallow-to-discuss-block-chain/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="区块链的风头真是一浪高过一浪，有种「千树万树梨花开」的感觉。技术永远都在革新，我们不能停止学习的脚步。简单的做一些了解，增加茶余饭后的谈资吧！">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/block1.png-blog">
+<meta property="og:updated_time" content="2018-12-30T15:52:17.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="浅谈区块链">
+<meta name="twitter:description" content="区块链的风头真是一浪高过一浪，有种「千树万树梨花开」的感觉。技术永远都在革新，我们不能停止学习的脚步。简单的做一些了解，增加茶余饭后的谈资吧！">
+<meta name="twitter:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/block1.png-blog">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo/chain.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo/chain.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            浅谈区块链
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2018-01-16T23:32:19+08:00">
+	  
+		    2018/1月/16 23:32:19
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术杂谈/">技术杂谈</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>区块链的风头真是一浪高过一浪，有种「千树万树梨花开」的感觉。技术永远都在革新，我们不能停止学习的脚步。简单的做一些了解，增加茶余饭后的谈资吧！<br><a id="more"></a></p>
+<h4 id="一、什么，被区块链刷屏了？"><a href="#一、什么，被区块链刷屏了？" class="headerlink" title="一、什么，被区块链刷屏了？"></a>一、什么，被区块链刷屏了？</h4><p>是的，一时间所有区块链的文章都爆发出来，好在我也是个有心的人。这不，都被我一一收录了：</p>
+<ul>
+<li><a href="https://mp.weixin.qq.com/s/hoRLBOGfDOe57dEzdNzMoQ" target="_blank" rel="noopener">走近比特币：一个故事看懂区块链原理</a></li>
+<li><a href="http://mp.weixin.qq.com/s/STCxZlH0E3A-pyGuIiBbZQ" target="_blank" rel="noopener">写给互联网人读的“区块链第一课”</a></li>
+<li><a href="http://froggy.link/p/Njc4NQ==?s=1648674332" target="_blank" rel="noopener">区块链、比特币、ICO ：一场不折不扣的惊天庞氏骗局</a></li>
+<li><a href="http://mp.weixin.qq.com/s/hA1nkv_E114I-KouZxehdQ" target="_blank" rel="noopener">区块链｜对于产品，对于行业究竟意味着什么？</a></li>
+<li><a href="http://mp.weixin.qq.com/s/e_-lplErsebErOaPAlwG3w" target="_blank" rel="noopener">技术人再不懂区块链，你就OUT了？</a></li>
+<li><a href="https://view.inews.qq.com/a/20180114A05I0300?from=groupmessage&amp;isappinstalled=0" target="_blank" rel="noopener">从原理到趋势，解剖风口上的区块链技术</a></li>
+<li><a href="http://mp.weixin.qq.com/s/DiqTOyv0U8xc83J9oE0vDw" target="_blank" rel="noopener">别人在忙挖矿，阿里工程师却悄悄用区块链搞了件大事！</a></li>
+<li><a href="http://mp.weixin.qq.com/s/QTNAfrvkQIp3YfVK1cKjMA" target="_blank" rel="noopener">当你妈也问你区块链是啥的时候，区块链究竟是风口，是炒作？还是阴谋？</a></li>
+<li><a href="http://mp.weixin.qq.com/s/31BgSLahFNRHw75R463AEw" target="_blank" rel="noopener">如果用上区块链技术，那么《白夜追凶》可能第一季就完结了！</a></li>
+</ul>
+<h4 id="二、众说纷纭，我该相信谁？"><a href="#二、众说纷纭，我该相信谁？" class="headerlink" title="二、众说纷纭，我该相信谁？"></a>二、众说纷纭，我该相信谁？</h4><p>可以看到区块链火的一塌糊涂，从互联网到产品，到技术人，再到亲人朋友圈，还有影视圈。我脑中想到了一个词：<br><div class="alert warning"><p>无所不在，无所不能！</p>
+</div><br>真的有这么神吗，我来从小白的视角窥探一二。</p>
+<h4 id="三、到底什么是区块链？"><a href="#三、到底什么是区块链？" class="headerlink" title="三、到底什么是区块链？"></a>三、到底什么是区块链？</h4><p>区块链的本质是一个分布式的数据库系统，在这个系统里，每条被写入的数据都是经过所有人的同意和验证的，并且每个人都能看见这条数据是被谁在什么时候添加上去的。一旦一条数据被记录进区块链中，它就不能被任何人篡改，这也意味着那有一个信任源，但这个信任源并不是一个权威的中心机构，而是分布在每个用户中。<br><div class="alert success"><p>区块链（Blockchain）技术的核心是一种去中心化的分布式互联网数据库技术方案。</p>
+</div><br><img src="http://7xvi3w.com1.z0.glb.clouddn.com/block1.png-blog" alt="block chain"><br><div class="alert info"><p>上图中，高亮的点就是区块链系统中分布在全球各地的一个个节点。而这些节点可以简单理解为一台服务器或服务器集群。</p>
+</div></p>
+<p>更深入的了解，请参考<a href="https://view.inews.qq.com/a/20180114A05I0300?from=groupmessage&amp;isappinstalled=0" target="_blank" rel="noopener">两万字深度长文！从原理到趋势，解剖风口上的区块链技术</a></p>
+<h4 id="四、有没有更简单的例子？"><a href="#四、有没有更简单的例子？" class="headerlink" title="四、有没有更简单的例子？"></a>四、有没有更简单的例子？</h4><p>在青青草原上住着一群羊，这里没有货币。大家有多少家底全记在村长的账本上，账本第一页记懒羊羊家的，第二页记肥羊羊家的…平时大家购物 shopping+ 转账都是用微信扫一扫。大家日常一有进出账，就马上报告村长，这样的日子过了八百年，村长翘辫子了。每只羊都抢着当村长，因为这样就可以在自己那页的进账里动动手脚了，还可以把村子里的钱，贷给隔壁狼村收好处！</p>
+<p>有只羊提出给每家都发一个村长那样的账本。为了防止大家随意的在自己那页的进账里动手脚，规定所有的羊每消费一笔，必须通过村头的大喇叭吼一声：我消费（赚了）几捆草。然后所有的羊都刷刷记下来。<code>这样的方法就是区块链所谓的去中心化分布式账本！</code></p>
+<p><code>去中心就是给每只羊都记账的权力，分布式账本解决的是坏心眼的羊随意发行货币和篡改数据作假的问题</code>。账簿里记载每只羊名下进出账的那一章叫<code>区块</code>，要是有很多只羊同时跑向村口的大喇叭宣布进出账，怎么办？当然是<code>跑的最快</code>的那只羊抢到大喇叭，不同的羊的不同奔跑能力叫做<code>算力</code>。</p>
+<p>好了，看完例子，我们再来理解一下概念：</p>
+<ol>
+<li><code>A</code> 想要发送钱给 <code>B</code> ;</li>
+<li>这笔交易在网络上以一个 “区块” 作为代表；</li>
+<li>该区块广播给网络里的所有参与者；</li>
+<li>参与者同意交易有效；</li>
+<li>该区块然后被添加到链上，这条链永久和透明的交易纪录；</li>
+<li>资金从 <code>A</code> 转移到 <code>B</code>；</li>
+</ol>
+<p>如果你觉得还是不太懂，那可以看看<a href="http://mp.weixin.qq.com/s/e_-lplErsebErOaPAlwG3w" target="_blank" rel="noopener">漫画</a>。</p>
+<h4 id="五、区块链有哪些特性？"><a href="#五、区块链有哪些特性？" class="headerlink" title="五、区块链有哪些特性？"></a>五、区块链有哪些特性？</h4><div class="alert success"><p>不易被篡改，时间戳不可伪造，弹性强，高度透明，分布式信任</p>
+</div>
+<ul>
+<li><p>不易被篡改<br>要更新一个区块链，只有通过添加另一个块到末端的链上才能实现，每一个在链条节点上的区块要返回到之前的区块时，必须要用我们之前为这个电子证据创建的 “指纹” 。这就意味着，一旦这个电子证据的 “指纹（即哈希值）” 被写入区块链中，它就是永久有效的，并且是不可篡改的，即使是写入者也不能。</p>
+</li>
+<li><p>时间戳不可伪造<br>每一个记录在区块链上的区块都被打上了不可能被伪造的时间戳。</p>
+</li>
+<li><p>弹性强<br>由于区块链上的数据都是分布式记录的，因此每个人都将有一份这个数据的副本。这在保证了纪录的准确性外，也使得区块链成为极具弹性的信息存储 “店铺” 。一旦一条信息被记入区块链（公有链）中，每个人都有权限进行查阅、获取，而不会像现在这样，信息一般都是存储在私有数据库中，一旦出现技术故障或者合约到期等问题，就没法查询。</p>
+</li>
+<li><p>高度透明<br>记录在区块链（公有链）上的信息，世界上的任何人在任何时候都可以读取。任何一个收到这份证据副本的人都可以自己验证这条证据的完整性和真实性，而不需要去权威中心机构验证。这可以减少行政管理开销，并增加公众对政府政务的信任。</p>
+</li>
+<li><p>分布式信任（共识机制）<br>使用区块链技术绕过了与证据来源相关的行政管理问题。比如你有一份电子证据的副本，你为这份副本证据创建的 “指纹” 与区块链上记录的 “指纹” 相一致，这使得证据的完整性得到保留，简化了 “保管链” 问题。</p>
+</li>
+</ul>
+<h4 id="六、区块链如何分类？"><a href="#六、区块链如何分类？" class="headerlink" title="六、区块链如何分类？"></a>六、区块链如何分类？</h4><p>广义上来看区块链大致可以分为三类：</p>
+<p>1.公有区块链，主要是指不用给予权限便可任由人们读取、发送交易，并参与共识过程的区块链。目前，全球最大的公有链是比特币。</p>
+<p>2.联盟区块链，即共识过程由预选节点控制的区块链，其主要由一个联盟组织构建而成，同时也交由其代为管控，需要得到授权才可写入，其余用户可以利用这一区块链中开放的API接口在有效范围内进行查看、寻找。每一节点均有相对应的实体机构组织，其会构建成与之相关的利益联盟，然后来共同维护区块链的正常运作。</p>
+<p>3.私有区块链，主要是指写入权限为一个组织所有的区块链。其不论是读取权限，还是对外开放等权限都制定了限定条件。</p>
+<h4 id="七、区块链和比特币有啥联系？"><a href="#七、区块链和比特币有啥联系？" class="headerlink" title="七、区块链和比特币有啥联系？"></a>七、区块链和比特币有啥联系？</h4><p>区块链技术是比特币的底层技术，比特币在没有任何中心化机构运营和管理的情况下，多年运行非常稳定，没有出现过任何问题，所以有人注意到了它的底层技术，把比特币技术抽象提取出来，称之为区块链技术，或者分布式账本技术。</p>
+<h4 id="八、区块链可以应用到哪些场景？"><a href="#八、区块链可以应用到哪些场景？" class="headerlink" title="八、区块链可以应用到哪些场景？"></a>八、区块链可以应用到哪些场景？</h4><div class="alert success"><p>区块链主要的优势是无需中介参与、过程高效透明且成本很低、数据高度安全。所以如果在这三个方面有任意一个需求的行业都有机会使用区块链技术。</p>
+</div>
+<ol>
+<li>区块链不仅可以用来验证证据的完整性和真实性，还可以应用在收集证据上。存证、证据验证一直是区块链应用研究的一个重要领域；</li>
+<li>世界经济论坛金融服务行业主管 GianCarlo Bruno 在该报告声明中说，“区块链技术不再是金融行业的边缘领域，而是会占据核心位置”。该报告估计，全球约有 80% 的银行将会在明年启动分布式账本项目。</li>
+<li>一家叫摩令技术的公司正在利用其区块链为基础的技术为银联商务提供的积分平台，可以实现 “通换、通兑” ，帮助用户自由兑换积分合理消费的同时，刺激用户的积分消费欲望，挖掘积分背后所隐藏的经济效益。</li>
+<li>很多商业机构正在积极的打造区块链投票系统，全球证券交易巨头纳斯达克于去年 2 月宣布，它正在开发一种基于区块链技术的股东电子投票系统。</li>
+<li>美国的能源公司 LO3 Energy 与比特币开发公司 Consensus Systems 合作，在纽约布鲁克林 Gowanus 和 Park Slope 街区为少数住户建立了一个基于区块链系统的可交互电网平台 TransActiveGrid。</li>
+<li>有家创业公司在利用区块链做真正的去中心化拼车，做法就是发明了一种币，司机只要把自己的资源贡献出来就可以获得这一种币，其实就像挖矿一样的。</li>
+</ol>
+<p>随着区块链技术的日趋成熟，未来的网络安全、银行业、支付转账、选举、股票交易、司法公证等都会用到区块链技术。</p>
+<h4 id="九、庞氏骗局还是互联网泡沫？"><a href="#九、庞氏骗局还是互联网泡沫？" class="headerlink" title="九、庞氏骗局还是互联网泡沫？"></a>九、庞氏骗局还是互联网泡沫？</h4><p>泡沫的形成和破灭永远是资本市场永恒不变的主题。小泡沫的形成和毁灭往往和商业模式自身的 <code>Bug</code> 有关，而大泡沫的形成和毁灭一定是和时代，和国家，和一个长期趋势息息相关。</p>
+<p>“对于加密数字货币，我几乎可以肯定地说，它不会有好的结局。至于这种糟糕的结局何时到来，以及究竟有多么糟糕，目前还不好判断。” —巴菲特</p>
+<p>“ 区块链技术远比人工智能和深度学习更加重要。——金妮·罗曼提，IBM 总裁兼 CEO”</p>
+<h4 id="十、我赞同的结论"><a href="#十、我赞同的结论" class="headerlink" title="十、我赞同的结论"></a>十、我赞同的结论</h4><p>区块链的技术发展不会一蹴而就，这些应用场景的真正使用也需要其他各种条件的跟进，包括法律、模式、运营、使用习惯教育等等。</p>
+<p>在未来面前，我们都是孩子，目前对于区块链谈及风口似乎为时尚早。不可否认的是，区块链技术确实会带来一场技术革命，但处于革命开端的我们不应被资本的利益蒙蔽双眼，而是应该把目光放在技术本身上面。</p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/block-chain/">block-chain</a> <a class="tag tag--primary tag--small t-link" href="/tags/区块链/">区块链</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/01/19/play-image-stream/" data-tooltip="玩转图片流">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/01/14/first-exploration-electron-3/" data-tooltip="初探 Electron - 实践篇1">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/01/16/shallow-to-discuss-block-chain/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/01/16/shallow-to-discuss-block-chain/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/01/16/shallow-to-discuss-block-chain/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/01/19/play-image-stream/" data-tooltip="玩转图片流">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/01/14/first-exploration-electron-3/" data-tooltip="初探 Electron - 实践篇1">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/01/16/shallow-to-discuss-block-chain/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/01/16/shallow-to-discuss-block-chain/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/01/16/shallow-to-discuss-block-chain/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/01/16/shallow-to-discuss-block-chain/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/01/16/shallow-to-discuss-block-chain/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/01/16/shallow-to-discuss-block-chain/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

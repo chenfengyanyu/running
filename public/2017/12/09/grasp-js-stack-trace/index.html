@@ -1,0 +1,560 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>掌握 JS Stack Trace - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="在使用 Roadhog 编译过程中，我的终端崩掉了，怀着好奇的心理，我找到了 JS Stack Trace 这样的提示，怎么理解呢，这节我们来探究一下。">
+<meta name="keywords" content="js,stack,trace">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="掌握 JS Stack Trace">
+<meta property="og:url" content="http://jartto.wang/2017/12/09/grasp-js-stack-trace/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="在使用 Roadhog 编译过程中，我的终端崩掉了，怀着好奇的心理，我找到了 JS Stack Trace 这样的提示，怎么理解呢，这节我们来探究一下。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/jstrance1.png">
+<meta property="og:updated_time" content="2018-10-31T15:10:35.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="掌握 JS Stack Trace">
+<meta name="twitter:description" content="在使用 Roadhog 编译过程中，我的终端崩掉了，怀着好奇的心理，我找到了 JS Stack Trace 这样的提示，怎么理解呢，这节我们来探究一下。">
+<meta name="twitter:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/jstrance1.png">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/jstrace.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/jstrace.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            掌握 JS Stack Trace
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2017-12-09T21:44:13+08:00">
+	  
+		    2017/12月/09 21:44:13
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>在使用 <code>Roadhog</code> 编译过程中，我的终端崩掉了，怀着好奇的心理，我找到了 <code>JS Stack Trace</code> 这样的提示，怎么理解呢，这节我们来探究一下。<br><a id="more"></a><br>本文并不会告诉你“终端崩溃了，如何解决？”，我只会围绕 “JS Stack Trace” 异常来分析，我们可能碰到了什么问题，以及需要了解的相关技术栈。</p>
+<h4 id="一、队列（Queue）与栈（Stack）"><a href="#一、队列（Queue）与栈（Stack）" class="headerlink" title="一、队列（Queue）与栈（Stack）"></a>一、队列（Queue）与栈（Stack）</h4><p>最早是在数据结构的线性表中接触到队列（Queue）与栈（Stack），我们先来回顾一下概念：</p>
+<ul>
+<li>栈的插入和删除操作只允许在表的尾端进行（在栈中成为“栈顶”），满足 “FIFO：First In Last Out”；</li>
+<li>队列只允许在表尾插入数据元素，在表头删除数据元素,满足 “First In First Out”。</li>
+</ul>
+<div class="alert info"><p>这里我们不去纠结<a href="http://blog.csdn.net/bbc955625132551/article/details/72773285" target="_blank" rel="noopener">栈与队列的异同</a>，而只去用概念去理解 JS 中 Stack。</p>
+</div>
+<h4 id="二、Stack"><a href="#二、Stack" class="headerlink" title="二、Stack"></a>二、Stack</h4><p>我们先来看这样一段<a href="https://segmentfault.com/a/1190000008413860" target="_blank" rel="noopener">代码</a>，试想一下输出结果，以及它是如何调用的：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">c</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'c'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">b</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'b'</span>);</span><br><span class="line">    c();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'a'</span>);</span><br><span class="line">    b();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">a();</span><br></pre></td></tr></table></figure></p>
+<p>对上面的代码做一下简短的分析：</p>
+<ul>
+<li>当调用 a 的时候，它会被压到栈顶；</li>
+<li>然后，当 b 在 a 中被调用的时候，它会被继续压入栈顶，当 c 在 b 中被调用的时候，也一样；</li>
+<li>在运行 c 的时候，栈中包含了 a，b，c，并且其顺序也是 a，b，c；</li>
+<li>当 c 调用完毕时，它会被从栈顶移出，随后控制流回到 b。当 b 执行完毕后也会从栈顶移出，控制流交还到 a。最后，当 a 执行完毕后也会从栈中移出。</li>
+</ul>
+<div class="alert success"><p>每当有一个函数调用，就会将其压入栈顶。在调用结束的时候再将其从栈顶移出。</p>
+</div>
+<p>补充一点： 我们可以用 <code>console.trace()</code> 将 <code>Stack Trace</code> 打印到控制台。</p>
+<h4 id="三、Error"><a href="#三、Error" class="headerlink" title="三、Error"></a>三、Error</h4><p>当 <code>Error</code> 发生的时候，通常会抛出一个 <code>Error</code> 对象。<code>Error</code> 对象也可以被看做一个 <code>Error</code> 原型，用户可以扩展其含义，以创建自己的 <code>Error</code> 对象。</p>
+<p><code>Error.prototype</code> 对象通常包含下面属性：</p>
+<ul>
+<li>constructor - 一个错误实例原型的构造函数</li>
+<li>message - 错误信息</li>
+<li>name - 错误名称</li>
+</ul>
+<div class="alert success"><p>一个 <code>Error</code> 的堆栈追踪包含了从其构造函数开始的所有堆栈帧。</p>
+</div>
+<h4 id="四、Stack-Trace"><a href="#四、Stack-Trace" class="headerlink" title="四、Stack Trace"></a>四、Stack Trace</h4><p>好了，介绍了一些基础点，这里重新回到我们的重点：Stack Trace - 堆栈追踪。</p>
+<p><code>Error.captueStackTrace</code> 函数的第一个参数是一个 <code>object</code> 对象，第二个参数是一个可选的 <code>function</code>。捕获堆栈跟踪所做的是要捕获当前堆栈的路径（这是显而易见的），并且在 <code>object</code> 对象上创建一个 <code>stack</code> 属性来存储它。如果提供了第二个 <code>function</code> 参数，那么这个被传递的函数将会被看成是本次堆栈调用的终点，本次堆栈跟踪只会展示到这个函数被调用之前。</p>
+<p>我们来用几个例子来更清晰的解释下。我们将捕获当前堆栈路径并且将其存储到一个普通 <code>object</code> 对象中。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> myObj = &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">c</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">b</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 这里存储当前的堆栈路径，保存到myObj中</span></span><br><span class="line">    <span class="built_in">Error</span>.captureStackTrace(myObj);</span><br><span class="line">    c();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    b();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 首先调用这些函数</span></span><br><span class="line">a();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这里，我们看一下堆栈路径往 myObj.stack 中存储了什么</span></span><br><span class="line"><span class="built_in">console</span>.log(myObj.stack);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这里将会打印如下堆栈信息到控制台</span></span><br><span class="line"><span class="comment">//    at b (repl:3:7) &lt;-- Since it was called inside B, the B call is the last entry in the stack</span></span><br><span class="line"><span class="comment">//    at a (repl:2:1)</span></span><br><span class="line"><span class="comment">//    at repl:1:1 &lt;-- Node internals below this line</span></span><br><span class="line"><span class="comment">//    at realRunInThisContextScript (vm.js:22:35)</span></span><br><span class="line"><span class="comment">//    at sigintHandlersWrap (vm.js:98:12)</span></span><br><span class="line"><span class="comment">//    at ContextifyScript.Script.runInThisContext (vm.js:24:12)</span></span><br><span class="line"><span class="comment">//    at REPLServer.defaultEval (repl.js:313:29)</span></span><br><span class="line"><span class="comment">//    at bound (domain.js:280:14)</span></span><br><span class="line"><span class="comment">//    at REPLServer.runBound [as eval] (domain.js:293:12)</span></span><br><span class="line"><span class="comment">//    at REPLServer.onLine (repl.js:513:10)</span></span><br></pre></td></tr></table></figure></p>
+<p>我们从上面的例子中可以看到，我们首先调用了 a（ a 被压入栈），然后从 a 的内部调用了 b（ b 被压入栈，并且在 a 的上面）。在 b 中，我们捕获到了当前堆栈路径并且将其存储在了 myObj 中。这就是为什么打印在控制台上的只有 a 和 b，而且是下面 a 上面 b。</p>
+<p>深入了解请查看：<a href="https://segmentfault.com/a/1190000008413860" target="_blank" rel="noopener">深入理解 JavaScript Errors 和 Stack Traces</a></p>
+<h4 id="五、作用域链"><a href="#五、作用域链" class="headerlink" title="五、作用域链"></a>五、作用域链</h4><p>提到作用域链，不得不说说 <code>JS</code> 中的作用域：<br><div class="alert info"><p>作用域就是变量和函数的可访问范围，控制着变量和函数的可见性与生命周期，在 <code>JS</code> 中变量的作用域有全局作用域和局部作用域。</p>
+</div></p>
+<p>很好的一个<a href="http://www.cnblogs.com/dolphinX/p/3280876.html" target="_blank" rel="noopener">例子</a>：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a=<span class="number">3</span>; <span class="comment">//全局变量</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params">b</span>)</span>&#123; <span class="comment">//局部变量</span></span><br><span class="line">    c=<span class="number">2</span>; <span class="comment">//全局变量</span></span><br><span class="line">    <span class="keyword">var</span> d=<span class="number">5</span>; <span class="comment">//局部变量</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">subFn</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      <span class="keyword">var</span> e=d; <span class="comment">//父函数的局部变量对子函数可见</span></span><br><span class="line">      <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;<span class="number">3</span>;i++)&#123;</span><br><span class="line">          <span class="built_in">console</span>.write(i);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="built_in">console</span>.log(i);<span class="comment">//3, 在for循环内声明，循环外function内仍然可见，没有块作用域</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(c); <span class="comment">//在function内声明但不带var修饰，仍然是全局变量</span></span><br></pre></td></tr></table></figure></p>
+<div class="alert success"><p><code>JS</code> 并没有块及的作用域，只有函数级作用域：变量在声明它们的函数体及其子函数内是可见的。</p>
+</div>
+<p>执行环境（execution context）定义了变量或函数有权访问的其它数据，决定了它们的各自行为。每个执行环境都有一个与之关联的变量对象（variable object, VO），执行环境中定义的所有变量和函数都会保存在这个对象中，解析器在处理数据的时候就会访问这个内部对象。</p>
+<p>全局执行环境是最外层的一个执行环境，在 <code>web</code> 浏览器中全局执行环境是 <code>window</code> 对象，因此所有全局变量和函数都是作为 <code>window</code> 对象的属性和放大创建的。</p>
+<p>每个函数都有自己的执行环境，当执行流进入一个函数的时候，函数的环境会被推入一个函数栈中，而在函数执行完毕后执行环境出栈并被销毁，保存在其中的所有变量和函数定义随之销毁，控制权返回到之前的执行环境中，全局的执行环境在应用程序退出（浏览器关闭）才会被销毁。</p>
+<p>理解了上面这些内容，我们就不难理解作用域链了：<br><div class="alert info"><p>当代码在一个环境中执行时，会创建变量对象的一个作用域链（scope chain）来保证对执行环境有权访问的变量和函数的有序访问。</p>
+</div><br>作用域第一个对象始终是当前执行代码所在环境的变量对象（VO）。</p>
+<p>此处摘录自：<a href="http://www.cnblogs.com/dolphinX/p/3280876.html" target="_blank" rel="noopener">JavaScript 作用域链</a></p>
+<h4 id="六、JS-执行机制"><a href="#六、JS-执行机制" class="headerlink" title="六、JS 执行机制"></a>六、JS 执行机制</h4><p>从上面我们可以看出，每当有一个函数调用，就会将其压入栈顶，在调用结束的时候再将其从栈顶移出。那这些方法是如何执行的呢，我们就需要了解一下 <a href="https://juejin.im/post/59e85eebf265da430d571f89" target="_blank" rel="noopener">JavaScript 执行机制</a>，此处用原文中的图来做一下说明：<br><img src="http://7xvi3w.com1.z0.glb.clouddn.com/jstrance1.png" alt="JS 执行机制"><br>简单分析一下上图中的流程：</p>
+<ul>
+<li>同步和异步任务分别进入不同的执行”场所”，同步的进入主线程，异步的进入 <code>Event Table</code> 并注册函数。</li>
+<li>当指定的事情完成时，<code>Event Table</code> 会将这个函数移入 <code>Event Queue</code>。</li>
+<li>主线程内的任务执行完毕为空，会去 <code>Event Queue</code> 读取对应的函数，进入主线程执行。</li>
+<li>上述过程会不断重复，也就是常说的 <code>Event Loop</code>(事件循环)。</li>
+</ul>
+<p>举个例子说明一下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$.ajax(&#123;</span><br><span class="line">  url: <span class="string">'www.jartto.wang'</span>,</span><br><span class="line">  data: &#123;<span class="attr">test</span>: <span class="string">'jarro'</span>&#125;,</span><br><span class="line">  success: <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'异步请求'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'主线程同步输出'</span>);</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li><code>ajax</code> 进入 <code>Event Table</code>，注册回调函数 <code>success</code>。</li>
+<li>执行 <code>console.log</code>(‘代码执行结束’)。</li>
+<li><code>ajax</code> 事件完成，回调函数 <code>success</code> 进入 <code>Event Queue</code>。</li>
+<li>主线程从 <code>Event Queue</code> 读取回调函数 <code>success</code> 并执行。</li>
+</ul>
+<p>上面的例子很简单，我们继续深入。</p>
+<h4 id="七、垃圾回收"><a href="#七、垃圾回收" class="headerlink" title="七、垃圾回收"></a>七、垃圾回收</h4><p>1.我们先来看看垃圾回收的意义：<br>由于字符串、对象和数组没有固定大小，所有当他们的大小已知时，才能对他们进行动态的存储分配。<code>JS</code> 程序每次创建字符串、数组或对象时，解释器都必须分配内存来存储那个实体。只要像这样动态地分配了内存，最终都要释放这些内存以便他们能够被再用，否则，<code>JS</code> 的解释器将会消耗完系统中所有可用的内存，造成系统崩溃。</p>
+<p>2.<code>JavaScript</code> 垃圾回收的机制：<br><div class="alert success"><p>找出不再使用的变量，然后释放掉其占用的内存。由于这个过程不是实时的，而且开销比较大，所以垃圾回收器会按照固定的时间间隔周期性的执行。</p>
+</div></p>
+<p>那么垃圾回收器是怎么工作的，常见的方式有两种，如下：</p>
+<ul>
+<li><p>标记清除<br>这是 <code>Javascript</code> 中最常用的垃圾回收方式。当变量进入执行环境是，就标记这个变量为“进入环境”。从逻辑上讲，永远不能释放进入环境的变量所占用的内存，因为只要执行流进入相应的环境，就可能会用到他们。当变量离开环境时，则将其标记为“离开环境”。<br>垃圾收集器在运行的时候会给存储在内存中的所有变量都加上标记。然后，它会去掉环境中的变量以及被环境中的变量引用的标记。而在此之后再被加上标记的变量将被视为准备删除的变量，原因是环境中的变量已经无法访问到这些变量了。最后，垃圾收集器完成内存清除工作，销毁那些带标记的值，并回收他们所占用的内存空间。</p>
+</li>
+<li><p>引用计数<br>另一种不太常见的垃圾回收策略是引用计数。引用计数的含义是跟踪记录每个值被引用的次数。当声明了一个变量并将一个引用类型赋值给该变量时，则这个值的引用次数就是1。相反，如果包含对这个值引用的变量又取得了另外一个值，则这个值的引用次数就减1。当这个引用次数变成0时，则说明没有办法再访问这个值了，因而就可以将其所占的内存空间给收回来。这样，垃圾收集器下次再运行时，它就会释放那些引用次数为0的值所占的内存。</p>
+</li>
+</ul>
+<p>“引用计数”也是不错的垃圾回收方式，为什么很少有浏览器采用，还会带来内存泄露问题呢？<br><div class="alert danger"><p>因为“引用计数”方式没办法解决循环引用问题。</p>
+</div></p>
+<p>这里举一个例子：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> a = &#123;&#125;;</span><br><span class="line">    <span class="keyword">var</span> b = &#123;&#125;;</span><br><span class="line">    a.prop = b;</span><br><span class="line">    b.prop = a;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这样 <code>a</code> 和 <code>b</code> 的引用次数都是 2，即使在 <code>test()</code> 执行完成后，两个对象都已经离开环境，在标记清除的策略下是没有问题的，离开环境的就被清除，但是在引用计数策略下不行，因为这两个对象的引用次数仍然是 2，不会变成 0，所以其占用空间不会被清理。<br><div class="alert info"><p>如果这个函数被多次调用，这样就会不断地有空间不会被回收，造成内存泄露。</p>
+</div></p>
+<p>3.什么时候触发垃圾回收？<br>垃圾回收器周期性运行，如果分配的内存非常多，那么回收工作也会很困难，确定垃圾回收时间间隔就变成了一个值得思考的问题。</p>
+<p>我们可以手动去触发垃圾回收，防止内存泄漏：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a.prop = <span class="literal">null</span>;</span><br><span class="line">b.prop = <span class="literal">null</span>;</span><br></pre></td></tr></table></figure></p>
+<p>如果这里写的不清楚，可以看看下面这两篇文章：</p>
+<ul>
+<li><a href="https://www.cnblogs.com/zhwl/p/4664604.html" target="_blank" rel="noopener">JavaScript 垃圾回收机制</a></li>
+<li><a href="https://www.cnblogs.com/dolphinX/p/3348468.html" target="_blank" rel="noopener">JavaScript 垃圾回收</a></li>
+</ul>
+<h4 id="八、内存泄漏"><a href="#八、内存泄漏" class="headerlink" title="八、内存泄漏"></a>八、内存泄漏</h4><p>上面反复提到了内存泄漏，什么会导致内存泄漏，我们又能做什么来避免这种情况呢？<br>1.什么是内存泄漏？</p>
+<ul>
+<li>程序的运行需要内存。只要程序提出要求，操作系统或者运行时（runtime）就必须供给内存。</li>
+<li>对于持续运行的服务进程（daemon），必须及时释放不再用到的内存。否则，内存占用越来越高，轻则影响系统性能，重则导致进程崩溃。</li>
+<li>不再用到的内存，没有及时释放，就叫做内存泄漏（memory leak）。</li>
+</ul>
+<p>2.如何识别内存泄漏？<br><a href="https://www.toptal.com/nodejs/debugging-memory-leaks-node-js-applications" target="_blank" rel="noopener">经验法则</a>是，如果连续五次垃圾回收之后，内存占用一次比一次大，就有内存泄漏。这就要求实时查看内存占用。</p>
+<p>3.如何避免？<br>最好能有一种方法，在新建引用的时候就声明，哪些引用必须手动清除，哪些引用可以忽略不计，当其他引用消失以后，垃圾回收机制就可以释放内存。这样就能大大减轻程序员的负担，你只要清除主要引用就可以了。</p>
+<p><code>ES6</code> 考虑到了这一点，推出了两种新的数据结构：<code>WeakSet</code> 和 <code>WeakMap</code>。它们对于值的引用都是不计入垃圾回收机制的，所以名字里面才会有一个 <code>&quot;Weak&quot;</code>，表示这是弱引用。</p>
+<div class="alert info"><p>弱引用，不会被计入垃圾回收机制。</p>
+</div>
+<p>更多内容请移步阮一峰老师文章：<a href="http://www.ruanyifeng.com/blog/2017/04/memory-leak.html" target="_blank" rel="noopener">JavaScript 内存泄漏教程</a>。</p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/js/">js</a> <a class="tag tag--primary tag--small t-link" href="/tags/stack/">stack</a> <a class="tag tag--primary tag--small t-link" href="/tags/trace/">trace</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/12/11/chattered-about-parcel/" data-tooltip="聊聊 Parcel">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/12/03/exploration-the-encryption/" data-tooltip="初探加密算法">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2017/12/09/grasp-js-stack-trace/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2017/12/09/grasp-js-stack-trace/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2017/12/09/grasp-js-stack-trace/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/12/11/chattered-about-parcel/" data-tooltip="聊聊 Parcel">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/12/03/exploration-the-encryption/" data-tooltip="初探加密算法">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2017/12/09/grasp-js-stack-trace/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2017/12/09/grasp-js-stack-trace/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2017/12/09/grasp-js-stack-trace/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2017/12/09/grasp-js-stack-trace/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2017/12/09/grasp-js-stack-trace/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2017/12/09/grasp-js-stack-trace/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

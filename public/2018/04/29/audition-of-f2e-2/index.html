@@ -1,0 +1,550 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>前端反思录（二）－不要让软实力成为短板 - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="书接上文，在 前端反思录（一）中，强调了技术能力的核心作用，同等重要的还有「个人软实力」。本文将围绕软实力还说明，努力让自己成为 T 字形人才。">
+<meta name="keywords" content="f2e">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="前端反思录（二）－不要让软实力成为短板">
+<meta property="og:url" content="http://jartto.wang/2018/04/29/audition-of-f2e-2/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="书接上文，在 前端反思录（一）中，强调了技术能力的核心作用，同等重要的还有「个人软实力」。本文将围绕软实力还说明，努力让自己成为 T 字形人才。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2018-10-31T14:51:29.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端反思录（二）－不要让软实力成为短板">
+<meta name="twitter:description" content="书接上文，在 前端反思录（一）中，强调了技术能力的核心作用，同等重要的还有「个人软实力」。本文将围绕软实力还说明，努力让自己成为 T 字形人才。">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/f2e1.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/f2e1.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            前端反思录（二）－不要让软实力成为短板
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2018-04-29T21:35:09+08:00">
+	  
+		    2018/4月/29 21:35:09
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/前端分享/">前端分享</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>书接上文，在 <a href="http://jartto.wang/2018/03/29/audition-of-f2e/">前端反思录（一）</a>中，强调了技术能力的核心作用，同等重要的还有「个人软实力」。本文将围绕软实力还说明，努力让自己成为 T 字形人才。<br><a id="more"></a></p>
+<h4 id="一、保持对技术的热情"><a href="#一、保持对技术的热情" class="headerlink" title="一、保持对技术的热情"></a>一、保持对技术的热情</h4><p>保持热情，说来简单，但是做起来太难了。我见过很多从培训机构走出来的童鞋，最终都走上了改行的其他路子。为什么会这样呢？因为你并不喜欢这份工作，也许只是觉得不得不找一件事做，或者更简单－赚得多。</p>
+<p>保持对技术的热情，你才会去深入研究，你才能主动去把事情做好。曾经我去面试某公司，面试官问了我一个问题：你为什么要做前端开发？我当时并没有犹豫，直接告诉他，我喜欢做前端的一切，喜欢这种贴近用户的感觉，能做出一个让更多人使用的优秀产品，对我来说是一种极大的满足。</p>
+<div class="alert success"><p>保持技术热情的本质是良好的自我驱动。</p>
+</div>
+<h4 id="二、产品永远不是只有产品经理才能定义"><a href="#二、产品永远不是只有产品经理才能定义" class="headerlink" title="二、产品永远不是只有产品经理才能定义"></a>二、产品永远不是只有产品经理才能定义</h4><p>每个公司都设有产品经理这个职位，所以产品的任何细节都全权交由产品经理来定义。孰不知，从某些方面来说，前端开发工程师才是最贴近用户的一层。</p>
+<p>看到过这样一段话：<br>产品如果设计的不合理，可能会付出很大的技术代价：技术是用来解决业务问题的，而业务的问题，也可以通过业务的手段去解决。产品经理可能并不关心技术实现，所以前端童鞋需要拿出自己的解决方案来默默的填平这个坑。</p>
+<p>当然，这里并不是教你如何去怼产品经理，而是为你所做出的产品灌输一些思想罢了。</p>
+<div class="alert success"><p>你是前端开发，你见过太多的交互设计，也看过太多的实现原理，因此肯定可以拿出最佳性价比的产品喽。</p>
+</div>
+<h4 id="三、做一些有趣的事情"><a href="#三、做一些有趣的事情" class="headerlink" title="三、做一些有趣的事情"></a>三、做一些有趣的事情</h4><p>工作永远都是生活的一部分，我们工作只是为了更好的生活，那么工作之余有没有一些奇思妙想涌入脑海？举个例子来说吧：<br>曾几何时，口令红包闹的满城风雨，同时又衍生出一种新的口令红包。它需要你完整的读出红包的内容，这样就可以具有抢红包的资格。于是，各种繁体字的红包涌现出来，看着红包却不能抢，真的是很难受。</p>
+<p>这时，我就在想，如果我能开发出一个程序，自动识别图片上的文字，然后转为语音播报，岂不是红包就可以轻松收入囊中？于是乎，我的小程序产品「AI识图」便应运而生。</p>
+<p>后来，我又惊奇的发现，原来还有更多的需求，譬如：身份证识别，银行卡识别，票据识别等等。就这样，产品需求被一点点挖掘出来，每天我都会去看小程序的统计结果，了解用户增长，慢慢的运营思维已经开始侵入我的大脑。</p>
+<div class="alert success"><p>做自己喜欢做的事，把想法落地，何尝不是种快乐呢？</p>
+</div>
+<h4 id="四、维护好自己的-Github"><a href="#四、维护好自己的-Github" class="headerlink" title="四、维护好自己的 Github"></a>四、维护好自己的 Github</h4><p>如果你还没 <code>Github</code>，那么从现在开始经营自己的 <code>Github</code> 账号吧。大家都知道，国内有堵墙，而 <code>Github</code> 却是墙外之物。有没有想过它为什么就可以破除限制呢？我想，重要性就不必我多说了吧！</p>
+<p><code>Github</code> 是世界级的代码仓库，你可以和国外的思想进行碰撞，也可以看到很多优秀的项目。这是程序员的后花园，也更是你成长的里程碑。尽可能的去点亮你的小绿点吧，久而久之，你会发现：原来编程也会成为一种习惯，而这种习惯带来的奖励也是丰厚的。</p>
+<div class="alert success"><p>调侃一下：我们不生产代码，我们只是国外优秀代码的搬运工。</p>
+</div>
+<h4 id="五、不要忘了读书"><a href="#五、不要忘了读书" class="headerlink" title="五、不要忘了读书"></a>五、不要忘了读书</h4><p>既然单独提出了读书这一块，那么必要性也就不言自明了。读书是为了开阔视野、增长见识、以及增强表达能力。程序员或多或少都会存在内向的性格，所以业余时间一定要丰富自己的精神食粮。不说用来陶冶情操，起码装逼也足够了。</p>
+<p>当然，读书应该分为两类。其一，技术书；其二，除了技术书以外的书。</p>
+<p>为什么这么分类呢，个人觉得既然是看书，也就不需要分门别类。看技术书可以提高技能，看小说可以增强想象，看悬疑可以增加逻辑思维，等等。一个字，就是多看！</p>
+<p>所以，请坚持读书，将自己的厚度积累起来，你在读书上花的任何时间，都会在某一时刻给你回报。</p>
+<div class="alert success"><p>新知识不断成为下一次思考素材的积累，从而让知识能够不断以「复利速度」快速迭代。</p>
+</div>
+<h4 id="六、提升自己的欣赏水平"><a href="#六、提升自己的欣赏水平" class="headerlink" title="六、提升自己的欣赏水平"></a>六、提升自己的欣赏水平</h4><p>前面提到了前端开发要有产品思维，这里又强调要提升欣赏水平，那么到底有何联系呢？前端开发到底需要提升自己的欣赏水平吗？这里我举一个不太恰当，可能还会吸引仇恨的例子：后端开发写的页面总是会被一眼看穿。</p>
+<p>其实也不难想象，后端开发主要玩弄数据，只要数据 OK，其他都不重要。而前端开发呢，你能这么洒脱吗，你做出的东西会不会让别人觉得很 Low ？当让，你可以把锅推给设计师，因为设计的不够美观。</p>
+<p>那么问题来了，为什么不想着自我改变，试着救赎一下呢？退一步讲，如果哪天你有灵感了，需要创业，前期没有设计，产品的雏形也不能太丑吧。黑完后端开发，我们接着来黑设计师。程序员有自己的后花园，设计师何尝不是呢？</p>
+<p>既然设计师可以去大量的设计网站去寻找灵感，你为什么不可以呢？这里推荐两个有名的视觉网站：</p>
+<ul>
+<li><a href="https://www.behance.net" target="_blank" rel="noopener">Behance</a></li>
+<li><a href="https://dribbble.com" target="_blank" rel="noopener">Dribbble</a></li>
+</ul>
+<p>此外，你可能还需要一些基础类的书，如：</p>
+<ul>
+<li>给大家看的设计书</li>
+<li>解密色彩设计原理</li>
+<li>至关重要的设计</li>
+<li>破茧成蝶</li>
+<li>视界－无界</li>
+</ul>
+<div class="alert success"><p>就这样，在专精你前端技术的时候，多去了解一些前端周边的生态。你是前端专家，而不是页面仔。</p>
+</div>
+<h4 id="七、扩展技术面"><a href="#七、扩展技术面" class="headerlink" title="七、扩展技术面"></a>七、扩展技术面</h4><p>扩展技术面其实很简单，除了多看书以外，多去一些科技资讯网站、技术社区转转。碰到有自己不熟悉的名词或者技术点，一定要去了解一下，能写出 <code>DEMO</code> ，总归是好的。</p>
+<p>面试的时候，我总会去问：我看你在项目中使用了 <code>XX</code> ，为什么要使用它，不用行不行？一部分面试者就答不上来了，因为对他来说，我只管会用就行了，懂不懂是另外一回事。另一部分呢？只是听过名词，甚至都没有用过。</p>
+<p>用和懂，真的是不同的境界。试想一下，如果别人提到的所有东西，你或多或少都知道。那将是怎样一个技术面，怎样一个 Level？也许你离技术大咖只有一步之遥。</p>
+<div class="alert success"><p>丰富的技术面将为你登上前端巅峰铺平道路，所以尽可能的去接触新知识，不要抱残守缺、不思进取。</p>
+</div>
+<h4 id="八、结识更多优秀的人"><a href="#八、结识更多优秀的人" class="headerlink" title="八、结识更多优秀的人"></a>八、结识更多优秀的人</h4><p>高中时代，一直被一句话感动着：要么与强者为伍，要么自己成为强者。</p>
+<p>为什么要去结识优秀的人？那是因为，人们大多自我欣赏、自我感动，这样就会导致一叶障目，过于浮躁。而去接触优秀的人，你会被一些细节所感动，茅塞顿开可能只是一念之间。</p>
+<p>这里千万不要扭曲我的意思，不要什么垃圾会议都去参加，以此来达到目的。这样的话，不能结识优秀的人才，只能结识大量的广告。</p>
+<p>我很欣赏前端圈子里那些技术「布道者」，他们真的是高手，层次和眼界都很高。不要再说什么 <code>KPI</code> 产物，难道你不觉得人家既有 <code>KPI</code> 又有产物，而你呢，什么也没有。</p>
+<div class="alert success"><p>强烈建议，多去接触接触优秀的人，多些思维沟通。万一，谁为你点亮了灯。</p>
+</div>
+<h4 id="九、收敛自己的锋芒"><a href="#九、收敛自己的锋芒" class="headerlink" title="九、收敛自己的锋芒"></a>九、收敛自己的锋芒</h4><p>见过这样的人：除了我以外，其他人都是垃圾。得不得瑟我不知道，反正能说这话，肯定不是高手。一定要收敛自己的锋芒，低调做事，高调做人。</p>
+<p>最近一次面试，碰到了一个很高傲的面试者，抱着一个人才也不放过的心态，我强行坚持了半个小时，最后礼貌的送走了他。起因是这样的：</p>
+<p>问：你对 HTML5 和 CSS3 有啥认识吗？<br>答：我觉得不需要了解，会用就行。</p>
+<p>问：呃，那你跟我说一下 Web Work 是什么？<br>答：没用过，用的时候现查就行，几分钟搞定。</p>
+<p>问：CSS3 动画有了解过吗？<br>答：很简单啊。</p>
+<p>问：好，那你说说一个完整的动画需要包含哪些因素？<br>答：。。。</p>
+<p>问：都用过哪些框架，用到什么程度？<br>答：流行框架基本都用过，都挺简单。</p>
+<p>问：这，说说 React 项目如何构建吧！<br>答：脚手架直接生成。</p>
+<p>问：有没有自己构建过，而不依赖脚手架？<br>答：没有，我觉得不需要自己构建。</p>
+<p>。。。</p>
+<p>聊天一度无法进行，抱着开放交流的心态，我还是坚持着面完了。对我来说也是颇有收获，锋芒毕露而无实才，洋洋自得而不知深浅，这何尝不是种悲哀。所以，请收敛自己的锋芒，除了自己的亲人，谁也不会宠着你、惯着你。</p>
+<div class="alert success"><p>每个人都是带着棱角来到世上，只有你磨平了棱角，才能滚的更远。</p>
+</div>
+<h4 id="十、学会去包容"><a href="#十、学会去包容" class="headerlink" title="十、学会去包容"></a>十、学会去包容</h4><p>看到过这样一句话：<br>高情商就是一种开放心态的能力，就是能和身边的人发生连接的能力。</p>
+<p>我比较同意这个观点，高情商是一种保持开放心态的能力，不轻易否定别人，一种万物为我所用的格局和心态。所以，任何时间点，任何情况下，请保持宽容，用开放的心态来看待一切。</p>
+<div class="alert success"><p>一个封闭的人，时刻都倾向于先否定的人，是无法完成自我进化和迭代升级的。</p>
+</div>
+<h4 id="十一、坚持不懈"><a href="#十一、坚持不懈" class="headerlink" title="十一、坚持不懈"></a>十一、坚持不懈</h4><p>每天努力一点点，确保你每天睡觉之前，都比你醒来时聪明一点点。剩下的，交给时间，你的人生会进入正循环轨道。</p>
+<div class="alert success"><p>只要方向是对的，不要焦虑和不安，多给自己一些时间。</p>
+</div>
+<h4 id="十二、确保核心竞争力"><a href="#十二、确保核心竞争力" class="headerlink" title="十二、确保核心竞争力"></a>十二、确保核心竞争力</h4><ul>
+<li>和专业的人沟通交流</li>
+<li>以面试者的身份</li>
+<li>尽可能多的参与项目</li>
+<li>活跃于技术论坛</li>
+</ul>
+<h4 id="十三、总结"><a href="#十三、总结" class="headerlink" title="十三、总结"></a>十三、总结</h4><p>好了，就写这些吧。每个人的实际情况是不同的，但是经验教训是可以吸收和避免的。如果你刚走上前端开发这条路，那么恭喜你，也许可能会给你一些帮助。如果你已经在前端方向发展了很多年，会不会有一些认同感。下一篇文章：</p>
+<ul>
+<li><a href="http://jartto.wang/2018/04/29/audition-of-f2e-3/">前端反思录（三）－谈谈个人规划</a></li>
+</ul>
+<p>此外，欢迎关注我的博客同步版本<a href="https://github.com/chenfengyanyu/source" target="_blank" rel="noopener"> Github </a>哦！</p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/f2e/">f2e</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/04/29/audition-of-f2e-3/" data-tooltip="前端反思录（三）－谈谈个人规划">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/04/25/rewrite-audio-style/" data-tooltip="重写 Audio 样式">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/04/29/audition-of-f2e-2/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/04/29/audition-of-f2e-2/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/04/29/audition-of-f2e-2/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/04/29/audition-of-f2e-3/" data-tooltip="前端反思录（三）－谈谈个人规划">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/04/25/rewrite-audio-style/" data-tooltip="重写 Audio 样式">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/04/29/audition-of-f2e-2/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/04/29/audition-of-f2e-2/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/04/29/audition-of-f2e-2/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/04/29/audition-of-f2e-2/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/04/29/audition-of-f2e-2/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/04/29/audition-of-f2e-2/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

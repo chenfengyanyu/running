@@ -1,0 +1,582 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>Angularjs知识分享 - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="在这个信息快速更替的时代，昨天还被人捧上了天，今天就会被某些人贬的一文不值。跟技术挂钩的话，你可能猜到我要说的就是Angularjs，对，一个我至今仍然非常喜欢的框架。">
+<meta name="keywords" content="angularjs">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Angularjs知识分享">
+<meta property="og:url" content="http://jartto.wang/2015/06/29/summarize-the-angularjs/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="在这个信息快速更替的时代，昨天还被人捧上了天，今天就会被某些人贬的一文不值。跟技术挂钩的话，你可能猜到我要说的就是Angularjs，对，一个我至今仍然非常喜欢的框架。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/blog_793F7E26-4F0B-48F5-A6ED-4DDE8D95CF07.png">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/blog_1.gif">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/blgo_0C20BA8C-39FD-41B4-9131-9BC276F10420.png">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/blgo_F12A4C16-5B28-4A54-8B61-817F52128657.png">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/blgo_A0D5DB52-36D7-48EF-86A5-AC9FDE292AC6.png">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/blog_1.gif">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/blog_65919517-DA4D-4CA3-A7DC-51FE54145C54.png">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/blog_F938A44E-AAA0-4827-88AC-DDA5288725ED.png">
+<meta property="og:updated_time" content="2016-06-20T12:56:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Angularjs知识分享">
+<meta name="twitter:description" content="在这个信息快速更替的时代，昨天还被人捧上了天，今天就会被某些人贬的一文不值。跟技术挂钩的话，你可能猜到我要说的就是Angularjs，对，一个我至今仍然非常喜欢的框架。">
+<meta name="twitter:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/blog_793F7E26-4F0B-48F5-A6ED-4DDE8D95CF07.png">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/blog_155IK010-0.jpg"/>
+        <meta class="swiftype" name="image" data-type="enum" content="http://7xvi3w.com1.z0.glb.clouddn.com/blog_155IK010-0.jpg" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            Angularjs知识分享
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2015-06-29T17:11:23+08:00">
+	  
+		    2015/6月/29 17:11:23
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>在这个信息快速更替的时代，昨天还被人捧上了天，今天就会被某些人贬的一文不值。跟技术挂钩的话，你可能猜到我要说的就是Angularjs，对，一个我至今仍然非常喜欢的框架。<br><a id="more"></a><br>当然很多人喜欢把他和Reactjs做比较，我只能呵呵了，不同的东西，应用于不同的场景，物尽其用，人尽其能罢了。为啥要比个你死我活，一定要包容万物嘛，此处省略俩字。</p>
+<p>言归正传，此时发表这篇文章貌似有点过气了，谁说不是呢。要不是那个挨千刀的点点博客网崩盘了，我的博客也不至于沦落至此。哎，雄关漫道真如铁，而今迈步从头越，从头越～</p>
+<p>下面开始进入正题，纪念我那一次好几十人的前端培训。</p>
+<h4 id="一、AngularJS是什么"><a href="#一、AngularJS是什么" class="headerlink" title="一、AngularJS是什么"></a>一、AngularJS是什么</h4><p>AngularJS主要用于构建单页Web应用。它通过增加开发人员和常见Web应用开发任务之间的抽象级别，使构建交互式的现代Web应用变得更加简单。</p>
+<p><img src="http://7xvi3w.com1.z0.glb.clouddn.com/blog_793F7E26-4F0B-48F5-A6ED-4DDE8D95CF07.png" alt="Angularjs读法"></p>
+<p>在其他JavaScript框架中，我们被迫从自定义的JavaScript对象中进行扩展，并从外到内操作DOM。以jQuery为例，为了在DOM中插入一个按钮元素，我们必须知道要把元素放到何处，并在合适的位置插入它。</p>
+<p>尽管这个过程并不复杂，但是它要求开发者对整个DOM结构都有所了解，并强迫我们在JavaScript代码中加入复杂的控制逻辑，用以操作外部DOM。</p>
+<p>而AngularJS则通过原生的Model-View-Controller（MVC，模型-视图-控制器）功能增强了HTML。结果表明，这个选择可以快捷和愉悦的构建出令人印象深刻并且极富表现力的客户端应用。</p>
+<h4 id="二、示例对比（高效，简洁，重构）"><a href="#二、示例对比（高效，简洁，重构）" class="headerlink" title="二、示例对比（高效，简洁，重构）"></a>二、示例对比（高效，简洁，重构）</h4><p><img src="http://7xvi3w.com1.z0.glb.clouddn.com/blog_1.gif" alt="Angularjs动态图片展示"><br>传统方式：<br><a href="http://jsfiddle.net/Au79V/36/" target="_blank" rel="noopener">http://jsfiddle.net/Au79V/36/</a><br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">Your name:</span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span>  <span class="attr">placeholder</span>=<span class="string">"World"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">hr</span>&gt;</span></span><br><span class="line">Hello <span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span>=<span class="string">"changeVal"</span>&gt;</span>World<span class="tag">&lt;/<span class="name">span</span>&gt;</span> !</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> input = $(<span class="string">'input'</span>),</span><br><span class="line">    span = $(<span class="string">'#changeVal'</span>);</span><br><span class="line">input.on(<span class="string">'keyup'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  span.text(input.val() ? input.val() : <span class="string">'World'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>AngularJS方式：<br><a href="http://jsfiddle.net/Au79V/34/" target="_blank" rel="noopener">http://jsfiddle.net/Au79V/34/</a></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-app</span>&gt;</span></span><br><span class="line">Your name:</span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">ng-model</span>=<span class="string">"yourname"</span> <span class="attr">placeholder</span>=<span class="string">"World"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">hr</span>&gt;</span></span><br><span class="line">Hello &#123;&#123;yourname || 'World'&#125;&#125; !</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="三、基本原理"><a href="#三、基本原理" class="headerlink" title="三、基本原理"></a>三、基本原理</h4><blockquote>
+<p>Scope作用域：AngularJS核心基础，是一个指向应用模型的对象。它是表达式的执行环境。作用域有层次结构，这个层次和相应的DOM几乎是一样的。作用域能监控表达式和传递事件。<br>在应用将视图渲染并呈献给用户之前，视图中的模板会和作用域进行连接，然后应用会对DOM进行设置以便将属性变化通知给AngularJS。</p>
+</blockquote>
+<p>作用域的特点：</p>
+<ul>
+<li>作用域提供APIs（$watch）来观察模型的变化。</li>
+<li>作用域提供APIs($apply)将任何模型的改变从”AngularJS领域(Angularrealm)”通过系统映射到视图上。</li>
+<li>作用域能通过共享模型成员的方式嵌套到应用组件上。一个作用域从父作用域继承属性。</li>
+<li>作用域提供表达式执行的上下文。比如说表达式  本身是无意义的，除非把它放到指定username属性的作用域中。</li>
+</ul>
+<p><img src="http://7xvi3w.com1.z0.glb.clouddn.com/blgo_0C20BA8C-39FD-41B4-9131-9BC276F10420.png" alt="作用域"></p>
+<blockquote>
+<p>双向绑定：AngularJS通过创建实时模板来代替视图，而不是将数据合并进模板之后更新DOM。任何一个独立视图组件中的值都是动态替换的。</p>
+</blockquote>
+<p>①传统的模板系统数据绑定：<br>就像下面这幅图所展示的，它们将Model和Template结合生成视图。这个结合过程产生的视图不是动态更新的。更糟的是，任何用户和视图的交互都不会反映到模型。而我们要做的就是写视图和模型双向的同步代码，这也就是我们通常用ajax来实现的局部动态刷新。</p>
+<p><img src="http://7xvi3w.com1.z0.glb.clouddn.com/blgo_F12A4C16-5B28-4A54-8B61-817F52128657.png" alt="单向数据绑定"><br>②angularjs模板中数据绑定：<br>AngularJS模板的工作原理与传统模板单向数据绑定有以下两点不同：<br>第一，模板（附加了自定义属性等标记的未经编译的HTML）是由浏览器编译的；<br>第二，编译最后产生的是一个动态的视图。</p>
+<p>为什么是动态视图呢？这里动态指的是视图的任何变化都会直接反应到模型，反之亦然。这使得模型总是应用状态的唯一标识，这大大简化了开发人员的编程工作。因为视图只是模型的投影，控制器完全和视图分离了，并且视图对它来说是透明的。这使得测试变得更简单，因为你不需要关心相关的DOM或者浏览器变化了。</p>
+<p><img src="http://7xvi3w.com1.z0.glb.clouddn.com/blgo_A0D5DB52-36D7-48EF-86A5-AC9FDE292AC6.png" alt="双向数据绑定"></p>
+<blockquote>
+<p>脏值检测：AngularJS会记录数据模型所包含的数据在任何特定时间点的值，而不是原始值。当AngularJS认为某个值可能发生变化时，它会运行自己的事件循环来检查这个值是否变“脏”。如果该值从上次事件循环运行之后发生了变化，则该值被认为是“脏”值。这也是AngularJS可以跟踪和响应应用变化的方式。</p>
+</blockquote>
+<p>这个事件循环会调用$digest( ) 循环。</p>
+<p>这个过程被称为脏值检测（dirty checking），游戏开发中大量使用该技术。脏值检测是检查数据模型变化的有效手段。当有潜在的变化存在时，AngularJS会在事件循环时执行脏检测来保证数据的一致性。</p>
+<p>如果使用KnockoutJS这种通过在数据模型上绑定事件监听器来监听数据变化的框架，这个过程会变得更复杂且低效。处理事件合并、依赖跟踪和大量的事件触发是非常复杂的，而且会在性能方面导致额外的问题。</p>
+<blockquote>
+<p>依赖注入：依赖注入，也就是Dependency injection，是一种软件设计模式，用来处理代码的依赖关系。<br>开发指南中提到，用三种方法让函数获得它的需要依赖。</p>
+</blockquote>
+<p>其一，它的依赖是能被创建的，一般用new操作符就行。<br>其二，能够通过全局变量查找依赖。<br>其三，依赖能在需要时被导入。</p>
+<p>前两种方式都不是很好，因为它们需要对依赖硬编码，使得修改依赖的时候变得困难。特别是在测试的时候不好办，因为对某个部分进行孤立的测试常常需要模拟它的依赖。第三种方式是最好的，因为它不必在组件中去主动需找和获取依赖，而是由外界将依赖传入。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">HelloController</span>(<span class="params">$scope,$location</span>)</span>&#123;</span><br><span class="line">    $scope.greeting=&#123;<span class="attr">text</span>:<span class="string">'Hello'</span>&#125;;</span><br><span class="line">    <span class="comment">//这里可以使用$location对象来做一些很酷的事情</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里我们想把数据绑定到用户浏览器中的URL地址上，可以使用$location对象，只要把$location对象放到我们的构造函数中就可以了。<br>这种神奇效果是通过angularjs的依赖注入机制实现的。依赖注入让我们遵守这样一种开发风格：<br>我们的类只是简单的获取它们所需要的东西，而不需要创建那些它们所依赖的东西。</p>
+<blockquote>
+<p>路由：AngularJS中应用的路由通过$routeProvider来声明，它是$route服务的提供者。这项服务使得控制器、视图模板与当前浏览器的URL可以轻易集成。应用这个特性我们就可以实现深链接，它允许我们使用浏览器的历史(回退或者前进导航)和书签。</p>
+</blockquote>
+<p>app.js:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myApp= angular.module(<span class="string">'myApp'</span>, [ ]);</span><br><span class="line">myApp.config(<span class="function"><span class="keyword">function</span>(<span class="params">$routeProvider</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">$routeProvider.</span><br><span class="line">when(<span class="string">'url'</span>,</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">controller:aController,</span><br><span class="line"></span><br><span class="line">templateUrl:<span class="string">'/path/to/tempate'</span></span><br><span class="line"></span><br><span class="line">&#125;).</span><br><span class="line">when(...other mappings <span class="keyword">for</span> your app...).</span><br><span class="line">…</span><br><span class="line">otherwise(...what to <span class="keyword">do</span> <span class="keyword">if</span> nothing <span class="keyword">else</span> matches...);</span><br><span class="line"></span><br><span class="line">)&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>html:<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span> <span class="attr">ng-app</span>=<span class="string">"myApp"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-view</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>指令：Angular最强大的功能之一就是，你可以把模板编写成HTML的形式。之所以可以做到这一点，是因为angular引入了一款强大的DOM转换引擎，可以用它来扩展html的语法。<br>angular中已经添加了一些新的属性，这些属性不属于html规范。例如，<br>我们引入了双花括号用来实现数据绑定；<br>引入了ng-controller用来指定每个控制器负责监视视图中的哪一部分；<br>引入了ng-model，用来把输入数据绑定到模型中的一部分属性上；<br>我们把这些叫做html扩展指令。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myModule = angular.module(<span class="string">"myModule"</span> , []);</span><br><span class="line">myModule.directive(<span class="string">'namespaceDirectiveName'</span>, <span class="function"><span class="keyword">function</span> <span class="title">factory</span>(<span class="params">injectables</span>) </span>&#123;</span><br><span class="line">   <span class="keyword">var</span> directiveDefinitionObject = &#123;</span><br><span class="line">       restrict: string,</span><br><span class="line">       priority: number,</span><br><span class="line">       template: string,</span><br><span class="line">       templateUrl: string,</span><br><span class="line">       replace: bool,</span><br><span class="line">       transclude: bool,</span><br><span class="line">       scope: &#123;&#125;,</span><br><span class="line">       controller: <span class="function"><span class="keyword">function</span> <span class="title">controllerConstructor</span>(<span class="params"></span></span></span><br><span class="line"><span class="function"><span class="params">                                                                               $scope,</span></span></span><br><span class="line"><span class="function"><span class="params">                                                                               $element,</span></span></span><br><span class="line"><span class="function"><span class="params">                                                                               $attrs,</span></span></span><br><span class="line"><span class="function"><span class="params">                                                                               $transclude</span>) </span>&#123; &#125;,</span><br><span class="line">       <span class="built_in">require</span>: string,</span><br><span class="line">       link: <span class="function"><span class="keyword">function</span> <span class="title">postLink</span>(<span class="params">scope, iElement, iAttrs</span>) </span>&#123; &#125;,</span><br><span class="line">       compile: <span class="function"><span class="keyword">function</span> <span class="title">compile</span>(<span class="params">tElement, tAttrs, transclude</span>) </span>&#123;</span><br><span class="line">           <span class="keyword">return</span> &#123;</span><br><span class="line">               pre: <span class="function"><span class="keyword">function</span> <span class="title">preLink</span>(<span class="params">scope, iElement, iAttrs, controller</span>) </span>&#123; &#125;,</span><br><span class="line">               post: <span class="function"><span class="keyword">function</span> <span class="title">postLink</span>(<span class="params">scope, iElement, iAttrs, controller</span>) </span>&#123; &#125;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;;</span><br><span class="line">   <span class="keyword">return</span> directiveDefinitionObject;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>angular内置了很多指令，可以帮助你为你的应用定义视图。这些指令可以把常见的视图定义成模板，它们可以设置应用的运行方式，或者用来创建可复用的组件。同时，你并不会受限于angular内置的指令。你可以编写自己的指令用来扩展html模板的功能，从而实现你梦想中的任何东西。</p>
+<blockquote>
+<p>服务：在一个应用中，负责提供一个接口，把特定函数需要的方法放在一起。angular开发指南（<a href="http://www.angularjs.cn/A00L）中是这么说的，“服务是一种由服务器端带到客户端的特性，它由来已久。AngularJS应用中的服务是一些用依赖注入捆绑在一起的可替换的对象。服务是最常和依赖注入一起用的，它也是AngularJS中的关键特性”。" target="_blank" rel="noopener">http://www.angularjs.cn/A00L）中是这么说的，“服务是一种由服务器端带到客户端的特性，它由来已久。AngularJS应用中的服务是一些用依赖注入捆绑在一起的可替换的对象。服务是最常和依赖注入一起用的，它也是AngularJS中的关键特性”。</a></p>
+</blockquote>
+<p>AngularJS 提供了一组常用操作的服务。和其他的内建变量或者标识符一样，内建服务名称也总是以”$”开头。另外你也可以创建你自己的服务，我会在下节笔记中详细介绍。这里我们来聚焦内建服务，首先我们来看看angularjs中有哪些常用的内建服务以及他们的含义。</p>
+<p>①$http：angular的核心服务，通过浏览器的XMLHttpRequest对象或者JSONP，为远程HTTP服务器的通信提供便利。<br>②$location：对地址栏中的URL的一系列操作<br>③$log：安全的将信息写入浏览器控制台，也就是控制台输出<br>④$timeout：angular包装了window.setTimeout，我更习惯叫它定时器<br>⑤$q：异步请求使用，promise/deferred模板<br>⑥$routeProvider：路由</p>
+<p>一个简单的例子可能如下所示：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">angular.module(<span class="string">'myServiceModule'</span>, []).</span><br><span class="line"> controller(<span class="string">'MyController'</span>, [<span class="string">'$scope'</span>,<span class="string">'notify'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">$scope, notify</span>) </span>&#123;</span><br><span class="line">   $scope.callNotify = <span class="function"><span class="keyword">function</span>(<span class="params">msg</span>) </span>&#123;</span><br><span class="line">     notify(msg);</span><br><span class="line">   &#125;;</span><br><span class="line"> &#125;]).</span><br><span class="line">factory(<span class="string">'notify'</span>, [<span class="string">'$window'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">win</span>) </span>&#123;<span class="comment">//定义服务名称</span></span><br><span class="line">   <span class="keyword">var</span> msgs = [];</span><br><span class="line">   <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">msg</span>) </span>&#123;<span class="comment">//定义方法</span></span><br><span class="line">     msgs.push(msg);</span><br><span class="line">     <span class="keyword">if</span> (msgs.length == <span class="number">3</span>) &#123;</span><br><span class="line">       win.alert(msgs.join(<span class="string">"\n"</span>));</span><br><span class="line">       msgs = [];</span><br><span class="line">     &#125;</span><br><span class="line">   &#125;;</span><br><span class="line"> &#125;]);</span><br></pre></td></tr></table></figure></p>
+<h4 id="四、绑定示例，演示"><a href="#四、绑定示例，演示" class="headerlink" title="四、绑定示例，演示"></a>四、绑定示例，演示</h4><p>示例一：<br><a href="http://jsfiddle.net/Au79V/7/" target="_blank" rel="noopener">http://jsfiddle.net/Au79V/7/</a><br><img src="http://7xvi3w.com1.z0.glb.clouddn.com/blog_1.gif" alt="Angularjs动态图片展示"></p>
+<p>示例二：<br><a href="http://jsfiddle.net/Au79V/12/" target="_blank" rel="noopener">http://jsfiddle.net/Au79V/12/</a><br><img src="http://7xvi3w.com1.z0.glb.clouddn.com/blog_65919517-DA4D-4CA3-A7DC-51FE54145C54.png" alt="过滤器演示"></p>
+<p>示例三：<br><a href="http://jsfiddle.net/Au79V/16/" target="_blank" rel="noopener">http://jsfiddle.net/Au79V/16/</a><br><img src="http://7xvi3w.com1.z0.glb.clouddn.com/blog_F938A44E-AAA0-4827-88AC-DDA5288725ED.png" alt="指令"></p>
+<p>示例四：<br>表单验证</p>
+<p>示例五：<br>完整的CRUD</p>
+<h4 id="五、优缺点一览"><a href="#五、优缺点一览" class="headerlink" title="五、优缺点一览"></a>五、优缺点一览</h4><ul>
+<li><p>优点：<br>①模板功能强大丰富，并且是声明式的，自带了丰富的Angular指令；<br>②是一个比较完善的前端MV*框架，包含模板，数据双向绑定，路由，模块化，服务，依赖注入等所有功能；<br>③自定义Directive，需要深入了解Directive的一些特性，简单的封装比较容易。<br>④ ng模块的依赖注入，能够很容易的写出可复用的代码，实际开发中UI变化很大，但是js的代码基本上很少改动。<br>⑤ Angular支持单元测试和端到端测试。</p>
+</li>
+<li><p>缺点：<br>①适合处理简单的CRUD，复杂的应用场景将会很难下手；<br>②内容网站，需要SEO的。angularjs不利于此类网站；<br>③交互频繁的网站，angularjs效率将会大大降低，详情请查看angularjs事件循环；<br>④兼容的话，1.3版本已经放弃IE8了。</p>
+</li>
+</ul>
+<h4 id="六、相关资源"><a href="#六、相关资源" class="headerlink" title="六、相关资源"></a>六、相关资源</h4><p>Angularjs在线文档：<a href="http://docs.angularjs.org/guide/services" target="_blank" rel="noopener">http://docs.angularjs.org/guide/services</a><br>angularjs入门教程：<a href="http://www.ituring.com.cn/article/13472" target="_blank" rel="noopener">http://www.ituring.com.cn/article/13472</a><br>中文版开发指南：<a href="http://angular.duapp.com/guide/controller" target="_blank" rel="noopener">http://angular.duapp.com/guide/controller</a><br>angularjs中文社区：<a href="http://www.angularjs.cn/" target="_blank" rel="noopener">http://www.angularjs.cn/</a><br>angularjs焦点图特效：<a href="http://dfsq.github.io/ngView-animation-effects/app/#/page/1" target="_blank" rel="noopener">http://dfsq.github.io/ngView-animation-effects/app/#/page/1</a><br>angular ui：<a href="http://angular-ui.github.io/bootstrap/" target="_blank" rel="noopener">http://angular-ui.github.io/bootstrap/</a><br>angularjs 最强资源整合：<a href="http://www.iteye.com/news/28651-AngularJS-Google-resource" target="_blank" rel="noopener">http://www.iteye.com/news/28651-AngularJS-Google-resource</a><br>满满的全是angular：<a href="https://github.com/jmcunningham/AngularJS-Learning" target="_blank" rel="noopener">https://github.com/jmcunningham/AngularJS-Learning</a><br>angular树插件：<a href="http://jsfiddle.net/vL4TJ/44/" target="_blank" rel="noopener">http://jsfiddle.net/vL4TJ/44/</a><br>angular文本可编辑插件：<a href="http://vitalets.github.io/angular-xeditable/" target="_blank" rel="noopener">http://vitalets.github.io/angular-xeditable/</a><br>angular另一套ui框架：<a href="http://mgcrea.github.io/angular-strap/" target="_blank" rel="noopener">http://mgcrea.github.io/angular-strap/</a></p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/angularjs/">angularjs</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/07/05/Comprehension-of-Markdown-Grammatical-Structure/" data-tooltip="Markdown语法浅析">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/06/25/solutions-to-touchend-on-mobile/" data-tooltip="移动端touchend事件不触发解决方案">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2015/06/29/summarize-the-angularjs/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2015/06/29/summarize-the-angularjs/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2015/06/29/summarize-the-angularjs/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+            
+                <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/07/05/Comprehension-of-Markdown-Grammatical-Structure/" data-tooltip="Markdown语法浅析">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/06/25/solutions-to-touchend-on-mobile/" data-tooltip="移动端touchend事件不触发解决方案">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2015/06/29/summarize-the-angularjs/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2015/06/29/summarize-the-angularjs/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2015/06/29/summarize-the-angularjs/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2015/06/29/summarize-the-angularjs/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2015/06/29/summarize-the-angularjs/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2015/06/29/summarize-the-angularjs/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+    
+        <script>
+             var disqus_config = function () {
+                 this.page.url = 'http://jartto.wang/2015/06/29/summarize-the-angularjs/';
+                 
+                    this.page.identifier = '2015/06/29/summarize-the-angularjs/';
+                                  
+             };
+            (function() {
+                var d = document, s = d.createElement('script');
+                var disqus_shortname = 'jartto';
+                s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+
+
+
+</html>

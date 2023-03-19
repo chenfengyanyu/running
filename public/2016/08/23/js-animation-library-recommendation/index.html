@@ -1,0 +1,521 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>js动画库推荐 - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="想在页面中加入一个动态粒子效果，翻阅了很多资料，尝试了很多效果，然而UE并不是十分满意。虽然任务还没有完成，但是却意外发现了一些比较有意思的js动画库，特此分享出来。">
+<meta name="keywords" content="js,animation,svg">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="js动画库推荐">
+<meta property="og:url" content="http://jartto.wang/2016/08/23/js-animation-library-recommendation/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="想在页面中加入一个动态粒子效果，翻阅了很多资料，尝试了很多效果，然而UE并不是十分满意。虽然任务还没有完成，但是却意外发现了一些比较有意思的js动画库，特此分享出来。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/phy_1">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/phy_2">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/phy_3">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/phy_4">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/phy_5">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/phy_6">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/phy_7">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/phy_8">
+<meta property="og:updated_time" content="2016-09-06T02:13:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="js动画库推荐">
+<meta name="twitter:description" content="想在页面中加入一个动态粒子效果，翻阅了很多资料，尝试了很多效果，然而UE并不是十分满意。虽然任务还没有完成，但是却意外发现了一些比较有意思的js动画库，特此分享出来。">
+<meta name="twitter:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/phy_1">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/ani_lib.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="http://7xvi3w.com1.z0.glb.clouddn.com/ani_lib.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            js动画库推荐
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2016-08-23T23:25:45+08:00">
+	  
+		    2016/8月/23 23:25:45
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/前端分享/">前端分享</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>想在页面中加入一个动态粒子效果，翻阅了很多资料，尝试了很多效果，然而UE并不是十分满意。虽然任务还没有完成，但是却意外发现了一些比较有意思的js动画库，特此分享出来。<br><a id="more"></a></p>
+<h4 id="一、js物理引擎"><a href="#一、js物理引擎" class="headerlink" title="一、js物理引擎"></a>一、js物理引擎</h4><p><a href="http://wellcaffeinated.net/PhysicsJS/#demo-6" target="_blank" rel="noopener">http://wellcaffeinated.net/PhysicsJS/#demo-6</a><br><div class="figure left" style="width:350px;"><a class="fancybox" href="http://7xvi3w.com1.z0.glb.clouddn.com/phy_1" title data-fancybox-group="travel" target="_blank" rel="noopener"><img class="fig-img" src="http://7xvi3w.com1.z0.glb.clouddn.com/phy_1" style="width:350px;" alt></a></div><div style="clear:both;"></div></p>
+<h4 id="二、svg动画库"><a href="#二、svg动画库" class="headerlink" title="二、svg动画库"></a>二、svg动画库</h4><p><a href="http://dynamicsjs.com" target="_blank" rel="noopener">http://dynamicsjs.com</a><br><div class="figure left" style="width:350px;"><a class="fancybox" href="http://7xvi3w.com1.z0.glb.clouddn.com/phy_2" title data-fancybox-group="travel" target="_blank" rel="noopener"><img class="fig-img" src="http://7xvi3w.com1.z0.glb.clouddn.com/phy_2" style="width:350px;" alt></a></div><div style="clear:both;"></div></p>
+<h4 id="三、d3图表插件库"><a href="#三、d3图表插件库" class="headerlink" title="三、d3图表插件库"></a>三、d3图表插件库</h4><p><a href="https://github.com/d3/d3/wiki/Gallery" target="_blank" rel="noopener">https://github.com/d3/d3/wiki/Gallery</a><br><div class="figure left" style="width:350px;"><a class="fancybox" href="http://7xvi3w.com1.z0.glb.clouddn.com/phy_3" title data-fancybox-group="travel" target="_blank" rel="noopener"><img class="fig-img" src="http://7xvi3w.com1.z0.glb.clouddn.com/phy_3" style="width:350px;" alt></a></div><div style="clear:both;"></div></p>
+<h4 id="四、js专用图形绘制类库"><a href="#四、js专用图形绘制类库" class="headerlink" title="四、js专用图形绘制类库"></a>四、js专用图形绘制类库</h4><p><a href="http://sigmajs.org" target="_blank" rel="noopener">http://sigmajs.org</a><br><div class="figure left" style="width:350px;"><a class="fancybox" href="http://7xvi3w.com1.z0.glb.clouddn.com/phy_4" title data-fancybox-group="travel" target="_blank" rel="noopener"><img class="fig-img" src="http://7xvi3w.com1.z0.glb.clouddn.com/phy_4" style="width:350px;" alt></a></div><div style="clear:both;"></div></p>
+<h4 id="五、3d力导向图"><a href="#五、3d力导向图" class="headerlink" title="五、3d力导向图"></a>五、3d力导向图</h4><p><a href="https://vida.io/documents/N4jSip7n68yQ48DXp" target="_blank" rel="noopener">https://vida.io/documents/N4jSip7n68yQ48DXp</a><br><div class="figure left" style="width:350px;"><a class="fancybox" href="http://7xvi3w.com1.z0.glb.clouddn.com/phy_5" title data-fancybox-group="travel" target="_blank" rel="noopener"><img class="fig-img" src="http://7xvi3w.com1.z0.glb.clouddn.com/phy_5" style="width:350px;" alt></a></div><div style="clear:both;"></div></p>
+<h4 id="六、jquery插件，粒子动态背景插件"><a href="#六、jquery插件，粒子动态背景插件" class="headerlink" title="六、jquery插件，粒子动态背景插件"></a>六、jquery插件，粒子动态背景插件</h4><p><a href="http://www.jqcool.net/demo/201409/jquery-particleground/" target="_blank" rel="noopener">http://www.jqcool.net/demo/201409/jquery-particleground/</a><br><div class="figure left" style="width:350px;"><a class="fancybox" href="http://7xvi3w.com1.z0.glb.clouddn.com/phy_6" title data-fancybox-group="travel" target="_blank" rel="noopener"><img class="fig-img" src="http://7xvi3w.com1.z0.glb.clouddn.com/phy_6" style="width:350px;" alt></a></div><div style="clear:both;"></div></p>
+<h4 id="七、可交互的粒子背景插件1"><a href="#七、可交互的粒子背景插件1" class="headerlink" title="七、可交互的粒子背景插件1"></a>七、可交互的粒子背景插件1</h4><p><a href="http://p5js.org" target="_blank" rel="noopener">http://p5js.org</a><br><div class="figure left" style="width:350px;"><a class="fancybox" href="http://7xvi3w.com1.z0.glb.clouddn.com/phy_7" title data-fancybox-group="travel" target="_blank" rel="noopener"><img class="fig-img" src="http://7xvi3w.com1.z0.glb.clouddn.com/phy_7" style="width:350px;" alt></a></div><div style="clear:both;"></div></p>
+<h4 id="八、可交互的粒子背景插件2"><a href="#八、可交互的粒子背景插件2" class="headerlink" title="八、可交互的粒子背景插件2"></a>八、可交互的粒子背景插件2</h4><p><a href="http://www.htmleaf.com/Demo/201506182061.html" target="_blank" rel="noopener">http://www.htmleaf.com/Demo/201506182061.html</a><br><div class="figure left" style="width:350px;"><a class="fancybox" href="http://7xvi3w.com1.z0.glb.clouddn.com/phy_8" title data-fancybox-group="travel" target="_blank" rel="noopener"><img class="fig-img" src="http://7xvi3w.com1.z0.glb.clouddn.com/phy_8" style="width:350px;" alt></a></div><div style="clear:both;"></div></p>
+<p>当然，还有很多此类动画库，以后我会持续补充的～</p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/animation/">animation</a> <a class="tag tag--primary tag--small t-link" href="/tags/js/">js</a> <a class="tag tag--primary tag--small t-link" href="/tags/svg/">svg</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/09/04/final-solution-of-the-web-font/" data-tooltip="web font 终极解决方案">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/08/18/detect-page-scroll-and-execute-animation/" data-tooltip="如何检测页面滚动并执行动画">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2016/08/23/js-animation-library-recommendation/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2016/08/23/js-animation-library-recommendation/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2016/08/23/js-animation-library-recommendation/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+            
+                <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/09/04/final-solution-of-the-web-font/" data-tooltip="web font 终极解决方案">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/08/18/detect-page-scroll-and-execute-animation/" data-tooltip="如何检测页面滚动并执行动画">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2016/08/23/js-animation-library-recommendation/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2016/08/23/js-animation-library-recommendation/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2016/08/23/js-animation-library-recommendation/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2016/08/23/js-animation-library-recommendation/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2016/08/23/js-animation-library-recommendation/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2016/08/23/js-animation-library-recommendation/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+    
+        <script>
+             var disqus_config = function () {
+                 this.page.url = 'http://jartto.wang/2016/08/23/js-animation-library-recommendation/';
+                 
+                    this.page.identifier = '2016/08/23/js-animation-library-recommendation/';
+                                  
+             };
+            (function() {
+                var d = document, s = d.createElement('script');
+                var disqus_shortname = 'jartto';
+                s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+
+
+
+</html>

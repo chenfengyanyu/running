@@ -1,0 +1,633 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>了不起的 Istio - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="很多企业都会面临从单体应用向微服务架构的转型，也会衍生出更多的分布式场景需求。随着规模和复杂度的不断增长，如何才能更好的理解、高效的管理服务网格呢？">
+<meta name="keywords" content="istio,k8s,service mesh">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="了不起的 Istio">
+<meta property="og:url" content="http://jartto.wang/2020/07/29/istio-1/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="很多企业都会面临从单体应用向微服务架构的转型，也会衍生出更多的分布式场景需求。随着规模和复杂度的不断增长，如何才能更好的理解、高效的管理服务网格呢？">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/istio/service-mesh.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/istio/ingress-istio.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/istio/intro.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/istio/framework.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/istio/before.svg">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/istio/after.svg">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/istio/practice.png">
+<meta property="og:updated_time" content="2020-08-03T02:18:03.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="了不起的 Istio">
+<meta name="twitter:description" content="很多企业都会面临从单体应用向微服务架构的转型，也会衍生出更多的分布式场景需求。随着规模和复杂度的不断增长，如何才能更好的理解、高效的管理服务网格呢？">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/istio/service-mesh.png">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/istio/logo.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/istio/logo.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            了不起的 Istio
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2020-07-29T06:44:51+08:00">
+	  
+		    2020/7月/29 06:44:51
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>很多企业都会面临从单体应用向微服务架构的转型，也会衍生出更多的分布式场景需求。随着规模和复杂度的不断增长，如何才能更好的理解、高效的管理<strong>服务网格</strong>呢？</p>
+<a id="more"></a>
+<p>本节篇幅较长，我们主要围绕以下几点来展开：<br>1.什么是服务网格？<br>2.初识 <code>Istio</code><br>3.核心特性<br>4.流程架构<br>5.核心模块<br>6.<code>Envoy</code> 进阶<br>7.方案畅想</p>
+<p>对许多公司来说，<code>Docker</code> 和 <code>Kubernetes</code> 这样的工具已经解决了部署问题，或者说几乎解决了。但他们还没有解决<strong>运行时</strong>的问题，这就是服务网格（<code>Service Mesh</code>）的由来。</p>
+<h4 id="一、什么是服务网格？"><a href="#一、什么是服务网格？" class="headerlink" title="一、什么是服务网格？"></a>一、什么是服务网格？</h4><p>服务网格（<code>Service Mesh</code>）用来描述组成这些应用程序的微服务网络以及它们之间的交互。它是一个用于保证服务间安全、快速、可靠通信的网络代理组件，是随着<strong>微服务和云原生应用</strong>兴起而诞生的基础设施层。</p>
+<p>它通常以轻量级网络代理的方式同应用部署在一起。比如 <code>Sidecar</code> 方式，如下图所示：</p>
+<p><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/istio/service-mesh.png" alt="Service Mesh"></p>
+<p>我们对上图做个解释：<br><code>Service Mesh</code> 设计一般划分为两个模块，<strong>控制面</strong>和<strong>数据面</strong>。对于应用来说，所有流量都会经过数据面进行转发。顺利转发的前提：<strong>数据面需要知道转发的目标地址</strong>，目标地址本身是由一些业务逻辑来决定的(例如服务发现)。</p>
+<p>所以自然而然地，我们可以推断<strong>控制面</strong>需要负责管理数据面能正常运行所需要的一些配置：</p>
+<ul>
+<li>需要知道某次请求转发去哪里：服务发现配置；</li>
+<li>外部流量进入需要判断是否已经达到服务流量上限：限流配置；</li>
+<li>依赖服务返回错误时，需要能够执行相应的熔断逻辑：熔断配置；</li>
+</ul>
+<p><code>Serivce Mesh</code> 可以看作是一个位于 <code>TCP/IP</code> 之上的网络模型，抽象了服务间可靠通信的机制。但与 <code>TCP</code> 不同，它是面向应用的，为应用提供了统一的可视化和控制。</p>
+<p><strong>1.<code>Service Mesh</code> 具有如下优点：</strong></p>
+<ul>
+<li>屏蔽分布式系统通信的复杂性(负载均衡、服务发现、认证授权、监控追踪、流量控制等等)，服务只用关注业务逻辑；</li>
+<li>真正的语言无关，服务可以用任何语言编写，只需和 <code>Service Mesh</code> 通信即可；</li>
+<li>对应用透明，<code>Service Mesh</code> 组件可以单独升级；</li>
+</ul>
+<p><strong>2.<code>Service Mesh</code> 目前也面临一些挑战：</strong></p>
+<ul>
+<li><code>Service Mesh</code> 组件以代理模式计算并转发请求，一定程度上会降低通信系统性能，并增加系统资源开销；</li>
+<li><code>Service Mesh</code> 组件接管了网络流量，因此服务的整体稳定性依赖于 <code>Service Mesh</code>，同时额外引入的大量 <code>Service Mesh</code> 服务实例的运维和管理也是一个挑战；</li>
+</ul>
+<div class="alert danger"><p>随着服务网格的规模和复杂性不断的增长，它将会变得越来越难以理解和管理。</p>
+</div>
+<p><code>Service Mesh</code> 的需求包括服务发现、负载均衡、故障恢复、度量和监控等。<code>Service Mesh</code> 通常还有更复杂的运维需求，比如 <code>A/B</code> 测试、金丝雀发布、速率限制、访问控制和端到端认证。</p>
+<p><code>Service Mesh</code>的出现，弥补了 <code>Kubernetes</code> 在微服务的连接、管理和监控方面的短板，为 <code>Kubernetes</code> 提供更好的应用和服务管理。因此，<code>Service Mesh</code> 的代表 <code>Istio</code> 一经推出，就被认为是可以和 <code>Kubernetes</code> 形成双剑合璧效果的微服务管理的利器，受到了业界的推崇。</p>
+<p><code>Istio</code> 提供了对整个服务网格的行为洞察和操作控制的能力，以及一个完整的满足微服务应用各种需求的解决方案。<code>Istio</code> 主要采用一种一致的方式来保护、连接和监控微服务，降低了管理微服务部署的复杂性。</p>
+<h4 id="二、初识-Istio"><a href="#二、初识-Istio" class="headerlink" title="二、初识 Istio"></a>二、初识 Istio</h4><p><code>Istio</code> 发音「意丝帝欧」，重音在<strong>意</strong>上。官方给出的 <code>Istio</code> 的总结，简单明了：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Istio lets you connect, secure, control, and observe services.</span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p>连接、安全、控制和观测服务。</p>
+</div>
+<p><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/istio/ingress-istio.png" alt="初识 Istio"></p>
+<p>简单来说，<code>Istio</code> 针对现有的服务网格，提供一种简单的方式将连接、安全、控制和观测的模块，与应用程序或服务隔离开来，从而开发人员可以将更多的精力放在核心的业务逻辑上，以下是 <code>Istio</code> 的核心功能：</p>
+<p>1.<code>HTTP</code>、<code>gRPC</code>、<code>WebSocket</code> 和 <code>TCP</code> 流量的自动负载均衡；<br>2.通过丰富的路由规则、重试、故障转移和故障注入，可以对流量行为进行细粒度控制；<br>3.可插入的策略层和配置 <code>API</code>，支持访问控制、速率限制和配额；<br>4.对出入集群入口和出口中所有流量的自动度量指标、日志记录和追踪；<br>5.通过强大的基于身份的验证和授权，在集群中实现安全的服务间通信；</p>
+<p>从较高的层面来说，<code>Istio</code> 有助于降低这些部署的复杂性，并减轻开发团队的压力。它是一个完全开源的服务网格，作为透明的一层接入到现有的分布式应用程序里。它也是一个平台，拥有可以集成任何日志、遥测和策略系统的 <code>API</code> 接口。</p>
+<p><code>Istio</code> 多样化的特性使我们能够成功且高效地运行分布式微服务架构，并提供保护、连接和监控微服务的统一方法。</p>
+<h4 id="三、核心特性"><a href="#三、核心特性" class="headerlink" title="三、核心特性"></a>三、核心特性</h4><p><code>Istio</code> 以统一的方式提供了许多<strong>跨服务网格</strong>的关键功能：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/istio/intro.png" alt="官方介绍"></p>
+<p><strong>1.流量管理</strong><br><code>Istio</code> 简单的规则配置和流量路由允许我们控制服务之间的流量和 <code>API</code> 调用过程。<code>Istio</code> 简化了服务级属性（如熔断器、超时和重试）的配置，并且让它轻而易举的执行重要的任务（如 <code>A/B</code> 测试、金丝雀发布和按流量百分比划分的分阶段发布）。</p>
+<p>有了更好的对流量的可视性和开箱即用的故障恢复特性，我们就可以在问题产生之前捕获它们，无论面对什么情况都可以使调用更可靠，网络更健壮。</p>
+<p><strong>2.安全</strong><br><div class="alert warning"><p><code>Istio</code> 的安全特性解放了开发人员，使其只需要专注于应用程序级别的安全。</p>
+</div></p>
+<p><code>Istio</code> 提供了<strong>底层的安全通信通道</strong>，并为大规模的<strong>服务通信管理认证、授权和加密</strong>。有了 <code>Istio</code>，服务通信在默认情况下就是受保护的，可以在跨不同协议和运行时的情况下实施一致的策略，而所有这些都只需要很少甚至不需要修改应用程序。</p>
+<p><code>Istio</code> 是独立于平台的，可以与 <code>Kubernetes</code>（或基础设施）的网络策略一起使用。但它更强大，能够在网络和应用层面保护 <code>Pod</code> 到 <code>Pod</code> 或者服务到服务之间的通信。</p>
+<p><strong>3.可观察性</strong><br><code>Istio</code> 健壮的<strong>追踪、监控和日志特性</strong>让我们能够深入的<strong>了解服务网格部署</strong>。通过 <code>Istio</code> 的监控能力，可以真正的了解到服务的性能是如何影响上游和下游的。而它的定制 <code>Dashboard</code> 提供了对所有服务性能的可视化能力，并让我们看到它如何影响其他进程。</p>
+<p><code>Istio</code> 的 <code>Mixer</code> 组件负责<strong>策略控制</strong>和<strong>遥测数据收集</strong>。它提供了后端抽象和中介，将一部分 <code>Istio</code>与后端的基础设施实现细节隔离开来，并为运维人员提供了对网格与后端基础实施之间交互的细粒度控制。</p>
+<p>所有这些特性都使我们能够更有效地设置、监控和加强服务的 <code>SLO</code>。当然，底线是我们可以快速有效地检测到并修复出现的问题。</p>
+<p><strong>4.平台支持</strong><br><code>Istio</code> 独立于平台，被设计为可以在各种环境中运行，包括跨云、内部环境、<code>Kubernetes</code>、<code>Mesos</code> 等等。我们可以在 <code>Kubernetes</code> 或是装有 <code>Consul</code> 的 <code>Nomad</code> 环境上部署 <code>Istio</code>。</p>
+<p><code>Istio</code> 目前支持：</p>
+<ul>
+<li><code>Kubernetes</code> 上的服务部署</li>
+<li>基于 <code>Consul</code> 的服务注册</li>
+<li>服务运行在独立的虚拟机上</li>
+</ul>
+<p><strong>5.整合和定制</strong><br><code>Istio</code> 的策略实施组件可以扩展和定制，与现有的 <code>ACL</code>、日志、监控、配额、审查等解决方案集成。</p>
+<h4 id="四、流程架构"><a href="#四、流程架构" class="headerlink" title="四、流程架构"></a>四、流程架构</h4><p><code>Istio</code> 服务网格逻辑上分为<strong>数据平面</strong>（<code>Control Plane</code>）和<strong>控制平面</strong>（<code>Data Plane</code>），架构图如下所示：</p>
+<p><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/istio/framework.png" alt="Istio 架构图"></p>
+<p>1.<strong>数据平面<code>Data Plane</code></strong>由一组以 <code>Sidecar</code> 方式部署的智能代理 <code>Envoy</code> 组成。</p>
+<p><code>Envoy</code> 被部署为 <code>Sidecar</code>，和对应服务在同一个 <code>Kubernetes pod</code> 中。这允许 <code>Istio</code> 将大量关于流量行为的信号作为属性提取出来，而这些属性又可以在 <code>Mixer</code> 中用于执行策略决策，并发送给监控系统，以提供整个网格行为的信息。</p>
+<div class="alert success"><p>这些代理可以调节和控制微服务及 <code>Mixer</code> 之间所有的网络通信。</p>
+</div>
+<p>2.<strong>控制平面<code>Control Plane</code></strong>负责管理和配置代理来路由流量，此外配置 <code>Mixer</code> 以实施策略和收集遥测数据。主要包含如下几部分内容：</p>
+<ul>
+<li><code>Mixer</code>：策略和请求追踪；</li>
+<li><code>Pilot</code>：提供服务发现功能，为智能路由（例如 <code>A/B</code> 测试、金丝雀部署等）和弹性（超时、重试、熔断器等）提供流量管理功能；</li>
+<li><code>Citadel</code>：分发 <code>TLS</code> 证书到智能代理；</li>
+<li><code>Sidecar injector</code>：可以允许向应用中无侵入的添加功能，避免为了满足第三方需求而添加额外的代码；</li>
+</ul>
+<h4 id="五、核心模块"><a href="#五、核心模块" class="headerlink" title="五、核心模块"></a>五、核心模块</h4><p>上文提到了很多技术名词，我们需要重点解释一下：</p>
+<p>1.什么是 <code>Sidecar</code> 模式？<br><code>Sidecar</code> 是一种将应用功能从应用本身剥离出来作为单独进程的设计模式，可以允许向应用中无侵入的添加功能，避免为了满足第三方需求而添加额外的代码。</p>
+<p>在软件架构中，<code>Sidecar</code> 附加到主应用，或者叫父应用上，以扩展、增强功能特性，同时 <code>Sidecar</code> 与主应用是<strong>松耦合</strong>的。</p>
+<div class="alert info"><p><code>Sidecar</code> 是一种单节点多容器的应用设计形式，主张以额外的容器来扩展或增强主容器。</p>
+</div>
+<p>2.<code>Envoy</code> 的作用是什么？<br><code>Envoy</code> 是一个独立的进程，旨在与每个应用程序服务器一起运行。所有 <code>Envoy</code> 组成了一个透明的通信网格，其中每个应用程序发送和接收来自本地主机的消息，并且不需要知道网络拓扑。</p>
+<p>与传统的服务通信服务的库方法相比，<strong>进程外架构</strong>有两个实质性好处：</p>
+<ul>
+<li><code>Envoy</code> 支持任何编程语言写的服务。只用部署一个 <code>Envoy</code> 就可以在 <code>Java</code>、<code>C++</code>、<code>Go</code>、<code>PHP</code>、<code>Python</code> 等服务间形成网格。</li>
+<li>任何使用过大型面向服务的体系结构的人都知道，部署库升级可能会非常痛苦。<code>Envoy</code> 可以在整个基础设施中迅速部署和升级。</li>
+</ul>
+<div class="alert success"><p><code>Envoy</code> 以透明的方式弥合了面向服务的体系结构使用多个应用程序框架和语言的情况。</p>
+</div>
+<p>3.<code>Mixer</code><br><code>Mixer</code> 是一个独立于平台的组件，负责在服务网格上执行<strong>访问控制</strong>和<strong>使用策略</strong>，并从 <code>Envoy</code> 代理和其他服务收集遥测数据，代理提取请求级属性，发送到 <code>Mixer</code> 进行评估。有关属性提取和策略评估的更多信息，请参见 <code>Mixer</code> 配置。</p>
+<p><code>Mixer</code> 中包括一个灵活的插件模型，使其能够接入到各种主机环境和基础设施后端，从这些细节中抽象出 <code>Envoy</code> 代理和 <code>Istio</code> 管理的服务。</p>
+<p>4.<code>Pilot</code><br>控制面中负责流量管理的组件为 <code>Pilot</code>，它为 <code>Envoy Sidecar</code> 提供服务发现功能，为智能路由（例如 <code>A/B</code> 测试、金丝雀部署等）和弹性（超时、重试、熔断器等）提供流量管理功能。它将控制流量行为的高级路由规则转换为特定于 <code>Envoy</code> 的配置，并在运行时将它们传播到 <code>Sidecar</code>。</p>
+<p>5.<code>Istio</code> 如何保证服务通信的安全？</p>
+<ul>
+<li><p><code>Istio</code> 以可扩缩的方式管理微服务间通信的<strong>身份验证、授权和加密</strong>。<code>Istio</code> 提供基础的安全通信渠道，使开发者可以专注于<strong>应用层级</strong>的安全。</p>
+</li>
+<li><p><code>Istio</code> 可以<strong>增强微服务及其通信</strong>（包括服务到服务和最终用户到服务的通信）的安全性，且不需要更改服务代码。</p>
+<div class="alert info"><p>它为每个服务提供基于角色的强大身份机制，以实现跨集群、跨云端的互操作性。</p>
+</div>
+</li>
+</ul>
+<ul>
+<li><p>如果我们结合使用 <code>Istio</code> 与 <code>Kubernetes</code>（或基础架构）网络政策，<code>Pod</code> 到 <code>Pod</code> 或服务到服务的通信在网络层和应用层都将安全无虞。<code>Istio</code> 以 <code>Google</code> 的<strong>深度防御策略为基础</strong>构建而成，以确保微服务通信的安全。</p>
+<div class="alert success"><p>当我们在 <code>Google Cloud</code> 中使用 <code>Istio</code> 时，<code>Google</code> 的基础架构可让我们构建真正安全的应用部署。</p>
+</div>
+</li>
+<li><p><code>Istio</code> 可确保服务通信在默认情况下是安全的，并且我们可以<strong>跨不同协议和运行时一致地实施安全政策</strong>，而只需对应用稍作调整，甚至无需调整。</p>
+</li>
+</ul>
+<h4 id="六、Envoy-进阶"><a href="#六、Envoy-进阶" class="headerlink" title="六、Envoy 进阶"></a>六、Envoy 进阶</h4><p><code>Istio</code> 使用 <code>Envoy</code> 代理的扩展版本，<code>Envoy</code> 是以 <code>C++</code> 开发的高性能代理，用于<strong>调解服务网格中所有服务的所有入站和出站流量</strong>。</p>
+<p><code>Envoy</code> 的许多内置功能被 <code>Istio</code> 发扬光大，例如：</p>
+<ul>
+<li>动态服务发现</li>
+<li>负载均衡</li>
+<li><code>TLS</code> 终止</li>
+<li><code>HTTP2 &amp; gRPC</code> 代理</li>
+<li>熔断器</li>
+<li>健康检查、基于百分比流量拆分的灰度发布</li>
+<li>故障注入</li>
+<li>丰富的度量指标</li>
+</ul>
+<p><code>Envoy</code> 分为主线程、工作线程、文件刷新线程，其中主线程就是负责工作线程和文件刷新线程的管理和调度。而工作线程主要负责监听、过滤和转发，工作线程里面会包含一个监听器，如果收到一个请求之后会通过过滤链来进行数据过滤。前面两个都是非阻塞的，唯一一个阻塞的是这种 <code>IO</code> 操作的，会不断地把内存里面一些缓存进行落盘。</p>
+<p>总结来说，我们可以围绕如下 5 方面：</p>
+<p><strong>1.服务的动态注册和发现</strong><br><div class="alert info"><p><code>Envoy</code> 可以选择使用一组分层的动态配置 <code>API</code> 来进行集中管理。</p>
+</div></p>
+<p>这些层为 <code>Envoy</code> 提供了动态更新，后端群集的主机、后端群集本身、<code>HTTP</code> 路由、侦听套接字和通信加密。为了实现更简单的部署，后端主机发现可以通过 <code>DNS</code> 解析 (甚至完全跳过) 完成，层也可以替换为静态配置文件。</p>
+<p><strong>2.健康检查</strong><br>构建 <code>Envoy</code> 网格的建议方法是将<strong>服务发现</strong>视为最终一致的过程。 <code>Envoy</code> 包括一个运行状况检查子系统，该子系统可以选择对上游服务集群执行主动运行状况检查。</p>
+<p>然后，<code>Envoy</code> 使用服务发现和运行状况检查信息的联合来确定健康的负载均衡服务器。<code>Envoy</code> 还支持通过<strong>异常检测子系统</strong>进行被动运行状况检查。</p>
+<p><strong>3.高级负载均衡</strong><br><div class="alert warning"><p>分布式系统中不同组件之间的负载平衡是一个复杂的问题。</p>
+</div></p>
+<p>由于 <code>Envoy</code> 是一个独立的代理而不是库，因此它能够在一个位置实现<strong>高级负载平衡</strong>技术，并使任何应用程序都可以访问。</p>
+<p>目前 <code>Envoy</code> 包括支持自动重试、断路、通过外部速率限制服务限制全局速率、请求隐藏和异常值检测。未来计划为 <code>Request Racing</code> 提供支持。</p>
+<p><strong>4.前端/边缘系统代理支持</strong><br>虽然 <code>Envoy</code> 主要是为<strong>服务通信系统而设计</strong>的，但对前端/边缘系统也是很有用的，如：可观测性、管理、相同的服务发现和负载平衡算法等。</p>
+<p><code>Envoy</code> 包含足够的功能，使其可用作大多数 <code>Web</code> 应用服务用例的边缘代理。这包括作为 <code>TLS</code> 的终点、<code>HTTP/1.1</code> 和 <code>HTTP/2</code> 支持, 以及 <code>HTTP L7</code> 路由。</p>
+<p><strong>5.最好的观察统计能力</strong><br><code>Envoy</code> 的首要目标是使<strong>网络透明</strong>。但是在网络级别和应用程序级都无法避免的容易出现问题。<code>Envoy</code> 包含了对所有子系统的强有力的统计支持。 <code>statsd</code> 和其他兼容的数据提供程序是当前支持的统计接收器，插入不同的统计接收器也并不困难。</p>
+<div class="alert info"><p><code>Envoy</code> 可以通过管理端口查看统计信息，还支持通过第三方供应商进行分布式追踪。</p>
+</div>
+<p>更多详情请参考：<a href="https://www.jianshu.com/p/a6f7f46683e1?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation" target="_blank" rel="noopener">什么是 <code>Envoy</code> ?</a></p>
+<h4 id="七、方案畅想"><a href="#七、方案畅想" class="headerlink" title="七、方案畅想"></a>七、方案畅想</h4><div class="alert success"><p>应用上面的原理，我们可以有很多具体的方案应用于日常开发。</p>
+</div>
+<p><strong>1.方案一</strong>：应用 <code>Istio</code> 改造微服务<br>模仿在线书店的一个分类，显示一本书的信息。 页面上会显示一本书的描述，书籍的细节（<code>ISBN</code>、页数等），以及关于这本书的一些评论。</p>
+<p><strong>应用的端到端架构：</strong><code>Bookinfo</code> 应用中的几个微服务是由不同的语言编写的。 这些服务对 <code>Istio</code> 并无依赖，但是构成了一个有代表性的服务网格的例子：它由多个服务、多个语言构成，并且 <code>reviews</code> 服务具有多个版本。</p>
+<p><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/istio/before.svg" alt="Bookinfo 架构图"></p>
+<p><strong>用 <code>Istio</code> 改造后架构如下：</strong>要在 <code>Istio</code> 中运行这一应用，无需对应用自身做出任何改变。我们只需要把 <code>Envoy Sidecar</code> 注入到每个服务之中。最终的部署结果将如下图所示：</p>
+<p><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/istio/after.svg" alt="Istio 改造后架构图"></p>
+<p>所有的微服务都和 <code>Envoy Sidecar</code> 集成在一起，被集成服务所有的<strong>出入流量</strong>都被 <code>Sidecar</code> 所劫持，这样就为外部控制准备了所需的 <code>Hook</code>，然后就可以利用 <code>Istio</code> 控制平面为应用提供服务路由、遥测数据收集以及策略实施等功能。</p>
+<p>更多细节，请移步 <a href="https://istio.io/latest/zh/docs/examples/bookinfo/" target="_blank" rel="noopener">官网示例</a>。</p>
+<p><strong>2.方案二</strong>：用 <code>Istio</code> 改造 <code>CI/CD</code> 流程<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/istio/practice.png" alt="Istio 架构图"></p>
+<p>对上述流程图简单解释一下：</p>
+<ul>
+<li>通过 <code>Docker</code> 对代码进行容器化处理；</li>
+<li>通过 <code>Gitlab</code> 托管代码；</li>
+<li><code>Jenkins</code> 监听 <code>Gitlab</code> 下的代码，触发自动构建，并执行 <code>Kustomize</code> 文件；</li>
+<li><code>Kustomize</code> 通过配置文件，设置了 <code>Istio</code> 的配置（染色识别、流量分发），并启动 <code>K8s</code> 部署应用；</li>
+<li>最终我们通过 <code>Rancher</code> 来对多容器进行界面化管理；</li>
+<li>打开浏览器进行访问；</li>
+</ul>
+<p>看到这里，相信你也了解了，我们实现了一个<strong>前端多容器化部署</strong>的案例。它有什么意义呢？</p>
+<ul>
+<li>首先，当然是环境隔离了，研发每人一个容器开发，互不干扰；</li>
+<li>其次，我们可以做很多小流量、灰度发布等事情；</li>
+<li>自动化部署，一站式的流程体验；</li>
+</ul>
+<p>如果你对容器化还不太了解，请先看看前面两篇文章：<br><a href="http://jartto.wang/2020/07/04/learn-docker/"><code>Docker</code> 边学边用</a><br><a href="http://jartto.wang/2020/07/15/start-k8s/">一文了解 <code>Kubernetes</code></a></p>
+<p><code>Istio</code> 还是有很多可圈可点的地方，相信看到这里你也有了更全面的认识。如果你想深入了解，不妨仔细研究官方示例，并且在实际项目中不断打磨。</p>
+<h4 id="八、参考资料"><a href="#八、参考资料" class="headerlink" title="八、参考资料"></a>八、参考资料</h4><p><a href="https://istio.io/latest/zh/docs/concepts/what-is-istio/" target="_blank" rel="noopener">1.<code>Istio</code> 官网</a><br><a href="https://www.jianshu.com/p/a6f7f46683e1?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation" target="_blank" rel="noopener">2.什么是 <code>Envoy</code></a><br><a href="https://www.jianshu.com/p/27a742e349f7" target="_blank" rel="noopener">3.微服务之 <code>Service Mesh</code></a><br><a href="https://zhuanlan.zhihu.com/p/61901608" target="_blank" rel="noopener">4.什么是 <code>Service Mesh</code></a><br><a href="https://www.kubernetes.org.cn/3575.html" target="_blank" rel="noopener">5.<code>Istio</code> 如何连接、管理和保护微服务 2.0？</a><br><a href="https://blog.csdn.net/joke59/article/details/106725749" target="_blank" rel="noopener">6.在 <code>MOSN</code> 中玩转 <code>dubbo-go</code></a></p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/istio/">istio</a> <a class="tag tag--primary tag--small t-link" href="/tags/k8s/">k8s</a> <a class="tag tag--primary tag--small t-link" href="/tags/service-mesh/">service mesh</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2023/03/12/30-seconds-of-nginx/" data-tooltip="30s 就可以掌握的 Nginx 片段">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2020/07/15/start-k8s/" data-tooltip="一文了解 Kubernetes">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2020/07/29/istio-1/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2020/07/29/istio-1/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2020/07/29/istio-1/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2023/03/12/30-seconds-of-nginx/" data-tooltip="30s 就可以掌握的 Nginx 片段">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2020/07/15/start-k8s/" data-tooltip="一文了解 Kubernetes">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2020/07/29/istio-1/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2020/07/29/istio-1/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2020/07/29/istio-1/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2020/07/29/istio-1/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2020/07/29/istio-1/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2020/07/29/istio-1/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

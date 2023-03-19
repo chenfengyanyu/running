@@ -1,0 +1,530 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>算法图解1 - 二分查找和大O表示法 - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="闲来无事，翻了翻《算法图解》，觉得收获颇多，所以会陆续整理成笔记，纪录学习过程。嗯，第一篇先来看看二分查找和大O表示法吧。">
+<meta name="keywords" content="algorithm,二分查找,大O表示法">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="算法图解1 - 二分查找和大O表示法">
+<meta property="og:url" content="http://jartto.wang/2018/11/22/algorithm1/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="闲来无事，翻了翻《算法图解》，觉得收获颇多，所以会陆续整理成笔记，纪录学习过程。嗯，第一篇先来看看二分查找和大O表示法吧。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/algorithm/log.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/algorithm/binary.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/algorithm/o.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/algorithm/o1.png">
+<meta property="og:updated_time" content="2019-04-07T13:54:52.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="算法图解1 - 二分查找和大O表示法">
+<meta name="twitter:description" content="闲来无事，翻了翻《算法图解》，觉得收获颇多，所以会陆续整理成笔记，纪录学习过程。嗯，第一篇先来看看二分查找和大O表示法吧。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/algorithm/log.png">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/algorithm/logo.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/algorithm/logo.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            算法图解1 - 二分查找和大O表示法
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2018-11-22T08:53:28+08:00">
+	  
+		    2018/11月/22 08:53:28
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/算法实践/">算法实践</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>闲来无事，翻了翻《算法图解》，觉得收获颇多，所以会陆续整理成笔记，纪录学习过程。嗯，第一篇先来看看二分查找和大O表示法吧。<br><a id="more"></a></p>
+<h4 id="一、二分查找"><a href="#一、二分查找" class="headerlink" title="一、二分查找"></a>一、二分查找</h4><p>二分查找是一种算法，其输入是一个有序的元素列表（必须有序的原因稍后解释）。如果要查找的元素包含在列表中，二分查找返回其位置；否则返回 <code>null</code> 。</p>
+<div class="alert info"><p>一般而言，对于包含 <code>n</code> 个元素的列表，用二分查找最多需要 <code>log2 n</code> 步，而简单查找最多需要 <code>n</code> 步。</p>
+</div>
+<p>很多童鞋可能忘了倒数如何计算，这里我们先复习一下：对数运算是幂运算的逆运算。看看下面的公式，是不是有点回忆起来了。<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/algorithm/log.png" alt="log"></p>
+<p>我们通过 <code>JS</code> 来实现一下思路：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @msg: 二分查找</span></span><br><span class="line"><span class="comment"> * @param &#123;Array&#125; 数组</span></span><br><span class="line"><span class="comment"> * @param &#123;String&#125; 数值</span></span><br><span class="line"><span class="comment"> * @return: index</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">const</span> binarySearch = <span class="function">(<span class="params">arr, val</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> start = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">let</span> end = arr.length - <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">let</span> guess;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">while</span> (start &lt;= end) &#123;</span><br><span class="line">    <span class="keyword">let</span> mid = <span class="built_in">Math</span>.ceil((start + end) / <span class="number">2</span>);</span><br><span class="line">    guess = arr[mid];</span><br><span class="line">    <span class="keyword">if</span> (guess === val) <span class="keyword">return</span> mid;</span><br><span class="line">    <span class="keyword">if</span> (guess &gt; val) &#123;</span><br><span class="line">      end = mid - <span class="number">1</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      start = mid + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">binarySearch([<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">9</span>], <span class="number">3</span>);</span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p>一般而言，应选择效率最高的算法，以最大限度地减少运行时间或占用空间。</p>
+</div>
+<p>按照上面的思路，我们使用二分查找实现了这个函数。嗯，看起来不错，我们来看看他的运行时间。</p>
+<h4 id="二、运行时间"><a href="#二、运行时间" class="headerlink" title="二、运行时间"></a>二、运行时间</h4><p>先来看一个概念：<br>线性时间（<code>linear time</code>）：最多需要猜测的次数与列表长度相同，这被称为线性时间。<br>我们举个例子来说：简单查找逐个地检查数字，如果列表包含 <code>100</code> 个数字，最多需要猜 <code>100</code> 次。如果列表包含 <code>40</code> 亿个数字，最多需要猜 <code>40</code> 亿次。</p>
+<p>二分查找则不同：如果列表包含 <code>100</code> 个元素，最多要猜 <code>7</code> 次；如果列表包含 <code>40</code> 亿个数字，最多需猜 <code>32</code> 次。<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/algorithm/binary.png" alt="binary"></p>
+<div class="alert success"><p>可以看出来，对比线性查找来说，二分查找效率出奇的高。</p>
+</div>
+<p>既然提到运行时间，那么我们一般如何来计量呢？</p>
+<h4 id="三、大O表示法"><a href="#三、大O表示法" class="headerlink" title="三、大O表示法"></a>三、大O表示法</h4><div class="alert info"><p>大O表示法：是一种特殊的表示法，指出了算法的速度有多快。。</p>
+</div>
+<p><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/algorithm/o.png" alt="大O"></p>
+<p>通过上图，我们不难看出来：<br>随着元素数量的增加，二分查找需要的额外时间并不多，而简单查找需要的额外时间却很多。因此，随着列表的增长，二分查找的速度比简单查找快得多。</p>
+<p>有鉴于此，仅知道算法需要多长时间才能运行完毕还不够，还需知道运行时间如何随列表增长而增加。这正是大O表示法的用武之地。使用大O表示法，这个运行时间为 <code>O (n )</code>。单位秒呢？没有——大O表示法指的并非以秒为单位的速度。</p>
+<p>大O表示法让你能够比较操作数，它指出了算法运行时间的增速。</p>
+<div class="alert danger"><p>需要注意：大O表示法计算的是操作数。</p>
+</div>
+<p>这里有个问题：<br>如果要查找的是 <code>Adit</code> ——电话簿中的第一个人，一次就能找到，无需查看每个条目。考虑到一次就找到了 <code>Adit</code>，请问这种算法的运行时间是 <code>O(n)</code> 还是 <code>O(1)</code> 呢？</p>
+<div class="alert info"><p>大O表示法说的是最糟的情形。</p>
+</div>
+<p>因此，你可以说，在最糟情况下，必须查看电话簿中的每个条目，对应的运行时间为 <code>O(n)</code>。这是一个保证——你知道简单查找的运行时间不可能超过 <code>O(n)</code>。</p>
+<h4 id="四、5种常见大O运行时间"><a href="#四、5种常见大O运行时间" class="headerlink" title="四、5种常见大O运行时间"></a>四、5种常见大O运行时间</h4><ul>
+<li>对数时间：O (log n )，二分查找</li>
+<li>线性时间：O (n ) ，简单查找</li>
+<li>O (n * log n )，快速排序——一种速度较快的排序算法</li>
+<li>O (n 2 )，选择排序——一种速度较慢的排序算法</li>
+<li>O (n !)，旅行商问题的解决方案——一种非常慢的算法</li>
+</ul>
+<p>我们来举个例子，绘制一个包含 16 格的网格，且有 5 种不同的算法可供选择，下面按从快到慢的顺序列出了使用这些算法绘制网格所需的时间：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/algorithm/o1.png" alt="大O"></p>
+<div class="alert success"><p>这就有意思了，通过上面的图示，我们得到几点启示</p>
+</div>
+<p>1.算法的速度指的并非时间，而是操作数的增速。<br>2.谈论算法的速度时，我们说的是随着输入的增加，其运行时间将以什么样的速度增加。<br>3.算法的运行时间用大O表示法表示。<br>4.<code>O (log n )</code> 比 <code>O (n )</code> 快，当需要搜索的元素越多时，前者比后者快得越多。</p>
+<h4 id="五、旅行商问题"><a href="#五、旅行商问题" class="headerlink" title="五、旅行商问题"></a>五、旅行商问题</h4><p>上面提到了一种运行时间为 <code>O (n !)</code> 的算法，提到了旅行商问题，这里我们来扩展一下。</p>
+<p>这着实困扰着很多人，一位旅行商要去往 <code>5</code> 个城市，如何确保旅程最短，<code>5</code> 个城市有 <code>120</code> 种不同的排列方式。涉及 <code>n</code> 个城市时，需要执行 <code>n!</code>（ <code>n</code> 的阶乘）次操作才能计算出结果。因此运行时间为 <code>O(n!)</code>，即阶乘时间。</p>
+<div class="alert info"><p>5 个城市，有 5 种选择，去到一个城市之后，还有 4 种选择，以此类推：<code>5*4*3*2*1</code> = 5! = 120</p>
+</div>
+<p><a href="https://baike.baidu.com/item/旅行商问题/7737042?fr=aladdin" target="_blank" rel="noopener">旅行商问题</a>(<code>TravelingSalesmanProblem</code>，<code>TSP</code> )是一个经典的组合优化问题。经典的 <code>TSP</code> 可以描述为：一个商品推销员要去若干个城市推销商品，该推销员从一个城市出发，需要经过所有城市后，回到出发地。应如何选择行进路线，以使总的行程最短。</p>
+<div class="alert success"><p>从图论的角度来看，该问题实质是在一个带权完全无向图中，找一个权值最小的 <code>Hamilton</code> 回路。</p>
+</div>
+<p>由于该问题的可行解是所有顶点的全排列，随着顶点数的增加，会产生组合爆炸，它是一个 <code>NP</code> 完全问题。</p>
+<p>由于其在交通运输、电路板线路设计以及物流配送等领域内有着广泛的应用，国内外学者对其进行了大量的研究。早期的研究者使用精确算法求解该问题，常用的方法包括：分枝定界法、线性规划法、动态规划法等。</p>
+<p>但是，随着问题规模的增大，精确算法将变得无能为力，因此，在后来的研究中，国内外学者重点使用近似算法或启发式算法，主要有遗传算法、模拟退火法、蚁群算法、禁忌搜索算法、贪婪算法和神经网络等。</p>
+<div class="alert info"><p>突然发现，算法的世界真的很大，而很多实际问题都是通过算法解决的。</p>
+</div>
+<p>所以，花些时间了解一下经典算法，也算是提高自己的核心竞争力。</p>
+<h4 id="六、文末彩蛋：原来小蜜蜂一直在解决旅行商问题！"><a href="#六、文末彩蛋：原来小蜜蜂一直在解决旅行商问题！" class="headerlink" title="六、文末彩蛋：原来小蜜蜂一直在解决旅行商问题！"></a>六、文末彩蛋：原来小蜜蜂一直在解决旅行商问题！</h4><p>进行研究的奈杰尔·雷恩博士说，蜜蜂每天都要在蜂巢和花朵间飞来飞去，为了采蜜而在不同花朵间飞行是一件很耗精力的事情，因此实际上蜜蜂每天都在解决「旅行商问题」。尽管蜜蜂的大脑只有草籽那么大，也没有电脑的帮助，但它已经进化出了一套很好的解决方案，如果能理解蜜蜂怎样做到这一点，对人类的生产、生活将有很大帮助。</p>
+<h4 id="七、学习目录"><a href="#七、学习目录" class="headerlink" title="七、学习目录"></a>七、学习目录</h4><ul>
+<li><a href="http://jartto.wang/2018/11/22/algorithm1/">算法图解1 - 二分查找和大O表示法</a></li>
+<li><a href="http://jartto.wang/2018/11/25/algorithm2/">算法图解2 - 数组和链表</a></li>
+<li><a href="http://jartto.wang/2018/11/26/algorithm3/">算法图解3 - 递归，快排</a></li>
+<li><a href="http://jartto.wang/2018/11/27/algorithm4/">算法图解4 - 散列表</a></li>
+<li><a href="http://jartto.wang/2018/11/28/algorithm5/">算法图解5 - 图和广度优先搜索</a></li>
+<li><a href="http://jartto.wang/2018/11/29/algorithm6/">算法图解6 - 狄克斯特拉算法与贪婪算法</a></li>
+<li><a href="http://jartto.wang/2018/11/29/algorithm7/">算法图解7 - 动态规划</a></li>
+</ul>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/algorithm/">algorithm</a> <a class="tag tag--primary tag--small t-link" href="/tags/二分查找/">二分查找</a> <a class="tag tag--primary tag--small t-link" href="/tags/大O表示法/">大O表示法</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/11/25/algorithm2/" data-tooltip="算法图解2 - 数组和链表">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/11/20/js-exception-handling/" data-tooltip="如何优雅处理前端异常？">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/11/22/algorithm1/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/11/22/algorithm1/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/11/22/algorithm1/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/11/25/algorithm2/" data-tooltip="算法图解2 - 数组和链表">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/11/20/js-exception-handling/" data-tooltip="如何优雅处理前端异常？">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/11/22/algorithm1/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/11/22/algorithm1/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/11/22/algorithm1/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/11/22/algorithm1/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/11/22/algorithm1/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/11/22/algorithm1/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

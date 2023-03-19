@@ -1,0 +1,562 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>小程序开发 Tips - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="继「细数小程序的坑」之后，我们来说一些小程序开发中可以用到的技巧，毕竟抱怨并不能解决问题，更何况还「人在屋檐下，不得不低头」。">
+<meta name="keywords" content="wx,mini-programs">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="小程序开发 Tips">
+<meta property="og:url" content="http://jartto.wang/2018/03/06/tips-of-mini-programs/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="继「细数小程序的坑」之后，我们来说一些小程序开发中可以用到的技巧，毕竟抱怨并不能解决问题，更何况还「人在屋檐下，不得不低头」。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/wxtips1.png">
+<meta property="og:updated_time" content="2018-10-31T14:57:23.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="小程序开发 Tips">
+<meta name="twitter:description" content="继「细数小程序的坑」之后，我们来说一些小程序开发中可以用到的技巧，毕竟抱怨并不能解决问题，更何况还「人在屋檐下，不得不低头」。">
+<meta name="twitter:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/wxtips1.png">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/wxtips0.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/wxtips0.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            小程序开发 Tips
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2018-03-06T18:59:12+08:00">
+	  
+		    2018/3月/06 18:59:12
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>继「<a href="http://jartto.wang/2018/02/08/count-pit-of-mini-programs/">细数小程序的坑</a>」之后，我们来说一些小程序开发中可以用到的技巧，毕竟抱怨并不能解决问题，更何况还「人在屋檐下，不得不低头」。<br><a id="more"></a><br>本文是小程序系列的第三篇文章，如果你还没有实际开发小程序的经验，建议按照顺序阅读如下文章：<br>1.<a href="http://jartto.wang/2018/01/25/quick-start-mini-programs/">快速上手小程序</a><br>2.<a href="http://jartto.wang/2018/02/08/count-pit-of-mini-programs/">细数小程序的坑</a><br>3.<a href="http://jartto.wang/2018/03/06/tips-of-mini-programs/">小程序开发 Tips</a></p>
+<h4 id="一、小程序生命周期"><a href="#一、小程序生命周期" class="headerlink" title="一、小程序生命周期"></a>一、小程序生命周期</h4><p>我们先来熟悉一下小程序的生命周期函数：</p>
+<ul>
+<li>data: Object<ul>
+<li>页面初始数据</li>
+</ul>
+</li>
+<li>onLoad: Function<ul>
+<li>监听页面加载</li>
+</ul>
+</li>
+<li>onReady: Function<ul>
+<li>监听页面渲染完成</li>
+</ul>
+</li>
+<li>onShow: Function<ul>
+<li>监听页面显示</li>
+</ul>
+</li>
+<li>onHide: Function<ul>
+<li>监听页面隐藏</li>
+</ul>
+</li>
+<li>onUnload: Function<ul>
+<li>监听页面卸载</li>
+</ul>
+</li>
+</ul>
+<div class="alert success"><p>接下来我们来看一张状态图，深入了解一下：</p>
+</div>
+<p><img src="http://7xvi3w.com1.z0.glb.clouddn.com/wxtips1.png" alt="状态图"></p>
+<p>如果用代码来表示小程序的生命周期的话，大致如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获取应用实例</span></span><br><span class="line"><span class="keyword">var</span> app = getApp()</span><br><span class="line">Page(&#123;</span><br><span class="line">  <span class="comment">// 通过data初始化数据</span></span><br><span class="line">  data: &#123;</span><br><span class="line">    blog: <span class="string">'jartto'</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 监听页面开始加载的状态，页面加载完成之后就不会在执行</span></span><br><span class="line">  onLoad: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'onLoad()'</span>);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 监听页面渲染完成，完成之后不会在执行</span></span><br><span class="line">  onReady: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'onReaday()'</span>);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 监听页面显示，当从当前页面调转到另一个页面，另一个页面销毁时会再次执行</span></span><br><span class="line">  onShow: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'onShow()'</span>);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 监听页面隐藏，当前页面跳转到另一个页面时会执行</span></span><br><span class="line">  onHide: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'onHide()'</span>);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 当页面销毁时调用</span></span><br><span class="line">  onUnload: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'onUnload'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<h4 id="二、小程序返回监听"><a href="#二、小程序返回监听" class="headerlink" title="二、小程序返回监听"></a>二、小程序返回监听</h4><p>提到返回监听，可能会有几种业务场景，如：<br>1.监听页面返回按钮，警告用户是否确认离开？<br>2.提醒用户进行保存操作；<br>3.更新一些状态值；<br>…<br><div class="alert danger"><p>遗憾的是，小程序并没有提供类似的方法，所以只能自己想办法实现。</p>
+</div></p>
+<p>如果你真正了解了上文描述的生命周期，那么就有两个方式可以变通解决问题：</p>
+<ul>
+<li>其一：通过监听 <code>onShow</code> 或 <code>onHide</code> 来实现；</li>
+<li>其二：页面被 <code>destroy</code> 后，<code>onUnload</code> 来实现。</li>
+</ul>
+<h4 id="三、小程序-onUnload-未触发"><a href="#三、小程序-onUnload-未触发" class="headerlink" title="三、小程序 onUnload 未触发"></a>三、小程序 onUnload 未触发</h4><div class="alert info"><p>如果你碰到了页面 <code>onUnload</code> 未触发的问题，可能原因是：页面类型不对。</p>
+</div>
+<p>正常的业务开发中，我们都会使用小程序的框架 <code>wepy</code>，那么页面就会被分为三类：<br>1.小程序入口<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">import</span> wepy <span class="keyword">from</span> <span class="string">'wepy'</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="keyword">extends</span> <span class="title">wepy</span>.<span class="title">app</span> </span>&#123;</span><br><span class="line">    config = &#123;</span><br><span class="line">        <span class="string">"pages"</span>:[</span><br><span class="line">            <span class="string">"pages/index/index"</span></span><br><span class="line">        ],</span><br><span class="line">        <span class="string">"window"</span>:&#123;</span><br><span class="line">            <span class="string">"backgroundTextStyle"</span>: <span class="string">"light"</span>,</span><br><span class="line">            <span class="string">"navigationBarBackgroundColor"</span>: <span class="string">"#fff"</span>,</span><br><span class="line">            <span class="string">"navigationBarTitleText"</span>: <span class="string">"WeChat"</span>,</span><br><span class="line">            <span class="string">"navigationBarTextStyle"</span>: <span class="string">"black"</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    onLaunch() &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">&lt;style lang="less"&gt;</span></span><br><span class="line"><span class="regexp">/</span>** less **<span class="regexp">/</span></span><br><span class="line"><span class="regexp">&lt;/</span>style&gt;</span><br></pre></td></tr></table></figure></p>
+<p>入口文件 <code>app.wpy</code> 中所声明的小程序实例继承自 <code>wepy.app</code> 类，包含一个 <code>config</code> 属性和其它全局属性、方法、事件。其中 <code>config</code> 属性对应原生的 <code>app.json</code> 文件，<code>build</code> 编译时会根据 <code>config</code> 属性自动生成 <code>app.json</code> 文件，如果需要修改 <code>config</code> 中的内容，请使用微信提供的相关 <code>API</code>。</p>
+<p>2.页面 <code>page.wpy</code><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">import</span> wepy <span class="keyword">from</span> <span class="string">'wepy'</span>;</span><br><span class="line"><span class="keyword">import</span> Counter <span class="keyword">from</span> <span class="string">'../components/counter'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">Page</span> <span class="keyword">extends</span> <span class="title">wepy</span>.<span class="title">page</span> </span>&#123;</span><br><span class="line">    config = &#123;&#125;;</span><br><span class="line">    components = &#123;<span class="attr">counter1</span>: Counter&#125;;</span><br><span class="line"></span><br><span class="line">    data = &#123;&#125;;</span><br><span class="line">    methods = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    events = &#123;&#125;;</span><br><span class="line">    onLoad() &#123;&#125;;</span><br><span class="line">    <span class="comment">// Other properties</span></span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">&lt;template lang="wxml"&gt;</span></span><br><span class="line"><span class="regexp">    &lt;view&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>view&gt;</span><br><span class="line">    &lt;counter1&gt;<span class="xml"><span class="tag">&lt;/<span class="name">counter1</span>&gt;</span></span></span><br><span class="line">&lt;<span class="regexp">/template&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">&lt;style lang="less"&gt;</span></span><br><span class="line"><span class="regexp">/</span>** less **<span class="regexp">/</span></span><br><span class="line"><span class="regexp">&lt;/</span>style&gt;</span><br></pre></td></tr></table></figure></p>
+<p>3.组件 <code>com.wpy</code><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;template lang=<span class="string">"wxml"</span>&gt;</span><br><span class="line">    &lt;view&gt;  <span class="xml"><span class="tag">&lt;/<span class="name">view</span>&gt;</span></span></span><br><span class="line">&lt;<span class="regexp">/template&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">&lt;script&gt;</span></span><br><span class="line"><span class="regexp">import wepy from 'wepy';</span></span><br><span class="line"><span class="regexp">export default class Com extends wepy.component &#123;</span></span><br><span class="line"><span class="regexp">    components = &#123;&#125;;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">    data = &#123;&#125;;</span></span><br><span class="line"><span class="regexp">    methods = &#123;&#125;;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">    events = &#123;&#125;;</span></span><br><span class="line"><span class="regexp">    /</span><span class="regexp">/ Other properties</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp">&lt;/</span>script&gt;</span><br><span class="line"></span><br><span class="line">&lt;style lang=<span class="string">"less"</span>&gt;</span><br><span class="line"><span class="comment">/** less **/</span></span><br><span class="line">&lt;<span class="regexp">/style&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>组件文件 <code>com.wpy</code> 中所声明的组件实例继承自 <code>wepy.component</code> 类，除了不需要 <code>config</code> 配置以及页面特有的一些生命周期函数之外，其属性与页面属性大致相同。</p>
+<p>仔细看完这些类型之后，「onUnload 未触发」这个问题就不攻自破了。你还会去 <code>component</code> 中调用 <code>onShow</code> 方法吗？</p>
+<h4 id="四、小程序取消授权怎么办？"><a href="#四、小程序取消授权怎么办？" class="headerlink" title="四、小程序取消授权怎么办？"></a>四、小程序取消授权怎么办？</h4><p>一般情况下，当我们需要获取用户信息的时候，就需要用到授权 <code>API</code>，那么问题来了，如果用户直接点击了拒绝，你该如何处理？试用了很多小程序后，我得到如下几种方式：<br>1.拒绝将直接退出小程序，这个做法粗暴而又简单，但用户体验极差；<br>2.一直提示用户去开启设置；</p>
+<p>我们不去探讨这种做法对不对，这里我提供一种方式：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">getUserInfo() &#123;</span><br><span class="line">  <span class="keyword">let</span> self = <span class="keyword">this</span>;</span><br><span class="line">  wx.getUserInfo(&#123;</span><br><span class="line">    success: <span class="function"><span class="keyword">function</span>(<span class="params">res</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">let</span> userInfo = res.userInfo;</span><br><span class="line">      <span class="comment">// let nickName = userInfo.nickName</span></span><br><span class="line">      <span class="comment">// let avatarUrl = userInfo.avatarUrl</span></span><br><span class="line">      <span class="comment">// let gender = userInfo.gender //性别 0：未知、1：男、2：女</span></span><br><span class="line">      <span class="comment">// let province = userInfo.province</span></span><br><span class="line">      <span class="comment">// let city = userInfo.city</span></span><br><span class="line">      <span class="comment">// let country = userInfo.country</span></span><br><span class="line">    &#125;,</span><br><span class="line">    fail: <span class="function"><span class="keyword">function</span>(<span class="params">error</span>) </span>&#123;</span><br><span class="line">      wx.showModal(&#123;</span><br><span class="line">        title: <span class="string">'警告'</span>,</span><br><span class="line">        confirmText: <span class="string">'授权'</span>,</span><br><span class="line">        cancelText: <span class="string">'不授权'</span>,</span><br><span class="line">        content: <span class="string">`若不授权微信登陆，则无法使用「AI识图」功能；点击重新获取授权，则可重新使用；若点击不授权，后期还使用小程序，需在微信「发现小程序」，删掉「AI识图」，重新搜索授权登陆，方可使用。`</span>,</span><br><span class="line">        success: <span class="function"><span class="keyword">function</span>(<span class="params">res</span>) </span>&#123;</span><br><span class="line">          <span class="keyword">if</span> (res.confirm) &#123;</span><br><span class="line">            wx.openSetting(&#123;</span><br><span class="line">              success:<span class="function"><span class="keyword">function</span>(<span class="params">res</span>)</span>&#123;</span><br><span class="line">                <span class="comment">// todo</span></span><br><span class="line">              &#125;</span><br><span class="line">            &#125;)</span><br><span class="line">          &#125; <span class="keyword">else</span> <span class="keyword">if</span> (res.cancel) &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'用户点击取消'</span>);</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>检测到用户授权失败，则提醒用户开启「用户设置」，用户开启后，调用你的初始化方法。</p>
+<h4 id="五、小程序-wepy-中启用-async-await"><a href="#五、小程序-wepy-中启用-async-await" class="headerlink" title="五、小程序 wepy 中启用 async/await"></a>五、小程序 wepy 中启用 async/await</h4><p>1.进入项目根目录，安装 <code>runtime</code> 包：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install wepy-async-function --save</span><br></pre></td></tr></table></figure></p>
+<p>2.修改 <code>wepy.config.js</code> 加入 <code>runtime</code> 配置：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">babel: &#123;</span><br><span class="line">  "presets": [</span><br><span class="line">    <span class="string">"env"</span></span><br><span class="line">  ],</span><br><span class="line">  "plugins": [</span><br><span class="line">    "transform-export-extensions",</span><br><span class="line">    <span class="string">"syntax-export-extensions"</span></span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>3.在 <code>app.wpy</code> 中引入引入 <code>runtime</code> 包：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">'wepy-async-function'</span>;</span><br></pre></td></tr></table></figure></p>
+<p>4.在 <code>app.wpy</code> 中使 <code>API promise</code> 化：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="keyword">extends</span> <span class="title">wepy</span>.<span class="title">app</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span> () &#123;</span><br><span class="line">    <span class="keyword">super</span>();</span><br><span class="line">    <span class="keyword">this</span>.use(<span class="string">'promisify'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>5.重启编译：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wepy build --no-cache</span><br></pre></td></tr></table></figure></p>
+<p>详细信息可阅读：<a href="https://github.com/Tencent/wepy/wiki/wepy项目中使用async-await" target="_blank" rel="noopener">wepy 项目中使用 async await</a></p>
+<h4 id="六、小程序的-textarea-光标问题"><a href="#六、小程序的-textarea-光标问题" class="headerlink" title="六、小程序的 textarea 光标问题"></a>六、小程序的 textarea 光标问题</h4><p>如果你使用了 <code>textarea</code> 框，同时又有更改内容值的需求，那么恭喜你，此 <code>bug</code> 必现。去小程序开发者论坛可以搜到一大堆此类问题，那么解决办法呢？我找到的一种解决方式如下：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">textarea</span> <span class="attr">maxlength</span>=<span class="string">"-1"</span> <span class="attr">focus</span> <span class="attr">selection-start</span>=<span class="string">"&#123;&#123; cursorIndex &#125;&#125;"</span> <span class="attr">selection-end</span>=<span class="string">"&#123;&#123; cursorIndex &#125;&#125;"</span> @<span class="attr">input</span>=<span class="string">"updateTextarea"</span> <span class="attr">value</span>=<span class="string">"&#123;&#123;val&#125;&#125;"</span> /&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p><code>js</code> 部分如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">updateTextarea(e)  &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; value, cursor &#125; = e.detail;</span><br><span class="line">  <span class="keyword">this</span>.setData(&#123;</span><br><span class="line">     val: value,</span><br><span class="line">     cursorIndex: cursor</span><br><span class="line">   &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<div class="alert success"><p>主要原理是重置了光标的当前位置，不至于出现光标混乱，而导致内容被错误修改。</p>
+</div>
+<h4 id="七、页面多次跳转，直接返回首页"><a href="#七、页面多次跳转，直接返回首页" class="headerlink" title="七、页面多次跳转，直接返回首页"></a>七、页面多次跳转，直接返回首页</h4><p>微信提供了多种页面跳转 <code>API</code>，应该能够满足页面跳转的业务逻辑，主要如下：<br>1.<code>wx.navigateTo(OBJECT)</code>，保留当前页面，跳转到应用内的某个页面，使用 <code>wx.navigateBack</code> 可以返回到原页面。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wx.navigateTo(&#123;</span><br><span class="line">  url: <span class="string">'test?name=jartto'</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>2.<code>wx.redirectTo(OBJECT)</code>，关闭当前页面，跳转到应用内的某个页面。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wx.redirectTo(&#123;</span><br><span class="line">  url: <span class="string">'test?name=jartto'</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>3.<code>wx.reLaunch(OBJECT)</code>，关闭所有页面，打开到应用内的某个页面。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wx.reLaunch(&#123;</span><br><span class="line">  url: <span class="string">'test?name=jartto'</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>4.<code>wx.switchTab(OBJECT)</code>，跳转到 <code>tabBar</code> 页面，并关闭其他所有非 <code>tabBar</code> 页面。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"tabBar"</span>: &#123;</span><br><span class="line">    <span class="string">"list"</span>: [&#123;</span><br><span class="line">      <span class="string">"pagePath"</span>: <span class="string">"index"</span>,</span><br><span class="line">      <span class="string">"text"</span>: <span class="string">"首页"</span></span><br><span class="line">    &#125;,&#123;</span><br><span class="line">      <span class="string">"pagePath"</span>: <span class="string">"other"</span>,</span><br><span class="line">      <span class="string">"text"</span>: <span class="string">"其他"</span></span><br><span class="line">    &#125;]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">wx.switchTab(&#123;</span><br><span class="line">  url: <span class="string">'/index'</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>5.<code>wx.navigateBack(OBJECT)</code>，关闭当前页面，返回上一页面或多级页面。可通过 <code>getCurrentPages()</code> 获取当前的页面栈，决定需要返回几层。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 此处是A页面</span></span><br><span class="line">wx.navigateTo(&#123;</span><br><span class="line">  url: <span class="string">'B?id=1'</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 此处是B页面</span></span><br><span class="line">wx.navigateTo(&#123;</span><br><span class="line">  url: <span class="string">'C?id=1'</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 在C页面内 navigateBack，将返回A页面</span></span><br><span class="line">wx.navigateBack(&#123;</span><br><span class="line">  delta: <span class="number">2</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>上面是文档的说名，其实意思很清楚了。这里我假设一种场景：用户从 <code>A－B－C</code> 页面，当从 <code>C</code> 页面返回的时候，其实就不需要再经过 <code>B</code> 页面，那么就需要用到 <code>wx.redirectTo()</code>。如下，在 <code>B</code> 页面执行：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wx.redirectTo(&#123;</span><br><span class="line">  url: <span class="string">'C?name=jartto'</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<h4 id="八、表单域控制"><a href="#八、表单域控制" class="headerlink" title="八、表单域控制"></a>八、表单域控制</h4><p>在小程序中如果要取得 <code>input</code> 的值需要如下操作：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"section"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> @<span class="attr">input</span>=<span class="string">"bindKeyInput"</span> <span class="attr">placeholder</span>=<span class="string">""</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>js 代码如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">bindKeyInput: <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.setData(&#123;</span><br><span class="line">    inputValue: e.detail.value</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>其他表单类似，可以查看：<a href="https://mp.weixin.qq.com/debug/wxadoc/dev/component/input.html" target="_blank" rel="noopener">文档说明</a></p>
+<div class="alert warning"><p>切记：很多组件都被小程序重写了，所以碰到问题一定要先查阅文档，确定无法实现的话，再自行扩展。</p>
+</div>
+<h4 id="九、不要轻易移除-dist-文件"><a href="#九、不要轻易移除-dist-文件" class="headerlink" title="九、不要轻易移除 dist 文件"></a>九、不要轻易移除 dist 文件</h4><p>这是一条友善的提醒，你肯定会有疑问：生成出来的文件还不能移除？答案是肯定的，具体为什么，请看<a href="https://github.com/Tencent/wepy/issues/758" target="_blank" rel="noopener">这里</a>。当然，有的人通过重启后问题解决了，但是有些人出现了更多的 <code>bug</code>。</p>
+<p>可能很多童鞋都发现了，小程序使用 <code>wepy</code> 开发过程中，构建出来的 <code>dist</code> 目录会有冗余文件。也就意味着，我先添加一张图片，然后从项目中移除，<code>dist</code> 目录就会一直保留该文件。</p>
+<div class="alert danger"><p>小程序文件限定大小为 2M</p>
+</div>
+<p>所以，当某天你觉得项目比较大的时候，记得去清理一些冗余文件。官方给出的建议如下：</p>
+<p>开发者工具会监听 <code>dist</code> 目录的修改，如果删除 <code>dist</code> 后，再生成 <code>dist</code> 。不会监听到新的 <code>dist</code> 文件如果需要删除 <code>dist</code> 重建的话，请使用 <code>rm -rf dist/*</code> 来代替 <code>rm -rf dist</code>。</p>
+<h4 id="十、为小程序添加转发"><a href="#十、为小程序添加转发" class="headerlink" title="十、为小程序添加转发"></a>十、为小程序添加转发</h4><p>这条就比较简单了，但是也越容易被忽略。在 <code>Page</code> 中定义 <code>onShareAppMessage</code> 函数，设置该页面的转发信息。</p>
+<ul>
+<li>只有定义了此事件处理函数，右上角菜单才会显示 “转发” 按钮；</li>
+<li>用户点击转发按钮的时候会调用；</li>
+<li>此事件需要 <code>return</code> 一个 <code>Object</code>，用于自定义转发内容；</li>
+</ul>
+<p>代码参考：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Page(&#123;</span><br><span class="line">  onShareAppMessage: <span class="function"><span class="keyword">function</span> (<span class="params">res</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (res.from === <span class="string">'button'</span>) &#123;</span><br><span class="line">      <span class="comment">// 来自页面内转发按钮</span></span><br><span class="line">      <span class="built_in">console</span>.log(res.target)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      title: <span class="string">'自定义转发标题'</span>,</span><br><span class="line">      path: <span class="string">'/page/user?name=jartto'</span>,</span><br><span class="line">      success: <span class="function"><span class="keyword">function</span>(<span class="params">res</span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 转发成功</span></span><br><span class="line">      &#125;,</span><br><span class="line">      fail: <span class="function"><span class="keyword">function</span>(<span class="params">res</span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 转发失败</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>详细文档，请参考<a href="https://mp.weixin.qq.com/debug/wxadoc/dev/api/share.html#onshareappmessageoptions" target="_blank" rel="noopener">这里</a></p>
+<h4 id="十一、合理使用-scroll-view"><a href="#十一、合理使用-scroll-view" class="headerlink" title="十一、合理使用 scroll-view"></a>十一、合理使用 scroll-view</h4><div class="alert info"><p>页面滚动区域的限制也比较大，所以一定要在需要限制的容器外套上 <code>scroll-view</code></p>
+</div>
+<p>主要问题在于官方的几种警告：</p>
+<ul>
+<li>请勿在 <code>scroll-view</code> 中使用 <code>textarea、map、canvas、video</code> 组件</li>
+<li><code>scroll-into-view</code> 的优先级高于 <code>scroll-top</code></li>
+<li>在滚动 <code>scroll-view</code> 时会阻止页面回弹，所以在 <code>scroll-view</code> 中滚动，是无法触发 <code>onPullDownRefresh</code></li>
+<li>若要使用下拉刷新，请使用页面的滚动，而不是 <code>scroll-view</code> ，这样也能通过点击顶部状态栏回到页面顶部</li>
+</ul>
+<h4 id="十二、总结"><a href="#十二、总结" class="headerlink" title="十二、总结"></a>十二、总结</h4><p>从头开始一步步研究了小程序，也通过实际项目尝试了一把。虽然过程中比较痛苦，但是结局是欢乐的。文末打个广告吧，微信小程序搜索：「AI 识图」，欢迎体验，欢迎反馈。</p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/mini-programs/">mini-programs</a> <a class="tag tag--primary tag--small t-link" href="/tags/wx/">wx</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/03/29/audition-of-f2e/" data-tooltip="前端反思录（一）－技术就是核心竞争力">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/03/06/outline-of-css/" data-tooltip="CSS 实用概要">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/03/06/tips-of-mini-programs/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/03/06/tips-of-mini-programs/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/03/06/tips-of-mini-programs/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/03/29/audition-of-f2e/" data-tooltip="前端反思录（一）－技术就是核心竞争力">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/03/06/outline-of-css/" data-tooltip="CSS 实用概要">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/03/06/tips-of-mini-programs/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/03/06/tips-of-mini-programs/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/03/06/tips-of-mini-programs/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/03/06/tips-of-mini-programs/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/03/06/tips-of-mini-programs/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/03/06/tips-of-mini-programs/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

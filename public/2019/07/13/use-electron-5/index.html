@@ -1,0 +1,509 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>使用 Electron5.0 构建你的 React 项目 - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="最近要使用 Electron 来构建 React 项目，突然发现之前的 Demo 已经不能正常运行了，有些感概技术发展的迅猛。">
+<meta name="keywords" content="electron">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="使用 Electron5.0 构建你的 React 项目">
+<meta property="og:url" content="http://jartto.wang/2019/07/13/use-electron-5/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="最近要使用 Electron 来构建 React 项目，突然发现之前的 Demo 已经不能正常运行了，有些感概技术发展的迅猛。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/electron/react.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/electron/electron.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/electron/dmg.png">
+<meta property="og:updated_time" content="2019-07-30T05:43:12.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用 Electron5.0 构建你的 React 项目">
+<meta name="twitter:description" content="最近要使用 Electron 来构建 React 项目，突然发现之前的 Demo 已经不能正常运行了，有些感概技术发展的迅猛。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/electron/react.png">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/electron0.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/electron0.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            使用 Electron5.0 构建你的 React 项目
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2019-07-13T13:51:17+08:00">
+	  
+		    2019/7月/13 13:51:17
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>最近要使用 Electron 来构建 React 项目，突然发现之前的 <a href="https://github.com/chenfengyanyu/my-web-accumulation/tree/master/electron-quick-start" target="_blank" rel="noopener">Demo</a> 已经不能正常运行了，有些感概技术发展的迅猛。<br><a id="more"></a><br>如果你还不了解 <code>Electron</code>，可以看我之前的文章：<a href="http://jartto.wang/2018/01/03/first-exploration-electron/">初探 Electron - 理论篇</a>，理论知识没有变。如果你想了解 <code>Electron5.0</code> 版本如何构建 <code>React</code> 项目，不妨继续看本文。</p>
+<div class="alert danger"><p>需要注意：网上流传的 1.0 版本的项目应该已经启动不了了。</p>
+</div>
+<h4 id="一、为什么要写此文"><a href="#一、为什么要写此文" class="headerlink" title="一、为什么要写此文"></a>一、为什么要写此文</h4><p>之前研究的时候，<code>Electron</code> 还是 <code>1.0</code> 版本，因此写了一系列的文章。</p>
+<ul>
+<li><a href="http://jartto.wang/2018/01/03/first-exploration-electron/">初探 Electron - 理论篇</a></li>
+<li><a href="http://jartto.wang/2018/01/04/first-exploration-electron-2/">初探 Electron - 升华篇</a></li>
+<li><a href="http://jartto.wang/2018/01/14/first-exploration-electron-3/">初探 Electron - 实践篇1</a></li>
+<li><a href="http://jartto.wang/2018/01/21/first-exploration-electron-4/">初探 Electron - 实践篇2</a></li>
+</ul>
+<p>经过本次尝试，发现 <code>5.0</code> 版本有了更多的变化，所以不想误人子弟，索性更新此系列文章。</p>
+<div class="alert info"><p>这次起手，我们就来构建一个 React 项目。</p>
+</div>
+<h4 id="二、创建-React-项目"><a href="#二、创建-React-项目" class="headerlink" title="二、创建 React 项目"></a>二、创建 React 项目</h4><p>1.首先，全局安装 <code>cli</code>:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --global create-react-app</span><br></pre></td></tr></table></figure></p>
+<p>2.创建项目<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create-react-app electron5-react-demo</span><br></pre></td></tr></table></figure></p>
+<p>3.启动<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> electron5-react-demo &amp;&amp; yarn start</span><br></pre></td></tr></table></figure></p>
+<p>4.访问 <code>http://localhost:3000/</code> 如果看到如下页面，说明你的 <code>React</code> 项目已经成功启动了。<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/electron/react.png" alt="react"></p>
+<h4 id="三、集成-Electron-环境"><a href="#三、集成-Electron-环境" class="headerlink" title="三、集成 Electron 环境"></a>三、集成 Electron 环境</h4><p>1.首先需要安装 <code>Electron</code> 和 <code>Electron-builder</code><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add electron electron-builder --dev</span><br></pre></td></tr></table></figure></p>
+<p>2.增加相应开发工具<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yarn add wait-on concurrently --dev</span><br><span class="line">yarn add cross-env electron-is-dev</span><br></pre></td></tr></table></figure></p>
+<p>3.项目根目录下新建文件：<code>electron.js</code><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">touch public/electron.js</span><br></pre></td></tr></table></figure></p>
+<p>此时项目目录如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── README.md</span><br><span class="line">├── main.js</span><br><span class="line">├── node_modules</span><br><span class="line">├── public</span><br><span class="line">│   ├── electron.js</span><br><span class="line">│   ├── favicon.ico</span><br><span class="line">│   ├── index.html</span><br><span class="line">│   └── manifest.json</span><br><span class="line">├── src</span><br><span class="line">│   ├── App.css</span><br><span class="line">│   ├── App.js</span><br><span class="line">│   ├── App.test.js</span><br><span class="line">│   ├── index.css</span><br><span class="line">│   ├── index.js</span><br><span class="line">│   ├── logo.svg</span><br><span class="line">│   └── serviceWorker.js</span><br><span class="line">└── yarn.lock</span><br></pre></td></tr></table></figure></p>
+<p>4.修改代码，可以去<a href="https://github.com/electron/electron-quick-start/blob/master/main.js" target="_blank" rel="noopener">官网</a>上拷贝一份内容，写入 <code>electron.js</code>，具体如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Modules to control application life and create native browser window</span></span><br><span class="line"><span class="keyword">const</span> &#123;app, BrowserWindow&#125; = <span class="built_in">require</span>(<span class="string">'electron'</span>)</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>)</span><br><span class="line">+ <span class="keyword">const</span> isDev = <span class="built_in">require</span>(<span class="string">'electron-is-dev'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Keep a global reference of the window object, if you don't, the window will</span></span><br><span class="line"><span class="comment">// be closed automatically when the JavaScript object is garbage collected.</span></span><br><span class="line"><span class="keyword">let</span> mainWindow</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createWindow</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// Create the browser window.</span></span><br><span class="line">  mainWindow = <span class="keyword">new</span> BrowserWindow(&#123;</span><br><span class="line">    width: <span class="number">800</span>,</span><br><span class="line">    height: <span class="number">600</span>,</span><br><span class="line">    webPreferences: &#123;</span><br><span class="line">      preload: path.join(__dirname, <span class="string">'preload.js'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">+  mainWindow.loadURL(</span><br><span class="line">+  isDev</span><br><span class="line">+  ? <span class="string">'http://localhost:3000'</span></span><br><span class="line">+  : <span class="string">`file://<span class="subst">$&#123;path.join(__dirname, <span class="string">"../build/index.html"</span>)&#125;</span>`</span></span><br><span class="line">+  );</span><br><span class="line">    </span><br><span class="line">  <span class="comment">// Open the DevTools.</span></span><br><span class="line">  <span class="comment">// mainWindow.webContents.openDevTools()</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// Emitted when the window is closed.</span></span><br><span class="line">  mainWindow.on(<span class="string">'closed'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// Dereference the window object, usually you would store windows</span></span><br><span class="line">    <span class="comment">// in an array if your app supports multi windows, this is the time</span></span><br><span class="line">    <span class="comment">// when you should delete the corresponding element.</span></span><br><span class="line">    mainWindow = <span class="literal">null</span></span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// This method will be called when Electron has finished</span></span><br><span class="line"><span class="comment">// initialization and is ready to create browser windows.</span></span><br><span class="line"><span class="comment">// Some APIs can only be used after this event occurs.</span></span><br><span class="line">app.on(<span class="string">'ready'</span>, createWindow)</span><br><span class="line"></span><br><span class="line"><span class="comment">// Quit when all windows are closed.</span></span><br><span class="line">app.on(<span class="string">'window-all-closed'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// On macOS it is common for applications and their menu bar</span></span><br><span class="line">  <span class="comment">// to stay active until the user quits explicitly with Cmd + Q</span></span><br><span class="line">  <span class="keyword">if</span> (process.platform !== <span class="string">'darwin'</span>) app.quit()</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">app.on(<span class="string">'activate'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// On macOS it's common to re-create a window in the app when the</span></span><br><span class="line">  <span class="comment">// dock icon is clicked and there are no other windows open.</span></span><br><span class="line">  <span class="keyword">if</span> (mainWindow === <span class="literal">null</span>) createWindow()</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// In this file you can include the rest of your app's specific main process</span></span><br><span class="line"><span class="comment">// code. You can also put them in separate files and require them here.</span></span><br></pre></td></tr></table></figure></p>
+<p>注意我们做了两处修改（加号位置）：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引入环境变量：</span></span><br><span class="line"><span class="keyword">const</span> isDev = <span class="built_in">require</span>(<span class="string">'electron-is-dev'</span>);</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置启动文件</span></span><br><span class="line">mainWindow.loadURL(</span><br><span class="line">  isDev</span><br><span class="line">  ? <span class="string">'http://localhost:3000'</span></span><br><span class="line">  : <span class="string">`file://<span class="subst">$&#123;path.join(__dirname, <span class="string">"../build/index.html"</span>)&#125;</span>`</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure></p>
+<p>5.修改 <code>package.json</code> 文件，总共两处：<br>其一：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">"name"</span>: <span class="string">"electron5-react-demo"</span>,</span><br><span class="line">    <span class="string">"version"</span>: <span class="string">"0.1.0"</span>,</span><br><span class="line">    <span class="string">"private"</span>: <span class="literal">true</span>,</span><br><span class="line">+    <span class="string">"main"</span>: <span class="string">"public/electron.js"</span>,</span><br><span class="line">+    <span class="string">"homepage"</span>: <span class="string">"./"</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>其二，修改启动项：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"react-start"</span>: <span class="string">"react-scripts start"</span>,</span><br><span class="line"><span class="string">"react-build"</span>: <span class="string">"react-scripts build"</span>,</span><br><span class="line"><span class="string">"electron-start"</span>: <span class="string">"electron ."</span>,</span><br><span class="line"><span class="string">"electron-build"</span>: <span class="string">"electron-builder"</span>,</span><br><span class="line"><span class="string">"release"</span>: <span class="string">"yarn react-build &amp;&amp; electron-builder --publish=always"</span>,</span><br><span class="line"><span class="string">"build"</span>: <span class="string">"yarn react-build &amp;&amp; yarn electron-build"</span>,</span><br><span class="line"><span class="string">"start"</span>: <span class="string">"concurrently \"cross-env BROWSER=none yarn react-start\" \"wait-on http://localhost:3000 &amp;&amp; electron .\""</span></span><br><span class="line"><span class="string">"test"</span>: <span class="string">"react-scripts test"</span>,</span><br><span class="line"><span class="string">"eject"</span>: <span class="string">"react-scripts eject"</span>,</span><br></pre></td></tr></table></figure></p>
+<h4 id="四、启动"><a href="#四、启动" class="headerlink" title="四、启动"></a>四、启动</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn start</span><br></pre></td></tr></table></figure>
+<p>看到如下界面，恭喜你，已经成功启动了：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/electron/electron.png" alt="Electron"></p>
+<div class="alert info"><p>试着修改一下吧，热修改也已经生效了。</p>
+</div>
+<h4 id="五、构建"><a href="#五、构建" class="headerlink" title="五、构建"></a>五、构建</h4><p>如果你想构建，可以使用<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn build</span><br></pre></td></tr></table></figure></p>
+<div class="alert danger"><p>需要注意：构建会同时构建 React 和 Electron 两个项目。</p>
+</div>
+<p>构建完成后，项目目录中会出现一个 <code>dist</code> 目录：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── builder-effective-config.yaml</span><br><span class="line">├── electron5-react-demo-0.1.0-mac.zip</span><br><span class="line">├── electron5-react-demo-0.1.0.dmg</span><br><span class="line">├── electron5-react-demo-0.1.0.dmg.blockmap</span><br><span class="line">├── latest-mac.yml</span><br><span class="line">└── mac</span><br><span class="line">    └── electron5-react-demo.app</span><br></pre></td></tr></table></figure></p>
+<p>目录中的 <code>dmg</code> 就是 <code>Mac</code> 上面的安装程序，双击安装：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/electron/dmg.png" alt="dmg"></p>
+<p>安装之后去运行吧，到这里，我们已经完成了整个项目。</p>
+<h4 id="六、参考"><a href="#六、参考" class="headerlink" title="六、参考"></a>六、参考</h4><ul>
+<li><a href="https://electronjs.org/docs?q=react" target="_blank" rel="noopener">Electron 文档</a></li>
+<li><a href="https://github.com/electron/electron-api-demos" target="_blank" rel="noopener">API</a></li>
+<li><a href="https://medium.com/@impaachu/how-to-build-a-react-based-electron-app-d0f27413f17f" target="_blank" rel="noopener">How to build a React based Electron app</a></li>
+</ul>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/electron/">electron</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/08/24/how-to-decrease-bugs/" data-tooltip="程序员如何减少开发中的 Bug？">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/07/09/git-stats/" data-tooltip="Git 代码统计">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2019/07/13/use-electron-5/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2019/07/13/use-electron-5/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2019/07/13/use-electron-5/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/08/24/how-to-decrease-bugs/" data-tooltip="程序员如何减少开发中的 Bug？">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/07/09/git-stats/" data-tooltip="Git 代码统计">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2019/07/13/use-electron-5/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2019/07/13/use-electron-5/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2019/07/13/use-electron-5/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2019/07/13/use-electron-5/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2019/07/13/use-electron-5/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2019/07/13/use-electron-5/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

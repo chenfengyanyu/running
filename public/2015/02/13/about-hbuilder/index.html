@@ -1,0 +1,542 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>关于Hbuilder - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="如今，hybrid app也就是混合应用，如日中天。这是前端开发的一次机会，因为我们已经不再局限于pc和手机wap了，app我们也占有一席之地了。所以，hybrid app技术重要性可见一斑。">
+<meta name="keywords" content="hbuilder,cordova">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="关于Hbuilder">
+<meta property="og:url" content="http://jartto.wang/2015/02/13/about-hbuilder/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="如今，hybrid app也就是混合应用，如日中天。这是前端开发的一次机会，因为我们已经不再局限于pc和手机wap了，app我们也占有一席之地了。所以，hybrid app技术重要性可见一斑。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/blog_9FF2D0D5-A886-4A15-8FFA-BD4AC90541E1.png">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/blog_showjs.gif">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/blog_90CDD136-AA04-4689-8E58-58FC3A4774ED.png">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/blog_68732442-D752-468B-9E3B-72F4834AD719.png">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/blog_3CD72F48-69EC-4E7C-80B4-62F2D19AA99B.png">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/blog_8399CBCA-1DEC-4F1B-A099-31DB2BA74F52.png">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/blog_2A341319-FC6E-43E1-8B0A-5516DEE6DC74.png">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/blog_6F7A3763-938A-46F7-87B0-57AF9D0825B5.png">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/blog_E752B405-19AD-4497-8928-7C4FFBC97337.png">
+<meta property="og:updated_time" content="2016-06-23T13:39:33.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于Hbuilder">
+<meta name="twitter:description" content="如今，hybrid app也就是混合应用，如日中天。这是前端开发的一次机会，因为我们已经不再局限于pc和手机wap了，app我们也占有一席之地了。所以，hybrid app技术重要性可见一斑。">
+<meta name="twitter:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/blog_9FF2D0D5-A886-4A15-8FFA-BD4AC90541E1.png">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/blog_11730409-B1D3-4C7C-88BF-211C8BA8921F.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="http://7xvi3w.com1.z0.glb.clouddn.com/blog_11730409-B1D3-4C7C-88BF-211C8BA8921F.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            关于Hbuilder
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2015-02-13T20:45:50+08:00">
+	  
+		    2015/2月/13 20:45:50
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>如今，hybrid app也就是混合应用，如日中天。这是前端开发的一次机会，因为我们已经不再局限于pc和手机wap了，app我们也占有一席之地了。所以，hybrid app技术重要性可见一斑。<br><a id="more"></a><br>俗话说，好马配好鞍，今天我就来介绍一个编辑器。灰常好用，不信你看～</p>
+<h4 id="一、下载安装"><a href="#一、下载安装" class="headerlink" title="一、下载安装"></a>一、下载安装</h4><p><a href="http://www.dcloud.io/" target="_blank" rel="noopener">http://www.dcloud.io/</a><br>从官网下载文件后，简单安装即可使用。首次打开应用会有帮助文档，如下图所示，大致了解即可。<br><img src="http://7xvi3w.com1.z0.glb.clouddn.com/blog_9FF2D0D5-A886-4A15-8FFA-BD4AC90541E1.png" alt="hbuilder"><br>Hbuilder里面的代码提示真的很强大，下面用动图大概演示一下：<br><img src="http://7xvi3w.com1.z0.glb.clouddn.com/blog_showjs.gif" alt="hbuilder"><br>更多的快捷键，请参看lession1.text和lession2.test，这里就不细说了。</p>
+<h4 id="二、创建项目"><a href="#二、创建项目" class="headerlink" title="二、创建项目"></a>二、创建项目</h4><p>其实你完全可以把它当做一款前端开发编辑器，当然，这里我想演示的是如何创建“移动App”。<br>打开菜单→文件→新建→移动App，我们先来创建一个空模板：<br><img src="http://7xvi3w.com1.z0.glb.clouddn.com/blog_90CDD136-AA04-4689-8E58-58FC3A4774ED.png" alt="hbuilder"></p>
+<p>这样，移动应用就创建好了。</p>
+<p>这里我们引入一个概念，HTML5+到底是什么呢？</p>
+<blockquote>
+<p>HTML5 Plus移动App，简称5+App，是一种基于HTML、JS、CSS编写的运行于手机端的App，这种App可以通过扩展的JS API任意调用手机的原生能力，实现与原生App同样强大的功能和性能。<br>通过HTML5开发移动App时，会发现HTML5很多能力不具备。为弥补HTML5能力的不足，在W3C中国的指导下成立了<a href="http://www.html5plus.org组织，推出HTML5+规范。" target="_blank" rel="noopener">www.html5plus.org组织，推出HTML5+规范。</a><br>HTML5+规范是一个开放规范，允许三方浏览器厂商或其他手机runtime制造商实现。<br>HTML5+扩展了JavaScript对象plus，使得js可以调用各种浏览器无法实现或实现不佳的系统能力，设备能力如摄像头、陀螺仪、文件系统等，业务能力如上传下载、二维码、地图、支付、语音输入、消息推送等。</p>
+</blockquote>
+<h4 id="三、项目结构"><a href="#三、项目结构" class="headerlink" title="三、项目结构"></a>三、项目结构</h4><p>像上面这样，我们创建了一个空的移动App，目录结构如下图：<br><img src="http://7xvi3w.com1.z0.glb.clouddn.com/blog_68732442-D752-468B-9E3B-72F4834AD719.png" alt="hbuilder"><br>css、img、js和index文件意思很明了，这里我就不费唇舌了。我们来着重看一下manifest.json文件。<br>manifest.json文件有两个视图模式：可视化视图和代码视图。</p>
+<p>manifest.json分为4部分，我们用可视化视图来做说明：<br>①应用信息：设置应用名称，版本号以及入口页面。此外包含重力感应（应用启动时横屏或竖屏设置）和平台选择（ios，iphone，ipad，android）。</p>
+<p>②iPad设置：设置iPad设备应用图标和启动页面，点击即可更换图片。如下图所示：<br><img src="http://7xvi3w.com1.z0.glb.clouddn.com/blog_3CD72F48-69EC-4E7C-80B4-62F2D19AA99B.png" alt="hbuilder"></p>
+<div class="alert info"><p>注意：这里的图片尺寸千万不要搞错了，一一对应就ok了。</p>
+</div>
+<p>③iPhone设置：设置iPhome设备上面应用图标和启动页面，与上面类似。<br>④Android设置：设置Android设备应用图标和启动页面，与上面类似。</p>
+<h4 id="四、Web端调试"><a href="#四、Web端调试" class="headerlink" title="四、Web端调试"></a>四、Web端调试</h4><p>菜单栏中，我们找到如下图标，可以自由选择运行应用的浏览器。<br><img src="http://7xvi3w.com1.z0.glb.clouddn.com/blog_8399CBCA-1DEC-4F1B-A099-31DB2BA74F52.png" alt="hbuilder"><br>直接点击就在所选浏览器中打开了。很简单，这里就不细说了。</p>
+<h4 id="五、真机调试"><a href="#五、真机调试" class="headerlink" title="五、真机调试"></a>五、真机调试</h4><p>首先，你需要将移动设备用数据线连接到电脑。<br><img src="http://7xvi3w.com1.z0.glb.clouddn.com/blog_2A341319-FC6E-43E1-8B0A-5516DEE6DC74.png" alt="hbuilder"><br>接下来，点击在设备上运行。<br>这样，应用就在手机上面启动了。我们可以从Hbuilder的控制台中看到如下信息：<br><img src="http://7xvi3w.com1.z0.glb.clouddn.com/blog_6F7A3763-938A-46F7-87B0-57AF9D0825B5.png" alt="hbuilder"><br>如上图所示，这里将成为以后我们调试、查看控制台输出信息的地方。</p>
+<h4 id="六、Android和ios本地打包"><a href="#六、Android和ios本地打包" class="headerlink" title="六、Android和ios本地打包"></a>六、Android和ios本地打包</h4><p>到这里，我们的移动App已经可以运行了，但是这并不是最终版本。因为要在手机上面安装，ios系统需要的文件格式为ipa，而android系统需要的文件格式是apk。显然，我们当前的文件并不满足要求。<br>下面，我来说说如何打包App。在菜单中，选择发行→Android本地打包<br><img src="http://7xvi3w.com1.z0.glb.clouddn.com/blog_E752B405-19AD-4497-8928-7C4FFBC97337.png" alt="hbuilder"></p>
+<p>我们发现此时已然跳转到一个页面，对，这就是Hbuilder官网中介绍的Android本地打包方式。当然，android开发需要安装SDK。文章介绍很详细，请查看链接：<a href="http://ask.dcloud.net.cn/article/38" target="_blank" rel="noopener">http://ask.dcloud.net.cn/article/38</a><br>ios情况类似，但具体操作有所差异，ios开发需要用到XCode。请查看文章：<a href="http://ask.dcloud.net.cn/article/41" target="_blank" rel="noopener">http://ask.dcloud.net.cn/article/41</a></p>
+<p>当你操作到这一步时，整个移动App基本就开发完成了。我们借助Hbuilder来开发，同时完成了打包过程。</p>
+<h4 id="七、与cordova打包的异同"><a href="#七、与cordova打包的异同" class="headerlink" title="七、与cordova打包的异同"></a>七、与cordova打包的异同</h4><p>之前我总结过cordova开发以及打包方式（详见U9移动开发指南），本文主要介绍用Hbuilder来开发移动App。这种场景下，我来对两种方式做一些对比，分析分析它们之间的异同。</p>
+<div class="alert success"><p>相同点：</p>
+</div>
+<p>①相同的打包环境<br>开发android都需要SDK以及Java运行环境，开发ios都需要XCode；<br>②开发过程类似<br>过程如下：首先开发web项目，然后将该web项目打包成移动设备可访问的文件格式。</p>
+<div class="alert success"><p>不同点：</p>
+</div>
+<p>①访问设备的能力<br>cordova访问设备的能力依赖于它强大的插件，而Hbuilder的开发方式则更多的依赖了HTML5+来实现。<br>②展现方式<br>cordova借助命令行完成设备调试和打包操作，Hbuilder则做了更多可视化的东西。<br>③打包方式<br>cordova需要手动将web文件拷入下载好的cordova“壳子”中，从而通过指令打包。<br>Hbuilder需要借助Eclipse来完成打包，其过程类似于原生应用开发。<br>④后续项目更改<br>cordova会把文件融合为一个整体，后续更改需要手动分离web文件。<br>Hbuilder更大意义上类似一个文本编辑器，所以web文件和打包都是分离操作的，更改也就相对容易了。</p>
+<p>暂时就想到这些，后续想到了再进行补充吧。</p>
+<h4 id="八、总结"><a href="#八、总结" class="headerlink" title="八、总结"></a>八、总结</h4><p>对比完cordova和Hbuilder的异同点，开发过程已经很明朗了。无非就是，取其精华去其糟粕。我们可以通过文本编辑器或 Hbuilder来开发web项目，至于打包阶段，我更偏向于使用cordova来操作，调试和打包一体化。</p>
+<p>我们结合了Hbuilder的思想和Cordova的打包操作，从而使整个移动开发过程简洁、清晰、可控。</p>
+<p>注意：Hbuilder建立移动应用会生成manifest.json文件，这在cordova打包中是不需要的。所以，如果结合两种方式来开发移动应用，你需要手动添加或者移除一些特性文件。<br>恩，其实开发移动App就是这么简单。</p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/cordova/">cordova</a> <a class="tag tag--primary tag--small t-link" href="/tags/hbuilder/">hbuilder</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/03/25/go-into-details-about-typeof-and-instanceof/" data-tooltip="细说typeof与instanceof">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2014/08/20/js-variable/" data-tooltip="js之如何访问函数内部变量">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2015/02/13/about-hbuilder/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2015/02/13/about-hbuilder/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2015/02/13/about-hbuilder/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+            
+                <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/03/25/go-into-details-about-typeof-and-instanceof/" data-tooltip="细说typeof与instanceof">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2014/08/20/js-variable/" data-tooltip="js之如何访问函数内部变量">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2015/02/13/about-hbuilder/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2015/02/13/about-hbuilder/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2015/02/13/about-hbuilder/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2015/02/13/about-hbuilder/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2015/02/13/about-hbuilder/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2015/02/13/about-hbuilder/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+    
+        <script>
+             var disqus_config = function () {
+                 this.page.url = 'http://jartto.wang/2015/02/13/about-hbuilder/';
+                 
+                    this.page.identifier = '2015/02/13/about-hbuilder/';
+                                  
+             };
+            (function() {
+                var d = document, s = d.createElement('script');
+                var disqus_shortname = 'jartto';
+                s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+
+
+
+</html>

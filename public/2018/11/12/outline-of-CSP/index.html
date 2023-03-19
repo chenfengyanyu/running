@@ -1,0 +1,544 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>CSP 概要 - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="在开发 Chrome 插件的时候，遇到了 CSP 问题。源于对 CSP 的一知半解，所以折腾了不少时间，索性系统的学习，归纳总结一下。">
+<meta name="keywords" content="web,内容安全策略,CSP,安全">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="CSP 概要">
+<meta property="og:url" content="http://jartto.wang/2018/11/12/outline-of-CSP/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="在开发 Chrome 插件的时候，遇到了 CSP 问题。源于对 CSP 的一知半解，所以折腾了不少时间，索性系统的学习，归纳总结一下。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2018-11-17T11:12:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSP 概要">
+<meta name="twitter:description" content="在开发 Chrome 插件的时候，遇到了 CSP 问题。源于对 CSP 的一知半解，所以折腾了不少时间，索性系统的学习，归纳总结一下。">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/csp.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/csp.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            CSP 概要
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2018-11-12T10:32:45+08:00">
+	  
+		    2018/11月/12 10:32:45
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>在开发 Chrome 插件的时候，遇到了 CSP 问题。源于对 CSP 的一知半解，所以折腾了不少时间，索性系统的学习，归纳总结一下。<br><a id="more"></a></p>
+<h4 id="一、起因"><a href="#一、起因" class="headerlink" title="一、起因"></a>一、起因</h4><p>我们先来看一个异常：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Refused to execute inline script because it violates the following Content Security Policy directive: &quot;script-src &apos;self&apos; blob: filesystem: chrome-extension-resource:&quot;. Either the &apos;unsafe-inline&apos; keyword, a hash (&apos;sha256-GgRxrVOKNdB4LrRsVPDSbzvfdV4UqglmviH9GoBJ5jk=&apos;), or a nonce (&apos;nonce-...&apos;) is required to enable inline execution.</span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p>看到了这样的字眼 <code>Content Security Policy</code>，所以问题关键就变成了如何处理 <code>CSP</code>。</p>
+</div>
+<p><code>Chrome</code> 扩展和应用都使用了 <code>CSP（Content Security Policy）</code> 声明可以引用哪些资源，但是 <code>Chrome</code> 扩展和应用会在我们创建时提供一个默认的值，对于 <code>Chrome</code> 扩展来说是 <code>script-src &#39;self&#39;; object-src &#39;self&#39;</code>。</p>
+<p>上面的 <code>CSP</code> 规则表示只能引用自身（同域下）的 <code>JavaScript</code> 文件和自身的 <code>object</code> 元素（如 <code>Flash</code> 等），其他资源未做限定。</p>
+<p>当然，这是 <code>Chrome</code> 插件的硬性限制，可是为什么会有这样的限制，大 <code>Google</code> 为何要多此一举？</p>
+<h4 id="二、什么是-CSP"><a href="#二、什么是-CSP" class="headerlink" title="二、什么是 CSP"></a>二、什么是 CSP</h4><p>带着好奇我们来看一下什么是 <code>CSP</code>，<code>CSP（Content Security Policy）</code>，内容安全策略，<code>CSP</code> 通常是在 <code>Header</code> 或者 <code>HTML</code> 的 <code>meta</code> 标签中定义的，它声明了一系列可以被当前网页合法引用的资源，如果不在 <code>CSP</code> 声明的合法范围内，浏览器会拒绝引用这些资源。</p>
+<div class="alert success"><p><code>CSP</code> 的主要目的是防止跨站脚本攻击（XSS）。</p>
+</div>
+<p>通俗来说：<code>CSP</code> 的实质就是白名单策略，开发者明确告诉客户端，哪些外部资源可以加载和执行。开发者只需要简单的配置，其他的交给浏览器来执行或者处理。</p>
+<h4 id="三、启用-CSP"><a href="#三、启用-CSP" class="headerlink" title="三、启用 CSP"></a>三、启用 CSP</h4><div class="alert info"><p>既然是浏览器的安全策略，那我们如何来启用呢？</p>
+</div>
+<p>1.通过 <code>HTTP</code> 头信息的 <code>Content-Security-Policy</code> 的字段：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Content-Security-Policy: script-src &apos;self&apos;; object-src &apos;none&apos;;</span><br><span class="line">style-src cdn.example.org third-party.org; child-src https:</span><br></pre></td></tr></table></figure></p>
+<p>2.也可以通过网页的 <code>&lt;meta&gt;</code> 标签设定规则：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"Content-Security-Policy"</span> <span class="attr">content</span>=<span class="string">"script-src 'self'; object-src 'none'; style-src cdn.example.org third-party.org; child-src https:”&gt;</span></span></span><br></pre></td></tr></table></figure></p>
+<p>不管是从 <code>HTTP</code> 来设置，或者是从 <code>Meta</code> 来设置，我们看到了共同的属性值：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">script-src &apos;self&apos;; object-src &apos;none&apos;; style-src cdn.example.org third-party.org; child-src https:</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>脚本：只信任当前域名</li>
+<li><code>&lt;object&gt;</code> 标签：不信任任何 <code>URL</code>，即不加载任何资源</li>
+<li>样式表：只信任 <code>cdn.example.org</code> 和 <code>third-party.org</code></li>
+<li>框架（<code>frame</code>）：必须使用 <code>HTTPS</code> 协议加载</li>
+<li>其他资源：没有限制</li>
+</ul>
+<h4 id="四、详细参数"><a href="#四、详细参数" class="headerlink" title="四、详细参数"></a>四、详细参数</h4><p>是不是看到这里有些了然了，<code>CSP</code> 参数可远不止这些，我们再来多了解一些：</p>
+<ul>
+<li>script-src：外部脚本</li>
+<li>style-src：样式表</li>
+<li>img-src：图像</li>
+<li>media-src：媒体文件（音频和视频）</li>
+<li>font-src：字体文件</li>
+<li>object-src：插件（比如 <code>Flash</code>）</li>
+<li>child-src：框架</li>
+<li>frame-ancestors：嵌入的外部资源（比如<code>&lt;frame&gt;</code>、<code>&lt;iframe&gt;</code>、<code>&lt;embed&gt;</code> 和 <code>&lt;applet&gt;</code>）</li>
+<li>connect-src：<code>HTTP</code> 连接（通过 <code>XHR</code>、<code>WebSockets</code>、<code>EventSource</code> 等）</li>
+<li>worker-src：<code>worker</code> 脚本</li>
+<li>manifest-src：<code>manifest</code> 文件</li>
+</ul>
+<h4 id="五、补充"><a href="#五、补充" class="headerlink" title="五、补充"></a>五、补充</h4><p>1.<code>default-src</code> 用来设置上面各个选项的默认值。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Content-Security-Policy: default-src &apos;self&apos;</span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p>上面代码限制所有的外部资源，都只能从当前域名加载。</p>
+</div>
+<p>如果同时设置某个单项限制（比如 <code>font-src</code>  ）和 <code>default-src</code>，前者会覆盖后者，即字体文件会采用 <code>font-src</code> 的值，其他资源依然采用 <code>default-src</code> 的值。</p>
+<p>2.<code>URL</code> 限制<br>有时，网页会跟其他 <code>URL</code> 发生联系，这时也可以加以限制。</p>
+<ul>
+<li>frame-ancestors：限制嵌入框架的网页</li>
+<li>base-uri：限制 <code>&lt;base#href&gt;</code></li>
+<li>form-action：限制 <code>&lt;form#action&gt;</code></li>
+</ul>
+<p>其他一些安全相关的功能，也放在了 <code>CSP</code> 里面。</p>
+<ul>
+<li>block-all-mixed-content：HTTPS 网页不得加载 HTTP 资源（浏览器已经默认开启）</li>
+<li>upgrade-insecure-requests：自动将网页上所有加载外部资源的 HTTP 链接换成 HTTPS 协议</li>
+<li>plugin-types：限制可以使用的插件格式</li>
+<li>sandbox：浏览器行为的限制，比如不能有弹出窗口等。</li>
+</ul>
+<h4 id="六、高级"><a href="#六、高级" class="headerlink" title="六、高级"></a>六、高级</h4><p>有时，我们不仅希望防止 <code>XSS</code>，还希望记录此类行为。<code>report-uri</code> 就用来告诉浏览器，应该把注入行为报告给哪个网址。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Content-Security-Policy: default-src &apos;self&apos;; ...; report-uri /my_amazing_csp_report_parser;</span><br></pre></td></tr></table></figure></p>
+<p>浏览器会使用 <code>POST</code> 方法，发送一个 <code>JSON</code> 对象，下面是一个例子。<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"csp-report"</span>: &#123;</span><br><span class="line">    <span class="attr">"document-uri"</span>: <span class="string">"http://example.org/page.html"</span>,</span><br><span class="line">    <span class="attr">"referrer"</span>: <span class="string">"http://evil.example.com/"</span>,</span><br><span class="line">    <span class="attr">"blocked-uri"</span>: <span class="string">"http://evil.example.com/evil.js"</span>,</span><br><span class="line">    <span class="attr">"violated-directive"</span>: <span class="string">"script-src 'self' https://apis.google.com"</span>,</span><br><span class="line">    <span class="attr">"original-policy"</span>: <span class="string">"script-src 'self' https://apis.google.com; report-uri http://example.org/my_amazing_csp_report_parser"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>除了常规值，<code>script-src</code> 还可以设置一些特殊值。注意，下面这些值都必须放在单引号里面。</p>
+<ul>
+<li><code>unsafe-inline</code>：允许执行页面内嵌的 <code>&lt;script&gt;</code> 标签和事件监听函数</li>
+<li><code>unsafe-eval</code>：允许将字符串当作代码执行，比如使用 <code>eval</code>、<code>setTimeout</code>、<code>setInterval</code> 和 <code>Function</code> 等函数。</li>
+<li><code>nonce</code> ：每次 <code>HTTP</code> 回应给出一个授权 <code>token</code>，页面内嵌脚本必须有这个 <code>token</code>，才会执行</li>
+<li><code>hash</code> ：列出允许执行的脚本代码的 <code>Hash</code> 值，页面内嵌脚本的哈希值只有吻合的情况下，才能执行。</li>
+</ul>
+<p><code>nonce</code> 值的例子如下，服务器发送网页的时候，告诉浏览器一个随机生成的 <code>token</code>。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Content-Security-Policy: script-src &apos;nonce-EDNnf03nceIOfn39fn3e9h3sdfa’</span><br></pre></td></tr></table></figure></p>
+<p>页面内嵌脚本，必须有这个 <code>token</code> 才能执行。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">nonce</span>=<span class="string">EDNnf03nceIOfn39fn3e9h3sdfa</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">  <span class="comment">// some code</span></span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p><code>hash</code> 值的例子如下，服务器给出一个允许执行的代码的 <code>hash</code> 值。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Content-Security-Policy: script-src &apos;sha256-qznLcsROx4GACP2dm0UCKCzCG-HiZ1guq6ZZDob_Tng=‘</span><br></pre></td></tr></table></figure></p>
+<p>下面的代码就会允许执行，因为hash值相符。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript">alert(<span class="string">'Hello, world.'</span>);</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<div class="alert warning"><p>注意，计算hash值的时候，<code>&lt;script&gt;</code> 标签不算在内。</p>
+</div>
+<h4 id="七、回顾"><a href="#七、回顾" class="headerlink" title="七、回顾"></a>七、回顾</h4><div class="alert info"><p>看完了 <code>CSP</code> 的相关内容，我们来解决一下文章开头抛出的那个问题。</p>
+</div>
+<p>在了解了 <code>CSP</code> 策略后，我们有了两个解决问题的思路：<br>1.关闭 <code>CSP</code>；<br>2.修改脚本，让其满足 <code>CSP</code> 策略；</p>
+<p>默认情况下，内容安全策略将不会加载内联脚本，只能加载本地脚本。你可以通过以下方式放宽默认政策：<br>1.内联脚本：通过官方文档，我们可以在策略中指定源代码的 <code>base64</code> 编码散列，可以将内联脚本列入白名单。<br><div class="alert success"><p>最佳实践：将这个逻辑提取到一个单独的脚本，而不是使用内联脚本。</p>
+</div></p>
+<p>2.白名单策略：我们可以设置 <code>http://jartto.wang/2018/11/12/outline-of-CSP/</code> 白名单脚本资源，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">manifest.json &quot;content_security_policy&quot;:&quot;script-src &apos;self&apos; http://jartto.wang/; object-src &apos;self&apos;&quot;</span><br></pre></td></tr></table></figure></p>
+<div class="alert warning"><p>需要注意的是：根据内联脚本的说明，<code>unsafe-inline</code> 不再有效。</p>
+</div>
+<p>直到 <code>Chrome 45</code>，没有放松对内嵌 <code>JavaScript</code> 执行限制的机制。尤其是，制定包含不安全内联的脚本策略将不起作用。</p>
+<h4 id="八、参考"><a href="#八、参考" class="headerlink" title="八、参考"></a>八、参考</h4><p><a href="http://www.ruanyifeng.com/blog/2016/09/csp.html" target="_blank" rel="noopener">Content Security Policy 入门教程</a><br><a href="https://www.w3.org/TR/2015/CR-CSP2-20150721/#script-src-hash-usage" target="_blank" rel="noopener">Content Security Policy Level 2</a></p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/CSP/">CSP</a> <a class="tag tag--primary tag--small t-link" href="/tags/web/">web</a> <a class="tag tag--primary tag--small t-link" href="/tags/内容安全策略/">内容安全策略</a> <a class="tag tag--primary tag--small t-link" href="/tags/安全/">安全</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/11/16/html5-geolocation/" data-tooltip="HTML5 之地理定位（Geolocation）">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/11/10/chrome-extensions-1/" data-tooltip="打造你的专属 Chrome 插件（一）">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/11/12/outline-of-CSP/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/11/12/outline-of-CSP/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/11/12/outline-of-CSP/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/11/16/html5-geolocation/" data-tooltip="HTML5 之地理定位（Geolocation）">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/11/10/chrome-extensions-1/" data-tooltip="打造你的专属 Chrome 插件（一）">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/11/12/outline-of-CSP/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/11/12/outline-of-CSP/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/11/12/outline-of-CSP/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/11/12/outline-of-CSP/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/11/12/outline-of-CSP/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/11/12/outline-of-CSP/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

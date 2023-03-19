@@ -1,0 +1,539 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>Web 优化之 Request - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="对于 Web 页面的优化，可能大家都会提出很多方案。可是如果有一天，你发现由于请求接口的数据量太大，导致页面长时间 Loading，这时候你会怎么办？">
+<meta name="keywords" content="web,优化,optimise,request">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Web 优化之 Request">
+<meta property="og:url" content="http://jartto.wang/2018/02/09/optimise-for-web-request/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="对于 Web 页面的优化，可能大家都会提出很多方案。可是如果有一天，你发现由于请求接口的数据量太大，导致页面长时间 Loading，这时候你会怎么办？">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/web1.png-blog">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/web2.png">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/web3.png">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/web4.png">
+<meta property="og:updated_time" content="2018-12-30T15:37:31.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Web 优化之 Request">
+<meta name="twitter:description" content="对于 Web 页面的优化，可能大家都会提出很多方案。可是如果有一天，你发现由于请求接口的数据量太大，导致页面长时间 Loading，这时候你会怎么办？">
+<meta name="twitter:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/web1.png-blog">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/async0.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/async0.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            Web 优化之 Request
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2018-02-09T10:37:00+08:00">
+	  
+		    2018/2月/09 10:37:00
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>对于 Web 页面的优化，可能大家都会提出很多方案。可是如果有一天，你发现由于请求接口的数据量太大，导致页面长时间 Loading，这时候你会怎么办？<br><a id="more"></a></p>
+<h4 id="一、场景介绍"><a href="#一、场景介绍" class="headerlink" title="一、场景介绍"></a>一、场景介绍</h4><p>先来明确一下相关场景：业务需求需要将海量的数据加载在地图页面「目前是 2 万数据，不久后可能是 5 万数据」，地图方案我们采用了海量点，经测试，前端性能压力不是很大。另一方面，产品对地图数据的实时性要求较高，所以无法使用数据缓存方案，无论是前端还是后端。</p>
+<h4 id="二、定位问题"><a href="#二、定位问题" class="headerlink" title="二、定位问题"></a>二、定位问题</h4><p>页面长时间 <code>Loading</code> ，肯定你会怀疑接口的请求状态，我们来看一下：<br><img src="http://7xvi3w.com1.z0.glb.clouddn.com/web1.png-blog" alt="Timing"></p>
+<p>从上图可以大致看出一些问题，浏览器发送请求还是很快的，「等待数据返回」和「内容下载」的总时间长达 <code>12.59s</code>，服务端也开启了 <code>Gzip</code> 压缩，也确实生效了，那为什么还是如此慢？</p>
+<div class="alert danger"><p>请注意：网络状况也是不容忽视的一个优化点，这里不再赘述。</p>
+</div>
+<h4 id="三、工具介绍"><a href="#三、工具介绍" class="headerlink" title="三、工具介绍"></a>三、工具介绍</h4><p>上面我们用到了 <code>Chrome Network</code> 来查看接口请求时间，可能有童鞋对 <code>Timing</code> 还不太熟悉，这里补充说明一下：</p>
+<p>1.<code>Queueing</code>：<br>浏览器线程限制，从添加到待处理队列，到实际开始处理的时间间隔标识；</p>
+<p>2.<code>Stalled</code>：<br>是浏览器得到要发出这个请求的指令到请求可以发出的等待时间，一般是代理协商、以及等待可复用的 <code>TCP</code> 连接释放的时间，不包括 <code>DNS</code> 查询、建立 <code>TCP</code> 连接等时间等；</p>
+<p>3.<code>Request sent</code>：<br>请求第一个字节发出前到最后一个字节发出后的时间，也就是上传时间；</p>
+<p>4.<code>Waiting(TTFB)</code>：<br>请求发出后，到收到响应的第一个字节所花费的时间(Time To First Byte),发送请求完毕到接收请求开始的时间；</p>
+<p>5.<code>Content Download</code>：<br>收到响应的第一个字节，到接受完最后一个字节的时间，就是内容下载时间；</p>
+<div class="alert info"><p>补充：TTFB(Time to First Byte) 代表服务器处理和返回数据网络延时时间了。服务器优化的目的就是要让这个时间段尽可能短。</p>
+</div>
+<p>更多细节，请查看介绍：</p>
+<ul>
+<li><a href="http://blog.csdn.net/qq_20881087/article/details/56682525" target="_blank" rel="noopener">Chrome Timing</a></li>
+<li><a href="http://blog.csdn.net/fumier/article/details/50511174" target="_blank" rel="noopener">优化TTFB</a></li>
+</ul>
+<h4 id="四、请求的生命周期"><a href="#四、请求的生命周期" class="headerlink" title="四、请求的生命周期"></a>四、请求的生命周期</h4><p>在 <a href="http://blog.csdn.net/qq_20881087/article/details/56682525" target="_blank" rel="noopener">Chrome Timing</a> 中摘录出如下解释，这里我就不翻译了，怕误导芸芸众生。</p>
+<p>The primary phases of the request lifecycle are:</p>
+<ul>
+<li>Redirect: Immediately begins startTime. If a redirect is happening, redirectStart begins as well. If a redirect is occurring at the end of this phase then redirectEnd will be taken.</li>
+<li>App Cache: If it’s application cache fulfilling the request, a fetchStart time will be taken.</li>
+<li>DNS: domainLookupStart time is taken at the beginning of the DNS request. domainLookupEnd time is taken at the end of the DNS request.</li>
+<li>TCP: connectStart is taken when initially connecting to the server. If TLS or SSL are in use then secureConnectionStart will start when the handshake begins for securing the connection. connectEnd is taken when the connection to the server is complete.</li>
+<li>Request: requestStart is taken once the request for a resource has been sent to the server.</li>
+<li>Response: responseStart is the time when the server initially responds to the request. responseEnd is the time when the request ends and the data is retrieved.</li>
+</ul>
+<p>我们来看看具体<a href="http://blog.csdn.net/qq_20881087/article/details/56682525" target="_blank" rel="noopener">流程图</a>：<br><img src="http://7xvi3w.com1.z0.glb.clouddn.com/web2.png" alt="request lifecycle"></p>
+<p>这里推荐一篇文章：<a href="https://developers.google.com/web/tools/chrome-devtools/network-performance/reference#timing-explanation" target="_blank" rel="noopener">Network Analysis Reference</a></p>
+<h4 id="五、尝试方案"><a href="#五、尝试方案" class="headerlink" title="五、尝试方案"></a>五、尝试方案</h4><ul>
+<li><p>减少数据传输大小：将后端 <code>JSON</code> 数据精简为二维数组，削减 <code>Key</code> 值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这个效果很明显，2 万数据从 `2.8M` 减少到 `1.8M`，减少了 `36%` 文件大小。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>调整 <code>Nginx Gzip</code> 压缩阈值，参考如下代码修改你的 <code>nginx.config</code> 配置文件：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#gzip模块设置</span><br><span class="line">gzip on; #开启gzip压缩输出</span><br><span class="line">gzip_proxied any;</span><br><span class="line">gzip_min_length 1k; #最小压缩文件大小</span><br><span class="line">gzip_buffers 4 16k; #压缩缓冲区</span><br><span class="line">gzip_http_version 1.0; #压缩版本（默认1.1，前端如果是squid2.5请使用1.0）</span><br><span class="line">gzip_comp_level 4; #压缩等级</span><br><span class="line">gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript;</span><br><span class="line">#压缩类型，默认就已经包含 textml，所以下面就不用再写了，写上去也不会有问题，但是会有一个 warn。</span><br><span class="line">gzip_vary on;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>后端数据考虑缓存：在固定时间点生成 <code>JSON</code> 文件或者 <code>CSV</code>，避开数据库查询时间。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">只要是缓存的数据，都会有一定的延迟性，所以你需要深刻了解数据特征，而不是一股脑全缓存了。</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="六、最终结果"><a href="#六、最终结果" class="headerlink" title="六、最终结果"></a>六、最终结果</h4><p>1.当我们将数据从根源减少后，数据大小减少了 <code>36%</code>，时间也缩短了 <code>3.75</code> 秒，如下图：</p>
+<p><img src="http://7xvi3w.com1.z0.glb.clouddn.com/web3.png" alt="Timing2"></p>
+<p>2.我们调节 <code>Gzip</code> 的压缩级别为 <code>4</code>「压缩值越高，压缩率越大，对 <code>CPU</code> 的使用率也会升高，但文件大小变化会呈现减缓趋势」，数据大小从 <code>1.8M</code> 减少到了 <code>388KB</code> ，同时数据下载时间缩短了 <code>3.45</code> 秒，如下图：</p>
+<p><img src="http://7xvi3w.com1.z0.glb.clouddn.com/web4.png" alt="Timing3"></p>
+<div class="alert warning"><p>友情提示：一定要注意你的数据返回格式，同时相应的调整 <code>gzip_types</code>，否则 <code>Gzip</code> 可能开启了，但并未起作用。</p>
+</div>
+<h4 id="七、优化-TTFB"><a href="#七、优化-TTFB" class="headerlink" title="七、优化 TTFB"></a>七、优化 TTFB</h4><p>到这里，优化过程其实并没有完，因为我又发现了 <code>TTFB</code> 是可以优化的，先附上<a href="https://www.incapsula.com/blog/using-cdn-to-improve-seo-and-ttfb.html" target="_blank" rel="noopener">原文地址</a>。文中提到了两个问题：</p>
+<p>1.动态 <code>HTML</code> 如何影响 <code>TTFB</code> 呢？我们知道 <code>TTFB</code> 是作为客户端接收服务器响应首字节的时间，那么服务器首先会发送什么资源给客户端呢？第一个有意义的响应经常是网页 <code>HTML</code> 的内容部分，它的渲染时间由以下两部分组成：</p>
+<ul>
+<li><code>Processing(Waiting)time</code> 在 <code>web</code> 服务器上生成动态 <code>HTML</code> 所产生的时间；</li>
+<li><code>Network(Receiving)time</code> 编译的 <code>HTML</code> 到达浏览器的时间；</li>
+</ul>
+<p>2.使用 <code>Incapsula CDN</code> 管理 <code>TTFB</code> 和新鲜度<br><div class="alert success"><p>这里不是很明白，原文中大致是这样描述的，先摘录过来。</p>
+</div></p>
+<ul>
+<li><p>Purge Cache<br>这个最新增加的功能目的是通过移除与我们预先设置的验证周期的依赖来清除所有的缓存对像，内容和自动验证机制。点击鼠标缓存副本即被删除，为所有最新更新的内容或动态生成的内容保持即时新鲜度。</p>
+</li>
+<li><p>Cache Everything<br>这是基于学习算法版本中最受争议的方法。该功能可用即缓存所有可用的对象，不管他们的类型和功能。明显的缺点是对新鲜度产生重大的影响。尽管如此，如果你运行的是一个静态的博客，可以开发一个程序在每次更新后手动清除缓存，这可能是一次选择方案。</p>
+</li>
+<li><p>Always Cache(by resource)<br>在缓存一切模式上有一个更多选择的版本。是一个可以手动微调缓存指令的工具。如果你仅仅想缓存某一特殊页面的HTML部分而不影响页面的其他部分来提高TTFB，你可以使用这种方式。</p>
+</li>
+<li><p>Async Validation<br>这个方式控制自动验证周期。启用这个选型确保所有用户总是会从缓存中提高 <code>TTFB</code>。然而，在每个缓存周期中，用户有可能访问过时的副本，因为缓存在他访问的过程中将异步的进行更新。</p>
+</li>
+<li><p>Override “Vary:User-Agent”headers<br><code>Vart:User-Agent</code> 将防止缓存。然而，这些 <code>headers</code> 经常被滥用，他们经常出现在没有真正目的服务的网页上。启用该选项，将允许 <code>Incapsula</code> 来重写这些指令，来提高你的 <code>TTFB</code> 和用户体验以及搜索引擎排名。</p>
+</li>
+</ul>
+<h4 id="八、总结"><a href="#八、总结" class="headerlink" title="八、总结"></a>八、总结</h4><p><code>Web</code> 页面优化本身就不是一蹴而就的，更没有什么捷径可走，你唯一需要做的就是：不断的尝试，不断优化。</p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/optimise/">optimise</a> <a class="tag tag--primary tag--small t-link" href="/tags/request/">request</a> <a class="tag tag--primary tag--small t-link" href="/tags/web/">web</a> <a class="tag tag--primary tag--small t-link" href="/tags/优化/">优化</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/03/06/outline-of-css/" data-tooltip="CSS 实用概要">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/02/08/count-pit-of-mini-programs/" data-tooltip="细数小程序的坑">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/02/09/optimise-for-web-request/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/02/09/optimise-for-web-request/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/02/09/optimise-for-web-request/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/03/06/outline-of-css/" data-tooltip="CSS 实用概要">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/02/08/count-pit-of-mini-programs/" data-tooltip="细数小程序的坑">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/02/09/optimise-for-web-request/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/02/09/optimise-for-web-request/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/02/09/optimise-for-web-request/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/02/09/optimise-for-web-request/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/02/09/optimise-for-web-request/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/02/09/optimise-for-web-request/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

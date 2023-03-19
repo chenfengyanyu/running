@@ -1,0 +1,555 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>Nginx 使用与异常处理 - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="以前总是偷懒使用 Http-Server 来启动一个本地服务，后来花时间学习了一下 Nginx，感觉挺好用。总结整理一下，就当打点存档了。">
+<meta name="keywords" content="nginx">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Nginx 使用与异常处理">
+<meta property="og:url" content="http://jartto.wang/2017/04/15/nginx-exception-handling/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="以前总是偷懒使用 Http-Server 来启动一个本地服务，后来花时间学习了一下 Nginx，感觉挺好用。总结整理一下，就当打点存档了。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2017-11-30T00:02:26.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Nginx 使用与异常处理">
+<meta name="twitter:description" content="以前总是偷懒使用 Http-Server 来启动一个本地服务，后来花时间学习了一下 Nginx，感觉挺好用。总结整理一下，就当打点存档了。">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/nginx.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="http://7xvi3w.com1.z0.glb.clouddn.com/nginx.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            Nginx 使用与异常处理
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2017-04-15T23:00:04+08:00">
+	  
+		    2017/4月/15 23:00:04
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>以前总是偷懒使用 Http-Server 来启动一个本地服务，后来花时间学习了一下 Nginx，感觉挺好用。总结整理一下，就当打点存档了。<br><a id="more"></a></p>
+<h4 id="一、简单介绍"><a href="#一、简单介绍" class="headerlink" title="一、简单介绍"></a>一、简单介绍</h4><p>Nginx — Ngine X，是一款自由的、开源的、高性能 HTTP 服务器和反向代理服务器；也是一个 IMAP 、POP3 、SMTP 代理服务器；也就是说 Nginx 本身就可以托管网站（类似于 Tomcat 一样），进行 Http 服务处理，也可以作为反向代理服务器使用。</p>
+<p>Nginx 解决了服务器的 C10K（就是在一秒之内连接客户端的数目为10k即1万）问题。它的设计不像传统的服务器那样使用线程处理请求，而是一个更加高级的机制—事件驱动机制，是一种异步事件驱动结构。</p>
+<div class="alert success"><p>Nginx 有一个主线程（ master process）和几个工作线程（worker process）。主线程的目的是<strong>加载</strong>和<strong>验证配置文件</strong>、<strong>维护工作线程</strong>。</p>
+</div>
+<p>工作线程处理实际的请求，Nginx 采用基于事件的模型和依赖操作系统的机制在工作线程之间高效地分发请求。工作线程的数量可配置，也可自动调整为服务器 CPU 的数量。</p>
+<h4 id="二、搞懂正向代理和反向代码"><a href="#二、搞懂正向代理和反向代码" class="headerlink" title="二、搞懂正向代理和反向代码"></a>二、搞懂正向代理和反向代码</h4><ul>
+<li><p>正向代理：<br>首先，代理服务器一般指局域网内部的机器通过代理服务器发送请求到互联网上的服务器，代理服务器一般作用在客户端。例如：GoAgent 翻墙软件。我们的客户端在进行翻墙操作的时候，我们使用的正是正向代理，通过正向代理的方式，在我们的客户端运行一个软件，将我们的 HTTP 请求转发到其他不同的服务器端，实现请求的分发。</p>
+</li>
+<li><p>反向代理：<br>反向代理服务器作用在服务器端，它在服务器端接收客户端的请求，然后将请求分发给具体的服务器进行处理，然后再将服务器的相应结果反馈给客户端。Nginx 就是一个反向代理服务器软件。</p>
+</li>
+</ul>
+<h4 id="三、Nginx-安装与使用"><a href="#三、Nginx-安装与使用" class="headerlink" title="三、Nginx 安装与使用"></a>三、Nginx 安装与使用</h4><p>这里我已 Mac 安装举例：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">brew search nginx</span><br><span class="line"></span><br><span class="line">brew install nginx</span><br></pre></td></tr></table></figure></p>
+<p>Nginx 及其模块的工作方式由配置文件确定。 默认情况下，配置文件名为 <code>nginx.conf</code>，放在 <code>/usr/local/nginx/conf</code> 、<code>/etc/nginx</code> 或者 <code>/usr/local/etc/nginx</code> 文件夹中。</p>
+<p>安装完，打开浏览器，访问 <code>localhost:8080</code> ，页面出现欢迎语 <code>Welcome to nginx!</code>，则说明安装成功。</p>
+<h4 id="四、Nginx-查看配置"><a href="#四、Nginx-查看配置" class="headerlink" title="四、Nginx 查看配置"></a>四、Nginx 查看配置</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nginx -t</span><br></pre></td></tr></table></figure>
+<p>当你执行 <code>nginx -t</code> 的时候，<code>Nginx</code> 会去测试你得配置文件得语法，并告诉你配置文件是否写得正确，同时也告诉了你配置文件得路径，如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nginx: the configuration file /usr/<span class="built_in">local</span>/etc/nginx/nginx.conf syntax is ok</span><br><span class="line">nginx: configuration file /usr/<span class="built_in">local</span>/etc/nginx/nginx.conf <span class="built_in">test</span> is successful</span><br></pre></td></tr></table></figure>
+<p>通过 <code>vim</code> 查看与编辑配置文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /usr/local/etc/nginx/nginx.confıg</span><br></pre></td></tr></table></figure></p>
+<p>启动 <code>Nginx</code>:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nginx</span><br></pre></td></tr></table></figure></p>
+<p>重启 <code>Nginx</code>：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nginx -s reload</span><br></pre></td></tr></table></figure></p>
+<p>退出 <code>Nginx</code>:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nginx -s quit</span><br></pre></td></tr></table></figure></p>
+<h4 id="五、Nginx-配置文件"><a href="#五、Nginx-配置文件" class="headerlink" title="五、Nginx 配置文件"></a>五、Nginx 配置文件</h4><p>通过 <code>vim /usr/local/etc/nginx/nginx.confıg</code> 打开 <code>Nginx</code> 配置文件：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#定义 Nginx 运行的用户和用户组</span></span><br><span class="line">user www www;</span><br><span class="line"></span><br><span class="line"><span class="comment"># Nginx 进程数，建议设置为等于 CPU 总核心数</span></span><br><span class="line">worker_processes 8;</span><br><span class="line"></span><br><span class="line"><span class="comment">#全局错误日志定义类型，[ debug | info | notice | warn | error | crit ]</span></span><br><span class="line">error_log ar/loginx/error.log info;</span><br><span class="line"></span><br><span class="line"><span class="comment">#进程文件</span></span><br><span class="line">pid ar/runinx.pid;</span><br><span class="line"></span><br><span class="line"><span class="comment">#一个 Nginx 进程打开的最多文件描述符数目，理论值应该是最多打开文件数（系统的值 ulimit -n ）与 Nginx 进程数相除，但是 Nginx 分配请求并不均匀，所以建议与 ulimit -n 的值保持一致。</span></span><br><span class="line">worker_rlimit_nofile 65535;</span><br><span class="line"></span><br><span class="line"><span class="comment">#工作模式与连接数上限</span></span><br><span class="line">events</span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">#参考事件模型，use [ kqueue | rtsig | epoll | /dev/poll | select | poll ]; epoll 模型是 Linux 2.6以上版本内核中的高性能网络 I/O 模型，如果跑在 FreeBSD 上面，就用 kqueue 模型。</span></span><br><span class="line">  use epoll;</span><br><span class="line">  <span class="comment">#单个进程最大连接数（最大连接数=连接数*进程数）</span></span><br><span class="line">  worker_connections 65535;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">#设定http服务器</span></span><br><span class="line">http</span><br><span class="line">&#123;</span><br><span class="line">  include mime.types; <span class="comment">#文件扩展名与文件类型映射表</span></span><br><span class="line">  default_type application/octet-stream; <span class="comment">#默认文件类型</span></span><br><span class="line">  charset utf-8; <span class="comment">#默认编码</span></span><br><span class="line">  server_names_hash_bucket_size 128; <span class="comment">#服务器名字的hash表大小</span></span><br><span class="line">  client_header_buffer_size 32k; <span class="comment">#上传文件大小限制</span></span><br><span class="line">  large_client_header_buffers 4 64k; <span class="comment">#设定请求缓</span></span><br><span class="line">  client_max_body_size 8m; <span class="comment">#设定请求缓</span></span><br><span class="line">  sendfile on; <span class="comment">#开启高效文件传输模式，sendfile指令指定nginx是否调用sendfile函数来输出文件，对于普通应用设为 on，如果用来进行下载等应用磁盘IO重负载应用，可设置为off，以平衡磁盘与网络I/O处理速度，降低系统的负载。注意：如果图片显示不正常把这个改 成off。</span></span><br><span class="line"></span><br><span class="line">  autoindex on; <span class="comment">#开启目录列表访问，合适下载服务器，默认关闭。</span></span><br><span class="line">  tcp_nopush on; <span class="comment">#防止网络阻塞</span></span><br><span class="line">  tcp_nodelay on; <span class="comment">#防止网络阻塞</span></span><br><span class="line">  keepalive_timeout 120; <span class="comment">#长连接超时时间，单位是秒</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">#FastCGI相关参数是为了改善网站的性能：减少资源占用，提高访问速度。下面参数看字面意思都能理解。</span></span><br><span class="line">  fastcgi_connect_timeout 300;</span><br><span class="line">  fastcgi_send_timeout 300;</span><br><span class="line">  fastcgi_read_timeout 300;</span><br><span class="line">  fastcgi_buffer_size 64k;</span><br><span class="line">  fastcgi_buffers 4 64k;</span><br><span class="line">  fastcgi_busy_buffers_size 128k;</span><br><span class="line">  fastcgi_temp_file_write_size 128k;</span><br><span class="line"></span><br><span class="line">  <span class="comment">#gzip模块设置</span></span><br><span class="line">  gzip on; <span class="comment">#开启gzip压缩输出</span></span><br><span class="line">  gzip_min_length 1k; <span class="comment">#最小压缩文件大小</span></span><br><span class="line">  gzip_buffers 4 16k; <span class="comment">#压缩缓冲区</span></span><br><span class="line">  gzip_http_version 1.0; <span class="comment">#压缩版本（默认1.1，前端如果是squid2.5请使用1.0）</span></span><br><span class="line">  gzip_comp_level 2; <span class="comment">#压缩等级</span></span><br><span class="line">  gzip_types text/plain application/x-javascript text/css application/xml;</span><br><span class="line">  <span class="comment">#压缩类型，默认就已经包含 textml，所以下面就不用再写了，写上去也不会有问题，但是会有一个 warn。</span></span><br><span class="line">  gzip_vary on;</span><br><span class="line"></span><br><span class="line">  limit_zone crawler <span class="variable">$binary_remote_addr</span> 10m; <span class="comment">#开启限制IP连接数的时候需要使用</span></span><br><span class="line"></span><br><span class="line">  upstream blog.linuxidc.com &#123;</span><br><span class="line">    <span class="comment">#upstream的负载均衡，weight是权重，可以根据机器配置定义权重。weigth参数表示权值，权值越高被分配到的几率越大。</span></span><br><span class="line">    server 192.168.80.121:80 weight=3;</span><br><span class="line">    server 192.168.80.122:80 weight=2;</span><br><span class="line">    server 192.168.80.123:80 weight=3;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">#虚拟主机的配置</span></span><br><span class="line">  server</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="comment">#监听端口</span></span><br><span class="line">    listen 80;</span><br><span class="line"></span><br><span class="line">    <span class="comment">#域名可以有多个，用空格隔开</span></span><br><span class="line">    server_name www.linuxidc.com linuxidc.com;</span><br><span class="line">    index index.html index.htm index.php;</span><br><span class="line">    root /data/www/linuxidc;</span><br><span class="line">    location ~ .*.(php|php5)?$</span><br><span class="line">    &#123;</span><br><span class="line">      fastcgi_pass 127.0.0.1:9000;</span><br><span class="line">      fastcgi_index index.php;</span><br><span class="line">      include fastcgi.conf;</span><br><span class="line">    &#125;</span><br><span class="line">    location ~ .*.(gif|jpg|jpeg|png|bmp|swf)$</span><br><span class="line">    &#123;</span><br><span class="line">      expires 10d;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">#JS和CSS缓存时间设置</span></span><br><span class="line">    location ~ .*.(js|css)?$</span><br><span class="line">    &#123;</span><br><span class="line">      expires 1h;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">#日志格式设定</span></span><br><span class="line">    log_format access <span class="string">'$remote_addr - $remote_user [$time_local] "$request" '</span></span><br><span class="line">    <span class="string">'$status $body_bytes_sent "$http_referer" '</span></span><br><span class="line">    <span class="string">'"$http_user_agent" $http_x_forwarded_for'</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">#定义本虚拟主机的访问日志</span></span><br><span class="line">    access_log ar/loginx/linuxidcaccess.log access;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">#对 "/" 启用反向代理</span></span><br><span class="line">    location / &#123;</span><br><span class="line">      proxy_pass http://127.0.0.1:88;</span><br><span class="line">      proxy_redirect off;</span><br><span class="line">      proxy_set_header X-Real-IP <span class="variable">$remote_addr</span>;</span><br><span class="line">      <span class="comment">#后端的Web服务器可以通过X-Forwarded-For获取用户真实IP</span></span><br><span class="line">      proxy_set_header X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">      <span class="comment">#以下是一些反向代理的配置，可选。</span></span><br><span class="line">      proxy_set_header Host <span class="variable">$host</span>;</span><br><span class="line">      client_max_body_size 10m; <span class="comment">#允许客户端请求的最大单文件字节数</span></span><br><span class="line">      client_body_buffer_size 128k; <span class="comment">#缓冲区代理缓冲用户端请求的最大字节数，</span></span><br><span class="line">      proxy_connect_timeout 90; <span class="comment">#nginx跟后端服务器连接超时时间(代理连接超时)</span></span><br><span class="line">      proxy_send_timeout 90; <span class="comment">#后端服务器数据回传时间(代理发送超时)</span></span><br><span class="line">      proxy_read_timeout 90; <span class="comment">#连接成功后，后端服务器响应时间(代理接收超时)</span></span><br><span class="line">      proxy_buffer_size 4k; <span class="comment">#设置代理服务器（nginx）保存用户头信息的缓冲区大小</span></span><br><span class="line">      proxy_buffers 4 32k; <span class="comment">#proxy_buffers缓冲区，网页平均在32k以下的设置</span></span><br><span class="line">      proxy_busy_buffers_size 64k; <span class="comment">#高负荷下缓冲大小（proxy_buffers*2）</span></span><br><span class="line">      proxy_temp_file_write_size 64k; <span class="comment">#设定缓存文件夹大小，大于这个值，将从upstream服务器传</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">#设定查看Nginx状态的地址</span></span><br><span class="line">    location /NginxStatus &#123;</span><br><span class="line">      stub_status on;</span><br><span class="line">      access_log on;</span><br><span class="line">      auth_basic <span class="string">"NginxStatus"</span>;</span><br><span class="line">      auth_basic_user_file confpasswd;</span><br><span class="line">      <span class="comment"># htpasswd 文件的内容可以用 apache 提供的 htpasswd 工具来产生。</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">#本地动静分离反向代理配置</span></span><br><span class="line">    <span class="comment">#所有jsp的页面均交由tomcat或resin处理</span></span><br><span class="line">    location ~ .(jsp|jspx|<span class="keyword">do</span>)?$ &#123;</span><br><span class="line">      proxy_set_header Host <span class="variable">$host</span>;</span><br><span class="line">      proxy_set_header X-Real-IP <span class="variable">$remote_addr</span>;</span><br><span class="line">      proxy_set_header X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">      proxy_pass http://127.0.0.1:8080;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">#所有静态文件由 nginx 直接读取不经过 tomcat 或 resin</span></span><br><span class="line">    location ~ .*.(htm|html|gif|jpg|jpeg|png|bmp|swf|ioc|rar|zip|txt|flv|mid|doc|ppt|pdf|xls|mp3|wma)$</span><br><span class="line">    &#123; expires 15d; &#125;</span><br><span class="line">    location ~ .*.(js|css)?$</span><br><span class="line">    &#123; expires 1h; &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>深入了解，请参考：<a href="http://linux.it.net.cn/e/server/nginx/2015/0621/15898.html" target="_blank" rel="noopener">Config 配置详解</a></p>
+<h4 id="六、Nginx-配置-HTTPS"><a href="#六、Nginx-配置-HTTPS" class="headerlink" title="六、Nginx 配置 HTTPS"></a>六、Nginx 配置 HTTPS</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">  listen 80;</span><br><span class="line">  listen 443 ssl;</span><br><span class="line"></span><br><span class="line">  server_name passport.sensoro.com;</span><br><span class="line"></span><br><span class="line">  ssl_certificate     /ssl/https.crt;</span><br><span class="line">  ssl_certificate_key /ssl/https.key;</span><br><span class="line"></span><br><span class="line">  proxy_set_header Host <span class="variable">$http_host</span>;</span><br><span class="line">  proxy_set_header X-Real-IP <span class="variable">$remote_addr</span>;</span><br><span class="line">  proxy_set_header X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">  proxy_set_header X-Forwarded-Proto <span class="variable">$scheme</span>;</span><br><span class="line">  proxy_http_version 1.1;</span><br><span class="line">  proxy_set_header Upgrade <span class="variable">$http_upgrade</span>;</span><br><span class="line">  proxy_set_header Connection <span class="string">"upgrade"</span>;</span><br><span class="line"></span><br><span class="line">  more_set_headers <span class="string">'X-Powered-By: Jartto'</span>;</span><br><span class="line"></span><br><span class="line">  location / &#123;</span><br><span class="line">      access_log /var/<span class="built_in">log</span>/nginx/user-service.log  main;</span><br><span class="line">      proxy_pass http://192.168.1.4:3000/;</span><br><span class="line">      client_max_body_size 10M;</span><br><span class="line">      proxy_redirect off;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="七、Nginx-中使用-rewrite"><a href="#七、Nginx-中使用-rewrite" class="headerlink" title="七、Nginx 中使用 rewrite"></a>七、Nginx 中使用 rewrite</h4><p>1.Nginx Rewrite 基本标记( flags )<br>last - 基本上都用这个 Flag。<br>※相当于Apache里的[L]标记，表示完成 rewrite，不再匹配后面的规则<br>break - 中止 Rewirte ，不再继续匹配<br>redirect - 返回临时重定向的 HTTP 状态302<br>permanent - 返回永久重定向的 HTTP 状态301 ※原有的 url 支持正则，重写的 url 不支持正则</p>
+<p>2.正则表达式匹配，其中：</p>
+<ul>
+<li>~ 为区分大小写匹配</li>
+<li>~* 为不区分大小写匹配</li>
+<li>!~和!~* 分别为区分大小写不匹配及不区分大小写不匹配</li>
+</ul>
+<p>3.文件及目录匹配，其中：</p>
+<ul>
+<li>-f和!-f用来判断是否存在文件</li>
+<li>-d和!-d用来判断是否存在目录</li>
+<li>-e和!-e用来判断是否存在文件或目录</li>
+<li>-x和!-x用来判断文件是否可执行</li>
+</ul>
+<p>4.Nginx 的一些可用的全局变量，可用做条件判断：</p>
+<ul>
+<li>$args</li>
+<li>$content_length</li>
+<li>$content_type</li>
+<li>$document_root</li>
+<li>$document_uri</li>
+<li>$host</li>
+<li>$http_user_agent</li>
+<li>$http_cookie</li>
+<li>$limit_rate</li>
+<li>$request_body_file</li>
+<li>$request_method</li>
+<li>$remote_addr</li>
+<li>$remote_port</li>
+<li>$remote_user</li>
+<li>$request_filename</li>
+<li>$request_uri</li>
+<li>$query_string</li>
+<li>$scheme</li>
+<li>$server_protocol</li>
+<li>$server_addr</li>
+<li>$server_name</li>
+<li>$server_port</li>
+<li>$uri</li>
+</ul>
+<p>举个例子，将所有 <code>ithov.com</code> 与 <code>netseek.ithov.com</code> 域名全部自跳转到 <code>http://www.ithov.com</code><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">server</span><br><span class="line">&#123;</span><br><span class="line">  listen 80;</span><br><span class="line">  server_name ithov.com netseek.ithov.com;</span><br><span class="line">  index index.html index.php;</span><br><span class="line">  root /data/www/wwwroot;</span><br><span class="line">  <span class="keyword">if</span> (<span class="variable">$host</span> !~ <span class="string">"^www.linxtone.org$"</span>) &#123;</span><br><span class="line">    rewrite ^(.*) http://www.ithov.com<span class="variable">$1</span> redirect;</span><br><span class="line">  &#125;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>深入了解，请参考：<br><a href="https://www.server110.com/nginx/201403/8413.html" target="_blank" rel="noopener">Nginx Rewrite 和 Redirect 模块配置方法说明</a><br><a href="http://www.nginx.cn/216.html" target="_blank" rel="noopener">Nginx rewrite 指令</a><br><a href="https://wizardforcel.gitbooks.io/nginx-doc/content/Text/3.21_rewrite.html" target="_blank" rel="noopener">Nginx 中文文档</a></p>
+<h4 id="八、Nginx-open-异常"><a href="#八、Nginx-open-异常" class="headerlink" title="八、Nginx open 异常"></a>八、Nginx open 异常</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nginx: [error] open() <span class="string">"/usr/local/var/run/nginx.pid"</span> failed (2: No such file or directory)</span><br></pre></td></tr></table></figure>
+<p>解决方法：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost nginx]<span class="comment"># /usr/local/nginx/sbin/nginx -c /usr/local/nginx/conf/nginx.conf</span></span><br></pre></td></tr></table></figure></p>
+<p>使用 <code>nginx -c</code> 的参数指定 <code>nginx.conf</code> 文件的位置<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost nginx]<span class="comment"># cd logs/</span></span><br><span class="line">[root@localhost logs]<span class="comment"># ll</span></span><br></pre></td></tr></table></figure></p>
+<p>总用量 12<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-rw-r--r-- 1 root root 1246 12月  9 18:10 access.log</span><br><span class="line">-rw-r--r-- 1 root root  516 12月 10 15:39 error.log</span><br><span class="line">-rw-r--r-- 1 root root    5 12月 10 15:38 nginx.pid</span><br></pre></td></tr></table></figure></p>
+<p>可以看到 <code>nginx.pid</code> 文件已经有了，之后执行 <code>nginx -s reload</code> 重启 Nginx，问题搞定。</p>
+<h4 id="九、Nginx-启动异常"><a href="#九、Nginx-启动异常" class="headerlink" title="九、Nginx 启动异常"></a>九、Nginx 启动异常</h4><p>当我们运行 <code>nginx -s reload</code> 的时候，会报这样的错误：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nginx: [alert] <span class="built_in">kill</span>(647, 1) failed (3: No such process)</span><br></pre></td></tr></table></figure></p>
+<p>这是因为，我们并没有启动 <code>Nginx</code> 服务，执行 <code>nginx</code> 命令启动服务。</p>
+<h4 id="十、invalid-PID-number"><a href="#十、invalid-PID-number" class="headerlink" title="十、invalid PID number"></a>十、invalid PID number</h4><p>在 <code>Mac</code> 上用 <code>brew</code> 安装 <code>Nginx</code>，然后修改 <code>Nginx</code> 配置文件，再重启时报出如下错误：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nginx: [error] invalid PID number “” <span class="keyword">in</span> “/usr/<span class="built_in">local</span>/var/run/nginx/nginx.pid”</span><br></pre></td></tr></table></figure>
+<p>解决方案：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo nginx -c /usr/<span class="built_in">local</span>/etc/nginx/nginx.conf</span><br><span class="line">$ sudo nginx -s reload</span><br></pre></td></tr></table></figure></p>
+<h4 id="十一、Nginx-403-forbidden-原因"><a href="#十一、Nginx-403-forbidden-原因" class="headerlink" title="十一、Nginx 403 forbidden 原因"></a>十一、Nginx 403 forbidden 原因</h4><p>引起 <code>nginx 403 forbidden</code> 可能有二种原因，具体如下：<br>1.缺少 <code>index.html</code> 或者 <code>index.php</code> 文件<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line"> listen       80;</span><br><span class="line"> server_name  localhost;</span><br><span class="line"> index  index.php index.html;</span><br><span class="line"> root  /home/jartto/www;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p>如果在 <code>/home/jartto/www</code> 下面没有 <code>index.php,index.html</code> 的时候，直接访问域名，找不到文件，会报 <code>403 forbidden</code> 。</p>
+</div>
+<p>2.权限问题<a href="http://blog.51yip.com/apachenginx/1512.html" target="_blank" rel="noopener">详情请参考</a><br>因为权限问题引起的403，比较难查找，但是值得我们注意。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line"> listen       80;</span><br><span class="line"> server_name  localhost;</span><br><span class="line"> index  index.php index.html;</span><br><span class="line"> root  /home/jartto/www;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<div class="alert danger"><p>可以看到， <code>web</code> 目录放在用户的所属目录下面，<code>Nginx</code> 的启动用户默认是 <code>Nginx</code>的，所以对目录根本没有读的权限，这样就会报403错误了。</p>
+</div>
+<p>解决方案：<br>这个时候，把 <code>web</code> 目录的权限改大，或者是把 <code>Nginx</code> 的启动用户改成目录的所属用户，重启一下。</p>
+<h4 id="十二、Nginx-资源汇总"><a href="#十二、Nginx-资源汇总" class="headerlink" title="十二、Nginx 资源汇总"></a>十二、Nginx 资源汇总</h4><ul>
+<li><a href="http://blog.csdn.net/xlgen157387/article/details/49781487" target="_blank" rel="noopener">Nginx 初探</a></li>
+<li><a href="https://lufficc.com/blog/nginx-for-beginners" target="_blank" rel="noopener">初识 Nginx</a></li>
+<li><a href="https://wizardforcel.gitbooks.io/nginx-doc/content/" target="_blank" rel="noopener">gitbooks</a></li>
+<li><a href="http://www.nginx.cn/doc/" target="_blank" rel="noopener">Nginx 中文文档</a></li>
+</ul>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/nginx/">nginx</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/04/25/gating-roadhog/" data-tooltip="探路 Roadhog">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/04/10/funny-plugin-for-dynamic-weather/" data-tooltip="有趣的动态天气图标插件">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2017/04/15/nginx-exception-handling/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2017/04/15/nginx-exception-handling/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2017/04/15/nginx-exception-handling/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/04/25/gating-roadhog/" data-tooltip="探路 Roadhog">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/04/10/funny-plugin-for-dynamic-weather/" data-tooltip="有趣的动态天气图标插件">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2017/04/15/nginx-exception-handling/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2017/04/15/nginx-exception-handling/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2017/04/15/nginx-exception-handling/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2017/04/15/nginx-exception-handling/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2017/04/15/nginx-exception-handling/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2017/04/15/nginx-exception-handling/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

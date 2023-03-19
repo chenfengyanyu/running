@@ -1,0 +1,562 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>了解 Kafka - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="经常听后端童鞋提到 Kafka ，加上业务慢慢有了交集，对 Kafka 的好奇越来越强烈。索性花点时间，一探究竟，顺便扩展一下技能树。">
+<meta name="keywords" content="kafka">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="了解 Kafka">
+<meta property="og:url" content="http://jartto.wang/2018/10/12/about-kafka/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="经常听后端童鞋提到 Kafka ，加上业务慢慢有了交集，对 Kafka 的好奇越来越强烈。索性花点时间，一探究竟，顺便扩展一下技能树。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/kafka1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/kafka2.png">
+<meta property="og:updated_time" content="2018-10-29T01:26:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="了解 Kafka">
+<meta name="twitter:description" content="经常听后端童鞋提到 Kafka ，加上业务慢慢有了交集，对 Kafka 的好奇越来越强烈。索性花点时间，一探究竟，顺便扩展一下技能树。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/kafka1.png">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/kafka.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/kafka.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            了解 Kafka
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2018-10-12T05:21:52+08:00">
+	  
+		    2018/10月/12 05:21:52
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>经常听后端童鞋提到 <code>Kafka</code> ，加上业务慢慢有了交集，对 <code>Kafka</code> 的好奇越来越强烈。索性花点时间，一探究竟，顺便扩展一下技能树。</p>
+<a id="more"></a>
+<h4 id="一、Kafka-是什么？"><a href="#一、Kafka-是什么？" class="headerlink" title="一、Kafka 是什么？"></a>一、Kafka 是什么？</h4><p><code>Kafka</code> 是分布式发布-订阅消息系统。它最初由 <code>LinkedIn</code> 公司开发，之后成为 <code>Apache</code> 项目的一部分。<code>Kafka</code> 是一个分布式的，可划分的，冗余备份的持久性的日志服务。</p>
+<div class="alert info"><p>Kafka 是用于构建实时数据管道和流应用程序。具有横向扩展，容错，wicked fast（变态快）等优点。</p>
+</div>
+<h4 id="二、简单理解"><a href="#二、简单理解" class="headerlink" title="二、简单理解"></a>二、简单理解</h4><p>直接去解释概念可能比较枯燥，不如先委婉的理解一下。</p>
+<p>举个<a href="http://orchome.com/kafka/index" target="_blank" rel="noopener">例子</a>，生产者消费者，生产者生产鸡蛋，消费者消费鸡蛋，生产者生产一个鸡蛋，消费者就消费一个鸡蛋，假设消费者消费鸡蛋的时候噎住了（系统宕机了），生产者还在生产鸡蛋，那新生产的鸡蛋就丢失了。</p>
+<p>或者另一种情况：生产者很强劲（大交易量的情况），生产者 1 秒钟生产 100 个鸡蛋，消费者 1 秒钟只能吃 50 个鸡蛋，那要不了一会，消费者就吃不消了（消息堵塞，最终导致系统超时），消费者拒绝再吃了，「鸡蛋」又丢失了。</p>
+<p>这个时候我们放个篮子在它们中间，生产出来的鸡蛋都放到篮子里，消费者去篮子里拿鸡蛋，这样鸡蛋就不会丢失了，都在篮子里，而这个篮子就是<code>Kafka</code>。</p>
+<p>鸡蛋其实就是「数据流」，系统之间的交互都是通过「数据流」来传输的，也称为报文，也叫「消息」。消息队列满了，其实就是篮子满了，「鸡蛋」放不下了，那赶紧多放几个篮子，其实就是 <code>Kafka</code> 的扩容。</p>
+<div class="alert success"><p>综上所述，Kafka 的概念就很好理解了，它就是那个「篮子」。</p>
+</div>
+<h4 id="三、使用场景"><a href="#三、使用场景" class="headerlink" title="三、使用场景"></a>三、使用场景</h4><p>通过简单形象的比喻，相信很多童鞋都大概了解 <code>Kafka</code> 是怎么一回事了。</p>
+<div class="alert warning"><p>那么我们要不要放「篮子」，以及什么情况我们需要去放这个「篮子」？</p>
+</div>
+<p>1.消息系统<br>对于一些常规的消息系统，<code>Kafka</code> 是个不错的选择。</p>
+<p>2.检测网站活性<br><code>Kafka</code> 可以作为「网站活性跟踪」的最佳工具。可以将网页/用户操作等信息发送到 <code>Kafka</code> 中。并实时监控，或者离线统计分析等。</p>
+<p>3.日志系统<br><code>Kafka</code> 的特性决定它非常适合作为「日志收集中心」;</p>
+<div class="alert success"><p>kafka是一个分布式消息队列。一般在架构设计中起到解耦、削峰、异步处理的作用。</p>
+</div>
+<h4 id="四、重要概念"><a href="#四、重要概念" class="headerlink" title="四、重要概念"></a>四、重要概念</h4><ul>
+<li>Producers：生产者，就是它来生产「鸡蛋」的。</li>
+<li>Consumers：消费者，生出的「鸡蛋」它来消费。</li>
+<li>topic：你把它理解为标签，生产者每生产出来一个鸡蛋就贴上一个标签（topic），消费者可不是谁生产的「鸡蛋」都吃的，这样不同的生产者生产出来的「鸡蛋」，消费者就可以选择性的吃了。</li>
+<li>broker：就是篮子喽。</li>
+</ul>
+<div class="alert info"><p>除了上面几个概念，还有一个也非常重要，那就是 <code>zookeeper</code>。</p>
+</div>
+<p>1) <code>Producer</code> 端使用 <code>zookeeper</code> 用来发现 <code>broker</code> 列表，以及和 <code>Topic</code> 下每个 <code>partition leader</code> 建立 <code>socket</code> 连接并发送消息。<br>2) <code>Broker</code> 端使用 <code>zookeeper</code> 用来注册 <code>broker</code> 信息，已经监测 <code>partition leader</code> 存活性。<br>3) <code>Consumer</code> 端使用 <code>zookeeper</code> 用来注册 <code>consumer</code> 信息,其中包括 <code>consumer</code> 消费的 <code>partition</code> 列表等，同时也用来发现 <code>broker</code> 列表，并和 <code>partition leader</code> 建立 <code>socket</code> 连接，并获取消息。</p>
+<h4 id="五、Kafka-数据流"><a href="#五、Kafka-数据流" class="headerlink" title="五、Kafka 数据流"></a>五、Kafka 数据流</h4><p>看完「鸡蛋」，「篮子」，我们逐渐清晰了，可这他娘的 <code>zookeeper</code> 又出来搅合了，是不是有点懵比了？不要着急，看看下面这张图，也许你就了然于胸了。</p>
+<p><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/kafka1.png" alt="kafka data flow"></p>
+<p><code>Kafka</code> 的总体<a href="https://www.jianshu.com/p/d3e963ff8b70" target="_blank" rel="noopener">数据流</a>是这样的：<code>Producer</code> 往 <code>Broker</code> 里面的指定 <code>Topic</code> 中写消息，<code>Consumers</code> 从 <code>Brokers</code> 里面拉去指定 <code>Topic</code> 的消息，然后进行业务处理。</p>
+<p>图中有两个 <code>topic</code>，<code>topic 0</code> 有两个 <code>partition</code>，<code>topic 1</code> 有一个 <code>partition</code> ，三副本备份。可以看到<code>consumer gourp 1</code> 中的 <code>consumer 2</code> 没有分到 <code>partition</code> 处理，这是有可能出现的。</p>
+<p>那么，<code>Kafka</code> 又是如何<a href="https://www.jianshu.com/p/d3e963ff8b70" target="_blank" rel="noopener">生产数据</a>的？</p>
+<p><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/kafka2.png" alt="Producer"></p>
+<p>如上图所示：</p>
+<ul>
+<li>首先创建一条记录，记录中一定要指定对应的 <code>topic</code> 和 <code>value</code> ，<code>key</code> 和 <code>partition</code> 可选。 </li>
+<li>先序列化，然后按照 <code>topic</code> 和 <code>partition</code> ，放进对应的发送队列中。</li>
+<li><code>kafka produce</code> 都是批量请求，会积攒一批，然后一起发送，不是调 <code>send()</code> 就进行立刻进行网络发包。</li>
+</ul>
+<p>如果 <code>partition</code> 没填，那么情况会是这样的：<br>1.填写了 <code>key</code>：按照 <code>key</code> 进行哈希，相同 <code>key</code> 去一个 <code>partition</code>。（如果扩展了 <code>partition</code> 的数量那么就不能保证了）</p>
+<p>2.没填 <code>key</code>：<code>round-robin</code> 来选 <code>partition</code>。</p>
+<div class="alert info"><p>这些要发往同一个 <code>partition</code> 的请求按照配置，攒一波，然后由一个单独的线程一次性发过去。</p>
+</div>
+<h4 id="六、设计原理"><a href="#六、设计原理" class="headerlink" title="六、设计原理"></a>六、设计原理</h4><p><code>Kafka</code> 的设计初衷是希望作为一个统一的信息收集平台，能够实时的收集反馈信息，并需要能够支撑较大的数据量，且具备良好的容错能力。</p>
+<p>1.持久性<br><code>kafka</code> 使用文件存储消息，这就直接决定 <code>kafka</code> 在性能上严重依赖文件系统的本身特性.且无论任何 <code>OS</code> 下，对文件系统本身的优化几乎没有可能。</p>
+<div class="alert info"><p>文件缓存/直接内存映射等是常用的手段。</p>
+</div>
+<p>因为 <code>kafka</code> 是对日志文件进行 <code>append</code> 操作，因此磁盘检索的开支是较小的。同时为了减少磁盘写入的次数，<code>broker</code> 会将消息暂时 <code>buffer</code> 起来，当消息的个数(或尺寸)达到一定阀值时，再 <code>flush</code> 到磁盘，这样减少了磁盘<code>IO</code> 调用的次数。</p>
+<p>2.性能<br>需要考虑的影响性能点很多，除磁盘 <code>IO</code> 之外，我们还需要考虑网络 <code>IO</code>，这直接关系到 <code>kafka</code> 的吞吐量问题。<code>kafka</code> 并没有提供太多高超的技巧：</p>
+<ul>
+<li>对于 <code>producer</code> 端，可以将消息 <code>buffer</code> 起来，当消息的条数达到一定阀值时，批量发送给 <code>broker</code>;</li>
+<li>对于 <code>consumer</code> 端也是一样，批量 <code>fetch</code> 多条消息，不过消息量的大小可以通过配置文件来指定；</li>
+<li>对于 <code>broker</code> 端，似乎有个 <code>sendfile</code> 系统调用可以潜在的提升网络 <code>IO</code> 的性能：将文件的数据映射到系统内存中，<code>socket</code> 直接读取相应的内存区域即可，而无需进程再次 ｀copy｀ 和交换。</li>
+</ul>
+<p>其实对于 <code>producer/consumer/broker</code> 三者而言，<code>CPU</code> 的开支应该都不大，因此启用消息压缩机制是一个良好的策略。压缩需要消耗少量的 <code>CPU</code> 资源，不过对于 <code>kafka</code> 而言，网络 <code>IO</code> 更应该需要考虑。可以将任何在网络上传输的消息都经过压缩。</p>
+<div class="alert info"><p><code>kafka</code> 支持 <code>gzip/snappy</code> 等多种压缩方式。</p>
+</div>
+<p>3.生产者<br>负载均衡: <code>producer</code> 将会和 <code>Topic</code> 下所有 <code>partition leader</code> 保持 <code>socket</code> 连接。消息由 <code>producer</code> 直接通过 <code>socket</code> 发送到 <code>broker</code> ，中间不会经过任何路由层。</p>
+<p>事实上，消息被路由到哪个 <code>partition</code> 上，有 <code>producer</code> 客户端决定。比如可以采用<code>random</code>、<code>key-hash</code>、<code>轮询</code>等，如果一个 <code>topic</code> 中有多个 <code>partitions</code>，那么在 <code>producer</code> 端实现「消息均衡分发」是必要的。</p>
+<p>4.消费者<br><code>consumer</code> 端向 <code>broker</code> 发送 <code>fetch</code> 请求，并告知其获取消息的 <code>offset</code>。此后 <code>consumer</code> 将会获得一定条数的消息，<code>consumer</code> 端也可以重置 <code>offset</code> 来重新消费消息。</p>
+<p>5.消息传送机制<br>对于 <code>JMS</code> 实现，消息传输担保非常直接：有且只有一次(exactly once)。在 <code>kafka</code> 中稍有不同：</p>
+<ul>
+<li>at most once: 最多一次，这个和 <code>JMS</code> 中 「非持久化」消息类似。发送一次，无论成败，将不会重发。</li>
+<li>at least once: 消息至少发送一次，如果消息未能接受成功，可能会重发，直到接收成功。</li>
+<li>exactly once: 消息只会发送一次。</li>
+<li>at most once: 消费者 <code>fetch</code> 消息，然后保存 <code>offset</code>，然后处理消息。当 <code>client</code> 保存 <code>offset</code> 之后，但是在消息处理过程中出现了异常，导致部分消息未能继续处理。那么此后「未处理」的消息将不能被 <code>fetch</code> 到。</li>
+<li>at least once: 消费者 <code>fetch</code> 消息，然后处理消息，然后保存 <code>offset</code>。如果消息处理成功之后，但是在保存<code>offset</code> 阶段 <code>zookeeper</code> 异常导致保存操作未能执行成功，这就导致接下来再次 <code>fetch</code> 时可能获得上次已经处理过的消息，原因 <code>offset</code> 没有及时的提交给 <code>zookeeper</code>，<code>zookeeper</code> 恢复正常还是之前 <code>offset</code> 状态。</li>
+<li>exactly once: <code>kafka</code> 中并没有严格的去实现(基于2阶段提交，事务)，我们认为这种策略在 <code>kafka</code> 中是没有必要的。</li>
+</ul>
+<div class="alert info"><p>通常情况下「at-least-once」是我们首选。(相比「at most once」而言，重复接收数据总比丢失数据要好)。</p>
+</div>
+<p>6.复制备份<br><code>kafka</code> 将每个 <code>partition</code> 数据复制到多个 <code>server</code> 上，任何一个 <code>partition</code> 有一个 <code>leader</code> 和多个<code>follower</code>(可以没有)，备份的个数可以通过 <code>broker</code> 配置文件来设定。</p>
+<ul>
+<li><code>leader</code> 处理所有的 <code>read-write</code> 请求，<code>follower</code> 需要和 <code>leader</code> 保持同步。</li>
+<li><code>follower</code> 和 <code>consumer</code> 一样，消费消息并保存在本地日志中;</li>
+<li><code>leader</code> 负责跟踪所有的 <code>follower</code> 状态，如果 <code>follower</code> 落后太多或者失效，<code>leader</code> 将会把它从<code>replicas</code> 同步列表中删除。</li>
+<li>当所有的 <code>follower</code> 都将一条消息保存成功，此消息才被认为是 <code>committed</code>，那么此时 <code>consumer</code> 才能消费它。- 即使只有一个 <code>replicas</code> 实例存活，仍然可以保证消息的正常发送和接收，只要 <code>zookeeper</code> 集群存活即可。(不同于其他分布式存储，比如 <code>hbase</code> 需要「多数派」存活才行)</li>
+<li>当 <code>leader</code> 失效时，需在 <code>followers</code> 中选取出新的 <code>leader</code>，可能此时 <code>follower</code> 落后于 <code>leader</code>，因此需要选择一个 <code>up-to-date</code> 的 <code>follower</code>。</li>
+<li>选择 <code>follower</code> 时需要兼顾一个问题，就是新 <code>leader server</code> 上所已经承载的 <code>partition leader</code> 的个数，如果一个 <code>server</code> 上有过多的 <code>partition leader</code>，意味着此 <code>server</code> 将承受着更多的 <code>IO</code> 压力。</li>
+<li>在选举新 <code>leader</code>，需要考虑到负载均衡。</li>
+</ul>
+<p>7.日志<br>日志文件中保存了一序列 <code>log entries</code>(日志条目)，每个 <code>log entry</code> 格式为「4个字节的数字N表示消息的长度」 + 「N个字节的消息内容」;</p>
+<p>每个日志都有一个 <code>offset</code> 来唯一的标记一条消息，<code>offset</code> 的值为 8 个字节的数字，表示此消息在此 <code>partition</code> 中所处的起始位置。</p>
+<p>每个 <code>partition</code> 在物理存储层面，有多个 <code>log file</code> 组成(称为 <code>segment</code>)。<code>segmentfile</code> 的命名为 “最小offset”.kafka</p>
+<p>8.分配<br><code>kafka</code> 使用 <code>zookeeper</code> 来存储一些 <code>meta</code> 信息，并使用了 <code>zookeeper watch</code> 机制来发现 <code>meta</code> 信息的变更并作出相应的动作(比如 <code>consumer</code> 失效，触发负载均衡等)</p>
+<p>更多细节，请移步 <a href="http://www.aboutyun.com/thread-9341-1-1.html" target="_blank" rel="noopener">Kafka 入门</a>。</p>
+<h4 id="七、快速开始"><a href="#七、快速开始" class="headerlink" title="七、快速开始"></a>七、快速开始</h4><p>1.下载 <a href="https://www.apache.org/dyn/closer.cgi?path=/kafka/2.0.0/kafka_2.11-2.0.0.tgz" target="_blank" rel="noopener">kafka</a><br>2.解压并进入目录<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar -xzf kafka_2.11-2.0.0.tgz</span><br><span class="line"><span class="built_in">cd</span> kafka_2.11-2.0.0</span><br></pre></td></tr></table></figure></p>
+<p>3.启动服务<br><code>kafka</code> 使用了 <code>zooKeeper</code>，所以我们需要先启动 <code>zooKeeper</code> 服务。执行：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/zookeeper-server-start.sh config/zookeeper.properties</span><br></pre></td></tr></table></figure></p>
+<p>然后，再启动 <code>kafka</code> 服务：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/kafka-server-start.sh config/server.properties</span><br></pre></td></tr></table></figure></p>
+<p>控制台应该会输出：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">[2018-10-27 14:41:16,579] INFO [KafkaServer id=0] started (kafka.server.KafkaServer)</span><br></pre></td></tr></table></figure></p>
+<p>…</p>
+<p>突然发现要运行一个简单的 <code>Demo</code> 还需要做很多事情，鉴于文章内容过长。我将会在下一篇文章：<a href="http://jartto.wang/2018/10/28/start-kafka/">快速上手 Kafka</a>中详细说明，还请各位移步。</p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/kafka/">kafka</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/10/13/nodejs-pdf/" data-tooltip="抓取网页生成 PDF">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/07/08/perfect-math/" data-tooltip="完美渲染之数学公式">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/10/12/about-kafka/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/10/12/about-kafka/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/10/12/about-kafka/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/10/13/nodejs-pdf/" data-tooltip="抓取网页生成 PDF">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/07/08/perfect-math/" data-tooltip="完美渲染之数学公式">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/10/12/about-kafka/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/10/12/about-kafka/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/10/12/about-kafka/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/10/12/about-kafka/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/10/12/about-kafka/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/10/12/about-kafka/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

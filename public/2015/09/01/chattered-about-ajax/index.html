@@ -1,0 +1,598 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>ajax杂谈 - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="最近媳妇换工作一直在面试，ajax的相关问题已经占到了70%。作为一个在前端混了3年的老鸟，也经不住各种公司的狂轰乱炸，好吧，那就拿起笔来总结一下。">
+<meta name="keywords" content="ajax">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="ajax杂谈">
+<meta property="og:url" content="http://jartto.wang/2015/09/01/chattered-about-ajax/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="最近媳妇换工作一直在面试，ajax的相关问题已经占到了70%。作为一个在前端混了3年的老鸟，也经不住各种公司的狂轰乱炸，好吧，那就拿起笔来总结一下。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/blog_79E424FE-BC37-4822-8D36-5F94CD47127E.png">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/blog_D178FAFC-F34B-4051-9B61-F20A33A8ED3B.png">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/blog_BA2701DA-B51D-4E18-9696-142A5BF0DF9D.png">
+<meta property="og:updated_time" content="2016-06-28T06:45:08.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ajax杂谈">
+<meta name="twitter:description" content="最近媳妇换工作一直在面试，ajax的相关问题已经占到了70%。作为一个在前端混了3年的老鸟，也经不住各种公司的狂轰乱炸，好吧，那就拿起笔来总结一下。">
+<meta name="twitter:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/blog_79E424FE-BC37-4822-8D36-5F94CD47127E.png">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/blog_3525370C-2C33-4F8B-BD7E-6A9C286F48BF.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="http://7xvi3w.com1.z0.glb.clouddn.com/blog_3525370C-2C33-4F8B-BD7E-6A9C286F48BF.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            ajax杂谈
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2015-09-01T09:32:42+08:00">
+	  
+		    2015/9月/01 09:32:42
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/面试笔试/">面试笔试</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>最近媳妇换工作一直在面试，ajax的相关问题已经占到了70%。作为一个在前端混了3年的老鸟，也经不住各种公司的狂轰乱炸，好吧，那就拿起笔来总结一下。<br><a id="more"></a><br>如果你是新手，认真的看完，面试笔试可能会有所帮助。如果你是老手，那么夯实一下基础，也是极好的～</p>
+<h4 id="一、ajax是什么？"><a href="#一、ajax是什么？" class="headerlink" title="一、ajax是什么？"></a>一、ajax是什么？</h4><blockquote>
+<p>AJAX全称为“AsynchronousJavaScript and XML”（异步JavaScript和XML），是一种创建交互式网页应用的网页开发技术。 </p>
+</blockquote>
+<p>Ajax本质上是一个浏览器端的技术。      </p>
+<ul>
+<li>不是一种新技术，是如下几种技术的组合应用：</li>
+<li>基于web标准（standards-basedpresentation）XHTML+CSS的表示；</li>
+<li>使用 DOM（DocumentObject Model）进行动态显示及交互；</li>
+<li>使用 XML 和 XSLT 进行数据交换及相关操作；</li>
+<li>使用 XMLHttpRequest 进行异步数据查询、检索；</li>
+<li>使用 JavaScript将所有的东西绑定在一起。</li>
+</ul>
+<h4 id="二、ajax的交互模型"><a href="#二、ajax的交互模型" class="headerlink" title="二、ajax的交互模型"></a>二、ajax的交互模型</h4><ul>
+<li><p>如下图：总共分为6个步骤<br><img src="http://7xvi3w.com1.z0.glb.clouddn.com/blog_79E424FE-BC37-4822-8D36-5F94CD47127E.png" alt="ajax交互模型"></p>
+</li>
+<li><p>传统的交互模式：<br>传统的JavaScript编程中，如果想得到服务器端数据库或文件上的信息，或者发送客户端信息到服务器，需要建立一个HTML表单，即Form，然后用GET方法或者POST方法发送数据到服务器端。用户点击Submit按钮来发送或者接收数据信息，然后等待服务器端响应请求，之后就是无操作阶段，直到服务器端数据返回，页面重新加载。由于服务器每次都会返回一个新的页面，所以传统的web应用反应速度极为缓慢且用户体验较差。<br><img src="http://7xvi3w.com1.z0.glb.clouddn.com/blog_D178FAFC-F34B-4051-9B61-F20A33A8ED3B.png" alt="ajax交互模型"></p>
+</li>
+<li><p>ajax交互模式：<br>AJAX应用技术则通过HTTP Request发送请求到WEB服务器并接受WEb服务器返回的数据，显示在WEB页面，此过程页面不会重新加载，展示给用户的还是同一个页面。用户体验较为流畅。<br><img src="http://7xvi3w.com1.z0.glb.clouddn.com/blog_BA2701DA-B51D-4E18-9696-142A5BF0DF9D.png" alt="ajax交互模型"></p>
+</li>
+</ul>
+<h4 id="三、状态值与状态码"><a href="#三、状态值与状态码" class="headerlink" title="三、状态值与状态码"></a>三、状态值与状态码</h4><blockquote>
+<p>AJAX状态值是指，运行AJAX所经历过的几种状态，无论访问是否成功都将响应的步骤，可以理解成为AJAX运行步骤。如：正在发送，正在响应等，由AJAX对象与服务器交互时所得；使用“ajax.readyState”获得。（由数字1~4单位数字组成）          </p>
+</blockquote>
+<blockquote>
+<p>AJAX状态码是指，无论AJAX访问是否成功，由HTTP协议根据所提交的信息，服务器所返回的HTTP头信息代码，该信息使用“ajax.status”所获得；（由数字1XX,2XX三位数字组成，详细查看RFC）</p>
+</blockquote>
+<p>这就是我们在使用AJAX时为什么采用下面的方式判断所获得的信息是否正确的原因。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(ajax.readyState == <span class="number">4</span> &amp;&amp; ajax.status == <span class="number">200</span>) &#123; </span><br><span class="line">	putData(ajax.responseText);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="四、status"><a href="#四、status" class="headerlink" title="四、status"></a>四、status</h4><p>status体现的是服务器对请求的反馈</p>
+<ul>
+<li>1**：请求收到，继续处理</li>
+<li>2**：操作成功收到，分析、接受</li>
+<li>3**：完成此请求必须进一步处理</li>
+<li>4**：请求包含一个错误语法或不能完成</li>
+<li>5**：服务器执行一个完全有效请求失败</li>
+<li>100——客户必须继续发出请求</li>
+<li>101——客户要求服务器根据请求转换HTTP协议版本</li>
+<li>200——交易成功</li>
+<li>201——提示知道新文件的URL</li>
+<li>202——接受和处理、但处理未完成</li>
+<li>203——返回信息不确定或不完整</li>
+<li>204——请求收到，但返回信息为空</li>
+<li>205——服务器完成了请求，用户代理必须复位当前已经浏览过的文件</li>
+<li>206——服务器已经完成了部分用户的GET请求</li>
+<li>300——请求的资源可在多处得到</li>
+<li>301——删除请求数据</li>
+<li>302——在其他地址发现了请求数据</li>
+<li>303——建议客户访问其他URL或访问方式</li>
+<li>304——客户端已经执行了GET，但文件未变化</li>
+<li>305——请求的资源必须从服务器指定的地址得到</li>
+<li>306——前一版本HTTP中使用的代码，现行版本中不再使用</li>
+<li>307——申明请求的资源临时性删除</li>
+<li>400——错误请求，如语法错误</li>
+<li>401——请求授权失败</li>
+<li>402——保留有效ChargeTo头响应</li>
+<li>403——请求不允许</li>
+<li>404——没有发现文件、查询或URl</li>
+<li>405——用户在Request-Line字段定义的方法不允许</li>
+<li>406——根据用户发送的Accept拖，请求资源不可访问</li>
+<li>407——类似401，用户必须首先在代理服务器上得到授权</li>
+<li>408——客户端没有在用户指定的饿时间内完成请求</li>
+<li>409——对当前资源状态，请求不能完成</li>
+<li>410——服务器上不再有此资源且无进一步的参考地址</li>
+<li>411——服务器拒绝用户定义的Content-Length属性请求</li>
+<li>412——一个或多个请求头字段在当前请求中错误</li>
+<li>413——请求的资源大于服务器允许的大小</li>
+<li>414——请求的资源URL长于服务器允许的长度</li>
+<li>415——请求资源不支持请求项目格式</li>
+<li>416——请求中包含Range请求头字段，在当前请求资源范围内没有range指示值，请求也不包含If-Range请求头字段</li>
+<li>417——服务器不满足请求Expect头字段指定的期望值，如果是代理服务器，可能是下一级服务器不能满足请求</li>
+<li>500——服务器产生内部错误</li>
+<li>501——服务器不支持请求的函数</li>
+<li>502——服务器暂时不可用，有时是为了防止发生系统过载</li>
+<li>503——服务器过载或暂停维修</li>
+<li>504——关口过载，服务器使用另一个关口或服务来响应用户，等待时间设定值较长</li>
+<li>505——服务器不支持或拒绝支请求头中指定的HTTP版本</li>
+</ul>
+<h4 id="五、readyStatus"><a href="#五、readyStatus" class="headerlink" title="五、readyStatus"></a>五、readyStatus</h4><p>客户端与客户的交互状态过程</p>
+<blockquote>
+<p>在AJAX实际运行当中，对于访问XMLHttpRequest（XHR）时并不是一次完成的，而是分别经历了多种状态后取得的结果，对于这种状态在AJAX中共有5种，分别是。</p>
+</blockquote>
+<p>0 - (未初始化)还没有调用send()方法<br>1 - (载入)已调用send()方法，正在发送请求<br>2 - (载入完成)send()方法执行完成，<br>3 - (交互)正在解析响应内容<br>4 - (完成)响应内容解析完成，可以在客户端调用了</p>
+<p>对于上面的状态，其中“0”状态是在定义后自动具有的状态值，而对于成功访问的状态（得到信息）我们大多数采用“4”进行判断。</p>
+<h4 id="六、XMLHttpRequest对象的常用方法和属性："><a href="#六、XMLHttpRequest对象的常用方法和属性：" class="headerlink" title="六、XMLHttpRequest对象的常用方法和属性："></a>六、XMLHttpRequest对象的常用方法和属性：</h4><p>①open(“method”,”URL”)建立对服务器的调用。第一个参数是HTTP请求，方式是GET、POST等。第二个参数是请求页面的URL。<br>②send( )方法，发送具体请求；<br>③abort( )方法，停止当前请求；<br>④readyState属性，包含五个状态，0为请求未初始化，1为正在加载，2为已加载，3为交互中，4为完成；<br>⑤responseText属性，此为服务器的响应，表示为一个串。<br>⑥responseXML属性，此为服务器的响应，表示为XML。<br>⑦status属性，服务器的HTTP状态码，200对应的是OK，400错误是页面为找到等等。</p>
+<h4 id="七、一个AJAX的简单实例"><a href="#七、一个AJAX的简单实例" class="headerlink" title="七、一个AJAX的简单实例"></a>七、一个AJAX的简单实例</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> xmlhttp;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">loadXMLDoc</span>(<span class="params">url, cfunc</span>)</span>&#123;</span><br><span class="line">          <span class="keyword">if</span>(<span class="built_in">window</span>.XMLHttpRequest)&#123;</span><br><span class="line">            xmlhttp = <span class="keyword">new</span> XMLHttpRequest();<span class="comment">//非IE内核浏览器</span></span><br><span class="line">          &#125;</span><br><span class="line">          <span class="keyword">else</span>&#123;</span><br><span class="line">          xmlhttp = <span class="keyword">new</span> ActiveXObject(<span class="string">"Mircrosoft.XMLHTTP"</span>);<span class="comment">//IE内核浏览器</span></span><br><span class="line">          &#125;</span><br><span class="line">          xmlhttp.onreadystatechange = cfunc;</span><br><span class="line">          xmlhttp.open(<span class="string">"GET"</span>,url,<span class="literal">true</span>);</span><br><span class="line">          xmlhttp.send();</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="function"><span class="keyword">function</span> <span class="title">myFunction</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        loadXMLDoc(<span class="string">"/ajax/test1.txt"</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;                         <span class="comment">//这里使用callback函数</span></span><br><span class="line">            <span class="keyword">if</span>(xmlhttp.readystate ==<span class="number">4</span> &amp;&amp;xmlhttp.status==<span class="number">200</span>)&#123;</span><br><span class="line">             <span class="built_in">document</span>.getELementById(<span class="string">"mydiv"</span>).innerHTML = xmlhttp.responseText;</span><br><span class="line">             &#125;</span><br><span class="line">             &#125;);</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"mydiv"</span>&gt;</span>ljkjlkjlkj<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">onclick</span>=<span class="string">"muFunction()"</span>&gt;</span>通过AJAX改变内容<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="八、AJAX的优点和缺点"><a href="#八、AJAX的优点和缺点" class="headerlink" title="八、AJAX的优点和缺点"></a>八、AJAX的优点和缺点</h4><ul>
+<li>AJAX的优点：<br>①实现局部动态刷新；<br>②异步加载，提高客户端浏览器响应速度；<br>③利用客户端闲置的资源来缓解服务器端的压力；<br>④不需要使用任何插件，使用方便；<br>⑤网页操作反应速度快，动态效果十足，用户体验好。</li>
+<li>AJAX的缺点：<br>①破坏了浏览器的后退按钮，使之无法运行；<br>解决方案，通过js调用history.go(-1)实现后退功能。自行处理，为用户提供误操作返回入口。<br>②对搜索引擎不友好；<br>换句话说，AJXA实现异步加载，也就意味着有一部分内容通过请求后才从服务器接收过来。而搜索引擎则是通过页面抓取进行搜索的，服务器上的东西根本访问不到。<br>③AJAX的脚本语言是嵌入在HTML页面中的，通过查看源代码或者firebug等工具可直接查看，不利于项目代码的保密；<br>④不支持跨域请求；<br>解决方案,JSONP(JSON with Padding,即填充式JSON)。</li>
+</ul>
+<p>参考：<br><a href="http://blog.csdn.net/chenmoquan/article/details/38560649" target="_blank" rel="noopener">http://blog.csdn.net/chenmoquan/article/details/38560649</a><br><a href="http://www.itxueyuan.org/view/6454.html" target="_blank" rel="noopener">http://www.itxueyuan.org/view/6454.html</a><br><a href="http://www.jb51.net/article/16966.htm" target="_blank" rel="noopener">http://www.jb51.net/article/16966.htm</a><br><a href="http://blog.csdn.net/libertea/article/details/11059425" target="_blank" rel="noopener">http://blog.csdn.net/libertea/article/details/11059425</a></p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/ajax/">ajax</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/09/07/git-part-1/" data-tooltip="git实践系列一：初探">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/08/29/trigger-and-bind/" data-tooltip="trigger和bind">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2015/09/01/chattered-about-ajax/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2015/09/01/chattered-about-ajax/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2015/09/01/chattered-about-ajax/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+            
+                <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/09/07/git-part-1/" data-tooltip="git实践系列一：初探">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/08/29/trigger-and-bind/" data-tooltip="trigger和bind">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2015/09/01/chattered-about-ajax/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2015/09/01/chattered-about-ajax/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2015/09/01/chattered-about-ajax/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2015/09/01/chattered-about-ajax/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2015/09/01/chattered-about-ajax/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2015/09/01/chattered-about-ajax/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+    
+        <script>
+             var disqus_config = function () {
+                 this.page.url = 'http://jartto.wang/2015/09/01/chattered-about-ajax/';
+                 
+                    this.page.identifier = '2015/09/01/chattered-about-ajax/';
+                                  
+             };
+            (function() {
+                var d = document, s = d.createElement('script');
+                var disqus_shortname = 'jartto';
+                s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+
+
+
+</html>

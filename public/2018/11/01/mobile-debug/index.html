@@ -1,0 +1,587 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>H5 移动调试全攻略 - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="随着移动设备的高速发展，H5 开发也成为了 F2E 不可或缺的能力。而移动开发的重中之重就是掌握调试技巧，定 Bug于无形。">
+<meta name="keywords" content="html5,mobile,debug">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="H5 移动调试全攻略">
+<meta property="og:url" content="http://jartto.wang/2018/11/01/mobile-debug/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="随着移动设备的高速发展，H5 开发也成为了 F2E 不可或缺的能力。而移动开发的重中之重就是掌握调试技巧，定 Bug于无形。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/mobile-debug/safari1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/mobile-debug/ios1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/mobile-debug/ios2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/mobile-debug/ip1.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/mobile-debug/ip2.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/mobile-debug/map1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/mobile-debug/map2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/mobile-debug/page1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/mobile-debug/page2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/mobile-debug/whistle1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/mobile-debug/whistle2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/mobile-debug/https1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/mobile-debug/https2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/mobile-debug/vconsole1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/mobile-debug/vconsole2.png">
+<meta property="og:updated_time" content="2018-11-30T15:03:52.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="H5 移动调试全攻略">
+<meta name="twitter:description" content="随着移动设备的高速发展，H5 开发也成为了 F2E 不可或缺的能力。而移动开发的重中之重就是掌握调试技巧，定 Bug于无形。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/mobile-debug/safari1.png">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/Debug.jpg"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/Debug.jpg" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            H5 移动调试全攻略
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2018-11-01T23:33:09+08:00">
+	  
+		    2018/11月/01 23:33:09
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>随着移动设备的高速发展，<code>H5</code> 开发也成为了 <code>F2E</code> 不可或缺的能力。而移动开发的重中之重就是掌握调试技巧，定 <code>Bug</code>于无形。<br><a id="more"></a><br>文章首发于 <a href="http://jartto.wang/2018/11/01/mobile-debug/">Jartto’s blog</a>，转载请标明出处。</p>
+<h4 id="一、概要"><a href="#一、概要" class="headerlink" title="一、概要"></a>一、概要</h4><p>因为移动端操作系统分为 <code>iOS</code> 和 <code>Android</code> 两派，所以本文的调试技巧也会按照不同的系统来区分。寻找最合适高效的方式，才能让你事半功倍。</p>
+<div class="alert success"><p>文章会列举目前适合移动端调试的多种方案，快来选择你的<a href="http://jartto.wang/2018/11/01/mobile-debug/">最佳实践</a>吧！</p>
+</div>
+<h4 id="二、iOS-设备"><a href="#二、iOS-设备" class="headerlink" title="二、iOS 设备"></a>二、iOS 设备</h4><div class="alert info"><p>Safari：iphone 调试利器，查错改样式首选，需要我们做如下设置：</p>
+</div>
+<ul>
+<li>浏览器设置：Safari - 偏好设置 - 高级 - 勾选「在菜单栏中显示开发」菜单</li>
+<li>iphone 设置：设置 - Safari - 高级 - 打开 Web 检查器</li>
+</ul>
+<p>大功告成，这时候通过手机的 <code>Safari</code> 来打开 <code>H5</code> 页面，我们通过浏览器开发选项可以看到：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/mobile-debug/safari1.png" alt="safari1"></p>
+<div class="alert info"><p>iOS 模拟器：不需要真机，适合调试 <code>Webview</code> 和 <code>H5</code> 有频繁交互的功能页面。</p>
+</div>
+<p>首先下载 <code>Xcode</code> ，运行项目，选择模拟器 <code>iphonex</code>，编译后就会打开模拟器，如下：</p>
+<div class="figure left" style="width:320px;"><a class="fancybox" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/mobile-debug/ios1.png" title data-fancybox-group="travel" target="_blank" rel="noopener"><img class="fig-img" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/mobile-debug/ios1.png" style="width:320px;" alt></a></div>
+<div class="figure right" style="width:320px;"><a class="fancybox" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/mobile-debug/ios2.png" title data-fancybox-group="travel" target="_blank" rel="noopener"><img class="fig-img" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/mobile-debug/ios2.png" style="width:320px;" alt></a></div><div style="clear:both;"></div>
+<p>可以看到 <a href="http://localhost:4000/2018/11/01/mobile-debug/" target="_blank" rel="noopener"><code>H5</code></a> 已经在「壳子」中运行起来了，下来就可以尝试调用 <code>Webview</code> 的方法，和「壳子」交互了。更多的调试技巧可以参考文章：<a href="http://imweb.io/topic/5bcd417305c8cb261b76a1f9" target="_blank" rel="noopener">iOS 模拟器调试</a>。</p>
+<div class="alert success"><p>具体的调试功能还是依赖浏览器的开发选项，与上无异，就不赘述了。</p>
+</div>
+<h4 id="三、抓包"><a href="#三、抓包" class="headerlink" title="三、抓包"></a>三、抓包</h4><div class="alert info"><p><a href="https://www.charlesproxy.com/download/" target="_blank" rel="noopener">Charles</a>： Mac OS 系统首选的抓包工具，适合查看、控制网络请求，分析数据情况。</p>
+</div>
+<p><code>Charles</code> 抓包首先需要配置手机代理，<code>Wifi</code> - 配置代理（IP 地址） - 手动，如下图：</p>
+<div class="figure left" style="width:320px;"><a class="fancybox" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/mobile-debug/ip1.jpeg" title data-fancybox-group="travel" target="_blank" rel="noopener"><img class="fig-img" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/mobile-debug/ip1.jpeg" style="width:320px;" alt></a></div>
+<div class="figure right" style="width:320px;"><a class="fancybox" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/mobile-debug/ip2.jpeg" title data-fancybox-group="travel" target="_blank" rel="noopener"><img class="fig-img" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/mobile-debug/ip2.jpeg" style="width:320px;" alt></a></div><div style="clear:both;"></div>
+<p>配置好手机代理，这时候打开 <code>Charles</code> ，就会收到确认提醒，选择允许。接下来就可以捕获手机的请求了，但是这些都是常规操作，我们来点高级的。</p>
+<div class="alert success"><p>有意思的是：我们可以用本地文件来替换线上文件，方便调试，远程定位线上问题。</p>
+</div>
+<p>选择 <code>Structure</code>，找到需要替换的文件，右键菜单 - <code>Map Local</code>，如下图：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/mobile-debug/map1.png" alt="map1"></p>
+<p>这时候就会打开一个弹窗，填写具体的配置：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/mobile-debug/map2.png" alt="map2"></p>
+<p>OK，大功告成，快去改动本地文件吧，从此再也不怕线上调试了。需要注意的是如果抓取 <code>HTTPS</code> 请求，要安装信任证书，<a href="http://jartto.wang/2018/11/01/mobile-debug/">下文</a>会详细说明。</p>
+<div class="alert warning"><p>与之相应的是 Windows 平台的 Fiddler，功能大致相似，这里就不细说了。</p>
+</div>
+<h4 id="四、Spy-Debugger"><a href="#四、Spy-Debugger" class="headerlink" title="四、Spy-Debugger"></a>四、Spy-Debugger</h4><div class="alert info"><p><a href="https://github.com/wuchangming/spy-debugger" target="_blank" rel="noopener">spy-debugger</a>： 移动端调试的利器，便捷的远程调试手机页面、抓包工具。</p>
+</div>
+<p>我们先来安装：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; sudo npm install spy-debugger -g</span><br></pre></td></tr></table></figure></p>
+<p>启动命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; spy-debugger</span><br></pre></td></tr></table></figure></p>
+<p>这时候，控制台会打印出如下信息，说明服务已经启动了：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">正在启动代理</span><br><span class="line">本机在当前网络下的IP地址为：10.200.24.46</span><br><span class="line">node-mitmproxy启动端口: 9888</span><br><span class="line">浏览器打开 ---&gt; http://127.0.0.1:50389</span><br></pre></td></tr></table></figure></p>
+<p>最后一步，设置手机代理：<code>10.200.24.46</code>，端口号：<code>9888</code>。补充说明一下：</p>
+<ul>
+<li><code>Android</code> 设置代理步骤：设置 - <code>WLAN</code> - 长按选中网络 - 修改网络 - 高级 - 代理设置 - 手动</li>
+<li><code>iOS</code> 设置代理步骤：设置 - 无线局域网 - 选中网络 - <code>HTTP</code> 代理手动</li>
+</ul>
+<p>接下来，尝试一下抓包：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/mobile-debug/page1.png" alt="page1"><br>再打开调试页面：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/mobile-debug/page2.png" alt="page2"></p>
+<div class="alert success"><p><code>HTTPS</code> 抓包，需要安装根证书，<a href="http://jartto.wang/2018/11/01/mobile-debug/">下文</a>会详细说明。</p>
+</div>
+<h4 id="五、Whistle"><a href="#五、Whistle" class="headerlink" title="五、Whistle"></a>五、Whistle</h4><p>上面推荐了一款操作简单的调试利器，升级一下，看看更加强大的调试工具 <code>whistle</code>。<br><div class="alert info"><p><a href="http://wproxy.org/whistle/" target="_blank" rel="noopener">whistle</a>：基于 <code>Node</code> 实现的跨平台 <code>Web</code> 调试代理工具。</p>
+</div></p>
+<p><code>whistle</code>(读音[ˈwɪsəl]，拼音[wēisǒu])是基于 <code>Node</code>实现的跨平台抓包调试代理工具，有以下基本功能：</p>
+<ol>
+<li>查看 <code>HTTP</code>、<code>HTTPS</code>请求响应内容</li>
+<li>查看 <code>WebSocket</code>、<code>Socket</code> 收发的帧数据</li>
+<li>设置请求 <code>hosts</code>、上游 <code>http/socks</code> 代理</li>
+<li>修改请求 <code>url</code> 、方法、头部、内容</li>
+<li>修改响应状态码、头部、内容，并支持本地替换</li>
+<li>修改 <code>WebSocket</code> 或 <code>Socket</code> 收发的帧数据</li>
+<li>内置调试移动端页面的 <code>weinre</code> 和 <code>log</code></li>
+<li>作为 <code>HTTP</code> 代理或反向代理</li>
+<li>支持用 <code>Node</code> 编写插件扩展功能</li>
+</ol>
+<p>大致了解后，我们来尝试安装：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo npm install -g whistle</span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p>淘宝镜像：npm install whistle -g –registry=<a href="https://registry.npm.taobao.org" target="_blank" rel="noopener">https://registry.npm.taobao.org</a></p>
+</div>
+<p><code>whistle</code> 安装完成后，执行命令 <code>whistle help</code> 或 <code>w2 help</code>，查看 <code>whistle</code> 的帮助信息：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">run       Start a front service</span><br><span class="line">start     Start a background service</span><br><span class="line">stop      Stop current background service</span><br><span class="line">restart   Restart current background service</span><br><span class="line"><span class="built_in">help</span>      Display <span class="built_in">help</span> information</span><br></pre></td></tr></table></figure></p>
+<div class="alert warning"><p>这里只列出部分命令，更多请 w2 help 查看。</p>
+</div>
+<p>看到上面的操作，我们何不试试缩写 <code>w2 start</code> 来启动服务：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">w2 start</span><br></pre></td></tr></table></figure></p>
+<p>看到如下的输出，说明服务已经正常启动了：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/mobile-debug/whistle1.png" alt="whistle"></p>
+<p>这时候在浏览器打开链接，同时手机上配置代理（同 <code>Charles</code>），接下来就可以愉快的调试了。值得注意的是，<code>whistle</code> 的功能远非如此，更多的扩展请移步<a href="http://wproxy.org/whistle/" target="_blank" rel="noopener">官网文档</a>，贴张图先预览下：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/mobile-debug/whistle2.png" alt="whistle"></p>
+<div class="alert danger"><p>记得开启拦截 <code>HTTPS</code>：勾选 <code>Capture HTTPS CONNECTs</code></p>
+</div>
+<h4 id="六、安装-HTTPS-证书"><a href="#六、安装-HTTPS-证书" class="headerlink" title="六、安装 HTTPS 证书"></a>六、安装 HTTPS 证书</h4><p>对于 <code>Charles</code>，按照如下操作安装证书：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">help-SSL - Proxying - install Charles root</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/mobile-debug/https1.png" alt="https1"></p>
+<p>弹出安装证书的提示框：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/mobile-debug/https2.png" alt="https2"></p>
+<div class="alert info"><p>按照提示去手机浏览器打开：<code>chls.pro/ssl</code>，安装信任证书即可。</p>
+</div>
+<p>对于 <code>spy-debugger</code>，<code>HTTPS</code> 抓包，需要安装根证书，选择 <code>RootCA</code>，扫描二维码按照提示信任证书。安装证书的时候需要注意以下几件事情：</p>
+<p>1.手机必须先设置完代理后再通过(非微信)手机浏览器访问 <code>http://s.xxx</code> (地址二维码)安装证书；<br>2.手机首次调试需要安装证书，已安装了证书的手机无需重复安装；<br>3.手机和 <code>PC</code> 保持在同一网络下（比如同时连到一个 <code>WIFI</code> 下）；</p>
+<div class="alert danger"><p>切记：移动设备和 PC 必须在一个 WIFI 下。</p>
+</div>
+<h4 id="七、真机调试"><a href="#七、真机调试" class="headerlink" title="七、真机调试"></a>七、真机调试</h4><p>上面说了很多，但是实际开发过程中，我们不会等上线了才去验证兼容性，所以你可能需要提前「真机调试」。这里提供两种方式：<br><div class="alert info"><p><code>Chrome Remote Devices</code>：依赖 Chrome 来进行远程调试，适合安卓手机。</p>
+</div><br>首先，开启 <code>Android</code> 手机的「开发者选项」，勾选 「USB 调试」。<br>然后，<code>Chrome</code> 中输入：<code>chrome://inspect</code>，进入调试页面。</p>
+<p>很全面的一篇文章，可以参考：<a href="https://blog.csdn.net/freshlover/article/details/42528643" target="_blank" rel="noopener">Chrome 远程调试</a>。</p>
+<div class="alert info"><p><code>localhost</code> 转 <code>ip</code>，扫描二维码手机显示，这个比较简单。</p>
+</div>
+<p>可以在浏览器安装一个 <code>Chrome</code> 插件，用于将当前页面链接转换成二维码，这样就能边开发边真机预览，非常方便。</p>
+<h4 id="八、调试工具"><a href="#八、调试工具" class="headerlink" title="八、调试工具"></a>八、调试工具</h4><p>这里推荐一款调试工具：<a href="https://github.com/Tencent/vConsole/blob/dev/README_CN.md" target="_blank" rel="noopener">vConsole</a>，一个轻量、可拓展、针对手机网页的前端开发者调试面板。安装很简单：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install vconsole</span><br></pre></td></tr></table></figure></p>
+<p>如果未使用 <code>AMD/CMD</code> 规范，可直接在 <code>HTML</code> 中引入 <code>vConsole</code> 模块。为了便于后续扩展，建议在 <code>&lt;head&gt;</code> 中引入：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"path/to/vconsole.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> vConsole = <span class="keyword">new</span> VConsole();</span></span><br><span class="line"><span class="undefined">  </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>如果使用了 <code>AMD/CMD</code> 规范，可在 <code>module</code> 内使用 <code>require()</code> 引入模块：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var VConsole = require(&apos;path/to/vconsole.min.js&apos;);</span><br><span class="line">var vConsole = new VConsole();</span><br></pre></td></tr></table></figure></p>
+<div class="alert danger"><p>请注意，<code>VConsole</code> 只是 <code>vConsole</code> 的原型，而非一个已实例化的对象。</p>
+</div>
+<p>所以在手动 <code>new</code> 实例化之前，<code>vConsole</code> 不会被插入到网页中。大概功能如下图：</p>
+<div class="figure left" style="width:320px;"><a class="fancybox" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/mobile-debug/vconsole1.png" title data-fancybox-group="travel" target="_blank" rel="noopener"><img class="fig-img" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/mobile-debug/vconsole1.png" style="width:320px;" alt></a></div>
+<div class="figure right" style="width:320px;"><a class="fancybox" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/mobile-debug/vconsole2.png" title data-fancybox-group="travel" target="_blank" rel="noopener"><img class="fig-img" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/mobile-debug/vconsole2.png" style="width:320px;" alt></a></div><div style="clear:both;"></div>
+<p>看起来很完美，但是有个小缺点：网络请求，需要刷新页面，可是很多内嵌的 <code>H5</code> 页面是没有机会刷新页面的，所以需要客户端童鞋配合增加刷新的功能方便调试。</p>
+<h4 id="九、场景分析"><a href="#九、场景分析" class="headerlink" title="九、场景分析"></a>九、场景分析</h4><div class="alert warning"><p>既然移动端调试有这么多种方案，那在实际操作中，我该如何取舍？</p>
+</div>
+<p>说了这么多钟方案，这里总结一下各个方案的适用场景，根据不同的场景去选择最佳的调试方案，这样才能更快速的输出，<code>Carry</code> 全场：</p>
+<p>1.<code>Safari</code>：<code>iPhone</code> 调试利器，查错改样式首选；<br>2.<code>iOS</code> 模拟器：不需要真机，适合调试 <code>Webview</code> 和 <code>H5</code> 有频繁交互的功能页面；<br>3.<code>Charles</code>： <code>Mac OS</code> 系统首选的抓包工具，适合查看、控制网络请求，分析数据情况；<br>4.<code>Fiddler</code>：适合 <code>Windows</code> 平台，与 <code>Charles</code> 类似，查看、控制网络请求，分析数据情况；<br>5.<code>Spy-Debugger</code>： 移动端调试的利器，便捷的远程调试手机页面、抓包工具；<br>6.<code>Whistle</code>：基于 <code>Node</code> 实现的跨平台 <code>Web</code> 调试代理工具；<br>7.<code>Chrome Remote Devices</code>：依赖 <code>Chrome</code> 来进行远程调试，适合安卓手机远程调试静态页；<br>8.<code>localhost</code> 转 <code>ip</code>：真机调试，适合远程调试静态页面；<br>9.<code>vConsole</code>：内置于项目，打印移动端日志，查看网络请求以及查看 <code>Cookie</code> 和 <code>Storage</code>；</p>
+<h4 id="十、白屏处理"><a href="#十、白屏处理" class="headerlink" title="十、白屏处理"></a>十、白屏处理</h4><div class="alert success"><p>移动端的白屏是最头疼的问题，这里顺带提供几种分析问题的思路，以供参考。</p>
+</div>
+<p>1.方案分析 ☆<br>一般上线后出现问题，我们最容易想到的就是：是否是新代码引起的问题。所以有效解决手段就是「控制变量法」。</p>
+<p>2.代码注释法 ☆<br>莫名奇妙的白屏，适合页面无异常日志，同时无请求发送，问题集中在单一页面的情况。这种问题比较直观，肯定是某一页面出现了代码异常或是无效的 <code>return</code>，导致页面渲染终止，但并不属于异常。这时候，「代码注释法」将是你的最佳选择，逐行去注释可以代码，直到定位问题。</p>
+<p>3.类库异常，兼容问题 ☆<br>这种场景也会经常遇到，我们需要用可以调试页面异常的方式，如 <code>Safari</code>，<code>Spy-Debugger</code>，<code>Whistle</code>，<code>vConsole</code> 查看异常日志，从而迅速定位类库位置，从而找寻替换或是兼容方案。</p>
+<p>4.try catch ☆☆<br>如果你的项目没有<a href="http://jartto.wang/2018/11/20/js-exception-handling/">异常监控</a>，那么在可疑的代码片段中去 <code>Try Catch</code> 吧。</p>
+<p>5.Debug 包 ☆☆☆<br>在你的项目中装上 <a href="http://jartto.wang/2018/11/01/mobile-debug/"><code>vConsole</code></a>，并配合客户端 <code>debug</code> 插件，<code>360</code> 度无死角监控异常，这才是最有效的方式。</p>
+<p>6.ES6 语法兼容 ☆<br>一般我们都会通过 <code>Babel</code> 来编译 <code>ES6</code> ，但是额外的第三方类库如果有不兼容的语法，低版本的移动设备就会异常。所以，先用<a href="http://jartto.wang/2018/11/01/mobile-debug/">上文</a>讲述的调试方法，确定异常，然后去增加 <a href="https://polyfill.io/v2/docs/examples" target="_blank" rel="noopener"><code>polyfill</code></a> 来兼容吧。</p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/debug/">debug</a> <a class="tag tag--primary tag--small t-link" href="/tags/html5/">html5</a> <a class="tag tag--primary tag--small t-link" href="/tags/mobile/">mobile</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/11/10/chrome-extensions-1/" data-tooltip="打造你的专属 Chrome 插件（一）">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/10/31/h5-SpeechSynthesis/" data-tooltip="HTML5 之音频合成（Speech Synthesis）">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/11/01/mobile-debug/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/11/01/mobile-debug/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/11/01/mobile-debug/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/11/10/chrome-extensions-1/" data-tooltip="打造你的专属 Chrome 插件（一）">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/10/31/h5-SpeechSynthesis/" data-tooltip="HTML5 之音频合成（Speech Synthesis）">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/11/01/mobile-debug/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/11/01/mobile-debug/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/11/01/mobile-debug/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/11/01/mobile-debug/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/11/01/mobile-debug/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/11/01/mobile-debug/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

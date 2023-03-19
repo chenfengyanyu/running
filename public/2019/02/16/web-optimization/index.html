@@ -1,0 +1,641 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>网站优化实战 - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="网站优化是前端开发的重中之重，但是优化细节却十分繁杂。没有好的思路，优化很难高效的开展。本文将以实际网站来做参考，手把手教你如何一步步做好网站优化。">
+<meta name="keywords" content="web,optimization">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="网站优化实战">
+<meta property="og:url" content="http://jartto.wang/2019/02/16/web-optimization/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="网站优化是前端开发的重中之重，但是优化细节却十分繁杂。没有好的思路，优化很难高效的开展。本文将以实际网站来做参考，手把手教你如何一步步做好网站优化。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/web-optimization/s.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/web-optimization/good.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/web-optimization/webpack.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/web-optimization/tree.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/web-optimization/time.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/web-optimization/ttfb.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/web-optimization/wrong.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/web-optimization/history.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/web-optimization/bundle.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/web-optimization/speed1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/web-optimization/speed2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/web-optimization/speed3.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/web-optimization/speed4.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/web-optimization/speed5.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/web-optimization/speed6.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/web-optimization/bundle.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/web-optimization/bundle1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/web-optimization/ttl.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/web-optimization/parse.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/web-optimization/opt1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/web-optimization/speed1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/web-optimization/opt2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/web-optimization/speed7.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/web-optimization/opt3.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/web-optimization/speed8.png">
+<meta property="og:updated_time" content="2019-02-20T13:58:33.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="网站优化实战">
+<meta name="twitter:description" content="网站优化是前端开发的重中之重，但是优化细节却十分繁杂。没有好的思路，优化很难高效的开展。本文将以实际网站来做参考，手把手教你如何一步步做好网站优化。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/web-optimization/s.png">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/web-optimization/logo.jpeg"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/web-optimization/logo.jpeg" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            网站优化实战
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2019-02-16T09:17:29+08:00">
+	  
+		    2019/2月/16 09:17:29
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/面试笔试/">面试笔试</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>网站优化是前端开发的重中之重，但是优化细节却十分繁杂。没有好的思路，优化很难高效的开展。本文将以实际网站来做参考，手把手教你如何一步步做好网站优化。<br><a id="more"></a><br>这不是一篇 <code>基础网站优化</code> 文章，继续下文前，请确定已经做了如下<code>基本优化</code>：<br>1.图片压缩、合并<br>2.代码精简、混淆<br>3.减少 <code>iframe</code> 使用<br>4.避免图片 <code>src</code> 为空<br>5.减少 <code>HTTP</code> 请求数<br>6.避免重定向<br>7.样式表放页头，脚本放底部<br>…</p>
+<h4 id="一、优化的意义"><a href="#一、优化的意义" class="headerlink" title="一、优化的意义"></a>一、优化的意义</h4><p>我们可以从两个角度来看这个问题：<br>1.用户角度<br>网站优化能够让页面加载得更快，响应更加及时，极大提升用户体验。</p>
+<p>2.服务商角度<br>优化会减少页面资源请求数，减小请求资源所占带宽大小，从而节省可观的带宽资源。</p>
+<div class="alert info"><p>网站优化的目标是：减少网站加载时间，提高响应速度。</p>
+</div>
+<p>那么网站加载速度和用户体验又有着怎样的关系呢？我们来看下面这张图：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/web-optimization/s.png" alt="speed"></p>
+<p><code>Google</code> 和亚马逊的研究表明，<code>Google</code> 页面加载的时间从 <code>0.4</code> 秒提升到 <code>0.9</code> 秒导致丢失了 <code>20%</code> 流量和广告收入，对于亚马逊，页面加载时间每增加 <code>100ms</code> 就意味着 <code>1%</code> 的销售额损失。</p>
+<div class="alert success"><p>可见，页面的加载速度对于用户有着至关重要的影响。</p>
+</div>
+<p>一个好的交互效果可能是这样的：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/web-optimization/good.png" alt="good"></p>
+<h4 id="二、分析网站性能瓶颈"><a href="#二、分析网站性能瓶颈" class="headerlink" title="二、分析网站性能瓶颈"></a>二、分析网站性能瓶颈</h4><p>1.打包文件大小<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/web-optimization/webpack.png" alt="webpack"></p>
+<p>2.打包文件目录<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/web-optimization/tree.png" alt="tree"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── favicon.ico</span><br><span class="line">├── index.html</span><br><span class="line">├── manifest.json</span><br><span class="line">├── static</span><br><span class="line">│   ├── DIN-Medium.1bbe3460.otf</span><br><span class="line">│   ├── DIN-Regular.799221d7.otf</span><br><span class="line">│   └── logo.c57d38d0.png</span><br><span class="line">├── umi.css</span><br><span class="line">├── umi.css.map</span><br><span class="line">├── umi.js</span><br><span class="line">└── umi.js.map</span><br></pre></td></tr></table></figure>
+<div class="alert warning"><p>需要注意：生产环境不要开启 SOURCEMAP</p>
+</div>
+<p>3.静态资源加载时间<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/web-optimization/time.png" alt="time"></p>
+<p>4.资源瀑布：<code>Waterfall</code><br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/web-optimization/ttfb.png" alt="ttfb"></p>
+<p><code>TTFB</code> 全称 <code>Time To First Byte</code>：是指网络请求被发起到从服务器接收到第一个字节的这段时间，它包含了 <code>TCP</code> 连接时间、发送 <code>HTTP</code> 请求时间和获得响应消息第一个字节的时间。</p>
+<div class="alert info"><p>Content Download：即下载内容所需要的时间。</p>
+</div>
+<p>页面一接口情况：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/web-optimization/wrong.png" alt="wrong"></p>
+<p>页面二接口情况：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/web-optimization/history.png" alt="history"></p>
+<p>用户下载内容所需要的时间，受限于服务器的资源、资源的大小以及用户的网络速度。因此，我们暂时<code>不讨论</code>这方面的内容。</p>
+<p>5.分析工具<br>通过 <code>webpack</code> 打包，分析一下大文件构成。<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/web-optimization/bundle.png" alt="bundle"></p>
+<p>6.<code>YSlow</code> 或者 <code>PageSpeed</code><br>我们可以通过 <a href="https://developers.google.com/speed/pagespeed/insights/" target="_blank" rel="noopener">Google PageSpeed Insights API Extension</a> 来对 <code>网站整体性能</code> 做一下评估，按照建议去做一些高效优化。</p>
+<p>加载时间概况：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/web-optimization/speed1.png" alt="speed1"></p>
+<p>影响网站加载因素：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/web-optimization/speed2.png" alt="speed2"></p>
+<p>缓存策略问题：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/web-optimization/speed3.png" alt="speed3"></p>
+<p><code>DOM</code> 节点：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/web-optimization/speed4.png" alt="speed4"></p>
+<p>关键路径：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/web-optimization/speed5.png" alt="speed5"></p>
+<p>主线程情况：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/web-optimization/speed6.png" alt="speed6"></p>
+<h4 id="三、通过策略解决问题"><a href="#三、通过策略解决问题" class="headerlink" title="三、通过策略解决问题"></a>三、通过策略解决问题</h4><p>1.<code>favicon.ico</code> 404 问题；✓<br>2.去除调试工具代码：<code>eruda</code>，线上环境是不需要的；✓<br>3.图片合并或者多个 <code>svg</code>；✓<br>建议使用 <a href="https://github.com/mixtur/webpack-spritesmith" target="_blank" rel="noopener"><code>webpack-spritesmith</code></a>，简单使用如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">plugins: [</span><br><span class="line">  <span class="keyword">new</span> SpritesmithPlugin(&#123;</span><br><span class="line">    src: &#123;</span><br><span class="line">        cwd: path.resolve(__dirname, <span class="string">'src/ico'</span>),</span><br><span class="line">        glob: <span class="string">'*.png'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    target: &#123;</span><br><span class="line">        image: path.resolve(__dirname, <span class="string">'src/spritesmith-generated/jartto.png'</span>),</span><br><span class="line">        css: path.resolve(__dirname, <span class="string">'src/spritesmith-generated/jartto.styl'</span>)</span><br><span class="line">    &#125;,</span><br><span class="line">    apiOptions: &#123;</span><br><span class="line">        cssImageRef: <span class="string">"~jartto.png"</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
+<p>4.大文件拆分 ✓<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/web-optimization/bundle.png" alt="bundle"></p>
+<p>从上图分析得出，大文件主要包含：<code>dist.js</code>，<code>lottie.js</code>，<code>lodash.js</code>，<code>loading.json</code> 等文件。所以我们从这几个文件入手，逐个优化：</p>
+<ul>
+<li><p><code>moment.js</code>：配置 <code>moment</code> 忽略本地化，可减少 <code>70kb</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ignoreMomentLocale: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>dist.js</code>：在给单页应用做按需加载优化时，一般采用以下原则：</p>
+</li>
+</ul>
+<ul>
+<li>把整个网站划分成一个个小功能，再按照每个功能的相关程度把它们分成几类。</li>
+<li>把每一类合并为一个 <code>Chunk</code>，按需加载对应的 <code>Chunk</code>。</li>
+<li>对于用户首次打开你的网站时需要看到的画面所对应的功能，不要对它们做按需加载，而是放到执行入口所在的 <code>Chunk</code> 中，以降低用户能感知的网页加载时间。</li>
+<li>对于个别依赖大量代码的功能点，例如依赖 <code>Chart.js</code> 去画图表、依赖 <code>flv.js</code> 去播放视频的功能点，可再对其进行按需加载。</li>
+</ul>
+<ul>
+<li><p><code>lottie.js</code>：分离减少 <code>60kb</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">externals: &#123;</span><br><span class="line">  lottie : <span class="string">'react-lottie'</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>lodash.js</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">externals: &#123;</span><br><span class="line">  lodash : &#123;</span><br><span class="line">    commonjs: <span class="string">'lodash'</span>,</span><br><span class="line">    amd: <span class="string">'lodash'</span>,</span><br><span class="line">    root: <span class="string">'_'</span> <span class="comment">// indicates global variable</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>动态导入以及文件拆分</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dynamicImport: &#123;</span><br><span class="line">  webpackChunkName: <span class="literal">true</span>,</span><br><span class="line">  loadingComponent: <span class="string">'./components/Loading/jartto.js'</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>按照上面我们一步步处理后，重新打包分析一下文件构成：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/web-optimization/bundle1.png" alt="bundle1"></p>
+<p>这里为什么没有继续拆分 <code>dist.js</code> ，是因为目前阶段没有好的方案，需要对代码做很多调整，所以暂且保留。相关信息可以在 <code>Ant-Design Issuse</code> <a href="https://github.com/ant-design/ant-design/issues/12011" target="_blank" rel="noopener">Svg icons make bunlde size too large </a> 中查看解决方案。</p>
+<p>5.存放 <code>CDN</code></p>
+<ul>
+<li><code>loading.json</code>，大小54kb ✓</li>
+<li><code>svg</code> 替换 2 倍图 ✓</li>
+<li>删除项目冗余图片 ✓</li>
+</ul>
+<p>6.优化 <code>TTFB</code></p>
+<ul>
+<li>减少 <code>DNS</code> 查询</li>
+<li>使用 <code>CDN</code></li>
+<li>提早 <code>Flush</code></li>
+<li>添加周期头</li>
+</ul>
+<p>7.移除阻塞渲染的资源</p>
+<ul>
+<li><p><code>css</code> 预加载 <code>preload</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel=&quot;preload&quot;&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>异步加载第三方资源：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script async src=&quot;https://cdn.jartto.wang/fastclick.js&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>没有 <code>async</code> 属性，<code>script</code> 将立即获取（下载）并执行，期间阻塞了浏览器的后续处理。如果有 <code>async</code> 属性，那么<code>script</code> 将被异步下载并执行，同时浏览器继续后续的处理。</p>
+<p>8.确保文本在网页字体加载期间保持可见状态<br>利用 <code>font-display</code> 这项 <code>CSS</code> 功能，确保文本在网页字体加载期间始终对用户可见。<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">font-face</span> &#123;</span><br><span class="line">    <span class="attribute">font-family</span>: <span class="string">'Arvo'</span>;</span><br><span class="line">    <span class="attribute">font-display</span>: auto;</span><br><span class="line">    <span class="attribute">src</span>:<span class="built_in">local</span>(<span class="string">'Arvo'</span>),<span class="built_in">url</span>(https://fonts.jartto.wang/fonts/temp.woff2)<span class="built_in">format</span>(<span class="string">'woff2'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>9.采用高效的缓存策略提供静态资源<br><div class="alert info"><p>延长缓存期限可加快重访网页的速度。</p>
+</div></p>
+<p><code>DNS TTL(Time-To-Live)</code>，简单的说它表示一条域名解析记录在 <code>DNS</code> 服务器上缓存时间.</p>
+<p>当各地的 <code>DNS</code> 服务器接受到解析请求时，就会向域名指定的 <code>DNS</code> 服务器发出解析请求从而获得解析记录；<br>在获得这个记录之后，记录会在 <code>DNS</code> 服务器中保存一段时间，这段时间内如果再接到这个域名的解析请求，<code>DNS</code> 服务器将不再向 <code>DNS</code> 服务器发出请求，而是直接返回刚才获得的记录；</p>
+<div class="alert info"><p>而这个记录在 <code>DNS</code> 服务器上保留的时间，就是 <code>TTL</code> 值。</p>
+</div>
+<p>所以一般更新域名解析的步骤如下：</p>
+<ol>
+<li>先查看域名当前的 <code>TTL</code> 值。</li>
+<li>修改 <code>TTL</code> 值为可设定的最小值，建议为 60 秒。</li>
+<li>等待一天，保证各地的 <code>DNS</code> 服务器缓存都过期并更新了记录。</li>
+<li>设置修改 <code>DNS</code> 解析到新的记录，这个时候各地的 <code>DNS</code> 就能以最快的速度更新到新的记录。</li>
+<li>确认各地的 <code>DNS</code> 已经更新完成后，再 <code>TTL</code> 值设置成常用的值(如: <code>TTL=86400</code>)。</li>
+</ol>
+<p>如下图，<code>TTL</code> 值设置的最佳实践，可供参考：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/web-optimization/ttl.jpg" alt="ttl"></p>
+<div class="alert success"><p>后文我们会详细介绍 <code>DNS</code> 相关内容，欢迎各位童鞋关注。</p>
+</div>
+<p>10.避免 <code>DOM</code> 规模过大<br>网页包含的 <code>DOM</code> 节点最好少于 <code>1500</code> 个左右。理想状况是，树深度少于 <code>32</code> 个元素，且少于 <code>60</code> 个子/父元素。大型 <code>DOM</code> 可能会增加内存使用量、导致样式计算用时延长并产生高昂的布局重排费用。</p>
+<p>11.最大限度地缩短关键请求深度<br><div class="alert info"><p><code>关键请求链</code> 显示了以高优先级加载的资源。</p>
+</div><br>我们可以通过：缩短链长、缩减资源的下载文件大小，或者推迟下载不必要的资源，从而提高网页加载速度。<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/web-optimization/parse.png" alt="parse"></p>
+<p>当 <code>HTML</code> 解析过程中遇到一个 <code>script</code> 标记时，它会暂停 <code>DOM</code> 构建，将控制权移交给 <code>JavaScript</code> 引擎，等<code>JavaScript</code> 引擎运行完毕，浏览器再从中断的地方恢复 <code>DOM</code> 构建。</p>
+<div class="alert danger"><p>也就是说，执行内联的 <code>JavaScript</code> 会阻塞页面的首次渲染。</p>
+</div>
+<p>在关键渲染路径中，我们通常要关注三个点：</p>
+<ul>
+<li>页面首次渲染需要的关键资源数量</li>
+<li>关键资源的大小</li>
+<li>关键渲染路径的往返次数（Roundtrip）</li>
+</ul>
+<div class="alert success"><p>我们的策略也非常简单，就是减少关键资源数量，降低资源大小，减少关键路径的往返次数。</p>
+</div>
+<p>优化关键渲染路径的常规步骤如下：<br>a. 对关键路径进行分析和特性描述：资源数、字节数、长度。<br>b. 最大限度减少关键资源的数量：删除它们，延迟它们的下载，将它们标记为异步等。<br>c. 优化关键字节数以缩短下载时间（往返次数）。<br>d. 优化其余关键资源的加载顺序：您需要尽早下载所有关键资源，以缩短关键路径长度。</p>
+<p>更多详情，请参考<a href="https://segmentfault.com/a/1190000013767948" target="_blank" rel="noopener">前端性能优化—关键渲染路径</a>。</p>
+<p>12.最大限度地减少主线程工作<br>考虑减少为解析、编译和执行 <code>JS</code> 而花费的时间。我们可以提供较小的 <code>JS</code> 负载来实现此目标。</p>
+<p>13.最优配置 <code>nginx</code><br>a. <code>gzip</code> 配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">gzip  on;</span><br><span class="line">gzip_min_length  1k;</span><br><span class="line">gzip_buffers     4 8k;</span><br><span class="line">gzip_http_version 1.1;</span><br><span class="line">gzip_comp_level 4;</span><br><span class="line">gzip_types text/plain text/css application/json image/png image/x-icon application/javascript application/x-javascript text/javascript text/xml application/xml application/xml+rss text/cache-manifest application/octet-stream;</span><br><span class="line">gzip_vary on;</span><br></pre></td></tr></table></figure></p>
+<p>b. <code>nginx</code> 开启缓存<br>如果你对浏览器缓存还不太清楚，欢迎移步<a href="http://jartto.wang/2019/02/14/web-cache/">聊一聊浏览器缓存机制</a>。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">location ~.*\.(html|htm|js|css|gif|jpg|jpeg|png|bmp|swf|ico|json|otf)$ &#123;</span><br><span class="line">  root /var/www/jartto_web/;</span><br><span class="line">  index index.html;</span><br><span class="line">  expires 1d;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p>Nginx 能非常有效地直接处理静态内容。在静态文件和 Nginx 在同一主机的情况下，这种特性尤为有用。</p>
+</div>
+<h4 id="四、效果如何？"><a href="#四、效果如何？" class="headerlink" title="四、效果如何？"></a>四、效果如何？</h4><div class="alert warning"><p>优化前：网站评分 27 ，首次内容绘制 6.9 秒</p>
+</div>
+<p>1.网站评分<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/web-optimization/opt1.png" alt="opt1"></p>
+<p>2.加载概况：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/web-optimization/speed1.png" alt="speed1"></p>
+<div class="alert info"><p>优化后：网站评分 70 ，首次内容绘制 1.6 秒</p>
+</div>
+<p>1.网站评分<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/web-optimization/opt2.png" alt="opt2"></p>
+<p>2.加载概况：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/web-optimization/speed7.png" alt="speed7"></p>
+<div class="alert success"><p>当然，优化还可以做更多，我们尽量让网站的评分接近 100 分，譬如：</p>
+</div>
+<p>1.网站评分<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/web-optimization/opt3.png" alt="opt3"></p>
+<p>2.加载概况：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/web-optimization/speed8.png" alt="speed8"></p>
+<h4 id="五、总结"><a href="#五、总结" class="headerlink" title="五、总结"></a>五、总结</h4><p>我们从头优化下来，做了不少代码改动，也达到了不错的效果。但是有几点还是需要注意：<br>1.尽可能减少白屏出现时间<br>骨架图解决 <code>webview</code> 加载页面过长的白屏过程。</p>
+<p>2.关注整站性能，如 <code>TTFB</code><br>服务端接口也需要同步优化，而不要仅仅依赖前端单方面优化。</p>
+<p>3.按照使用情况加载优先使用的资源</p>
+<ul>
+<li>css 预加载</li>
+<li>font 预加载</li>
+<li>js 预加载</li>
+<li>图片懒加载</li>
+</ul>
+<p>4.请高效利用 <code>DNS</code> 和 <code>CDN</code></p>
+<ul>
+<li>增加缓存时间</li>
+<li><code>DNS</code> 预解析</li>
+</ul>
+<p>网站优化从来不是一蹴而就，需要不断的去优化细节，不断的摸索尝试。从我的角度来看，其实优化更像是在网站性能和加载速度之间找到一个平衡点。譬如，<a href="http://jartto.wang/2019/02/16/web-optimization/">文中</a>我们为了优化文件打包大小，进行了大文件拆分。随之而来的问题就是拆分后的文件可能还会对某些文件有依赖，那么就影响到了关键渲染路径。</p>
+<p>所以，优化不存在什么奇技淫巧，不断的去尝试，找到这个最佳优化点，这才是根本。</p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/optimization/">optimization</a> <a class="tag tag--primary tag--small t-link" href="/tags/web/">web</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/04/07/learn-algorithm/" data-tooltip="算法学习思路">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/02/14/web-cache/" data-tooltip="聊一聊浏览器缓存机制">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2019/02/16/web-optimization/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2019/02/16/web-optimization/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2019/02/16/web-optimization/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/04/07/learn-algorithm/" data-tooltip="算法学习思路">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/02/14/web-cache/" data-tooltip="聊一聊浏览器缓存机制">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2019/02/16/web-optimization/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2019/02/16/web-optimization/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2019/02/16/web-optimization/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2019/02/16/web-optimization/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2019/02/16/web-optimization/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2019/02/16/web-optimization/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

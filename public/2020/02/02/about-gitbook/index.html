@@ -1,0 +1,539 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>GitBook 和它有趣的插件 - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="相信很多童鞋在日常开发中都会有「说明文档」、「学习笔记」和「个人博客」的需求，那么最经济简洁的方式莫过于 GitBook 方案了，10 分钟学习，永久使用。">
+<meta name="keywords" content="gitbook,plugin">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="GitBook 和它有趣的插件">
+<meta property="og:url" content="http://jartto.wang/2020/02/02/about-gitbook/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="相信很多童鞋在日常开发中都会有「说明文档」、「学习笔记」和「个人博客」的需求，那么最经济简洁的方式莫过于 GitBook 方案了，10 分钟学习，永久使用。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/gitbook/demo.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/gitbook/demo0.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/gitbook/plugin.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/gitbook/gitbook1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/gitbook/demo1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/gitbook/demo2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/gitbook/demo3.png">
+<meta property="og:updated_time" content="2020-02-02T12:45:20.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="GitBook 和它有趣的插件">
+<meta name="twitter:description" content="相信很多童鞋在日常开发中都会有「说明文档」、「学习笔记」和「个人博客」的需求，那么最经济简洁的方式莫过于 GitBook 方案了，10 分钟学习，永久使用。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/gitbook/demo.png">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo/gitbook.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo/gitbook.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            GitBook 和它有趣的插件
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2020-02-02T15:20:03+08:00">
+	  
+		    2020/2月/02 15:20:03
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>相信很多童鞋在日常开发中都会有「说明文档」、「学习笔记」和「个人博客」的需求，那么最经济简洁的方式莫过于 <code>GitBook</code> 方案了，<code>10</code> 分钟学习，永久使用。<br><a id="more"></a><br>本文将简单介绍 <code>GitBook</code> 的使用方式以及最佳插件搭配方案，快来运行一个与众不同而且免费托管的个人站点吧！</p>
+<h4 id="一、安装与使用"><a href="#一、安装与使用" class="headerlink" title="一、安装与使用"></a>一、安装与使用</h4><p>1.<strong>安装 <code>GitBook</code> 插件</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install gitbook-cli -g</span><br></pre></td></tr></table></figure></p>
+<p>2.<strong>查看安装版本</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gitbook -V</span><br></pre></td></tr></table></figure></p>
+<p>控制台会输出如下信息：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Jartto</span></span><br><span class="line">CLI version: 2.3.2</span><br><span class="line">GitBook version: 3.2.3</span><br></pre></td></tr></table></figure></p>
+<p>3.<strong>初始化</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 建立项目：</span></span><br><span class="line">mkdir jartto-gitbook-demo</span><br><span class="line"><span class="comment"># 进入目录：</span></span><br><span class="line"><span class="built_in">cd</span> jartto-gitbook-demo</span><br><span class="line"><span class="comment"># 初始化：</span></span><br><span class="line">gitbook init</span><br></pre></td></tr></table></figure></p>
+<p>此时，<code>jartto-gitbook-demo</code> 目录下会自动生成如下文件：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── README.md</span><br><span class="line">└── SUMMARY.md</span><br><span class="line"></span><br><span class="line">0 directories, 2 files</span><br></pre></td></tr></table></figure></p>
+<p>4.<strong>启动</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gitbook serve</span><br></pre></td></tr></table></figure></p>
+<p>5.<strong>访问站点</strong>：<a href="http://localhost:4000" target="_blank" rel="noopener">http://localhost:4000</a><br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/gitbook/demo.png" alt="网站预览"></p>
+<div class="alert success"><p>恭喜你，到这一步我们已经完成了基本版本。</p>
+</div>
+<p>更详细的操作，请查看如下文档：</p>
+<ul>
+<li><a href="https://www.gitbook.com/" target="_blank" rel="noopener">官网地址</a></li>
+<li><a href="https://github.com/GitbookIO/gitbook" target="_blank" rel="noopener">Github 地址</a></li>
+<li><a href="https://docs.gitbook.com/resources/gitbook-legacy/v2-differences#plugins" target="_blank" rel="noopener">帮助文档</a></li>
+</ul>
+<h4 id="二、重点说明"><a href="#二、重点说明" class="headerlink" title="二、重点说明"></a>二、重点说明</h4><p>1.<strong>目录结构</strong><br>当我们运行 <code>gitbook serve</code> 后，<code>jartto-gitbook-demo</code> 目录下会生成一个 <code>_book</code> 文件夹：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── README.md</span><br><span class="line">├── SUMMARY.md</span><br><span class="line">└── _book</span><br><span class="line">    ├── gitbook</span><br><span class="line">    ├── index.html</span><br><span class="line">    └── search_index.json</span><br><span class="line"></span><br><span class="line">2 directories, 4 files</span><br></pre></td></tr></table></figure></p>
+<p>2.<strong>关于 <code>README.md</code></strong><br><figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># Introduction</span></span><br></pre></td></tr></table></figure></p>
+<p>说明文档，大家应该都不陌生，就不赘述了。</p>
+<p>3.<strong>关于 <code>SUMMARY.md</code></strong><br><figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># Summary</span></span><br><span class="line"><span class="bullet">* </span>[<span class="string">Introduction</span>](<span class="link">README.md</span>)</span><br></pre></td></tr></table></figure></p>
+<p><code>SUMMARY.md</code> 其实就是书的章节目录，我们不妨稍作修改：<br><figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># Jartto-GitBook-Demo</span></span><br><span class="line"></span><br><span class="line"><span class="bullet">* </span>[<span class="string">一、概要</span>](<span class="link">README.md</span>)</span><br><span class="line"><span class="code">    * [1.示例](README.md)</span></span><br><span class="line"><span class="code">    * [2.说明](README.md)</span></span><br><span class="line"><span class="code">    * [3.文档](README.md)</span></span><br><span class="line"><span class="bullet">* </span>[<span class="string">二、高级</span>](<span class="link">README.md</span>)</span><br><span class="line"><span class="code">    * [1.配置](README.md)</span></span><br><span class="line"><span class="code">    * [2.插件](README.md)</span></span><br></pre></td></tr></table></figure></p>
+<p>效果如下：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/gitbook/demo0.png" alt="演示目录"></p>
+<h4 id="三、补充文档"><a href="#三、补充文档" class="headerlink" title="三、补充文档"></a>三、补充文档</h4><p>当然，<code>GitBook</code> 的远比我们想象的强大，我们还可以通过 <code>gitbook help</code> 来查看：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">build [book] [output]       build a book</span><br><span class="line">        --<span class="built_in">log</span>                   Minimum <span class="built_in">log</span> level to display (Default is info; Values are debug, info, warn, error, disabled)</span><br><span class="line">        --format                Format to build to (Default is website; Values are website, json, ebook)</span><br><span class="line">        --[no-]timing           Print timing debug information (Default is <span class="literal">false</span>)</span><br><span class="line"></span><br><span class="line">serve [book] [output]       serve the book as a website <span class="keyword">for</span> testing</span><br><span class="line">    --port                  Port <span class="keyword">for</span> server to listen on (Default is 4000)</span><br><span class="line">    --lrport                Port <span class="keyword">for</span> livereload server to listen on (Default is 35729)</span><br><span class="line">    --[no-]watch            Enable file watcher and live reloading (Default is <span class="literal">true</span>)</span><br><span class="line">    --[no-]live             Enable live reloading (Default is <span class="literal">true</span>)</span><br><span class="line">    --[no-]open             Enable opening book <span class="keyword">in</span> browser (Default is <span class="literal">false</span>)</span><br><span class="line">    --browser               Specify browser <span class="keyword">for</span> opening book (Default is )</span><br><span class="line">    --<span class="built_in">log</span>                   Minimum <span class="built_in">log</span> level to display (Default is info; Values are debug, info, warn, error, disabled)</span><br><span class="line">    --format                Format to build to (Default is website; Values are website, json, ebook)</span><br><span class="line"></span><br><span class="line">install [book]              install all plugins dependencies</span><br><span class="line">    --<span class="built_in">log</span>                   Minimum <span class="built_in">log</span> level to display (Default is info; Values are debug, info, warn, error, disabled)</span><br><span class="line"></span><br><span class="line">parse [book]                parse and <span class="built_in">print</span> debug information about a book</span><br><span class="line">    --<span class="built_in">log</span>                   Minimum <span class="built_in">log</span> level to display (Default is info; Values are debug, info, warn, error, disabled)</span><br><span class="line"></span><br><span class="line">init [book]                 setup and create files <span class="keyword">for</span> chapters</span><br><span class="line">    --<span class="built_in">log</span>                   Minimum <span class="built_in">log</span> level to display (Default is info; Values are debug, info, warn, error, disabled)</span><br><span class="line"></span><br><span class="line">pdf [book] [output]         build a book into an ebook file</span><br><span class="line">    --<span class="built_in">log</span>                   Minimum <span class="built_in">log</span> level to display (Default is info; Values are debug, info, warn, error, disabled)</span><br><span class="line"></span><br><span class="line">epub [book] [output]        build a book into an ebook file</span><br><span class="line">    --<span class="built_in">log</span>                   Minimum <span class="built_in">log</span> level to display (Default is info; Values are debug, info, warn, error, disabled)</span><br><span class="line"></span><br><span class="line">mobi [book] [output]        build a book into an ebook file</span><br><span class="line">    --<span class="built_in">log</span>                   Minimum <span class="built_in">log</span> level to display (Default is info; Values are debug, info, warn, error, disabled)</span><br></pre></td></tr></table></figure></p>
+<h4 id="四、有趣插件"><a href="#四、有趣插件" class="headerlink" title="四、有趣插件"></a>四、有趣插件</h4><p>了解上面的操作，使用 <code>GitBook</code> 已经没有任何障碍了。</p>
+<div class="alert info"><p>如果你还想做一些个性化的操作，不妨继续深入。</p>
+</div>
+<p>要安装插架，需要我们有配置文件 <code>book.json</code>，我们可以在根目录下创建：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">touch book.json</span><br></pre></td></tr></table></figure></p>
+<p>写入基本配置：<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"title"</span>: <span class="string">"Jartto-GitBook-Demo"</span>,</span><br><span class="line">    <span class="attr">"description"</span>: <span class="string">"Jartto-GitBook-Demo"</span>,</span><br><span class="line">    <span class="attr">"author"</span>: <span class="string">"sphard"</span>,</span><br><span class="line">    <span class="attr">"language"</span>: <span class="string">"zh-hans"</span>,</span><br><span class="line">    <span class="attr">"root"</span>: <span class="string">"."</span>,</span><br><span class="line"></span><br><span class="line">    <span class="attr">"plugins"</span>: [</span><br><span class="line">        <span class="string">"donate"</span>,</span><br><span class="line">        <span class="string">"github-buttons@2.1.0"</span>,</span><br><span class="line">        <span class="string">"edit-link"</span></span><br><span class="line">    ],</span><br><span class="line"></span><br><span class="line">    <span class="attr">"pluginsConfig"</span>: &#123;</span><br><span class="line">        <span class="attr">"donate"</span>: &#123;</span><br><span class="line">            <span class="attr">"wechat"</span>: <span class="string">"http://jartto.wang/images/wechatpay.jpg"</span>,</span><br><span class="line">            <span class="attr">"alipay"</span>: <span class="string">"http://jartto.wang/images/alipay.jpg"</span>,</span><br><span class="line">            <span class="attr">"title"</span>: <span class="string">""</span>,</span><br><span class="line">            <span class="attr">"button"</span>: <span class="string">"打赏"</span>,</span><br><span class="line">            <span class="attr">"alipayText"</span>: <span class="string">"支付宝打赏"</span>,</span><br><span class="line">            <span class="attr">"wechatText"</span>: <span class="string">"微信打赏"</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">"github-buttons"</span>: &#123;</span><br><span class="line">            <span class="attr">"repo"</span>: <span class="string">"jartto/gitbook"</span>,</span><br><span class="line">            <span class="attr">"types"</span>: [</span><br><span class="line">                <span class="string">"star"</span></span><br><span class="line">            ],</span><br><span class="line">            <span class="attr">"size"</span>: <span class="string">"small"</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">"edit-link"</span>: &#123;</span><br><span class="line">            <span class="attr">"base"</span>: <span class="string">"https://github.com/jartto/gitbook/master"</span>,</span><br><span class="line">            <span class="attr">"label"</span>: <span class="string">"Edit This Page"</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>插件安装通用命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install gitbook-plugin-[插件名]</span><br></pre></td></tr></table></figure></p>
+<p>例如：我们要安装 <code>flexible-alerts</code> 信息框插件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install gitbook-plugin-flexible-alerts</span><br></pre></td></tr></table></figure></p>
+<p>效果如下：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/gitbook/plugin.png" alt="信息框插件"></p>
+<p>还有很多可用插件，具体如下：</p>
+<ol>
+<li>信息框(<code>flexible-alerts</code>)</li>
+<li>阅读统计（<code>pageview-count</code>）</li>
+<li>侧边栏宽度可调节（<code>splitter</code>）</li>
+<li>页脚版权（<code>page-copyright</code>）</li>
+<li>打赏功能（<code>donate</code>）</li>
+<li>分享当前页面（<code>sharing-plus</code>）</li>
+<li>修改标题栏图标（<code>custom-favicon</code>）</li>
+<li>复选框（<code>todo</code>）</li>
+<li>显示图片名称（<code>image-captions</code>）</li>
+<li>目录折叠（<code>toggle-chapters</code>）</li>
+<li>分章节展示（<code>multipart</code>）</li>
+<li>插入 <code>Logo</code>（<code>insert-logo</code>）</li>
+<li><code>Google</code> 分析（<code>ga</code>）</li>
+<li>返回顶部（<code>back-to-top-button</code>）</li>
+<li>代码添加行号和复制按钮（<code>code</code>）</li>
+<li>高级搜索，支持中文（<code>search-pro</code>）</li>
+<li>添加 <code>Github</code> 图标（<code>github</code>）<br>…</li>
+</ol>
+<p>需要注意的是：<br><code>GitBook</code> 默认带有 <code>5</code> 个插件：</p>
+<ul>
+<li><code>highlight</code></li>
+<li><code>search</code></li>
+<li><code>sharing</code></li>
+<li><code>fontsettings</code></li>
+<li><code>livereload</code></li>
+</ul>
+<p>如果要去除自带的插件，可以在插件名称前面加 <code>-</code>，例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&quot;plugins&quot;:[</span><br><span class="line">    &quot;-search&quot;</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
+<p>小技巧：<code>NPM</code> 中搜索关键字 <a href="https://www.npmjs.com/search?q=gitbook-plugin" target="_blank" rel="noopener"><code>GitBook-Plugin</code></a>，发现更多插件。</p>
+<h4 id="五、效果展示"><a href="#五、效果展示" class="headerlink" title="五、效果展示"></a>五、效果展示</h4><p>1.<code>GitBook</code> 扩展：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/gitbook/gitbook1.png" alt="扩展 GitBook"></p>
+<p>2.示例一：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/gitbook/demo1.png" alt="示例一"></p>
+<p>3.示例二：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/gitbook/demo2.png" alt="示例二"></p>
+<p>4.示例三：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/gitbook/demo3.png" alt="示例三"></p>
+<h4 id="六、总结"><a href="#六、总结" class="headerlink" title="六、总结"></a>六、总结</h4><p><a href="http://jartto.wang/2020/02/02/about-gitbook/">上文</a>介绍了 <code>GitBook</code> 的基本使用和一些实用插件，构建在线文档变得轻而易举。加上 <code>Github</code> 免费的托管平台，我们就可以干更多有趣的事情了。快输出你的 <code>HTML</code>、<code>PDF</code>、<code>eBook</code> 技术文档吧～</p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/gitbook/">gitbook</a> <a class="tag tag--primary tag--small t-link" href="/tags/plugin/">plugin</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2020/02/16/web-barrager/" data-tooltip="极简弹幕方案">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2020/01/20/system-load/" data-tooltip="系统负载看不懂？">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2020/02/02/about-gitbook/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2020/02/02/about-gitbook/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2020/02/02/about-gitbook/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2020/02/16/web-barrager/" data-tooltip="极简弹幕方案">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2020/01/20/system-load/" data-tooltip="系统负载看不懂？">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2020/02/02/about-gitbook/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2020/02/02/about-gitbook/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2020/02/02/about-gitbook/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2020/02/02/about-gitbook/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2020/02/02/about-gitbook/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2020/02/02/about-gitbook/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

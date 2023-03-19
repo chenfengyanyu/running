@@ -1,0 +1,532 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>细数小程序的坑 - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="最近做了一个应用，把玩了一下小程序。总体感觉还是可以，但是限制太多，最适合的场景可能就是手机小型应用。这节，我们来细数一下小程序开发过程的坑。">
+<meta name="keywords" content="微信,小程序,mini programs">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="细数小程序的坑">
+<meta property="og:url" content="http://jartto.wang/2018/02/08/count-pit-of-mini-programs/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="最近做了一个应用，把玩了一下小程序。总体感觉还是可以，但是限制太多，最适合的场景可能就是手机小型应用。这节，我们来细数一下小程序开发过程的坑。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/wx3.png">
+<meta property="og:updated_time" content="2018-10-31T14:54:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="细数小程序的坑">
+<meta name="twitter:description" content="最近做了一个应用，把玩了一下小程序。总体感觉还是可以，但是限制太多，最适合的场景可能就是手机小型应用。这节，我们来细数一下小程序开发过程的坑。">
+<meta name="twitter:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/wx3.png">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/wx2.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/wx2.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            细数小程序的坑
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2018-02-08T14:31:33+08:00">
+	  
+		    2018/2月/08 14:31:33
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>最近做了一个应用，把玩了一下小程序。总体感觉还是可以，但是限制太多，最适合的场景可能就是手机小型应用。这节，我们来细数一下小程序开发过程的坑。</p>
+<a id="more"></a>
+<div class="alert success"><p>查看<a href="http://jartto.wang/2018/02/08/count-pit-of-mini-programs/">原文</a>，获得更好的体验哦～</p>
+</div>
+<h4 id="一、小程序注册前提"><a href="#一、小程序注册前提" class="headerlink" title="一、小程序注册前提"></a>一、小程序注册前提</h4><p>小程序注册的前提是，没有注册过任何的微公众平，如未注册过订阅号、服务号之类的。邮箱要求也是是这样的：</p>
+<div class="alert warning"><p>未被公众平台注册，未被开放平台注册，未被个人微信号绑定的邮箱</p>
+</div>
+<p>恰巧之前开发过微信公众号，结果登陆后死活找不到小程序，后来才发现了这个前提。教训就是，一定要好好审题，提前看看小程序的介绍说明。</p>
+<h4 id="二、大小限制"><a href="#二、大小限制" class="headerlink" title="二、大小限制"></a>二、大小限制</h4><p>是的，你没有看错，小程序对项目大小做了限制，你的项目不能超过 <code>2048kb</code>。这个大小的项目文件，能做的事情就不言自明了。<br><div class="alert info"><p>我们可以做工具类，服务类，投票类，在线答题类的小应用。</p>
+</div></p>
+<p>此外，还需要注意的是，如果你用了过多的图片资源，要么精简要么转在线地址，否则，你的小程序很可能大小失控。</p>
+<div class="alert success"><p>这里有一些建议，优化后的效果还是很不错的。</p>
+</div>
+<ol>
+<li>图片资源过多的话，建议本地和远程协调，将项目大小控制在一定范围内。全用远程图片，可能会出现加载白屏问题；</li>
+<li>如果你用了 wepy 构建工具，切记上线前一定要检查 dist 文件夹中的冗余文件，它只添加而不会删除；</li>
+<li>图片可以优化一下，减少大小，推荐使用 <a href="https://tinypng.com" target="_blank" rel="noopener">TinyPng</a> 无损压缩一下；</li>
+</ol>
+<h4 id="三、水平滚动与垂直滚动"><a href="#三、水平滚动与垂直滚动" class="headerlink" title="三、水平滚动与垂直滚动"></a>三、水平滚动与垂直滚动</h4><p>这个 <code>bug</code> 就比较气人了，当你使用了 <code>swiper</code> 的时候，左右滑动，屏幕上下也会跟着抖动。一般情况，我们禁掉浏览器的滚动行为：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//阻止浏览器默认事件</span></span><br><span class="line">event.preventDefault();</span><br></pre></td></tr></table></figure></p>
+<p>移动端处理水平滚动和垂直滚动的原理大致是这样的：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> xx,yy,XX,YY,swipeX,swipeY ;</span><br><span class="line">div.addEventListener(<span class="string">'touchstart'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">    xx = event.targetTouches[<span class="number">0</span>].screenX ;</span><br><span class="line">    yy = event.targetTouches[<span class="number">0</span>].screenY ;</span><br><span class="line">    swipeX = <span class="literal">true</span>;</span><br><span class="line">    swipeY = <span class="literal">true</span> ;</span><br><span class="line">&#125;)</span><br><span class="line">div.addEventListener(<span class="string">'touchmove'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">    XX = event.targetTouches[<span class="number">0</span>].screenX ;</span><br><span class="line">    YY = event.targetTouches[<span class="number">0</span>].screenY ;</span><br><span class="line">    <span class="keyword">if</span>(swipeX &amp;&amp; <span class="built_in">Math</span>.abs(XX-xx)-<span class="built_in">Math</span>.abs(YY-yy)&gt;<span class="number">0</span>)  <span class="comment">//左右滑动</span></span><br><span class="line">    &#123;</span><br><span class="line">        event.stopPropagation();<span class="comment">//组织冒泡</span></span><br><span class="line">        event.preventDefault();<span class="comment">//阻止浏览器默认事件</span></span><br><span class="line">        swipeY = <span class="literal">false</span> ;</span><br><span class="line">        <span class="comment">//左右滑动</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(swipeY &amp;&amp; <span class="built_in">Math</span>.abs(XX-xx)-<span class="built_in">Math</span>.abs(YY-yy)&lt;<span class="number">0</span>)&#123;  <span class="comment">//上下滑动</span></span><br><span class="line">        swipeX = <span class="literal">false</span> ;</span><br><span class="line">        <span class="comment">//上下滑动，使用浏览器默认的上下滑动</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>本身并不是什么很难的问题，然而，在微信中就没有任何办法了。很多人会说，你 <code>overflow</code> 一下啊，我只能呵呵表示，并甩给你一篇文章<a href="https://www.zhihu.com/question/52852717" target="_blank" rel="noopener">微信小程序 在 canvas 画布上划动，如何阻止页面上下动？</a></p>
+<p>还可以看看这篇文章：<a href="https://www.jianshu.com/p/6022f7346ed2" target="_blank" rel="noopener">解决微信小程序自定义弹窗滚动与页面滚动冲突</a></p>
+<p>这里摘自<a href="https://mp.weixin.qq.com/debug/wxadoc/dev/component/scroll-view.html" target="_blank" rel="noopener">官方文档</a>：Bug &amp; Tip</p>
+<ul>
+<li>tip: 请勿在 scroll-view 中使用 textarea、map、canvas、video 组件</li>
+<li>tip: scroll-into-view 的优先级高于 scroll-top</li>
+<li>tip: 在滚动 scroll-view 时会阻止页面回弹，所以在 scroll-view 中滚动，是无法触发 onPullDownRefresh</li>
+<li>tip: 若要使用下拉刷新，请使用页面的滚动，而不是 scroll-view ，这样也能通过点击顶部状态栏回到页面顶部</li>
+</ul>
+<h4 id="四、图片组件"><a href="#四、图片组件" class="headerlink" title="四、图片组件"></a>四、图片组件</h4><p>既然叫组件了，那说明已经被动过手脚了，具体的表现是啥呢？小程序会给 <code>image</code> 组件默认宽高：<br><div class="alert warning"><p>注：image 组件默认宽度 300px 、高度 225px</p>
+</div><br>看起来是完美的，可是如果你要图片自适应外容器呢？OK，小程序提供了 <code>mode</code> 属性，但是并不完全，你还需要这么写：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">image</span> <span class="attr">style</span>=<span class="string">"width: 100%;"</span> <span class="attr">mode</span>=<span class="string">"widthFix"</span> <span class="attr">src</span>=<span class="string">"http://jartto.wang"</span>&gt;</span><span class="tag">&lt;/<span class="name">image</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>是的，你还需要设置他的宽度，才能使用 <code>mode=&quot;widthFix&quot;</code>，否则又开始默认了，沮丧😂。至于 <code>mode</code> 提供的其他裁切属性 <code>top</code>, <code>bottom</code>, <code>center</code> 等等，不太清楚具体的应用场景是什么。</p>
+<h4 id="五、脚本不能使用-window-等对象"><a href="#五、脚本不能使用-window-等对象" class="headerlink" title="五、脚本不能使用 window 等对象"></a>五、脚本不能使用 window 等对象</h4><p>页面的脚本逻辑是在 <code>JsCore</code> 中运行，<code>JsCore</code> 是一个没有窗口对象的环境，所以不能在脚本中使用 <code>window</code>，也无法在脚本中操作组件。</p>
+<div class="alert info"><p>当然，zepto/jquery 会使用到 window 对象和 document 对象，所以无法使用。</p>
+</div>
+<h4 id="六、wx-navigateTo-无法打开页面"><a href="#六、wx-navigateTo-无法打开页面" class="headerlink" title="六、wx.navigateTo 无法打开页面"></a>六、wx.navigateTo 无法打开页面</h4><p>一个应用同时只能打开 5 个页面，当已经打开了 5 个页面之后，<code>wx.navigateTo</code> 不能正常打开新页面。请避免多层级的交互方式，或者使用 <code>wx.redirectTo</code>。</p>
+<div class="alert success"><p>这个应该不算是 <code>bug</code> 吧，我们姑且认为它是一个 <code>feature</code>。</p>
+</div>
+<h4 id="七、样式表不支持级联选择器"><a href="#七、样式表不支持级联选择器" class="headerlink" title="七、样式表不支持级联选择器"></a>七、样式表不支持级联选择器</h4><p><code>WXSS</code> 支持以.开始的类选择器。如：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.normal_view</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#000000</span>;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">10px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>可以使用标签选择器，控制同一类组件的样式。如：使用 <code>input</code> 标签选择器控制 <code>&lt;input/&gt;</code> 的默认样式。<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">input</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="八、不能直接操作-Page-data"><a href="#八、不能直接操作-Page-data" class="headerlink" title="八、不能直接操作 Page.data"></a>八、不能直接操作 Page.data</h4><p>小程序中的规则，只能遵守：<br><div class="alert info"><p>避免在直接对 Page.data 进行赋值修改，请使用 Page.setData 进行操作才能将数据同步到页面中进行渲染。</p>
+</div></p>
+<p>此外，如果你有了 <code>WePY</code> 框架的话，赋值操作是有优化的。<code>WePY</code> 使用脏数据检查对 <code>setData</code> 进行封装，在函数运行周期结束时执行脏数据检查，一来可以不用关心页面多次<code>setData</code> 是否会有性能上的问题，二来可以更加简洁去修改数据实现绑定，不用重复去写 <code>setData</code> 方法。代码如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.title = <span class="string">'this is title'</span>;</span><br></pre></td></tr></table></figure></p>
+<p>需注意的是，在异步函数中更新数据的时，必须手动调用 <code>$apply</code> 方法，才会触发脏数据检查流程的运行。如：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">this</span>.title = <span class="string">'this is title'</span>;</span><br><span class="line">    <span class="keyword">this</span>.$apply();</span><br><span class="line">&#125;, <span class="number">3000</span>);</span><br></pre></td></tr></table></figure></p>
+<h4 id="九、本地资源无法通过-WXSS-获取"><a href="#九、本地资源无法通过-WXSS-获取" class="headerlink" title="九、本地资源无法通过 WXSS 获取"></a>九、本地资源无法通过 WXSS 获取</h4><p>当你需要平铺页面背景的时候，肯能会碰到这样的异常：<br><img src="http://7xvi3w.com1.z0.glb.clouddn.com/wx3.png" alt="background-image"></p>
+<p>很清楚，小程序已经告诉你怎么回事了：<code>background-image</code>：可以使用网络图片，或者 <code>base64</code>，或者使用 <code>&lt;image/&gt;</code> 标签。</p>
+<h4 id="十、修改窗口的背景色"><a href="#十、修改窗口的背景色" class="headerlink" title="十、修改窗口的背景色"></a>十、修改窗口的背景色</h4><p>整个小程序的代码是包在 <code>page</code> 标签中的，所以使用 <code>page</code> 标签选择器，可以修改顶层节点的样式：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">page</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: block;</span><br><span class="line">  <span class="attribute">min-height</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">background-color</span>: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="十一、不可设置网络请求的-referer"><a href="#十一、不可设置网络请求的-referer" class="headerlink" title="十一、不可设置网络请求的 referer"></a>十一、不可设置网络请求的 referer</h4><p>网络请求的 <code>referer</code> 是不可以设置的，格式固定为 <code>https://servicewechat.com/{appid}/{version}/page-frame.html</code>，其中 <code>{appid}</code> 为小程序的 <code>appid</code>，<code>{version}</code> 为小程序的版本号，版本号为 0 表示为开发版、体验版以及审核版本，版本号为 <code>devtools</code> 表示为开发者工具，其余为正式版本。</p>
+<p>这个，文档中有细致的说明，这里就不赘述了。</p>
+<h4 id="十二、map-组件总是在最上层"><a href="#十二、map-组件总是在最上层" class="headerlink" title="十二、map 组件总是在最上层"></a>十二、map 组件总是在最上层</h4><p><code>map</code>、<code>canvas</code>、<code>video</code>、<code>textarea</code> 是由客户端创建的原生组件，原生组件的层级是最高的，所以页面中的其他组件无论设置 <code>z-index</code> 为多少，都无法盖在原生组件上。 原生组件暂时还无法放在 <code>scroll-view</code> 上，也无法对原生组件设置 <code>css</code> 动画。</p>
+<h4 id="十三、你的域名必须备案"><a href="#十三、你的域名必须备案" class="headerlink" title="十三、你的域名必须备案"></a>十三、你的域名必须备案</h4><p>如果你是个人搞的小程序，一定要记得找一个备案的域名绑定主机服务器，否则，你连调用接口都费劲。<br><div class="alert danger"><p>不能使用 IP 地址访问后端接口，必须经过 <code>ICP</code> 备案。</p>
+</div></p>
+<h4 id="十四、转发功能需要自己设置"><a href="#十四、转发功能需要自己设置" class="headerlink" title="十四、转发功能需要自己设置"></a>十四、转发功能需要自己设置</h4><p>页面的转发需要自行设置，并没有区分个人和企业用户。唯一麻烦的就是，需要每个页面都设置转发规则。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Page(&#123;</span><br><span class="line">  onShareAppMessage: <span class="function"><span class="keyword">function</span> (<span class="params">res</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (res.from === <span class="string">'button'</span>) &#123;</span><br><span class="line">      <span class="comment">// 来自页面内转发按钮</span></span><br><span class="line">      <span class="built_in">console</span>.log(res.target)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      title: <span class="string">'自定义转发标题'</span>,</span><br><span class="line">      path: <span class="string">'/page/user?name=jartto'</span>,</span><br><span class="line">      success: <span class="function"><span class="keyword">function</span>(<span class="params">res</span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 转发成功</span></span><br><span class="line">      &#125;,</span><br><span class="line">      fail: <span class="function"><span class="keyword">function</span>(<span class="params">res</span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 转发失败</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>具体，请查看<a href="https://mp.weixin.qq.com/debug/wxadoc/dev/api/share.html#onshareappmessageoptions" target="_blank" rel="noopener">文档地址</a>。</p>
+<h4 id="十五、canvas-的-drawImage-性能问题"><a href="#十五、canvas-的-drawImage-性能问题" class="headerlink" title="十五、canvas 的 drawImage 性能问题"></a>十五、canvas 的 drawImage 性能问题</h4><p>当使用图片裁切功能的时候，发现异常卡顿，找到了微信官网更新日志：</p>
+<ul>
+<li>问题描述：canvas 的 drawImage 性能变差，频繁调动会出现卡顿</li>
+<li>系统：iOS</li>
+<li>出现版本：微信 6.6.0</li>
+<li>预计修复时间：1 月版本</li>
+<li>兼容方案：尽量减少传入的图片尺寸</li>
+</ul>
+<p>如果遇到了这种情况，那么只能等微信官方修复了。</p>
+<h4 id="十六、写在最后"><a href="#十六、写在最后" class="headerlink" title="十六、写在最后"></a>十六、写在最后</h4><p>零零散散记了这么多，全是小程序的问题，但是我们也不能否定小程序的价值，毕竟人家还是有很多优点的嘛。我知道这么做很烦人，但是我也特别希望在我刚开始接触某个技术或者框架的时候，能有人告诉我，这些坑你不要再踩了。</p>
+<p>这并不是在浇小程序的凉水，毕竟小程序需要发展嘛。我一直相信如果大家都能提出问题，那么对一些东西是有正向激励的。</p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/mini-programs/">mini programs</a> <a class="tag tag--primary tag--small t-link" href="/tags/小程序/">小程序</a> <a class="tag tag--primary tag--small t-link" href="/tags/微信/">微信</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/02/09/optimise-for-web-request/" data-tooltip="Web 优化之 Request">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/02/01/analysis-of-angularjs/" data-tooltip="剖析 Angularjs 语法">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/02/08/count-pit-of-mini-programs/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/02/08/count-pit-of-mini-programs/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/02/08/count-pit-of-mini-programs/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/02/09/optimise-for-web-request/" data-tooltip="Web 优化之 Request">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/02/01/analysis-of-angularjs/" data-tooltip="剖析 Angularjs 语法">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/02/08/count-pit-of-mini-programs/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/02/08/count-pit-of-mini-programs/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/02/08/count-pit-of-mini-programs/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/02/08/count-pit-of-mini-programs/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/02/08/count-pit-of-mini-programs/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/02/08/count-pit-of-mini-programs/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

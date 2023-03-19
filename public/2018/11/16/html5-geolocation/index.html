@@ -1,0 +1,491 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>HTML5 之地理定位（Geolocation） - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="很久前研究过 HTML5 Geolocation，最近整理 F2E-Awesome 的时候，发现缺少相关的文章，所以按照自己的使用经验整理了此篇文章。">
+<meta name="keywords" content="chrome,extensions">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="HTML5 之地理定位（Geolocation）">
+<meta property="og:url" content="http://jartto.wang/2018/11/16/html5-geolocation/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="很久前研究过 HTML5 Geolocation，最近整理 F2E-Awesome 的时候，发现缺少相关的文章，所以按照自己的使用经验整理了此篇文章。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/geolocation/canuse.png">
+<meta property="og:updated_time" content="2018-11-16T01:28:46.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HTML5 之地理定位（Geolocation）">
+<meta name="twitter:description" content="很久前研究过 HTML5 Geolocation，最近整理 F2E-Awesome 的时候，发现缺少相关的文章，所以按照自己的使用经验整理了此篇文章。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/geolocation/canuse.png">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/geolocation/logo.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/geolocation/logo.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            HTML5 之地理定位（Geolocation）
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2018-11-16T08:55:31+08:00">
+	  
+		    2018/11月/16 08:55:31
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>很久前研究过 HTML5 Geolocation，最近整理 <a href="https://github.com/f2e-awesome/knowledge" target="_blank" rel="noopener">F2E-Awesome</a> 的时候，发现缺少相关的文章，所以按照自己的使用经验整理了此篇文章。<br><a id="more"></a></p>
+<h4 id="一、应用场景："><a href="#一、应用场景：" class="headerlink" title="一、应用场景："></a>一、应用场景：</h4><p>附近商家定位；计算行走路程；<code>GPS</code> 导航；</p>
+<p>请求一个位置信息，如果用户同意，浏览器就会返回位置信息，该位置信息是通过支持 <code>HTML5</code> 地理定位功能的底层设备提供给浏览器。位置信息由纬度／经度坐标和一些其他的元数据组成。有了这些位置信息就可以构建引人注意目的位置感知类应用程序。</p>
+<h4 id="二、简单示例"><a href="#二、简单示例" class="headerlink" title="二、简单示例"></a>二、简单示例</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">'load'</span>,loadDemo,<span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">loadDemo</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(navigator.geolocation)&#123;</span><br><span class="line">        navigator.geolocation.watchPosition(</span><br><span class="line">            updateLocation,</span><br><span class="line">            handleLocationError,</span><br><span class="line">            &#123;<span class="attr">maximumAge</span>:<span class="number">20000</span>&#125;</span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">updateLocation</span>(<span class="params">position</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> latitude = position.coords.latitude;</span><br><span class="line">    <span class="keyword">var</span> longitude = position.coords.longitude;</span><br><span class="line">    <span class="keyword">var</span> accuracy = position.coords.accuracy;</span><br><span class="line">    <span class="keyword">var</span> timestamp = position.timestamp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="三、兼容性"><a href="#三、兼容性" class="headerlink" title="三、兼容性"></a>三、兼容性</h4><p><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/geolocation/canuse.png" alt="geolocation"></p>
+<h4 id="四、相关-API"><a href="#四、相关-API" class="headerlink" title="四、相关 API"></a>四、相关 API</h4><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Geolocation/Using_geolocation" target="_blank" rel="noopener">MDN</a></p>
+<p>先打印：</p>
+<div class="alert info"><p>两种类型的定位请求API：单次定位请求和重复性的位置更新请求；</p>
+</div>
+<p>三个方法：<br>1.<code>getCurrentPosition</code><br>获取用户当前定位位置，这会异步地请求获取用户位置，并查询定位硬件来获取最新信息。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(navigator.geolocation)&#123;</span><br><span class="line">    navigator.geolocation.watchPosition(</span><br><span class="line">    updateLocation,</span><br><span class="line">    handleLocationError,</span><br><span class="line">    &#123;<span class="attr">maximumAge</span>:<span class="number">20000</span>&#125;</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>需要注意的是：有 <code>GPS</code> 的设备可能需要一分钟或更久来获取 <code>GPS</code> 定位，在这种情况下 <code>getCurrentPosition()</code> 会返回低精度数据（基于 <code>IP</code> 的定位或 <code>Wi-Fi</code> 定位）。</p>
+<p>2.<code>watchPosition</code><br>您可以设定一个回调函数来响应定位数据发生的变更（设备发生了移动，或获取到了更高精度的地理位置信息），它与 <code>getCurrentPosition()</code> 接受相同的参数，但回调函数会被调用多次。错误回调函数与 <code>getCurrentPosition()</code> 中一样是可选的，也会被多次调用。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> watchID = navigator.geolocation.watchPosition(<span class="function"><span class="keyword">function</span>(<span class="params">position</span>) </span>&#123;</span><br><span class="line">  do_something(position.coords.latitude, position.coords.longitude);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>3.<code>clearWatch</code><br><code>watchPosition()</code> 函数会返回一个 <code>ID</code>，唯一地标记该位置监视器。您可以将这个 <code>ID</code> 传给 <code>clearWatch()</code> 函数来停止监视用户位置。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">navigator.geolocation.clearWatch(watchID);</span><br></pre></td></tr></table></figure></p>
+<h4 id="五、警告"><a href="#五、警告" class="headerlink" title="五、警告"></a>五、警告</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[Deprecation] getCurrentPosition() and watchPosition() no longer work on insecure origins. To use this feature, you should consider switching your application to a secure origin, such as HTTPS. See https://goo.gl/rStTGz for more details.</span><br></pre></td></tr></table></figure>
+<p>在 <code>IOS 10</code> 中，苹果对 <code>webkit</code> 定位权限进行了修改，所有定位请求的页面必须是 <code>https</code> 协议的。如果是非 <code>https</code> 网页，在 <code>http</code> 协议下通过 <code>html5</code> 原生定位接口会返回错误，也就是无法正常定位到用户的具体位置，而已经支持 <code>https</code> 的网站则不会受影响。</p>
+<div class="alert warning"><p>经测试，本地 <code>file</code> 文件或者是启动服务器，都会直接返回拒绝服务。</p>
+</div>
+<h4 id="六、定位原理"><a href="#六、定位原理" class="headerlink" title="六、定位原理"></a>六、定位原理</h4><div class="alert info"><p>那么浏览器是如何实现定位的呢，原理又是如何？</p>
+</div>
+<p>1.<code>IP</code> 定位<br>每一台连上网路的电脑都具有一个独一无二的 <code>IP</code> 位址，经由 <code>IP</code> 位址可以反查出电脑位置，但是结果并不精确，而且很容易到受到 <code>ISP</code> 的 <code>IP</code> 分配机制影响，而造成误差。</p>
+<p>2.<code>GPS</code> 定位<br><code>GPS</code> 是我们最常听到的定位技术，它是利用卫星来定位，可以很精确的侦测到使用者位置。但是要玩 <code>GPS</code>，行动装置一定要有 <code>GPS</code> 模组，而且尽管 <code>GPS</code> 非常精准，还是会有技术上的局限，比如在侦测位置时，<code>GPS</code> 的感应器要位于视线范围内（line of sight），因此在有很多高楼大厦、或者是障碍物的地方，<code>GPS</code> 反而没有办法运作自如。</p>
+<p>3.<code>Wi-Fi</code> 三角测量定位<br>这个定位技术可以说是为都会区而设的，因为热闹的大都市通常会有不少 <code>Wi-Fi</code> 热点，定位供应商可以根据这些热点的相对位置、距离等建立一个资料库。<code>Wi-Fi</code> 三角测量适用于 <code>GPS</code> 无法渗透的地方，不过缺点是需要经常更新资料库。</p>
+<p>4.基地台三角测量定位<br>借助基地台之间的相对位置，可以定位出用户在哪里，只要你的手机收得到讯号，就能定位。 一般来说，这四种技术的准确性由高而低分别是：<code>GPS</code> 定位、<code>Wi-Fi</code> 三角测量、基地台三角测量、<code>IP</code> 定位。但还是要视环境而定，比如你到没有 <code>Wi-Fi</code> 热点的地方、或是手机信号不好，定位效果当然也会受影响。</p>
+<p><a href="http://www.iefans.net/liulanqi-zhidao-weizhi/" target="_blank" rel="noopener">为什么浏览器知道你在哪里</a></p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/chrome/">chrome</a> <a class="tag tag--primary tag--small t-link" href="/tags/extensions/">extensions</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/11/17/about-ast/" data-tooltip="AST 抽象语法树">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/11/12/outline-of-CSP/" data-tooltip="CSP 概要">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/11/16/html5-geolocation/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/11/16/html5-geolocation/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/11/16/html5-geolocation/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/11/17/about-ast/" data-tooltip="AST 抽象语法树">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/11/12/outline-of-CSP/" data-tooltip="CSP 概要">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/11/16/html5-geolocation/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/11/16/html5-geolocation/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/11/16/html5-geolocation/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/11/16/html5-geolocation/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/11/16/html5-geolocation/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/11/16/html5-geolocation/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

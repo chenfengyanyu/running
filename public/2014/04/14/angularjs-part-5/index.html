@@ -1,0 +1,526 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>Angularjs学习笔记04~过滤器 Filter - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="最近越来越懒了，说好的每天抽一点时间来总结笔记，可是却完全没有执行，后续还有好多笔记，想想都觉得头疼。之前已经把目录整理好了，回头发现，目录是全了，可是之前学习的笔记太过于零散，无法形成一套完整的笔记。">
+<meta name="keywords" content="angularjs">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Angularjs学习笔记04~过滤器 Filter">
+<meta property="og:url" content="http://jartto.wang/2014/04/14/angularjs-part-5/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="最近越来越懒了，说好的每天抽一点时间来总结笔记，可是却完全没有执行，后续还有好多笔记，想想都觉得头疼。之前已经把目录整理好了，回头发现，目录是全了，可是之前学习的笔记太过于零散，无法形成一套完整的笔记。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/blog_CB60244D-79F6-4B3C-A341-D7E2E24B5382.png">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/blog_5DFA9C34-BCE6-4588-8A0B-D257CD4F8D86.png">
+<meta property="og:updated_time" content="2016-06-24T02:54:55.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Angularjs学习笔记04~过滤器 Filter">
+<meta name="twitter:description" content="最近越来越懒了，说好的每天抽一点时间来总结笔记，可是却完全没有执行，后续还有好多笔记，想想都觉得头疼。之前已经把目录整理好了，回头发现，目录是全了，可是之前学习的笔记太过于零散，无法形成一套完整的笔记。">
+<meta name="twitter:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/blog_CB60244D-79F6-4B3C-A341-D7E2E24B5382.png">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/blog_155IK010-0.jpg"/>
+        <meta class="swiftype" name="image" data-type="enum" content="http://7xvi3w.com1.z0.glb.clouddn.com/blog_155IK010-0.jpg" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            Angularjs学习笔记04~过滤器 Filter
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2014-04-14T15:31:15+08:00">
+	  
+		    2014/4月/14 15:31:15
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>最近越来越懒了，说好的每天抽一点时间来总结笔记，可是却完全没有执行，后续还有好多笔记，想想都觉得头疼。之前已经把目录整理好了，回头发现，目录是全了，可是之前学习的笔记太过于零散，无法形成一套完整的笔记。<br><a id="more"></a><br>所以，边写博客边总结吧，也算是对之前的学习来一次大回顾。哎，看书虽易，理解不易，且学且总结吧！不瞎扯了，下面直接进入正题。</p>
+<p>这节笔记主要是来总结angularjs中过滤器（filter）是如何使用的。其实，之前的笔记中已经有filter的使用示例，但是并没有作为重点。这里我又把问题抛出来，给个痛快的解决（参考了不少资料，应该是很全面了，至少我自己这么觉得O(∩_∩)O）。</p>
+<h4 id="一、过滤器"><a href="#一、过滤器" class="headerlink" title="一、过滤器"></a>一、过滤器</h4><p>AngularJS过滤器用来格式化输出数据。过滤器不但能格式化数据，还能修改DOM。过滤器可用在任何api或者ng.$rootScoe.Scope的执行过程中，不过一般用来格式化绑定在模板中的表达式。<br>这是一种最常见的模式，也是最简单的，直接用管道符连接起来就行。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123; expression | filter &#125;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>过滤器一般在处理过程中将数据转变成新的格式。它能使用链式风格，还能接受附加参数。我们可以这样使用链式风格：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123; expression | filter1 | filter2 &#125;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>当然也可以使用“:”来传递额外的参数给过滤器，比如，将数字123格式化成带有2位小数的形式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">123 | number:2</span><br></pre></td></tr></table></figure></p>
+<h4 id="二、过滤器的两种形式"><a href="#二、过滤器的两种形式" class="headerlink" title="二、过滤器的两种形式"></a>二、过滤器的两种形式</h4><p>上面大概描述了过滤器的几种常见格式，可是如何去使用过滤器来格式化我们自己的数据呢？这里，我姑且先把过滤器分为两类吧。</p>
+<p>第一种，内置过滤器：<br>也就是Angularjs内置的过滤器，例如currency、date、number、uppercase等。如你所想，内置过滤器用起来也相当简单，下面给出几个简单的实例，代码如下：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-app</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> &gt;</span> 12.9 用过滤器currency结果为： &#123;&#123;12.9|currency &#125;&#125; <span class="tag">&lt;/<span class="name">div</span> &gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> &gt;</span> 1396606957717 用过滤器date结果为： &#123;&#123;1396606957717|date:"yyyy-MM-dd hh:mm:ss"&#125;&#125; <span class="tag">&lt;/ <span class="attr">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> &gt;</span> 12.9 用过滤器number结果为： &#123;&#123;12.9| number:0 &#125;&#125; <span class="tag">&lt;/<span class="name">div</span> &gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> &gt;</span> &#123;name="wang"&#125; 用过滤器json结果为： &#123;&#123;&#123;name:"wang"&#125;| json&#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span>wang 用过滤器uppercase结果为：&#123;&#123;"wang"| uppercase&#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span>WANG 用过滤器lowercase结果为：&#123;&#123;"WANG"| lowercase&#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>效果如下：<br><img src="http://7xvi3w.com1.z0.glb.clouddn.com/blog_CB60244D-79F6-4B3C-A341-D7E2E24B5382.png" alt="angularjs"></p>
+<div class="alert info"><p>演示地址：<a href="http://jsfiddle.net/Au79V/13/" target="_blank" rel="noopener">http://jsfiddle.net/Au79V/13/</a></p>
+</div>
+<p>第二种，自定义过滤器：<br>当然，多数情况下angularjs的内置过滤器就可以满足我们的使用了。但是你需要定制或者一些特别的过滤器，那么也不用担心，我们可以写自己的过滤器。哈哈，规则完全由你定，听起来是不是感觉很过瘾。下面我引用一下开发指南中的自定义过滤器，来说明问题，首先来看看代码：<br>index.html:<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">!</span> <span class="attr">doctype</span> <span class="attr">html</span> &gt;</span></span><br><span class="line"><span class="tag">&lt; <span class="attr">html</span> <span class="attr">ng-app</span> =<span class="string">"MyReverseModule"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt; <span class="attr">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span> =<span class="string">"http://code.angularjs.org/angular-1.0.2.min.js"</span>&gt;</span><span class="xml"><span class="tag">&lt;/ <span class="attr">script</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"script.js"</span>&gt;</span><span class="xml"><span class="tag">&lt;/ <span class="attr">script</span> &gt;</span></span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/ <span class="attr">head</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt; <span class="attr">body</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-controller</span>=<span class="string">"Ctrl"</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt; <span class="attr">input</span> <span class="attr">ng-model</span> =<span class="string">"greeting"</span> <span class="attr">type</span> =<span class="string">"greeting"</span>&gt;</span><span class="tag">&lt;<span class="name">br</span> &gt;</span></span></span><br><span class="line"><span class="xml">        No filter: &#123;&#123;greeting &#125;&#125; <span class="tag">&lt;<span class="name">br</span> &gt;</span></span></span><br><span class="line"><span class="xml">        Reverse: &#123;&#123;greeting|reverse &#125;&#125; <span class="tag">&lt;<span class="name">br</span> &gt;</span></span></span><br><span class="line"><span class="javascript">        Reverse + uppercase: &#123;&#123;greeting|reverse:<span class="literal">true</span> &#125;&#125; &lt;br &gt;</span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">div</span> &gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/ <span class="attr">body</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/ <span class="attr">html</span>&gt;</span></span></span><br></pre></td></tr></table></figure></p>
+<p>script.js:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">angular.module( <span class="string">'MyReverseModule'</span>, []).</span><br><span class="line">    filter( <span class="string">'reverse'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">input, uppercase</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">var</span> out = <span class="string">""</span> ;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; input.length; i++) &#123;</span><br><span class="line">                out = input.charAt(i) + out;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// conditional based on optional argument</span></span><br><span class="line">            <span class="keyword">if</span> (uppercase) &#123;</span><br><span class="line">                out = out.toUpperCase();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> out;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Ctrl</span>(<span class="params">$scope</span>) </span>&#123;</span><br><span class="line">    $scope.greeting = <span class="string">'hello'</span> ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>效果如下：<br><img src="http://7xvi3w.com1.z0.glb.clouddn.com/blog_5DFA9C34-BCE6-4588-8A0B-D257CD4F8D86.png" alt="angularjs"></p>
+<div class="alert info"><p>演示地址：<a href="http://jsfiddle.net/Au79V/14/" target="_blank" rel="noopener">http://jsfiddle.net/Au79V/14/</a></p>
+</div>
+<p>说明：这里实现了一个将字符串逆向输出的过滤器reverse，要扩展filter，首先我们需要在module中创建它，就像这样</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">angular.module(<span class="string">'moduleName'</span>,[]).filter(<span class="string">'filterName'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;这里是你扩展的方法&#125;);</span><br></pre></td></tr></table></figure>
+<p>这样我们就定义好自己的filter了，下面我来像这样调用它<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;&quot;字符串&quot;|reverse&#125;&#125;。</span><br></pre></td></tr></table></figure></p>
+<p>通过两步就轻松的扩展了一个自定义过滤器，是不是很简单呢？</p>
+<p>到这里，过滤器的简单用法已经阐述完了。当然，复杂的使用场景这里我就不说了（关键是我也不懂）。网上有很多大牛，晋级的话，他们是最好的老师！</p>
+<p>参考文章：<br>《Angularjs 开发指南》<br>《用Angularjs开发下一代web应用》</p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/angularjs/">angularjs</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2014/04/20/angularjs-part-6/" data-tooltip="Angularjs学习笔记05~模板 Template">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2014/04/01/angularjs-part-4/" data-tooltip="Angularjs学习笔记03~数据绑定 Data-Binding">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2014/04/14/angularjs-part-5/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2014/04/14/angularjs-part-5/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2014/04/14/angularjs-part-5/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+            
+                <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2014/04/20/angularjs-part-6/" data-tooltip="Angularjs学习笔记05~模板 Template">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2014/04/01/angularjs-part-4/" data-tooltip="Angularjs学习笔记03~数据绑定 Data-Binding">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2014/04/14/angularjs-part-5/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2014/04/14/angularjs-part-5/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2014/04/14/angularjs-part-5/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2014/04/14/angularjs-part-5/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2014/04/14/angularjs-part-5/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2014/04/14/angularjs-part-5/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+    
+        <script>
+             var disqus_config = function () {
+                 this.page.url = 'http://jartto.wang/2014/04/14/angularjs-part-5/';
+                 
+                    this.page.identifier = '2014/04/14/angularjs-part-5/';
+                                  
+             };
+            (function() {
+                var d = document, s = d.createElement('script');
+                var disqus_shortname = 'jartto';
+                s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+
+
+
+</html>

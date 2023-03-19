@@ -1,0 +1,527 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>DevOps 简介 - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="头一次听到这个东西，真的是一脸懵逼。感觉应该类似项目管理中的一些理念，却又不是很清晰。哎，请原谅我的孤陋寡闻。">
+<meta name="keywords" content="devops">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="DevOps 简介">
+<meta property="og:url" content="http://jartto.wang/2018/11/30/about-devops/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="头一次听到这个东西，真的是一脸懵逼。感觉应该类似项目管理中的一些理念，却又不是很清晰。哎，请原谅我的孤陋寡闻。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/devops/circle.png">
+<meta property="og:updated_time" content="2018-12-09T09:22:58.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="DevOps 简介">
+<meta name="twitter:description" content="头一次听到这个东西，真的是一脸懵逼。感觉应该类似项目管理中的一些理念，却又不是很清晰。哎，请原谅我的孤陋寡闻。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/devops/circle.png">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/devops/logo.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/devops/logo.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            DevOps 简介
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2018-11-30T16:38:05+08:00">
+	  
+		    2018/11月/30 16:38:05
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>头一次听到这个东西，真的是一脸懵逼。感觉应该类似项目管理中的一些理念，却又不是很清晰。哎，请原谅我的孤陋寡闻。<br><a id="more"></a></p>
+<h4 id="一、是什么？"><a href="#一、是什么？" class="headerlink" title="一、是什么？"></a>一、是什么？</h4><p><a href="https://baike.baidu.com/item/devops/2613029?fr=aladdin" target="_blank" rel="noopener">百度百科</a>中是这么定义的：<code>DevOps</code>（ <code>Development</code> 和 <code>Operations</code> 的组合词）是一组过程、方法与系统的统称，用于促进开发（应用程序/软件工程）、技术运营和质量保障（ <code>QA</code> ）部门之间的沟通、协作与整合。</p>
+<p>它是一种重视「软件开发人员（<code>Dev</code>）」和「<code>IT</code> 运维技术人员（<code>Ops</code>）」之间沟通合作的文化、运动或惯例。透过自动化软件交付和架构变更的流程，来使得构建、测试、发布软件能够更加地快捷、频繁和可靠。</p>
+<div class="alert info"><p>为了按时交付软件产品和服务，开发和运营工作必须紧密合作。</p>
+</div>
+<h4 id="二、常见开发模型"><a href="#二、常见开发模型" class="headerlink" title="二、常见开发模型"></a>二、常见开发模型</h4><p>看了专业的解释，我们不难理解到，<code>DevOps</code> 是一种开发模型。那么什么是开发模型，又有哪些常见的开发模型呢？<br>1.什么是开发模型？<br><a href="https://baike.baidu.com/item/软件开发模型/223381?fr=aladdin" target="_blank" rel="noopener">软件开发模型</a>(Software Development Model)是指软件开发全部过程、活动和任务的结构框架。软件开发包括需求、设计、编码和测试等阶段，有时也包括维护阶段。 软件开发模型能清晰、直观地表达软件开发全过程，明确规定了要完成的主要活动和任务，用来作为软件项目工作的基础。</p>
+<p>2.常见的开发模型</p>
+<ul>
+<li>瀑布式开发</li>
+<li>敏捷开发</li>
+<li>DevOps</li>
+</ul>
+<h4 id="三、化繁为简"><a href="#三、化繁为简" class="headerlink" title="三、化繁为简"></a>三、化繁为简</h4><p><code>DevOps</code> 一词的来自于 <code>Development</code> 和 <code>Operations</code> 的组合，突出重视软件开发人员和运维人员的沟通合作，通过自动化流程来使得软件构建、测试、发布更加快捷、频繁和可靠。</p>
+<div class="alert info"><p>DevOps 是为了填补开发端和运维端之间的信息鸿沟，改善团队之间的协作关系。</p>
+</div>
+<p>不过需要澄清的一点是，从开发到运维，中间还有测试环节。<code>DevOps</code> 其实包含了三个部分：开发、测试和运维。</p>
+<p>专家们总结出了下面这个 <code>DevOps</code> 能力图，良好的闭环可以大大增加整体的产出：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/devops/circle.png" alt="circle"></p>
+<h4 id="四、使用场景"><a href="#四、使用场景" class="headerlink" title="四、使用场景"></a>四、使用场景</h4><p>以下几方面因素可能促使一个组织引入 <code>DevOps</code>：<br>1、使用敏捷或其他软件开发过程与方法；<br>2、业务负责人要求加快产品交付的速率；<br>3、虚拟化和云计算基础设施（可能来自内部或外部供应商）日益普遍；<br>4、数据中心自动化技术和配置管理工具的普及；<br>5、有一种观点认为，占主导地位的传统美国式管理风格（斯隆模型 vs 丰田模型）会导致「烟囱式自动化」，从而造成开发与运营之间的鸿沟，因此需要 <code>DevOps</code> 能力来克服由此引发的问题。</p>
+<div class="alert info"><p>DevOps 经常被描述为「开发团队与运营团队之间更具协作性、更高效的关系」。</p>
+</div>
+<p>由于团队间协作关系的改善，整个组织的效率因此得到提升，伴随频繁变化而来的生产环境的风险也能得到降低。</p>
+<h4 id="五、DevOps-对应用程序发布的影响"><a href="#五、DevOps-对应用程序发布的影响" class="headerlink" title="五、DevOps 对应用程序发布的影响"></a>五、DevOps 对应用程序发布的影响</h4><div class="alert danger"><p>在很多企业中，应用程序发布是一项涉及多个团队、压力很大、风险很高的活动。</p>
+</div>
+<p>然而在具备 <code>DevOps</code> 能力的组织中，应用程序发布的风险很低，原因如下：</p>
+<ul>
+<li><p>减少变更范围<br>与传统的瀑布式开发模型相比，采用敏捷或迭代式开发意味着更频繁的发布、每次发布包含的变化更少。由于部署经常进行，因此每次部署不会对生产系统造成巨大影响，应用程序会以平滑的速率逐渐生长。</p>
+</li>
+<li><p>加强发布协调<br>靠强有力的发布协调人来弥合开发与运营之间的技能鸿沟和沟通鸿沟；采用电子数据表、电话会议、即时消息、企业门户（<code>wiki</code>、<code>sharepoint</code>）等协作工具来确保所有相关人员理解变更的内容并全力合作。</p>
+</li>
+<li><p>自动化<br>强大的部署自动化手段确保部署任务的可重复性、减少部署出错的可能性。</p>
+</li>
+</ul>
+<p>与传统开发方法那种大规模的、不频繁的发布（通常以季度或年为单位）相比，敏捷方法大大提升了发布频率（通常以天或周为单位），同时也增大了出错的概率。</p>
+<h4 id="六、DevOps-又有啥不同？它有什么好处？"><a href="#六、DevOps-又有啥不同？它有什么好处？" class="headerlink" title="六、DevOps 又有啥不同？它有什么好处？"></a>六、DevOps 又有啥不同？它有什么好处？</h4><p>减少变更范围与传统的瀑布式开发模型相比，采用敏捷或迭代式开发意味着更频繁的发布、每次发布包含的变化更少。由于部署经常进行，因此每次部署不会对生产系统造成巨大影响，应用程序会以平滑的速率逐渐生长。</p>
+<div class="alert info"><p>加强发布协调靠强有力的发布协调人来弥合开发与运营之间的技能鸿沟和沟通鸿沟。</p>
+</div>
+<p>这里需要明确两点认识：<br>1.开发是由功能性需求（通常与业务需求直接相关）驱动的。<br>2.运营是由非功能性需求（例如可获得性、可靠性、性能等）驱动的。</p>
+<h4 id="七、精益-7-原则"><a href="#七、精益-7-原则" class="headerlink" title="七、精益 7 原则"></a>七、精益 7 原则</h4><ul>
+<li>杜绝浪费</li>
+<li>内建质量</li>
+<li>创建知识(放大学习)</li>
+<li>延迟决策(尽量延迟决定)</li>
+<li>快速交付</li>
+<li>尊重人员(团队授权)</li>
+<li>全局优化</li>
+</ul>
+<h4 id="八、DevOps-八荣八耻"><a href="#八、DevOps-八荣八耻" class="headerlink" title="八、DevOps 八荣八耻"></a>八、DevOps 八荣八耻</h4><p>偶然在网上看到了这个，觉得很形象，所以拿过来（感谢原作者）：</p>
+<ul>
+<li>以可配置为荣，以硬编码为耻。</li>
+<li>以系统互备为荣，以系统单点为耻。</li>
+<li>以随时可重启为荣，以不能迁移为耻。</li>
+<li>以整体交付为荣，以部分交付为耻。</li>
+<li>以无状态为荣，以特殊化为耻。</li>
+<li>以自动化工具为荣，以人肉操作为耻。</li>
+<li>以无人值守为荣，以人工介入为耻。</li>
+</ul>
+<p>真正理解上面这些规则，你才能熟练的应用于项目开发。</p>
+<h4 id="九、反思"><a href="#九、反思" class="headerlink" title="九、反思"></a>九、反思</h4><p>在了解 <code>DevOps</code> 之后，我陷入了深深的恐惧之中。总以为可以通过不断学习技术来弥补短板，然而现实并非如此。越是努力的学习，越是发现自己掌控之外的东西数不胜数。</p>
+<p>所以，有时间真得去琢磨琢磨项目管理相关内容了。唯有博览群书，才能博学多才！</p>
+<h4 id="十、参考"><a href="#十、参考" class="headerlink" title="十、参考"></a>十、参考</h4><p><a href="https://baike.baidu.com/item/devops/2613029?fr=aladdin" target="_blank" rel="noopener">1.百度百科</a><br><a href="https://www.cnblogs.com/liufei1983/p/7152013.html" target="_blank" rel="noopener">2.DevOps简介</a><br><a href="https://www.cnblogs.com/jetzhang/p/6068773.html" target="_blank" rel="noopener">3.一分钟了解DevOps</a><br><a href="https://www.cnblogs.com/servicehot/p/6510199.html" target="_blank" rel="noopener">4.Devops 到底是什么？</a></p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/devops/">devops</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/12/02/indexeddb/" data-tooltip="浏览器存储之争">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/11/29/algorithm7/" data-tooltip="算法图解7 - 动态规划">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/11/30/about-devops/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/11/30/about-devops/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/11/30/about-devops/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/12/02/indexeddb/" data-tooltip="浏览器存储之争">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/11/29/algorithm7/" data-tooltip="算法图解7 - 动态规划">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/11/30/about-devops/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/11/30/about-devops/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/11/30/about-devops/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/11/30/about-devops/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/11/30/about-devops/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/11/30/about-devops/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

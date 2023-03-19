@@ -1,0 +1,557 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>前端面试官的套路，你懂吗？ - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="最近一年陆陆续续都在面试各种不同程度的 Web 前端开发，总觉得现在前端氛围太过于浮躁，急于求成的人比比皆是。">
+<meta name="keywords" content="F2E,前端,面试">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="前端面试官的套路，你懂吗？">
+<meta property="og:url" content="http://jartto.wang/2019/01/06/f2e-interview/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="最近一年陆陆续续都在面试各种不同程度的 Web 前端开发，总觉得现在前端氛围太过于浮躁，急于求成的人比比皆是。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/interview/pic2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/interview/resume1.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/interview/resume2.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/interview/pic1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/interview/pic5.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/interview/pic4.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/interview/pic3.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/interview/store.jpg">
+<meta property="og:updated_time" content="2019-01-06T14:07:19.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端面试官的套路，你懂吗？">
+<meta name="twitter:description" content="最近一年陆陆续续都在面试各种不同程度的 Web 前端开发，总觉得现在前端氛围太过于浮躁，急于求成的人比比皆是。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/interview/pic2.png">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/interview/logo.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/interview/logo.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            前端面试官的套路，你懂吗？
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2019-01-06T12:25:44+08:00">
+	  
+		    2019/1月/06 12:25:44
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/面试笔试/">面试笔试</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>最近一年陆陆续续都在面试各种不同程度的 Web 前端开发，总觉得现在前端氛围太过于浮躁，急于求成的人比比皆是。<br><a id="more"></a><br>然而很多童鞋还是没有掌握面试的技巧，一次次碰壁。鉴于此，我觉得是时候总结一些面试经验了，只不过这一次我打算从面试官的角度来阐述。</p>
+<div class="alert success"><p>我是如何面试前端的？</p>
+</div>
+<h4 id="一、筛选简历"><a href="#一、筛选简历" class="headerlink" title="一、筛选简历"></a>一、筛选简历</h4><p>我们先从筛选简历阶段说起，一般人力同事会帮我们去捞一些合适的简历，但是很多时候技术开发自己也不会闲着，而不同职能的人捞简历的方式也千差万别。</p>
+<div class="alert warning"><p>先从我自己捞简历的角度来说吧，当然，不同的面试官有不同的风格，不可尽信。</p>
+</div>
+<p>1.我一般会去看简历中所提的技术栈是否匹配，怎么看呢？我们可以抓住简历中的技术名词，一般来说如果一点技术名词都没有提到，那么大概有以下几种可能：</p>
+<ul>
+<li>很水</li>
+<li>很牛但是概率很小</li>
+<li>不会写简历</li>
+</ul>
+<p>所以，一部分人可能会因为简历的问题没有了面试机会，这点是需要非常注意的。</p>
+<div class="alert info"><p>那么有人可能会问，那我该如何在简历里面体现我的技术实力呢？</p>
+</div>
+<p>我们举个简单的例子，假如你要面试一个公司，他们主招 React 技术栈的前端开发，那么你的简历里面只有 React 这个名词是不够的，最好能体现出 React 的生态来。</p>
+<p>这样写就不错：熟练使用 Antd＋React＋Redux 开发项目，Roadhog 或者 Webpack 构建项目，Nextjs 做服务端渲染。</p>
+<p>其他技术栈类似，了解技术栈的周边生态，间接的反应了项目的体量。</p>
+<h4 id="二、个人介绍"><a href="#二、个人介绍" class="headerlink" title="二、个人介绍"></a>二、个人介绍</h4><p>通过了简历筛选阶段，就真正到了面试环节。这时候一定要准备好一段最多 3 分钟的个人介绍。</p>
+<div class="alert info"><p>请注意，最多 3 分钟！</p>
+</div>
+<p>碰到过这样的面试者，一段个人介绍说不完，滔滔不绝，从高中时代说起，然而面试官并没有那么多的耐心和时间。这样会留下不太好的初次印象。正确的做法是：<br><div class="alert success"><p>言简意赅的说明自己的工作时间，擅长技术栈和自己的工作预期。</p>
+</div></p>
+<h4 id="三、技术名词"><a href="#三、技术名词" class="headerlink" title="三、技术名词"></a>三、技术名词</h4><p><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/interview/pic2.png" alt="pic2"><br>既然我是通过技术名词来筛选简历，这就成为了我面试的重点考察区域。简历堆砌技术名词其实是一把双刃剑：<br>1.不写技术名词，简历容易被刷掉；<br>2.写上的话，可是需要充分的准备哦，否则这可能成为你的软肋；</p>
+<p>为了充分说明，我举几个例子（这是真实面试的反馈）：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/interview/resume1.jpg" alt="ruseum1"></p>
+<p>再来看一个：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/interview/resume2.jpg" alt="ruseum2"></p>
+<p>可以看到，技术点我都会去问一下，根据掌握度，会有一个简单的评分（1-5）。而这个评分就是我定级的标准，后面会详细说明。</p>
+<h4 id="四、挖掘项目的深度"><a href="#四、挖掘项目的深度" class="headerlink" title="四、挖掘项目的深度"></a>四、挖掘项目的深度</h4><p>项目经验也是面试中比较重要的一个环节，为了对面试者有一个全面的认识，所以我会花一些时间聊聊面试者做过的项目。</p>
+<p>当然，不会有人只写一个项目，所以我的问题就变成了：能看出来你做过不少项目，有没有哪个项目是你做的最好，值得骄傲的？</p>
+<div class="alert info"><p>这样，我就可以从最好的项目入手，省去了人为过滤的麻烦。</p>
+</div>
+<p><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/interview/pic1.png" alt="pic1"></p>
+<p>当面试者开始讲自己项目的同时，作为面试官，我有几件事情需要确定：</p>
+<p>1.首先要确定项目是否是自己做的，即确定项目的真实性；</p>
+<p>举个例子：你的项目是 <code>React</code> 搭建的，能告诉我搭建项目的过程和需要注意的地方吗？<br>这时候有人就漏底了，除了 <code>Create-react-app</code> 之外，什么都说不出来。难道你不用 <code>Router</code> 吗，难道不需要处理静态资源吗，难道不需要构建吗？<br><div class="alert danger"><p>细问之下，告诉我项目是其他同事搭建的，自己只负责开发业务。</p>
+</div></p>
+<p>2.项目的缺陷<br>我们在架构项目的时候，想的太多会过度设计，想的太少则可能会出现随着业务增长而来的种种问题。很多企业都在探索某个技术领域的最佳实践，其实并没有行业通用标准，只是思想可以借鉴罢了。</p>
+<p>当然，你如果经验丰富，并且能不断重构，是可以修复一些项目缺陷。嗯，所以我的问题又来了：在项目中有没有碰到过一些问题，你是如何解决的？</p>
+<div class="alert info"><p>这里主要考察面试者实际处理问题的能力，以及是否有独立思考的过程，这个很重要。</p>
+</div>
+<p>3.项目的深度</p>
+<p>项目做到一定规模以后，一定会去深挖原理，甚至原本的架构或者插件都无法满足。举个例子：如果没有扩展过 <code>Webpack Loader</code> 的项目，基本可以肯定是一个小型项目，中型或大型项目以及业务复杂的项目都或多或少有一些方向的扩展。</p>
+<p>项目深度的考察其实比较难，总会有一些行业通用问题需要去解决，这也就是 <code>BAT</code>，<code>TMD</code> 这些公司经常会去制定一些行业标准，开源一些技术方案的原因。</p>
+<p>当然，很多公司还是达不到这个层次，所以项目深度也是因人而异，并没有通用标准。</p>
+<div class="alert info"><p>所以考察方向就成了对这个项目的持续开发，垂直领域以及深度思考。</p>
+</div>
+<h4 id="五、程序基础，手写代码，算法"><a href="#五、程序基础，手写代码，算法" class="headerlink" title="五、程序基础，手写代码，算法"></a>五、程序基础，手写代码，算法</h4><p><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/interview/pic5.png" alt="pic5"></p>
+<div class="alert info"><p>看到过这样一个问题：面试要求手写代码的面试官是不是都很 Low？</p>
+</div>
+<p>显然不是，通过写代码可以看出一个人的编程功底和思想。另一方面，我们很多时候都在阅读别人的代码，所以能迅速的看出你代码问题的人，在我看来，能力是在你之上的。</p>
+<p>一般手写代码都集中在：数组操作、原生 <code>JS</code>、算法实现、以及数据结构这几方面。部分前端有可能会有一些 <code>CSS</code> 布局要求。这里我就不展开说明了，后续会出系列文章来探讨笔试面试题相关内容。欢迎关注，欢迎探讨。</p>
+<h4 id="六、技术热情"><a href="#六、技术热情" class="headerlink" title="六、技术热情"></a>六、技术热情</h4><p><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/interview/pic4.png" alt="pic4"><br>我们来举两个例子：</p>
+<p>问：<code>HTML5</code> 的地理定位你用过的场景是什么？</p>
+<p>答：<code>balbalbal</code>…</p>
+<p>问：有没有遇到过定位不准的情况，浏览器定位的原理究竟是什么呢？</p>
+<p>答：……</p>
+<p>再譬如：</p>
+<p>问：<code>webpack</code> 你最常用的 <code>loader</code> 都有哪些？</p>
+<p>答：<code>balbalbal</code>…<code>Babel</code></p>
+<p>问：<code>Babel</code> 的作用是什么？</p>
+<p>答：<code>balbalbal</code>…</p>
+<p>问：有没有了解过 <code>Babel</code> 的原理，它是如何做到的呢？</p>
+<p>答：……</p>
+<p>相信大家也看出问题了，这位同学会有一些简单的使用场景，但是一追问原理，就一无所知。所以你觉得他对技术有热情吗，难道你对技术一点都不好奇吗？</p>
+<div class="alert success"><p>技术热情决定了你在这行的成就，也决定了你是否能走得更远。</p>
+</div>
+<h4 id="七、个人规划"><a href="#七、个人规划" class="headerlink" title="七、个人规划"></a>七、个人规划</h4><p><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/interview/pic3.png" alt="pic3"><br>你一定很奇怪，为什么会考察个人规划？</p>
+<p>原本我也是认为一些个人规划都是空谈主义，整一些虚无缥缈的东西有意思吗？然而实际并非如此，当我陆续面过很多工作 10 年之久的行业前辈的时候，我会发现有些人之后的几年毫无进展，完全是在混资历，技术一塌糊涂。</p>
+<p>这时候我就有了反思，为什么会有这种现象，我猜测大概有如下几点原因：<br>1.没有个人规划，走哪算哪，混日子型；<br>2.忙于管理，疏于技术；<br>3.长期在一个岗位，做着千篇一律的事情；</p>
+<p>个人规划的意义就很明显了，之前<a href="http://jartto.wang/2018/04/29/audition-of-f2e-3/">前端反思录（三）—谈谈个人规划</a>有提到过，这里就不细说了。</p>
+<div class="alert warning"><p>人变老了的感觉不是说我不想学习新东西，而是老东西我还消化不完。</p>
+</div>
+<h4 id="八、面试者反馈"><a href="#八、面试者反馈" class="headerlink" title="八、面试者反馈"></a>八、面试者反馈</h4><p>面试接近尾声的时候，作为尊重，这时候我都会去问这样一个问题：大概情况我都了解了，有没有你觉得自己擅长而又没被问到的东西？</p>
+<p>每个人都会有自己的思维，甚至是偏见，所以面试的时候一定要去得到面试者的互动和反馈，从而映证自己的观点。报着一个人才都不放过的心态，去全方位了解面试者。</p>
+<div class="alert info"><p>也许他所擅长的刚好是你的软肋呢？海纳百川，有容乃大。</p>
+</div>
+<h4 id="九、你有什么问题想问我？"><a href="#九、你有什么问题想问我？" class="headerlink" title="九、你有什么问题想问我？"></a>九、你有什么问题想问我？</h4><p>面试官一定要放低姿态，不要一副高高在上的样子，尤其是做技术的。如果觉得面试者稍微有些紧张，可以先聊点其他，如：所学专业，住在哪里，上下班时间之类无关痛痒的问题，缓解一下紧张气氛。</p>
+<p>至于最后一个问题为什么要问：你有什么问题想问我？有以下几点理由：<br>1.确定面试反馈；<br>2.给面试者一个沟通的机会；<br>3.看看面试者对应试部门的了解或者是对公司的兴趣；</p>
+<h4 id="十、定级"><a href="#十、定级" class="headerlink" title="十、定级"></a>十、定级</h4><p>技术名词部分，我做了打分处理，所以定级就很容易了。一般情况我会按照 5 分制来评估，具体的标准这里就不透露了。</p>
+<p>当然，每个面试官都有自己的风格，也许完全和我这一套背道而驰。但是你要记住，套路是一致的，任何事物都会有一个评判标准。</p>
+<div class="alert info"><p>我走过最长的路，就是你的套路！</p>
+</div>
+<h4 id="十一、文末彩蛋"><a href="#十一、文末彩蛋" class="headerlink" title="十一、文末彩蛋"></a>十一、文末彩蛋</h4><p>每个人都是天才，但是如果你以爬树的本领来判断一条鱼的能力，那它终其一生都会以为自己是个笨蛋。很有意思的一幅图，分享给大家。<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/interview/store.jpg" alt="store"></p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/F2E/">F2E</a> <a class="tag tag--primary tag--small t-link" href="/tags/前端/">前端</a> <a class="tag tag--primary tag--small t-link" href="/tags/面试/">面试</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/01/06/map-case/" data-tooltip="网站地图方案汇总，教你玩转可视化">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/12/31/f2e-2018/" data-tooltip="用 Python 爬取 2018 前端热点">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2019/01/06/f2e-interview/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2019/01/06/f2e-interview/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2019/01/06/f2e-interview/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/01/06/map-case/" data-tooltip="网站地图方案汇总，教你玩转可视化">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/12/31/f2e-2018/" data-tooltip="用 Python 爬取 2018 前端热点">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2019/01/06/f2e-interview/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2019/01/06/f2e-interview/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2019/01/06/f2e-interview/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2019/01/06/f2e-interview/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2019/01/06/f2e-interview/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2019/01/06/f2e-interview/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

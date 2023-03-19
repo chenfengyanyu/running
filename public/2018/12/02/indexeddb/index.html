@@ -1,0 +1,532 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>浏览器存储之争 - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="数据存储一直是前端的软肋，从 4KB 左右的 Cookie 到最多 10MB 的 Storage，存储之争从未停止。然而有些问题还是不能解决，这时候我们遇见了她：IndexedDB。">
+<meta name="keywords" content="html5,indexeddb">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="浏览器存储之争">
+<meta property="og:url" content="http://jartto.wang/2018/12/02/indexeddb/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="数据存储一直是前端的软肋，从 4KB 左右的 Cookie 到最多 10MB 的 Storage，存储之争从未停止。然而有些问题还是不能解决，这时候我们遇见了她：IndexedDB。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/indexeddb/hack.png">
+<meta property="og:updated_time" content="2018-12-09T12:32:45.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="浏览器存储之争">
+<meta name="twitter:description" content="数据存储一直是前端的软肋，从 4KB 左右的 Cookie 到最多 10MB 的 Storage，存储之争从未停止。然而有些问题还是不能解决，这时候我们遇见了她：IndexedDB。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/indexeddb/hack.png">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/indexeddb/logo.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/indexeddb/logo.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            浏览器存储之争
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2018-12-02T22:06:53+08:00">
+	  
+		    2018/12月/02 22:06:53
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>数据存储一直是前端的软肋，从 4KB 左右的 Cookie 到最多 10MB 的 Storage，存储之争从未停止。然而有些问题还是不能解决，这时候我们遇见了她：IndexedDB。<br><a id="more"></a></p>
+<h4 id="一、前端存储困境"><a href="#一、前端存储困境" class="headerlink" title="一、前端存储困境"></a>一、前端存储困境</h4><div class="alert warning"><p>随着业务场景的深入，前端对数据存储有了更高的要求，更多的问题也逐渐暴露出来。</p>
+</div>
+<p>1.存储空间小<br>2.无法搜索数据<br>3.大量数据如何存储<br>4.无法提供事务支持</p>
+<h4 id="二、目前存储方式"><a href="#二、目前存储方式" class="headerlink" title="二、目前存储方式"></a>二、目前存储方式</h4><p>1.<code>Cookie</code></p>
+<ul>
+<li><code>Cookie</code> 的大小不超过4KB，且每次请求都会发送回服务器，占用额外的流量；</li>
+<li>此外，<code>Cookies</code> 只能是字符串；</li>
+<li>浏览器里存储 <code>Cookies</code> 的空间有限，很多用户禁止浏览器使用 <code>Cookies</code>；</li>
+<li><code>Safari</code> 中 <code>Cookie</code> 不能存储中文字符；</li>
+</ul>
+<div class="alert info"><p>所以，Cookies 只能用来存储小量的非关键的数据。</p>
+</div>
+<p>2.<code>Storage</code></p>
+<ul>
+<li><code>LocalStorage</code> 在 <code>2.5MB</code> 到 <code>10MB</code> 之间（各家浏览器不同）；</li>
+<li>不提供搜索功能；</li>
+<li>不能建立自定义的索引；</li>
+<li><code>LocalStorage</code> 是用 <code>key-value</code> 键值模式存储数据，它存储的数据都是字符串形式；</li>
+<li><code>Localstorage</code> 就是专门为小数量数据设计的，它的 <code>api</code> 是同步的；</li>
+</ul>
+<p>3.<a href="https://www.w3.org/TR/webdatabase/" target="_blank" rel="noopener"><code>WebSQL</code></a><br><code>WebSQL</code> 也是一种在浏览器里存储数据的技术，跟 <code>IndexedDB</code> 不同的是，<code>IndexedDB</code> 更像是一个 <code>NoSQL</code> 数据库，而 <code>WebSQL</code> 更像是关系型数据库，使用 <code>SQL</code> 查询数据。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">This document was on the W3C Recommendation track but specification work has stopped. The specification reached an impasse: all interested implementors have used the same SQL backend (Sqlite), but we need multiple independent implementations to proceed along a standardisation path.</span><br></pre></td></tr></table></figure>
+<div class="alert danger"><p><code>W3C</code> 已经不再支持这种技术。</p>
+</div>
+<p>鉴于以上问题，一种新的存储手段是迫切需要的，以此解决现有存储的不足之处。</p>
+<h4 id="三、如何解决？"><a href="#三、如何解决？" class="headerlink" title="三、如何解决？"></a>三、如何解决？</h4><p>那么既然抛出了这么多问题，我们有没有什么处理的手段呢？</p>
+<div class="alert success"><p><code>IndexedDB</code> 提供了一个解决方案。</p>
+</div>
+<p><code>IndexedDB</code> 是一种浏览器端文档数据库，可以被网页脚本程序创建和操作。它允许储存大量数据，并且提供查询接口，且可以建立索引。</p>
+<p><code>IndexedDB</code> 是一种低级 <code>API</code> ，用于客户端存储大量结构化数据(包括, 文件/ <code>blobs</code>)。该 <code>API</code> 使用索引来实现对该数据的高性能搜索。虽然 <code>Web Storage</code> 对于存储较少量的数据很有用，但对于存储更大量的结构化数据来说，这种方法不太有用。</p>
+<p><code>IndexedDB</code> 不属于关系型数据库（不支持 <code>SQL</code> 查询语句），更接近 <code>NoSQL</code> 数据库。</p>
+<h4 id="四、兼容性"><a href="#四、兼容性" class="headerlink" title="四、兼容性"></a>四、兼容性</h4><div class="alert success"><p>在对某个技术进行尝试前，我们可能最关心的是他的兼容性。</p>
+</div>
+<p><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/indexeddb/hack.png" alt="hack"></p>
+<p>上图可以看出，几乎所有浏览器都对 <code>indexedDB</code> 有了不错的支持，所以可以放心大胆的去在你的项目中使用。</p>
+<h4 id="五、indexedDB-特点"><a href="#五、indexedDB-特点" class="headerlink" title="五、indexedDB 特点"></a>五、indexedDB 特点</h4><p>1.键值对储存<br><code>IndexedDB</code> 内部采用对象仓库 <code>object store</code> 存放数据。所有类型的数据都可以直接存入，包括 <code>JavaScript</code> 对象。对象仓库中，数据以「键值对」的形式保存，每一个数据记录都有对应的主键。</p>
+<div class="alert info"><p>主键是独一无二的，不能有重复，否则会抛出一个错误。</p>
+</div>
+<p>2.属于异步操作<br><code>IndexedDB</code> 操作时不会锁死浏览器，用户依然可以进行其他操作，这与 <code>LocalStorage</code> 形成对比，因为后者是同步操作。</p>
+<div class="alert info"><p>异步设计是为了防止大量数据的读写，拖慢网页的表现。</p>
+</div>
+<p>3.支持事务<br><code>IndexedDB</code> 支持事务 <code>transaction</code>，这意味着一系列操作步骤之中，只要有一步失败，整个事务就都取消，数据库回滚到事务发生之前的状态，不存在只改写一部分数据的情况。</p>
+<p>4.同源限制<br><code>IndexedDB</code> 受到同源限制，每一个数据库对应创建它的域名。</p>
+<div class="alert info"><p>网页只能访问自身域名下的数据库，而不能访问跨域的数据库。</p>
+</div>
+<p>5.储存空间大<br><code>IndexedDB</code> 的储存空间比 <code>LocalStorage</code> 大得多，一般来说不少于 <code>250MB</code>，甚至没有上限。</p>
+<p>6.支持二进制储存<br><code>IndexedDB</code> 不仅可以储存字符串，还可以储存二进制数据 <code>ArrayBuffer</code> 对象和 <code>Blob</code> 对象。</p>
+<h4 id="六、应用场景"><a href="#六、应用场景" class="headerlink" title="六、应用场景"></a>六、应用场景</h4><p>当一个技术出现在你眼前，可能大家会有同样的疑问：<br><div class="alert warning"><p>他的应用场景是什么，是否适合我的应用程序？</p>
+</div><br>1.你的用户通过浏览器访问您的应用程序（浏览器）支持 <code>IndexedDB API</code> 吗 ?<br>2.你需要存储大量的数据在客户端？<br>3.你需要在一个大型的数据集合中快速定位单个数据点吗？<br>4.你的架构在客户端需要事务支持吗？</p>
+<p>如果你有上面几条提到的需求，<code>IndexedDB</code> 可能是你很好的选择。</p>
+<h4 id="七、快速开始"><a href="#七、快速开始" class="headerlink" title="七、快速开始"></a>七、快速开始</h4><p>1.使用前，需要进行必要的判空处理<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(!<span class="built_in">window</span>.indexedDB)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'你的浏览器不支持 IndexedDB '</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>2.我们来创建一个请求打开 <code>IndexedDB</code><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> request = <span class="built_in">window</span>.indexedDB.open(<span class="string">'jarttoDB'</span>, <span class="number">2</span>);</span><br></pre></td></tr></table></figure></p>
+<p>第一个参数是数据库的名称，第二个参数是数据库的版本号。版本号可以在升级数据库时用来调整数据库结构和数据。当我们增加数据库版本号时，会触发 <code>onupgradeneeded</code> 事件，这时可能会出现成功、失败和阻止事件三种情况。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> db;</span><br><span class="line">request.onerror = <span class="function">(<span class="params">event</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Error'</span>, event);</span><br><span class="line">&#125;</span><br><span class="line">request.onupgradeneeded = <span class="function">(<span class="params">event</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Upgrading'</span>);</span><br><span class="line">    db = event.target.result;</span><br><span class="line">    <span class="keyword">let</span> objectStore = db.createObjectStore(<span class="string">'blogs'</span>, &#123; <span class="attr">keyPath</span> : <span class="string">'rollNo'</span> &#125;);</span><br><span class="line">&#125;;</span><br><span class="line">request.onsuccess = <span class="function">(<span class="params">event</span>) =&gt;</span> &#123;</span><br><span class="line">    db = event.target.result;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Success'</span>, db);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>onupgradeneeded</code> 事件在第一次打开页面初始化数据库时会被调用，或在当有版本号变化时。所以，我们应该在<code>onupgradeneeded</code> 函数里创建存储数据。</p>
+<p>如果没有版本号变化，而且页面之前被打开过，这时候就会获得一个 <code>onsuccess</code> 事件。如果有错误发生时则触发 <code>onerror</code> 事件；如果你之前没有关闭连接，则会触发 <code>onblocked</code> 事件;</p>
+<div class="alert info"><p>大致套路如此，下面我们来一个完整的数据操作演练一下。</p>
+</div>
+<h4 id="八、CRUD"><a href="#八、CRUD" class="headerlink" title="八、CRUD"></a>八、CRUD</h4><p>1.增：为了往数据库里新增数据，我们首先需要创建一个事务，并要求具有读写权限。在 <code>indexedDB</code> 里任何的存取对象的操作都需要放在事务里执行。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> transaction = db.transaction([<span class="string">'blogs'</span>],<span class="string">'readwrite'</span>);</span><br><span class="line">transaction.oncomplete = <span class="function">(<span class="params">event</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Success'</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">transaction.onerror = <span class="function">(<span class="params">event</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Error'</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> objectStore = transaction.objectStore(<span class="string">'blogs'</span>);</span><br><span class="line">objectStore.add(&#123;<span class="attr">rollNo</span>: rollNo, <span class="attr">name</span>: name&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>2.删：删除跟新增一样，需要创建事务，然后调用删除接口，通过 <code>key</code> 删除对象。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.transaction([<span class="string">'blogs'</span>],<span class="string">'readwrite'</span>).objectStore(<span class="string">'blogs'</span>).delete(rollNo);</span><br></pre></td></tr></table></figure></p>
+<p>3.改：为了更新一个对象，首先要把它取出来，修改，然后再放回去。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> transaction = db.transaction([<span class="string">'blogs'</span>],<span class="string">'readwrite'</span>);</span><br><span class="line"><span class="keyword">let</span> objectStore = transaction.objectStore(<span class="string">'blogs'</span>);</span><br><span class="line"><span class="keyword">let</span> request = objectStore.get(rollNo);</span><br><span class="line"></span><br><span class="line">request.onsuccess = <span class="function">(<span class="params">event</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`Updating : <span class="subst">$&#123;request.result.name&#125;</span>`</span>);</span><br><span class="line">  request.result.name = name;</span><br><span class="line">  objectStore.put(request.result);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>4.查：往 <code>get()</code> 方法里传入对象的 <code>key</code> 值，取出相应的对象。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> request = db.transaction([<span class="string">'blogs'</span>],<span class="string">'readwrite'</span>).objectStore(<span class="string">'blogs'</span>).get(rollNo);</span><br><span class="line">request.onsuccess = <span class="function">(<span class="params">event</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`Name : <span class="subst">$&#123;request.result.name&#125;</span>`</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<h4 id="九、总结"><a href="#九、总结" class="headerlink" title="九、总结"></a>九、总结</h4><p>我们从浏览器的储存说起，引出了前端存储的一系列问题。之后通过简单的 <code>IndexedDB</code> 介绍，以及实际的 <code>CRUD</code> 操作来全面了解 <code>IndexedDB</code>。当然，这些还只是皮毛，我们还有很长的路要走。</p>
+<p>本篇文章主要起到入门学习作用，如果你只想简单了解一下，那么看到这里就可以了。如果你想要深入学习，那么请移步我的下一篇文章：<a href="#">深入学习 IndexedDB</a>。</p>
+<h4 id="十、参考："><a href="#十、参考：" class="headerlink" title="十、参考："></a>十、参考：</h4><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/IndexedDB_API" target="_blank" rel="noopener">MDN</a><br><a href="http://www.ruanyifeng.com/blog/2018/07/indexeddb.html" target="_blank" rel="noopener">浏览器数据库 IndexedDB 入门教程</a><br><a href="https://blog.csdn.net/inter_peng/article/details/49133081" target="_blank" rel="noopener">IndexedDB: 浏览器里内置的数据库简介</a><br><a href="http://web.jobbole.com/81793/" target="_blank" rel="noopener">前端的数据库</a><br><a href="http://www.webhek.com/post/indexeddb.html" target="_blank" rel="noopener">IndexedDB:浏览器里内置的数据库</a></p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/html5/">html5</a> <a class="tag tag--primary tag--small t-link" href="/tags/indexeddb/">indexeddb</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/12/05/git-flow/" data-tooltip="Git 版本控制之 Git-Flow">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/11/30/about-devops/" data-tooltip="DevOps 简介">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/12/02/indexeddb/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/12/02/indexeddb/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/12/02/indexeddb/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/12/05/git-flow/" data-tooltip="Git 版本控制之 Git-Flow">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/11/30/about-devops/" data-tooltip="DevOps 简介">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/12/02/indexeddb/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/12/02/indexeddb/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/12/02/indexeddb/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/12/02/indexeddb/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/12/02/indexeddb/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/12/02/indexeddb/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

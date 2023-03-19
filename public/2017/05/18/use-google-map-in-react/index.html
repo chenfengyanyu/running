@@ -1,0 +1,528 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>在 React 中接入 Google Map - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="业务需求，正好对接了 google map 。初次使用，碰到了很多细节问题，于是总结整理，也算是学习过程自己踩过的坑吧。">
+<meta name="keywords" content="google,map">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="在 React 中接入 Google Map">
+<meta property="og:url" content="http://jartto.wang/2017/05/18/use-google-map-in-react/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="业务需求，正好对接了 google map 。初次使用，碰到了很多细节问题，于是总结整理，也算是学习过程自己踩过的坑吧。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2017-12-06T07:49:20.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="在 React 中接入 Google Map">
+<meta name="twitter:description" content="业务需求，正好对接了 google map 。初次使用，碰到了很多细节问题，于是总结整理，也算是学习过程自己踩过的坑吧。">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/googleMap0.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="http://7xvi3w.com1.z0.glb.clouddn.com/googleMap0.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            在 React 中接入 Google Map
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2017-05-18T22:43:57+08:00">
+	  
+		    2017/5月/18 22:43:57
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>业务需求，正好对接了 google map 。初次使用，碰到了很多细节问题，于是总结整理，也算是学习过程自己踩过的坑吧。<br><a id="more"></a></p>
+<h4 id="一、React-中如何引入"><a href="#一、React-中如何引入" class="headerlink" title="一、React 中如何引入"></a>一、React 中如何引入</h4><p>1.使用 <a href="https://github.com/istarkov/google-map-react" target="_blank" rel="noopener">google-map-react</a> ；<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save google-map-react</span><br></pre></td></tr></table></figure></p>
+<p>使用示例：<br><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> GoogleMapReact <span class="keyword">from</span> <span class="string">'google-map-react'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> AnyReactComponent = <span class="function">(<span class="params">&#123; text &#125;</span>) =&gt;</span> &lt;div&gt;&#123;text&#125;&lt;<span class="regexp">/div&gt;;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">class SimpleMap extends Component &#123;</span></span><br><span class="line"><span class="regexp">  static defaultProps = &#123;</span></span><br><span class="line"><span class="regexp">    center: &#123;lat: 59.95, lng: 30.33&#125;,</span></span><br><span class="line"><span class="regexp">    zoom: 11</span></span><br><span class="line"><span class="regexp">  &#125;;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">  render() &#123;</span></span><br><span class="line"><span class="regexp">    return (</span></span><br><span class="line"><span class="regexp">      &lt;GoogleMapReact</span></span><br><span class="line"><span class="regexp">        defaultCenter=&#123;this.props.center&#125;</span></span><br><span class="line"><span class="regexp">        defaultZoom=&#123;this.props.zoom&#125;</span></span><br><span class="line"><span class="regexp">      &gt;</span></span><br><span class="line"><span class="regexp">        &lt;AnyReactComponent</span></span><br><span class="line"><span class="regexp">          lat=&#123;59.955413&#125;</span></span><br><span class="line"><span class="regexp">          lng=&#123;30.337844&#125;</span></span><br><span class="line"><span class="regexp">          text=&#123;'Kreyser Avrora'&#125;</span></span><br><span class="line"><span class="regexp">        /</span>&gt;</span><br><span class="line">      &lt;<span class="regexp">/GoogleMapReact&gt;</span></span><br><span class="line"><span class="regexp">    );</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p><a href="http://istarkov.github.io/google-map-react/map/simple_hover/" target="_blank" rel="noopener">demo 演示地址</a></p>
+<p>2.使用 <a href="https://github.com/tomchentw/react-google-maps" target="_blank" rel="noopener"> react-google-maps </a> ；<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install --save react-google-maps <span class="comment"># or</span></span><br><span class="line">yarn add react-google-maps</span><br></pre></td></tr></table></figure></p>
+<p>简单代码示例：<br><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;</span><br><span class="line">  withGoogleMap,</span><br><span class="line">  GoogleMap,</span><br><span class="line">  Marker,</span><br><span class="line">&#125; <span class="keyword">from</span> <span class="string">"react-google-maps"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> MapWithAMarker = withGoogleMap(<span class="function"><span class="params">props</span> =&gt;</span></span><br><span class="line">  &lt;GoogleMap</span><br><span class="line">    defaultZoom=&#123;<span class="number">8</span>&#125;</span><br><span class="line">    defaultCenter=&#123;&#123; <span class="attr">lat</span>: <span class="number">-34.397</span>, <span class="attr">lng</span>: <span class="number">150.644</span> &#125;&#125;</span><br><span class="line">  &gt;</span><br><span class="line">    &lt;Marker</span><br><span class="line">      position=&#123;&#123; <span class="attr">lat</span>: <span class="number">-34.397</span>, <span class="attr">lng</span>: <span class="number">150.644</span> &#125;&#125;</span><br><span class="line">    /&gt;</span><br><span class="line">  &lt;<span class="regexp">/GoogleMap&gt;</span></span><br><span class="line"><span class="regexp">);</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">&lt;MapWithAMarker</span></span><br><span class="line"><span class="regexp">  containerElement=&#123;&lt;div style=&#123;&#123; height: `400px` &#125;&#125; /</span>&gt;&#125;</span><br><span class="line">  mapElement=&#123;&lt;div style=&#123;&#123; <span class="attr">height</span>: <span class="string">`100%`</span> &#125;&#125; /&gt;&#125;</span><br><span class="line">/&gt;</span><br></pre></td></tr></table></figure></p>
+<p><a href="https://tomchentw.github.io/react-google-maps/" target="_blank" rel="noopener">demo 文档地址</a> ，<a href="https://tomchentw.github.io/#/demos/react-google-maps" target="_blank" rel="noopener">demo 演示地址</a></p>
+<p>友情提示，记得提前引入 <code>Google Map API</code>：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">"https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&amp;callback=initMap"</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="二、API-调用次数限制："><a href="#二、API-调用次数限制：" class="headerlink" title="二、API 调用次数限制："></a>二、API 调用次数限制：</h4><p><code>Google Map</code> 虽然是免费的，但是也是有调用次数限制，这里列举几条计数的规则：</p>
+<ul>
+<li>重新加载；</li>
+<li>调用地图；</li>
+<li>切换卫星模式；</li>
+<li>切换全景模式；</li>
+</ul>
+<h4 id="三、经纬度查询："><a href="#三、经纬度查询：" class="headerlink" title="三、经纬度查询："></a>三、经纬度查询：</h4><p>处理地图业务，可能会用到一个经纬度检测工具：<a href="http://www.gpsspg.com/maps.htm" target="_blank" rel="noopener"> GPS SPG </a></p>
+<h4 id="四、地图个性化"><a href="#四、地图个性化" class="headerlink" title="四、地图个性化"></a>四、地图个性化</h4><p>如果你不想局限于默认的地图，可以在这里找到答案：<a href="https://github.com/tomchentw/react-google-maps/issues/53" target="_blank" rel="noopener">个性化地图样式</a>：</p>
+<p>首先，我们需要下载一个 <code>JSON</code> 类型的<a href="https://github.com/wuct/react-google-maps/blob/21d70d0afd03aa802cdc69028c8ead2f35b3c1ce/examples/gh-pages/scripts/components/basics/StyledMap.js#L40-L43" target="_blank" rel="noopener">样式文件</a></p>
+<p>其次，引入文件：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> demoFancyMapStyles = <span class="built_in">require</span>(<span class="string">"./demoFancyMapStyles.json"</span>);</span><br></pre></td></tr></table></figure></p>
+<p>最后，在 <code>Map</code> 初始化的时候应用定义样式：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;GoogleMap</span><br><span class="line">    defaultZoom=&#123;<span class="number">5</span>&#125;</span><br><span class="line">    defaultCenter=&#123;props.center&#125;</span><br><span class="line">    defaultOptions=&#123;&#123; <span class="attr">styles</span>: demoFancyMapStyles &#125;&#125;</span><br><span class="line">  &gt;</span><br><span class="line">&lt;<span class="regexp">/GoogleMap&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>OK，大功告成，可以刷新页面查看新的地图样式了。此外，这里推荐两款样式相关的工具：</p>
+<ul>
+<li><a href="https://snazzymaps.com/editor/customize/2" target="_blank" rel="noopener">地图样式编辑器</a></li>
+<li><a href="https://snazzymaps.com/explore?text=&amp;sort=&amp;tag=&amp;color=gray" target="_blank" rel="noopener">样式库</a></li>
+</ul>
+<h4 id="五、关于-DrawingManager"><a href="#五、关于-DrawingManager" class="headerlink" title="五、关于 DrawingManager"></a>五、关于 <code>DrawingManager</code></h4><p>1.<code>DrawingManager undefined</code> 处理方式：<br>遇到这个问题，需要在加载 <code>Map API</code> 的时候初始化 <code>libraries=drawing</code>，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=&quot;https://maps.googleapis.com/maps/api/js?key=AIzaSyB8Qspe99idJxy7QlEi_VIH2Bcl9y5Mlqk&amp;libraries=drawing&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
+<p>2.<code>DrawingManagerOption</code> 说明文档：</p>
+<ul>
+<li><a href="https://developers.google.com/maps/documentation/javascript/drawinglayer?hl=zh-cn" target="_blank" rel="noopener"> Drawinglayer </a></li>
+<li><a href="https://developers.google.com/maps/documentation/javascript/reference?hl=zh-cn#DrawingManagerOptions" target="_blank" rel="noopener">DrawingManagerOptions</a></li>
+</ul>
+<p>3.<code>DrawManager</code> 画图按键监听：<br>当我们使用 <code>DrawManager</code> 的时候，可能会有按键监听的需求，那么只需要这么写：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">google.maps.event.addDomListener(<span class="built_in">document</span>, <span class="string">'keyup'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;    </span><br><span class="line">  <span class="keyword">var</span> code = (e.keyCode ? e.keyCode : e.which);</span><br><span class="line">  <span class="keyword">if</span> (code === <span class="number">27</span>) &#123;</span><br><span class="line">    drawingManager.setDrawingMode(<span class="literal">null</span>);</span><br><span class="line">    polygon.setMap(<span class="literal">null</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>更多内容，请查看：<a href="http://jsfiddle.net/upsidown/a1j58c2b/" target="_blank" rel="noopener">参考示例</a></p>
+<p>4.对于 <code>DrawManager</code> 来说，清除地图时需要调用 <code>setDrawingMode(null)</code>：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>._drawingManager.setDrawingMode(<span class="literal">null</span>);</span><br><span class="line">clearFlag.setMap &amp;&amp; clearFlag.setMap(<span class="literal">null</span>);</span><br></pre></td></tr></table></figure></p>
+<p>此处参考：<br><a href="http://stackoverflow.com/questions/30342519/how-to-remove-previous-shape-when-drawing-new-shape-is-started-on-google-map" target="_blank" rel="noopener">how-to-remove-previous-shape-when-drawing-new-shape-is-started-on-google-map</a></p>
+<p>5.<code>Draw Manage</code> 如果要拖动图形，需要把 <code>Clickable</code> 设置为 <code>True</code><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">clickable: <span class="literal">true</span>,</span><br><span class="line">draggable: <span class="literal">true</span>,</span><br></pre></td></tr></table></figure></p>
+<p>6.扩展 <code>Google Draw Manager Toolbar</code><br>我们可以发现，<code>Draw Manager</code> 只支持给定的配置，如果我们有扩展的需求呢？此处，我们需要清除 <code>Map</code> 上绘制的图形，所以只能自行扩展，思路如下：<br><div class="alert info"><p>添加一个与 <code>Draw Manager</code> 相似的按钮，控制显示位置即可。</p>
+</div><br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.clearbtn</span>&#123;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#e2e1e1</span>;</span><br><span class="line">  <span class="attribute">border-left</span>: <span class="number">1px</span> solid <span class="number">#f6f4f4</span>;</span><br><span class="line">  <span class="attribute">display</span>: inline-block;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">2.5px</span> <span class="number">5px</span>;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">bottom</span>: <span class="number">4px</span>;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">50%</span>;</span><br><span class="line">  <span class="attribute">margin-left</span>: <span class="number">48px</span>;</span><br><span class="line">  <span class="attribute">cursor</span>: pointer;</span><br><span class="line">  <span class="attribute">background</span>: <span class="number">#fff</span>;</span><br><span class="line">  &amp;:hover&#123;</span><br><span class="line">    <span class="selector-tag">background</span>: <span class="selector-id">#eceaea</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>7.如何给 <code>Draw Manager</code> 添加修改监听事件？<br><div class="alert success"><p>绘制图形最难的就是对其添加事件监听，我们需要注意两个事件 <code>set_at</code> 和 <code>insert_at</code></p>
+</div></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Add an event listener that selects the newly-drawn shape when the user</span></span><br><span class="line">    <span class="comment">// mouses down on it.</span></span><br><span class="line"><span class="keyword">var</span> newShape = e.overlay;</span><br><span class="line">newShape.type = e.type;</span><br><span class="line">google.maps.event.addListener(newShape, <span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    google.maps.event.addListener(newShape.getPath(), <span class="string">'set_at'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"test"</span>);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    google.maps.event.addListener(newShape.getPath(), <span class="string">'insert_at'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"test"</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">  setSelection(newShape);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>此处参考：</p>
+<ul>
+<li><a href="http://stackoverflow.com/questions/12515748/event-after-modifying-polygon-in-google-maps-api-v3" target="_blank" rel="noopener">event-after-modifying-polygon-in-google-maps-api-v3</a></li>
+<li><a href="https://developers.google.com/maps/documentation/javascript/reference?hl=zh-cn#Polygon" target="_blank" rel="noopener">多边形：Polygon Class</a></li>
+</ul>
+<h4 id="六、地图事件监听"><a href="#六、地图事件监听" class="headerlink" title="六、地图事件监听"></a>六、地图事件监听</h4><p>上述例子只是列举了个别监听事件，详细请查看文档：<a href="https://developers.google.com/maps/documentation/javascript/reference?hl=zh-cn#MapsEventListener" target="_blank" rel="noopener">事件监听 API </a></p>
+<p>示例代码：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">handleOverlayComplete(event) &#123;</span><br><span class="line"><span class="keyword">let</span> newShape = event.overlay;</span><br><span class="line">clearFlag = event.overlay;</span><br><span class="line">newShape.type = event.type;</span><br><span class="line">shapes.push(newShape);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">this</span>._drawingManager.getDrawingMode()) &#123;</span><br><span class="line">  <span class="keyword">this</span>._drawingManager.setDrawingMode(<span class="literal">null</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (newShape.type === <span class="string">'polygon'</span>) &#123;</span><br><span class="line">  google.maps.event.addListener(newShape.getPath(), <span class="string">'set_at'</span>, () =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(newShape.getPaths(), <span class="string">'polygon_set_at'</span>);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  google.maps.event.addListener(newShape.getPath(), <span class="string">'insert_at'</span>, () =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(newShape.getPaths(), <span class="string">'polygon_insert_at'</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (newShape.type === <span class="string">'rectangle'</span>) &#123;</span><br><span class="line">    google.maps.event.addListener(newShape, <span class="string">'bounds_changed'</span>, () =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(newShape.getBounds(), <span class="string">'rectangle_changed'</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (newShape.type === <span class="string">'circle'</span>) &#123;</span><br><span class="line">    google.maps.event.addListener(newShape, <span class="string">'radius_changed'</span>, () =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(newShape.getRadius(), <span class="string">'circle_radius_changed'</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">    google.maps.event.addListener(newShape, <span class="string">'center_changed'</span>, () =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(newShape.getCenter().lat(), newShape.getCenter().lng(), <span class="string">'circle_center_changed'</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="七、引入多个-Map-Lib"><a href="#七、引入多个-Map-Lib" class="headerlink" title="七、引入多个 Map Lib"></a>七、引入多个 <code>Map Lib</code></h4><p>多个 <code>Map Lib</code> 需要在引入 <code>API</code> 的时候，需要用 <code>&amp;</code> 连接起来，如： <code>libraries=geometry,places&amp;sensor=false</code>，示例如下：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">src</span>=<span class="string">"http://maps.googleapis.com/maps/api/js?libraries=geometry,places&amp;sensor=false"</span>&gt;</span><span class="undefined"></span></span><br></pre></td></tr></table></figure></p>
+<p>此处容易出现的问题，如：<br>1.this api project is not authorized to use this API <a href="http://stackoverflow.com/questions/32994634/this-api-project-is-not-authorized-to-use-this-api-please-ensure-that-this-api" target="_blank" rel="noopener">如何解决</a>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">From the picture you posted, it say it&apos;s disabled...</span><br><span class="line"></span><br><span class="line">Go to Developer Console -&gt; APIs &amp; auth -&gt; APIs</span><br><span class="line"></span><br><span class="line">Search for Geocoding and click on Google Maps Geocoding API -&gt; Enable API. Do the same thing for Geolocating</span><br></pre></td></tr></table></figure></p>
+<p><a href="https://developers.google.com/maps/documentation/javascript/libraries" target="_blank" rel="noopener">API 文档</a></p>
+<h4 id="八、如何更改-Marker-图标："><a href="#八、如何更改-Marker-图标：" class="headerlink" title="八、如何更改 Marker 图标："></a>八、如何更改 <code>Marker</code> 图标：</h4><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> image = &#123;</span><br><span class="line">  url: <span class="string">'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'</span>,</span><br><span class="line">  <span class="comment">// This marker is 20 pixels wide by 32 pixels high.</span></span><br><span class="line">  size: <span class="keyword">new</span> google.maps.Size(<span class="number">20</span>, <span class="number">32</span>),</span><br><span class="line">  <span class="comment">// The origin for this image is (0, 0).</span></span><br><span class="line">  origin: <span class="keyword">new</span> google.maps.Point(<span class="number">0</span>, <span class="number">0</span>),</span><br><span class="line">  <span class="comment">// The anchor for this image is the base of the flagpole at (0, 32).</span></span><br><span class="line">  anchor: <span class="keyword">new</span> google.maps.Point(<span class="number">0</span>, <span class="number">32</span>)</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">&lt;Marker position=&#123;marker.position&#125; key=&#123;index&#125; icon=&#123;image&#125; /&gt;</span><br></pre></td></tr></table></figure>
+<p>1.为标记<a href="https://developers.google.com/maps/documentation/javascript/markers?hl=zh-cn#animate" target="_blank" rel="noopener">添加动画</a>：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">marker = <span class="keyword">new</span> google.maps.Marker(&#123;</span><br><span class="line">  map: map,</span><br><span class="line">  draggable: <span class="literal">true</span>,</span><br><span class="line">  animation: google.maps.Animation.DROP,</span><br><span class="line">  position: &#123;<span class="attr">lat</span>: <span class="number">59.327</span>, <span class="attr">lng</span>: <span class="number">18.067</span>&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>2.标记如何全部显示在可见区域：</p>
+<ul>
+<li><p><code>Marker</code> 适配示例</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> markers = [];<span class="comment">//some array</span></span><br><span class="line"><span class="keyword">var</span> bounds = <span class="keyword">new</span> google.maps.LatLngBounds();</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; markers.length; i++) &#123;</span><br><span class="line"> bounds.extend(markers[i].getPosition());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">map.fitBounds(bounds);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>Circle</code> 适配示例</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> bounds = circle.getBounds();</span><br><span class="line">bounds.union(rectangle.getBounds();</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> aa=<span class="number">0</span>; aa &lt; arrayLatitude.length; aa++) &#123;</span><br><span class="line">  <span class="keyword">var</span> points = <span class="keyword">new</span> google.maps.LatLng(arrayLatitude[aa], arrayLongitude[aa]);</span><br><span class="line">  bounds.extend(points);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">map.fitBounds(bounds);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>更多详情，请参考如下：<br><a href="http://stackoverflow.com/questions/19304574/center-set-zoom-of-map-to-cover-all-visible-markers" target="_blank" rel="noopener"> Marker </a><br><a href="http://stackoverflow.com/questions/9768439/how-to-google-map-circles-fit-the-map" target="_blank" rel="noopener"> Circle </a><br><a href="http://stackoverflow.com/questions/19887218/how-can-i-fitbounds-for-all-shapes-on-the-map" target="_blank" rel="noopener"> Shape </a><br><a href="https://developers.google.com/maps/documentation/javascript/reference#LatLngBounds" target="_blank" rel="noopener"> LatLngBounds </a></p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/google/">google</a> <a class="tag tag--primary tag--small t-link" href="/tags/map/">map</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/06/09/use-es6/" data-tooltip="ES6 边学边用一">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/05/03/guide-of-howler/" data-tooltip="Howlerjs 音频播放插件">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2017/05/18/use-google-map-in-react/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2017/05/18/use-google-map-in-react/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2017/05/18/use-google-map-in-react/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/06/09/use-es6/" data-tooltip="ES6 边学边用一">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/05/03/guide-of-howler/" data-tooltip="Howlerjs 音频播放插件">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2017/05/18/use-google-map-in-react/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2017/05/18/use-google-map-in-react/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2017/05/18/use-google-map-in-react/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2017/05/18/use-google-map-in-react/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2017/05/18/use-google-map-in-react/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2017/05/18/use-google-map-in-react/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

@@ -1,0 +1,535 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>yslow 优化之 add expires headers - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="相信很多前端童鞋都用过 yslow 来优化页面吧，不知道有多少人会被 add expires headers这一规则困扰，今天我来说道说道。">
+<meta name="keywords" content="优化,yslow">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="yslow 优化之 add expires headers">
+<meta property="og:url" content="http://jartto.wang/2016/12/08/yslow-add-expires-headers/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="相信很多前端童鞋都用过 yslow 来优化页面吧，不知道有多少人会被 add expires headers这一规则困扰，今天我来说道说道。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/yslow_test.png">
+<meta property="og:updated_time" content="2016-12-09T05:28:13.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="yslow 优化之 add expires headers">
+<meta name="twitter:description" content="相信很多前端童鞋都用过 yslow 来优化页面吧，不知道有多少人会被 add expires headers这一规则困扰，今天我来说道说道。">
+<meta name="twitter:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/yslow_test.png">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/yslow.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="http://7xvi3w.com1.z0.glb.clouddn.com/yslow.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            yslow 优化之 add expires headers
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2016-12-08T22:57:06+08:00">
+	  
+		    2016/12月/08 22:57:06
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>相信很多前端童鞋都用过 yslow 来优化页面吧，不知道有多少人会被 add expires headers这一规则困扰，今天我来说道说道。<br><a id="more"></a><br>本文就不介绍yslow了，这里着重介绍一下优化项中的 add expires headers 。正如短板效应所阐释的道理，网站评分可能会因为这一项评分F而拉低，所以，让我们一起来弥补短板吧。</p>
+<h4 id="一、使用-yslow"><a href="#一、使用-yslow" class="headerlink" title="一、使用 yslow"></a>一、使用 yslow</h4><p>我们先从网站评分看起，一图胜千言：<br><img src="http://7xvi3w.com1.z0.glb.clouddn.com/yslow_test.png" alt="yslow"><br>由于 add expires headers 这一项，我的网站整体评分为B，所以，我必须从这里下手。</p>
+<h4 id="二、add-expires-headers"><a href="#二、add-expires-headers" class="headerlink" title="二、add expires headers"></a>二、add expires headers</h4><p>首先，我们需要了解 add expires headers 到底是什么？<br><div class="alert success"><p>Expires headers tell the browser whether they should request a specific file from the server or whether they should grab it from the browser’s cache.</p>
+</div></p>
+<p>简单来说：就是向文档添加一个有效期，告诉浏览器这个文档的有效性和持久性。如果已有缓存，文档就可以从浏览器中的缓存(除已经过期)而不是从服务器读取。接着，客户端验证缓存中的副本，看看是否过期或者失效，以决定是否必须从服务器获得更新。</p>
+<p>添加该项主要是可以加快网站的访问速度，对于一些不长更新的静态文件，都可以进行设置。如</p>
+<ul>
+<li>images: jpg, gif, png</li>
+<li>favicon/ico</li>
+<li>javascript</li>
+<li>css</li>
+</ul>
+<h4 id="三、如何操作"><a href="#三、如何操作" class="headerlink" title="三、如何操作"></a>三、如何操作</h4><p>很好，那我该如何设置？根据<a href="https://gtmetrix.com/add-expires-headers.html" target="_blank" rel="noopener">gtmetrix</a>中记载：<br><div class="alert success"><p>We define our Expires Headers in the .htaccess file. </p>
+</div><br>格式如下：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;IfModule mod_expires.c&gt;</span><br><span class="line"><span class="comment"># Enable expirations</span></span><br><span class="line">ExpiresActive On </span><br><span class="line"><span class="comment"># Default directive</span></span><br><span class="line">ExpiresDefault <span class="string">"access plus 1 month"</span></span><br><span class="line">&lt;/IfModule&gt;</span><br></pre></td></tr></table></figure></p>
+<p>嗯，大概可以看出端倪了，然而并没有什么卵用！看来我们需要先补一下课，学点关于.htaccess的知识。</p>
+<h4 id="四、关于-htaccess"><a href="#四、关于-htaccess" class="headerlink" title="四、关于 .htaccess"></a>四、关于 .htaccess</h4><p>.htaccess文件(或者”分布式配置文件”）提供了针对目录改变配置的方法，即，在一个特定的文档目录中放置一个包含一个或多个指令的文件， 以作用于此目录及其所有子目录。</p>
+<p>.htaccess可以帮我们实现包括：文件夹密码保护、用户自动重定向、自定义错误页面、改变你的文件扩展名、封禁特定IP地址的用户、只允许特定IP地址的用户、禁止目录列表，以及使用其他文件作为index文件等一些功能。</p>
+<p>Unix、Linux系统或者是任何版本的Apache Web服务器都是支持.htaccess的，但是有的主机服务商可能不允许你自定义自己的.htaccess文件。</p>
+<p>.htaccess文件中的配置指令作用于.htaccess文件所在的目录及其所有子目录，但是很重要的、需要注意的是，其上级目录也可能会有.htaccess文件，而指令是按查找顺序依次生效的，所以一个特定目录下的.htaccess文件中的指令可能会覆盖其上级目录中的.htaccess文件中的指令，即子目录中的指令会覆盖父目录或者主配置文件中的指令。</p>
+<p>更多内容请移步<a href="http://baike.baidu.com/link?url=aq11YuMa6rKydRu5V_8Mw7gpszrRR2UC0zQJ5tb_l_iL87TLd7XBncVRmbEyXNj7jYwca75XXedDqp0EAzvBWX3Fc-j_Ww0ASYn0o7wcMGO" target="_blank" rel="noopener">百科</a></p>
+<h4 id="五、添加以及配置-htaccess"><a href="#五、添加以及配置-htaccess" class="headerlink" title="五、添加以及配置 htaccess"></a>五、添加以及配置 htaccess</h4><p>好了，根据上面提取关键字：<br>1.大部分服务器都支持；<br>2.将 .htaccess 放置在项目目录下；<br>3.下级 .htaccess 会覆盖上级 .htaccess；</p>
+<p>基本清晰了，我们来开始：<br>进入test项目目录：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> <span class="built_in">test</span></span><br></pre></td></tr></table></figure></p>
+<p>创建 .htaccess 文件：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">''</span> &gt;&gt; .htaccess</span><br></pre></td></tr></table></figure></p>
+<p>打开 .htaccess 文件：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim .htaccess</span><br></pre></td></tr></table></figure></p>
+<p>拷贝如下代码：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;IfModule mod_expires.c&gt;</span><br><span class="line"><span class="comment"># Enable expirations</span></span><br><span class="line">ExpiresActive On </span><br><span class="line"><span class="comment"># Default directive</span></span><br><span class="line">ExpiresDefault <span class="string">"access plus 1 days"</span></span><br><span class="line"><span class="comment"># My favicon</span></span><br><span class="line">ExpiresByType image/x-icon <span class="string">"access plus 1 year"</span></span><br><span class="line"><span class="comment"># Images</span></span><br><span class="line">ExpiresByType image/gif <span class="string">"access plus 3 days"</span></span><br><span class="line">ExpiresByType image/png <span class="string">"access plus 3 days"</span></span><br><span class="line">ExpiresByType image/jpg <span class="string">"access plus 3 days"</span></span><br><span class="line">ExpiresByType image/jpeg <span class="string">"access plus 3 days"</span></span><br><span class="line"><span class="comment"># CSS</span></span><br><span class="line">ExpiresByType text/css <span class="string">"access plus 3 days"</span></span><br><span class="line"><span class="comment"># Javascript</span></span><br><span class="line">ExpiresByType application/javascript <span class="string">"access plus 3 days”</span></span><br><span class="line"><span class="string">FileETag none</span></span><br><span class="line"><span class="string">&lt;/IfModule&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>保存并退出，搞定～</p>
+<p>如果你觉得还是不够用，来看看下 面这个超完整版：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">FileETag None</span><br><span class="line">&lt;IfModule mod_expires.c&gt;</span><br><span class="line">    ExpiresActive on</span><br><span class="line">    ExpiresDefault                                      <span class="string">"access plus 1 month"</span></span><br><span class="line">    ExpiresByType text/css                              <span class="string">"access plus 1 year"</span></span><br><span class="line">    ExpiresByType application/json                      <span class="string">"access plus 0 seconds"</span></span><br><span class="line">    ExpiresByType application/xml                       <span class="string">"access plus 0 seconds"</span></span><br><span class="line">    ExpiresByType text/xml                              <span class="string">"access plus 0 seconds"</span></span><br><span class="line">    ExpiresByType image/x-icon                          <span class="string">"access plus 1 week"</span></span><br><span class="line">    ExpiresByType text/x-component                      <span class="string">"access plus 1 month"</span></span><br><span class="line">    ExpiresByType text/html                             <span class="string">"access plus 0 seconds"</span></span><br><span class="line">    ExpiresByType application/javascript                <span class="string">"access plus 1 year"</span></span><br><span class="line">    ExpiresByType application/x-web-app-manifest+json   <span class="string">"access plus 0 seconds"</span></span><br><span class="line">    ExpiresByType text/cache-manifest                   <span class="string">"access plus 0 seconds"</span></span><br><span class="line">    ExpiresByType audio/ogg                             <span class="string">"access plus 1 month"</span></span><br><span class="line">    ExpiresByType image/gif                             <span class="string">"access plus 1 month"</span></span><br><span class="line">    ExpiresByType image/jpeg                            <span class="string">"access plus 1 month"</span></span><br><span class="line">    ExpiresByType image/png                             <span class="string">"access plus 1 month"</span></span><br><span class="line">    ExpiresByType video/mp4                             <span class="string">"access plus 1 month"</span></span><br><span class="line">    ExpiresByType video/ogg                             <span class="string">"access plus 1 month"</span></span><br><span class="line">    ExpiresByType video/webm                            <span class="string">"access plus 1 month"</span></span><br><span class="line">    ExpiresByType application/atom+xml                  <span class="string">"access plus 1 hour"</span></span><br><span class="line">    ExpiresByType application/rss+xml                   <span class="string">"access plus 1 hour"</span></span><br><span class="line">    ExpiresByType application/font-woff                 <span class="string">"access plus 1 month"</span></span><br><span class="line">    ExpiresByType application/vnd.ms-fontobject         <span class="string">"access plus 1 month"</span></span><br><span class="line">    ExpiresByType application/x-font-ttf                <span class="string">"access plus 1 month"</span></span><br><span class="line">    ExpiresByType font/opentype                         <span class="string">"access plus 1 month"</span></span><br><span class="line">    ExpiresByType image/svg+xml                         <span class="string">"access plus 1 month"</span></span><br><span class="line">&lt;/IfModule&gt;</span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p>友情提示：配置完，记得重启服务器哦～</p>
+</div>
+<p>好了，赶快应用到你的网站吧，see me fly～</p>
+<h4 id="六、参考文档"><a href="#六、参考文档" class="headerlink" title="六、参考文档"></a>六、参考文档</h4><p>1.<a href="https://gtmetrix.com/use-cookie-free-domains.html" target="_blank" rel="noopener">yslow优化规则说明</a><br>2.<a href="http://baike.baidu.com/link?url=aq11YuMa6rKydRu5V" target="_blank" rel="noopener">关于htaccess</a><br>3.<a href="http://972169909-qq-com.iteye.com/blog/1796646" target="_blank" rel="noopener">配置过期响应头</a><br>4.<a href="http://www.poluoluo.com/jzxy/201009/95482.html" target="_blank" rel="noopener">yslow极限优化</a></p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/yslow/">yslow</a> <a class="tag tag--primary tag--small t-link" href="/tags/优化/">优化</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/12/14/together-to-learn-ant-design-of-react/" data-tooltip="一起来学习Ant Design">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/12/06/talk-about-ie-compatible-over-again/" data-tooltip="再谈ie浏览器兼容问题">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2016/12/08/yslow-add-expires-headers/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2016/12/08/yslow-add-expires-headers/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2016/12/08/yslow-add-expires-headers/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+            
+                <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/12/14/together-to-learn-ant-design-of-react/" data-tooltip="一起来学习Ant Design">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/12/06/talk-about-ie-compatible-over-again/" data-tooltip="再谈ie浏览器兼容问题">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2016/12/08/yslow-add-expires-headers/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2016/12/08/yslow-add-expires-headers/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2016/12/08/yslow-add-expires-headers/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2016/12/08/yslow-add-expires-headers/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2016/12/08/yslow-add-expires-headers/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2016/12/08/yslow-add-expires-headers/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+    
+        <script>
+             var disqus_config = function () {
+                 this.page.url = 'http://jartto.wang/2016/12/08/yslow-add-expires-headers/';
+                 
+                    this.page.identifier = '2016/12/08/yslow-add-expires-headers/';
+                                  
+             };
+            (function() {
+                var d = document, s = d.createElement('script');
+                var disqus_shortname = 'jartto';
+                s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+
+
+
+</html>

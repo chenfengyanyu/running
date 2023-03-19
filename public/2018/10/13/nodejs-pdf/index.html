@@ -1,0 +1,534 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>抓取网页生成 PDF - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="看到自己喜欢的在线文档，是不是总想保存下来慢慢学习。可是苦于没有现成的工具，这里我来介绍两个 JS 类库，只需要简单封装一下，从此想抓哪里抓哪里。">
+<meta name="keywords" content="nodejs,pdf,phantomjs,puppeteer">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="抓取网页生成 PDF">
+<meta property="og:url" content="http://jartto.wang/2018/10/13/nodejs-pdf/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="看到自己喜欢的在线文档，是不是总想保存下来慢慢学习。可是苦于没有现成的工具，这里我来介绍两个 JS 类库，只需要简单封装一下，从此想抓哪里抓哪里。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/puppeteer-test/temp/iphonex.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/puppeteer-test/temp/search.png">
+<meta property="og:updated_time" content="2018-10-27T00:30:31.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="抓取网页生成 PDF">
+<meta name="twitter:description" content="看到自己喜欢的在线文档，是不是总想保存下来慢慢学习。可是苦于没有现成的工具，这里我来介绍两个 JS 类库，只需要简单封装一下，从此想抓哪里抓哪里。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/puppeteer-test/temp/iphonex.png">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/pdf.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/pdf.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            抓取网页生成 PDF
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2018-10-13T21:17:30+08:00">
+	  
+		    2018/10月/13 21:17:30
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>看到自己喜欢的在线文档，是不是总想保存下来慢慢学习。可是苦于没有现成的工具，这里我来介绍两个 JS 类库，只需要简单封装一下，从此想抓哪里抓哪里。<br><a id="more"></a></p>
+<h4 id="一、使用-Phantomjs"><a href="#一、使用-Phantomjs" class="headerlink" title="一、使用 Phantomjs"></a>一、使用 Phantomjs</h4><p>1.简单使用<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> phantom = <span class="built_in">require</span>(<span class="string">'phantom'</span>);</span><br><span class="line">(<span class="keyword">async</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> instance = <span class="keyword">await</span> phantom.create();</span><br><span class="line">  <span class="keyword">const</span> page = <span class="keyword">await</span> instance.createPage();</span><br><span class="line">  <span class="keyword">await</span> page.on(<span class="string">'onResourceRequested'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">requestData</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.info(<span class="string">'Requesting'</span>, requestData.url);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> status = <span class="keyword">await</span> page.open(<span class="string">'http://jartto.wang'</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">await</span> page.render(<span class="string">'jarttoTest.pdf'</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">await</span> instance.exit();</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure></p>
+<p>上面是一个完整的示例，我们来看看最核心的部分，不妨放大一下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">page.open(address, <span class="function"><span class="keyword">function</span> (<span class="params">status</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (status !== <span class="string">'success'</span>) &#123;</span><br><span class="line">      <span class="comment">// --- Error opening the webpage ---</span></span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'Unable to load the address!'</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">// --- Keep Looping Until Render Completes ---</span></span><br><span class="line">      <span class="built_in">window</span>.setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">          page.render(output);</span><br><span class="line">          phantom.exit();</span><br><span class="line">      &#125;, <span class="number">200</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>嗯，结合起来，就完美了。下面就是最佳实践：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> page = <span class="built_in">require</span>(<span class="string">'webpage'</span>).create();</span><br><span class="line">page.open(<span class="string">'http://jartto.wang'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">status</span>) </span>&#123;</span><br><span class="line">  setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> ( status === <span class="string">'success'</span> ) &#123;</span><br><span class="line">        page.render(<span class="string">'test.png'</span>);</span><br><span class="line">        phantom.exit(); </span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'Page failed to load.'</span>); </span><br><span class="line">      &#125;</span><br><span class="line">  &#125;, <span class="number">200</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p>因为 open 操作会有响应时间，所以需要使用 setTimeout 来确保流程。</p>
+</div>
+<p>这里需要额外补充一点，如果需要检测 <code>UA</code>，那么你需要这么使用：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> page = <span class="built_in">require</span>(<span class="string">'webpage'</span>).create();</span><br><span class="line">page.userAgent = <span class="string">'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36'</span>;</span><br><span class="line"></span><br><span class="line">page.open(<span class="string">'https://securelearning.in'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  page.render(<span class="string">'image.png'</span>);</span><br><span class="line">  phantom.exit();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>这里就不再细说了，更多细节可以查看 <a href="https://github.com/chenfengyanyu/my-web-accumulation/tree/master/phantomjs-demo" target="_blank" rel="noopener">Demo</a>。</p>
+<h4 id="二、使用-Puppeteer"><a href="#二、使用-Puppeteer" class="headerlink" title="二、使用 Puppeteer"></a>二、使用 Puppeteer</h4><div class="alert info"><p>既然 Phantomjs 这么好用，为啥还要了解 Puppeteer ？</p>
+</div>
+<p>提到这个问题，我们不得不来说一下 <a href="https://github.com/GoogleChrome/puppeteer" target="_blank" rel="noopener"><code>Puppeteer</code></a> 强大的官方背景：Puppeteer（木偶） 英[ˌpʌpɪˈtɪə(r)]，美[ˌpʌpɪˈtɪr]，是 <code>Google Chrome</code> 团队官方的无界面 <code>（Headless）Chrome</code> 工具。所以不管从以后的发展还是完整性方面，<code>Puppeteer</code> 都是我们的首选。</p>
+<p>那么，<code>Puppeteer</code> 能用来干啥，有哪些功能：</p>
+<ul>
+<li>生成页面的截图和 <code>PDF</code></li>
+<li>爬取网站内容</li>
+<li>模拟登陆、自动提交表单，<code>UI</code> 测试，键盘输入等</li>
+<li>使用最新的 <code>JavaScript</code> 和浏览器功能，直接在最新版本的 <code>Chrome</code> 中运行测试。</li>
+<li>捕获网站的时间线跟踪，以帮助诊断性能问题</li>
+<li>测试 <code>Chrome</code> 扩展程序</li>
+</ul>
+<div class="alert success"><p>说了这么多，让我们快速开始，迅速的体验一把。</p>
+</div>
+<p>1.安装<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i puppeteer</span><br></pre></td></tr></table></figure></p>
+<p>2.注意事项<br><div class="alert warning"><p>安装并不会那么顺利，因为要依赖 Chromium ，所以你可能会遇到这样的异常。</p>
+</div><br>Note: When you install Puppeteer, it downloads a recent version of Chromium (~170MB Mac, ~282MB Linux, ~280MB Win) that is guaranteed to work with the API. To skip the download, see Environment variables.</p>
+<p>正确姿势：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=1</span><br><span class="line">npm i puppeteer</span><br><span class="line"></span><br><span class="line"><span class="comment"># 或者忽略依赖脚本安装 jartto's demo</span></span><br><span class="line">npm i --save puppeteer --ignore-scripts</span><br></pre></td></tr></table></figure></p>
+<p>如果不能翻墙下载，那么就手动去官网下载 <a href="https://download-chromium.appspot.com/" target="_blank" rel="noopener"><code>Chromium</code></a> 吧。当然，坑远不止这些，感兴趣的童鞋可以戳这里 <a href="http://jartto.wang/2018/10/23/puppeteerjs/">Puppeteer 异常处理</a>。</p>
+<p>3.下载核心包<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i puppeteer-core</span><br></pre></td></tr></table></figure></p>
+<p>从 1.7 版本开始发布 <code>puppeteer-core</code> ，他默认不会下载 <code>Chromium</code> 。<code>puppeteer-core</code> 使用已安装的浏览器 或远程浏览器。具体可以查看官网文档 <a href="https://github.com/GoogleChrome/puppeteer/blob/v1.9.0/docs/api.md#puppeteer-vs-puppeteer-core" target="_blank" rel="noopener"><code>puppeteer vs puppeteer-core</code></a>.</p>
+<p>4.示例<br>生成网站快照：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> puppeteer = <span class="built_in">require</span>(<span class="string">'puppeteer'</span>);</span><br><span class="line"></span><br><span class="line">(<span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> browser = <span class="keyword">await</span> puppeteer.launch();</span><br><span class="line">  <span class="keyword">const</span> page = <span class="keyword">await</span> browser.newPage();</span><br><span class="line">  <span class="keyword">await</span> page.goto(<span class="string">'http://jartto.wang'</span>);</span><br><span class="line">  <span class="keyword">await</span> page.screenshot(&#123;<span class="attr">path</span>: <span class="string">'blog.png'</span>&#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">await</span> browser.close();</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure></p>
+<p>通过网站地址，生成 <code>pdf</code>：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> puppeteer = <span class="built_in">require</span>(<span class="string">'puppeteer'</span>);</span><br><span class="line"></span><br><span class="line">(<span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> browser = <span class="keyword">await</span> puppeteer.launch();</span><br><span class="line">  <span class="keyword">const</span> page = <span class="keyword">await</span> browser.newPage();</span><br><span class="line">  <span class="keyword">await</span> page.goto(<span class="string">'https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#pdf'</span>, &#123;<span class="attr">waitUntil</span>: <span class="string">'networkidle2'</span>&#125;);</span><br><span class="line">  <span class="keyword">await</span> page.pdf(&#123;<span class="attr">path</span>: <span class="string">'jartto.pdf'</span>, <span class="attr">format</span>: <span class="string">'A4'</span>&#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">await</span> browser.close();</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure></p>
+<p>设置视口：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">await</span> page.setViewport(&#123;<span class="attr">width</span>: <span class="number">1024</span>, <span class="attr">height</span>: <span class="number">880</span>&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>设置 <code>cookie</code>：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> COOKS =[</span><br><span class="line">  &#123;</span><br><span class="line">  <span class="string">'domain'</span>: <span class="string">'jartto.wang'</span>,</span><br><span class="line">  <span class="string">'name'</span>: <span class="string">'user'</span>,</span><br><span class="line">  <span class="string">'value'</span>: <span class="string">'jartto'</span>,</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="keyword">await</span> page.setCookie(...COOKS);</span><br></pre></td></tr></table></figure></p>
+<p>模拟设备 iphonex 来生成截图：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> devices = <span class="built_in">require</span>(<span class="string">'puppeteer/DeviceDescriptors'</span>);</span><br><span class="line"><span class="keyword">const</span> puppeteer = <span class="built_in">require</span>(<span class="string">'puppeteer'</span>);</span><br><span class="line"></span><br><span class="line">(<span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">  <span class="comment">//创建浏览器示例对象</span></span><br><span class="line">  <span class="keyword">const</span> browser = <span class="keyword">await</span> puppeteer.launch(&#123;</span><br><span class="line">    executablePath: <span class="string">'chromium/Chromium.app/Contents/MacOS/Chromium'</span>,</span><br><span class="line">    headless: <span class="literal">true</span></span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="comment">// 通过浏览器实例 Browser 对象创建页面 Page 对象 </span></span><br><span class="line">  <span class="keyword">const</span> page = <span class="keyword">await</span> browser.newPage();</span><br><span class="line">  <span class="keyword">await</span> page.emulate(devices[<span class="string">'iPhone X'</span>]);</span><br><span class="line">  <span class="keyword">await</span> page.goto(<span class="string">'http://jartto.wang'</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">await</span> page.screenshot(&#123;<span class="attr">path</span>: <span class="string">'temp/iphonex.png'</span>&#125;);</span><br><span class="line"> </span><br><span class="line">  <span class="keyword">await</span> browser.close();</span><br><span class="line">&#125;)().catch(<span class="function"><span class="params">error</span> =&gt;</span> <span class="built_in">console</span>.log(<span class="string">'error: '</span>, error.message));</span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p>如果是本地的 chromium ，记得配置 executablePath: ‘chromium/Chromium.app/Contents/MacOS/Chromium’。</p>
+</div>
+<p>更有趣的事情是，我们可以搜索一些关键字来生成快照，譬如：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> devices = <span class="built_in">require</span>(<span class="string">'puppeteer/DeviceDescriptors'</span>)</span><br><span class="line"><span class="keyword">const</span> puppeteer = <span class="built_in">require</span>(<span class="string">'puppeteer'</span>);</span><br><span class="line"></span><br><span class="line">(<span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> browser = <span class="keyword">await</span> puppeteer.launch(&#123;</span><br><span class="line">    executablePath: <span class="string">'chromium/Chromium.app/Contents/MacOS/Chromium'</span>,</span><br><span class="line">    headless: <span class="literal">true</span></span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">const</span> page = <span class="keyword">await</span> browser.newPage();</span><br><span class="line">  <span class="keyword">await</span> page.emulate(devices[<span class="string">'iPhone X'</span>]);</span><br><span class="line">  <span class="keyword">await</span> page.goto(<span class="string">'https://www.baidu.com/'</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 输入框 id，搜索关键字 jartto</span></span><br><span class="line">  <span class="keyword">await</span> page.type(<span class="string">'#index-kw'</span>, <span class="string">'jartto'</span>);</span><br><span class="line">  <span class="comment">// 模拟点击提交按钮</span></span><br><span class="line">  <span class="keyword">await</span> page.click(<span class="string">'#index-bn'</span>);</span><br><span class="line">  <span class="comment">// 跳转等待时间</span></span><br><span class="line">  <span class="keyword">await</span> page.waitForNavigation(&#123; <span class="attr">timeout</span>: <span class="number">3000</span> &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">await</span> page.screenshot(&#123;<span class="attr">path</span>: <span class="string">'temp/search.png'</span>&#125;);</span><br><span class="line">  <span class="keyword">await</span> browser.close();</span><br><span class="line">&#125;)().catch(<span class="function"><span class="params">error</span> =&gt;</span> <span class="built_in">console</span>.log(<span class="string">'error: '</span>, error.message));</span><br></pre></td></tr></table></figure></p>
+<p>执行上面的代码，将会打开百度搜索引擎，同时搜索关键字 <code>jartto</code>，跳转完成后进行截屏，保存成图片。核心代码：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 输入框 id，搜索关键字 jartto</span></span><br><span class="line"><span class="keyword">await</span> page.type(<span class="string">'#index-kw'</span>, <span class="string">'jartto'</span>);</span><br><span class="line"><span class="comment">// 模拟点击提交按钮</span></span><br><span class="line"><span class="keyword">await</span> page.click(<span class="string">'#index-bn'</span>);</span><br><span class="line"><span class="comment">// 跳转等待时间</span></span><br><span class="line"><span class="keyword">await</span> page.waitForNavigation(&#123; <span class="attr">timeout</span>: <span class="number">3000</span> &#125;);</span><br></pre></td></tr></table></figure></p>
+<div class="alert warning"><p>一定要找准对应元素的 id，我们可以使用 chrome 开发者工具切换手机模式查看元素。</p>
+</div>
+<p>实际效果一览，左图为 <a href="http://jartto.wang">blog</a> 快照，右图为搜索跳转快照：<br><div class="figure left" style="width:320px;"><a class="fancybox" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/puppeteer-test/temp/iphonex.png" title data-fancybox-group="travel" target="_blank" rel="noopener"><img class="fig-img" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/puppeteer-test/temp/iphonex.png" style="width:320px;" alt></a></div><br><div class="figure right" style="width:320px;"><a class="fancybox" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/puppeteer-test/temp/search.png" title data-fancybox-group="travel" target="_blank" rel="noopener"><img class="fig-img" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/puppeteer-test/temp/search.png" style="width:320px;" alt></a></div><div style="clear:both;"></div></p>
+<p>如果觉得例子还不够，这里有个<a href="https://try-puppeteer.appspot.com/" target="_blank" rel="noopener">在线演示</a>，以及我自己写的 <a href="https://github.com/chenfengyanyu/my-web-accumulation/tree/master/puppeteer-test" target="_blank" rel="noopener">Demo</a>。</p>
+<p>5.相关资源<br><div class="alert success"><p>学习资源总是很多，由浅入深的学习将会事半功倍，下面我稍微整理一下。</p>
+</div></p>
+<ul>
+<li>第一阶段<ul>
+<li><a href="https://try-puppeteer.appspot.com/" target="_blank" rel="noopener">在线 DEMO</a></li>
+<li><a href="https://juejin.im/post/5a8151a05188257a7349c6db" target="_blank" rel="noopener">了解 Puppeteer</a></li>
+<li><a href="https://www.jianshu.com/p/56babda610f9" target="_blank" rel="noopener">Puppeteer入门及实践</a></li>
+<li><a href="https://blog.csdn.net/u010142437/article/details/79126564?utm_source=blogxgwz0" target="_blank" rel="noopener">Chromium 下载跳坑 </a></li>
+<li><a href="http://jartto.wang/2018/10/13/nodejs-pdf/">通过 Puppeteer 生成 PDF 文件</a></li>
+</ul>
+</li>
+<li>第二阶段<ul>
+<li><a href="https://github.com/zhentaoo/puppeteer-deep" target="_blank" rel="noopener">深入 Puppeteer</a></li>
+<li><a href="http://jartto.wang/2018/10/23/puppeteerjs/">Puppeteer 异常处理</a></li>
+</ul>
+</li>
+<li>第三阶段<ul>
+<li><a href="https://www.bookstack.cn/read/puppeteer-api-zh_CN/class-Page.md" target="_blank" rel="noopener">中文文档</a></li>
+<li><a href="https://github.com/GoogleChrome/puppeteer/blob/v1.9.0/docs/api.md#environment-variables" target="_blank" rel="noopener">Puppeteer API </a></li>
+</ul>
+</li>
+</ul>
+<p>循序渐进的开始你的学习旅程吧。</p>
+<h4 id="三、总结"><a href="#三、总结" class="headerlink" title="三、总结"></a>三、总结</h4><p>文章提供了两种方式，在线抓取 <code>URL</code> 生成 <code>PDF</code>，当然插件的功能并不简单如此，你还可以做更多有趣的事情。嗯，慢慢摸索、积累，相信我，总有一天你会用上的。</p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/nodejs/">nodejs</a> <a class="tag tag--primary tag--small t-link" href="/tags/pdf/">pdf</a> <a class="tag tag--primary tag--small t-link" href="/tags/phantomjs/">phantomjs</a> <a class="tag tag--primary tag--small t-link" href="/tags/puppeteer/">puppeteer</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/10/23/puppeteerjs/" data-tooltip="Puppeteer 异常处理">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/10/12/about-kafka/" data-tooltip="了解 Kafka">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/10/13/nodejs-pdf/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/10/13/nodejs-pdf/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/10/13/nodejs-pdf/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/10/23/puppeteerjs/" data-tooltip="Puppeteer 异常处理">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/10/12/about-kafka/" data-tooltip="了解 Kafka">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/10/13/nodejs-pdf/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/10/13/nodejs-pdf/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/10/13/nodejs-pdf/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/10/13/nodejs-pdf/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/10/13/nodejs-pdf/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/10/13/nodejs-pdf/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

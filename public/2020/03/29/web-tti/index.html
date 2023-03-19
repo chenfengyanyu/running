@@ -1,0 +1,502 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>聚焦 Web 性能指标 TTI - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="如果你经常做网站优化，可能会陷入一个性能指标的泥潭即「面向指标优化」。真正的用户体验从来不是指标决定，相反它应该最真实的反映用户行为。">
+<meta name="keywords" content="web,optimization,tti">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="聚焦 Web 性能指标 TTI">
+<meta property="og:url" content="http://jartto.wang/2020/03/29/web-tti/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="如果你经常做网站优化，可能会陷入一个性能指标的泥潭即「面向指标优化」。真正的用户体验从来不是指标决定，相反它应该最真实的反映用户行为。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/tti/rail.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/tti/tti.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/tti/longtask.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/tti/timing.png">
+<meta property="og:updated_time" content="2020-03-30T03:12:56.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="聚焦 Web 性能指标 TTI">
+<meta name="twitter:description" content="如果你经常做网站优化，可能会陷入一个性能指标的泥潭即「面向指标优化」。真正的用户体验从来不是指标决定，相反它应该最真实的反映用户行为。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/tti/rail.png">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/tti/logo.jpg"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/tti/logo.jpg" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            聚焦 Web 性能指标 TTI
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2020-03-29T22:23:53+08:00">
+	  
+		    2020/3月/29 22:23:53
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>如果你经常做网站优化，可能会陷入一个性能指标的泥潭即「面向指标优化」。真正的用户体验从来不是指标决定，相反它应该最真实的反映用户行为。<br><a id="more"></a><br>所以本节我们就来研究 <code>TTI(Time to Interactive)</code>，话题展开之前，我们先来了解一些背景知识。</p>
+<h4 id="一、RAIL-模型"><a href="#一、RAIL-模型" class="headerlink" title="一、RAIL 模型"></a>一、RAIL 模型</h4><p><code>RAIL</code> 是一种以用户为中心的性能模型。每个网络应用均具有与其生命周期有关的四个不同方面，且这些方面以不同的方式影响着性能：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/tti/rail.png" alt="RAIL 性能模型"></p>
+<p>1.响应：输入延迟时间（从点按到绘制）小于 100 毫秒。<br>用户点按按钮（例如打开导航）。</p>
+<p>2.动画：每个帧的工作（从 JS 到绘制）完成时间小于 16 毫秒。<br>用户滚动页面，拖动手指（例如，打开菜单）或看到动画。 拖动时，应用的响应与手指位置有关（例如，拉动刷新、滑动轮播）。 此指标仅适用于拖动的持续阶段，不适用于开始阶段。</p>
+<p>3.空闲：主线程 JS 工作分成不大于 50 毫秒的块。<br>用户没有与页面交互，但主线程应足够用于处理下一个用户输入。</p>
+<p>4.加载：页面可以在 1000 毫秒内就绪。<br>用户加载页面并看到关键路径内容。</p>
+<div class="alert info"><p>如果要提升网站用户体验，RAIL 是个不错的评估模型。</p>
+</div>
+<h4 id="二、解读-TTI（页面可交互时间）"><a href="#二、解读-TTI（页面可交互时间）" class="headerlink" title="二、解读 TTI（页面可交互时间）"></a>二、解读 TTI（页面可交互时间）</h4><p><code>TTI</code> 指的是应用既在视觉上都已渲染出了，可以响应用户的输入了。要了解 <code>TTI</code>，我们需要知道它的计算规则，先来看下面这张图：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/tti/tti.png" alt="TTI"></p>
+<p>在<a href="https://docs.google.com/document/d/1GGiI9-7KeY3TPqS3YT271upUVimo-XiL5mwWorDUD4c/preview#" target="_blank" rel="noopener">官方文档</a>中找到了如下描述：<br><code>First Idle is the first early sign of time where the main thread has come at rest and the browser has completed a First Meaningful Paint.</code></p>
+<p><code>Time to Interactive is after First Meaningful Paint. The browser’s main thread has been at rest for at least 5 seconds and there are no long tasks that will prevent immediate response to user input.</code></p>
+<p>我们可以简单的理解一下：<br>1.<code>First Idle</code> 是主线程处于静止状态且浏览器已完成 <code>First Meanfulful Paint</code> 的第一个早期迹象；<br>2.<code>TTI</code> 在 <code>FMP</code> 之后，浏览器主线程静止至少 <code>5s</code>，并且没有可以阻断用户交互响应的「长任务」。</p>
+<p>如果你对 <code>FMP</code> 还不了解，不妨先看看这篇文章：<a href="http://jartto.wang/2020/03/15/about-web-fmp/">网站性能指标 - <code>FMP</code></a>。除此之外，第二条中提到的「长任务」又是什么呢？</p>
+<h4 id="三、Long-Task（长任务）"><a href="#三、Long-Task（长任务）" class="headerlink" title="三、Long Task（长任务）"></a>三、Long Task（长任务）</h4><p>对于「长任务」，我们通过如下图示说明：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/tti/longtask.png" alt="长任务"></p>
+<div class="alert info"><p>对于用户而言，任务耗时较长表现为滞后或卡顿，而这也是目前网页不良体验的主要根源。</p>
+</div>
+<p>如何测量 <code>Long Task</code>？<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Jartto's Demo</span></span><br><span class="line"><span class="keyword">const</span> observer = <span class="keyword">new</span> PerformanceObserver(<span class="function">(<span class="params">list</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">const</span> entry <span class="keyword">of</span> list.getEntries()) &#123;</span><br><span class="line">    <span class="comment">// TODO...</span></span><br><span class="line">    <span class="built_in">console</span>.log(entry);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">observer.observe(&#123;<span class="attr">entryTypes</span>: [<span class="string">'longtask'</span>]&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>控制台输出结果如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"name"</span>: <span class="string">"self"</span>,</span><br><span class="line">  <span class="string">"entryType"</span>: <span class="string">"longtask"</span>,</span><br><span class="line">  <span class="string">"startTime"</span>: <span class="number">315009.59500001045</span>,</span><br><span class="line">  <span class="string">"duration"</span>: <span class="number">99.9899999878835</span>,</span><br><span class="line">  <span class="string">"attribution"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">"name"</span>: <span class="string">"unknown"</span>,</span><br><span class="line">      <span class="string">"entryType"</span>: <span class="string">"taskattribution"</span>,</span><br><span class="line">      <span class="string">"startTime"</span>: <span class="number">0</span>,</span><br><span class="line">      <span class="string">"duration"</span>: <span class="number">0</span>,</span><br><span class="line">      <span class="string">"containerType"</span>: <span class="string">"window"</span>,</span><br><span class="line">      <span class="string">"containerSrc"</span>: <span class="string">""</span>,</span><br><span class="line">      <span class="string">"containerId"</span>: <span class="string">""</span>,</span><br><span class="line">      <span class="string">"containerName"</span>: <span class="string">""</span></span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>Long Tasks API</code> 可以将任何耗时超过 <code>50</code> 毫秒的任务标示为可能存在问题，并向应用开发者显示这些任务。 选择 <code>50</code> 毫秒的时间是为了让应用满足在 <code>100</code> 毫秒内响应用户输入的 <code>RAIL</code> 指导原则。</p>
+<p>实际开发过程中，我们可以通过一个 <code>hack</code> 来检查页面中「长任务」的代码：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// detect long tasks hack</span></span><br><span class="line">(<span class="function"><span class="keyword">function</span> <span class="title">detectLongFrame</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> lastFrameTime = <span class="built_in">Date</span>.now();</span><br><span class="line">    requestAnimationFrame(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">let</span> currentFrameTime = <span class="built_in">Date</span>.now();</span><br><span class="line">        <span class="keyword">if</span> (currentFrameTime - lastFrameTime &gt; <span class="number">50</span>) &#123;</span><br><span class="line">        <span class="comment">// Report long frame here...</span></span><br><span class="line">        &#125;</span><br><span class="line">        detectLongFrame(currentFrameTime);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;());</span><br></pre></td></tr></table></figure></p>
+<h4 id="四、如何计算-TTI？"><a href="#四、如何计算-TTI？" class="headerlink" title="四、如何计算 TTI？"></a>四、如何计算 TTI？</h4><p>在计算之前，我们先来看一下 <code>Timing API</code>：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/tti/timing.png" alt="Timing API"></p>
+<p><code>Google</code> 官方文档中有一段描述：<br><code>Note: Lower Bounding FirstInteractive at DOMContentLoadedEnd
+DOMContentLoadedEnd is the point where all the DOMContentLoaded listeners finish executing. It is very rare for critical event listeners of a webpage to be installed before this point. Some of the firstInteractive definitions we experimented with fired too early for a small number of sites, because the definitions only looked at long tasks and network activity (and not at, say, how many event listeners are installed), and sometimes when there are no long tasks in the first 5-10 seconds of loading we fire FirstInteractive at FMP, when the sites are often not ready yet to handle user inputs. We found that if we take max(DOMContentLoadedEnd, firstInteractive) as the final firstInteractive value, the values returned to reasonable region. Waiting for DOMContentLoadedEnd to declare FirstInteractive is sensible, so all the definitions introduced below lower bound firstInteractive at DOMContentLoadedEnd.</code></p>
+<p>所以，我们可以通过 <code>domContentLoadedEventEnd</code> 来粗略的进行估算：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 页面可交互时间 </span></span><br><span class="line">TTI: domContentLoadedEventEnd - navigationStart,</span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p><a href="https://w3c.github.io/navigation-timing/#dom-performancenavigationtiming-domcontentloadedeventend" target="_blank" rel="noopener">domContentLoadedEventEnd</a>：文档的 DOMContentLoaded 事件的结束时间。</p>
+</div>
+<p><code>The domContentLoadedEventEnd attribute MUST return a DOMHighResTimeStamp with a time value equal to the time immediately after the current document&#39;s DOMContentLoaded event completes.</code></p>
+<p>如果你觉得上述计算过于复杂，可以通过 <code>Google</code> 实验室提供的 <code>Polyfill</code> 来获取。</p>
+<h4 id="五、TTI-指标监控"><a href="#五、TTI-指标监控" class="headerlink" title="五、TTI 指标监控"></a>五、TTI 指标监控</h4><p>我们可以通过 <a href="https://github.com/GoogleChromeLabs/tti-polyfill" target="_blank" rel="noopener"><code>Google TTI Polyfill</code></a>来对 <code>TTI</code> 进行监测。<br>1.安装<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install tti-polyfill</span><br></pre></td></tr></table></figure></p>
+<p>2.使用<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> ttiPolyfill <span class="keyword">from</span> <span class="string">'./path/to/tti-polyfill.js'</span>;</span><br><span class="line">ttiPolyfill.getFirstConsistentlyInteractive(opts).then(<span class="function">(<span class="params">tti</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// Use `tti` value in some way.</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>很简单，就不细说了。推荐几篇 <code>TTI</code> 相关文章：<br><a href="https://docs.google.com/document/d/1GGiI9-7KeY3TPqS3YT271upUVimo-XiL5mwWorDUD4c/preview#" target="_blank" rel="noopener">First Interactive and Consistently Interactive</a><br><a href="https://web.dev/user-centric-performance-metrics/#tracking_tti" target="_blank" rel="noopener">User-centric performance metrics</a><br><a href="https://calibreapp.com/blog/time-to-interactive" target="_blank" rel="noopener">Focusing on the Human-Centric Metrics</a></p>
+<p>文章最后，打个小广告吧。如果你想搭上在线教育的快车，快速成长，不妨加入我们。一起成长，一起学习，一起挑战更多有趣的事情，「跟谁学-高途课堂」欢迎你，请将简历私我～</p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/optimization/">optimization</a> <a class="tag tag--primary tag--small t-link" href="/tags/tti/">tti</a> <a class="tag tag--primary tag--small t-link" href="/tags/web/">web</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2020/03/30/about-web-fmp/" data-tooltip="网站性能指标 - FMP">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2020/03/08/breaking-the-game/" data-tooltip="破局：技术视野与规划">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2020/03/29/web-tti/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2020/03/29/web-tti/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2020/03/29/web-tti/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2020/03/30/about-web-fmp/" data-tooltip="网站性能指标 - FMP">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2020/03/08/breaking-the-game/" data-tooltip="破局：技术视野与规划">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2020/03/29/web-tti/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2020/03/29/web-tti/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2020/03/29/web-tti/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2020/03/29/web-tti/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2020/03/29/web-tti/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2020/03/29/web-tti/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

@@ -1,0 +1,538 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>初探加密算法 - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="最近同事做了一次加密算法的分享，感觉自己对这方面的认知还有待提升，这篇文章算是先入门吧，多学点知识总归是好的。">
+<meta name="keywords" content="encrypt,加密,算法">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="初探加密算法">
+<meta property="og:url" content="http://jartto.wang/2017/12/03/exploration-the-encryption/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="最近同事做了一次加密算法的分享，感觉自己对这方面的认知还有待提升，这篇文章算是先入门吧，多学点知识总归是好的。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/encrtption1.png">
+<meta property="og:updated_time" content="2018-12-30T15:21:12.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="初探加密算法">
+<meta name="twitter:description" content="最近同事做了一次加密算法的分享，感觉自己对这方面的认知还有待提升，这篇文章算是先入门吧，多学点知识总归是好的。">
+<meta name="twitter:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/encrtption1.png">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/pwd.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/pwd.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            初探加密算法
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2017-12-03T18:53:33+08:00">
+	  
+		    2017/12月/03 18:53:33
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>最近同事做了一次加密算法的分享，感觉自己对这方面的认知还有待提升，这篇文章算是先入门吧，多学点知识总归是好的。<br><a id="more"></a></p>
+<h4 id="一、为什么要加密？"><a href="#一、为什么要加密？" class="headerlink" title="一、为什么要加密？"></a>一、为什么要加密？</h4><p>加密可以保护我们的数据。无论数据是正存放在我们自己的计算机上，还是位于数据中心，或者正在通过互联网传送的途中，加密都可以提供防护。</p>
+<p>加密可以保护我们的聊天，不管是视频、语音还是文字。加密可以保护我们的隐私，可以隐藏我们的踪迹，甚至有时候，它会保护我们的生命－这种保护是攸关我们每个人的。</p>
+<div class="alert info"><p>默认情况下，加密应该启用，而不是只有当你在做一些你认为值得保护的事情时才启用。</p>
+</div>
+<p>如果你觉得这些理由还不足以说服你，那么请看这篇文章：<a href="https://www.schneier.com/blog/archives/2015/06/why_we_encrypt.html" target="_blank" rel="noopener">Why We Encrypt</a></p>
+<h4 id="二、常见的加密算法"><a href="#二、常见的加密算法" class="headerlink" title="二、常见的加密算法"></a>二、常见的加密算法</h4><p>1.对称加密<br><div class="alert success"><p>所谓对称，就是采用这种加密方法的双方使用方式用同样的密钥进行加密和解密。密钥是控制加密及解密过程的指令。算法是一组规则，规定如何进行加密和解密。</p>
+</div><br><img src="http://7xvi3w.com1.z0.glb.clouddn.com/encrtption1.png" alt="对称加密"></p>
+<p>就拿<a href="https://baike.baidu.com/item/对称加密/2152944?fr=aladdin" target="_blank" rel="noopener">百度百科</a>中这个例子来说吧：<br>甲和乙是一对生意搭档，他们住在不同的城市。由于生意上的需要，他们经常会相互之间邮寄重要的货物。为了保证货物的安全，他们商定制作一个保险盒，将物品放入其中。他们打造了两把相同的钥匙分别保管，以便在收到包裹时用这个钥匙打开保险盒，以及在邮寄货物前用这把钥匙锁上保险盒。</p>
+<p>上面是一个将重要资源安全传递到目的地的传统方式，只要甲乙小心保管好钥匙，那么就算有人得到保险盒，也无法打开。</p>
+<p>这个思想被用到了现代计算机通信的信息加密中。在对称加密中，数据发送方将明文（原始数据）和加密密钥一起经过特殊加密算法处理后，使其变成复杂的加密密文发送出去。接收方收到密文后，若想解读原文，则需要使用加密密钥及相同算法的逆算法对密文进行解密，才能使其恢复成可读明文。<br><div class="alert success"><p>在对称加密算法中，使用的密钥只有一个，发收信双方都使用这个密钥对数据进行加密和解密。</p>
+</div></p>
+<p>在对称加密算法中常用的算法有：DES、3DES、TDEA、Blowfish、RC2、RC4、RC5、IDEA、SKIPJACK、AES 等。</p>
+<p>优缺点：</p>
+<ul>
+<li>优点：算法公开、计算量小、加密速度快、加密效率高；</li>
+<li>缺点：在数据传送前，发送方和接收方必须商定好秘钥，然后使双方都能保存好秘钥。其次如果一方的秘钥被泄露，那么加密信息也就不安全了。另外，每对用户每次使用对称加密算法时，都需要使用其他人不知道的唯一秘钥，这会使得收、发双方所拥有的钥匙数量巨大，密钥管理成为双方的负担。</li>
+</ul>
+<p>2.非对称加密<br>非对称加密算法需要两个密钥：公开密钥（publickey）和私有密钥（privatekey）。公开密钥与私有密钥是一对，如果用公开密钥对数据进行加密，只有用对应的私有密钥才能解密；如果用私有密钥对数据进行加密，那么只有用对应的公开密钥才能解密。因为加密和解密使用的是两个不同的密钥，所以这种算法叫作非对称加密算法。</p>
+<p>还是举个<a href="http://blog.csdn.net/cscrazybing/article/details/47111099" target="_blank" rel="noopener">例子</a>来说明：<br>如果企业中有 n 个用户，企业需要生成 n 对密钥，并分发 n 个公钥。由于公钥是可以公开的，用户只要保管好自己的私钥即可(企业分发后一般保存的是私钥,用户拿的是公钥)，因此加密密钥的分发将变得十分简单。同时，由于每个用户的私钥是唯一的，其他用户除了可以可以通过信息发送者的公钥来验证信息的来源是否真实，还可以确保发送者无法否认曾发送过该信息。</p>
+<p>常见的非对称加密算法有：RSA、ECC（移动设备用）、Diffie-Hellman、El Gamal、DSA（数字签名用）。</p>
+<p>优缺点：</p>
+<ul>
+<li>优点：非对称加密算法的保密性比较好，它消除了最终用户交换密钥的需要；</li>
+<li>缺点：但加密和解密花费时间长、速度慢，它不适合于对文件加密而只适用于对少量数据进行加密；</li>
+</ul>
+<p>3.Hash 加密（ MD5 加密是典型应用）<br><code>Hash</code> 算法特别的地方在于它是一种单向算法，用户可以通过 <code>Hash</code> 算法对目标信息生成一段特定长度的唯一的 <code>Hash</code> 值，却不能通过这个 <code>Hash</code> 值重新获得目标信息。因此 <code>Hash</code> 算法常用在不可还原的密码存储、信息完整性校验等。</p>
+<p>常见的Hash算法有 MD2、MD4、MD5、HAVAL、SHA ；</p>
+<p>深入了解请移步：</p>
+<ul>
+<li><a href="https://github.com/hello2dj/blog/blob/master/加密.md" target="_blank" rel="noopener">加密</a></li>
+<li><a href="http://blog.csdn.net/cscrazybing/article/details/47111099" target="_blank" rel="noopener">对称加密和非对称加密介绍和区别</a></li>
+</ul>
+<h4 id="三、SSL-TLS-协议"><a href="#三、SSL-TLS-协议" class="headerlink" title="三、SSL/TLS 协议"></a>三、SSL/TLS 协议</h4><p>1.SSL协议的握手过程<br><div class="alert success"><p>开始加密通信之前，客户端和服务器首先必须建立连接和交换参数，这个过程叫做握手（handshake）。</p>
+</div><br>用<a href="http://www.ruanyifeng.com/blog/2014/09/illustration-ssl.html" target="_blank" rel="noopener">阮一峰老师的举例</a>来说明一下，握手阶段分成五步：<br>第一步，爱丽丝给出协议版本号、一个客户端生成的随机数（Client random），以及客户端支持的加密方法。<br>第二步，鲍勃确认双方使用的加密方法，并给出数字证书、以及一个服务器生成的随机数（Server random）。<br>第三步，爱丽丝确认数字证书有效，然后生成一个新的随机数（Premaster secret），并使用数字证书中的公钥，加密这个随机数，发给鲍勃。<br>第四步，鲍勃使用自己的私钥，获取爱丽丝发来的随机数（即Premaster secret）。<br>第五步，爱丽丝和鲍勃根据约定的加密方法，使用前面的三个随机数，生成”对话密钥”（session key），用来加密接下来的整个对话过程。</p>
+<p>握手阶段有三点需要注意：</p>
+<ul>
+<li>生成对话密钥一共需要三个随机数。</li>
+<li>握手之后的对话使用”对话密钥”加密（对称加密），服务器的公钥和私钥只用于加密和解密”对话密钥”（非对称加密），无其他作用。</li>
+<li>服务器公钥放在服务器的数字证书之中。<br>2.DH 算法的握手阶段<br>整个握手阶段都不加密（也没法加密），都是明文的。因此，如果有人窃听通信，他可以知道双方选择的加密方法，以及三个随机数中的两个。整个通话的安全，只取决于第三个随机数（Premaster secret）能不能被破解。</li>
+</ul>
+<p>3.Session 的恢复<br>握手阶段用来建立 SSL 连接。如果出于某种原因，对话中断，就需要重新握手。这时有两种方法可以恢复原来的 session：一种叫做 session ID，另一种叫做 session ticket 。</p>
+<p>这里大概说一下思路，查看详情：<a href="http://www.ruanyifeng.com/blog/2014/09/illustration-ssl.html" target="_blank" rel="noopener">图解SSL/TLS协议</a></p>
+<h4 id="四、数字签名"><a href="#四、数字签名" class="headerlink" title="四、数字签名"></a>四、数字签名</h4><p>数字证书和数字签名的原理简单来说数字签名就是传输信息的摘要，数字证书就是 CA 用自己的私钥把你的公钥及其他信息加密后生成内容, 即 CA 用自己的私钥来给你的公钥做数字签名。<br><div class="alert info"><p>为什么会提到数字签名？这是因为：非对称加密的典型应用是数字签名。</p>
+</div></p>
+<p>数字签名的作用：</p>
+<ul>
+<li>能确定消息的不可抵赖性，因为他人假冒不了发送方的私钥签名。发送方是用自己的私钥对信息进行加密的，只有使用发送方的公钥才能解密。</li>
+<li>数字签名能保障消息的完整性。一次数字签名采用一个特定的哈希函数，它对不同文件产生的数字摘要的值也是不相同的</li>
+</ul>
+<p>数字证书的作用:</p>
+<ul>
+<li>不可抵赖性</li>
+<li>消息的完整性</li>
+<li>身份认证</li>
+</ul>
+<p>很形象的一个<a href="http://www.ruanyifeng.com/blog/2011/08/what_is_a_digital_signature.html" target="_blank" rel="noopener">例子</a>：<br>1.鲍勃有两把钥匙，一把是公钥，另一把是私钥。<br>2.鲍勃把公钥送给他的朋友们—-帕蒂、道格、苏珊—-每人一把。<br>3.苏珊要给鲍勃写一封保密的信。她写完后用鲍勃的公钥加密，就可以达到保密的效果。<br>4.鲍勃收信后，用私钥解密，就看到了信件内容。这里要强调的是，只要鲍勃的私钥不泄露，这封信就是安全的，即使落在别人手里，也无法解密。<br>5.鲍勃给苏珊回信，决定采用”数字签名”。他写完后先用 Hash 函数，生成信件的摘要（digest）。<br>6.然后，鲍勃使用私钥，对这个摘要加密，生成”数字签名”（signature）。<br>7.鲍勃将这个签名，附在信件下面，一起发给苏珊。<br>8.苏珊收信后，取下数字签名，用鲍勃的公钥解密，得到信件的摘要。由此证明，这封信确实是鲍勃发出的。<br>9.苏珊再对信件本身使用 Hash 函数，将得到的结果，与上一步得到的摘要进行对比。如果两者一致，就证明这封信未被修改过。<br>10.复杂的情况出现了。道格想欺骗苏珊，他偷偷使用了苏珊的电脑，用自己的公钥换走了鲍勃的公钥。此时，苏珊实际拥有的是道格的公钥，但是还以为这是鲍勃的公钥。因此，道格就可以冒充鲍勃，用自己的私钥做成”数字签名”，写信给苏珊，让苏珊用假的鲍勃公钥进行解密。<br>11.后来，苏珊感觉不对劲，发现自己无法确定公钥是否真的属于鲍勃。她想到了一个办法，要求鲍勃去找”证书中心”（certificate authority，简称 CA ），为公钥做认证。证书中心用自己的私钥，对鲍勃的公钥和一些相关信息一起加密，生成”数字证书”（Digital Certificate）。<br>12.鲍勃拿到数字证书以后，就可以放心了。以后再给苏珊写信，只要在签名的同时，再附上数字证书就行了。<br>13.苏珊收信后，用 CA 的公钥解开数字证书，就可以拿到鲍勃真实的公钥了，然后就能证明”数字签名”是否真的是鲍勃签的。</p>
+<p>深入了解，请查看阮一峰老师的文章：<a href="http://www.ruanyifeng.com/blog/2011/08/what_is_a_digital_signature.html" target="_blank" rel="noopener">数字签名是什么？</a></p>
+<h4 id="六、CA（Certificate-Authority）-数字证书认证机构"><a href="#六、CA（Certificate-Authority）-数字证书认证机构" class="headerlink" title="六、CA（Certificate Authority） 数字证书认证机构"></a>六、CA（Certificate Authority） 数字证书认证机构</h4><div class="alert info"><p>负责发放和管理数字证书的权威机构，承担公钥体系中公钥的合法性检验的责任。</p>
+</div>
+<p>CA 是证书的签发机构，它是 PKI 的核心。CA 是负责签发证书、认证证书、管理已颁发证书的机关。它要制定政策和具体步骤来验证、识别用户身份，并对用户证书进行签名，以确保证书持有者的身份和公钥的拥有权。</p>
+<p>CA 也拥有一个证书（内含公钥）和私钥。网上的公众用户通过验证 CA 的签字从而信任 CA ，任何人都可以得到 CA 的证书（含公钥），用以验证它所签发的证书。</p>
+<p>如果用户想得到一份属于自己的证书，他应先向 CA 提出申请。在 CA 判明申请者的身份后，便为他分配一个公钥，并且 CA 将该公钥与申请者的身份信息绑在一起，并为之签字后，便形成证书发给申请者。</p>
+<p>如果一个用户想鉴别另一个证书的真伪，他就用 CA 的公钥对那个证书上的签字进行验证，一旦验证通过，该证书就被认为是有效的</p>
+<h4 id="七、扩展阅读"><a href="#七、扩展阅读" class="headerlink" title="七、扩展阅读"></a>七、扩展阅读</h4><ul>
+<li><a href="https://github.com/hello2dj/blog/blob/master/加密.md" target="_blank" rel="noopener">hello2dj 加密</a></li>
+<li><a href="http://blog.csdn.net/cscrazybing/article/details/47111099" target="_blank" rel="noopener">对称加密和非对称加密介绍和区别</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2011/08/what_is_a_digital_signature.html" target="_blank" rel="noopener">数字签名是什么？</a></li>
+<li><a href="https://baike.baidu.com/item/对称加密/2152944?fr=aladdin" target="_blank" rel="noopener">对称加密</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2014/09/illustration-ssl.html" target="_blank" rel="noopener">图解 SSL/TLS 协议</a></li>
+</ul>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/encrypt/">encrypt</a> <a class="tag tag--primary tag--small t-link" href="/tags/加密/">加密</a> <a class="tag tag--primary tag--small t-link" href="/tags/算法/">算法</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/12/09/grasp-js-stack-trace/" data-tooltip="掌握 JS Stack Trace">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/12/01/git-common-operate/" data-tooltip="Git 常规操作">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2017/12/03/exploration-the-encryption/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2017/12/03/exploration-the-encryption/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2017/12/03/exploration-the-encryption/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/12/09/grasp-js-stack-trace/" data-tooltip="掌握 JS Stack Trace">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/12/01/git-common-operate/" data-tooltip="Git 常规操作">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2017/12/03/exploration-the-encryption/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2017/12/03/exploration-the-encryption/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2017/12/03/exploration-the-encryption/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2017/12/03/exploration-the-encryption/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2017/12/03/exploration-the-encryption/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2017/12/03/exploration-the-encryption/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

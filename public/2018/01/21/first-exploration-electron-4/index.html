@@ -1,0 +1,508 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>初探 Electron - 实践篇2 - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="上文 初探 Electron - 实践篇1中，我们完成了项目的主架构，虽然可以运行，但并不完美。这节我们继续补充，一起完成剩下的工作。">
+<meta name="keywords" content="electron">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="初探 Electron - 实践篇2">
+<meta property="og:url" content="http://jartto.wang/2018/01/21/first-exploration-electron-4/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="上文 初探 Electron - 实践篇1中，我们完成了项目的主架构，虽然可以运行，但并不完美。这节我们继续补充，一起完成剩下的工作。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2018-12-30T15:40:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="初探 Electron - 实践篇2">
+<meta name="twitter:description" content="上文 初探 Electron - 实践篇1中，我们完成了项目的主架构，虽然可以运行，但并不完美。这节我们继续补充，一起完成剩下的工作。">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/electron0.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/electron0.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            初探 Electron - 实践篇2
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2018-01-21T14:28:33+08:00">
+	  
+		    2018/1月/21 14:28:33
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>上文 <a href="http://jartto.wang/2018/01/14/first-exploration-electron-3/">初探 Electron - 实践篇1</a>中，我们完成了项目的主架构，虽然可以运行，但并不完美。这节我们继续补充，一起完成剩下的工作。<br><a id="more"></a></p>
+<h4 id="八、使用-Material-UI"><a href="#八、使用-Material-UI" class="headerlink" title="八、使用 Material-UI"></a>八、使用 Material-UI</h4><p>项目虽然有了主轮廓，但是外观并不令人满意。我们来引入一个 <code>UI</code> 框架 <a href="http://www.material-ui.com/#/" target="_blank" rel="noopener"><code>Material-UI</code></a>，为项目添加一些亮丽的色彩。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install material-ui --save</span><br></pre></td></tr></table></figure></p>
+<div class="alert success"><p>至于为啥选 <code>Material-UI</code> ，大概是其他 <code>UI</code> 框架使用的太频繁了，换换口味😂</p>
+</div>
+<p>当然，从理论上讲，你可以引入任何你喜欢的 <code>UI</code> 框架，大家各取所需。</p>
+<h4 id="九、增加-less-文件"><a href="#九、增加-less-文件" class="headerlink" title="九、增加 less 文件"></a>九、增加 less 文件</h4><p>仅仅引入 <code>UI</code> 框架是不够的，我们需要引入自己的样式文件，这里用 <code>less</code> 示例。首先，在 <code>app</code> 目录下，建立 <code>css</code> 文件夹：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> app &amp;&amp; mkdir css</span><br></pre></td></tr></table></figure></p>
+<p>这里将存放我们的 <code>less</code> 文件，我们分别添加 <code>main.less</code> 和 <code>_reset.less</code> 文件：<br><code>main.less</code>，为项目的主要样式文件，代码如下：<br><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@import</span> <span class="string">"./_reset.less"</span>;</span><br><span class="line"><span class="selector-tag">body</span>, <span class="selector-class">.box</span><span class="selector-pseudo">::before</span>&#123;</span><br><span class="line">  <span class="attribute">background</span>: url(<span class="string">../image/bg.jpg</span>) <span class="number">0</span> / cover fixed;</span><br><span class="line">  <span class="attribute">overflow</span>: hidden;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">a</span> &#123;</span><br><span class="line">  <span class="attribute">text-decoration</span>: none;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="attribute">text-align</span>: center;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">500px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">400px</span>;</span><br><span class="line">  <span class="attribute">background</span>: rgba(<span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>, <span class="number">0.3</span>);</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">50%</span>;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">50%</span>;</span><br><span class="line">  <span class="attribute">margin</span>: -<span class="number">200px</span> <span class="number">0</span> <span class="number">0</span> -<span class="number">250px</span>;</span><br><span class="line">  <span class="attribute">border-radius</span>: <span class="number">8px</span>;</span><br><span class="line">  <span class="attribute">background</span>: hsla(<span class="number">0</span>,<span class="number">0%</span>,<span class="number">100%</span>,.<span class="number">3</span>);</span><br><span class="line">  <span class="attribute">overflow</span>: hidden;</span><br><span class="line">  <span class="attribute">box-shadow</span>: <span class="number">2px</span> <span class="number">2px</span> <span class="number">5px</span> rgba(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0.3</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.box</span><span class="selector-pseudo">::before</span> &#123; </span><br><span class="line">  <span class="attribute">content</span>: <span class="string">''</span>;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">right</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">bottom</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">filter</span>: blur(<span class="number">10px</span>);</span><br><span class="line">  <span class="attribute">margin</span>: -<span class="number">20px</span>;</span><br><span class="line">  <span class="attribute">z-index</span>: -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="selector-class">.desc</span> &#123;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">12px</span>;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">bottom</span>: <span class="number">90px</span>;</span><br><span class="line">    <span class="attribute">opacity</span>: <span class="number">0.6</span>;</span><br><span class="line">    <span class="attribute">cursor</span>: pointer;</span><br><span class="line">    <span class="attribute">letter-spacing</span>: <span class="number">1px</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>_reset.less</code> 为重置样式表文件，具体代码如下：<br><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* http://meyerweb.com/eric/tools/css/reset/ </span></span><br><span class="line"><span class="comment">   v2.0 | 20110126</span></span><br><span class="line"><span class="comment">   License: none (public domain)</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="selector-tag">html</span>, <span class="selector-tag">body</span>, <span class="selector-tag">div</span>, <span class="selector-tag">span</span>, <span class="selector-tag">applet</span>, <span class="selector-tag">object</span>, <span class="selector-tag">iframe</span>,</span><br><span class="line"><span class="selector-tag">h1</span>, <span class="selector-tag">h2</span>, <span class="selector-tag">h3</span>, <span class="selector-tag">h4</span>, <span class="selector-tag">h5</span>, <span class="selector-tag">h6</span>, <span class="selector-tag">p</span>, <span class="selector-tag">blockquote</span>, <span class="selector-tag">pre</span>,</span><br><span class="line"><span class="selector-tag">a</span>, <span class="selector-tag">abbr</span>, <span class="selector-tag">acronym</span>, <span class="selector-tag">address</span>, <span class="selector-tag">big</span>, <span class="selector-tag">cite</span>, <span class="selector-tag">code</span>,</span><br><span class="line"><span class="selector-tag">del</span>, <span class="selector-tag">dfn</span>, <span class="selector-tag">em</span>, <span class="selector-tag">img</span>, <span class="selector-tag">ins</span>, <span class="selector-tag">kbd</span>, <span class="selector-tag">q</span>, <span class="selector-tag">s</span>, <span class="selector-tag">samp</span>,</span><br><span class="line"><span class="selector-tag">small</span>, <span class="selector-tag">strike</span>, <span class="selector-tag">strong</span>, <span class="selector-tag">sub</span>, <span class="selector-tag">sup</span>, <span class="selector-tag">tt</span>, <span class="selector-tag">var</span>,</span><br><span class="line"><span class="selector-tag">b</span>, <span class="selector-tag">u</span>, <span class="selector-tag">i</span>, <span class="selector-tag">center</span>,</span><br><span class="line"><span class="selector-tag">dl</span>, <span class="selector-tag">dt</span>, <span class="selector-tag">dd</span>, <span class="selector-tag">ol</span>, <span class="selector-tag">ul</span>, <span class="selector-tag">li</span>,</span><br><span class="line"><span class="selector-tag">fieldset</span>, <span class="selector-tag">form</span>, <span class="selector-tag">label</span>, <span class="selector-tag">legend</span>,</span><br><span class="line"><span class="selector-tag">table</span>, <span class="selector-tag">caption</span>, <span class="selector-tag">tbody</span>, <span class="selector-tag">tfoot</span>, <span class="selector-tag">thead</span>, <span class="selector-tag">tr</span>, <span class="selector-tag">th</span>, <span class="selector-tag">td</span>,</span><br><span class="line"><span class="selector-tag">article</span>, <span class="selector-tag">aside</span>, <span class="selector-tag">canvas</span>, <span class="selector-tag">details</span>, <span class="selector-tag">embed</span>, </span><br><span class="line"><span class="selector-tag">figure</span>, <span class="selector-tag">figcaption</span>, <span class="selector-tag">footer</span>, <span class="selector-tag">header</span>, <span class="selector-tag">hgroup</span>, </span><br><span class="line"><span class="selector-tag">menu</span>, <span class="selector-tag">nav</span>, <span class="selector-tag">output</span>, <span class="selector-tag">ruby</span>, <span class="selector-tag">section</span>, <span class="selector-tag">summary</span>,</span><br><span class="line"><span class="selector-tag">time</span>, <span class="selector-tag">mark</span>, <span class="selector-tag">audio</span>, <span class="selector-tag">video</span> &#123;</span><br><span class="line">	<span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">	<span class="attribute">padding</span>: <span class="number">0</span>;</span><br><span class="line">	<span class="attribute">border</span>: <span class="number">0</span>;</span><br><span class="line">	<span class="attribute">font-size</span>: <span class="number">100%</span>;</span><br><span class="line">	<span class="attribute">font</span>: inherit;</span><br><span class="line">	<span class="attribute">vertical-align</span>: baseline;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* HTML5 display-role reset for older browsers */</span></span><br><span class="line"><span class="selector-tag">article</span>, <span class="selector-tag">aside</span>, <span class="selector-tag">details</span>, <span class="selector-tag">figcaption</span>, <span class="selector-tag">figure</span>, </span><br><span class="line"><span class="selector-tag">footer</span>, <span class="selector-tag">header</span>, <span class="selector-tag">hgroup</span>, <span class="selector-tag">menu</span>, <span class="selector-tag">nav</span>, <span class="selector-tag">section</span> &#123;</span><br><span class="line">	<span class="attribute">display</span>: block;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">	<span class="attribute">line-height</span>: <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">ol</span>, <span class="selector-tag">ul</span> &#123;</span><br><span class="line">	<span class="attribute">list-style</span>: none;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">blockquote</span>, <span class="selector-tag">q</span> &#123;</span><br><span class="line">	<span class="attribute">quotes</span>: none;</span><br><span class="line">&#125;</span><br><span class="line"><span class="attribute">blockquote</span>:before, <span class="attribute">blockquote</span>:after,</span><br><span class="line"><span class="attribute">q</span>:before, <span class="attribute">q</span>:after &#123;</span><br><span class="line">	<span class="attribute">content</span>: <span class="string">''</span>;</span><br><span class="line">	<span class="attribute">content</span>: none;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">table</span> &#123;</span><br><span class="line">	<span class="attribute">border-collapse</span>: collapse;</span><br><span class="line">	<span class="attribute">border-spacing</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="十、美化首页"><a href="#十、美化首页" class="headerlink" title="十、美化首页"></a>十、美化首页</h4><p>如上，我们已经准备好了样式文件，修改 <code>app/index.html</code> 文件，引入 <code>main.less</code><br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">type</span>=<span class="string">"text/less"</span>  <span class="attr">href</span>=<span class="string">"css/main.less"</span> /&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p><code>less</code> 并不会自己编译，但是显然我们并没有做额外的工作，那究竟是为什么呢？<br><div class="alert danger"><p>心细的同学可能意识到了，一切的编译，<code>electron-compile</code> 已经帮我们做好了。</p>
+</div></p>
+<p>要美化首页，就需要去更新 <code>app/render.js</code> 文件，我们做如下更新：<br><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> ReactDOM <span class="keyword">from</span> <span class="string">'react-dom'</span>;</span><br><span class="line"><span class="keyword">import</span> getMuiTheme <span class="keyword">from</span> <span class="string">'material-ui/styles/getMuiTheme'</span>;</span><br><span class="line"><span class="keyword">import</span> MuiThemeProvider <span class="keyword">from</span> <span class="string">'material-ui/styles/MuiThemeProvider'</span>;</span><br><span class="line"><span class="keyword">import</span> SideMenu <span class="keyword">from</span> <span class="string">'./components/Menu'</span>;</span><br><span class="line"><span class="keyword">import</span> Upload <span class="keyword">from</span> <span class="string">'./components/Upload'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> muiTheme = getMuiTheme(&#123;</span><br><span class="line">  fontFamily: <span class="string">'Roboto, sans-serif'</span>,</span><br><span class="line">  palette: &#123;</span><br><span class="line">    <span class="comment">// primaryColor: white,</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainWindow</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">constructor</span>(props) &#123;</span><br><span class="line">    <span class="keyword">super</span>(props);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">this</span>.state = &#123;</span><br><span class="line">      </span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;MuiThemeProvider muiTheme=&#123;muiTheme&#125;&gt;</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">          &lt;SideMenu /&gt;</span><br><span class="line">          &lt;Upload /&gt;</span><br><span class="line">        &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">      &lt;/</span>MuiThemeProvider&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> mainWndComponent = ReactDOM.render(</span><br><span class="line">  &lt;MainWindow/&gt;, <span class="built_in">document</span>.getElementById(<span class="string">'content'</span>));</span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p>如上：我们使用了 <code>MuiThemeProvider</code> 外层容器，同时添加了 <code>SideMenu</code> 和 <code>Upload</code> 两个组件。</p>
+</div>
+<h4 id="十一、编写组件"><a href="#十一、编写组件" class="headerlink" title="十一、编写组件"></a>十一、编写组件</h4><p>首页 <code>UI</code> 已经就绪，我们来添加 <code>SideMenu</code> 和 <code>Upload</code> 这两个组件。<code>app</code> 目录下创建 <code>components</code> 文件夹：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd app &amp;&amp; mkdir components</span><br></pre></td></tr></table></figure></p>
+<p>接着来添加 <code>Upload.js</code> 也就是上面我们说的 <code>Upload</code> 组件：<br><div class="alert danger"><p>请先安装拖拽依赖包 <code>npm install react-dropzone --save</code></p>
+</div></p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> ActionBackup <span class="keyword">from</span> <span class="string">'material-ui/svg-icons/action/backup'</span>;</span><br><span class="line"><span class="keyword">import</span> Dropzone <span class="keyword">from</span> <span class="string">'react-dropzone'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> dropStyles = &#123;</span><br><span class="line">  width: <span class="string">'300px'</span>,</span><br><span class="line">  height: <span class="string">'300px'</span>,</span><br><span class="line">  position: <span class="string">'relative'</span>,</span><br><span class="line">  top: <span class="string">'50%'</span>,</span><br><span class="line">  left: <span class="string">'50%'</span>,</span><br><span class="line">  margin: <span class="string">'-150px 0 0 -150px'</span>,</span><br><span class="line">  display: <span class="string">'flex'</span>,</span><br><span class="line">  alignItems: <span class="string">'center'</span>,</span><br><span class="line">  justifyContent: <span class="string">'center'</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> iconStyles = &#123;</span><br><span class="line">  width: <span class="string">'100px'</span>,</span><br><span class="line">  height: <span class="string">'100px'</span>,</span><br><span class="line">  fill: <span class="string">'#ececec'</span>,</span><br><span class="line">  cursor: <span class="string">'pointer'</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Upload</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="comment">/* eslint-disable */</span></span><br><span class="line">  <span class="keyword">constructor</span>(props) &#123;</span><br><span class="line">    <span class="keyword">super</span>(props);</span><br><span class="line">    <span class="comment">// this.state = &#123; files: [] &#125;;</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  onDrop(files) &#123;</span><br><span class="line">    files.forEach(<span class="function"><span class="params">file</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> reader = <span class="keyword">new</span> FileReader();</span><br><span class="line">      reader.onload = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'Received files: '</span>, file);</span><br><span class="line">        <span class="keyword">const</span> fileAsBinaryString = reader.result;</span><br><span class="line">        <span class="keyword">this</span>.props.history.push(&#123;<span class="attr">pathname</span>:<span class="string">'/preview'</span>, <span class="attr">myfile</span>: file, <span class="attr">binary</span>: fileAsBinaryString&#125;);</span><br><span class="line">      &#125;;</span><br><span class="line">      reader.onabort = <span class="function"><span class="params">()</span> =&gt;</span> <span class="built_in">console</span>.log(<span class="string">'file reading was aborted'</span>);</span><br><span class="line">      reader.onerror = <span class="function"><span class="params">()</span> =&gt;</span> <span class="built_in">console</span>.log(<span class="string">'file reading has failed'</span>);</span><br><span class="line"></span><br><span class="line">      reader.readAsBinaryString(file);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;div className=<span class="string">"box"</span>&gt;</span><br><span class="line">        &lt;Dropzone onDrop=&#123;<span class="keyword">this</span>.onDrop.bind(<span class="keyword">this</span>)&#125; style=&#123;dropStyles&#125;&gt;</span><br><span class="line">          &lt;ActionBackup style=&#123;iconStyles&#125;/&gt;</span><br><span class="line">          &lt;div className=<span class="string">"desc"</span>&gt;拖拽文件或点击上传&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">        &lt;/</span>Dropzone&gt;</span><br><span class="line">      &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    );</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">export default Upload;</span></span><br></pre></td></tr></table></figure>
+<p>代码看起来长，但是逻辑很简单，主要是依赖了一个 <code>react</code> 组件 <code>react-dropzone</code> 来实现拖拽的交互。触发方法 <code>onDrop</code> 然后读取文件流，详细信息可以参考<a href="http://jartto.wang/2018/01/19/play-image-stream/">玩转图片流</a>，这里就不细说了。</p>
+<p>下来，来看第二个组件 <code>SideMenu</code>，创建 <code>app/components/Menu.js</code> 文件：<br><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> Drawer <span class="keyword">from</span> <span class="string">'material-ui/Drawer'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; List, ListItem &#125; <span class="keyword">from</span> <span class="string">'material-ui/List'</span>;</span><br><span class="line"><span class="keyword">import</span> ActionInfo <span class="keyword">from</span> <span class="string">'material-ui/svg-icons/hardware/keyboard-arrow-right'</span>;</span><br><span class="line"><span class="keyword">import</span> Avatar <span class="keyword">from</span> <span class="string">'material-ui/Avatar'</span>;</span><br><span class="line"><span class="keyword">import</span> ActionBackup <span class="keyword">from</span> <span class="string">'material-ui/svg-icons/action/backup'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; blue400 &#125; <span class="keyword">from</span> <span class="string">'material-ui/styles/colors'</span>;</span><br><span class="line"><span class="keyword">import</span> NavigationMenu <span class="keyword">from</span> <span class="string">'material-ui/svg-icons/navigation/menu'</span>;</span><br><span class="line"><span class="keyword">import</span> FloatingActionButton <span class="keyword">from</span> <span class="string">'material-ui/FloatingActionButton'</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> svgStyles = &#123;</span><br><span class="line">  fill: grey800,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">DrawerUndockedExample</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(props) &#123;</span><br><span class="line">    <span class="keyword">super</span>(props);</span><br><span class="line">    <span class="keyword">this</span>.state = &#123; <span class="attr">open</span>: <span class="literal">false</span> &#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  handleToggle() &#123;</span><br><span class="line">    <span class="keyword">this</span>.setState(&#123; <span class="attr">open</span>: !<span class="keyword">this</span>.state.open &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  handleClose() &#123;</span><br><span class="line">    <span class="keyword">this</span>.setState(&#123; <span class="attr">open</span>: <span class="literal">false</span> &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;div className=<span class="string">"_menu"</span>&gt;</span><br><span class="line">        &lt;FloatingActionButton className=<span class="string">"action"</span> onClick=&#123;<span class="keyword">this</span>.handleToggle.bind(<span class="keyword">this</span>)&#125; backgroundColor=&#123;lightWhite&#125;  mini=&#123;<span class="literal">true</span>&#125;&gt;</span><br><span class="line">          &lt;NavigationMenu style=&#123;svgStyles&#125; /&gt;</span><br><span class="line">        &lt;<span class="regexp">/FloatingActionButton&gt;</span></span><br><span class="line"><span class="regexp">        &lt;Drawer</span></span><br><span class="line"><span class="regexp">          docked=&#123;false&#125;</span></span><br><span class="line"><span class="regexp">          width=&#123;230&#125;</span></span><br><span class="line"><span class="regexp">          open=&#123;this.state.open&#125;</span></span><br><span class="line"><span class="regexp">          onRequestChange=&#123;open =&gt; this.setState(&#123; open &#125;)&#125;</span></span><br><span class="line"><span class="regexp">        &gt;</span></span><br><span class="line"><span class="regexp">          &lt;List&gt;</span></span><br><span class="line"><span class="regexp">            &lt;ListItem</span></span><br><span class="line"><span class="regexp">              leftAvatar=&#123;&lt;Avatar icon=&#123;&lt;ActionBackup /</span>&gt;&#125; backgroundColor=&#123;blue400&#125; /&gt;&#125;</span><br><span class="line">              rightIcon=&#123;&lt;ActionInfo /&gt;&#125;</span><br><span class="line">              primaryText=<span class="string">"上传图片"</span></span><br><span class="line">            /&gt;</span><br><span class="line">          &lt;<span class="regexp">/List&gt;</span></span><br><span class="line"><span class="regexp">        &lt;/</span>Drawer&gt;</span><br><span class="line">      &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    );</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p>这里，我们增加了一按钮，用来触发菜单的操作，<code>UI</code> 样式请参考 <a href="http://www.material-ui.com/#/" target="_blank" rel="noopener"><code>Material-UI</code></a></p>
+</div>
+<h4 id="十二、页面路由"><a href="#十二、页面路由" class="headerlink" title="十二、页面路由"></a>十二、页面路由</h4><p>随着页面的不断完善，我们发现可能需要拆分出更多的页面，是时候引入 <code>react-router</code> 了。首先安装依赖包：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install react-router-dom --save</span><br></pre></td></tr></table></figure></p>
+<p>我们来更新一下 <code>render.js</code> 文件，首先引入 <code>react-router</code>：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;</span><br><span class="line">  HashRouter <span class="keyword">as</span> Router,</span><br><span class="line">  Route,</span><br><span class="line">  Switch,</span><br><span class="line">  Redirect,</span><br><span class="line">&#125; <span class="keyword">from</span> <span class="string">'react-router-dom'</span>;</span><br></pre></td></tr></table></figure></p>
+<p>修改渲染部分：<br><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">render() &#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;Router&gt;</span><br><span class="line">      &lt;MuiThemeProvider muiTheme=&#123;muiTheme&#125;&gt;</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">          &lt;SideMenu /&gt;</span><br><span class="line">          &lt;RefreshIndicator</span><br><span class="line">            size=&#123;<span class="number">40</span>&#125;</span><br><span class="line">            left=&#123;<span class="number">750</span>&#125;</span><br><span class="line">            top=&#123;<span class="number">10</span>&#125;</span><br><span class="line">            loadingColor=<span class="string">"#FFB74D"</span></span><br><span class="line">            status=<span class="string">"loading"</span></span><br><span class="line">            style=&#123;style.refresh&#125;</span><br><span class="line">          /&gt;</span><br><span class="line">          &lt;Switch&gt;</span><br><span class="line">            &lt;Route path=<span class="string">"/"</span> exact component=&#123;Upload&#125; /&gt;</span><br><span class="line">            &lt;Route path=<span class="string">"/list"</span> component=&#123;ListPage&#125; /&gt;</span><br><span class="line">            &lt;Redirect to=<span class="string">"/"</span> /&gt;</span><br><span class="line">          &lt;<span class="regexp">/Switch&gt;</span></span><br><span class="line"><span class="regexp">        &lt;/</span>div&gt;</span><br><span class="line">      &lt;<span class="regexp">/MuiThemeProvider&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>Router&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>页面部分使用，很简单，加上 <code>link</code> 就行了：<br><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;Link to=<span class="string">"/"</span> onClick=&#123;<span class="keyword">this</span>.handleClose.bind(<span class="keyword">this</span>)&#125;&gt;</span><br><span class="line">  &lt;ListItem</span><br><span class="line">    leftAvatar=&#123;&lt;Avatar icon=&#123;&lt;ActionBackup /&gt;&#125; backgroundColor=&#123;blue400&#125; /&gt;&#125;</span><br><span class="line">    rightIcon=&#123;&lt;ActionInfo /&gt;&#125;</span><br><span class="line">    primaryText=<span class="string">"上传图片"</span></span><br><span class="line">  /&gt;</span><br><span class="line">&lt;<span class="regexp">/Link&gt;</span></span><br></pre></td></tr></table></figure></p>
+<div class="alert danger"><p>注意，此处代码较多，所以我挑了一些核心代码展示，更多细节请参考项目：<a href="https://github.com/chenfengyanyu/electron-ocr" target="_blank" rel="noopener">Electron-OCR</a></p>
+</div>
+<h4 id="十三、编码规范"><a href="#十三、编码规范" class="headerlink" title="十三、编码规范"></a>十三、编码规范</h4><p>说编码规范可能有些言过其实了，其实目的就是想统一一下编程风格，方便团队管理。当然，个人开发也用得上，起码不会犯一些语法错误，而影响项目进度。</p>
+<p>我们全局安装 <code>eslint</code>：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g eslint</span><br></pre></td></tr></table></figure></p>
+<p>安装完之后，执行 <code>eslint-init</code> ，就会生成 <code>.eslintrc.js</code> 文件，修改配置如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="string">"extends"</span>: <span class="string">"airbnb"</span>,</span><br><span class="line">  <span class="string">"parser"</span>: <span class="string">"babel-eslint"</span>,</span><br><span class="line">  <span class="string">"ecmaFeatures"</span>: &#123;</span><br><span class="line">    <span class="string">"classes"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="string">"jsx"</span>: <span class="literal">true</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"plugins"</span>: [</span><br><span class="line">    <span class="string">"react"</span>,</span><br><span class="line">    <span class="string">"jsx-a11y"</span>,</span><br><span class="line">    <span class="string">"import"</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="string">"rules"</span>: &#123;</span><br><span class="line">    <span class="string">"react/jsx-filename-extension"</span>: [<span class="number">1</span>, &#123; <span class="string">"extensions"</span>: [<span class="string">".js"</span>, <span class="string">".jsx"</span>] &#125;],</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>如果发现有如下异常，请安装 <code>babel-eslint</code> 文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ESLint: Cannot find module &apos;babel-eslint&apos;. Please see the &apos;ESLint&apos; output channel for details.</span><br></pre></td></tr></table></figure></p>
+<p>除此之外，我们要熟悉 <code>eslint</code> 的使用规则，记住下面的规则即可。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&quot;off&quot; or 0 - turn the rule off</span><br><span class="line">&quot;warn&quot; or 1 - turn the rule on as a warning (doesn’t affect exit code)</span><br><span class="line">&quot;error&quot; or 2 - turn the rule on as an error (exit code will be 1)</span><br></pre></td></tr></table></figure></p>
+<p>补充一点：局部禁用规则 <code>/* eslint-disable */</code></p>
+<h4 id="十四、对接-API"><a href="#十四、对接-API" class="headerlink" title="十四、对接 API"></a>十四、对接 API</h4><p>对接 <code>API</code> 的时候，少不了发送请求，这里我们依赖了 <code>superagent</code>，需要先安装：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install superagent --save</span><br></pre></td></tr></table></figure></p>
+<p>下面我们举一个简单的例子：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> request <span class="keyword">from</span> <span class="string">'superagent'</span>;</span><br><span class="line"><span class="comment">// 一个简单的例子</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">getAccessToken</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> param = qs.stringify(&#123;</span><br><span class="line">    grant_type: <span class="string">'client_credentials'</span>,</span><br><span class="line">    client_id: Keys.ak,</span><br><span class="line">    client_secret: Keys.sk,</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    request</span><br><span class="line">      .get(<span class="string">`http://jartto.wang/token?<span class="subst">$&#123;param&#125;</span>`</span>)</span><br><span class="line">      .then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="comment">// res.body, res.headers, res.status</span></span><br><span class="line">        resolve(res.body.access_token);</span><br><span class="line">      &#125;)</span><br><span class="line">      .catch(<span class="function">(<span class="params">err</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="comment">// err.message, err.response</span></span><br><span class="line">        reject(err.message);</span><br><span class="line">      &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>代码很简单，就不细说了。</p>
+<h4 id="十五、使用-async-await"><a href="#十五、使用-async-await" class="headerlink" title="十五、使用 async/await"></a>十五、使用 async/await</h4><p>在上面的 <code>API</code> 请求中，我们用到了 <code>async</code>，这里我说一下怎样配置。首先，安装依赖：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cnpm install --save-dev babel-plugin-transform-runtime</span><br><span class="line">cnpm install --save babel-runtime</span><br></pre></td></tr></table></figure></p>
+<p>接着配置 <code>compilerc</code>：<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"plugins"</span>: [</span><br><span class="line">    [<span class="string">"transform-runtime"</span>, &#123;</span><br><span class="line">      <span class="attr">"polyfill"</span>: <span class="literal">false</span>,</span><br><span class="line">      <span class="attr">"regenerator"</span>: <span class="literal">true</span></span><br><span class="line">    &#125;]</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<div class="alert danger"><p>如果出现异常：<code>await is a reserved word</code>，请注意配套 <code>async</code> 使用。</p>
+</div>
+<h4 id="十六、总结"><a href="#十六、总结" class="headerlink" title="十六、总结"></a>十六、总结</h4><p>本篇主要围绕具体实现来展开说明，提到了 <code>UI</code> 库、添加了路由、编写了组件、完善了规范、对接了 <code>API</code> 等等。功能也算是完成了七七八八，剩下的业务逻辑就不在这里啰嗦了。<code>Electron</code> 还有很多的技术细节，肯定也不是三言两语就能说完的，所以建议大家都去实际的应用一下，只有这样才能融汇贯通。</p>
+<p><a href="https://github.com/chenfengyanyu/electron-ocr" target="_blank" rel="noopener">Electron-OCR</a> 这个项目我还在继续，想到什么就加上去实现。欢迎大家加入进来，一起来做一个完美的识图工具。</p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/electron/">electron</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/01/25/quick-start-mini-programs/" data-tooltip="快速上手小程序">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/01/19/play-image-stream/" data-tooltip="玩转图片流">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/01/21/first-exploration-electron-4/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/01/21/first-exploration-electron-4/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/01/21/first-exploration-electron-4/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/01/25/quick-start-mini-programs/" data-tooltip="快速上手小程序">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/01/19/play-image-stream/" data-tooltip="玩转图片流">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/01/21/first-exploration-electron-4/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/01/21/first-exploration-electron-4/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/01/21/first-exploration-electron-4/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/01/21/first-exploration-electron-4/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/01/21/first-exploration-electron-4/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/01/21/first-exploration-electron-4/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

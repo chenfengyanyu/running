@@ -1,0 +1,521 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>极简弹幕方案 - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="重大的活动现场一般离不开 PPT 演示，可是如何有效和现场互动呢？这时候弹幕必不可少，静态的 PPT 就略显乏力。有没有一种好的方案可以二者兼得呢？">
+<meta name="keywords" content="web,ppt,barrager">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="极简弹幕方案">
+<meta property="og:url" content="http://jartto.wang/2020/02/16/web-barrager/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="重大的活动现场一般离不开 PPT 演示，可是如何有效和现场互动呢？这时候弹幕必不可少，静态的 PPT 就略显乏力。有没有一种好的方案可以二者兼得呢？">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/barrager/show.png">
+<meta property="og:updated_time" content="2020-02-22T14:05:12.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="极简弹幕方案">
+<meta name="twitter:description" content="重大的活动现场一般离不开 PPT 演示，可是如何有效和现场互动呢？这时候弹幕必不可少，静态的 PPT 就略显乏力。有没有一种好的方案可以二者兼得呢？">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/barrager/show.png">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/barrager/logo.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/barrager/logo.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            极简弹幕方案
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2020-02-16T23:58:47+08:00">
+	  
+		    2020/2月/16 23:58:47
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>重大的活动现场一般离不开 <code>PPT</code> 演示，可是如何有效和现场互动呢？这时候弹幕必不可少，静态的 <code>PPT</code> 就略显乏力。有没有一种好的方案可以二者兼得呢？<br><a id="more"></a><br><div class="alert info"><p>如何才能使 <code>PPT</code> 具有交互性，这是一个值得思考的问题！</p>
+</div></p>
+<p>可能很多童鞋想到了，如果使用「网页 <code>PPT</code>」 ，岂不是完美解决了这个问题。本节我们就来提供一种思路，用「<code>PPT</code> + 发射器 + <code>Socket</code>」 实现「极简弹幕方案」。</p>
+<p><strong>关于「网页 <code>PPT</code>」，可以查看我之前的文章「<a href="http://jartto.wang/2019/04/15/amusing-ppt/">酷炫的 <code>HTML5</code> 网页 <code>PPT</code></a>」一探究竟。</strong></p>
+<h4 id="一、效果演示"><a href="#一、效果演示" class="headerlink" title="一、效果演示"></a>一、效果演示</h4><p>我们先通过一个简单的视屏演示一下效果：</p>
+<video src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/barrager/demo.mp4" controls="controls" width="100%" height>您的浏览器不支持播放该视频！</video>
+
+<p>相关代码：<a href="#">Demo 地址</a></p>
+<h4 id="二、方案概括"><a href="#二、方案概括" class="headerlink" title="二、方案概括"></a>二、方案概括</h4><div class="alert info"><p>看完上面的演示，是不是迫不及待想知道答案，下面我们来逐步拆分。</p>
+</div>
+<p>先来看看代码结构<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── README.md</span><br><span class="line">├── mobile</span><br><span class="line">│   ├── README.md</span><br><span class="line">│   ├── node_modules</span><br><span class="line">│   ├── package.json</span><br><span class="line">│   ├── public</span><br><span class="line">│   ├── src</span><br><span class="line">│   └── yarn.lock</span><br><span class="line">├── package.json</span><br><span class="line">├── ppt</span><br><span class="line">│   ├── css</span><br><span class="line">│   ├── extras</span><br><span class="line">│   ├── images</span><br><span class="line">│   ├── index.html</span><br><span class="line">│   ├── js</span><br><span class="line">│   └── temp</span><br><span class="line">├── server</span><br><span class="line">│   ├── app.js</span><br><span class="line">│   ├── data</span><br><span class="line">│   ├── node_modules</span><br><span class="line">│   ├── package-lock.json</span><br><span class="line">│   └── package.json</span><br><span class="line">└── yarn.lock</span><br></pre></td></tr></table></figure></p>
+<div class="alert success"><p>我们主要关注以下三个目录：</p>
+</div>
+<p>1.<code>ppt</code><br>使用 <code>impressjs</code> 构建的项目，<code>PPT</code> 演讲「主屏」，主要演示内容区域，同时接收「服务端」推送弹幕信息。</p>
+<p>2.<code>mobile</code><br>移动端，下文称作「发射器」，主要用作现场用户互动向主屏发送弹幕消息。通过 <code>Create React App</code> 生成，技术栈是：<code>React + Antd</code>。</p>
+<p>3.<code>server</code><br>服务端，主要接受用户弹幕，同时广报到主屏，使用 <code>Socket</code> 实现。</p>
+<div class="alert success"><p>启动方式：</p>
+</div>
+<p>1.进入 server 目录，启动服务：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node app.js</span><br></pre></td></tr></table></figure></p>
+<p>此时会启动一个本机 IP 地址的服务。</p>
+<p>2.进入 ppt 目录，使用 http-server 启动站点：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http-server</span><br></pre></td></tr></table></figure></p>
+<p>注意：接口地址需要替换成本机 IP 地址。</p>
+<p>3.进入 mobile 目录，启动发射器：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn start</span><br></pre></td></tr></table></figure></p>
+<p>注意：请求接口需要使用本机 IP 地址。</p>
+<p><a href="https://github.com/chenfengyanyu/barrager-ppt-demo" target="_blank" rel="noopener">Demo</a> 比较简单，主要展示主流程，如果细节过程有问题，欢迎一起探讨。</p>
+<h4 id="三、主屏细节（核心代码）"><a href="#三、主屏细节（核心代码）" class="headerlink" title="三、主屏细节（核心代码）"></a>三、主屏细节（核心代码）</h4><p>主屏是主要演示版面，我们需要像下面这样作出 <code>PPT</code>，这里我们做了三个页面：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"impress"</span> <span class="attr">class</span>=<span class="string">"jartto"</span> <span class="attr">data-transition-duration</span>=<span class="string">"1000"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"cover"</span> <span class="attr">class</span>=<span class="string">"step slide title"</span> <span class="attr">data-x</span>=<span class="string">"1000"</span> <span class="attr">data-y</span>=<span class="string">"1000"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"temp/img/qrcode.png"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"award"</span> <span class="attr">class</span>=<span class="string">"step slide"</span> <span class="attr">data-x</span>=<span class="string">"2000"</span> <span class="attr">data-y</span>=<span class="string">"3000"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span>请开始你的表演～<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"change"</span> <span class="attr">class</span>=<span class="string">"step slide"</span> <span class="attr">data-x</span>=<span class="string">"2000"</span> <span class="attr">data-y</span>=<span class="string">"3000"</span> <span class="attr">data-scale</span>=<span class="string">"5"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span>切换 PPT<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"thank"</span> <span class="attr">class</span>=<span class="string">"step slide"</span>  <span class="attr">data-rel-x</span>=<span class="string">"0"</span> <span class="attr">data-rel-y</span>=<span class="string">"3000"</span> <span class="attr">data-rotate</span>=<span class="string">"90"</span> <span class="attr">data-scale</span>=<span class="string">"2"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"images/thanks.png"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<div class="alert warning"><p>每个 div 就是一页 ppt，里面可以随意排版，data-x 控制位置，data-scale 控制缩放，data-rotate 控制旋转。</p>
+</div>
+<p>更多 <code>API</code> 文档，请参考如下文档：<br>1.<a href="http://jartto.wang/2019/04/15/amusing-ppt/">酷炫的 <code>HTML5</code> 网页 <code>PPT</code></a><br>2.<a href="https://github.com/impress/impress.js" target="_blank" rel="noopener">文档地址</a></p>
+<h4 id="四、实现弹幕"><a href="#四、实现弹幕" class="headerlink" title="四、实现弹幕"></a>四、实现弹幕</h4><p>为了更好的理解弹幕，我们来实现一个简版：<br>1.定义弹幕结构<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"jartto_demo"</span>&gt;</span>我是弹幕<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>2.定义移动动画<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">keyframes</span> barrager&#123;</span><br><span class="line">   <span class="selector-tag">from</span>&#123;</span><br><span class="line">     <span class="attribute">left</span>:<span class="number">100%</span>;</span><br><span class="line">     <span class="attribute">transform</span>:<span class="built_in">translateX</span>(0);</span><br><span class="line">     <span class="attribute">transform</span>:<span class="built_in">translate3d</span>(0, 0, 0);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="selector-tag">to</span>&#123;</span><br><span class="line">     <span class="attribute">left</span>:<span class="number">0</span>;</span><br><span class="line">     <span class="attribute">transform</span>:<span class="built_in">translate3d</span>(-100%, 0, 0);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<div class="alert danger"><p>注意，使用 translate3d 可以开启 GPU 硬件加速，会比 translateX 更流畅一些。</p>
+</div>
+<p>关于硬件加速，可以关注我之前写的一篇文章：<a href="http://jartto.wang/2017/09/29/expand-on-performance-composite/">详谈层合成（composite）</a></p>
+<p>3.使用动画<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.jartto_demo</span>&#123;</span><br><span class="line">  <span class="attribute">position</span>:absolute;</span><br><span class="line">  <span class="attribute">animation</span>: barrager <span class="number">5s</span> linear <span class="number">0s</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>OK，我们通过三步实现了一个简单的弹幕动画。那么问题来了，弹幕都是随机位置，随机速度，随机颜色出现在屏幕上的，这个该如何实现呢？</p>
+<p>4.随机弹幕出现位置<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> window_height = $(<span class="built_in">window</span>).height() - <span class="number">150</span>;</span><br><span class="line">bottom = <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random() * window_height + <span class="number">40</span>);</span><br><span class="line">code = code.replace(<span class="string">"   bottom:&#123;bottom&#125;, //距离底部高度,单位px,默认随机 \n"</span>, <span class="string">''</span>);</span><br></pre></td></tr></table></figure></p>
+<p>5.随机弹幕颜色<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> color = <span class="string">`#<span class="subst">$&#123;<span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random() * (<span class="number">2</span> &lt;&lt; <span class="number">23</span>)).toString(<span class="number">16</span>)&#125;</span>`</span>; </span><br><span class="line"><span class="built_in">console</span>.log(color); <span class="comment">// #6e8360</span></span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p>好了，大功告成，我们顺手加上 Socket 事件监听。</p>
+</div>
+<p>6.事件监听<br>为了拿到用户发送过来的弹幕，我们需要做一个事件监听（接收服务端数据）：<br>首先，引入 <code>socket.io.js</code> 文件：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"http://&#123;jartto.ip&#125;/socket.io/socket.io.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> socket = io(<span class="string">'http://&#123;jartto.ip&#125;'</span>);</span><br><span class="line">socket.on(<span class="string">'server-push'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'news message &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;'</span>, data.message);</span><br><span class="line">    run(data.message); </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>当我们监听到 <code>server-push</code> 事件的时候，<code>run</code> 函数就会初始化弹幕方法，随机生成一条弹幕，在屏幕滑过。</p>
+<h4 id="五、发射器细节（核心代码）"><a href="#五、发射器细节（核心代码）" class="headerlink" title="五、发射器细节（核心代码）"></a>五、发射器细节（核心代码）</h4><p>发射器就非常简单了，我们使用 <code>Create React App</code> 初始化项目，在 <code>src/app.js</code> 中写入一个表单(这里以 <code>React</code> 为例，<code>Vue</code> 也是大同小异）：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;div className=<span class="string">"app-box"</span>&gt;</span><br><span class="line">    &lt;div className=<span class="string">"form-box"</span>&gt;</span><br><span class="line">        &lt;Form.Item &#123;...formItemLayout&#125; label=<span class="string">""</span>&gt;</span><br><span class="line">        &#123;getFieldDecorator(<span class="string">'msg'</span>, &#123;</span><br><span class="line">            rules: [</span><br><span class="line">            &#123;</span><br><span class="line">                required: <span class="literal">true</span>,</span><br><span class="line">                message: <span class="string">'请输入内容'</span>,</span><br><span class="line">            &#125;,</span><br><span class="line">            ],</span><br><span class="line">        &#125;)(<span class="xml"><span class="tag">&lt;<span class="name">Input</span> <span class="attr">size</span>=<span class="string">"large"</span> <span class="attr">placeholder</span>=<span class="string">"发送消息，嗨起来～"</span> /&gt;</span>)&#125;</span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">Form.Item</span>&gt;</span></span></span><br><span class="line">        &lt;Form.Item &#123;...formTailLayout&#125; &gt;</span><br><span class="line">        &lt;Button className="btns"  shape="round" icon="close" size="large" onClick=&#123;this.cancle&#125;&gt;取消&lt;/Button&gt;</span><br><span class="line">        &lt;Button   type="primary" shape="round" icon="check" size="large" onClick=&#123;this.check&#125;&gt;发送&lt;/Button&gt;</span><br><span class="line">        &lt;/Form.Item&gt;</span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br></pre></td></tr></table></figure></p>
+<p>用户在输入框输入消息，向我们的服务器发送请求，很简单，就不赘述了。效果图可以参考下面：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/barrager/show.png" alt="Demo 效果图"></p>
+<div class="alert warning"><p>请注意，此处为了演示效果，我将三端同框了。</p>
+</div>
+<h4 id="六、服务端细节（核心代码）"><a href="#六、服务端细节（核心代码）" class="headerlink" title="六、服务端细节（核心代码）"></a>六、服务端细节（核心代码）</h4><p>服务端比较简单，使用 <code>Express</code> 初始化一个 <code>Node</code> 项目，向 <code>app.js</code> 写入如下内容：<br>1.启动 <code>Socket</code> 服务：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>),</span><br><span class="line">  bodyParser = <span class="built_in">require</span>(<span class="string">'body-parser'</span>),</span><br><span class="line">  socket = <span class="built_in">require</span>(<span class="string">'socket.io'</span>),</span><br><span class="line">  fs = <span class="built_in">require</span>(<span class="string">'fs'</span>); </span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> app = express();</span><br><span class="line"><span class="keyword">const</span> PORT = <span class="number">4000</span>;</span><br><span class="line"><span class="keyword">const</span> io = socket(app.listen(PORT, () =&gt; <span class="built_in">console</span>.log(<span class="string">`start on port <span class="subst">$&#123;PORT&#125;</span>`</span>)));</span><br></pre></td></tr></table></figure></p>
+<p>2.监听 <code>Socket</code> 连接，接收用户发送数据，将数据写入本地 <code>JSON</code> 文件，并广播到 <code>server-push</code> 事件：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">io.on(<span class="string">'connection'</span>, sockets =&gt; &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'连接成功！'</span>);</span><br><span class="line">  app.post(<span class="string">'/api/send'</span>, (req, res, next) =&gt; &#123;</span><br><span class="line">    <span class="comment">// console.log(req.body);</span></span><br><span class="line">    <span class="keyword">let</span> info = <span class="built_in">JSON</span>.stringify(req.body.msg);</span><br><span class="line"></span><br><span class="line">    fs.writeFile(<span class="string">'./data/jartto.json'</span>, <span class="string">`<span class="subst">$&#123;info&#125;</span>,\n`</span>,</span><br><span class="line">    &#123;<span class="attr">flag</span>:<span class="string">'a'</span>,<span class="attr">encoding</span>:<span class="string">'utf-8'</span>,<span class="attr">mode</span>:<span class="string">'0666'</span>&#125;,<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line">      <span class="keyword">if</span>(err) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'文件写入失败'</span>);</span><br><span class="line">        res.status(<span class="number">500</span>).send(<span class="string">'Error'</span>);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        sockets.broadcast.emit(<span class="string">'server-push'</span>, &#123; <span class="attr">message</span>: req.body.msg &#125;);</span><br><span class="line">        res.status(<span class="number">200</span>).send(<span class="string">'Done'</span>);</span><br><span class="line">      &#125;  </span><br><span class="line">     &#125;) </span><br><span class="line"></span><br><span class="line">  &#125;)</span><br><span class="line">  </span><br><span class="line">  sockets.on(<span class="string">'disconnect'</span>, () =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'User Disconnected'</span>);</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>3.当然，我们也可以存入数据库做持久化，以下演示存入 <code>MySQL</code> 核心代码：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">io.on(<span class="string">'connection'</span>, sockets =&gt; &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'连接成功！'</span>);</span><br><span class="line">  app.post(<span class="string">'/api/send'</span>, (req, res, next) =&gt; &#123;</span><br><span class="line">    <span class="keyword">let</span> &#123;ua, msg&#125; = req.body.msg;</span><br><span class="line">    req.getConnection(<span class="function"><span class="keyword">function</span>(<span class="params">err, cnt</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">let</span> query = cnt.add(<span class="string">'INSERT INTO (ua, msg)'</span>, &#123;ua, msg&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">err, rows</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (err) &#123;</span><br><span class="line">          <span class="built_in">console</span>.log(<span class="string">"Error inserting : %s "</span>,err );</span><br><span class="line">          <span class="keyword">return</span> next(err);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        sockets.broadcast.emit(<span class="string">'server-push'</span>, &#123; <span class="attr">message</span>: req.body.msg &#125;);</span><br><span class="line">        res.status(<span class="number">200</span>).send(<span class="string">'Done'</span>);</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  sockets.on(<span class="string">'disconnect'</span>, () =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'User Disconnected'</span>);</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>4.启动服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node app.js</span><br></pre></td></tr></table></figure></p>
+<p>我们的服务端就启动起来了，访问地址是你的主机 <code>IP</code> 和 <code>4000</code> 端口。</p>
+<h4 id="七、总结"><a href="#七、总结" class="headerlink" title="七、总结"></a>七、总结</h4><p><a href="http://jartto.wang/2020/02/16/web-barrager/">本文</a>我们从零到一搭建了一个完整的弹幕方案，涉及到三部分：主屏，发射器和服务端，旨在为小伙伴们提供一套极简的设计思路。通过 <code>Demo</code> 我们可以简单的串联一个全栈项目，做更多有趣的事情。</p>
+<p>文章最后，打个小广告吧。如果你想搭上在线教育的快车，快速成长，不妨加入我们。一起成长，一起学习，一起挑战更多有趣的事情，「跟谁学-高途课堂」欢迎你，请将简历私我～</p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/barrager/">barrager</a> <a class="tag tag--primary tag--small t-link" href="/tags/ppt/">ppt</a> <a class="tag tag--primary tag--small t-link" href="/tags/web/">web</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2020/03/08/breaking-the-game/" data-tooltip="破局：技术视野与规划">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2020/02/02/about-gitbook/" data-tooltip="GitBook 和它有趣的插件">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2020/02/16/web-barrager/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2020/02/16/web-barrager/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2020/02/16/web-barrager/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2020/03/08/breaking-the-game/" data-tooltip="破局：技术视野与规划">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2020/02/02/about-gitbook/" data-tooltip="GitBook 和它有趣的插件">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2020/02/16/web-barrager/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2020/02/16/web-barrager/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2020/02/16/web-barrager/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2020/02/16/web-barrager/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2020/02/16/web-barrager/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2020/02/16/web-barrager/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

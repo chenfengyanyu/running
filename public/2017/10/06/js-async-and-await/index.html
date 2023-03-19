@@ -1,0 +1,531 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>掌握 Async/Await - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="前端工程师肯定都经历过 JS 回调链狱的痛苦过程，我们在使用 Promise 的时候总是不尽人意。这时候 Async/Await 应运而生，它到底有什么魔力，我们来说道说道。">
+<meta name="keywords" content="es7,async,await">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="掌握 Async&#x2F;Await">
+<meta property="og:url" content="http://jartto.wang/2017/10/06/js-async-and-await/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="前端工程师肯定都经历过 JS 回调链狱的痛苦过程，我们在使用 Promise 的时候总是不尽人意。这时候 Async/Await 应运而生，它到底有什么魔力，我们来说道说道。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2017-12-12T04:05:32.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="掌握 Async&#x2F;Await">
+<meta name="twitter:description" content="前端工程师肯定都经历过 JS 回调链狱的痛苦过程，我们在使用 Promise 的时候总是不尽人意。这时候 Async/Await 应运而生，它到底有什么魔力，我们来说道说道。">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/async0.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="http://7xvi3w.com1.z0.glb.clouddn.com/async0.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            掌握 Async/Await
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2017-10-06T23:42:36+08:00">
+	  
+		    2017/10月/06 23:42:36
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>前端工程师肯定都经历过 JS 回调链狱的痛苦过程，我们在使用 Promise 的时候总是不尽人意。这时候 Async/Await 应运而生，它到底有什么魔力，我们来说道说道。<br><a id="more"></a></p>
+<h4 id="一、回顾-Promise"><a href="#一、回顾-Promise" class="headerlink" title="一、回顾 Promise"></a>一、回顾 Promise</h4><div class="alert info"><p>所谓 Promise，简单说就是一个容器，里面保存着某个未来才会结束的事件（通常是一个异步操作）的结果。</p>
+</div>
+<p>1.语法<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(executor);</span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve, reject</span>) </span>&#123; ... &#125;);</span><br></pre></td></tr></table></figure></p>
+<p>2.参数<br>带有 resolve 、reject 两个参数的一个函数。这个函数在创建 Promise 对象的时候会立即得到执行（在 Promise 构造函数返回 Promise 对象之前就会被执行），并把成功回调函数（resolve）和失败回调函数（reject）作为参数传递进来。调用成功回调函数（resolve）和失败回调函数（reject）会分别触发 Promise 的成功或失败。</p>
+<p>这个函数通常被用来执行一些异步操作，操作完成以后可以选择调用成功回调函数（resolve）来触发 Promise 的成功状态，或者，在出现错误的时候调用失败回调函数（reject）来触发 Promise 的失败。</p>
+<p>3.Promise.all<br>用 <code>Promise.all</code> 来执行，<code>all</code> 接收一个数组参数，里面的值最终都算返回 <code>Promise</code> 对象。这样，三个异步操作的并行执行的，等到它们都执行完后才会进到 <code>then</code> 里面。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Promise</span>.all([async1(), async2(), async3()])</span><br><span class="line">.then(<span class="function"><span class="keyword">function</span>(<span class="params">results</span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(results);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p><code>all</code> 会把所有异步操作的结果放进一个数组中传给 <code>then</code>，就是上面的 <code>results</code>。</p>
+</div>
+<p>4.race 的用法<br><code>all</code> 方法的效果实际上是「谁跑的慢，以谁为准执行回调」，那么相对的就有另一个方法「谁跑的快，以谁为准执行回调」，这就是 <code>race</code>方法：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Promise</span>.race([requestImg(), timeout()])</span><br><span class="line">.then(<span class="function"><span class="keyword">function</span>(<span class="params">results</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(results);</span><br><span class="line">&#125;)</span><br><span class="line">.catch(<span class="function"><span class="keyword">function</span>(<span class="params">reason</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(reason);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>上述代码演示了 <code>race</code> 的基本用法，实现的功能是：请求图片，如果请求成功就返回图片，否则就调用超时函数。</p>
+<p>更多资源，请查看：</p>
+<ul>
+<li><a href="http://www.jianshu.com/p/063f7e490e9a" target="_blank" rel="noopener">js promise</a></li>
+<li><a href="http://www.cnblogs.com/lvdabao/p/es6-promise-1.html" target="_blank" rel="noopener">白话 promise</a></li>
+<li><a href="http://javascript.ruanyifeng.com/advanced/promise.html" target="_blank" rel="noopener">promise 对象-阮一峰</a></li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise" target="_blank" rel="noopener">promise</a></li>
+</ul>
+<h4 id="二、Promise-为何不完美？"><a href="#二、Promise-为何不完美？" class="headerlink" title="二、Promise 为何不完美？"></a>二、Promise 为何不完美？</h4><p>乍一看，<code>Promise</code> 还不错，帮我们解决了回调链狱的问题。当然这只是简单使用，碰到复杂的业务也有很鸡肋的场景，比如：</p>
+<p>1.错误处理<br>在下面的 <code>Promise</code> 示例中，<code>Try/Catch</code> 不能处理 <code>JSON.parse</code> 的错误，因为它在 <code>Promise</code> 中。我们需要使用 <code>catch</code>，这样错误处理代码非常冗余。并且，在我们的实际生产代码会更加复杂。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> makeRequest = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    getJSON().then(<span class="function"><span class="params">result</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// JSON.parse可能会出错</span></span><br><span class="line">      <span class="keyword">const</span> data = <span class="built_in">JSON</span>.parse(result)</span><br><span class="line">      <span class="built_in">console</span>.log(data)</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="comment">// 取消注释，处理异步代码的错误</span></span><br><span class="line">    <span class="comment">// .catch((err) =&gt; &#123;</span></span><br><span class="line">    <span class="comment">//   console.log(err)</span></span><br><span class="line">    <span class="comment">// &#125;)</span></span><br><span class="line">  &#125; <span class="keyword">catch</span> (err) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(err)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>Async/Await</code> 让 <code>Try/Catch</code> 可以同时处理同步和异步错误。使用 <code>Async/Await</code> 的话，<code>Catch</code> 能处理 <code>JSON.parse</code> 错误:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> makeRequest = <span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="comment">// this parse may fail</span></span><br><span class="line">    <span class="keyword">const</span> data = <span class="built_in">JSON</span>.parse(<span class="keyword">await</span> getJSON())</span><br><span class="line">    <span class="built_in">console</span>.log(data)</span><br><span class="line">  &#125; <span class="keyword">catch</span> (err) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(err)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<div class="alert success"><p><code>Async/Await</code> 最让人舒服的一点是代码看起来是同步的。</p>
+</div>
+<p>2.条件语句<br>下面示例中，需要获取数据，然后根据返回数据决定是直接返回，还是继续获取更多的数据。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> makeRequest = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> getJSON()</span><br><span class="line">    .then(<span class="function"><span class="params">data</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (data.needsAnotherRequest) &#123;</span><br><span class="line">        <span class="keyword">return</span> makeAnotherRequest(data)</span><br><span class="line">          .then(<span class="function"><span class="params">moreData</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(moreData)</span><br><span class="line">            <span class="keyword">return</span> moreData</span><br><span class="line">          &#125;)</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(data)</span><br><span class="line">        <span class="keyword">return</span> data</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这些代码看着就头痛。嵌套（6层），括号，<code>return</code> 语句很容易让人感到迷茫，而它们只是需要将最终结果传递到最外层的<code>Promise</code>。如果换成 <code>Async/Await</code> 呢：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> makeRequest = <span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> data = <span class="keyword">await</span> getJSON();</span><br><span class="line">  <span class="keyword">if</span> (data.needsAnotherRequest) &#123;</span><br><span class="line">    <span class="keyword">const</span> moreData = <span class="keyword">await</span> makeAnotherRequest(data);</span><br><span class="line">    <span class="built_in">console</span>.log(moreData);</span><br><span class="line">    <span class="keyword">return</span> moreData;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(data);</span><br><span class="line">    <span class="keyword">return</span> data;  </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>所以，这才是真正摆脱回调链狱的正确做法。</p>
+<p>3.中间值<br>你很可能遇到过这样的场景，调用 <code>promise1</code>，使用 <code>promise1</code> 返回的结果去调用 <code>promise2</code>，然后使用两者的结果去调用<code>promise3</code>。你的代码很可能是这样的：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> makeRequest = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> promise1()</span><br><span class="line">    .then(<span class="function"><span class="params">value1</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> promise2(value1);</span><br><span class="line">        .then(<span class="function"><span class="params">value2</span> =&gt;</span> &#123;        </span><br><span class="line">          <span class="keyword">return</span> promise3(value1, value2);</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 或者：</span></span><br><span class="line"><span class="keyword">const</span> makeRequest = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> promise1()</span><br><span class="line">    .then(<span class="function"><span class="params">value1</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="built_in">Promise</span>.all([value1, promise2(value1)])</span><br><span class="line">    &#125;)</span><br><span class="line">    .then(<span class="function">(<span class="params">[value1, value2]</span>) =&gt;</span> &#123;      </span><br><span class="line">      <span class="keyword">return</span> promise3(value1, value2)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>怎么写都会觉得很复杂，那如果 <code>Async/Await</code> 用来实现呢，表现可能如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> makeRequest = <span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> value1 = <span class="keyword">await</span> promise1();</span><br><span class="line">  <span class="keyword">const</span> value2 = <span class="keyword">await</span> promise2(value1);</span><br><span class="line">  <span class="keyword">return</span> promise3(value1, value2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>是不是很 6 ，将复杂的场景简化，这样的代码就很有灵性了。</p>
+<p>4.错误栈<br>调用了多个 <code>Promise</code>，假设 <code>Promise</code> 链中某个地方抛出了一个错误，<code>Promise</code> 链中返回的错误栈没有给出错误发生位置的线索。更糟糕的是，它会误导我们；错误栈中唯一的函数名为 <code>callAPromise</code>，然而它和错误没有关系。(文件名和行号还是有用的)。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> makeRequest = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> callAPromise()</span><br><span class="line">    .then(<span class="function"><span class="params">()</span> =&gt;</span> callAPromise())</span><br><span class="line">    .then(<span class="function"><span class="params">()</span> =&gt;</span> callAPromise())</span><br><span class="line">    .then(<span class="function"><span class="params">()</span> =&gt;</span> callAPromise())</span><br><span class="line">    .then(<span class="function"><span class="params">()</span> =&gt;</span> callAPromise())</span><br><span class="line">    .then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">"oops"</span>);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">makeRequest().catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(err);</span><br><span class="line">  <span class="comment">// output</span></span><br><span class="line">  <span class="comment">// Error: oops at callAPromise.then.then.then.then.then (index.js:8:13)</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>然而，<code>Async/Await</code> 中的错误栈会指向错误所在的函数：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> makeRequest = <span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">  <span class="keyword">await</span> callAPromise();</span><br><span class="line">  <span class="keyword">await</span> callAPromise();</span><br><span class="line">  <span class="keyword">await</span> callAPromise();</span><br><span class="line">  <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">"oops"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">makeRequest().catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(err);</span><br><span class="line">  <span class="comment">// output</span></span><br><span class="line">  <span class="comment">// Error: oops at makeRequest (index.js:7:9)</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>5.调试<br>调试 <code>Promise</code> 有两个问题：</p>
+<ul>
+<li>不能在返回表达式的箭头函数中设置断点；</li>
+<li>如果你在 <code>then</code> 代码块中设置断点，调试器不会跳到下一个 <code>then</code>，因为它只会跳过异步代码;</li>
+</ul>
+<p>而使用 <code>Await/Async</code> 时，你不再需要那么多箭头函数，这样你就可以像调试同步代码一样跳过 <code>Await</code> 语句。</p>
+<p>这里只简单的列出问题，详细请查看原文：<a href="http://cnodejs.org/topic/58e4914e43ee7e7106c13541" target="_blank" rel="noopener">Async/Await 替代 Promise 的 6 个理由</a></p>
+<h4 id="三、新时代的曙光-Async-Await"><a href="#三、新时代的曙光-Async-Await" class="headerlink" title="三、新时代的曙光 Async/Await"></a>三、新时代的曙光 Async/Await</h4><p>简单介绍：</p>
+<ul>
+<li>Await/Async 是写异步代码的新方式，以前的方法有回调函数和 Promise。</li>
+<li>Await/Async 是基于 Promise 实现的，它不能用于普通的回调函数。</li>
+<li>Await/Async 与 Promise 一样，是非阻塞的。</li>
+<li>Await/Async 使得异步代码看起来像同步代码，这正是它的魔力所在。</li>
+</ul>
+<p>使用 <code>Promise</code> 是这样的:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> jarttoDemo = <span class="function"><span class="params">()</span> =&gt;</span></span><br><span class="line">getJSON().then(<span class="function"><span class="params">data</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> data;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">jarttoDemo();</span><br></pre></td></tr></table></figure></p>
+<p>使用 <code>Async/Await</code> 是这样的:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> jarttoDemo = <span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">  <span class="keyword">let</span> data = <span class="keyword">await</span> getJSON();</span><br><span class="line">  <span class="keyword">return</span> data;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">jarttoDemo();</span><br></pre></td></tr></table></figure></p>
+<p>基本规则：</p>
+<ul>
+<li>Async 表示这是一个 Async 函数，Await 只能用在这个函数里面。</li>
+<li>Await 表示在这里等待 Promise返回结果了，再继续执行。</li>
+<li>Await 后面跟着的应该是一个 Promise 对象，当然，其他返回值也没关系，只是会立即执行，不过那样就没有意义了。</li>
+</ul>
+<h4 id="四、更多用法示例"><a href="#四、更多用法示例" class="headerlink" title="四、更多用法示例"></a>四、更多用法示例</h4><p>1.简单示例<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> sleep = <span class="function"><span class="keyword">function</span> (<span class="params">time</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        resolve();</span><br><span class="line">    &#125;, time);</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> start = <span class="keyword">async</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 在这里使用起来就像同步代码那样直观</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'start'</span>);</span><br><span class="line">    <span class="keyword">await</span> sleep(<span class="number">3000</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'end'</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">start();</span><br></pre></td></tr></table></figure></p>
+<p>2.获得返回值<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> sleep = <span class="function"><span class="keyword">function</span> (<span class="params">time</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 返回 ‘ok’</span></span><br><span class="line">        resolve(<span class="string">'ok'</span>);</span><br><span class="line">    &#125;, time);</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> start = <span class="keyword">async</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> result = <span class="keyword">await</span> sleep(<span class="number">3000</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(result); <span class="comment">// 收到 ‘ok’</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>3.错误捕获<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> makeRequest = <span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="comment">// this parse may fail</span></span><br><span class="line">    <span class="keyword">const</span> data = <span class="built_in">JSON</span>.parse(<span class="keyword">await</span> getJSON())</span><br><span class="line">    <span class="built_in">console</span>.log(data)</span><br><span class="line">  &#125; <span class="keyword">catch</span> (err) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(err)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>既然 <code>then</code> 不用写了，那么 <code>catch</code> 也不用写，可以直接用标准的 <code>try catch</code> 语法捕捉错误。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> sleep = <span class="function"><span class="keyword">function</span> (<span class="params">time</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="comment">// 模拟出错了，返回 ‘error’</span></span><br><span class="line">      reject(<span class="string">'error'</span>);</span><br><span class="line">    &#125;, time);</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> start = <span class="keyword">async</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'start'</span>);</span><br><span class="line">    <span class="keyword">await</span> sleep(<span class="number">3000</span>); <span class="comment">// 这里得到了一个返回错误</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 所以以下代码不会被执行了</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'end'</span>);</span><br><span class="line">  &#125; <span class="keyword">catch</span> (err) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(err); <span class="comment">// 这里捕捉到错误 `error`</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>4.条件语句<br><code>Promise</code> 写法：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> makeRequest = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> getJSON()</span><br><span class="line">    .then(<span class="function"><span class="params">data</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (data.needsAnotherRequest) &#123;</span><br><span class="line">        <span class="keyword">return</span> makeAnotherRequest(data)</span><br><span class="line">          .then(<span class="function"><span class="params">moreData</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> moreData;</span><br><span class="line">          &#125;)</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> data;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>Async/Await</code> 写法：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> makeRequest = <span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> data = <span class="keyword">await</span> getJSON();</span><br><span class="line">  <span class="keyword">if</span> (data.needsAnotherRequest) &#123;</span><br><span class="line">    <span class="keyword">const</span> moreData = <span class="keyword">await</span> makeAnotherRequest(data);</span><br><span class="line">    <span class="keyword">return</span> moreData;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> data;  </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>5.循环多个 <code>Await</code><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> start = <span class="keyword">async</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>; i &lt;= <span class="number">10</span>; i++) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`当前是第 <span class="subst">$&#123;i&#125;</span> 次等待..`</span>);</span><br><span class="line">    <span class="keyword">await</span> sleep(<span class="number">1000</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<div class="alert success"><p>需要注意的是，<code>Await</code> 必须在 <code>Async</code> 函数的上下文中的。</p>
+</div>
+<p>6.在 <code>forEach</code> 中使用<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">printFiles</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> files = <span class="keyword">await</span> getFilePaths();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> file <span class="keyword">of</span> files) &#123;</span><br><span class="line">    <span class="keyword">const</span> contents = <span class="keyword">await</span> fs.readFile(file, <span class="string">'utf8'</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(contents);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">printFiles</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> files = <span class="keyword">await</span> getFilePaths();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">await</span> <span class="built_in">Promise</span>.all(files.map(<span class="keyword">async</span> (file) =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> contents = <span class="keyword">await</span> fs.readFile(file, <span class="string">'utf8'</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(contents)</span><br><span class="line">  &#125;));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>示例参考如下文章：<br><a href="http://cnodejs.org/topic/58e4914e43ee7e7106c13541" target="_blank" rel="noopener">Async/Await替代Promise的6个理由</a><br><a href="http://cnodejs.org/topic/5640b80d3a6aa72c5e0030b6" target="_blank" rel="noopener">ES7 的 Async/Await</a><br><a href="https://stackoverflow.com/questions/37576685/using-async-await-with-a-foreach-loop" target="_blank" rel="noopener">Using async/await with a forEach loop</a></p>
+<h4 id="五、总结"><a href="#五、总结" class="headerlink" title="五、总结"></a>五、总结</h4><p>我们一直在强调代码的可读性和可维护性，对我来说，Async/Await 更加易懂和易用。所以，不管是 Promise 还是 Async/Await ，能解决实际问题的技术就是好技术。</p>
+<p>当然，Async/Await 也是基于 Promise 概念的，技术上我们也可以求同存异，不必太过较真。一句话，选择权在你！</p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/async/">async</a> <a class="tag tag--primary tag--small t-link" href="/tags/await/">await</a> <a class="tag tag--primary tag--small t-link" href="/tags/es7/">es7</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/10/18/js-fancy-programming/" data-tooltip="JS 花式编程">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/09/29/expand-on-performance-composite/" data-tooltip="详谈层合成（composite）">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2017/10/06/js-async-and-await/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2017/10/06/js-async-and-await/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2017/10/06/js-async-and-await/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/10/18/js-fancy-programming/" data-tooltip="JS 花式编程">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/09/29/expand-on-performance-composite/" data-tooltip="详谈层合成（composite）">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2017/10/06/js-async-and-await/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2017/10/06/js-async-and-await/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2017/10/06/js-async-and-await/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2017/10/06/js-async-and-await/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2017/10/06/js-async-and-await/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2017/10/06/js-async-and-await/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

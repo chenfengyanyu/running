@@ -1,0 +1,498 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>聊一聊浏览器缓存机制 - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="相信很多前端童鞋对于浏览器缓存都不太陌生，但是如果没有系统的归纳总结，可能三言两句很难说明白。如何才能完美的回答，这是一个值得思考的问题。">
+<meta name="keywords" content="http,web,cache">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="聊一聊浏览器缓存机制">
+<meta property="og:url" content="http://jartto.wang/2019/02/14/web-cache/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="相信很多前端童鞋对于浏览器缓存都不太陌生，但是如果没有系统的归纳总结，可能三言两句很难说明白。如何才能完美的回答，这是一个值得思考的问题。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/cache/process.png">
+<meta property="og:updated_time" content="2019-02-16T14:08:35.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="聊一聊浏览器缓存机制">
+<meta name="twitter:description" content="相信很多前端童鞋对于浏览器缓存都不太陌生，但是如果没有系统的归纳总结，可能三言两句很难说明白。如何才能完美的回答，这是一个值得思考的问题。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/cache/process.png">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/cache/logo.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/cache/logo.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            聊一聊浏览器缓存机制
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2019-02-14T08:54:13+08:00">
+	  
+		    2019/2月/14 08:54:13
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/面试笔试/">面试笔试</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>相信很多前端童鞋对于浏览器缓存都不太陌生，但是如果没有系统的归纳总结，可能三言两句很难说明白。如何才能完美的回答，这是一个值得思考的问题。<br><a id="more"></a></p>
+<div class="alert success"><p>当然，我们不能为了应对面试才去掌握，而应该当作技能储备起来，做到活学活用。</p>
+</div>
+<h4 id="一、为什么要缓存"><a href="#一、为什么要缓存" class="headerlink" title="一、为什么要缓存"></a>一、为什么要缓存</h4><p>1.缓存可以减少用户等待时间，提升用户体验；<br>2.减少网络带宽消耗<br>对于网站运营者和用户，带宽都代表着成本，过多的带宽消耗，都需要支付额外的费用。如果可以使用缓存，只会产生极小的网络流量，这将有效的降低运营成本。</p>
+<p>3.降低服务器压力<br>给网络资源设定有效期之后，用户可以重复使用本地的缓存，减少对源服务器的请求，降低服务器的压力。此外，搜索引擎的爬虫机器人也能根据过期机制降低爬取的频率，也能有效降低服务器的压力。</p>
+<div class="alert warning"><p>需要注意：缓存使用不当，会有「脏数据」，导致用户数据异常。</p>
+</div>
+<h4 id="二、常见缓存类型"><a href="#二、常见缓存类型" class="headerlink" title="二、常见缓存类型"></a>二、常见缓存类型</h4><div class="alert info"><p>浏览器缓存分为强缓存和协商缓存。</p>
+</div>
+<p>强缓存<br>1.<code>Expires</code>：<code>GMT</code> 格式的时间字符串，代表缓存资源的过期时间<br><code>Expires</code> 也是需要在服务端配置（具体配置也根据服务器而定），<code>Expires</code> 添加的是该资源过期的日期。浏览器会根据该过期日期与客户端时间对比，如果过期时间还没到，则会去缓存中读取该资源，如果已经到期了，则浏览器判断为该资源已经不新鲜要重新从服务端获取。</p>
+<p>通过这种方式，可以实现直接从浏览器缓存中读取，而不需要去服务端判断是否已经缓存，避免了这次 <code>HTTP</code> 请求。值得注意的是 <code>Expires</code> 时间可能存在 <code>客户端时间跟服务端时间不一致</code> 的问题。</p>
+<div class="alert info"><p>建议 Expires 结合 Cache-Control 一起使用，大型网站中一起使用的情况比较多见。</p>
+</div>
+<p>2.<code>Cache-Control</code>: <code>max-age</code> 强缓存利用其 <code>max-age</code> 值来判断缓存资源的最大生命周期，它的值单位为秒。<br><code>Cache-Control</code> 属性值是在 <code>server</code> 端配置的，不同的服务器有不同的配置，<code>web</code> 服务器 <code>apache</code>、<code>nginx</code>、<code>IIS</code> ,应用服务器 <code>tomcat</code> 等配置都不尽相同；</p>
+<p>协商缓存<br>1.<code>Last-Modified</code>：值为资源最后更新时间，随服务器 <code>Response</code> 返回</p>
+<p>2.<code>If-Modified-Since</code>：通过比较两个时间来判断资源在两次请求期间是否有过修改，如果没有修改，则命中协商缓存。</p>
+<p>3.<code>ETag</code>：表示资源内容的唯一标识，随服务器 <code>Response</code> 返回。<br><code>Web</code> 服务器响应请求时，告诉浏览器当前资源在服务器的唯一标识</p>
+<div class="alert danger"><p>注：HTTP 中并没有指定如何生成 ETag，哈希是比较理想的选择。</p>
+</div>
+<p>4.<code>If-None-Match</code><br>服务器通过比较请求头部的 <code>If-None-Match</code> 与当前资源的 <code>ETag</code> 是否一致来判断资源是否在两次请求之间有过修改，如果没有修改，则命中协商缓存。</p>
+<h4 id="三、缓存流程解析"><a href="#三、缓存流程解析" class="headerlink" title="三、缓存流程解析"></a>三、缓存流程解析</h4><p>看完上面的概念，我们来看看缓存流程是怎样的？先来看看下面这张图：</p>
+<p><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/cache/process.png" alt="process"></p>
+<p>如上图所示：<br>1.浏览器会先检测强缓存类型（<code>Cache-Control</code> 或者 <code>Expires</code>）是否有效；<br>2.如果命中了强缓存，则直接从本地获取缓存资源；<br>3.当强缓存没有命中时，客户端会发送请求到服务器，服务器通过另一些 <code>Request Header</code> 验证这个资源是否命中协商缓存，称为 <code>HTTP</code> 再验证，如果命中，服务器将请求返回，但不返回资源，而是告诉客户端直接从缓存中获取，客户端收到返回后就会从缓存中获取资源；<br>4.强缓存不会发送请求到服务器，但协商缓存会发送服务器请求；<br>5.当协商缓存也没命中时，服务器就会将资源发送回客户端。</p>
+<p>需要注意：<br>1.强缓存和协商缓存共同之处在于，如果命中缓存，服务器都不会返回资源；<br>2.当 <code>F5</code> 刷新网页时，跳过强缓存，但是会检查协商缓存；<br>3.当 <code>Ctrl + F5</code> 强制刷新页面时，直接从服务器加载，跳过强缓存和协商缓存；</p>
+<h4 id="四、不会缓存的情况"><a href="#四、不会缓存的情况" class="headerlink" title="四、不会缓存的情况"></a>四、不会缓存的情况</h4><p>当然并不是所有请求都能被缓存，无法被浏览器缓存的请求如下：<br>1.<code>HTTP</code> 信息头中包含 <code>Cache-Control:no-cache</code> ，<code>pragma:no-cache（HTTP1.0）</code>，或<code>Cache-Control: max-age=0</code> 等告诉浏览器不用缓存的请求；<br>2.需要根据 <code>Cookie</code>，认证信息等决定输入内容的动态请求是不能被缓存的；<br>3.经过 <code>HTTPS</code> 安全加密的请求；<br>4.<code>POST</code> 请求无法被缓存；<br>5.<code>HTTP</code> 响应头中不包含 <code>Last-Modified/Etag</code>，也不包含 <code>Cache-Control/Expires</code> 的请求无法被缓存；</p>
+<h4 id="五、小故事大道理"><a href="#五、小故事大道理" class="headerlink" title="五、小故事大道理"></a>五、小故事大道理</h4><p>上文对整个概念做了阐述，还是不够形象，我们来通过几个小故事生动理解一下：</p>
+<p>故事一：<code>Last-Modified</code><br>浏览器：<code>Hi</code>，我需要 <code>jartto.min.js</code> 这个文件，如果是在 <code>Last-Modified: Fri Feb 15 2019 19:57:31 GMT</code> 之后修改过的，请发给我。<br>服务器：（检查文件的修改时间）<br>服务器：<code>Oh</code>，这个文件在那个时间之后没有被修改过，你已经有最新的版本了。<br>浏览器：太好了，那我就显示给用户了。</p>
+<p>故事二：<code>ETag</code><br>浏览器：<code>Hi</code>，我需要 <code>jartto.css</code> 这个文件，有没有不匹配 <code>3c61f-1c1-2aecb436</code> 这个串的<br>服务器：（检查 <code>ETag</code>…）<br>服务器：<code>Hey</code>，我这里的版本也是 <code>3c61f-1c1-2aecb436</code>，你已经是最新的版本了<br>浏览器：好，那就可以使用本地缓存了</p>
+<div class="alert success"><p>看完这两个小故事，是否对协商缓存有了更清晰的认识了。</p>
+</div>
+<p>参考：<br><a href="https://www.cnblogs.com/slly/p/6732749.html" target="_blank" rel="noopener">浏览器缓存机制详解</a><br><a href="https://www.cnblogs.com/etoah/p/5579622.html" target="_blank" rel="noopener">web性能优化:详说浏览器缓存</a><br><a href="https://blog.csdn.net/bluedandelion/article/details/80895021" target="_blank" rel="noopener">前端性能优化之缓存利用</a></p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/cache/">cache</a> <a class="tag tag--primary tag--small t-link" href="/tags/http/">http</a> <a class="tag tag--primary tag--small t-link" href="/tags/web/">web</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/02/16/web-optimization/" data-tooltip="网站优化实战">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/01/17/js-typeof/" data-tooltip="JS 基础｜搞懂 typeof 和 instanceof">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2019/02/14/web-cache/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2019/02/14/web-cache/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2019/02/14/web-cache/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/02/16/web-optimization/" data-tooltip="网站优化实战">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/01/17/js-typeof/" data-tooltip="JS 基础｜搞懂 typeof 和 instanceof">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2019/02/14/web-cache/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2019/02/14/web-cache/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2019/02/14/web-cache/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2019/02/14/web-cache/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2019/02/14/web-cache/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2019/02/14/web-cache/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

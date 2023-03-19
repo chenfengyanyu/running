@@ -1,0 +1,517 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>何谓 JS 挖矿 - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="突然间“挖矿”，“门罗币”这样的字眼充斥在很多自媒体的文章中，这极大引起了我的好奇，本着“不抛弃，不放过”的学习理念，我们来做一些简单的了解。">
+<meta name="keywords" content="js">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="何谓 JS 挖矿">
+<meta property="og:url" content="http://jartto.wang/2017/11/08/js-dig-ore/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="突然间“挖矿”，“门罗币”这样的字眼充斥在很多自媒体的文章中，这极大引起了我的好奇，本着“不抛弃，不放过”的学习理念，我们来做一些简单的了解。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/dig4.png-blog">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/dig2.png-blog">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/dig3.png-blog">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/dig5.png-blog">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/dig6.png-blog">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/dig7.png-blog">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/dig9.png">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/dig8.gif-blog">
+<meta property="og:updated_time" content="2018-10-31T14:56:17.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="何谓 JS 挖矿">
+<meta name="twitter:description" content="突然间“挖矿”，“门罗币”这样的字眼充斥在很多自媒体的文章中，这极大引起了我的好奇，本着“不抛弃，不放过”的学习理念，我们来做一些简单的了解。">
+<meta name="twitter:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/dig4.png-blog">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/dig0.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/dig0.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            何谓 JS 挖矿
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2017-11-08T12:03:45+08:00">
+	  
+		    2017/11月/08 12:03:45
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术杂谈/">技术杂谈</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>突然间“挖矿”，“门罗币”这样的字眼充斥在很多自媒体的文章中，这极大引起了我的好奇，本着“不抛弃，不放过”的学习理念，我们来做一些简单的了解。<br><a id="more"></a><br>在 IT 界，我们更多听到的是：“码农”，“搬砖”这样的字眼。可是从今往后，你就会知道，原来还有“挖矿”这一说。</p>
+<h4 id="一、挖矿与-JS-为何会联系起来？"><a href="#一、挖矿与-JS-为何会联系起来？" class="headerlink" title="一、挖矿与 JS 为何会联系起来？"></a>一、挖矿与 JS 为何会联系起来？</h4><div class="alert info"><p>网页中嵌入 Javascript, 一旦用户打开该网站，浏览器便会按照脚本的指令变成一个门罗币挖矿机。这一段附加的挖矿代码通常因为大量占用 CPU，使用户的计算机变得异常卡顿甚至无法正常使用。</p>
+</div>
+<p>这样的网站会嵌入了 Coinhive JavaScript Miner 代码。该代码是基于 CryptoNight 挖矿算法编写，该算法可以产出 CryptoNote 类网络货币，如 Monero (门罗币)、Dashcoin (达世币)，DarkNetCoin (暗网币)等。</p>
+<p>网络安全公司 Adguard 于近期发表一份研究报告，指出逾 220 家热门网站运营者早期就已经从 CoelHive 寻找到加密货币 Monero 的采矿脚本，并通过用户电脑进行试验挖掘加密货币，从而获取巨额收益。据悉，目前共有 5 亿用户在不知情下运行 JS 脚本、<strong>挖掘加密货币</strong>。</p>
+<h4 id="二、挖矿平台"><a href="#二、挖矿平台" class="headerlink" title="二、挖矿平台"></a>二、挖矿平台</h4><p>顺藤摸瓜，我们找到了一个挖矿平台的网站，它是这么介绍的：<br><div class="alert info"><p>Monetize Your Business With Your Users’ CPU Power</p>
+</div></p>
+<p>JS 使用方式也很简单，注册平台:<br><img src="http://7xvi3w.com1.z0.glb.clouddn.com/dig4.png-blog" alt="dig sign up"><br>得到 Site Key 和 Secret Key:<br><img src="http://7xvi3w.com1.z0.glb.clouddn.com/dig2.png-blog" alt="dig site key"><br>嵌入如下代码：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://coinhive.com/lib/coinhive.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">  <span class="keyword">var</span> miner = <span class="keyword">new</span> CoinHive.User(<span class="string">'JXKRjYbooF1daPun4jz8O3eC3zQlBL6b'</span>, <span class="string">'jartto'</span>);</span></span><br><span class="line"><span class="undefined">  miner.start();</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>网站很人性化的还提供了一个 Dashboard 页面，方便去监控挖矿的进度:<br><img src="http://7xvi3w.com1.z0.glb.clouddn.com/dig3.png-blog" alt="dig dashboard"></p>
+<div class="alert danger"><p>CoinHive 是目前最受欢迎的 JS 挖矿引擎。安全专家表示，上述攻击手段主要是网站运营商在其网页内嵌入一段 JS 代码，只要用户访问，挖矿程序就会在网民的电脑中运行，从而占据大量系统资源，导致 CPU 利用率突然提升。</p>
+</div>
+<p>这里就不细说了，具体请查看：<a href="https://coinhive.com" target="_blank" rel="noopener">A Crypto Miner for your Website</a>。细心的童鞋可能发现了，在 CoinHive 设置面板中，需要我们填写 Monero Payment Adress，这又是什么？</p>
+<h4 id="三、门罗币钱包"><a href="#三、门罗币钱包" class="headerlink" title="三、门罗币钱包"></a>三、门罗币钱包</h4><p>既然是在挖门罗币，那么自然引出了门罗币钱包。于是乎，我们找到了 <a href="https://getmonero.org/downloads/" target="_blank" rel="noopener">Monero</a>。</p>
+<p>那就来试试，打开 Monero ，创建钱包：<br><img src="http://7xvi3w.com1.z0.glb.clouddn.com/dig5.png-blog" alt="Monero"><br>创建完成：<br><img src="http://7xvi3w.com1.z0.glb.clouddn.com/dig6.png-blog" alt="Monero"><br>接着，然后就得到了一个收款地址，也就是上文我们需要填写的 Monero Payment Adress：<br><img src="http://7xvi3w.com1.z0.glb.clouddn.com/dig7.png-blog" alt="Monero payment"></p>
+<div class="alert success"><p>到这里，终于形成了一个完整的闭环，挖矿 - 门罗币 - 交易。</p>
+</div>
+<h4 id="四、到底在挖掘什么？"><a href="#四、到底在挖掘什么？" class="headerlink" title="四、到底在挖掘什么？"></a>四、到底在挖掘什么？</h4><p>如上所述，JS 挖矿代码会占用大量的客户端 CPU 资源，可是这有什么意义呢，这些代码在做什么呢？</p>
+<p>很模糊的理解到，貌似“用户 CPU 计算能力”便是挖掘的目标。为了验证自己的猜想，我尝试了运行了一个例子：</p>
+<p><center><img src="http://7xvi3w.com1.z0.glb.clouddn.com/dig9.png" alt="demo png"></center><br>示例地址：<a href="https://jartto.github.io/demo.html" target="_blank" rel="noopener">mining live demo</a></p>
+<p>在钱包中，我们看到下面这样的描述，这也就解释了我们之前的疑惑：</p>
+<ul>
+<li>挖矿同时能让您有机会赚取额外的门罗币，因为在挖矿时，您的计算机将被用来寻找 Monero 区块的解答，每当您找到一个区块的解答，您即可以获得其附带的门罗币奖励，祝您好运！</li>
+<li>挖矿可增进 Monero 网络的安全性，只要越多使用者在挖矿，Monero 网络就会越难以被攻击。</li>
+</ul>
+<p>下面这张动图可以很有意思，非常形象：<br><img src="http://7xvi3w.com1.z0.glb.clouddn.com/dig8.gif-blog" alt="gif"></p>
+<h4 id="五、如何感知以及防范？"><a href="#五、如何感知以及防范？" class="headerlink" title="五、如何感知以及防范？"></a>五、如何感知以及防范？</h4><p>其实这种 JS 挖矿的思路还是挺有意思的，用一段嵌入代码来整合网上的资源。唯一让人很不舒服的地方就是：它是未经用户授权而私自调用。不但降低了用户体验，而且也威胁到了用户隐私。</p>
+<p>挖矿代码通常因为大量占用 CPU，使用户的计算机变得异常卡顿甚至无法正常使用。所以这也是我们防范的突破口，我们可以尝试以下的方式：</p>
+<p>方式一：<br>打开浏览器的任务管理器，如果发现 CPU 占用率明显飙升，请注意该页面；</p>
+<p>方式二：<br>既然是嵌入的 JS 代码片段，怎么可能没有痕迹？查看页面源文件，查找 <code>coinhive</code> 关键字，如果有的话，基本可以确定；</p>
+<div class="alert success"><p>所以，当你的网页卡顿无比的时候，不要总觉得是电脑性能问题或者网站的优化问题，切记首先排除“恶意挖矿”。</p>
+</div>
+<p>方式三：<br>一些去广告的浏览器插件，可以禁止 JS 挖矿。</p>
+<div class="alert info"><p>当然，如果挖矿代码加一些截流控制和 CPU 使用预警的话，用户就更难察觉了。</p>
+</div>
+<h4 id="六、怎么样去看待这样的操作？"><a href="#六、怎么样去看待这样的操作？" class="headerlink" title="六、怎么样去看待这样的操作？"></a>六、怎么样去看待这样的操作？</h4><p>就拿<a href="http://tieba.baidu.com/p/2404500396" target="_blank" rel="noopener">贴吧</a>中看到的这句话，说的不无道理：</p>
+<p>首先，挖矿并不是自己制造货币，挖矿得来的受益来源于去中心化的货币结点（或者你可以理解成整个 p2p 网络）给予矿工的奖励分成、挖矿实际上是在向市场输送更多货币（因为供求关系嘛）。</p>
+<p>其次，比特币的激励机制是这样的：如果矿工的受益不足以应付起成本也就是积极性被抑制时，就降低 gigahash 的生成难度，来刺激矿工参与挖矿，如果矿工的挖矿效率太高到易导致通货膨胀就进行抑制，升高难度。</p>
+<p>因此从全局上来看个体的矿工永远不会大赚大亏。简而言之就是为整个比特币市场注入新的比特币（数据散列）然后市场会有一定的激励机制（按比例给你分配比特币）因为如果不给你没人会这么干 就好比你的计算机就是矿工 比特币就是酬劳。</p>
+<div class="alert danger"><p>很多情况下，这些挖矿脚本的行为就像恶意程序，未经许可侵入用户的计算机和利用计算机资源。广告屏蔽工具现在成了防止劫持 CPU 的安全工具了。</p>
+</div>
+<h4 id="七、总结"><a href="#七、总结" class="headerlink" title="七、总结"></a>七、总结</h4><p>起初不了解挖矿，所以非常好奇，然后就查询了相关资料。现在懂了，违反用户意愿并私自挖矿的行为必将受到用户的强烈反对，这与网站加恶意广告不无区别。</p>
+<p>法律的灰色地带，也许只有时间能够证明这件事情的利弊了。</p>
+<h4 id="八、参考"><a href="#八、参考" class="headerlink" title="八、参考"></a>八、参考</h4><p><a href="http://liujinkai.com/2017/10/28/js-miner/?hmsr=toutiao.io&amp;utm_medium=toutiao.io&amp;utm_source=toutiao.io" target="_blank" rel="noopener">门罗币是如何利用网页挖矿的？</a><br><a href="http://www.freebuf.com/articles/web/149107.html" target="_blank" rel="noopener">网站代码中暗藏JS挖矿机脚本</a><br><a href="http://tieba.baidu.com/p/2404500396" target="_blank" rel="noopener">贴吧－挖矿</a><br><a href="http://www.safedog.cn/news.html?id=2240" target="_blank" rel="noopener">JS 采矿脚本，秘密挖掘加密货币</a></p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/js/">js</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/11/12/f2e-tips/" data-tooltip="CSS 实用 Tips">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/11/02/grasp-testing/" data-tooltip="你了解软件测试吗？">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2017/11/08/js-dig-ore/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2017/11/08/js-dig-ore/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2017/11/08/js-dig-ore/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/11/12/f2e-tips/" data-tooltip="CSS 实用 Tips">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/11/02/grasp-testing/" data-tooltip="你了解软件测试吗？">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2017/11/08/js-dig-ore/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2017/11/08/js-dig-ore/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2017/11/08/js-dig-ore/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2017/11/08/js-dig-ore/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2017/11/08/js-dig-ore/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2017/11/08/js-dig-ore/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

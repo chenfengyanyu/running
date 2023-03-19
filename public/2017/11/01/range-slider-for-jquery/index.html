@@ -1,0 +1,519 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>jQuery 插件 range.slider - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="在查找一滑动条插件的时候，发现了一款 jQuery 支持的插件 range.slider，效果非常不错。于是通读了使用文档，本文算是一个插件积累吧，以备不时之需。">
+<meta name="keywords" content="jquery,range,slider">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="jQuery 插件 range.slider">
+<meta property="og:url" content="http://jartto.wang/2017/11/01/range-slider-for-jquery/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="在查找一滑动条插件的时候，发现了一款 jQuery 支持的插件 range.slider，效果非常不错。于是通读了使用文档，本文算是一个插件积累吧，以备不时之需。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/range.png">
+<meta property="og:updated_time" content="2018-11-12T02:56:41.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="jQuery 插件 range.slider">
+<meta name="twitter:description" content="在查找一滑动条插件的时候，发现了一款 jQuery 支持的插件 range.slider，效果非常不错。于是通读了使用文档，本文算是一个插件积累吧，以备不时之需。">
+<meta name="twitter:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/range.png">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/jquery-slider.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/jquery-slider.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            jQuery 插件 range.slider
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2017-11-01T23:25:53+08:00">
+	  
+		    2017/11月/01 23:25:53
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>在查找一滑动条插件的时候，发现了一款 <code>jQuery</code> 支持的插件 <code>range.slider</code>，效果非常不错。于是通读了使用文档，本文算是一个插件积累吧，以备不时之需。<br><a id="more"></a></p>
+<h4 id="一、先看效果"><a href="#一、先看效果" class="headerlink" title="一、先看效果"></a>一、先看效果</h4><p><img src="http://7xvi3w.com1.z0.glb.clouddn.com/range.png" alt="demo"></p>
+<h4 id="二、简单示例"><a href="#二、简单示例" class="headerlink" title="二、简单示例"></a>二、简单示例</h4><p>看完效果，我们来看看如何使用：<br>1.下载安装<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># bower</span></span><br><span class="line">bower install ionrangeslider</span><br><span class="line"></span><br><span class="line"><span class="comment"># npm</span></span><br><span class="line">npm install ion-rangeslider</span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p>建议通过 <code>bower</code> 下载，这样可以看到所有的资源文件，包括依赖的 jQuery 文件。</p>
+</div>
+<p>2.<code>slider</code> 重写了 <code>input</code> 元素，所以你需要先添加一个 <code>input</code>：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"example_id"</span> <span class="attr">name</span>=<span class="string">"example_name"</span> <span class="attr">value</span>=<span class="string">""</span> /&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>然后根据元素 <code>id</code> 来初始化 <code>slider</code>：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">"#example_id"</span>).ionRangeSlider();</span><br></pre></td></tr></table></figure></p>
+<p>好了，刷新页面看看，是不是很简单就使用了。</p>
+<h4 id="三、参数详解"><a href="#三、参数详解" class="headerlink" title="三、参数详解"></a>三、参数详解</h4><p>要简单的使用，那上面就满足需求了。但是在实际开发中，可能需要我们了解更多参数配置，丰富我们的使用场景。</p>
+<ul>
+<li>type: 控制手柄 string 类型<ul>
+<li>“single” || “double” </li>
+</ul>
+</li>
+<li>min: 最小值 number 类型<ul>
+<li>10</li>
+</ul>
+</li>
+<li>max: 最大值 number 类型<ul>
+<li>100</li>
+</ul>
+</li>
+<li>from: 起点 number 类型<ul>
+<li>min</li>
+</ul>
+</li>
+<li>to: 最大值 number 类型<ul>
+<li>max</li>
+</ul>
+</li>
+<li>step: 步进值 number 类型<ul>
+<li>1</li>
+</ul>
+</li>
+<li>prefix: 前缀 string 类型</li>
+<li>postfix: 后缀 string 类型</li>
+<li>max_postfix: 最大值后缀</li>
+<li>grid: 是否显示标尺</li>
+<li>grid_num: 标尺单位<br>…</li>
+</ul>
+<p>更多请<a href="http://ionden.com/a/plugins/ion.rangeSlider/en.html" target="_blank" rel="noopener">查看文档</a></p>
+<h4 id="四、高级用法"><a href="#四、高级用法" class="headerlink" title="四、高级用法"></a>四、高级用法</h4><p>对参数有了了解，下面列举一些复杂的使用场景：<br>1.传入更多的对象来初始化 <code>slider</code><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">"#example"</span>).ionRangeSlider(&#123;</span><br><span class="line">  min: <span class="number">0</span>,</span><br><span class="line">  max: <span class="number">10000</span>,</span><br><span class="line">  <span class="keyword">from</span>: <span class="number">1000</span>,</span><br><span class="line">  to: <span class="number">9000</span>,</span><br><span class="line">  type: <span class="string">'double'</span>,</span><br><span class="line">  prefix: <span class="string">"$"</span>,</span><br><span class="line">  grid: <span class="literal">true</span>,</span><br><span class="line">  grid_num: <span class="number">10</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>2.可以通过 <code>data-*</code> 在 <code>html</code> 中初始化，如下：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">data-min="0"</span><br><span class="line">data-max="10000"</span><br><span class="line">data-from="1000"</span><br><span class="line">data-to="9000"</span><br><span class="line">data-type="double"</span><br><span class="line">data-prefix="$"</span><br><span class="line">data-grid="true"</span><br><span class="line">data-grid-num="10"</span><br></pre></td></tr></table></figure></p>
+<p>3.可用方法 <code>update</code>, <code>reset</code>, <code>destroy</code><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Launch plugin</span></span><br><span class="line">$(<span class="string">"#range"</span>).ionRangeSlider(&#123;</span><br><span class="line">    type: <span class="string">"double"</span>,</span><br><span class="line">    min: <span class="number">0</span>,</span><br><span class="line">    max: <span class="number">1000</span>,</span><br><span class="line">    <span class="keyword">from</span>: <span class="number">200</span>,</span><br><span class="line">    to: <span class="number">500</span>,</span><br><span class="line">    grid: <span class="literal">true</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Saving it's instance to var</span></span><br><span class="line"><span class="keyword">var</span> slider = $(<span class="string">"#range"</span>).data(<span class="string">"ionRangeSlider"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// UPDATE - updates slider to any new values</span></span><br><span class="line">slider.update(&#123;</span><br><span class="line">    <span class="keyword">from</span>: <span class="number">300</span>,</span><br><span class="line">    to: <span class="number">400</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// RESET - reset slider to it's first values</span></span><br><span class="line">slider.reset();</span><br><span class="line"></span><br><span class="line"><span class="comment">// DESTROY - destroys slider and restores original input field</span></span><br><span class="line">slider.destroy();</span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p>调用这三个方法，务必先实例化 <code>ionRangeSlider</code>。</p>
+</div>
+<p>4.监听 <code>change</code> 事件<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> $range = $(<span class="string">"#range_47"</span>);</span><br><span class="line"></span><br><span class="line">$range.ionRangeSlider(&#123;</span><br><span class="line">    type: <span class="string">"single"</span>,</span><br><span class="line">    min: <span class="number">0</span>,</span><br><span class="line">    max: <span class="number">100</span>,</span><br><span class="line">    <span class="keyword">from</span>: <span class="number">50</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">$range.on(<span class="string">"change"</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> $<span class="keyword">this</span> = $(<span class="keyword">this</span>),</span><br><span class="line">        value = $<span class="keyword">this</span>.prop(<span class="string">"value"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"Value: "</span> + value);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>5.<code>angularjs</code> 中使用<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">""</span> <span class="attr">value</span>=<span class="string">"5"</span> <span class="attr">ng-model</span>=<span class="string">"demoVals"</span> <span class="attr">class</span>=<span class="string">"ion_slider"</span> <span class="attr">ui-jq</span>=<span class="string">"ionRangeSlider"</span> <span class="attr">ui-options</span>=<span class="string">"slider.options"</span> /&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>JS 中需要初始化：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$scope.slider = &#123;</span><br><span class="line">  options: &#123;</span><br><span class="line">    min: <span class="number">1</span>,</span><br><span class="line">    max: <span class="number">10</span>,</span><br><span class="line">    step: <span class="number">0.1</span>,</span><br><span class="line">    <span class="keyword">from</span>: <span class="number">6</span>,</span><br><span class="line">    prefix: <span class="string">'直径 '</span>,</span><br><span class="line">    postfix: <span class="string">' 公里'</span>,</span><br><span class="line">    max_postfix: <span class="string">'+'</span>,</span><br><span class="line">    grid: <span class="literal">true</span>,</span><br><span class="line">    onFinish: <span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123; </span><br><span class="line">      <span class="comment">// Todo</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="五、事件支持"><a href="#五、事件支持" class="headerlink" title="五、事件支持"></a>五、事件支持</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">"#range_43"</span>).ionRangeSlider(&#123;</span><br><span class="line">    type: <span class="string">"single"</span>,</span><br><span class="line">    min: <span class="number">0</span>,</span><br><span class="line">    max: <span class="number">100</span>,</span><br><span class="line">    <span class="keyword">from</span>: <span class="number">50</span>,</span><br><span class="line">    keyboard: <span class="literal">true</span>,</span><br><span class="line">    onStart: <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"onStart"</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    onChange: <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"onChange"</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    onFinish: <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"onFinish"</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    onUpdate: <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"onUpdate"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h4 id="六、注意事项"><a href="#六、注意事项" class="headerlink" title="六、注意事项"></a>六、注意事项</h4><p>1.进度条是图片，所以如果你对配色不满意，只能替换图片了。<br>2.<code>rangeSlider</code> 支持换肤，需要下载不同的 <code>css</code> 皮肤文件以及对应的 <code>JS</code> 文件，如：FlatUI, Modern, HMTL5, Nice White, Dark 等。</p>
+<h4 id="七、资源网站"><a href="#七、资源网站" class="headerlink" title="七、资源网站"></a>七、资源网站</h4><p><a href="http://ionden.com/a/plugins/ion.rangeSlider/en.html" target="_blank" rel="noopener">rangeSlider</a><br><a href="http://ionden.com/a/plugins/ion.rangeSlider/demo_interactions.html" target="_blank" rel="noopener">demo page</a></p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/jquery/">jquery</a> <a class="tag tag--primary tag--small t-link" href="/tags/range/">range</a> <a class="tag tag--primary tag--small t-link" href="/tags/slider/">slider</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/11/02/grasp-testing/" data-tooltip="你了解软件测试吗？">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/10/31/js-anti-aliasing/" data-tooltip="JS 反混淆">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2017/11/01/range-slider-for-jquery/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2017/11/01/range-slider-for-jquery/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2017/11/01/range-slider-for-jquery/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/11/02/grasp-testing/" data-tooltip="你了解软件测试吗？">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/10/31/js-anti-aliasing/" data-tooltip="JS 反混淆">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2017/11/01/range-slider-for-jquery/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2017/11/01/range-slider-for-jquery/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2017/11/01/range-slider-for-jquery/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2017/11/01/range-slider-for-jquery/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2017/11/01/range-slider-for-jquery/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2017/11/01/range-slider-for-jquery/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

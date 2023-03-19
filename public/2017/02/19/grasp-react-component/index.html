@@ -1,0 +1,557 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>掌握 React 组件 Component - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="用 React 已经许久了，虽然可以熟练的书写业务逻辑，但对 Component 却一知半解。索性写篇笔记，系统的学习一下，嗯，是时候淬炼一下了👻">
+<meta name="keywords" content="react,component">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="掌握 React 组件 Component">
+<meta property="og:url" content="http://jartto.wang/2017/02/19/grasp-react-component/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="用 React 已经许久了，虽然可以熟练的书写业务逻辑，但对 Component 却一知半解。索性写篇笔记，系统的学习一下，嗯，是时候淬炼一下了👻">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/react-component.jpeg">
+<meta property="og:updated_time" content="2017-02-20T03:40:23.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="掌握 React 组件 Component">
+<meta name="twitter:description" content="用 React 已经许久了，虽然可以熟练的书写业务逻辑，但对 Component 却一知半解。索性写篇笔记，系统的学习一下，嗯，是时候淬炼一下了👻">
+<meta name="twitter:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/react-component.jpeg">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/A2B93BEC-661F-4F3D-8FDA-27D600A19151.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="http://7xvi3w.com1.z0.glb.clouddn.com/A2B93BEC-661F-4F3D-8FDA-27D600A19151.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            掌握 React 组件 Component
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2017-02-19T22:28:40+08:00">
+	  
+		    2017/2月/19 22:28:40
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>用 React 已经许久了，虽然可以熟练的书写业务逻辑，但对 Component 却一知半解。索性写篇笔记，系统的学习一下，嗯，是时候淬炼一下了👻<br><a id="more"></a></p>
+<h4 id="一、如何创建组件"><a href="#一、如何创建组件" class="headerlink" title="一、如何创建组件"></a>一、如何创建组件</h4><p>方式一：React.createClass<br><div class="alert info"><p>用 React.createClass 构建组件是 React 最传统、也是兼容最好的方法。</p>
+</div><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Button = React.createClass(&#123;</span><br><span class="line">	getDefaultProps() &#123;</span><br><span class="line">		<span class="keyword">return</span> &#123;</span><br><span class="line">			color: <span class="string">'blue'</span>,</span><br><span class="line">			text: <span class="string">'http://jartto.wang'</span></span><br><span class="line">		&#125;;</span><br><span class="line">	&#125;,</span><br><span class="line"></span><br><span class="line">	render() &#123;</span><br><span class="line">		<span class="keyword">const</span> &#123; color, text &#125; = <span class="keyword">this</span>.props;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">return</span> (</span><br><span class="line">			&lt;button className=&#123;<span class="string">`btn btn-<span class="subst">$&#123;color&#125;</span>`</span>&#125;&gt;</span><br><span class="line">				&lt;em&gt;&#123;text&#125;&lt;<span class="regexp">/em&gt;</span></span><br><span class="line"><span class="regexp">			&lt;/</span>button&gt;</span><br><span class="line">		);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>React.createClass 方法就是构建一个组件对象。当另一个组件需要调用 Button 组件时，只用写成<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Button</span>/&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p> 就可以被解析成 React.createElement(Button) 方法来创建 Button实例，这意味着在一个应用中调用几次 Button，就会创建几次 Button 实例。</p>
+<p>方式二：ES6 classes<br><div class="alert info"><p>ES6 classes 的写法是通过 ES6 标准的类语法的方式来构建方法。</p>
+</div><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Button</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">	<span class="keyword">constructor</span>(props) &#123;</span><br><span class="line">		<span class="keyword">super</span>(props);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">static</span> defaultProps = &#123;</span><br><span class="line">		color: <span class="string">'blue'</span>,</span><br><span class="line">		text: <span class="string">'http://jartto.wang'</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	render() &#123;</span><br><span class="line">		<span class="keyword">return</span> (</span><br><span class="line">			&lt;button className = &#123; <span class="string">`btn btn-<span class="subst">$&#123;color&#125;</span>`</span>&#125;&gt;</span><br><span class="line">				&lt;em&gt;&#123;text&#125;&lt;<span class="regexp">/em&gt;</span></span><br><span class="line"><span class="regexp">			&lt;/</span>button&gt;</span><br><span class="line">		)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>与 createClass 的结果相同的是，调用类实现的组件会创建实例对象。在 React 组件开发中，常用的方式是将组件拆分到合理的粒度，用组合的方式合成业务组件。</p>
+<p>React 的所有组件都继承自顶层类 React.Component，它的定义非常简洁，只是初始化了 ReactComponent 方法，声明了 props、context、refs 等，并在原型上定义了 setState 和 forceUpdate 方法。</p>
+<p>内部初始化的生命周期方法与 createClass 方式使用的是同一个方法创建的。</p>
+<p>方式三：无状态函数<br><div class="alert info"><p>使用无状态函数构建的组件称为无状态组件，这种构建方式是 0.14 版本之后增加的，且官方颇为推崇。</p>
+</div><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Button</span>(<span class="params">&#123; color = <span class="string">'blue'</span>, text = <span class="string">'http://jartto.wang'</span>&#125;</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> (</span><br><span class="line">		&lt;button className = &#123;<span class="string">`btn btn-<span class="subst">$&#123;color&#125;</span>`</span>&#125;&gt;</span><br><span class="line">			&lt;em&gt;&#123;text&#125;&lt;<span class="regexp">/em&gt;</span></span><br><span class="line"><span class="regexp">		&lt;/</span>button&gt;</span><br><span class="line">	)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>无状态组件只传入 props 和 context 两个参数。也就是说，它不存在 state，也没有生命周期方法，组件本身即上面两种 React 组件构建方法中的 render 方法。不过，像 propType 和 defaultProps 还是可以通过向方法设置静态属性来实现。</p>
+<h4 id="二、不同创建组件方式的使用场景"><a href="#二、不同创建组件方式的使用场景" class="headerlink" title="二、不同创建组件方式的使用场景"></a>二、不同创建组件方式的使用场景</h4><p>不错，我们有很多方式来创建 React 组件，那么问题来了，我们该如何抉择？这里我们把 React.createClass 和 ES6 classes 归为一类，称作有状态组件，而 function 类型的称为无状态组件。</p>
+<p>下来我们主要来区分有状态组件和无状态组件的适用场景。</p>
+<p>先来假设有这样的需求：在接入一个地图功能的时候，要求数据实时刷新，那么我们有两种方式实现：<br>其一：通过 sockets 来推数据，在初始化组件的时候，建立连接，然后动态更改数据；<br>其二：在组件初始化的时候，设置定时器更新数据，组件卸载时移除定时器；</p>
+<p>当然，方式一需要后端 sockets 处理，我们用定时器来试试。那么问题其实已经转化为：如何在 React 组件中使用定时器，下面是官方推荐的写法：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Timer</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(props) &#123;</span><br><span class="line">    <span class="keyword">super</span>(props);</span><br><span class="line">    <span class="keyword">this</span>.state = &#123;<span class="attr">secondsElapsed</span>: <span class="number">0</span>&#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  tick() &#123;</span><br><span class="line">    <span class="keyword">this</span>.setState(<span class="function">(<span class="params">prevState</span>) =&gt;</span> (&#123;</span><br><span class="line">      secondsElapsed: prevState.secondsElapsed + <span class="number">1</span></span><br><span class="line">    &#125;));</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  componentDidMount() &#123;</span><br><span class="line">    <span class="keyword">this</span>.interval = setInterval(<span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">this</span>.tick(), <span class="number">1000</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  componentWillUnmount() &#123;</span><br><span class="line">    clearInterval(<span class="keyword">this</span>.interval);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;div&gt;Seconds Elapsed: &#123;<span class="keyword">this</span>.state.secondsElapsed&#125;&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    );</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">ReactDOM.render(&lt;Timer /</span>&gt;, mountNode);</span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p>计时器要 在componentDidMount 生命周期方法挂上，然后在 componentWillUnmount 生命周期方法清除。</p>
+</div>
+<p>无状态意味着也就没有生命周期函数，那么如果是这样的话，上述功能实现将不适合使用无状态组件方式，因为你很难找到合适的时机去创建和移除定时器。</p>
+<p>无状态组件的创建形式使代码的可读性更好，并且减少了大量冗余的代码，精简至只有一个render方法，大大的增强了编写一个组件的便利，除此之外无状态组件还有以下几个显著的特点（<a href="http://www.cnblogs.com/wonyun/p/5930333.html" target="_blank" rel="noopener">详情</a>）：</p>
+<ul>
+<li>组件不会被实例化，整体渲染性能得到提升<br>因为组件被精简成一个 render 方法的函数来实现的，由于是无状态组件，所以无状态组件就不会在有组件实例化的过程，无实例化过程也就不需要分配多余的内存，从而性能得到一定的提升。</li>
+<li>组件不能访问 this 对象<br>无状态组件由于没有实例化过程，所以无法访问组件this中的对象，例如：this.ref、this.state 等均不能访问。若想访问就不能使用这种形式来创建组件。</li>
+<li>组件无法访问生命周期的方法<br>因为无状态组件是不需要组件生命周期管理和状态管理，所以底层实现这种形式的组件时是不会实现组件的生命周期方法。所以无状态组件是不能参与组件的各个生命周期管理的。</li>
+<li>无状态组件只能访问输入的 props，同样的 props 会得到同样的渲染结果，不会有副作用。</li>
+</ul>
+<p>从《深入 React 技术栈》中摘录到这样一句话：<br><div class="alert success"><p>在适合的情况下，我们都应该且必须使用无状态组件。无状态组件不像其他两种方法在调用时会创建新实例，它创建时始终保持了一个实例，避免了不必要的检查和内存分配，做到了内部优化。</p>
+</div></p>
+<p>对于有状态函数中的 React.createClass 和 ES6 classes 有如下区别：</p>
+<ul>
+<li>React.createClass会自绑定函数方法（不像ES6 classes只绑定需要关心的函数）导致不必要的性能开销，增加代码过时的可能性。</li>
+<li>React.createClass的mixins不够自然、直观；</li>
+<li>React.Component形式非常适合高阶组件（Higher Order Components–HOC）,它以更直观的形式展示了比mixins更强大的功能，并且HOC是纯净的JavaScript，不用担心他们会被废弃。</li>
+</ul>
+<p>更多且别请移步<a href="http://www.cnblogs.com/wonyun/p/5930333.html" target="_blank" rel="noopener">React.createClass与React.Component区别</a></p>
+<h4 id="三、组件生命周期"><a href="#三、组件生命周期" class="headerlink" title="三、组件生命周期"></a>三、组件生命周期</h4><p>关于组件生命周期，我们先来看几个概念：<br>1.挂载与卸载过程；<br>组件的挂载是最基本的过程，这个过程主要做组件状态的初始化。下面是一个模板：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; Component, PropTypes &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">     <span class="comment">// 	static 定义的 propTypes 和 defaultProps 可以在类外面访问，如：App.propTypes</span></span><br><span class="line">	<span class="keyword">static</span> propTypes = &#123; <span class="comment">//props 类型检查 &#125;;</span></span><br><span class="line">	<span class="keyword">static</span> defaultProps = &#123; <span class="comment">//默认类型 &#125;;</span></span><br><span class="line">	<span class="keyword">constructor</span>(props) &#123;</span><br><span class="line">		<span class="keyword">super</span>(props);</span><br><span class="line">		<span class="keyword">this</span>.state = &#123; <span class="comment">//... &#125;;</span></span><br><span class="line">	&#125;</span><br><span class="line">	componentWillMount() &#123; <span class="comment">// render 方法之前执行&#125;</span></span><br><span class="line">	componentDidMount() &#123; <span class="comment">// render 方法之后执行&#125;</span></span><br><span class="line">	render() &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>jartto's blog<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>组件卸载非常简单，只有 componentWillUnmount 这一个卸载前状态：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; Component, PropTypes &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">	componentWillUnmount() &#123; <span class="comment">//... &#125;</span></span><br><span class="line">	render() &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>jartto's blog<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p>在 componentWillUnmount 方法中，我们常常会执行一些清理方法，如事件回收或者是清除定时器。</p>
+</div>
+<p>2.生命周期；</p>
+<ul>
+<li>componentWillMount 在渲染前调用,在客户端也在服务端。</li>
+<li>componentDidMount 在第一次渲染后调用，只在客户端。之后组件已经生成了对应的DOM结构，可以通过this.getDOMNode()来进行访问。 如果你想和其他JavaScript框架一起使用，可以在这个方法中调用setTimeout, setInterval或者发送AJAX请求等操作(防止异部操作阻塞UI)。</li>
+<li>componentWillUnmount在组件从 DOM 中移除的时候立刻被调用。</li>
+<li>componentWillReceiveProps 在组件接收到一个新的prop时被调用。这个方法在初始化render时不会被调用。</li>
+<li>shouldComponentUpdate 返回一个布尔值。在组件接收到新的props或者state时被调用。在初始化时或者使用forceUpdate时不被调用。<br>可以在你确认不需要更新组件时使用。</li>
+<li>componentWillUpdate在组件接收到新的props或者state但还没有render时被调用。在初始化时不会被调用。</li>
+<li>componentDidUpdate 在组件完成更新后立即调用。在初始化时不会被调用。</li>
+</ul>
+<p>3.图示流程；<br><img src="http://7xvi3w.com1.z0.glb.clouddn.com/react-component.jpeg" alt="react-component"></p>
+<h4 id="四、总结"><a href="#四、总结" class="headerlink" title="四、总结"></a>四、总结</h4><p>React 中组件的使用不外乎文中写的这些，甚至在我们日常的项目中很多生命周期方法都用不到。但是作为一个开发者，我们要更深层次的理解这些，这样有助于我们使用最适当的方式去高效编程。</p>
+<p>参考：<br>1.《深入 React 技术栈》<br>2.<a href="https://facebook.github.io/react/docs/state-and-lifecycle.html" target="_blank" rel="noopener">官方文档</a><br>3.<a href="http://www.runoob.com/react/react-component-life-cycle.html" target="_blank" rel="noopener">runoob</a><br>4.<a href="http://www.cnblogs.com/wonyun/p/5930333.html" target="_blank" rel="noopener">React创建组件</a></p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/component/">component</a> <a class="tag tag--primary tag--small t-link" href="/tags/react/">react</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/02/19/use-AMap-in-React/" data-tooltip="在 React 中接入高德地图（AMap）">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/02/08/css-features/" data-tooltip="CSS 三大特性">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2017/02/19/grasp-react-component/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2017/02/19/grasp-react-component/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2017/02/19/grasp-react-component/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+            
+                <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/02/19/use-AMap-in-React/" data-tooltip="在 React 中接入高德地图（AMap）">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/02/08/css-features/" data-tooltip="CSS 三大特性">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2017/02/19/grasp-react-component/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2017/02/19/grasp-react-component/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2017/02/19/grasp-react-component/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2017/02/19/grasp-react-component/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2017/02/19/grasp-react-component/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2017/02/19/grasp-react-component/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+    
+        <script>
+             var disqus_config = function () {
+                 this.page.url = 'http://jartto.wang/2017/02/19/grasp-react-component/';
+                 
+                    this.page.identifier = '2017/02/19/grasp-react-component/';
+                                  
+             };
+            (function() {
+                var d = document, s = d.createElement('script');
+                var disqus_shortname = 'jartto';
+                s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+
+
+
+</html>

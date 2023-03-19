@@ -1,0 +1,517 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>HTML5 之音频合成（Speech Synthesis） - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="H5 让我们的 Web 交互更加生动有趣，但浏览器的多样性以及挥之不去的兼容问题，却阻碍了技术发展。这并不是我们拒绝的理由，恰恰相反，它应该成为动力。">
+<meta name="keywords" content="html5,SpeechSynthesis">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="HTML5 之音频合成（Speech Synthesis）">
+<meta property="og:url" content="http://jartto.wang/2018/10/31/h5-SpeechSynthesis/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="H5 让我们的 Web 交互更加生动有趣，但浏览器的多样性以及挥之不去的兼容问题，却阻碍了技术发展。这并不是我们拒绝的理由，恰恰相反，它应该成为动力。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/h5/speech1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/h5/console.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/h5/speech2.png">
+<meta property="og:updated_time" content="2018-11-06T00:40:47.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HTML5 之音频合成（Speech Synthesis）">
+<meta name="twitter:description" content="H5 让我们的 Web 交互更加生动有趣，但浏览器的多样性以及挥之不去的兼容问题，却阻碍了技术发展。这并不是我们拒绝的理由，恰恰相反，它应该成为动力。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/h5/speech1.png">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/h5-speed.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/h5-speed.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            HTML5 之音频合成（Speech Synthesis）
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2018-10-31T20:53:09+08:00">
+	  
+		    2018/10月/31 20:53:09
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>H5 让我们的 Web 交互更加生动有趣，但浏览器的多样性以及挥之不去的兼容问题，却阻碍了技术发展。这并不是我们拒绝的理由，恰恰相反，它应该成为动力。<br><a id="more"></a></p>
+<h4 id="一、语音场景"><a href="#一、语音场景" class="headerlink" title="一、语音场景"></a>一、语音场景</h4><p>文章标题为了严谨，所以叫音频合成。如果用大白话来解释，那就是「文字转语音」。语音的场景就太多了：</p>
+<ul>
+<li>点读机：哪里不会点哪里</li>
+<li>有声小说：看着太累，听起来不错</li>
+<li><code>Web</code> 页面警示用户的操作</li>
+<li>闹钟，提醒，小秘书</li>
+<li>残疾人支持<br>…</li>
+</ul>
+<p>这些都是随处可见的例子，但真正燃起我激情的是这个<a href="https://codepen.io/ispal/pen/LxjgEj" target="_blank" rel="noopener">场景</a>，简直酷炫到爆。原来动画和语音结合起来才是最佳的用户体验。</p>
+<h4 id="二、技术核心"><a href="#二、技术核心" class="headerlink" title="二、技术核心"></a>二、技术核心</h4><p>看完上面的动画，按捺不住内心的好奇，随手就翻起了源码。Oh～原来如此，把你揪出来：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> sayhello = <span class="keyword">new</span> <span class="built_in">window</span>.SpeechSynthesisUtterance(<span class="string">'你好，欢迎来到 Jartto 的博客！'</span>);</span><br><span class="line"><span class="built_in">window</span>.speechSynthesis.speak(sayhello);</span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p>事情的真相就是简单如此，短短两行，就实现了语音播报。</p>
+</div>
+<h4 id="三、兼容性"><a href="#三、兼容性" class="headerlink" title="三、兼容性"></a>三、兼容性</h4><p>如此有趣的 <code>API</code>，突然想到了一万个应用场景。别忙，先来看看 <code>SpeechSynthesis</code> 的兼容性吧：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/h5/speech1.png" alt="SpeechSynthesis"></p>
+<p>看起来各大浏览器支持的还不错，那就试试呗！</p>
+<h4 id="四、API-文档"><a href="#四、API-文档" class="headerlink" title="四、API 文档"></a>四、API 文档</h4><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/SpeechSynthesis" target="_blank" rel="noopener"><code>SpeechSynthesis</code></a> 接口是语音服务的控制接口，属于<a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API" target="_blank" rel="noopener">网页语音 API</a>，它可以用于获取设备上关于可用的合成声音的信息，开始、暂停语音，或除此之外的其他命令。</p>
+<div class="alert success"><p>既然浏览器已经普遍支持了，那么我们不妨打印出来看看。</p>
+</div>
+<p><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/h5/console.png" alt="console"></p>
+<div class="alert info"><p>下面我们来适当的解释一下：</p>
+</div>
+<ul>
+<li>SpeechSynthesis.paused: 当 <code>SpeechSynthesis</code> 处于暂停状态时， <code>Boolean</code> 值返回 <code>true</code> 。</li>
+<li>SpeechSynthesis.pending: 当语音播放队列到目前为止保持没有说完的语音时， <code>Boolean</code> 值返回 <code>true</code> 。</li>
+<li>SpeechSynthesis.speaking: 当语音谈话正在进行的时候，即使 <code>SpeechSynthesis</code> 处于暂停状态， <code>Boolean</code> 返回 <code>true</code> 。</li>
+<li>SpeechSynthesis.onvoiceschanged: 当由 <code>SpeechSynthesis.getVoices()</code> 方法返回的<code>SpeechSynthesisVoice</code> 列表改变时触发。</li>
+</ul>
+<p>此外，还有几个非常实用的方法：</p>
+<ul>
+<li>SpeechSynthesis.cancel(): 移除所有语音谈话队列中的谈话。</li>
+<li>SpeechSynthesis.getVoices(): 返回当前设备所有可用声音的 <code>SpeechSynthesisVoice</code> 列表。</li>
+<li>SpeechSynthesis.pause(): 把 SpeechSynthesis 对象置为暂停状态。</li>
+<li>SpeechSynthesis.resume(): 把 SpeechSynthesis 对象置为一个非暂停状态：如果已经暂停了则继续。</li>
+<li>SpeechSynthesis.speak(): 添加一个 utterance 到语音谈话队列；它将会在其他语音谈话播放完之后播放。</li>
+</ul>
+<div class="alert success"><p>API 很简单，这里就不赘述了，来个例子尝尝鲜。</p>
+</div>
+<h4 id="五、代码演示"><a href="#五、代码演示" class="headerlink" title="五、代码演示"></a>五、代码演示</h4><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/SpeechSynthesis" target="_blank" rel="noopener">MDN Web Docs</a>上面有个很形象的例子，我们拿过来学习学习：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> synth = <span class="built_in">window</span>.speechSynthesis;</span><br><span class="line"><span class="keyword">var</span> voices = synth.getVoices();</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (synth.speaking) &#123;</span><br><span class="line">  <span class="built_in">console</span>.error(<span class="string">'Speaking'</span>);</span><br><span class="line">  <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> sayThis = <span class="keyword">new</span> SpeechSynthesisUtterance(<span class="string">'你好，欢迎来到 Jartto 的博客！'</span>);</span><br><span class="line">sayThis.onend = <span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'End'</span>);</span><br><span class="line">&#125;</span><br><span class="line">sayThis.onerror = <span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.error(<span class="string">'Error'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">sayThis.pitch = pitch.value;</span><br><span class="line">sayThis.rate = rate.value;</span><br><span class="line"></span><br><span class="line">synth.speak(sayThis);</span><br></pre></td></tr></table></figure></p>
+<div class="alert warning"><p>注意：这里为了演示，只列出了核心代码，完整代码请看下面「完整示例」。</p>
+</div>
+<h4 id="六、完整示例"><a href="#六、完整示例" class="headerlink" title="六、完整示例"></a>六、完整示例</h4><p>看完了核心代码，这里把完整代码贴出来，整理理解一下，加强记忆吧：<br>1.html<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">class</span>=<span class="string">"txt"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"rate"</span>&gt;</span>Rate<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"range"</span> <span class="attr">min</span>=<span class="string">"0.5"</span> <span class="attr">max</span>=<span class="string">"2"</span> <span class="attr">value</span>=<span class="string">"1"</span> <span class="attr">step</span>=<span class="string">"0.1"</span> <span class="attr">id</span>=<span class="string">"rate"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"rate-value"</span>&gt;</span>1<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"clearfix"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"pitch"</span>&gt;</span>Pitch<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"range"</span> <span class="attr">min</span>=<span class="string">"0"</span> <span class="attr">max</span>=<span class="string">"2"</span> <span class="attr">value</span>=<span class="string">"1"</span> <span class="attr">step</span>=<span class="string">"0.1"</span> <span class="attr">id</span>=<span class="string">"pitch"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"pitch-value"</span>&gt;</span>1<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"clearfix"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">select</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"controls"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">"play"</span> <span class="attr">type</span>=<span class="string">"submit"</span>&gt;</span>Play<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>2.js<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> synth = <span class="built_in">window</span>.speechSynthesis;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> inputForm = <span class="built_in">document</span>.querySelector(<span class="string">'form'</span>);</span><br><span class="line"><span class="keyword">var</span> inputTxt = <span class="built_in">document</span>.querySelector(<span class="string">'.txt'</span>);</span><br><span class="line"><span class="keyword">var</span> voiceSelect = <span class="built_in">document</span>.querySelector(<span class="string">'select'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> pitch = <span class="built_in">document</span>.querySelector(<span class="string">'#pitch'</span>);</span><br><span class="line"><span class="keyword">var</span> pitchValue = <span class="built_in">document</span>.querySelector(<span class="string">'.pitch-value'</span>);</span><br><span class="line"><span class="keyword">var</span> rate = <span class="built_in">document</span>.querySelector(<span class="string">'#rate'</span>);</span><br><span class="line"><span class="keyword">var</span> rateValue = <span class="built_in">document</span>.querySelector(<span class="string">'.rate-value'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> voices = [];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">populateVoiceList</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  voices = synth.getVoices();</span><br><span class="line">  <span class="keyword">var</span> selectedIndex = voiceSelect.selectedIndex &lt; <span class="number">0</span> ? <span class="number">0</span> : voiceSelect.selectedIndex;</span><br><span class="line">  voiceSelect.innerHTML = <span class="string">''</span>;</span><br><span class="line">  <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; voices.length ; i++) &#123;</span><br><span class="line">    <span class="keyword">var</span> option = <span class="built_in">document</span>.createElement(<span class="string">'option'</span>);</span><br><span class="line">    option.textContent = voices[i].name + <span class="string">' ('</span> + voices[i].lang + <span class="string">')'</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>(voices[i].default) &#123;</span><br><span class="line">      option.textContent += <span class="string">' -- DEFAULT'</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    option.setAttribute(<span class="string">'data-lang'</span>, voices[i].lang);</span><br><span class="line">    option.setAttribute(<span class="string">'data-name'</span>, voices[i].name);</span><br><span class="line">    voiceSelect.appendChild(option);</span><br><span class="line">  &#125;</span><br><span class="line">  voiceSelect.selectedIndex = selectedIndex;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">populateVoiceList();</span><br><span class="line"><span class="keyword">if</span> (speechSynthesis.onvoiceschanged !== <span class="literal">undefined</span>) &#123;</span><br><span class="line">  speechSynthesis.onvoiceschanged = populateVoiceList;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">speak</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (synth.speaking) &#123;</span><br><span class="line">        <span class="built_in">console</span>.error(<span class="string">'speechSynthesis.speaking'</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (inputTxt.value !== <span class="string">''</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> utterThis = <span class="keyword">new</span> SpeechSynthesisUtterance(inputTxt.value);</span><br><span class="line">    utterThis.onend = <span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'SpeechSynthesisUtterance.onend'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    utterThis.onerror = <span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.error(<span class="string">'SpeechSynthesisUtterance.onerror'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> selectedOption = voiceSelect.selectedOptions[<span class="number">0</span>].getAttribute(<span class="string">'data-name'</span>);</span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; voices.length ; i++) &#123;</span><br><span class="line">      <span class="keyword">if</span>(voices[i].name === selectedOption) &#123;</span><br><span class="line">        utterThis.voice = voices[i];</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    utterThis.pitch = pitch.value;</span><br><span class="line">    utterThis.rate = rate.value;</span><br><span class="line">    synth.speak(utterThis);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">inputForm.onsubmit = <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">  event.preventDefault();</span><br><span class="line"></span><br><span class="line">  speak();</span><br><span class="line"></span><br><span class="line">  inputTxt.blur();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">pitch.onchange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  pitchValue.textContent = pitch.value;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">rate.onchange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  rateValue.textContent = rate.value;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">voiceSelect.onchange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  speak();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>3.css<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.txt</span>, <span class="selector-tag">select</span>, <span class="selector-tag">form</span> &gt; <span class="selector-tag">div</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: block;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">0</span> auto;</span><br><span class="line">  <span class="attribute">font-family</span>: sans-serif;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">16px</span>;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">5px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.txt</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">80%</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">select</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">83%</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">form</span> &gt; <span class="selector-tag">div</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">81%</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.txt</span>, <span class="selector-tag">form</span> &gt; <span class="selector-tag">div</span> &#123;</span><br><span class="line">  <span class="attribute">margin-bottom</span>: <span class="number">10px</span>;</span><br><span class="line">  <span class="attribute">overflow</span>: auto;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.clearfix</span> &#123;</span><br><span class="line">  <span class="attribute">clear</span>: both;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">label</span> &#123;</span><br><span class="line">  <span class="attribute">float</span>: left;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">10%</span>;</span><br><span class="line">  <span class="attribute">line-height</span>: <span class="number">1.5</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.rate-value</span>, <span class="selector-class">.pitch-value</span> &#123;</span><br><span class="line">  <span class="attribute">float</span>: right;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">5%</span>;</span><br><span class="line">  <span class="attribute">line-height</span>: <span class="number">1.5</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#rate</span>, <span class="selector-id">#pitch</span> &#123;</span><br><span class="line">  <span class="attribute">float</span>: right;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">81%</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.controls</span> &#123;</span><br><span class="line">  <span class="attribute">text-align</span>: center;</span><br><span class="line">  <span class="attribute">margin-top</span>: <span class="number">10px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.controls</span> <span class="selector-tag">button</span> &#123;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">10px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="七、补充：SpeechRecognition"><a href="#七、补充：SpeechRecognition" class="headerlink" title="七、补充：SpeechRecognition"></a>七、补充：SpeechRecognition</h4><div class="alert info"><p>既然提到了文字转语音，那么不得不提到语音识别。</p>
+</div>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/SpeechRecognition" target="_blank" rel="noopener"><code>SpeechRecognition</code></a> 顾名思义，语音识别，属于<a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API" target="_blank" rel="noopener">网页语音 <code>API</code></a>。需要麦克风等音频输入设备的支持，可以识别用户的语音输入，并且转化成文字。</p>
+<p><code>SpeechRecognition API</code> 需要硬件支持，所以兼容性并不好，大致如下：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/h5/speech2.png" alt="SpeechRecognition"></p>
+<h4 id="八、未来畅想"><a href="#八、未来畅想" class="headerlink" title="八、未来畅想"></a>八、未来畅想</h4><p>相信不久的未来，浏览器会逐步统一，兼容问题将会化为乌有。我们将会用更多的时间去探索技术，而不是去兼容老破旧的网站或者机器。当然，Web 技术会大行其道，用户将会拥有到更加有趣的体验。今天，我们迈进了一步！</p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/SpeechSynthesis/">SpeechSynthesis</a> <a class="tag tag--primary tag--small t-link" href="/tags/html5/">html5</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/11/01/mobile-debug/" data-tooltip="H5 移动调试全攻略">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/10/30/html5-notification/" data-tooltip="HTML5 之消息通知（Web Notification）">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/10/31/h5-SpeechSynthesis/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/10/31/h5-SpeechSynthesis/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/10/31/h5-SpeechSynthesis/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/11/01/mobile-debug/" data-tooltip="H5 移动调试全攻略">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/10/30/html5-notification/" data-tooltip="HTML5 之消息通知（Web Notification）">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/10/31/h5-SpeechSynthesis/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/10/31/h5-SpeechSynthesis/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/10/31/h5-SpeechSynthesis/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/10/31/h5-SpeechSynthesis/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/10/31/h5-SpeechSynthesis/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/10/31/h5-SpeechSynthesis/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

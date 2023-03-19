@@ -1,0 +1,509 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>angularjs学习笔记～目录 - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="一个偶然的机会，让我认识了Angularjs，从此便开始了狂热的学习中。这个”偶然”要追溯到2014年1月，在一次紧张的两周迭代工作后，一位有着资深技术的同事兴奋的告诉我们，他发现了一门Google的技术，能大大提升工作效率，他决定花两天时间把我们这次迭代的前端交互用angularjs重写。">
+<meta name="keywords" content="angularjs">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="angularjs学习笔记～目录">
+<meta property="og:url" content="http://jartto.wang/2014/03/26/angularjs-part-1/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="一个偶然的机会，让我认识了Angularjs，从此便开始了狂热的学习中。这个”偶然”要追溯到2014年1月，在一次紧张的两周迭代工作后，一位有着资深技术的同事兴奋的告诉我们，他发现了一门Google的技术，能大大提升工作效率，他决定花两天时间把我们这次迭代的前端交互用angularjs重写。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2016-07-25T02:11:43.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="angularjs学习笔记～目录">
+<meta name="twitter:description" content="一个偶然的机会，让我认识了Angularjs，从此便开始了狂热的学习中。这个”偶然”要追溯到2014年1月，在一次紧张的两周迭代工作后，一位有着资深技术的同事兴奋的告诉我们，他发现了一门Google的技术，能大大提升工作效率，他决定花两天时间把我们这次迭代的前端交互用angularjs重写。">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="http://7xvi3w.com1.z0.glb.clouddn.com/blog_155IK010-0.jpg"/>
+        <meta class="swiftype" name="image" data-type="enum" content="http://7xvi3w.com1.z0.glb.clouddn.com/blog_155IK010-0.jpg" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            angularjs学习笔记～目录
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2014-03-26T21:42:40+08:00">
+	  
+		    2014/3月/26 21:42:40
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>一个偶然的机会，让我认识了Angularjs，从此便开始了狂热的学习中。这个”偶然”要追溯到2014年1月，在一次紧张的两周迭代工作后，一位有着资深技术的同事兴奋的告诉我们，他发现了一门Google的技术，能大大提升工作效率，他决定花两天时间把我们这次迭代的前端交互用angularjs重写。<br><a id="more"></a><br>两天后，我们惊奇的发现，他确实完成了，不但高效，而且代码量缩减为原来的1/4。这如何不让我们震惊呢，经过上层决定，我们开始了angularjs学习，后续又开展了一系列的angularjs开发，直到现在。</p>
+<p>后来我们才了解到，原来angularjs就是这样在Google火起来的，同事用实际行动，给我们阐释了angularjs的起源。啥都不说了，感激之情无以言表。</p>
+<p>在这期间，我看完了《angularjs 入门教程》、《angularjs开发指南》、《用Angularjs开发下一代web应用》等书，也算对angularjs有了一个初步的认识，自己也尝试写了一些demo和一些自定义指令。当然，学习期间笔记是不能少的，现在分享出来，供大家相互学习。我打算把笔记细化，出一个连贯性的学习笔记，慢慢来吧，以后逐渐补充完善。</p>
+<h4 id="一、为什么是angularjs？"><a href="#一、为什么是angularjs？" class="headerlink" title="一、为什么是angularjs？"></a>一、为什么是angularjs？</h4><p>综合上面种种原因，所以我开始拥抱angularjs，从此便沉浸其中。</p>
+<h4 id="二、一些资源："><a href="#二、一些资源：" class="headerlink" title="二、一些资源："></a>二、一些资源：</h4><p>Angularjs在线文档：<a href="http://docs.angularjs.org/guide/services" target="_blank" rel="noopener">http://docs.angularjs.org/guide/services</a><br>angularjs入门教程：<a href="http://www.ituring.com.cn/article/13472" target="_blank" rel="noopener">http://www.ituring.com.cn/article/13472</a><br>中文版开发指南：<a href="http://angular.duapp.com/guide/controller" target="_blank" rel="noopener">http://angular.duapp.com/guide/controller</a><br>angularjs中文社区：<a href="http://www.angularjs.cn/" target="_blank" rel="noopener">http://www.angularjs.cn/</a><br>angularjs焦点图特效：<a href="http://dfsq.github.io/ngView-animation-effects/app/#/page/1" target="_blank" rel="noopener">http://dfsq.github.io/ngView-animation-effects/app/#/page/1</a><br>angular ui：<a href="http://angular-ui.github.io/bootstrap/" target="_blank" rel="noopener">http://angular-ui.github.io/bootstrap/</a><br>angularjs 最强资源整合：<a href="http://www.iteye.com/news/28651-AngularJS-Google-resource" target="_blank" rel="noopener">http://www.iteye.com/news/28651-AngularJS-Google-resource</a></p>
+<p>补充：当然，angularjs的资源有很多，感兴趣的话你就搜一搜吧，绝对会让你兴奋不已，前提是你喜欢前端开发O(∩_∩)O</p>
+<h4 id="三、我的笔记目录"><a href="#三、我的笔记目录" class="headerlink" title="三、我的笔记目录"></a>三、我的笔记目录</h4><p><a href="http://jartto.wang/2014/03/28/angularjs-part-2/">Angularjs学习笔记01~作用域Scope</a><br><a href="http://jartto.wang/2014/03/29/angularjs-part-3/">Angularjs学习笔记02~控制器Controller</a><br><a href="http://jartto.wang/2014/04/01/angularjs-part-4/">Angularjs学习笔记03~数据绑定 Data-Binding</a><br><a href="http://jartto.wang/2014/04/20/angularjs-part-6/">Angularjs学习笔记04~过滤器 Filter</a><br><a href="http://jartto.wang/2014/04/24/angularjs-part-7/">Angularjs学习笔记05~模板 Template</a><br><a href="http://jartto.wang/2014/04/24/angularjs-part-7/">Angularjs学习笔记06~依赖注入 DI</a><br><a href="http://jartto.wang/2014/04/25/angularjs-part-8/">Angularjs学习笔记07~表单验证</a><br><a href="http://jartto.wang/2014/04/28/angularjs-part-9/">Angularjs学习笔记08~指令 Directive（一）初探</a><br><a href="http://jartto.wang/2014/04/28/angularjs-part-10/">Angularjs学习笔记09~指令 Directive（二）参数定义</a><br><a href="http://jartto.wang/2014/05/03/angularjs-part-11/">Angularjs学习笔记10~指令 Directive（三）自定义验证实例</a><br><a href="http://jartto.wang/2014/05/05/angularjs-part-12/">Angularjs学习笔记11~服务 Service（一）内建服务</a><br><a href="http://jartto.wang/2014/05/08/angularjs-part-13/">Angularjs学习笔记12~服务 Service（二）创建服务</a><br><a href="http://jartto.wang/2014/05/11/angularjs-part-14/">Angularjs学习笔记13~路由 Route</a><br><a href="http://jartto.wang/2014/05/20/angularjs-part-15/">Angularjs学习笔记14~项目演示（一）</a><br><a href="http://jartto.wang/2014/05/21/angularjs-part-16/">Angularjs学习笔记15~项目演示（二）</a><br><a href="http://jartto.wang/2014/05/25/angularjs-part-17/">Angularjs学习笔记16~总结</a></p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/angularjs/">angularjs</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2014/03/28/angularjs-part-2/" data-tooltip="Angularjs学习笔记01~作用域Scope">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2014/03/26/angularjs-part-1/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2014/03/26/angularjs-part-1/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2014/03/26/angularjs-part-1/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+            
+                <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2014/03/28/angularjs-part-2/" data-tooltip="Angularjs学习笔记01~作用域Scope">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2014/03/26/angularjs-part-1/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2014/03/26/angularjs-part-1/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2014/03/26/angularjs-part-1/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2014/03/26/angularjs-part-1/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2014/03/26/angularjs-part-1/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2014/03/26/angularjs-part-1/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+    
+        <script>
+             var disqus_config = function () {
+                 this.page.url = 'http://jartto.wang/2014/03/26/angularjs-part-1/';
+                 
+                    this.page.identifier = '2014/03/26/angularjs-part-1/';
+                                  
+             };
+            (function() {
+                var d = document, s = d.createElement('script');
+                var disqus_shortname = 'jartto';
+                s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+
+
+
+</html>

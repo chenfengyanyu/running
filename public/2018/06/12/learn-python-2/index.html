@@ -1,0 +1,522 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>Python 笔记2 - 常用操作 - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="继续上一节，我们来补充一些常用语法。很简单，主要是了解一些 Python 语言的特性，为后续使用做好铺垫。OK，快来开始吧！">
+<meta name="keywords" content="python">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Python 笔记2 - 常用操作">
+<meta property="og:url" content="http://jartto.wang/2018/06/12/learn-python-2/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="继续上一节，我们来补充一些常用语法。很简单，主要是了解一些 Python 语言的特性，为后续使用做好铺垫。OK，快来开始吧！">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2018-10-31T15:01:01.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python 笔记2 - 常用操作">
+<meta name="twitter:description" content="继续上一节，我们来补充一些常用语法。很简单，主要是了解一些 Python 语言的特性，为后续使用做好铺垫。OK，快来开始吧！">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/python1.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/python1.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            Python 笔记2 - 常用操作
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2018-06-12T08:43:39+08:00">
+	  
+		    2018/6月/12 08:43:39
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>继续<a href="http://jartto.wang/2018/05/19/learn-python-1/">上一节</a>，我们来补充一些常用语法。很简单，主要是了解一些 Python 语言的特性，为后续使用做好铺垫。OK，快来开始吧！<br><a id="more"></a></p>
+<h4 id="一、关于-if-else"><a href="#一、关于-if-else" class="headerlink" title="一、关于 if else"></a>一、关于 if else</h4><p><code>if else</code> 和其他语言使用一样，但是需要注意简写形式：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> number &lt; <span class="number">100</span>:</span><br><span class="line">    print(<span class="string">'小于 100'</span>)</span><br><span class="line"><span class="keyword">elif</span> number &lt; <span class="number">200</span>:</span><br><span class="line">    print(<span class="string">'大于 100，小于 200'</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    print(<span class="string">'大于 200'</span>)</span><br></pre></td></tr></table></figure></p>
+<div class="alert warning"><p>这里需要注意：elif</p>
+</div>
+<p>真值检测就更简单了：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> x:</span><br><span class="line">  print(<span class="string">'Jartto\'s blog'</span>)</span><br></pre></td></tr></table></figure></p>
+<h4 id="二、判断是否包含"><a href="#二、判断是否包含" class="headerlink" title="二、判断是否包含"></a>二、判断是否包含</h4><ul>
+<li><p>第一种方法：in</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">string = <span class="string">'hi,jartto!'</span></span><br><span class="line"><span class="keyword">if</span> <span class="string">'jartto'</span> <span class="keyword">in</span> string: <span class="comment"># true </span></span><br><span class="line">　　<span class="keyword">print</span> <span class="string">'Exist'</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">　　<span class="keyword">print</span> <span class="string">'Not exist'</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>第二种方法：find</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">string = <span class="string">'hi,jartto!'</span></span><br><span class="line"><span class="keyword">if</span> string.find(<span class="string">'jartto'</span>) === <span class="number">3</span>:</span><br><span class="line">　　<span class="keyword">print</span> <span class="string">'Exist'</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">　　<span class="keyword">print</span> <span class="string">'Not exist'</span></span><br></pre></td></tr></table></figure>
+<p>或者如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">str = <span class="string">'- jartto'</span></span><br><span class="line">str.find(<span class="string">'-'</span>) <span class="comment"># 0</span></span><br><span class="line">str.find(<span class="string">'['</span>) <span class="comment"># -1</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>第三种方法：index，此方法与 find 作用类似，也是找到字符起始的序号</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> string.index(<span class="string">'jartto'</span>) &gt; <span class="number">-1</span>:</span><br><span class="line">　　<span class="keyword">print</span> <span class="string">'Exist'</span></span><br></pre></td></tr></table></figure>
+<div class="alert danger"><p>这里需要注意：index 大于 －1 就说明包含。如果没找到，程序会抛出异常！</p>
+</div>
+</li>
+</ul>
+<h4 id="三、Python-如何取括号中的字符串？"><a href="#三、Python-如何取括号中的字符串？" class="headerlink" title="三、Python 如何取括号中的字符串？"></a>三、Python 如何取括号中的字符串？</h4><p>如果你恰好要处理一下字符串操作，譬如：我们将 <code>Markdown</code> 文件中的链接全部取出来，这时候就需要使用正则了。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line">str1 = <span class="string">'(1, 0.123) (2, 0.234)'</span></span><br><span class="line">re.findall(<span class="string">r'[(](.*?)[)]'</span>, str1)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出：['1, 0.123', '2, 0.234']</span></span><br><span class="line">result.append(re.findall(<span class="string">r'[[](.*?)[]]'</span>,str)[<span class="number">0</span>])</span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p>使用正则的话，需要先引入内置模块 re，这在后续章节中会深入介绍。</p>
+</div>
+<p>当然，这仅仅为了说明一些处理思路，正则操作会比你想象的更加复杂和强大。</p>
+<h4 id="四、字符串特殊操作"><a href="#四、字符串特殊操作" class="headerlink" title="四、字符串特殊操作"></a>四、字符串特殊操作</h4><p>通常我们用的最多的可能是一些类似 <code>trim</code> 之类的方法，去掉首尾空格。<code>Python</code> 中也有类似的操作，不过更加强大。这里我们来介绍几个方法。</p>
+<ul>
+<li><p>去掉两端字符串： strip(), rstrip(),lstrip()</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">text = <span class="string">'  ----- http://jartto.wang +++++    '</span></span><br><span class="line"><span class="comment"># 删除两边空字符</span></span><br><span class="line">print(text.strip()) <span class="comment"># '----- http://jartto.wang +++++'</span></span><br><span class="line"><span class="comment"># 删除右边空字符</span></span><br><span class="line">print(text.rstrip()) <span class="comment"># '  ----- http://jartto.wang +++++'</span></span><br><span class="line"><span class="comment"># 删除左边空字符</span></span><br><span class="line">print(text.lstrip()) <span class="comment"># '----- http://jartto.wang +++++    '</span></span><br></pre></td></tr></table></figure>
+<p>更高级的用法来，我们甚至可以指定去掉的字符，如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">text = <span class="string">'  ----- http://jartto.wang +++++    '</span></span><br><span class="line"><span class="comment"># 删除两边 -+ 和空字符</span></span><br><span class="line">print(text.strip().strip(<span class="string">'-+'</span>)) <span class="comment"># ' http://jartto.wang '</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>删除单个固定位置字符</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">text = <span class="string">'name:jartto'</span></span><br><span class="line"><span class="comment"># 字符串拼接方式去除冒号</span></span><br><span class="line">news = text[:<span class="number">4</span>] + text[<span class="number">5</span>:]</span><br><span class="line">print(news) <span class="comment">#namejartto</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>字符替换：replace(), re.sub()</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">text = <span class="string">'\njartto\n'</span></span><br><span class="line">text.replace(<span class="string">'\n'</span>,<span class="string">''</span>) <span class="comment"># jartto</span></span><br></pre></td></tr></table></figure>
+<div class="alert info"><p>很简单，replace 和 js 中的 replace 用法完全一样。</p>
+</div>
+<p>那如果是同时替换多个字符呢，我们总不能写个遍历吧。这时候就需要使用 <code>re.sub()</code> 方法了。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line">text = <span class="string">'\njartto\tblog'</span></span><br><span class="line">print(re.sub(<span class="string">'[\n\t]'</span>,<span class="string">''</span>,text))</span><br></pre></td></tr></table></figure>
+<div class="alert success"><p>re 模块后续会深入介绍，这里能看懂基本使用就可以了啦。</p>
+</div>
+</li>
+<li><p>去掉 unicode 字符中音调</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> unicodedata</span><br><span class="line">s = <span class="string">"Zhào Qián Sūn Lǐ Zhōu Wú Zhèng Wáng"</span></span><br><span class="line">remap = &#123;</span><br><span class="line">    <span class="comment"># ord返回ascii值</span></span><br><span class="line">    ord(<span class="string">'\t'</span>): <span class="string">''</span>,</span><br><span class="line">    ord(<span class="string">'\f'</span>): <span class="string">''</span>,</span><br><span class="line">    ord(<span class="string">'\r'</span>): <span class="literal">None</span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment"># 去除\t, \f, \r</span></span><br><span class="line">a = s.translate(remap)</span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">　　通过使用dict.fromkeys() 方法构造一个字典，每个Unicode 和音符作为键，对于的值全部为None</span></span><br><span class="line"><span class="string">　　然后使用unicodedata.normalize() 将原始输入标准化为分解形式字符</span></span><br><span class="line"><span class="string">　　sys.maxunicode : 给出最大Unicode代码点的值的整数，即1114111（十六进制的0x10FFFF）。</span></span><br><span class="line"><span class="string">　　unicodedata.combining:将分配给字符chr的规范组合类作为整数返回。 如果未定义组合类，则返回0。</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line">cmb_chrs = dict.fromkeys(c <span class="keyword">for</span> c <span class="keyword">in</span> range(sys.maxunicode) <span class="keyword">if</span> unicodedata.combining(chr(c))) <span class="comment">#此部分建议拆分开来理解</span></span><br><span class="line">b = unicodedata.normalize(<span class="string">'NFD'</span>, a)</span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">　　　调用translate 函数删除所有重音符</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line">print(b.translate(cmb_chrs))</span><br></pre></td></tr></table></figure>
+<p>更多细节，请参考：<a href="https://www.cnblogs.com/2bjiujiu/p/7257744.html" target="_blank" rel="noopener">Python - 去除字符串中不想要的字符</a>。</p>
+</li>
+</ul>
+<h4 id="五、数组过滤"><a href="#五、数组过滤" class="headerlink" title="五、数组过滤"></a>五、数组过滤</h4><p>1.如何找出 <code>a</code> 数组 的子集 <code>b</code> 数组，与 <code>a</code> 数组的不同项？<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="number">1</span>, <span class="number">22</span>, <span class="number">33</span>, <span class="number">44</span>]</span><br><span class="line">b = [<span class="number">1</span>, <span class="number">22</span>, <span class="number">33</span>]</span><br><span class="line">c = [i <span class="keyword">for</span> i <span class="keyword">in</span> a <span class="keyword">if</span> i <span class="keyword">not</span> <span class="keyword">in</span> b] <span class="comment"># 44</span></span><br></pre></td></tr></table></figure></p>
+<p>2.更骚气的操作<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = set([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line">b = set([<span class="number">2</span>])</span><br><span class="line">print(list(a - b))</span><br></pre></td></tr></table></figure></p>
+<div class="alert success"><p>可以看到，Python 对数据的处理细致入微，无不显示强大之处。</p>
+</div>
+<h4 id="六、字符串拼接"><a href="#六、字符串拼接" class="headerlink" title="六、字符串拼接"></a>六、字符串拼接</h4><p>那常用的字符串拼接，<code>Python</code> 中是如何处理的呢？<br>1.加号连接<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = <span class="string">'jartto'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = a + <span class="string">'blog'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(b)</span><br></pre></td></tr></table></figure></p>
+<p>2.相邻的两个字符串文本自动连接在一起<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'Jartto '</span> <span class="string">'blog'</span></span><br><span class="line"><span class="string">'jartto blog'</span></span><br></pre></td></tr></table></figure></p>
+<p>3.使用 <code>format</code> 进行字符串连接：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">test = <span class="string">'&#123;&#125;/jartto.txt'</span>.format(sys.path[<span class="number">0</span>])</span><br></pre></td></tr></table></figure></p>
+<h4 id="八、小结"><a href="#八、小结" class="headerlink" title="八、小结"></a>八、小结</h4><p>可能大家或多或少都看出来了，我并没有按照 <code>Python</code> 官网的文档去介绍，而是介绍了一些常用操作。因为语法介绍到这里可能就结束了，后续我们将偏向于实际应用。这些应用可能覆盖很多范围，但最终目的都是促进我们对 <code>Python</code> 的深入学习与理解。</p>
+<p>下一篇：<a href="http://jartto.wang/2018/06/24/learn-python-3/">Python 笔记3 - open 文件操作</a></p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/python/">python</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/06/24/learn-python-3/" data-tooltip="Python 笔记3 - Open 文件操作">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/06/08/nextjs-3/" data-tooltip="Next.js 使用指南3－高级配置">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/06/12/learn-python-2/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/06/12/learn-python-2/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/06/12/learn-python-2/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/06/24/learn-python-3/" data-tooltip="Python 笔记3 - Open 文件操作">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/06/08/nextjs-3/" data-tooltip="Next.js 使用指南3－高级配置">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/06/12/learn-python-2/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/06/12/learn-python-2/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/06/12/learn-python-2/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/06/12/learn-python-2/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/06/12/learn-python-2/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/06/12/learn-python-2/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

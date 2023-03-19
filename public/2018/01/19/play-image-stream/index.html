@@ -1,0 +1,564 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>玩转图片流 - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="做了一款图片识别软件，应用到了图片流，预览，Blob，Base64，以及类型转换等技术。这些技术在图片相关开发中必不可少，这一次，让我们玩转「图片流」吧！">
+<meta name="keywords" content="image,blob,base64">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="玩转图片流">
+<meta property="og:url" content="http://jartto.wang/2018/01/19/play-image-stream/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="做了一款图片识别软件，应用到了图片流，预览，Blob，Base64，以及类型转换等技术。这些技术在图片相关开发中必不可少，这一次，让我们玩转「图片流」吧！">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2018-12-30T15:49:17.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="玩转图片流">
+<meta name="twitter:description" content="做了一款图片识别软件，应用到了图片流，预览，Blob，Base64，以及类型转换等技术。这些技术在图片相关开发中必不可少，这一次，让我们玩转「图片流」吧！">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo/cool0.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo/cool0.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            玩转图片流
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2018-01-19T23:22:22+08:00">
+	  
+		    2018/1月/19 23:22:22
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>做了一款<a href="https://github.com/chenfengyanyu/electron-ocr" target="_blank" rel="noopener">图片识别</a>软件，应用到了图片流，预览，Blob，Base64，以及类型转换等技术。这些技术在图片相关开发中必不可少，这一次，让我们玩转「图片流」吧！<br><a id="more"></a></p>
+<h4 id="一、常见场景"><a href="#一、常见场景" class="headerlink" title="一、常见场景"></a>一、常见场景</h4><p>我们先来看一下图片的使用场景：</p>
+<ul>
+<li>通过 input 上传；</li>
+<li>文件拖拽上传；</li>
+<li>图片预览；</li>
+<li>图片数据存储；</li>
+<li>第三方接口需要；</li>
+<li>…</li>
+</ul>
+<div class="alert success"><p>当然，实际的应用远远比这些复杂，但是我们如果掌握了核心思想，那么无非就是「图片流」的获取和转换，下面让我们逐步深入吧！</p>
+</div>
+<h4 id="二、说说图片流"><a href="#二、说说图片流" class="headerlink" title="二、说说图片流"></a>二、说说图片流</h4><p>上面提到了「图片流」，其实就是用二进制流来表示图片，也就是我们常说的「二进制图片」。<br><div class="alert info"><p>计算机的存储在物理上是都二进制的，所以文本文件与二进制文件的区别并不是物理上的，而是逻辑上的。</p>
+</div><br>可能有人要问了，为什么要用二进制来表示图片呢？我们来看看二进制的优势：</p>
+<ol>
+<li>二进制文件比较节约空间，在储存字符型数据时与普通存储并没有差别。但是在储存数字，特别是实型数字时，二进制更节省空间；</li>
+<li>内存中参加计算的数据都是用二进制无格式储存起来的，因此，使用二进制储存到文件就更快捷。如果储存为文本文件，则需要一个转换的过程。在数据量很大的时候，两者就会有明显的速度差别了；　</li>
+<li>涉及到一些比较精确的数据，使用二进制储存不会造成有效位的丢失；</li>
+</ol>
+<p>看到这里，相信大家已经对图片流有了一定的认识。既然提到了存储，补充说明一下图片在后端存储方式：</p>
+<ul>
+<li>其一：可以将图片以独立文件的形式存储在服务器的指定文件夹中，再将路径存入数据库字段中；</li>
+<li>其二：将图片转换成二进制流，直接存储到数据库的 <code>Image</code> 类型字段中；</li>
+</ul>
+<h4 id="三、FileReader-是什么？"><a href="#三、FileReader-是什么？" class="headerlink" title="三、FileReader 是什么？"></a>三、FileReader 是什么？</h4><p><code>FileReader</code> 对象允许 <code>Web</code> 应用程序异步读取存储在用户计算机上的文件（或原始数据缓冲区）的内容，使用 <code>File</code> 或 <code>Blob</code> 对象指定要读取的文件或数据。</p>
+<p>其中 <code>File</code> 对象可以是来自用户在一个 <code>&lt;input&gt;</code> 元素上选择文件后返回的 <code>FileList</code> 对象,也可以来自拖放操作生成的  <code>DataTransfer</code> 对象,还可以是来自在一个 <code>HTMLCanvasElement</code> 上执行 <code>mozGetAsFile()</code> 方法后返回结果。<br><div class="alert warning"><p>官话说了一大堆，其实你只需要知道「它是用来读取文件的」就够了。</p>
+</div><br>参数说明如下：</p>
+<ul>
+<li><code>FileReader.error</code>（只读）：一个 <code>DOMException</code>，表示在读取文件时发生的错误 ；</li>
+<li><code>FileReader.readyState</code>（只读）：表示 <code>FileReader</code> 状态的数字。取值如下：<ul>
+<li><code>EMPTY</code>    0    还没有加载任何数据.</li>
+<li><code>LOADING</code>    1    数据正在被加载.</li>
+<li><code>DONE</code>    2    已完成全部的读取请求.</li>
+</ul>
+</li>
+<li><code>FileReader.result</code>（只读）：文件的内容。该属性仅在读取操作完成后才有效，数据的格式取决于使用哪个方法来启动读取操作。</li>
+</ul>
+<p>还有几个事件处理函数：</p>
+<ul>
+<li><code>FileReader.onabort</code>：处理 <code>abort</code> 事件。该事件在读取操作被中断时触发。</li>
+<li><code>FileReader.onerror</code>：处理 <code>error</code> 事件。该事件在读取操作发生错误时触发。</li>
+<li><code>FileReader.onload</code>：处理 <code>load</code> 事件。该事件在读取操作完成时触发。</li>
+<li><code>FileReader.onloadstart</code>：处理 <code>loadstart</code> 事件。该事件在读取操作开始时触发。</li>
+<li><code>FileReader.onloadend</code>：处理 <code>loadend</code> 事件。该事件在读取操作结束时（要么成功，要么失败）触发。</li>
+<li><code>FileReader.onprogress</code>：处理 <code>progress</code> 事件。该事件在读取 <code>Blob</code> 时触发。</li>
+</ul>
+<p>可以用的方法如下：</p>
+<ul>
+<li><code>FileReader.abort()</code>：中止读取操作。在返回时，<code>readyState</code> 属性为 <code>DONE</code>。</li>
+<li><code>FileReader.readAsArrayBuffer()</code>：开始读取指定的 <code>Blob</code> 中的内容。一旦完成，<code>result</code> 属性将包含一个<code>ArrayBuffer</code> 来表示文件数据；</li>
+<li><code>FileReader.readAsBinaryString()</code>：开始读取指定的 <code>Blob</code> 中的内容。一旦完成，<code>result</code> 属性中将包含所读取文件的原始二进制数据。</li>
+<li><code>FileReader.readAsDataURL()</code>：开始读取指定的 <code>Blob</code> 中的内容。一旦完成，<code>result</code> 属性中将包含一个 <code>data: URL</code> 格式的字符串以表示所读取文件的内容。</li>
+<li><code>FileReader.readAsText()</code>：开始读取指定的 <code>Blob</code> 中的内容。一旦完成，<code>result</code> 属性中将包含一个字符串以表示所读取的文件内容。</li>
+</ul>
+<div class="alert info"><p>上面的文档描述的很清楚了，但是估计你也没逐条细看，没关系，我们还有示例🙈</p>
+</div>
+<p>具体的应用场景可能如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">onDrop(files) &#123;</span><br><span class="line">  files.forEach(<span class="function"><span class="params">file</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> reader = <span class="keyword">new</span> FileReader();</span><br><span class="line">    reader.onload = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'Jartto files logs: '</span>, file);</span><br><span class="line">      <span class="keyword">const</span> fileAsBinaryString = reader.result;</span><br><span class="line">      <span class="comment">// Todo...</span></span><br><span class="line">    &#125;;</span><br><span class="line">    reader.onabort = <span class="function"><span class="params">()</span> =&gt;</span> <span class="built_in">console</span>.log(<span class="string">'file reading was aborted'</span>);</span><br><span class="line">    reader.onerror = <span class="function"><span class="params">()</span> =&gt;</span> <span class="built_in">console</span>.log(<span class="string">'file reading has failed'</span>);</span><br><span class="line"></span><br><span class="line">    reader.readAsBinaryString(file);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<div class="alert danger"><p>用法很简单，你唯一需要注意的是一定要在 <code>onload</code> 之后再做操作！</p>
+</div>
+<h4 id="四、base64-格式"><a href="#四、base64-格式" class="headerlink" title="四、base64 格式"></a>四、base64 格式</h4><p>我们有时候会在网页中看到这样的代码：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAb4AAABYCAYAAACK55LCAAAgAElEQVR4Xuy9aXNc2ZEleN4e+wIgsO8ACXAnk8mUUqoqldQ9Yz3W/an/wsxvnA/TM2NWizKVmczkTgIg9h0IxL6+fez4DbCo7JQqpZLZfGBARjEJBOK95/de9+PHj3toO//7f40x/BpaYGiBoQWGFhha4BOxgDYMfJ/ISg8fc2iBoQWGFhhaQCwwDHzDjTC0wNACQwsMLfBJWWAY</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+<p>这就是 <code>base64</code> 格式的数据，代表着一张图片的数据，专业术语叫：<code>Data URI scheme</code>。<br><div class="alert info"><p><code>Data URI scheme</code> 是在RFC2397中定义的，目的是将一些小的数据，直接嵌入到网页中，从而不用再从外部文件载入。</p>
+</div></p>
+<p>目前，<code>Data URI scheme</code> 支持的类型有：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">data:,文本数据</span><br><span class="line">data:text/plain,文本数据</span><br><span class="line">data:text/html,HTML 代码</span><br><span class="line">data:text/html;base64,base64 编码的 HTML 代码</span><br><span class="line">data:text/css,CSS代码</span><br><span class="line">data:text/css;base64,base64 编码的 CSS 代码</span><br><span class="line">data:text/javascript,Javascript 代码</span><br><span class="line">data:text/javascript;base64,base64 编码的 Javascript代码</span><br><span class="line">data:image/gif;base64,base64 编码的 gif 图片数据</span><br><span class="line">data:image/png;base64,base64 编码的 png 图片数据</span><br><span class="line">data:image/jpeg;base64,base64 编码的 jpeg 图片数据</span><br><span class="line">data:image/x-icon;base64,base64 编码的 icon 图片数据</span><br></pre></td></tr></table></figure></p>
+<p><code>Base64</code> 编码之所以称为 <code>Base64</code>，是因为其使用 64 个字符来对任意数据进行编码。<code>Base64</code> 编码本质上是一种将二进制数据转成文本数据的方案。对于非二进制数据，是先将其转换成二进制形式，然后每连续 6 比特（ 2 的 6 次方= 64 ）计算其十进制值，根据该值在上面的索引表中找到对应的字符，最终得到一个文本字符串。</p>
+<p>更深入的了解可以参考：<a href="http://blog.xiayf.cn/2016/01/24/base64-encoding/" target="_blank" rel="noopener">Base64 编码原理与应用</a></p>
+<h4 id="五、Blob-格式"><a href="#五、Blob-格式" class="headerlink" title="五、Blob 格式"></a>五、Blob 格式</h4><div class="alert success"><p>Blob (binary large object)，二进制大对象，是一个可以存储二进制文件的容器。</p>
+</div>
+<p><code>Blob</code> 是一个大文件，典型的 <code>Blob</code> 是一张图片或一个声音文件，由于它们的尺寸，必须使用特殊的方式来处理（例如：上传、下载或者存放到一个数据库）。</p>
+<p>这是我转换的一个 <code>Blob</code> 对象：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Blob &#123;</span><br><span class="line">  name: &quot;图片示例：jartto.png&quot;,</span><br><span class="line">  preview: &quot;blob:file:///f3823a2a-2908-44cb-81e2-c19d98abc5d1&quot;,</span><br><span class="line">  size: 47396,</span><br><span class="line">  type: &quot;image/png&quot;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<div class="alert success"><p>请注意，这里的 <code>preview</code> 属性是可以拿出来做图片预览的。</p>
+</div>
+<h4 id="六、base64-转-Blob"><a href="#六、base64-转-Blob" class="headerlink" title="六、base64 转 Blob"></a>六、base64 转 Blob</h4><p>当我们拿到一段用 <code>base64</code> 表示的图片代码，你觉得不够优雅，或者其他各种原因，你可能需要转化成 <code>Blob</code> 格式，代码如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">base64ToBlob(b64data, contentType, sliceSize) &#123;</span><br><span class="line">  sliceSize || (sliceSize = <span class="number">512</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 使用 atob() 方法将数据解码</span></span><br><span class="line">    <span class="keyword">let</span> byteCharacters = atob(b64data);</span><br><span class="line">    <span class="keyword">let</span> byteArrays = [];</span><br><span class="line"></span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">let</span> offset = <span class="number">0</span>; offset &lt; byteCharacters.length; offset += sliceSize) &#123;</span><br><span class="line">        <span class="keyword">let</span> slice = byteCharacters.slice(offset, offset + sliceSize);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">let</span> byteNumbers = [];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; slice.length; i++) &#123;</span><br><span class="line">            byteNumbers.push(slice.charCodeAt(i));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 8 位无符号整数值的类型化数组。内容将初始化为 0。</span></span><br><span class="line">        <span class="comment">// 如果无法分配请求数目的字节，则将引发异常。</span></span><br><span class="line">        byteArrays.push(<span class="keyword">new</span> <span class="built_in">Uint8Array</span>(byteNumbers));</span><br><span class="line">      &#125;</span><br><span class="line">      resolve(<span class="keyword">new</span> Blob(byteArrays, &#123;</span><br><span class="line">        type: contentType</span><br><span class="line">      &#125;))</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>调用方式：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// dataUri 是你的 base64 图片流</span></span><br><span class="line"><span class="keyword">let</span> blob = <span class="keyword">await</span> <span class="keyword">this</span>.base64ToBlob(dataUri.split(<span class="string">','</span>)[<span class="number">1</span>], <span class="string">'image/png'</span>);</span><br></pre></td></tr></table></figure></p>
+<p>经过处理，我们拿到了一个 <code>Blob</code> 对象，但可能是这样：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Blob &#123;</span><br><span class="line">  size: <span class="number">47396</span>,</span><br><span class="line">  type: <span class="string">"image/png"</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>就这个，那我想预览的计划不就泡汤了？不要着急，我们来补充一下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.assign(blob,&#123;</span><br><span class="line">  <span class="comment">// jartto: 这里一定要处理一下</span></span><br><span class="line">  preview: URL.createObjectURL(blob),</span><br><span class="line">  name: <span class="string">`图片示例：<span class="subst">$&#123;index&#125;</span>.png`</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p>你可以使用 <code>window.btoa()</code> 方法来编码一个可能在传输过程中出现问题的数据，并且在接受数据之后，使用 <code>atob()</code> 方法再将数据解码。</p>
+</div>
+<p>关于 <code>atob</code> 和 <code>Uint8Array</code> 这里就不细说了，大家可以看看文档：</p>
+<ul>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/WindowBase64/atob" target="_blank" rel="noopener">window.atob</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array" target="_blank" rel="noopener">Uint8Array</a></li>
+</ul>
+<h4 id="七、Blob-转-base64"><a href="#七、Blob-转-base64" class="headerlink" title="七、Blob 转 base64"></a>七、Blob 转 base64</h4><p>这又是另一种场景了，很可能出现在你使用第三方插件，如图片拖拽上传插件后，自动返回给你了 <code>Blob</code> 对象，但不幸的是，你发现你又用了一个第三方的服务接口只接收 <code>base64</code> 格式的数据，是否有点欲哭无泪。</p>
+<p>不要怕，我们也有办法，如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">blobToBase64(blob) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> fileReader = <span class="keyword">new</span> FileReader();</span><br><span class="line">    fileReader.onload = <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">      resolve(e.target.result);</span><br><span class="line">    &#125;;</span><br><span class="line">    fileReader.readAsDataURL(blob);</span><br><span class="line">    fileReader.onerror = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      reject(<span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'文件流异常'</span>));</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>调用方式：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> allBase64 = <span class="keyword">await</span> <span class="keyword">this</span>.blobToBase64(blobObj);</span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p>补充一句，上面所说的场景是我真实遇到过的，生活真是处处充满惊喜。</p>
+</div>
+<h4 id="八、URL-转-base64"><a href="#八、URL-转-base64" class="headerlink" title="八、URL 转 base64"></a>八、URL 转 base64</h4><p>好了，更有意思的事情来了，我提高了要求，只给你一个图片的 URL（本地或者在线地址），是否能将图片编码成流？答案是肯定的，这里我们得请出 <code>canvas</code> 了：<br><div class="alert success"><p>思路很简单，根据图片对象的数据去画 canvas，再利用它来等价表示图片流。</p>
+</div><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">getDataUri(url) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">/* eslint-disable */</span></span><br><span class="line">    <span class="keyword">let</span> image = <span class="keyword">new</span> Image();</span><br><span class="line">    image.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">let</span> canvas = <span class="built_in">document</span>.createElement(<span class="string">'canvas'</span>);</span><br><span class="line">      canvas.width = <span class="keyword">this</span>.naturalWidth;</span><br><span class="line">      canvas.height = <span class="keyword">this</span>.naturalHeight;</span><br><span class="line">      canvas.getContext(<span class="string">'2d'</span>).drawImage(<span class="keyword">this</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">      <span class="comment">// Data URI</span></span><br><span class="line">      resolve(canvas.toDataURL(<span class="string">'image/png'</span>));</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    image.src = url;</span><br><span class="line">    <span class="comment">// console.log(image.src);</span></span><br><span class="line"></span><br><span class="line">    image.onerror = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      reject(<span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'图片流异常'</span>));</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>你可以像这样调用：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> dataUri = <span class="keyword">await</span> <span class="keyword">this</span>.getDataUri(<span class="string">`image/test/jartto.png`</span>);</span><br></pre></td></tr></table></figure></p>
+<h4 id="九、常见问题与补充说明"><a href="#九、常见问题与补充说明" class="headerlink" title="九、常见问题与补充说明"></a>九、常见问题与补充说明</h4><p>1.<code>Failed to execute &#39;readAsDataURL&#39; on &#39;FileReader&#39;: parameter 1 is not of type &#39;Blob&#39;.</code><br>出现如上问题，请检查你的 Blob 对象格式是否正确，是否缺少必要项。</p>
+<p>2.很多第三方应用都需要去除 <code>base64</code> 头信息：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">base64.replace(<span class="regexp">/^data:image\/(jpeg|png|gif);base64,/</span>,<span class="string">''</span>)</span><br></pre></td></tr></table></figure></p>
+<p>3.<code>FileReader</code> 读取文件后，记得放在 <code>onload</code> 函数内，切记。</p>
+<p>4.在使用 <code>canvas.getContext(&#39;2d&#39;).drawImage(this, 0, 0);</code> 过程中，一定要注意这里的 <code>this</code> 指向，否则可能发生异常。</p>
+<p>5.<code>base64</code> 转 <code>Blob</code>，请记得：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.assign(blob,&#123;</span><br><span class="line">  <span class="comment">// jartto: 这里一定要处理一下</span></span><br><span class="line">  preview: URL.createObjectURL(blob),</span><br><span class="line">  name: <span class="string">`图片示例：<span class="subst">$&#123;index&#125;</span>.png`</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<h4 id="十、总结"><a href="#十、总结" class="headerlink" title="十、总结"></a>十、总结</h4><p>一个图片流转来转去的，是否有点晕头转向？相信我，如果你认真的看完了文章，那么以后你对图片数据的处理就会顺畅很多。</p>
+<p>一直喜欢这样来写文章：在项目之余，把问题纪录下来，然后逐条搞懂。知识就像是树枝一样，你不断的学习、反思，它不断的蔓延、分化，久而久之将会形成一张网。</p>
+<p>所以，努力学习吧，让自己长成参天大树，生机勃勃，遮天蔽日。</p>
+<h4 id="十一、参考资源"><a href="#十一、参考资源" class="headerlink" title="十一、参考资源"></a>十一、参考资源</h4><p><a href="https://baike.baidu.com/item/blob/543419?fr=aladdin" target="_blank" rel="noopener">Blob</a><br><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/FileReader" target="_blank" rel="noopener">MDN FileReader</a><br><a href="https://baike.baidu.com/item/二进制图片/22031326?fr=aladdin" target="_blank" rel="noopener">二进制图片</a><br><a href="https://davidwalsh.name/convert-image-data-uri-javascript" target="_blank" rel="noopener">Convert Image to Data URI</a><br><a href="http://blog.csdn.net/lgh1117/article/details/7740136" target="_blank" rel="noopener">html base64 img 图片显示</a></p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/base64/">base64</a> <a class="tag tag--primary tag--small t-link" href="/tags/blob/">blob</a> <a class="tag tag--primary tag--small t-link" href="/tags/image/">image</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/01/21/first-exploration-electron-4/" data-tooltip="初探 Electron - 实践篇2">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/01/16/shallow-to-discuss-block-chain/" data-tooltip="浅谈区块链">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/01/19/play-image-stream/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/01/19/play-image-stream/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/01/19/play-image-stream/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/01/21/first-exploration-electron-4/" data-tooltip="初探 Electron - 实践篇2">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/01/16/shallow-to-discuss-block-chain/" data-tooltip="浅谈区块链">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/01/19/play-image-stream/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/01/19/play-image-stream/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/01/19/play-image-stream/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/01/19/play-image-stream/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/01/19/play-image-stream/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/01/19/play-image-stream/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

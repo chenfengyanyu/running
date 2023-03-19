@@ -1,0 +1,547 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>Git 版本控制之 Git-Flow - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="最近在着手制定开发规范，想要把项目正规高效的跑起来。计划引入 Git 版本控制，Git-Flow 便成为了首选。因为之前并没有过多接触，所以先花些时间摸索一下。">
+<meta name="keywords" content="git,git-flow">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Git 版本控制之 Git-Flow">
+<meta property="og:url" content="http://jartto.wang/2018/12/05/git-flow/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="最近在着手制定开发规范，想要把项目正规高效的跑起来。计划引入 Git 版本控制，Git-Flow 便成为了首选。因为之前并没有过多接触，所以先花些时间摸索一下。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/gitflow/gitflow1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/gitflow/gitflow2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/gitflow/gitflow3.png">
+<meta property="og:updated_time" content="2019-07-09T07:13:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Git 版本控制之 Git-Flow">
+<meta name="twitter:description" content="最近在着手制定开发规范，想要把项目正规高效的跑起来。计划引入 Git 版本控制，Git-Flow 便成为了首选。因为之前并没有过多接触，所以先花些时间摸索一下。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/gitflow/gitflow1.png">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/gitflow/logo.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/gitflow/logo.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            Git 版本控制之 Git-Flow
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2018-12-05T22:49:54+08:00">
+	  
+		    2018/12月/05 22:49:54
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>最近在着手制定开发规范，想要把项目正规高效的跑起来。计划引入 Git 版本控制，Git-Flow 便成为了首选。因为之前并没有过多接触，所以先花些时间摸索一下。<br><a id="more"></a></p>
+<h4 id="一、为什么使用-git-flow"><a href="#一、为什么使用-git-flow" class="headerlink" title="一、为什么使用 git-flow"></a>一、为什么使用 git-flow</h4><p>当在团队开发中使用版本控制系统时，商定一个统一的工作流程是至关重要的。<code>Git</code> 的确可以在各个方面做很多事情，然而，如果在你的团队中还没有能形成一个特定有效的工作流程，那么混乱就将是不可避免的。</p>
+<div class="alert success"><p>基本套路：你可以定义一个完全适合你自己项目的工作流程，或者使用一个别人定义好的。</p>
+</div>
+<h4 id="二、安装-git-flow"><a href="#二、安装-git-flow" class="headerlink" title="二、安装 git-flow"></a>二、安装 git-flow</h4><p>我们使用 <code>Homebrew</code> 来安装 <code>git-flow</code>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install git-flow</span><br></pre></td></tr></table></figure></p>
+<p>之后，通过 <code>git-flow</code> 来初始化项目：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git flow init</span><br></pre></td></tr></table></figure></p>
+<p>这时候就会有一些配置的操作，先默认操作：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">Initialized empty Git repository in /Users/jartto/Documents/git-flow-demo/.git/</span><br><span class="line">No branches exist yet. Base branches must be created now.</span><br><span class="line">Branch name for production releases: [master]</span><br><span class="line">Branch name for &quot;next release&quot; development: [develop]</span><br><span class="line"></span><br><span class="line">*** Please tell me who you are.</span><br><span class="line"></span><br><span class="line">Run</span><br><span class="line"></span><br><span class="line">  git config --global user.email &quot;you@example.com&quot;</span><br><span class="line">  git config --global user.name &quot;Your Name&quot;</span><br><span class="line"></span><br><span class="line">to set your account&apos;s default identity.</span><br><span class="line">Omit --global to set the identity only in this repository.</span><br><span class="line"></span><br><span class="line">fatal: unable to auto-detect email address (got &apos;jartto@bogon.(none)&apos;)</span><br><span class="line">fatal: Not a valid object name: &apos;master&apos;.</span><br><span class="line">error: pathspec &apos;develop&apos; did not match any file(s) known to git.</span><br><span class="line"></span><br><span class="line">How to name your supporting branch prefixes?</span><br><span class="line">Feature branches? [feature/]</span><br><span class="line">Release branches? [release/]</span><br><span class="line">Hotfix branches? [hotfix/]</span><br><span class="line">Support branches? [support/]</span><br><span class="line">Version tag prefix? []</span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p>需要强调一点：git-flow 只是封装了 git 的命令。</p>
+</div>
+<p>所以在我们初始化的时候，对仓库并没有其他改动，只是创建了几个分支。当然，如果你不想继续使用 <code>git-flow</code> ,那么只需要简单的停用 <code>git-flow</code> 的命令即可，不需要修改或者删除任何文件。</p>
+<p>为了验证一下，我们看下目前的分支，执行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch</span><br></pre></td></tr></table></figure></p>
+<p>输出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">* develop</span><br><span class="line">  master</span><br></pre></td></tr></table></figure></p>
+<p>很简单，<code>develop</code> 分支是我们日常开发的分支，会有很多改动。而 <code>master</code> 主要针对线上分支，<a href="http://jartto.wang/2018/12/05/git-flow/">下面</a>会细说。</p>
+<div class="alert info"><p>这里补充一点，我们可以通过 help 命令来查看用例。</p>
+</div>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git flow help</span><br></pre></td></tr></table></figure>
+<p>输出如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">usage: git flow &lt;subcommand&gt;</span><br><span class="line"></span><br><span class="line">Available subcommands are:</span><br><span class="line">   init      Initialize a new git repo with support for the branching model.</span><br><span class="line">   feature   Manage your feature branches.</span><br><span class="line">   release   Manage your release branches.</span><br><span class="line">   hotfix    Manage your hotfix branches.</span><br><span class="line">   support   Manage your support branches.</span><br><span class="line">   version   Shows version information.</span><br><span class="line"></span><br><span class="line">Try &apos;git flow &lt;subcommand&gt; help&apos; for details.</span><br></pre></td></tr></table></figure></p>
+<p>如果我要看 <code>feature</code> 相关命令呢？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git flow feature help</span><br></pre></td></tr></table></figure></p>
+<p>使用规范就会列出来：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">usage: git flow feature [list] [-v]</span><br><span class="line">       git flow feature start [-F] &lt;name&gt; [&lt;base&gt;]</span><br><span class="line">       git flow feature finish [-rFk] &lt;name|nameprefix&gt;</span><br><span class="line">       git flow feature publish &lt;name&gt;</span><br><span class="line">       git flow feature track &lt;name&gt;</span><br><span class="line">       git flow feature diff [&lt;name|nameprefix&gt;]</span><br><span class="line">       git flow feature rebase [-i] [&lt;name|nameprefix&gt;]</span><br><span class="line">       git flow feature checkout [&lt;name|nameprefix&gt;]</span><br><span class="line">       git flow feature pull &lt;remote&gt; [&lt;name&gt;]</span><br></pre></td></tr></table></figure></p>
+<h4 id="三、分支模式"><a href="#三、分支模式" class="headerlink" title="三、分支模式"></a>三、分支模式</h4><p><code>git-flow</code> 模式会预设两个主分支在仓库中：<br>1.<code>master</code> 只能用来包含产品代码<br>我们不能直接工作在这个 <code>master</code> 分支上，而是在其他指定的，独立的特性分支中。<br><div class="alert warning"><p>不直接提交改动到 master 分支上也是很多工作流程的一个共同的规则。</p>
+</div></p>
+<p>2.<code>develop</code> 是你进行任何新的开发的基础分支<br>当你开始一个新的功能分支时，它将是开发的基础。另外，该分支也汇集所有已经完成的功能，并等待被整合到 <code>master</code> 分支中。</p>
+<p><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/gitflow/gitflow1.png" alt="gitflow1"></p>
+<div class="alert info"><p>上面说到的这两个分支被称作为长期分支，它们会存活在项目的整个生命周期中。</p>
+</div>
+<p>而其他的分支，例如针对功能的分支，针对发行的分支，仅仅只是临时存在的。它们是根据需要来创建的，当它们完成了自己的任务之后就会被删除掉。</p>
+<p><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/gitflow/gitflow2.png" alt="gitflow2"></p>
+<h4 id="四、明确分支功能"><a href="#四、明确分支功能" class="headerlink" title="四、明确分支功能"></a>四、明确分支功能</h4><p>1.<code>master</code> 分支<br>最为稳定功能比较完整的随时可发布的代码，即代码开发完成，经过测试，没有明显的 <code>bug</code>，才能合并到 <code>master</code> 中。请注意永远不要在 <code>master</code> 分支上直接开发和提交代码，以确保 <code>master</code> 上的代码一直可用；</p>
+<p>2.<code>develop</code> 分支<br>用作平时开发的主分支，并一直存在，永远是功能最新最全的分支，包含所有要发布 到下一个 <code>release</code> 的代码，主要用于合并其他分支，比如 <code>feature</code> 分支； 如果修改代码，新建 <code>feature</code> 分支修改完再合并到 <code>develop</code> 分支。所有的 <code>feature</code>、<code>release</code> 分支都是从 <code>develop</code> 分支上拉的。</p>
+<p>3.<code>feature</code> 分支<br>这个分支主要是用来开发新的功能，一旦开发完成，通过测试没问题，我们合并回 <code>develop</code> 分支进入下一个 <code>release</code> 。</p>
+<p>4.<code>release</code> 分支<br>用于发布准备的专门分支。当开发进行到一定程度，或者说快到了既定的发布日，可以发布时，建立一个 <code>release</code> 分支并指定版本号(可以在 <code>finish</code> 的时候添加)。开发人员可以对 <code>release</code> 分支上的代码进行集中测试和修改 <code>bug</code>。（这个测试，测试新功能与已有的功能是否有冲突，兼容性）全部完成经过测试没有问题后，将 <code>release</code> 分支上的代码合并到 <code>master</code> 分支和 <code>develop</code> 分支。</p>
+<p>5.<code>hotfix</code> 分支<br>用于修复线上代码的 <code>bug</code> 。从 <code>master</code> 分支上拉。完成 <code>hotfix</code> 后，打上 <code>tag</code> 我们合并回 <code>master</code> 和 <code>develop</code> 分支。</p>
+<p>需要注意：</p>
+<ul>
+<li>所有开发分支从 <code>develop</code> 分支拉。</li>
+<li>所有 <code>hotfix</code> 分支从 <code>master</code> 拉。</li>
+<li>所有在 <code>master</code> 上的提交都必要要有 <code>tag</code>，方便回滚。</li>
+<li>只要有合并到 <code>master</code> 分支的操作，都需要和 <code>develop</code> 分支合并下，保证同步。</li>
+<li><code>master</code> 和 <code>develop</code> 分支是主要分支，主要分支每种类型只能有一个，派生分支每个类型可以同时存在多个。</li>
+</ul>
+<h4 id="五、关于-Feature-分支"><a href="#五、关于-Feature-分支" class="headerlink" title="五、关于 Feature 分支"></a>五、关于 Feature 分支</h4><p>在 <code>Git-flow</code> 中，通过使用 <code>Feature</code> 分支，使得我们在同一时间开发多个分支更加简单。<br>我们接到了一个 <code>Test1</code> 需求，使用 <code>feature start</code> 来启动：<br><div class="alert info"><p>git flow feature start test1</p>
+</div></p>
+<p>当我们开始一个新的 <code>feature</code> 开发后：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Switched to a new branch &apos;feature/test1&apos;</span><br><span class="line"></span><br><span class="line">Summary of actions:</span><br><span class="line">- A new branch &apos;feature/test1&apos; was created, based on &apos;develop&apos;</span><br><span class="line">- You are now on branch &apos;feature/test1&apos;</span><br><span class="line"></span><br><span class="line">Now, start committing on your feature. When done, use:</span><br><span class="line"></span><br><span class="line">     git flow feature finish test1</span><br></pre></td></tr></table></figure></p>
+<p>我们自动切到了 <code>feature/test1</code> 分支下，正好开始我们的开发，建一个文件先：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi main.js</span><br></pre></td></tr></table></figure></p>
+<p>写入 <code>console.log(&#39;hello jartto&#39;);</code> 接着提交我们的变更：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m &apos;feat: add console.log&apos;</span><br></pre></td></tr></table></figure></p>
+<p>好了，现在我们开发完了，结束 feature 开发：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git flow feature finish test1</span><br></pre></td></tr></table></figure></p>
+<p>控制台输出了：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Switched to branch &apos;develop&apos;</span><br><span class="line">Updating d975789..27e920c</span><br><span class="line">Fast-forward</span><br><span class="line">main.js | 1 +</span><br><span class="line">1 file changed, 1 insertion(+)</span><br><span class="line">create mode 100644 main.js</span><br><span class="line">Deleted branch feature/test1 (was 27e920c).</span><br><span class="line"></span><br><span class="line">Summary of actions:</span><br><span class="line">- The feature branch &apos;feature/test1&apos; was merged into &apos;develop&apos;</span><br><span class="line">- Feature branch &apos;feature/test1&apos; has been removed</span><br><span class="line">- You are now on branch &apos;develop&apos;</span><br></pre></td></tr></table></figure></p>
+<p>这里做了几件事情：<br>1.将 <code>feature/test1</code> 分支合并到了 <code>develop</code> 分支；<br>2.删除了 <code>feature/test1</code>；<br>3.切换到 <code>develop</code> 分支；</p>
+<p>需要注意：<code>git-flow</code> 使用的命令是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge —no-ff feature/test1</span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p>这样，在我们移除 <code>feature</code> 分支之前，是不会丢失任何历史记录的。</p>
+</div>
+<p>如果你还不了解 <code>--no-ff</code> 相关知识，可以先看看：<a href="https://blog.csdn.net/chaiyu2002/article/details/81020370" target="_blank" rel="noopener">Git merge 的 –ff 和 –no-ff</a>。</p>
+<p>接着，我们看一下变更记录：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log --oneline</span><br></pre></td></tr></table></figure></p>
+<p>输出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">27e920c (HEAD -&gt; develop) feat: add console.log</span><br><span class="line">d975789 (master) Initial commit</span><br></pre></td></tr></table></figure></p>
+<h4 id="六、release-分支－版本发布"><a href="#六、release-分支－版本发布" class="headerlink" title="六、release 分支－版本发布"></a>六、release 分支－版本发布</h4><p>当我们开发完毕，需要去发布新版本的时候，我们可以使用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git flow release start 0.1.0</span><br></pre></td></tr></table></figure></p>
+<p>控制台会有一些提示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Switched to a new branch &apos;release/0.1.0&apos;</span><br><span class="line"></span><br><span class="line">Summary of actions:</span><br><span class="line">- A new branch &apos;release/0.1.0&apos; was created, based on &apos;develop&apos;</span><br><span class="line">- You are now on branch &apos;release/0.1.0&apos;</span><br><span class="line"></span><br><span class="line">Follow-up actions:</span><br><span class="line">- Bump the version number now!</span><br><span class="line">- Start committing last-minute fixes in preparing your release</span><br><span class="line">- When done, run:</span><br><span class="line"></span><br><span class="line">     git flow release finish &apos;0.1.0&apos;</span><br></pre></td></tr></table></figure></p>
+<p>很清晰，我们简单说一下：<br>1.基于 <code>develop</code> 分支新建了 <code>release/0.1.0</code> 分支；<br>2.切换至 <code>release/0.1.0</code> 分支；</p>
+<p>又出现了新问题：<br>1.这是什么意思：<code>Bump the version number now!</code><br>2.<code>last-minute fixes</code> 又是什么意思？</p>
+<div class="alert info"><p>那接下来我们要做什么呢？不着急，按照提示一步步来。</p>
+</div>
+<p>我们修改了代码，进行add，和 commit 之后，执行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git flow release finish 0.1.0</span><br></pre></td></tr></table></figure></p>
+<p>这个过程中间可能出现异常：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fatal: no tag message?</span><br><span class="line">Tagging failed. Please run finish again to retry.</span><br></pre></td></tr></table></figure></p>
+<p>输出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Switched to branch &apos;develop&apos;</span><br><span class="line">Merge made by the &apos;recursive&apos; strategy.</span><br><span class="line">test.js | 0</span><br><span class="line">1 file changed, 0 insertions(+), 0 deletions(-)</span><br><span class="line">create mode 100644 test.js</span><br><span class="line">Deleted branch release/0.1.0 (was 0426707).</span><br><span class="line"></span><br><span class="line">Summary of actions:</span><br><span class="line">- Latest objects have been fetched from &apos;origin&apos;</span><br><span class="line">- Release branch has been merged into &apos;master&apos;</span><br><span class="line">- The release was tagged &apos;0.1.0&apos;</span><br><span class="line">- Release branch has been back-merged into &apos;develop&apos;</span><br><span class="line">- Release branch &apos;release/0.1.0&apos; has been deleted</span><br></pre></td></tr></table></figure></p>
+<p>这里主要有几个操作：<br>1.首先，<code>git-flow</code> 会拉取远程仓库，以确保目前是最新的版本。<br>2.然后，<code>release</code> 的内容会被合并到 <code>master</code> 和 <code>develop</code> 两个分支中去，这样不仅产品代码为最新的版本，而且新的功能分支也将基于最新代码。<br>3.为便于识别和做历史参考，<code>release</code> 提交会被标记上这个 <code>release</code> 的 <code>Tag</code>。<br>4.清理操作，版本分支会被删除，并且回到 <code>develop</code>。</p>
+<h4 id="七、Hotfix-线上代码"><a href="#七、Hotfix-线上代码" class="headerlink" title="七、Hotfix 线上代码"></a>七、Hotfix 线上代码</h4><div class="alert warning"><p>如果线上代码有问题，这时候你需要紧急修复呢？</p>
+</div>
+<p>我们可以使用 <code>git flow hotfix</code> ：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git flow hotfix start jartto</span><br></pre></td></tr></table></figure></p>
+<p>看一下执行了什么：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Switched to a new branch &apos;hotfix/jartto&apos;</span><br><span class="line"></span><br><span class="line">Summary of actions:</span><br><span class="line">- A new branch &apos;hotfix/jartto&apos; was created, based on &apos;master&apos;</span><br><span class="line">- You are now on branch &apos;hotfix/jartto&apos;</span><br><span class="line"></span><br><span class="line">Follow-up actions:</span><br><span class="line">- Bump the version number now!</span><br><span class="line">- Start committing your hot fixes</span><br><span class="line">- When done, run:</span><br><span class="line"></span><br><span class="line">     git flow hotfix finish &apos;jartto&apos;</span><br></pre></td></tr></table></figure></p>
+<p>接着我们新建了目录：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir assets</span><br></pre></td></tr></table></figure></p>
+<p>放入一张图片，修改完毕，提交并结束 <code>hotfix</code>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m &apos;fix: assets img&apos;</span><br><span class="line">git flow hotfix finish &apos;jartto&apos;</span><br></pre></td></tr></table></figure></p>
+<p>看一下 <code>git-flow</code> 有哪些操作：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Switched to branch &apos;master&apos;</span><br><span class="line">Merge made by the &apos;recursive&apos; strategy.</span><br><span class="line">assets/git-flow.png | Bin 0 -&gt; 25839 bytes</span><br><span class="line">1 files changed, 0 insertions(+), 0 deletions(-)</span><br><span class="line">create mode 100644 assets/git-flow.png</span><br><span class="line">Switched to branch &apos;develop&apos;</span><br><span class="line">Merge made by the &apos;recursive&apos; strategy.</span><br><span class="line">assets/git-flow.png | Bin 0 -&gt; 25839 bytes</span><br><span class="line">1 files changed, 0 insertions(+), 0 deletions(-)</span><br><span class="line">create mode 100644 assets/git-flow.png</span><br><span class="line">Deleted branch hotfix/jartto (was a734849).</span><br><span class="line"></span><br><span class="line">Summary of actions:</span><br><span class="line">- Latest objects have been fetched from &apos;origin&apos;</span><br><span class="line">- Hotfix branch has been merged into &apos;master&apos;</span><br><span class="line">- The hotfix was tagged &apos;jartto&apos;</span><br><span class="line">- Hotfix branch has been back-merged into &apos;develop&apos;</span><br><span class="line">- Hotfix branch &apos;hotfix/jartto&apos; has been deleted</span><br></pre></td></tr></table></figure></p>
+<p>查看一下目前的 <code>Tag</code> 情况：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag</span><br></pre></td></tr></table></figure></p>
+<p>正是我们上面添加的两个标签：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">0.1.0</span><br><span class="line">jartto</span><br></pre></td></tr></table></figure></p>
+<p>总结一下：<br>1.完成的改动会被合并到 <code>master</code> 中，同样也会合并到 <code>develop</code> 分支中，这样就可以确保这个错误不会再次出现在下一个 <code>release</code> 中。<br>2.这个 <code>hotfix</code> 程序将被标记起来以便于参考。<br>3.这个 <code>hotfix</code> 分支将被删除，然后切换到 <code>develop</code> 分支上去。</p>
+<h4 id="八、git-flow-流程图示"><a href="#八、git-flow-流程图示" class="headerlink" title="八、git-flow 流程图示"></a>八、git-flow 流程图示</h4><p>恭喜你，到这里你已经完成了 <code>git-flow</code> 的基本流程。为了更加整体的理解工作流，我们来看看下面这张流程图：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/gitflow/gitflow3.png" alt="gitflow3"></p>
+<div class="alert success"><p>清清楚楚，是不是和我们上面的过程一模一样。</p>
+</div>
+<h4 id="九、参考"><a href="#九、参考" class="headerlink" title="九、参考"></a>九、参考</h4><p><a href="https://www.git-tower.com/learn/git/ebook/cn/command-line/advanced-topics/git-flow" target="_blank" rel="noopener">Learn Version Control with Git</a><br><a href="https://jeffkreeftmeijer.com/git-flow/" target="_blank" rel="noopener">Using git-flow to automate your git branching workflow</a><br><a href="https://blog.csdn.net/aaaaaaliang/article/details/79451598" target="_blank" rel="noopener">为什么使用 Git-flow 工作流</a><br><a href="https://www.oschina.net/translate/a-successful-git-branching-model?print" target="_blank" rel="noopener">Git 分支模型</a></p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/git/">git</a> <a class="tag tag--primary tag--small t-link" href="/tags/git-flow/">git-flow</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/12/09/bitmap/" data-tooltip="究竟什么是位图？">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/12/02/indexeddb/" data-tooltip="浏览器存储之争">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/12/05/git-flow/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/12/05/git-flow/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/12/05/git-flow/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/12/09/bitmap/" data-tooltip="究竟什么是位图？">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/12/02/indexeddb/" data-tooltip="浏览器存储之争">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/12/05/git-flow/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/12/05/git-flow/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/12/05/git-flow/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2018/12/05/git-flow/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2018/12/05/git-flow/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2018/12/05/git-flow/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

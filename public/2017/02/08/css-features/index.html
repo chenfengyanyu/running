@@ -1,0 +1,532 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>CSS 三大特性 - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="最近看了许多 CSS 相关的文章，也深刻认识到自身的不足。本文属于查漏补缺，巩固基础知识。">
+<meta name="keywords" content="css,feature">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="CSS 三大特性">
+<meta property="og:url" content="http://jartto.wang/2017/02/08/css-features/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="最近看了许多 CSS 相关的文章，也深刻认识到自身的不足。本文属于查漏补缺，巩固基础知识。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/css/rule.png">
+<meta property="og:image" content="http://acgtofe.com/assets/used-images/posts/201304/specificity_calculate_example.png">
+<meta property="og:updated_time" content="2019-01-06T04:00:01.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSS 三大特性">
+<meta name="twitter:description" content="最近看了许多 CSS 相关的文章，也深刻认识到自身的不足。本文属于查漏补缺，巩固基础知识。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/css/rule.png">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/css/logo.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/css/logo.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            CSS 三大特性
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2017-02-08T07:37:26+08:00">
+	  
+		    2017/2月/08 07:37:26
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>最近看了许多 CSS 相关的文章，也深刻认识到自身的不足。本文属于查漏补缺，巩固基础知识。<br><a id="more"></a></p>
+<h4 id="一、CSS-优先级"><a href="#一、CSS-优先级" class="headerlink" title="一、CSS 优先级"></a>一、CSS 优先级</h4><p>CSS 的组成单元是样式规则，也就是我们常说的 CSS Rule ，正如我们下面看到的这张图：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/css/rule.png" alt="css rule"></p>
+<p>众所周知，CSS 有一个核心特性：当多条样式规则中的同一个属性作用到了同一个元素，这些样式之间就会发生覆盖。<br><div class="alert info"><p>优先级高的 CSS 样式，将覆盖优先级低的 CSS 样式，成为最终网页元素的实际样式。</p>
+</div></p>
+<p>所以，为了保证页面有序并且正确的渲染，我们需要了解 CSS 优先级规则。大致的规则如下：<br><div class="alert success"><p>!important &gt; 行内样式 &gt; ID 选择器 &gt; 类选择器 &gt; 标签 &gt; 通配符 &gt; 继承 &gt; 浏览器默认属性</p>
+</div></p>
+<p>当然，上述规则可以解决我们 80% 的疑惑，关键的是，还需要理解以下三点：<br><strong>1. CSS 属性继承（详情请看下文），我们来看一个例子：</strong><br>首先定义 html 结构：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"box"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"text"</span>&gt;</span>Jartto's blog<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>为其添加样式规则：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#box</span>&#123;<span class="attribute">color</span>: red;&#125;</span><br><span class="line"><span class="selector-class">.text</span>&#123;<span class="attribute">color</span>: yellow;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>如上代码，那么到底显示什么颜色呢？答案就是 yellow 。你肯定会有这样的疑惑：ID 选择器的优先级高于 Class 选择器，且还有继承，应该是 red 。其实不然，这里不要被误导了，其实 box 提供的 color 对 text 来说只能继承 color 属性，而继承优先级是小于直接作用元素的。请务必明确如下规则：</p>
+<ul>
+<li>继承得到的样式的优先级是最低的，在任何时候，只要元素本身有同属性的样式定义，就可以覆盖掉继承值；</li>
+<li>在存在多个继承样式时，层级关系距离当前元素最近的父级元素的继承样式，具有相对最高的优先级；</li>
+</ul>
+<p><strong>2. CSS 权重计算：</strong><br>CSS 权重计算其实就是统计选择符中的不同组成元素的个数，并以 (a,b,c,d) 这种形式来判断。其中，abcd分别代表了不同类别的选择符组成元素，且战斗力分别在不同的数量级，a最强，d最弱。从强到弱，这4个字母分别代表的类别是：</p>
+<ul>
+<li>内联样式（Inline style） a = 1 – (1,0,0,0)；</li>
+<li>Id选择符 b = 1 – (0,1,0,0)</li>
+<li>类选择符 （Class），伪类选择符（Pseudo class），属性选择符（Attribute） c = 1 – (0,0,1,0)</li>
+<li>元素选择符（Element），伪元素选择符（Pseudo Element） d = 1 – (0,0,0,1)<br>这里引用一张图来说明：<br><img src="http://acgtofe.com/assets/used-images/posts/201304/specificity_calculate_example.png" alt="specificity_calculate_example"></li>
+</ul>
+<p><strong>3. !important 标识符；</strong><br>毫无疑问，!important 会有最高的优先级，这也经常让我们执行强制覆写样式。但是需要注意，一定是直接作用元素，不要和继承搞混淆，我们继续用上面的演示代码举例：<br>html 结构不变：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"box"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"text"</span>&gt;</span>Jartto's blog<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>样式规则稍作修改，我们增加 !important 规则：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#box</span>&#123;<span class="attribute">color</span>: red<span class="meta">!important</span>;&#125;</span><br><span class="line"><span class="selector-class">.text</span>&#123;<span class="attribute">color</span>: yellow;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>明白了上述规则后，我们不难得出结论，结果依然是黄色，因为 !important 再牛，在这里他也是 color 继承，显然干不过直接作用类 text。</p>
+<p>深入阅读请查看：<br><a href="http://acgtofe.com/posts/2013/04/css-specificity-explain-in-detail" target="_blank" rel="noopener">CSS 优先级详细解析</a></p>
+<h4 id="二、CSS-继承性"><a href="#二、CSS-继承性" class="headerlink" title="二、CSS 继承性"></a>二、CSS 继承性</h4><div class="alert success"><p>CSS 继承性是指被包在内部的标签将拥有外部标签的样式性，即子元素可以继承父元素的属性。</p>
+</div>
+<p>有哪些属性是可以继承的呢，我们简单分一下类：<br>1.font-family,font-size,font-weight 等 f 开头的 CSS 样式；<br>2.text-align,text-indent 等 t 开头的样式；<br>3.color；</p>
+<h4 id="三、CSS-层叠性"><a href="#三、CSS-层叠性" class="headerlink" title="三、CSS 层叠性"></a>三、CSS 层叠性</h4><p>CSS 层叠性是指 CSS 样式在针对同一元素配置同一属性时，依据层叠规则（权重）来处理冲突，选择应用权重高的 CSS 选择器所指定的属性，一般也被描述为权重高的覆盖权重低的，因此也称作层叠。</p>
+<p>每个 CSS 选择器都会有一个权重，当两个选择器同时配置同一元素的同一属性时（比如一个设置 color：red，另一个 color：black ），就会产生冲突，而解决冲突的方案就是 CSS 选择器的权重，权重高的来覆盖权重低的。</p>
+<div class="alert info"><p>层叠就是浏览器对多个样式来源进行叠加，最终确定结果的过程。CSS 之所以有“层叠”的概念，是因为有多个样式来源。</p>
+</div>
+<h4 id="四、示例解说"><a href="#四、示例解说" class="headerlink" title="四、示例解说"></a>四、示例解说</h4><p>为了巩固上面的知识，我们来高搞一些容易混淆的例子，简单的测试一下。<br>示例一：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ol</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span> Jartto's blog <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">ol</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>样式规则，定义如下：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span> &#123; <span class="attribute">color </span>: red<span class="meta">!important</span>; &#125;</span><br><span class="line"><span class="selector-tag">ol</span> &#123; <span class="attribute">color </span>: green; &#125;</span><br></pre></td></tr></table></figure></p>
+<p>结果是 green ，因为 div 和 ol 都不是直接作用于 li 元素，所以他们拼的是继承性，根据属性继承的<strong>就近原则</strong>，显然 ol 更胜一筹。</p>
+<p>示例二：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"box1"</span> <span class="attr">class</span>=<span class="string">"one"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"box2"</span> <span class="attr">class</span>=<span class="string">"two"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"box3"</span> <span class="attr">class</span>=<span class="string">"three"</span>&gt;</span> Jartto's blog <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>CSS 规则如下：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.one</span> <span class="selector-class">.two</span> <span class="selector-tag">div</span> &#123; <span class="attribute">color </span>: red; &#125;</span><br><span class="line"><span class="selector-tag">div</span> <span class="selector-id">#box3</span> &#123; <span class="attribute">color </span>: yellow; &#125;</span><br><span class="line"><span class="selector-id">#box1</span> <span class="selector-tag">div</span> &#123; <span class="attribute">color </span>: blue; &#125;</span><br></pre></td></tr></table></figure></p>
+<p>猜一猜，结果是什么？</p>
+<p>示例三：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span>Jartto's blog<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>为其设置如下规则：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span> <span class="selector-tag">div</span> <span class="selector-tag">div</span> &#123; <span class="attribute">color</span>: green; &#125;</span><br><span class="line"><span class="selector-tag">div</span> <span class="selector-tag">div</span> &#123; <span class="attribute">color</span>: red; &#125;</span><br><span class="line"><span class="selector-tag">div</span> &#123; <span class="attribute">color</span>: yellow; &#125;</span><br></pre></td></tr></table></figure></p>
+<div class="alert info"><p>CSS 规则都作用于文本，权重第一个大于第二个大于第三个（比较标签选择器数量），显示 green。</p>
+</div>
+<p>示例三，来自<a href="http://blog.csdn.net/k491022087/article/details/52319252" target="_blank" rel="noopener">CSS 三大特性</a>：<br><div class="alert danger"><p>注意：这里摘录的代码只为了演示 CSS 优先级以及层叠性，但是有悖于 CSS 解析规则，详情请参考<a href="http://jartto.wang/2017/11/13/Exploring-the-principle-of-CSS-parsing/">探究 CSS 解析原理</a>。</p>
+</div></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"father"</span> <span class="attr">class</span>=<span class="string">"c1"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"son"</span> <span class="attr">class</span>=<span class="string">"c2"</span>&gt;</span> Jartto's blog <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>为了演示效果，我们制定如下 CSS 规则：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#father</span> <span class="selector-id">#son</span> &#123; <span class="attribute">color</span>: red &#125;;</span><br><span class="line"><span class="selector-id">#father</span> <span class="selector-tag">p</span><span class="selector-class">.c2</span> &#123; <span class="attribute">color</span>: green &#125;;</span><br><span class="line"><span class="selector-tag">div</span><span class="selector-class">.c1</span> <span class="selector-tag">p</span><span class="selector-class">.c2</span> &#123; <span class="attribute">color</span>: yellow &#125;;</span><br><span class="line"><span class="selector-id">#father</span> &#123; <span class="attribute">color</span>: pink <span class="meta">!important</span>&#125;;</span><br><span class="line"><span class="selector-tag">div</span><span class="selector-id">#father</span><span class="selector-class">.c1</span> &#123; <span class="attribute">color</span>: blue &#125;;</span><br></pre></td></tr></table></figure></p>
+<p>我们暂且不去质疑这段代码的正确性，先来分析一下最终的呈现效果：</p>
+<ul>
+<li>首先，<code>#father #son { color: red };</code> 设置了 <code>#father</code> 后代的 <code>#son</code> 字体颜色为 <code>red</code>；</li>
+<li>其次，<code>#father p.c2 { color: green };</code> 和 <code>div.c1 p.c2 { color: yellow };</code> 想去作用，但 class 优先级低于 id ，所以 <code>Jartto&#39;s blog</code> 仍然为 <code>red</code>;</li>
+<li>然后，又设置了 <code>#father { color: pink !important};</code> ，企图用 <code>!important</code> 去强制使 <code>pink</code> 生效，但是这对 <code>Jartto&#39;s blog</code> 来说只是 CSS 继承，根据权重规则，继承权重低于 id ，很显然颜色依然是 <code>red</code>；</li>
+<li>最后，<code>div#father.c1 { color: blue };</code> 肯定权重更低了，所以依然无效，最终颜色只能是 <code>red</code>。</li>
+</ul>
+<p>这是一个极端的例子，但是可以很好的理解这些例子大家可以去<a href="http://runjs.cn/code" target="_blank" rel="noopener"> Runjs </a>在线测试一下，这样有助于更好的理解 CSS 的特性。</p>
+<h4 id="五、补充说明"><a href="#五、补充说明" class="headerlink" title="五、补充说明"></a>五、补充说明</h4><p>好了，相信到这里，大家对 CSS 的特性也有了深刻的认识。我们来解决一下之前抛出的疑问，再来看看这段拷贝过来的代码：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"father"</span> <span class="attr">class</span>=<span class="string">"c1"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"son"</span> <span class="attr">class</span>=<span class="string">"c2"</span>&gt;</span> Jartto's blog <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>CSS 规则如下：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#father</span> <span class="selector-id">#son</span> &#123; <span class="attribute">color</span>: red &#125;;</span><br><span class="line"><span class="selector-id">#father</span> <span class="selector-tag">p</span><span class="selector-class">.c2</span> &#123; <span class="attribute">color</span>: green &#125;;</span><br><span class="line"><span class="selector-tag">div</span><span class="selector-class">.c1</span> <span class="selector-tag">p</span><span class="selector-class">.c2</span> &#123; <span class="attribute">color</span>: yellow &#125;;</span><br><span class="line"><span class="selector-id">#father</span> &#123; <span class="attribute">color</span>: pink <span class="meta">!important</span>&#125;;</span><br><span class="line"><span class="selector-tag">div</span><span class="selector-id">#father</span><span class="selector-class">.c1</span> &#123; <span class="attribute">color</span>: blue &#125;;</span><br></pre></td></tr></table></figure></p>
+<p>本文的重点也说完了，这里来挑一下刺，看看这段代码的问题：</p>
+<ol>
+<li><code>#father #son { color: red };</code> 两个 <code>id</code> 选择器，简直是浪费；</li>
+<li><code>id</code> 选择器中使用 <code>!important</code> 这就尴尬了；</li>
+<li><code>div#father</code> 这种写法把 <code>id</code> 选择器变成了一个不精准的类选择器了；</li>
+<li>代码可读性很差，几乎很难把握到重点，全是冗余代码；</li>
+</ol>
+<p>可以看到，<code>#son { color: red };</code> 这样简单一行代码搞定的事情，被写的乱七八糟，漏洞百出。所以，我们不能只写代码，而不知其所以然，否则很有可能产生这样的后果，十分尴尬。</p>
+<p>上文基本也涵盖了此部分内容，这里就不赘述了，详情请参考：<a href="http://blog.csdn.net/k491022087/article/details/52319252" target="_blank" rel="noopener">CSS 三大特性</a></p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/css/">css</a> <a class="tag tag--primary tag--small t-link" href="/tags/feature/">feature</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/02/19/grasp-react-component/" data-tooltip="掌握 React 组件 Component">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/01/23/delicate-handling-of-Amount-of-Money/" data-tooltip="使用js巧妙处理金额数字">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2017/02/08/css-features/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2017/02/08/css-features/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2017/02/08/css-features/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/02/19/grasp-react-component/" data-tooltip="掌握 React 组件 Component">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/01/23/delicate-handling-of-Amount-of-Money/" data-tooltip="使用js巧妙处理金额数字">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2017/02/08/css-features/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2017/02/08/css-features/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2017/02/08/css-features/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2017/02/08/css-features/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2017/02/08/css-features/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2017/02/08/css-features/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

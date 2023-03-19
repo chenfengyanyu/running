@@ -1,0 +1,580 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>Web 安全之 XSS 和 CSRF - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="伴随着前端技术的不断发展，Web 应用已经随处可见了。随之而来的问题就是，谁来保护用户的隐私和网络安全？">
+<meta name="keywords" content="xss,csrf">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Web 安全之 XSS 和 CSRF">
+<meta property="og:url" content="http://jartto.wang/2017/12/15/xss-and-csrf/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="伴随着前端技术的不断发展，Web 应用已经随处可见了。随之而来的问题就是，谁来保护用户的隐私和网络安全？">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2018-12-30T15:25:55.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Web 安全之 XSS 和 CSRF">
+<meta name="twitter:description" content="伴随着前端技术的不断发展，Web 应用已经随处可见了。随之而来的问题就是，谁来保护用户的隐私和网络安全？">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/xss0.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/xss0.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            Web 安全之 XSS 和 CSRF
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2017-12-15T06:35:38+08:00">
+	  
+		    2017/12月/15 06:35:38
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>伴随着前端技术的不断发展，<code>Web</code> 应用已经随处可见了。随之而来的问题就是，谁来保护用户的隐私和网络安全？<br><a id="more"></a></p>
+<h4 id="一、网络安全"><a href="#一、网络安全" class="headerlink" title="一、网络安全"></a>一、网络安全</h4><div class="alert info"><p><a href="https://baike.baidu.com/item/网络安全/343664?fr=aladdin" target="_blank" rel="noopener">网络安全</a>是指网络系统的硬件、软件及其系统中的数据受到保护，不因偶然的或者恶意的原因而遭受到破坏、更改、泄露，系统连续可靠正常地运行，网络服务不中断。</p>
+</div>
+<p>网络安全主要有如下特征：</p>
+<ul>
+<li>保密性：信息不泄露给非授权用户、实体或过程，或供其利用的特性。</li>
+<li>完整性：数据未经授权不能进行改变的特性。即信息在存储或传输过程中保持不被修改、不被破坏和丢失的特性。</li>
+<li>可用性：可被授权实体访问并按需求使用的特性。即当需要时能否存取所需的信息。例如网络环境下拒绝服务、破坏网络和有关系统的正常运行等都属于对可用性的攻击；</li>
+<li>可控性：对信息的传播及内容具有控制能力。</li>
+<li>可审查性：出现安全问题时提供依据与手段。</li>
+</ul>
+<p>通过上面，我们也了解到网络安全其实与我们息息相关，而作为 <code>Web</code> 前端开发工程师，这方面知识一定要了解，可能我们是距离用户最近的开发者。所以我们先从 <code>Web</code> 最常见的 <code>XSS</code> 和 <code>CSRF</code> 攻击来入手吧。<br><div class="alert info"><p>这个时代软件的特点就是：解决了用户痛点，就能为王！</p>
+</div></p>
+<h4 id="二、什么是-XSS-？"><a href="#二、什么是-XSS-？" class="headerlink" title="二、什么是 XSS ？"></a>二、什么是 XSS ？</h4><p>跨站脚本攻击（<code>Cross Site Scripting</code>，为了不和层叠样式表 <code>CSS</code> 混淆，故将跨站脚本攻击缩写为 <code>XSS</code>)。恶意攻击者往 <code>Web</code> 页面里插入恶意 <code>Script</code> 代码，当用户浏览该页之时，嵌入其中 <code>Web</code> 里面的 <code>Script</code> 代码会被执行，从而达到恶意攻击用户的目的。</p>
+<p><code>XSS</code> 主要有如下<a href="https://juejin.im/post/59e6b21bf265da43247f861d" target="_blank" rel="noopener">三种分类</a>：</p>
+<ul>
+<li><code>Reflected XSS</code>（基于反射的 <code>XSS</code> 攻击）：主要通过利用系统反馈行为漏洞，并欺骗用户主动触发，从而发起 <code>Web</code> 攻击。</li>
+<li><code>Stored XSS</code>（基于存储的 <code>XSS</code> 攻击）：<code>Stored XSS</code> 和 <code>Reflected XSS</code> 的差别就在于，具有攻击性的脚本被保存到了服务器并且可以被普通用户完整的从服务的取得并执行，从而获得了在网络上传播的能力。</li>
+<li><code>DOM-based or local XSS</code>（基于 <code>DOM</code> 或本地的 <code>XSS</code> 攻击）：<code>DOM</code> 型 <code>XSS</code> 其实是一种特殊类型的反射型 <code>XSS</code>，它是基于 <code>DOM</code> 文档对象模型的一种漏洞。可以通过 <code>DOM</code> 来动态修改页面内容，从客户端获取 <code>DOM</code> 中的数据并在本地执行。基于这个特性，就可以利用 <code>JS</code> 脚本来实现 <code>XSS</code> 漏洞的利用。</li>
+</ul>
+<p><code>XSS</code> 是一门又热门又不太受重视的 <code>Web</code> 攻击方式，为什么会这样呢，原因如下：</p>
+<ul>
+<li>耗时间；</li>
+<li>有一定几率不成功；</li>
+<li>没有相应的软件来完成自动化攻击；</li>
+<li>前期需要基本的 <code>HTML</code>、<code>JS</code> 功底，后期需要扎实的 <code>HTML</code>、<code>JS</code>、<code>ActionScript2/3.0</code> 等语言的功底；</li>
+<li>是一种被动的攻击手法；</li>
+<li>对 <code>Website</code> 有 <code>http-only</code>、<code>crossdomian.xml</code> 没有用。</li>
+</ul>
+<div class="alert info"><p>但是这些并没有影响黑客对此漏洞的偏爱，原因只有一个：<code>XSS</code>几乎每个网站都存在。</p>
+</div>
+<h4 id="三、XSS-情景再现"><a href="#三、XSS-情景再现" class="headerlink" title="三、XSS 情景再现"></a>三、XSS 情景再现</h4><p>为了更好的说明 <code>XSS</code>，我们来举一些小栗子：<br>1.在网页 <code>input</code> 或者 <code>textarea</code> 中输入 <code>&lt;script&gt;alert(&#39;xss&#39;)&lt;/script&gt;</code> ，如果弹出 <code>alert</code> 对话框，则说明网站存在 <code>XSS</code> 漏洞。<br><div class="alert danger"><p>请注意：我们经常在一些博客网站或者论坛底下的留言框看到 <code>alert</code>，你以为是用户热情，其实他们是想搞你！</p>
+</div></p>
+<p>2.只要网页存在 <code>XSS</code> 漏洞，攻击者可能会嵌入 <code>JS</code> 脚本，如：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script scr=<span class="string">"jartto_xss_js"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span> <span class="comment">// 获取 cookie ，发送用户信息等</span></span><br></pre></td></tr></table></figure></p>
+<p>3.图片也可能会被利用，如：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=<span class="string">"..."</span> onerror=<span class="string">"appendChild(createElement('script')).src='jartto_xss_js'"</span> /&gt;</span><br></pre></td></tr></table></figure></p>
+<p>4.直接使用 <code>URL</code> 参数攻击，如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://www.baidu.com?jarttoTest=&lt;script&gt;alert(document.cookie)&lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
+<p>当然，这里需要注意的是，<code>URL</code> 也有可能是不知来历的二维码，所以请慎重扫码。</p>
+<div class="alert success"><p>到这里你可能就了解了，<code>XSS</code> 的目的就是在目标页面执行不为人知的 JS 脚本，从而窥探用户隐私甚至财产。</p>
+</div>
+<h4 id="四、XSS-漏洞检测以及防御"><a href="#四、XSS-漏洞检测以及防御" class="headerlink" title="四、XSS 漏洞检测以及防御"></a>四、XSS 漏洞检测以及防御</h4><p>通常有一些方式可以测试网站是否有正确处理特殊字符，具体如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript">alert(<span class="built_in">document</span>.cookie)</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span> </span><br><span class="line">=<span class="string">'&gt;&lt;script&gt;alert(document.cookie)&lt;/script&gt; </span></span><br><span class="line"><span class="string">"&gt;&lt;script&gt;alert(document.cookie)&lt;/script&gt; </span></span><br><span class="line"><span class="string">&lt;script&gt;alert(document.cookie)&lt;/script&gt; </span></span><br><span class="line"><span class="string">&lt;script&gt;alert(vulnerable)&lt;/script&gt; </span></span><br><span class="line"><span class="string">%3Cscript%3Ealert('</span>XSS<span class="string">')%3C/script%3E  </span></span><br><span class="line"><span class="string">&lt;script&gt;alert('</span>XSS<span class="string">')&lt;/script&gt; </span></span><br><span class="line"><span class="string">&lt;img src="javascript:alert('</span>XSS<span class="string">')"&gt; </span></span><br><span class="line"><span class="string">&lt;img src="http://jartto.com/test.png" onerror="alert('</span>XSS<span class="string">')"&gt; </span></span><br><span class="line"><span class="string">&lt;div style="height:expression(alert('</span>XSS<span class="string">'),1)" /&gt;（这个仅限 IE 有效）</span></span><br></pre></td></tr></table></figure></p>
+<p><a href="https://mp.weixin.qq.com/s/bCVUhh1hyj5KftoYfi89aA" target="_blank" rel="noopener">防御手段</a>可以采取如下方式：</p>
+<ul>
+<li>对所有用户提交内容进行可靠的输入验证，包括对 <code>URL</code>、查询关键字、<code>HTTP</code>头、<code>POST</code>数据等，仅接受指定长度范围内、采用适当格式、采用所预期的字符的内容提交，对其他的一律过滤。</li>
+<li>使用 <code>HTTP</code> 头指定类型，很多时候可以使用 <code>HTTP</code> 头指定内容的类型，使得输出的内容避免被作为 <code>HTML</code> 解析。</li>
+<li>实现 <code>Session</code> 标记(session tokens)、<code>CAPTCHA</code> 系统或者 <code>HTTP</code> 引用头检查，以防功能被第三方网站所执行。</li>
+<li>确认接收的的内容被妥善的规范化，仅包含最小的、安全的 <code>Tag</code> (没有 <code>JS</code> )，去掉任何对远程内容的引用(尤其是样式表和 <code>JS</code> )，使用 <code>HTTP only</code> 的 <code>Cookie</code>。</li>
+</ul>
+<div class="alert success"><p>避免 <code>XSS</code> 的方法之一主要是将用户所提供的内容进行过滤，许多语言都有提供对 <code>HTML</code> 的过滤，看似很简单，实则很有效。</p>
+</div>
+<h4 id="五、什么是-CSRF-？"><a href="#五、什么是-CSRF-？" class="headerlink" title="五、什么是 CSRF ？"></a>五、什么是 CSRF ？</h4><p><a href="https://juejin.im/post/59e6b21bf265da43247f861d" target="_blank" rel="noopener">跨站请求伪造</a> <code>CSRF</code>（Cross-site request forgery），也被称为 <code>One Click Attack</code> 或者 <code>Session Riding</code>，通常缩写为 <code>CSRF</code> 或者 <code>XSRF</code>，是一种对网站的恶意利用。尽管听起来像跨站脚本 <code>XSS</code>，但它与 <code>XSS</code> 非常不同，<code>XSS</code> 利用站点内的信任用户，而 <code>CSRF</code> 则通过伪装来自受信任用户的请求来利用受信任的网站。</p>
+<div class="alert info"><p>与 <code>XSS</code> 攻击相比，<code>CSRF</code> 攻击往往不大流行（因此对其进行防范的资源也相当稀少）和难以防范，所以被认为比 <code>XSS</code>更具危险性。</p>
+</div>
+<p>要完成一次 <code>CSRF</code> 攻击，受害者必须依次完成两个步骤：</p>
+<ol>
+<li>登录受信任网站 <code>A</code>，并在本地生成 <code>Cookie</code>。</li>
+<li>在不登出 <code>A</code> 的情况下，访问危险网站 <code>B</code>。</li>
+</ol>
+<p>那么这里有个问题：如果我不满足以上两个条件中的一个，我就不会受到 <code>CSRF</code> 的攻击”。是的，确实如此，但你不能保证以下情况不会发生：</p>
+<ul>
+<li>你不能保证你登录了一个网站后，不再打开一个 <code>tab</code> 页面并访问另外的网站。</li>
+<li>你不能保证你关闭浏览器了后，你本地的 <code>Cookie</code> 立刻过期，你上次的会话已经结束。</li>
+<li>攻击网站，可能是一个存在其他漏洞的可信任的经常被人访问的网站。</li>
+</ul>
+<h4 id="六、CSRF-情景再现"><a href="#六、CSRF-情景再现" class="headerlink" title="六、CSRF 情景再现"></a>六、CSRF 情景再现</h4><p>为了阐述 <code>CSRF</code> 的操作流程，我们来举几个不太恰当，但足够说明问题的<a href="https://juejin.im/post/59e6b21bf265da43247f861d" target="_blank" rel="noopener">栗子</a>：</p>
+<p>示例一：银行网站 <code>A</code>，它以 <code>GET</code> 请求来完成银行转账的操作，如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://www.mybank.com/Transfer.php?toBankId=11&amp;money=1000</span><br></pre></td></tr></table></figure></p>
+<p>危险网站 <code>B</code>，它里面有一段 <code>HTML</code> 的代码如下：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">http://www.mybank.com/Transfer.php?toBankId</span>=<span class="string">11&amp;money</span>=<span class="string">1000</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>首先，你登录了银行网站 A ，然后访问危险网站 B ，噢，这时你会发现你的银行账户少了 1000 块…</p>
+<p>究竟发生了什么，1000 块去哪里了？</p>
+<ul>
+<li>银行网站 <code>A</code> 违反了 <code>HTTP</code> 规范，使用 <code>GET</code> 请求更新资源。</li>
+<li>在访问危险网站 <code>B</code> 的之前，你已经登录了银行网站 <code>A</code>，而 <code>B</code> 中的以 <code>GET</code> 的方式请求第三方资源（这里的第三方就是指银行网站了，原本这是一个合法的请求，但这里被不法分子利用了）。</li>
+<li>此时你的浏览器会带上你的银行网站 <code>A</code> 的 <code>Cookie</code> 发出 <code>Get</code> 请求，去获取资源。</li>
+<li>银行网站服务器收到请求后，认为这是一个更新资源操作（转账操作），所以就立刻进行转账操作。</li>
+</ul>
+<p>示例二：为了杜绝上面的问题，银行决定改用 <code>POST</code> 请求完成转账操作。银行网站 <code>A</code> 的 <code>WEB</code> 表单如下：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"Transfer.php"</span> <span class="attr">method</span>=<span class="string">"POST"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>ToBankId: <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"toBankId"</span>/&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Money: <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"money"</span>/&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">"Transfer"</span>/&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>后台处理页面 <code>Transfer.php</code> 如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">　　　　session_start();</span><br><span class="line">　　　　<span class="keyword">if</span> (<span class="keyword">isset</span>($_REQUEST[<span class="string">'toBankId'</span>] &amp;&amp;　<span class="keyword">isset</span>($_REQUEST[<span class="string">'money'</span>]))</span><br><span class="line">　　　　&#123;</span><br><span class="line">　　　　    buy_stocks($_REQUEST[<span class="string">'toBankId'</span>],　$_REQUEST[<span class="string">'money'</span>]);</span><br><span class="line">　　　　&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>危险网站 <code>B</code> ，仍然只是包含那句 <code>HTML</code> 代码：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">http://www.mybank.com/Transfer.php?toBankId</span>=<span class="string">11&amp;money</span>=<span class="string">1000</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>和示例一中的操作一样，你首先登录了银行网站 <code>A</code>，然后访问危险网站 <code>B</code>，结果和示例一一样，你再次没了 1000块😱。</p>
+<p>我们来捋一捋，1000 块又是怎么丢的？</p>
+<ul>
+<li>银行后台使用了 <code>$_REQUEST</code> 去获取请求的数据，而 <code>$_REQUEST</code> 既可以获取 <code>GET</code> 请求的数据，也可以获取 <code>POST</code> 请求的数据，这就造成了在后台处理程序无法区分这到底是 <code>GET</code> 请求的数据还是 <code>POST</code> 请求的数据。</li>
+</ul>
+<div class="alert info"><p>在 <code>PHP</code> 中，可以使用 <code>$_GET</code> 和 <code>$_POST</code> 分别获取 <code>GET</code> 请求和 <code>POST</code> 请求的数据。</p>
+</div>
+<p>示例三：经过前面两个惨痛的教训，银行决定把获取请求数据的方法也改了，改用 <code>$_POST</code>，只获取 <code>POST</code> 请求的数据，后台处理页面 <code>Transfer.php</code> 代码如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">　session_start();</span><br><span class="line">　<span class="keyword">if</span> (<span class="keyword">isset</span>($_POST[<span class="string">'toBankId'</span>] &amp;&amp;　<span class="keyword">isset</span>($_POST[<span class="string">'money'</span>]))</span><br><span class="line">　&#123;</span><br><span class="line">　　buy_stocks($_POST[<span class="string">'toBankId'</span>],　$_POST[<span class="string">'money'</span>]);</span><br><span class="line">　&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>然而，危险网站 <code>B</code> 与时俱进，它改了一下代码：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">      <span class="function"><span class="keyword">function</span> <span class="title">steal</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        iframe = <span class="built_in">document</span>.frames[<span class="string">"steal"</span>];</span></span><br><span class="line"><span class="javascript">        iframe.document.Submit(<span class="string">"transfer"</span>);</span></span><br><span class="line"><span class="undefined">      &#125;</span></span><br><span class="line"><span class="undefined">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span> <span class="attr">onload</span>=<span class="string">"steal()"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">iframe</span> <span class="attr">name</span>=<span class="string">"steal"</span> <span class="attr">display</span>=<span class="string">"none"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"http://www.myBank.com/Transfer.php"</span> <span class="attr">method</span>=<span class="string">"POST"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"hidden"</span> <span class="attr">name</span>=<span class="string">"toBankId"</span> <span class="attr">value</span>=<span class="string">"11"</span>&gt;</span><span class="tag">&lt;/<span class="name">input</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"hidden"</span> <span class="attr">name</span>=<span class="string">"money"</span> <span class="attr">value</span>=<span class="string">"1000"</span>&gt;</span><span class="tag">&lt;/<span class="name">input</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>如果用户仍是继续上面的操作，很不幸，结果将会是再次不见 1000 块，因为这里危险网站 <code>B</code> 暗地里发送了 <code>POST</code> 请求到银行!</p>
+<p>在损失 3000 块之后，我们意识到了 <code>CSRF</code> 攻击的严重性，来总结一下：<br><code>CSRF</code> 主要的攻击模式基本上是以上的 3 种，其中以第 1, 2 种最为严重，因为触发条件很简单，一个就可以了，而第3种比较麻烦，需要使用 <code>JS</code>，所以使用的机会会比前面的少很多，但无论是哪种情况，只要触发了 <code>CSRF</code> 攻击，后果都有可能很严重。</p>
+<div class="alert info"><p><code>CSRF</code> 攻击是源于 <code>WEB</code> 的隐式身份验证机制，而 <code>WEB</code> 的身份验证机制虽然可以保证一个请求是来自于某个用户的浏览器，但却无法保证该请求是用户批准发送的！</p>
+</div>
+<p>此处示例出自<a href="https://juejin.im/post/59e6b21bf265da43247f861d" target="_blank" rel="noopener">Web 安全的三个攻防姿势</a>，查看详情请移步。还有一个有意思的<a href="https://www.ibm.com/developerworks/cn/web/1102_niugang_csrf/" target="_blank" rel="noopener">栗子</a>，出自 <code>developerWorks</code>。</p>
+<h4 id="七、CSRF-漏洞如何防御？"><a href="#七、CSRF-漏洞如何防御？" class="headerlink" title="七、CSRF 漏洞如何防御？"></a>七、CSRF 漏洞如何防御？</h4><p>1.验证 <code>HTTP Referer</code> 字段，利用 <code>HTTP</code> 头中的 <code>Referer</code> 判断请求来源是否合法。</p>
+<ul>
+<li>优点：简单易行，只需要在最后给所有安全敏感的请求统一增加一个拦截器来检查 <code>Referer</code> 的值就可以。特别是对于当前现有的系统，不需要改变当前系统的任何已有代码和逻辑，没有风险，非常便捷。</li>
+<li>缺点：<ul>
+<li><code>Referer</code> 的值是由浏览器提供的，不可全信，低版本浏览器下 <code>Referer</code> 存在伪造风险。</li>
+<li>用户自己可以设置浏览器使其在发送请求时不再提供 <code>Referer</code> 时，网站将拒绝合法用户的访问。</li>
+</ul>
+</li>
+</ul>
+<p>2.在请求地址中添加 <code>token</code> 并验证，在请求中放入黑客所不能伪造的信息，并且该信息不存在于 <code>cookie</code> 之中，以<code>HTTP</code> 请求参数的形式加入一个随机产生的 <code>token</code> 交由服务端验证。</p>
+<ul>
+<li>优点：比检查 <code>Referer</code> 要安全一些，并且不涉及用户隐私。</li>
+<li>缺点：对所有请求都添加 <code>token</code> 比较困难，难以保证 <code>token</code> 本身的安全，依然会被利用获取到 <code>token</code>。</li>
+</ul>
+<p>3.在 <code>HTTP</code> 头中自定义属性并验证 <code>One-Time Tokens</code>，将 <code>token</code> 放到 <code>HTTP</code> 头中自定义的属性里。通过  <code>XMLHttpRequest</code> 的异步请求交由后端校验，并且一次有效。</p>
+<ul>
+<li>优点：统一管理 <code>token</code> 输入输出，可以保证 <code>token</code> 的安全性。</li>
+<li>缺点：有局限性，无法在非异步的请求上实施。</li>
+</ul>
+<p>虽然上面的这些方案可以很大程度上抵御 <code>CSRF</code> 的攻击，但并没有一种完美的解决方案。由于这些新的方案尚不成熟，要正式投入使用并被业界广为接受还需时日。<br><div class="alert info"><p>在这之前，我们只有充分重视 <code>CSRF</code>，根据系统的实际情况选择最合适的策略，这样才能把 <code>CSRF</code> 的危害降到最低。</p>
+</div></p>
+<h4 id="八、总结"><a href="#八、总结" class="headerlink" title="八、总结"></a>八、总结</h4><p>随着 <code>Web2.0</code>、社交网络、微博等等一系列新型的互联网产品的诞生，基于 <code>Web</code> 环境的互联网应用越来越广泛，企业信息化的过程中各种应用都架设在 <code>Web</code> 平台上，<code>Web</code> 业务的迅速发展也引起黑客们的强烈关注，接踵而至的就是 <code>Web</code> 安全威胁的凸显。</p>
+<p>在时代赋予 <code>Web</code> 前端开发使命的时候，我们应该比其他人更谨慎，更懂得应付危害网络安全的行为，任重而道远啊～</p>
+<h4 id="九、参考"><a href="#九、参考" class="headerlink" title="九、参考"></a>九、参考</h4><p><a href="https://juejin.im/post/59e6b21bf265da43247f861d" target="_blank" rel="noopener">Web 安全的三个攻防姿势</a><br><a href="http://netsecurity.51cto.com/art/201408/448305_all.htm" target="_blank" rel="noopener">XSS 的原理分析与解剖</a><br><a href="http://netsecurity.51cto.com/art/201407/446775.htm" target="_blank" rel="noopener">对于 XSS 和 CSRF 你究竟了解多少</a><br><a href="https://www.ibm.com/developerworks/cn/web/1102_niugang_csrf/" target="_blank" rel="noopener">CSRF 攻击的应对之道</a></p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/csrf/">csrf</a> <a class="tag tag--primary tag--small t-link" href="/tags/xss/">xss</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/12/18/reflective-closure/" data-tooltip="反思闭包">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/12/11/chattered-about-parcel/" data-tooltip="聊聊 Parcel">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2017/12/15/xss-and-csrf/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2017/12/15/xss-and-csrf/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2017/12/15/xss-and-csrf/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/12/18/reflective-closure/" data-tooltip="反思闭包">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/12/11/chattered-about-parcel/" data-tooltip="聊聊 Parcel">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2017/12/15/xss-and-csrf/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2017/12/15/xss-and-csrf/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2017/12/15/xss-and-csrf/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2017/12/15/xss-and-csrf/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2017/12/15/xss-and-csrf/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2017/12/15/xss-and-csrf/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>

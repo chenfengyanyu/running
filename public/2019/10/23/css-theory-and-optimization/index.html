@@ -1,0 +1,656 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="baidu-site-verification" content="bJPvLdWAu8" />
+    <meta name="generator" content="Jartto&#39;s blog">
+    <title>CSS 渲染原理以及优化策略 - Jartto&#39;s blog</title>
+    <meta name="author" content="Jartto">
+    
+        <meta name="keywords" content="Jartto,Web 前端开发,博客,">
+    
+    
+        <link rel="icon" href="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="提起 CSS 很多童鞋都很不屑，尤其是看到 RedMonk 2019 Programming Language Rankings 的时候，CSS 竟然排到了第七位。">
+<meta name="keywords" content="css,optimazation,原理,优化">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="CSS 渲染原理以及优化策略">
+<meta property="og:url" content="http://jartto.wang/2019/10/23/css-theory-and-optimization/index.html">
+<meta property="og:site_name" content="Jartto&#39;s blog">
+<meta property="og:description" content="提起 CSS 很多童鞋都很不屑，尤其是看到 RedMonk 2019 Programming Language Rankings 的时候，CSS 竟然排到了第七位。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/css/rank.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/css/browser.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/css/render2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/css/specificity1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/css/inherent.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/css/specificity2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/css/render3.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/css/css-rule.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/css/test_CSSOM.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/css/rule2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/css/webkit2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/css/ast1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/css/ast2.png">
+<meta property="og:updated_time" content="2019-11-07T08:24:53.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSS 渲染原理以及优化策略">
+<meta name="twitter:description" content="提起 CSS 很多童鞋都很不屑，尤其是看到 RedMonk 2019 Programming Language Rankings 的时候，CSS 竟然排到了第七位。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/css/rank.png">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg"/>
+    
+    
+        <meta property="og:image" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/css/logo1.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/css/logo1.png" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-amswellqtyheubmlz8etcaxxnc5dvbfw49m4rvjaocb7nstambtlprry5pr8.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-79715416-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</script>
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Jartto&#39;s blog</a>
+    </h1>
+    
+        
+            <a class="header-right-picture st-search-show-outputs" href="#about">
+        
+        
+            <img class="header-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+            </a>
+            <span class="sidebar-profile-name">Jartto</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/ ">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">首页</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-categories">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">分类</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-tags">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">标签</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/all-archives">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">归档</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="#about">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">关于</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="mailto:Jartto@qq.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Email</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="https://github.com/chenfengyanyu/source" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/atom.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a class="sidebar-button-link " href="/sitemap.xml">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-sitemap"></i>
+                    <span class="sidebar-button-desc">Sitemap</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title" itemprop="headline">
+            CSS 渲染原理以及优化策略
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2019-10-23T21:04:53+08:00">
+	  
+		    2019/10月/23 21:04:53
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/技术博文/">技术博文</a>
+
+
+    
+    <span style="opacity:0;font-size:1.3rem;text-align:center;"> 123 次阅读</span>
+</div>
+
+</div>
+        <div style="color:#9eabb3;font-size:1.3rem;text-align:center;margin:-25px 0px 0 235px">
+          <span id="busuanzi_container_page_pv">
+            &nbsp;&nbsp;<span id="busuanzi_value_page_pv"></span> 次阅读
+          </span>
+        </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>提起 CSS 很多童鞋都很不屑，尤其是看到 RedMonk 2019 Programming Language Rankings 的时候，CSS 竟然排到了第七位。<br><a id="more"></a><br>我们先来看看这张排行榜：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/css/rank.png" alt="Rank"></p>
+<div class="alert info"><p>既然 CSS 这么重要，那么我们花点时间来研究相关原理也就物有所值了。</p>
+</div>
+<p>本节我们就来说说 CSS <strong>渲染以及优化</strong>相关的内容，主要围绕以下几点，由浅入深，了解来龙去脉：</p>
+<p>1.浏览器构成<br>2.渲染引擎<br>3.CSS 特性<br>4.CSS 语法解析过程<br>5.CSS 选择器执行顺序<br>6.高效的 ComputedStyle<br>7.CSS 书写顺序对性能有影响吗<br>8.优化策略</p>
+<h4 id="一、浏览器构成"><a href="#一、浏览器构成" class="headerlink" title="一、浏览器构成"></a>一、浏览器构成</h4><p><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/css/browser.png" alt="Browser"></p>
+<ul>
+<li><p>User Interface：<br>用户界面，包括浏览器中可见的地址输入框、浏览器前进返回按钮、书签，历史记录等用户可操作的功能选项。</p>
+</li>
+<li><p>Browser engine：<br>浏览器引擎，可以在用户界面和渲染引擎之间传送指令或在客户端本地缓存中读写数据，是浏览器各个部分之间相互通信的核心。</p>
+</li>
+<li><p>Rendering engine：<br>渲染引擎，解析 DOM 文档和 CSS 规则并将内容排版到浏览器中显示有样式的界面，也就是排版引擎，我们常说的浏览器内核主要指的就是渲染引擎。</p>
+</li>
+<li><p>Networking：<br>网络功能模块，是浏览器开启网络线程发送请求以及下载资源的模块。</p>
+</li>
+<li><p>JavaScript Interpreter：<br>JS 引擎，解释和执行 JS 脚本部分，例如 V8 引擎。</p>
+</li>
+<li><p>UI Backend：<br>UI 后端则是用于绘制基本的浏览器窗口内控件，比如组合选择框、按钮、输入框等。</p>
+</li>
+<li><p>Data Persistence：<br>数据持久化存储，涉及 Cookie、LocalStorage 等一些客户端存储技术，可以通过浏览器引擎提供的 API 进行调用。</p>
+</li>
+</ul>
+<!-- ![Render](https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/css/render.png) -->
+<h4 id="二、渲染引擎"><a href="#二、渲染引擎" class="headerlink" title="二、渲染引擎"></a>二、渲染引擎</h4><p>渲染引擎，解析 <code>DOM</code> 文档和 <code>CSS</code> 规则并将内容排版到浏览器中显示有样式的界面，也就是排版引擎，我们常说的浏览器内核主要指的就是渲染引擎。</p>
+<p><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/css/render2.png" alt="Render2"></p>
+<p>上图中，我们需要关注两条主线：<br>其一，<code>HTML Parser</code> 生成的 <code>DOM</code> 树；<br>其二，<code>CSS Parser</code> 生成的 <code>Style Rules</code> ；</p>
+<p>在这之后，<code>DOM</code> 树与 <code>Style Rules</code> 会生成一个新的对象，也就是我们常说的 <code>Render Tree</code> 渲染树，结合 <code>Layout</code> 绘制在屏幕上，从而展现出来。</p>
+<h4 id="三、CSS-特性"><a href="#三、CSS-特性" class="headerlink" title="三、CSS 特性"></a>三、CSS 特性</h4><p>1.<strong>优先级</strong>：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/css/specificity1.png" alt="specificity1"><br>!important &gt; 行内样式（权重1000） &gt; ID 选择器（权重 100） &gt; 类选择器（权重 10） &gt; 标签（权重1） &gt; 通配符 &gt; 继承 &gt; 浏览器默认属性</p>
+<p>示例代码一：<a href="https://jsfiddle.net/a5xtdoq7/1/" target="_blank" rel="noopener">https://jsfiddle.net/a5xtdoq7/1/</a><br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> &gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"box"</span> <span class="attr">class</span>=<span class="string">"text"</span>&gt;</span>Jartto's blog<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>样式规则：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#box</span>&#123;<span class="attribute">color</span>: red;&#125;</span><br><span class="line"><span class="selector-class">.text</span>&#123;<span class="attribute">color</span>: yellow;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>猜一猜，文本会显示什么颜色？当你知道 「<code>ID</code> 选择器 &gt; 类选择器 」的时候，答案不言自明。</p>
+<p>升级一下：<a href="https://jsfiddle.net/a5xtdoq7/3/" target="_blank" rel="noopener">https://jsfiddle.net/a5xtdoq7/3/</a><br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"box"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"text"</span>&gt;</span>Jartto's blog<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>样式规则：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#box</span>&#123;<span class="attribute">color</span>: red;&#125;</span><br><span class="line"><span class="selector-class">.text</span>&#123;<span class="attribute">color</span>: blue;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这里就考查到了规则「类选择器 &gt; 继承」，<code>ID</code> 对文本来说是继承过来的属性，所以优先级不如直接作用在元素上面的类选择器。</p>
+<p>2.<strong>继承性</strong></p>
+<ul>
+<li>继承得到的样式的优先级是最低的，在任何时候，只要元素本身有同属性的样式定义，就可以覆盖掉继承值；</li>
+<li>在存在多个继承样式时，层级关系距离当前元素最近的父级元素的继承样式，具有相对最高的优先级；</li>
+</ul>
+<p>有哪些属性是可以<a href="https://m.html.cn/qa/css3/12784.html" target="_blank" rel="noopener">继承</a>的呢，我们简单分一下类：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1.font-family,font-size,font-weight 等 f 开头的 CSS 样式；</span><br><span class="line">2.text-align,text-indent 等 t 开头的样式；</span><br><span class="line">3.color；</span><br></pre></td></tr></table></figure></p>
+<p>详细的规则，请看下图：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/css/inherent.png" alt="inherent"></p>
+<p>示例代码二：<a href="https://jsfiddle.net/a5xtdoq7/" target="_blank" rel="noopener">https://jsfiddle.net/a5xtdoq7/</a><br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ol</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span> Jartto's blog <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">ol</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>样式规则定义如下：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span> &#123; <span class="attribute">color </span>: red<span class="meta">!important</span>; &#125;</span><br><span class="line"><span class="selector-tag">ol</span> &#123; <span class="attribute">color </span>: green; &#125;</span><br></pre></td></tr></table></figure></p>
+<p>增加了 <code>!important</code> ，猜一猜，文本显示什么颜色？</p>
+<p>3.<strong>层叠性</strong><br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/css/specificity2.png" alt="specificity2"><br>层叠就是浏览器对多个样式来源进行叠加，最终确定结果的过程。<code>CSS</code> 之所以有「层叠」的概念，是因为有多个样式来源。</p>
+<p><code>CSS</code> 层叠性是指 <code>CSS</code> 样式在针对同一元素配置同一属性时，<strong>依据层叠规则（权重）来处理冲突</strong>，选择应用权重高的 <code>CSS</code> 选择器所指定的属性，一般也被描述为权重高的覆盖权重低的，因此也称作层叠。</p>
+<p>示例代码三：<a href="https://jsfiddle.net/a5xtdoq7/2/" target="_blank" rel="noopener">https://jsfiddle.net/a5xtdoq7/2/</a><br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> &gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"two one"</span>&gt;</span>Jartto's blog<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>样式规则如下：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.one</span>&#123;<span class="attribute">color</span>: red;&#125;</span><br><span class="line"><span class="selector-class">.two</span>&#123;<span class="attribute">color</span>: blue;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>如果两个类选择器同时作用呢，究竟以谁为准？这里我们要考虑样式表中两个类选择器的先后顺序，后面的会覆盖前面的，所以文本当然显示蓝色了。</p>
+<p>升级代码：<a href="https://jsfiddle.net/a5xtdoq7/6/" target="_blank" rel="noopener">https://jsfiddle.net/a5xtdoq7/6/</a><br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span>Jartto's blog<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>样式规则：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span> <span class="selector-tag">div</span> <span class="selector-tag">div</span> &#123; <span class="attribute">color</span>: green; &#125;</span><br><span class="line"><span class="selector-tag">div</span> <span class="selector-tag">div</span> &#123; <span class="attribute">color</span>: red; &#125;</span><br><span class="line"><span class="selector-tag">div</span> &#123; <span class="attribute">color</span>: yellow; &#125;</span><br></pre></td></tr></table></figure></p>
+<p>这个比较直接，算一下权重，谁大听谁的。</p>
+<p>继续升级：<a href="https://jsfiddle.net/a5xtdoq7/7/" target="_blank" rel="noopener">https://jsfiddle.net/a5xtdoq7/7/</a><br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"box1"</span> <span class="attr">class</span>=<span class="string">"one"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"box2"</span> <span class="attr">class</span>=<span class="string">"two"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"box3"</span> <span class="attr">class</span>=<span class="string">"three"</span>&gt;</span> Jartto's blog <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>样式：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.one</span> <span class="selector-class">.two</span> <span class="selector-tag">div</span> &#123; <span class="attribute">color </span>: red; &#125;</span><br><span class="line"><span class="selector-tag">div</span> <span class="selector-id">#box3</span> &#123; <span class="attribute">color </span>: yellow; &#125;</span><br><span class="line"><span class="selector-id">#box1</span> <span class="selector-tag">div</span> &#123; <span class="attribute">color </span>: blue; &#125;</span><br></pre></td></tr></table></figure></p>
+<p>权重：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">0 0 2 1</span><br><span class="line">0 1 0 1</span><br><span class="line">0 1 0 1</span><br></pre></td></tr></table></figure></p>
+<p>验证一下：<a href="https://jsfiddle.net/a5xtdoq7/9/" target="_blank" rel="noopener">https://jsfiddle.net/a5xtdoq7/9/</a><br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"box1"</span> <span class="attr">class</span>=<span class="string">"one"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"box2"</span> <span class="attr">class</span>=<span class="string">"two"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"box3"</span> <span class="attr">class</span>=<span class="string">"three"</span>&gt;</span> Jartto's blog <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>样式如下：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.one</span> <span class="selector-class">.two</span> <span class="selector-tag">div</span> &#123; <span class="attribute">color </span>: red; &#125;</span><br><span class="line"><span class="selector-id">#box1</span> <span class="selector-tag">div</span> &#123; <span class="attribute">color </span>: blue; &#125;</span><br><span class="line"><span class="selector-tag">div</span> <span class="selector-class">.three</span> &#123; <span class="attribute">color </span>: green; &#125;</span><br></pre></td></tr></table></figure></p>
+<p>权重：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">0 0 2 1</span><br><span class="line">0 1 0 1</span><br><span class="line">0 0 1 1</span><br></pre></td></tr></table></figure></p>
+<p>如果你对上面这些问题都了如指掌，那么恭喜你，基础部分顺利过关，可以继续升级了！</p>
+<h4 id="四、CSS-语法解析过程"><a href="#四、CSS-语法解析过程" class="headerlink" title="四、CSS 语法解析过程"></a>四、CSS 语法解析过程</h4><p>1.我们来把 <code>CSS</code> 拎出来看一下，<code>HTML Parser</code> 会生成 <code>DOM</code> 树，而 <code>CSS Parser</code> 会将解析结果附加到 <code>DOM</code> 树上，如下图：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/css/render3.png" alt="render3"></p>
+<p>2.<code>CSS</code> 有自己的规则，一般如下：<br><code>WebKit</code> 使用 <code>Flex</code> 和 <code>Bison</code> 解析器生成器，通过 <code>CSS</code> 语法文件自动创建解析器。<code>Bison</code> 会创建自下而上的移位归约解析器。<code>Firefox</code> 使用的是人工编写的自上而下的解析器。</p>
+<p>这两种解析器都会将 <code>CSS</code> 文件解析成 <code>StyleSheet</code> 对象，且每个对象都包含 <code>CSS</code> 规则。<code>CSS</code> 规则对象则包含选择器和声明对象，以及其他与 <code>CSS</code> 语法对应的对象。</p>
+<p><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/css/css-rule.jpg" alt="css-rule"></p>
+<p>3.<code>CSS</code> 解析过程会按照 <code>Rule</code>，<code>Declaration</code> 来操作：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/css/test_CSSOM.png" alt="CSSOM"></p>
+<p>4.那么他是如何解析的呢，我们不妨打印一下 <code>CSS Rules</code>：<br>控制台输入：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">document.styleSheets[0].cssRules</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/css/rule2.png" alt="rule2"></p>
+<p>打印出来的结果大致分为几类：</p>
+<ul>
+<li>cssText：存储当前节点规则字符串</li>
+<li>parentRule：父节点的规则</li>
+<li>parentStyleSheet：包含 cssRules，ownerNode，rules 规则</li>
+<li>…</li>
+</ul>
+<div class="alert danger"><p>规则貌似有点看不懂，不用着急，我们接着往下看。</p>
+</div>
+<p>5.CSS 解析和 Webkit 有什么关系？<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/css/webkit2.png" alt="webkit2"><br><div class="alert info"><p>CSS 依赖 WebCore 来解析，而 WebCore 又是 Webkit 非常重要的一个模块。</p>
+</div></p>
+<p>要了解 <code>WebCore</code> 是如何解析的，我们需要查看<a href="https://github.com/WebKit/webkit/tree/master/Source/WebCore/css" target="_blank" rel="noopener">相关源码</a>：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">CSSRule* CSSParser::createStyleRule(CSSSelector* selector)  </span><br><span class="line">&#123;  </span><br><span class="line">    CSSStyleRule* rule = <span class="number">0</span>;  </span><br><span class="line">    <span class="keyword">if</span> (selector) &#123;  </span><br><span class="line">        rule = <span class="keyword">new</span> CSSStyleRule(styleElement);  </span><br><span class="line">        m_parsedStyleObjects.append(rule);  </span><br><span class="line">        rule-&gt;setSelector(sinkFloatingSelector(selector));  </span><br><span class="line">        rule-&gt;setDeclaration(<span class="keyword">new</span> CSSMutableStyleDeclaration(rule, parsedProperties, numParsedProperties));  </span><br><span class="line">    &#125;  </span><br><span class="line">    clearProperties();  </span><br><span class="line">    <span class="keyword">return</span> rule;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>从该函数的实现可以很清楚的看到，解析器达到某条件需要创建一个 <code>CSSStyleRule</code> 的时候将调用该函数，该函数的功能是创建一个 <code>CSSStyleRule</code> ，并将其添加已解析的样式对象列表 <code>m_parsedStyleObjects</code> 中去，这里的对象就是指的 <code>Rule</code> 。</p>
+<div class="alert warning"><p>注意：源码是为了参考理解，不需要逐行阅读！</p>
+</div>
+<p><code>Webkit</code> 使用了自动代码生成工具生成了相应的代码，也就是说词法分析和语法分析这部分代码是自动生成的，而 <code>Webkit</code> 中实现的 <code>CallBack</code> 函数就是在 <code>CSSParser</code> 中。</p>
+<p>这时候就不得不提到 <code>AST</code> 了，我们继续剖析。</p>
+<p>补充阅读：<a href="https://webkit.org/status/#?search=css" target="_blank" rel="noopener">Webkit 对 CSS 支持</a></p>
+<p>6.<strong>关于 AST</strong><br>如果对 <code>AST</code> 还不了解，请移步<a href="http://jartto.wang/2018/11/17/about-ast/"><code>AST</code> 抽象语法树</a>。这里我们不做过多解释，主要围绕如何解析这一过程展开，先来看一张 <code>Babel</code> 转换过程图：</p>
+<p><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/css/ast1.png" alt="ast1"></p>
+<p>我们来举一个简单的例子，声明一个箭头函数，如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> jarttoTest = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// Todo</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>通过<a href="https://astexplorer.net/" target="_blank" rel="noopener">在线编译</a>，生成如下结果：<br><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/css/ast2.png" alt="ast2"></p>
+<p>从<a href="http://jartto.wang/2019/10/23/css-theory-and-optimization/">上图</a>我们可以看出：我们的箭头函数被解析成了一段标准代码，包含了类型，起始位置，结束位置，变量声明的类型，变量名，函数名，箭头函数表达式等等。</p>
+<p>标准的解析代码，我们可以对其进行一些加工和处理，之后通过相应 <code>API</code> 输出。很多场景都会用到这个过程，如：</p>
+<ul>
+<li>JS 反编译，语法解析</li>
+<li>Babel 编译 ES6 语法</li>
+<li>代码高亮</li>
+<li>关键字匹配</li>
+<li>作用域判断</li>
+<li>代码压缩</li>
+<li>…</li>
+</ul>
+<p>场景千千万，但是都离不开一个过程，那就是：<br><div class="alert info"><p>AST 转换过程：解析 - 转换 - 生成</p>
+</div></p>
+<p>到这里，<code>CSS</code> 如何解析的来龙去脉我们已经非常清楚了，可以回到<a href="#">文章</a>开头的那个流程图了，相信你一定会有另一翻感悟。</p>
+<h4 id="五、CSS-选择器执行顺序"><a href="#五、CSS-选择器执行顺序" class="headerlink" title="五、CSS 选择器执行顺序"></a>五、CSS 选择器执行顺序</h4><p>渲染引擎解析 <code>CSS</code> 选择器时是从右往左解析，这是为什么呢？举个例子：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"jartto"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span> 111 <span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span> 222 <span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span> 333 <span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">'yellow'</span>&gt;</span> 444 <span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>样式规则如下：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span> &gt; <span class="selector-tag">div</span><span class="selector-class">.jartto</span> <span class="selector-tag">p</span> <span class="selector-tag">span</span><span class="selector-class">.yellow</span>&#123;</span><br><span class="line">   <span class="attribute">color</span>:yellow;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>我们按照「从左到右」的方式进行分析：<br>1.先找到所有 <code>div</code> 节点；<br>2.在 <code>div</code> 节点内找到所有的子 <code>div</code> ,并且是 <code>class = “jartto”</code>；<br>3.然后再依次匹配 <code>p span.yellow</code> 等情况；<br>4.遇到不匹配的情况，就必须回溯到一开始搜索的 <code>div</code> 或者 <code>p</code> 节点，然后去搜索下个节点，重复这样的过程。</p>
+<div class="alert warning"><p>有没有觉得很低效，那么问题出在哪里？</p>
+</div>
+<p>这样的搜索过程对于一个只是匹配很少节点的选择器来说，效率是极低的，因为我们花费了大量的时间在<strong>回溯匹配不符合规则的节点</strong>。</p>
+<p>我们不妨换个思路，还以上面的示例为准：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"jartto"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span> 111 <span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span> 222 <span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span> 333 <span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">'yellow'</span>&gt;</span> 444 <span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>样式规则如下：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span> &gt; <span class="selector-tag">div</span><span class="selector-class">.jartto</span> <span class="selector-tag">p</span> <span class="selector-tag">span</span><span class="selector-class">.yellow</span>&#123;</span><br><span class="line">   <span class="attribute">color</span>:yellow;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>我们按照「从右向左」的方式进行分析：<br>1.首先就查找到 <code>class=“yellow”</code> 的 <code>span</code> 元素；<br>2.接着检测父节点是否为 <code>p</code> 元素，如果不是则进入同级其他节点的遍历，如果是则继续匹配父节点满足 <code>class=“jartto”</code> 的 <code>div</code> 容器；<br>3.这样就又减少了集合的元素，只有符合当前的子规则才会匹配再上一条子规则。</p>
+<p>综上所述，我们可以得出结论：<br><div class="alert success"><p>浏览器 <code>CSS</code> 匹配核心算法的规则是以从右向左方式匹配节点的。</p>
+</div></p>
+<p>样做是为了减少无效匹配次数，从而匹配快、性能更优。所以，我们在书写 <code>CSS Selector</code> 时，从右向左的 <code>Selector Term</code> 匹配节点越少越好。</p>
+<p>不同 <code>CSS</code> 解析器对 <code>CSS Rules</code> 解析速度差异也很大，感兴趣的童鞋可以看看：<a href="http://test.veryos.com/selector/slickspeed/index.html" target="_blank" rel="noopener">CSS 解析引擎</a>，这里不再赘述。</p>
+<h4 id="六、高效的-ComputedStyle"><a href="#六、高效的-ComputedStyle" class="headerlink" title="六、高效的 ComputedStyle"></a>六、高效的 ComputedStyle</h4><p>浏览器还有一个非常棒的策略，在特定情况下，浏览器会共享 <code>Computed Style</code>，网页中能共享的标签非常多，所以能极大的提升执行效率！</p>
+<div class="alert success"><p>如果能共享，那就不需要执行匹配算法了，执行效率自然非常高。</p>
+</div>
+<p>如果两个或多个 <code>Element</code> 的 <code>ComputedStyle</code> 不通过计算可以确认他们相等，那么这些<code>ComputedStyle</code> 相等的 <code>Elements</code> 只会计算一次样式，其余的仅仅共享该 <code>ComputedStyle</code>。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">section</span> <span class="attr">class</span>=<span class="string">"one"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"desc"</span>&gt;</span>One<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">section</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">section</span> <span class="attr">class</span>=<span class="string">"one"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"desc"</span>&gt;</span>two<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">section</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>如何高效共享 <code>Computed Style</code> ？<br>1.<code>TagName</code> 和 <code>Class</code> 属性必须一样；<br>2.不能有 <code>Style</code> 属性。哪怕 <code>Style</code> 属性相等，他们也不共享；<br>3.不能使用 <code>Sibling selector</code>，譬如: <code>first-child</code>, <code>:last-selector</code>, <code>+ selector</code><br>4.<code>mappedAttribute</code> 必须相等；</p>
+<p>为了更好的说明，我们再举两个例子：</p>
+<p>不能共享，<a href="http://jartto.wang/2019/10/23/css-theory-and-optimization/">上述</a>规则2：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">style</span>=<span class="string">"color:red"</span>&gt;</span>jartto's<span class="tag">&lt;/<span class="name">p</span>&gt;</span>  </span><br><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">style</span>=<span class="string">"color:red"</span>&gt;</span>blog<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>可以共享，<a href="http://jartto.wang/2019/10/23/css-theory-and-optimization/">上述</a>规则4：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">align</span>=<span class="string">"middle"</span>&gt;</span>jartto's<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">align</span>=<span class="string">"middle"</span>&gt;</span>blog<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>到这里，相信你对 <code>ComputedStyle</code> 有了更多的认识，代码也就更加精炼和高效了。</p>
+<h4 id="七、CSS-书写顺序对性能有影响吗？"><a href="#七、CSS-书写顺序对性能有影响吗？" class="headerlink" title="七、CSS 书写顺序对性能有影响吗？"></a>七、CSS 书写顺序对性能有影响吗？</h4><p>书写顺序会对 <code>CSS</code> 性能有影响吗，这是个值得思考的问题。</p>
+<p>需要注意的是：浏览器并不是一获取到 <code>CSS</code> 样式就立马开始解析，而是根据 <code>CSS</code> 样式的书写顺序将之按照 <code>DOM</code> 树的结构分布渲染样式，然后开始遍历每个树结点的 <code>CSS</code> 样式进行解析，此时的 <code>CSS</code> 样式的遍历顺序完全是按照之前的书写顺序。</p>
+<div class="alert info"><p>在解析过程中，一旦浏览器发现某个元素的定位变化影响布局，则需要倒回去重新渲染。</p>
+</div>
+<p>我们来看看下面这个代码片段：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">width: 150px;</span><br><span class="line">height: 150px;</span><br><span class="line">font-size: 24px;</span><br><span class="line">position: absolute;</span><br></pre></td></tr></table></figure></p>
+<p>当浏览器解析到 <code>position</code> 的时候突然发现该元素是绝对定位元素需要脱离文档流，而之前却是按照普通元素进行解析的，所以不得不重新渲染。</p>
+<p>渲染引擎首先解除该元素在文档中所占位置，这就导致了该元素的占位情况发生了变化，其他元素可能会受到它回流的影响而重新排位。</p>
+<p>我们对代码进行调整：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">position: absolute;</span><br><span class="line">width: 150px;</span><br><span class="line">height: 150px;</span><br><span class="line">font-size: 24px;</span><br></pre></td></tr></table></figure></p>
+<p>这样就能让渲染引擎更高效的工作，可是问题来了：<br><div class="alert warning"><p>在实际开发过程中，我们如何能保证自己的书写顺序是最优呢？</p>
+</div></p>
+<p>这里有一个规范，建议顺序大致如下：<br>1.定位属性<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">position  display  float  left  top  right  bottom   overflow  clear   z-index</span><br></pre></td></tr></table></figure></p>
+<p>2.自身属性<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">width  height  padding  border  margin   background</span><br></pre></td></tr></table></figure></p>
+<p>3.文字样式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">font-family   font-size   font-style   font-weight   font-varient   color</span><br></pre></td></tr></table></figure></p>
+<p>4.文本属性<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">text-align   vertical-align   text-wrap   text-transform   text-indent    text-decoration   letter-spacing    word-spacing    white-space   text-overflow</span><br></pre></td></tr></table></figure></p>
+<p>5.CSS3中新增属性<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">content   box-shadow   border-radius  transform</span><br></pre></td></tr></table></figure></p>
+<p>当然，我们需要知道这个规则就够了，剩下的可以交给一些<strong>插件</strong>去做，譬如：<a href="https://github.com/CSSLint/csslint" target="_blank" rel="noopener">CSSLint</a>。能用代码实现的，千万不要去浪费人力。</p>
+<h4 id="八、优化策略"><a href="#八、优化策略" class="headerlink" title="八、优化策略"></a>八、优化策略</h4><p>我们从浏览器构成，聊到了渲染引擎，再到 <code>CSS</code> 的解析原理，最后到执行顺序，做了一系列的探索。期望大家能从 <code>CSS</code> 的渲染原理中了解整个过程，从而写出更高效的代码。</p>
+<p>1.使用 <code>id selector</code> 非常的高效。在使用 <code>id selector</code> 的时候需要注意一点：因为 <code>id</code> 是唯一的，所以不需要既指定 <code>id</code> 又指定 <code>tagName</code>：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Bad  */</span></span><br><span class="line"><span class="selector-tag">p</span><span class="selector-id">#id1</span> &#123;<span class="attribute">color</span>:red;&#125;  </span><br><span class="line"></span><br><span class="line"><span class="comment">/* Good  */</span></span><br><span class="line"><span class="selector-id">#id1</span> &#123;<span class="attribute">color</span>:red;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>2.避免深层次的 <code>node</code> ，譬如：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Bad  */</span></span><br><span class="line"><span class="selector-tag">div</span> &gt; <span class="selector-tag">div</span> &gt; <span class="selector-tag">div</span> &gt; <span class="selector-tag">p</span> &#123;<span class="attribute">color</span>:red;&#125; </span><br><span class="line"><span class="comment">/* Good  */</span></span><br><span class="line"><span class="selector-tag">p-class</span>&#123;<span class="attribute">color</span>:red;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>3.不要使用 <code>attribute selector</code>，如：p[att1=”val1”]。这样的匹配非常慢。更不要这样写：<code>p[id=&quot;id1&quot;]</code>。这样将 <code>id selector</code> 退化成 <code>attribute selector</code>。<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Bad  */</span></span><br><span class="line"><span class="selector-tag">p</span><span class="selector-attr">[id="jartto"]</span>&#123;<span class="attribute">color</span>:red;&#125;  </span><br><span class="line"><span class="selector-tag">p</span><span class="selector-attr">[class="blog"]</span>&#123;<span class="attribute">color</span>:red;&#125;  </span><br><span class="line"><span class="comment">/* Good  */</span></span><br><span class="line"><span class="selector-id">#jartto</span>&#123;<span class="attribute">color</span>:red;&#125;  </span><br><span class="line"><span class="selector-class">.blog</span>&#123;<span class="attribute">color</span>:red;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>4.通常将浏览器前缀置于前面，将标准样式属性置于最后，类似：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.foo</span> &#123;</span><br><span class="line">  <span class="attribute">-moz-border-radius</span>: <span class="number">5px</span>;</span><br><span class="line">  <span class="attribute">border-radius</span>: <span class="number">5px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>可以参考如下 <a href="http://nec.netease.com/standard/css-sort.html" target="_blank" rel="noopener">Css 规范</a>。</p>
+<p>5.遵守 <a href="https://github.com/CSSLint/csslint" target="_blank" rel="noopener">CSSLint</a> 规则<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">font-faces        　　　　  　　　不能使用超过5个web字体</span><br><span class="line">import        　　　　　　　 　　  禁止使用@import</span><br><span class="line">regex-selectors        　　　　  禁止使用属性选择器中的正则表达式选择器</span><br><span class="line">universal-selector    　　 　　  禁止使用通用选择器*</span><br><span class="line">unqualified-attributes    　　　禁止使用不规范的属性选择器</span><br><span class="line">zero-units            　　 　　　0后面不要加单位</span><br><span class="line">overqualified-elements    　　　使用相邻选择器时，不要使用不必要的选择器</span><br><span class="line">shorthand        　　　　　　　　 简写样式属性</span><br><span class="line">duplicate-background-images    相同的url在样式表中不超过一次</span><br></pre></td></tr></table></figure></p>
+<p>6.减少 <code>CSS</code> 文档体积</p>
+<ul>
+<li>移除空的 CSS 规则（Remove empty rules）</li>
+<li>值为 0 不需要单位</li>
+<li>使用缩写</li>
+<li>属性值为浮动小数 0.**，可以省略小数点之前的0；</li>
+<li>不给 h1-h6 元素定义过多的样式</li>
+</ul>
+<p>7.<code>CSS Will Change</code><br><code>WillChange</code> 属性，允许作者提前告知浏览器的默认样式，使用一个专用的属性来通知浏览器留意接下来的变化，从而优化和分配内存。</p>
+<p>8.不要使用 <code>@import</code><br>使用 <code>@import</code> 引入 <code>CSS</code> 会影响浏览器的并行下载。使用 <code>@import</code> 引用的 <code>CSS</code> 文件只有在引用它的那个 <code>CSS</code> 文件被下载、解析之后，浏览器才会知道还有另外一个 <code>CSS</code> 需要下载，这时才去下载，然后下载后开始解析、构建 <code>Render Tree</code> 等一系列操作。</p>
+<p>多个 <code>@import</code> 会导致下载顺序紊乱。在 <code>IE</code> 中，<code>@import</code> 会引发资源文件的下载顺序被打乱，即排列在 <code>@import</code> 后面的 <code>JS</code> 文件先于 <code>@import</code> 下载，并且打乱甚至破坏 <code>@import</code> 自身的并行下载。</p>
+<p>9.避免过分重排（Reflow）<br>浏览器重新计算布局位置与大小。<br>常见的重排元素;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">width </span><br><span class="line">height </span><br><span class="line">padding </span><br><span class="line">margin </span><br><span class="line">display </span><br><span class="line">border-width </span><br><span class="line">border </span><br><span class="line">top </span><br><span class="line">position </span><br><span class="line">font-size </span><br><span class="line">float </span><br><span class="line">text-align </span><br><span class="line">overflow-y </span><br><span class="line">font-weight </span><br><span class="line">overflow </span><br><span class="line">left </span><br><span class="line">font-family </span><br><span class="line">line-height </span><br><span class="line">vertical-align </span><br><span class="line">right </span><br><span class="line">clear </span><br><span class="line">white-space </span><br><span class="line">bottom </span><br><span class="line">min-height</span><br></pre></td></tr></table></figure></p>
+<p>10.高效利用 <code>computedStyle</code> </p>
+<ul>
+<li>公共类</li>
+<li>慎用 ChildSelector</li>
+<li>尽可能共享</li>
+</ul>
+<p>更多请查看上文：<a href="http://jartto.wang/2019/10/23/css-theory-and-optimization/">高效的 ComputedStyle</a></p>
+<p>11.减少昂贵属性：<br>当页面发生重绘时，它们会降低浏览器的渲染性能。所以在编写 <code>CSS</code> 时，我们应该尽量减少使用昂贵属性，如：</p>
+<ul>
+<li>box-shadow</li>
+<li>border-radius</li>
+<li>filter</li>
+<li>:nth-child</li>
+</ul>
+<p>12.依赖继承。如果某些属性可以继承，那么自然没有必要在写一遍。</p>
+<p>13.遵守 <code>CSS</code> 顺序规则</p>
+<p>上面就是对<a href="http://jartto.wang/2019/10/23/css-theory-and-optimization/">本文</a>的一个总结，你了解 <code>CSS</code> 具体的实现原理，晓得规避错误书写方式，知道为什么这么优化，这就够了。</p>
+<p>性能优化，进无止境。</p>
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap"> 
+        <div style="color:#757288;font-size:1.3rem;padding:2px 6px;border:1px solid #fad2d2;background:#ffecea;border-radius:3px;line-height:22px;">
+          版权声明：<br>文章首发于 <a href="http://jartto.wang"> Jartto's Blog </a>，
+          转载文章请务必以超链接形式标明文章出处、作者信息及本版权声明。站点图片托管在 Github，如果打不开，请点击<a href="https://blog.csdn.net/qq_38232598/article/details/91346392" target="blank">这里</a>。
+        </div>
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/css/">css</a> <a class="tag tag--primary tag--small t-link" href="/tags/optimazation/">optimazation</a> <a class="tag tag--primary tag--small t-link" href="/tags/优化/">优化</a> <a class="tag tag--primary tag--small t-link" href="/tags/原理/">原理</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2020/01/01/web-ai/" data-tooltip="人工智能时代，Web 前端能做什么？">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/09/08/web-optimization-tools/" data-tooltip="网站优化，这些工具你一定用得着">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2019/10/23/css-theory-and-optimization/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2019/10/23/css-theory-and-optimization/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2019/10/23/css-theory-and-optimization/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        <div><img style="border-radius:3px;" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/blog.png" width="100%" alt="创作不易，请他喝杯咖啡"></div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+  <script async src="http://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <span class="copyrights">
+    Copyrights &copy; 2023 Jartto. All Rights Reserved.
+  </span>
+  <br>
+  <span id="busuanzi_container_site_uv">
+	  欢迎你，Jartto 的第 <span id="busuanzi_value_site_uv"></span> 位朋友！
+  </span>
+  <span id="busuanzi_container_site_pv">
+    网站总访问量 <span id="busuanzi_value_site_pv"></span> 人次
+  </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2020/01/01/web-ai/" data-tooltip="人工智能时代，Web 前端能做什么？">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/09/08/web-optimization-tools/" data-tooltip="网站优化，这些工具你一定用得着">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2019/10/23/css-theory-and-optimization/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2019/10/23/css-theory-and-optimization/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2019/10/23/css-theory-and-optimization/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://jartto.wang/2019/10/23/css-theory-and-optimization/">
+                <i class="fa fa-google-plus"></i><span class>分享到 Google+</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://jartto.wang/2019/10/23/css-theory-and-optimization/">
+                <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://jartto.wang/2019/10/23/css-theory-and-optimization/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/logo.jpeg">
+        
+            <h4 id="about-card-name">Jartto</h4>
+        
+            <h5 id="about-card-bio"><blockquote>
+<p>最遗憾的不是把梦想丢在路上，<br>而是梦想从未上路!<br>Just do IT</p>
+</blockquote>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p><a href="mailto:jartto@qq.com">jartto@qq.com</a></p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br>
+                北京－朝阳
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/layout_cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script-iygerex9hjtoatg1qpkyynried4qfoahrey3ag4td7adc7eosz0qqf9eieo9.min.js"></script>
+<!--SCRIPTS END-->
+
+
+
+</html>
