@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://jartto.wang/"/>
-  <updated>2023-03-18T12:57:54.398Z</updated>
+  <updated>2023-03-19T06:40:05.143Z</updated>
   <id>http://jartto.wang/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Docker 新书上市一周年</title>
+    <link href="http://jartto.wang/2023/03/19/docker-new-book-online/"/>
+    <id>http://jartto.wang/2023/03/19/docker-new-book-online/</id>
+    <published>2023-03-19T04:12:59.000Z</published>
+    <updated>2023-03-19T06:40:05.143Z</updated>
+    
+    <content type="html"><![CDATA[<p>我的新书<a href="https://mp.weixin.qq.com/s/DKEyfeRiNjfrQSzGxvLUHw" target="_blank" rel="noopener">《<code>Docker</code> 实战派：容器入门七步法》</a>上市已经一周年了，在这个里程碑的时刻，感谢各位朋友的支持。希望今年能够持续「大麦」，拿下同类书籍 <code>Top1</code>!<br><a id="more"></a></p><p><video src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/book/video.mp4" controls="controls" width="100%" height>您的浏览器不支持播放该视频！</video><br><div class="alert info"><p>本书已入选『自学入门的编程书 TOP 榜』，<a href="https://item.jd.com/13699932.html#none" target="_blank" rel="noopener">京东</a>、<a href="http://product.dangdang.com/29388559.html" target="_blank" rel="noopener">当当</a>，热卖中！</p></div></p><h4 id="一、内容回顾"><a href="#一、内容回顾" class="headerlink" title="一、内容回顾"></a>一、内容回顾</h4><p>市场上不乏<code>Docker</code>技术相关的书籍，或围绕官方基础文档缺乏新意，或直入源码让新人望而却步。鲜有既满足读者入门需要，又结合企业实际案例的佳作。<br>《<code>Docker</code>实战派：容器入门七步法》正是看到了这一点，另辟蹊径，从读者角度出发，首次提出了「七步法」的概念。</p><div class="alert success"><p>何谓「七步法」？七是人们最容易记住的数字，也是人类瞬间记忆的极限，本书正是立意于此。</p></div><p>第一步，从具象的故事开始，开门见山、降低认知门槛。<br>第二步，通过「第一个<code>Docker</code>项目」，帮助读者快速上手。在读者建立起体系概念后；<br>第三步，直切核心原理，围绕<code>Docker</code>架构展开，由浅入深的讲解了<code>Docker</code>底层隔离机制、容器生命周期、网络与通讯、存储原理以及源码。深入剖析，知其然而知其所以然。<br>第四步，趁热打铁，围绕前后端项目，从全栈角度进行项目实战。<br>第五步，从<code>Docker</code>容器运维角度出发，进一步补充读者知识图谱，这也是初学者最容易忽视的内容。<br>第六步，步入高级教程，该部分重点围绕<code>Docker</code>技术最佳实践展开，提供了容器与进程、文件存储与备份、网络配置、镜像优化以及安全策略等内容，示例丰富，操作性十足。<br>第七步，全书内容升华。通过云原生持续交付模型、企业容器标准化及两个实际的企业级方案，将本书所有内容进行串联。</p><p>至此，七步完成。读者可以清晰的感受每一步带来的技术提升，稳扎稳打，从而完全将<code>Docker</code>技术融会贯通。</p><h4 id="二、本书亮点"><a href="#二、本书亮点" class="headerlink" title="二、本书亮点"></a>二、本书亮点</h4><p>《<code>Docker</code> 实战派：容器入门七步法》最大的亮点就是：趣味易懂，案例丰富，实操性强。<br>（1）<strong>趣味易懂</strong><br>书中较多的原理，剥除了<code>Docker</code>官方文档晦涩难懂的外衣，通过趣味的故事展开。如：通过「盖房子」的比方来理解<code>Docker</code>是什么，通过「别墅与胶囊旅馆」的例子来阐述容器与虚拟机的概念，通过「工厂和车间」来说明进程和线程等。读者无需记忆，就可轻松理解，这也正是本书想要传达的观点——技术并非晦涩难懂，而是缺乏技巧。<br>（2）<strong>案例丰富</strong><br>本书第二、四、五、六、七章都包含大量的示例。不管是“第一个<code>Docker</code>项目”还是项目实战、或者是「企业案例」都包含了大量的代码讲解。读者完全可以按照教程逐步实现，体验<code>Docker</code>编程的乐趣。<br>（3）<strong>实操性强</strong><br>值得一提的是，本书中案例均来自于实际的研发过程，为了让读者能够轻松掌握，去除了容器中包含的业务逻辑，保留了<code>Docker</code>容器最核心的架构，实操性强。熟练掌握书中的精彩案例，沉淀其所表现出来的方法论，相信读者一定能够在企业应用中灵活运用，事半功倍。</p><h4 id="三、精彩书评"><a href="#三、精彩书评" class="headerlink" title="三、精彩书评"></a>三、精彩书评</h4><p><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/book/info.png" alt="新书推荐"></p><p>「毋庸讳言，现如今还不了解<code>Docker</code>就不是一个合格的开发者。<code>Docker</code>对<code>DevOps</code>的飞速发展具有重要作用。本书结合作者多年一线“大厂”技术实践的经验，既有前端开发者的视角，又有上下游的相关案例，为读者提供了一个完整的<code>DevOps</code>“地图”，可以作为一线开发人员的案头用书。」——<strong>高途集团大前端技术通道负责人 黄后锦</strong></p><p>「<code>Docker</code>作为一种开源的应用容器引擎正在被广泛使用。本书由浅入深地介绍了相关的知识点，将很多不容易理解的概念用生活中的例子生动、形象地表达了出来，对于各个阶段的学习者来说都非常友好。同时，本书从研发岗位的不同视角，介绍了<code>Docker</code>的实践方案，对相关开发者的日常工作具有一定的指导作用。」——<strong>字节跳动商业技术营销工程团队负责人 赵龙</strong></p><p>「云计算技术的普及，使企业和组织更聚焦于自身的核心业务。而云原生如同“集装箱改变世界”一样，通过标准化的方式来应对业务在打包、部署和管理等过程中遇到的各种挑战，从而帮助企业达到降本增效的目的。容器技术可以说是云原生技术体系结构的基础。而<code>Docker</code>则是容器技术落地的“先驱”，是非常重要的容器技术实现，在整个云原生技术体系中具有重要作用。本书通过一个故事让读者明白<code>Docker</code>是什么，之后通过一个项目带领读者快速上手实践，并帮助读者补充了解<code>Docker</code>的核心原理，而后从项目实践、持续集成与发布、<code>Docker</code>的高级应用、打造企业级应用等方面展开介绍。本书是帮助读者入门<code>Docker</code>的佳作。乐于见到有更多这样的图书来帮助更多有需求的人，帮助他们早日走上云原生的大舞台。」——<strong>阿里云边缘云原生技术负责人 周晶</strong></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;我的新书&lt;a href=&quot;https://mp.weixin.qq.com/s/DKEyfeRiNjfrQSzGxvLUHw&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;《&lt;code&gt;Docker&lt;/code&gt; 实战派：容器入门七步法》&lt;/a&gt;上市已经一周年了，在这个里程碑的时刻，感谢各位朋友的支持。希望今年能够持续「大麦」，拿下同类书籍 &lt;code&gt;Top1&lt;/code&gt;!&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="技术博文" scheme="http://jartto.wang/categories/%E6%8A%80%E6%9C%AF%E5%8D%9A%E6%96%87/"/>
+    
+    
+      <category term="docker" scheme="http://jartto.wang/tags/docker/"/>
+    
+  </entry>
   
   <entry>
     <title>30s 就可以掌握的 Nginx 片段</title>
@@ -85,9 +108,9 @@
       <category term="技术博文" scheme="http://jartto.wang/categories/%E6%8A%80%E6%9C%AF%E5%8D%9A%E6%96%87/"/>
     
     
-      <category term="k8s" scheme="http://jartto.wang/tags/k8s/"/>
-    
       <category term="docker" scheme="http://jartto.wang/tags/docker/"/>
+    
+      <category term="k8s" scheme="http://jartto.wang/tags/k8s/"/>
     
   </entry>
   
@@ -500,31 +523,6 @@
       <category term="stats" scheme="http://jartto.wang/tags/stats/"/>
     
       <category term="git_stats" scheme="http://jartto.wang/tags/git-stats/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>HTML5 之跨域通讯（postMessage）</title>
-    <link href="http://jartto.wang/2019/06/11/post-message/"/>
-    <id>http://jartto.wang/2019/06/11/post-message/</id>
-    <published>2019-06-11T08:31:21.000Z</published>
-    <updated>2019-07-09T08:41:49.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>很多情况下，我们受到浏览器的安全策略限制。如何能规避此限制，并且能安全的使用跨域通讯，这就不得不介绍一下 postMessage 了。<br><a id="more"></a></p><h4 id="一、关于-postMessage"><a href="#一、关于-postMessage" class="headerlink" title="一、关于 postMessage"></a>一、关于 postMessage</h4><div class="alert success"><p>window.postMessage() 方法可以安全地实现跨源通信。</p></div><p>通常，对于两个不同页面的脚本，只有当执行它们的页面位于具有相同的协议（通常为 <code>https</code>），端口号（<code>443</code> 为 <code>https</code> 的默认值），以及主机 (两个页面的模数 <code>Document.domain</code> 设置为相同的值) 时，这两个脚本才能相互通信。</p><p><code>window.postMessage()</code> 方法提供了一种受控机制来规避此限制，只要正确的使用，这种方法就很安全。</p><h4 id="二、理解过程"><a href="#二、理解过程" class="headerlink" title="二、理解过程"></a>二、理解过程</h4><p><code>window.postMessage()</code> 方法被调用时，会在所有页面脚本执行完毕之后向目标窗口派发一个  <code>MessageEvent</code> 消息。 该 <code>MessageEvent</code> 消息有四个属性： </p><p>1.<code>message</code> 属性表示该 <code>message</code> 的类型；<br>2.<code>data</code> 属性为 <code>window.postMessage</code> 的第一个参数；<br>3.<code>origin</code> 属性表示调用 <code>window.postMessage()</code> 方法时调用页面的当前状态；<br>4.<code>source</code> 属性记录调用 <code>window.postMessage()</code> 方法的窗口信息。</p><p>关于更多细节，我们可以查看<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Window/postMessage" target="_blank" rel="noopener"> MDN 文档</a>，这里就不赘述了。</p><h4 id="三、兼容性"><a href="#三、兼容性" class="headerlink" title="三、兼容性"></a>三、兼容性</h4><p><img src="https://raw.githubusercontent.com/chenfengyanyu/my-web-accumulation/master/images/postmsg/use.png" alt="caniuse"></p><p>通过上面的图片，我们可以看出来，几乎所有的浏览器都支持了 <code>postMessage</code>，所以放心大胆的去使用吧。</p><h4 id="四、用法简介"><a href="#四、用法简介" class="headerlink" title="四、用法简介"></a>四、用法简介</h4><p>基本用例：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">otherWindow.postMessage(message, targetOrigin, [transfer]);</span><br></pre></td></tr></table></figure></p><p>1.<code>otherWindow</code><br>其他窗口的一个引用，比如 <code>iframe</code> 的 <code>contentWindow</code> 属性、执行 <code>window.open</code> 返回的窗口对象、或者是命名过或数值索引的 <code>window.frames</code>。</p><p>2.<code>message</code><br>将要发送到其他 <code>window</code> 的数据。它将会被结构化克隆算法序列化。</p><div class="alert info"><p>这意味着我们可以不受什么限制的将数据对象安全的传送给目标窗口而无需自己序列化。</p></div><p>3.<code>targetOrigin</code><br>通过窗口的 <code>origin</code> 属性来指定哪些窗口能接收到消息事件，其值可以是字符串 「*」（表示无限制）或者一个 <code>URI</code>。</p><p>在发送消息的时候，如果目标窗口的协议、主机地址或端口这三者的任意一项不匹配 <code>targetOrigin</code> 提供的值，那么消息就不会被发送；</p><p>只有三者完全匹配，消息才会被发送。这个机制用来控制消息可以发送到哪些窗口。</p><p>我们举个例子，当用 <code>postMessage</code> 传送密码时，这个参数就显得尤为重要，必须保证它的值与这条包含密码的信息的预期接受者的 <code>origin</code> 属性完全一致，来防止密码被恶意的第三方截获。</p><p>如果你明确的知道消息应该发送到哪个窗口，那么请始终提供一个有确切值的 <code>targetOrigin</code>，而不是 <code>*</code>。</p><div class="alert danger"><p>需要注意：不提供确切的目标将导致数据泄露到恶意站点。</p></div><p>4.<code>transfer</code><br>是一串和 <code>message</code> 同时传递的 <code>Transferable</code> 对象. 这些对象的所有权将被转移给消息的接收方，而发送一方将不再保有所有权。</p><h4 id="五、事件监听"><a href="#五、事件监听" class="headerlink" title="五、事件监听"></a>五、事件监听</h4><p>我们来看下面这段代码：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">"message"</span>, receiveMessage, <span class="literal">false</span>);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">receiveMessage</span>(<span class="params">event</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="comment">// For Chrome, the origin property is in the event.originalEvent</span></span><br><span class="line">  <span class="comment">// object. </span></span><br><span class="line">  <span class="comment">// 这里不准确，chrome没有这个属性</span></span><br><span class="line">  <span class="comment">// var origin = event.origin || event.originalEvent.origin; </span></span><br><span class="line">  <span class="keyword">var</span> origin = event.origin</span><br><span class="line">  <span class="keyword">if</span> (origin !== <span class="string">"http://jartto.wang:8080"</span>)</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>1.<code>data</code><br>从其他 <code>window</code> 中传递过来的对象。</p><p>2.<code>origin</code><br>调用 <code>postMessage</code>  时消息发送方窗口的 <code>origin</code> . 这个字符串由 协议、<code>://</code>、域名、<code>: 端口号</code> 拼接而成。</p><p>例如 <code>https://jartto.wang (隐含端口 443)</code>、<code>http://jartto.net(隐含端口 80)</code>、<code>http://jartto.com:8080</code>。请注意，这个 <code>origin</code> 不能保证是该窗口的当前或未来 <code>origin</code> ，因为<code>postMessage</code> 被调用后可能被导航到不同的位置。</p><p>3.<code>source</code><br>对发送消息的窗口对象的引用， 我们可以使用此来在具有不同 <code>origin</code> 的两个窗口之间建立双向通信。</p><h4 id="六、简单应用"><a href="#六、简单应用" class="headerlink" title="六、简单应用"></a>六、简单应用</h4><p>1.监听 <code>message</code> 事件：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">"message"</span>, receiveMessage, <span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">receiveMessage</span>(<span class="params">event</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'get it !!!'</span>,event);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>2.发送数据<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.postMessage(&#123;</span><br><span class="line">    name: <span class="string">'Jartto'</span>,</span><br><span class="line">    say: <span class="string">'hello~'</span>,</span><br><span class="line">    arr: [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">&#125;, <span class="string">'*'</span>);</span><br></pre></td></tr></table></figure></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;很多情况下，我们受到浏览器的安全策略限制。如何能规避此限制，并且能安全的使用跨域通讯，这就不得不介绍一下 postMessage 了。&lt;br&gt;
-    
-    </summary>
-    
-    
-      <category term="技术博文" scheme="http://jartto.wang/categories/%E6%8A%80%E6%9C%AF%E5%8D%9A%E6%96%87/"/>
-    
-    
-      <category term="HTML5" scheme="http://jartto.wang/tags/HTML5/"/>
-    
-      <category term="postMessage" scheme="http://jartto.wang/tags/postMessage/"/>
     
   </entry>
   
