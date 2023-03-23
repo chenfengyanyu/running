@@ -97,7 +97,7 @@ server {
     root /var/www/sub.jartto.com;
 }
 ```
-上面的配置将所有以 `.sub.example.com` 结尾的二级域名都指向 `/var/www/sub.example.com` 目录下的网站。需要注意的是，在使用泛解析时，可能会导致一些安全问题。因此，建议仅在必要时使用泛解析，并且要对网站进行充分保护。
+上面的配置将所有以 `.sub.jartto.com` 结尾的二级域名都指向 `/var/www/sub.jartto.com` 目录下的网站。需要注意的是，在使用泛解析时，可能会导致一些安全问题。因此，建议仅在必要时使用泛解析，并且要对网站进行充分保护。
 
 #### 六、使用 $request_id 实现链路追踪
 `Nginx`在`1.11.0`版本中就提供了内置变量`$request_id`，其原理就是生成 32 位的随机字符串，虽不能比拟 `UUID` 的概率，但 32 位的随机字符串的重复概率也是微不足道了，所以一般可视为 `UUID` 来使用。
@@ -144,7 +144,7 @@ map $http_baggage_flow  $plimit {
 limit_req_zone $plimit zone=prelimit:10m rate=600r/s;
  server {
   listen       443 ssl;
-  server_name   m.gaotu100.com;
+  server_name   www.jartto.com;
   limit_req zone=prelimit  nodelay;
   limit_req_status 530;
 
@@ -196,7 +196,7 @@ map $http_accept $webp_suffix {
 ```
 location  ~* ^/_nuxt/img/(.+\.png|jpe?g)$ {
     rewrite ^/_nuxt/img/(.+\.png|jpe?g)$ /$1 break;
-    root /apps/srv/instance/test-webp.gaotu100.com/.nuxt/dist/client/img/;
+    root /apps/srv/instance/test-webp.jartto.com/.nuxt/dist/client/img/;
     add_header Vary Accept;
     try_files $uri$webp_suffix $uri =404;
     expires 30d;
